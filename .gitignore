@@ -1,0 +1,13 @@
+/target/
+*.onnx
+*.ort
+*.rten
+*.wav
+*.mp3
+*.flac
+*.ogg
+dist/
+pkg/
+.DS_Store
+.idea/
+.vscode/

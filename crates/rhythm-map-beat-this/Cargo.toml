@@ -1,0 +1,16 @@
+[package]
+name = "rhythm-map-beat-this"
+description = "Beat This observation backend for Rhythm Map"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+beat-this = "1.0.0"
+rhythm-map-core = { path = "../rhythm-map-core" }
+
+[lints]
+workspace = true

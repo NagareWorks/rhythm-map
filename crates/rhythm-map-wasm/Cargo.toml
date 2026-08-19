@@ -1,0 +1,20 @@
+[package]
+name = "rhythm-map-wasm"
+description = "WebAssembly timing-analysis bindings for Rhythm Map"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+rhythm-map-core = { path = "../rhythm-map-core" }
+serde-wasm-bindgen = "0.6"
+wasm-bindgen = "0.2"
+
+[lints]
+workspace = true

@@ -1,0 +1,37 @@
+[workspace]
+members = [
+    "crates/rhythm-map-core",
+    "crates/rhythm-map-beat-this",
+    "crates/rhythm-map-cli",
+    "crates/rhythm-map-ffi",
+    "crates/rhythm-map-wasm",
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.89"
+license = "Apache-2.0"
+repository = "https://github.com/NagareWorks/rhythm-map"
+authors = ["NagareWorks contributors"]
+
+[workspace.dependencies]
+anyhow = "1.0"
+clap = { version = "4.5", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "2.0"
+
+[workspace.lints.rust]
+missing_docs = "warn"
+unsafe_op_in_unsafe_fn = "deny"
+
+[workspace.lints.clippy]
+all = "warn"
+pedantic = "warn"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true
