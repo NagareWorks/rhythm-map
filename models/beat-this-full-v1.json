@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "id": "beat-this-full-rten",
+  "version": "model-large-2026-05-28+mel-089b509",
+  "backend": "beat-this-rten",
+  "source": {
+    "repository": "https://github.com/danigb/beat-this-rs",
+    "revision": "089b509247e6fdcec666511c0dcf0d5f39c21e73+model-large",
+    "license": "MIT",
+    "conversion": {
+      "tool": "scripts/ckpt2onnx.py",
+      "command": "uv run scripts/ckpt2onnx.py final0",
+      "source_checkpoint": "CPJKU/beat_this final0"
+    }
+  },
+  "feature_contract": {
+    "sample_rate_hz": 22050,
+    "mel_bands": 128,
+    "frame_rate_hz": 50.0,
+    "chunk_duration_s": 30.0
+  },
+  "artifacts": [
+    {
+      "role": "mel_frontend",
+      "file": "mel_spectrogram.onnx",
+      "sha256": "fdd59e65c515331308e4c8841edf99972deca646bdf6197744c2a5b7755e3de9",
+      "size_bytes": 270742,
+      "download_url": "https://raw.githubusercontent.com/danigb/beat-this-rs/089b509247e6fdcec666511c0dcf0d5f39c21e73/models/mel_spectrogram.onnx"
+    },
+    {
+      "role": "beat_model",
+      "file": "beat_this.onnx",
+      "sha256": "5f810debe53459b559127fb55bbad40035bb47cc567b20e501670f968c770f02",
+      "size_bytes": 83162650,
+      "download_url": "https://github.com/danigb/beat-this-rs/releases/download/model-large/beat_this.onnx"
+    }
+  ]
+}

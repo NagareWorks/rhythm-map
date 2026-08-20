@@ -52,6 +52,9 @@ The formulas, default thresholds, and output interpretation are documented in
 
 ## Model packages
 
-Model files are external artifacts. A future signed manifest will contain model
-identity, SHA-256, license, feature contract, tensor names, and schema
-compatibility. No model is silently downloaded by the core library.
+Model files are external artifacts. `rhythm-map-models` verifies a versioned
+manifest containing model identity, SHA-256, license, conversion provenance,
+feature contract, and artifact roles before a product surface loads the files.
+No model is silently downloaded by the core library. A future signature layer
+will authenticate the same content-addressed manifest rather than replace local
+integrity checks.

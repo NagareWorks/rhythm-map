@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "id": "constant-120",
+  "id": "subdivision-90",
   "sample_rate": 44100,
   "beats_per_bar": 4,
   "audio_profile": "percussion",
   "segments": [
-    { "duration_s": 16.0, "kind": "constant", "bpm": 120.0 }
+    { "duration_s": 20.0, "kind": "constant", "bpm": 90.0 }
   ]
 }

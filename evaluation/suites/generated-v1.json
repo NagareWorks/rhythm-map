@@ -58,6 +58,18 @@
         "redistributable": true,
         "commercial_evaluation_allowed": true
       }
+    },
+    {
+      "id": "subdivision-90",
+      "input": { "kind": "generated", "recipe": "recipes/subdivision-90.json" },
+      "tags": ["constant", "subdivision", "half-double-time", "4-4"],
+      "provenance": {
+        "kind": "generated",
+        "audio_license": "Apache-2.0",
+        "annotation_license": "Apache-2.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true
+      }
     }
   ]
 }

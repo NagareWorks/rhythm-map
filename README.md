@@ -17,6 +17,7 @@ This repository is at `0.1.0` and establishes the long-term package boundaries:
   training-free tempo-map estimator.
 - `rhythm-map-beat-this`: optional Beat This! adapter using pure-Rust `rten`.
 - `rhythm-map-cli`: end-to-end audio-file analysis to JSON.
+- `rhythm-map-models`: versioned provenance and SHA-256 model-pack verification.
 - `rhythm-map-ffi`: versioned C ABI for `.dll`, `.so`, and static libraries.
 - `rhythm-map-wasm`: WASM timing-analysis API from beat observations. End-to-end
   browser audio inference is the next WASM milestone.
@@ -49,10 +50,14 @@ ground truth and is a required CI gate:
 cargo xtask eval
 ```
 
-`cargo xtask render --output <directory>` produces disposable click-track WAV
-files for end-to-end backend evaluation. Public and private real-music cases use
-content-addressed external audio references, so possession of a track never
-silently becomes permission to redistribute it. See
+With an explicitly downloaded and verified model pack, `cargo xtask
+eval-backend` runs the same cases through Beat This and emits a paired
+oracle/end-to-end bottleneck report.
+
+`cargo xtask render --output <directory>` produces disposable deterministic
+synthetic WAV files for end-to-end backend evaluation. Public and private
+real-music cases use content-addressed external audio references, so possession
+of a track never silently becomes permission to redistribute it. See
 [`evaluation/README.md`](evaluation/README.md) for the data and license policy.
 
 ## Core API

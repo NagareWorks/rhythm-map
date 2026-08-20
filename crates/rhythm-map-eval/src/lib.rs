@@ -13,8 +13,12 @@ pub use manifest::{
 pub use metrics::{
     BeatMetrics, CaseEvaluation, ChangeMetrics, EvaluationMetrics, TempoMetrics, evaluate_analysis,
 };
-pub use runner::{SuiteEvaluation, evaluate_core_suite, render_suite, score_prediction_directory};
+pub use runner::{
+    AttributionCase, AttributionDecision, BottleneckEvaluation, CaseMetricDelta, ModelPackIdentity,
+    SuiteEvaluation, evaluate_backend_suite, evaluate_core_suite, render_suite,
+    score_prediction_directory,
+};
 pub use synthetic::{
-    GeneratedTruth, RecipeSegment, SegmentShape, SyntheticRecipe, TruthBeat, TruthChangePoint,
-    TruthTempoSegment, generate_truth,
+    GeneratedTruth, RecipeSegment, SegmentShape, SyntheticAudioProfile, SyntheticRecipe, TruthBeat,
+    TruthChangePoint, TruthTempoSegment, generate_truth,
 };

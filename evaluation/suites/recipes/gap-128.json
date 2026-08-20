@@ -3,6 +3,7 @@
   "id": "gap-128",
   "sample_rate": 44100,
   "beats_per_bar": 4,
+  "audio_profile": "percussion",
   "segments": [
     { "duration_s": 7.5, "kind": "constant", "bpm": 128.0 },
     { "duration_s": 2.0, "kind": "silence" },

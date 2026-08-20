@@ -7,10 +7,18 @@
 - Constant, ramp, jump, and discontinuity segmentation.
 - CLI, C ABI, and observation-driven WASM API.
 - Synthetic constant/step/ramp tests and a licensed evaluation manifest.
+- Verified Beat This model-pack manifest and paired oracle/end-to-end evaluation.
 
 ## Phase 2: product surfaces
 
-- Signed model packs and a license/provenance manifest.
+- Signed model-pack authenticity layered over the existing provenance and
+  SHA-256 integrity manifest.
+- Async analysis with progress and cancellation across native API, C ABI, and
+  GUI surfaces.
+- A measured fast/accurate model-pack policy; do not make the full model the
+  default merely because it is more accurate in isolation.
+- Separate short model smoke tests from scheduled/release full-suite baselines,
+  with per-case progress visible to developers.
 - End-to-end browser inference with a measured WASM backend.
 - Native GUI for waveform, beat grid, confidence, and editable tempo segments.
 - Export adapters for common rhythm-game and DAW tempo-map formats.
@@ -40,10 +48,12 @@ aggregate score.
 
 Use the difference between the two paths to decide where model work belongs:
 
-- If oracle observations pass but end-to-end observations fail, treat the beat
-  observation backend as the primary bottleneck. First test backend calibration,
-  decoding, and metrical-level behavior; consider a custom multitask model only
-  after those alternatives are exhausted.
+- If oracle observations pass but end-to-end observations fail, treat the broad
+  observation path as the primary bottleneck. First separate missed/extra model
+  events from deterministic robustness to noisy observations, especially
+  half/double-time ambiguity; consider a custom multitask model only after
+  calibration, decoding, metrical normalization, and backend alternatives are
+  exhausted.
 - If both paths fail on the same tempo or boundary cases, treat the deterministic
   estimator as the primary bottleneck. Improve robust statistics, segmentation,
   or add a learned boundary/confidence head without replacing a beat tracker that

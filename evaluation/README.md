@@ -28,12 +28,35 @@ Gate the deterministic tempo-map estimator using ideal beat observations:
 cargo xtask eval
 ```
 
-Render click-track WAV files and exact truth outside the checkout for an
-end-to-end Beat This run:
+Render deterministic synthetic WAV files and exact truth outside the checkout
+for an end-to-end Beat This run:
 
 ```bash
 cargo xtask render --output D:/rhythm-map-eval/generated-v1
 ```
+
+Run the generated audio directly through a verified Beat This model pack and
+compare it with ideal beat observations:
+
+```bash
+cargo xtask eval-backend \
+  --model-pack models/beat-this-full-v1.json \
+  --model-dir D:/rhythm-map-models/beat-this-full-v1 \
+  --report D:/rhythm-map-eval/reports/beat-this-full-v1.json \
+  --no-fail
+```
+
+The paired report attributes a failing suite to the deterministic estimator
+when the oracle path fails, or to the broader observation path when oracle
+beats pass but rendered audio fails. The latter includes model errors and
+deterministic robustness to noisy or metrically ambiguous observations; it is
+not evidence by itself that the neural backend should be replaced. Capability
+slice metrics remain the evidence used for engineering decisions.
+
+`cargo xtask` uses an optimized build because unoptimized neural inference is
+not a meaningful performance baseline. Keep the generated oracle suite in
+ordinary CI, use a short verified-model smoke suite for compatibility, and run
+the full end-to-end suite as a scheduled or release quality gate.
 
 After a CLI or another product surface writes one Analysis JSON file per case,
 score the directory with the exact same metrics:
@@ -48,6 +71,11 @@ The report distinguishes beat matching, tempo-curve error, and same-kind
 change-point matching. Acceptance thresholds belong to the suite and can be
 overridden for a documented case; they should be tightened only from measured
 product requirements, not adjusted to make a release green.
+
+Synthetic recipes select an audio profile. `click` is a sparse timing signal,
+`percussion` adds deterministic drums and subdivisions, and `drumless` uses
+harmonic note onsets without drums. All profiles retain the same analytic beat
+and tempo truth.
 
 ## Adding copyrighted evaluation music
 

@@ -1,7 +1,7 @@
 use rhythm_map_core::{ChangeKind, ModelInfo, ObservedBeat, RhythmObservations, TempoSegmentKind};
 use serde::{Deserialize, Serialize};
 
-/// Versioned recipe for a deterministic click-track fixture.
+/// Versioned recipe for a deterministic synthetic audio fixture.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct SyntheticRecipe {
     /// Recipe schema version.
@@ -14,8 +14,24 @@ pub struct SyntheticRecipe {
     /// Number of beats in one bar for synthetic downbeat labels.
     #[serde(default = "default_beats_per_bar")]
     pub beats_per_bar: u32,
+    /// Deterministic audio arrangement used for backend evaluation.
+    #[serde(default)]
+    pub audio_profile: SyntheticAudioProfile,
     /// Ordered timing segments.
     pub segments: Vec<RecipeSegment>,
+}
+
+/// Deterministic arrangement rendered from exact beat truth.
+#[derive(Debug, Clone, Copy, Default, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum SyntheticAudioProfile {
+    /// Sparse high-frequency reference clicks.
+    #[default]
+    Click,
+    /// Kick, snare, subdivisions, and a quiet tonal bed.
+    Percussion,
+    /// Harmonic note onsets without synthesized drums.
+    Drumless,
 }
 
 /// One consecutive region of a synthetic timing recipe.
@@ -368,6 +384,7 @@ mod tests {
             id: "ramp".to_string(),
             sample_rate: 44_100,
             beats_per_bar: 4,
+            audio_profile: SyntheticAudioProfile::Click,
             segments: vec![
                 RecipeSegment {
                     duration_s: 10.0,

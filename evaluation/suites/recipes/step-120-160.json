@@ -3,6 +3,7 @@
   "id": "step-120-160",
   "sample_rate": 44100,
   "beats_per_bar": 4,
+  "audio_profile": "percussion",
   "segments": [
     { "duration_s": 10.0, "kind": "constant", "bpm": 120.0 },
     { "duration_s": 9.0, "kind": "constant", "bpm": 160.0 }
