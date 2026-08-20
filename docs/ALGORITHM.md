@@ -101,6 +101,34 @@ or an isolated extra event without a tempo change therefore does not trigger
 the repair. The decision is recorded as
 `short_transition_beat_grid_recovered`.
 
+## Bar-level downbeat selection
+
+Beat This can identify the correct two-beat metrical pulse while assigning
+downbeat confidence to both the first and third beat of a four-beat bar. Rhythm
+Map treats those events as half-bar candidates rather than assuming every
+second candidate must be removed.
+
+After transition-grid recovery, the estimator finds continuous runs where
+downbeat candidates are exactly two analyzed beats apart. Runs shorter than six
+candidates are left unchanged. Within each longer run it compares the mean PCM
+activity amplitude of the two alternating candidate phases. The weaker phase
+is rejected only when the stronger phase is at least 1.2 times as salient.
+Equal or weakly differentiated phases remain untouched, preserving legitimate
+2/4 meter and acoustically ambiguous material.
+
+An irregular candidate interval splits the run, so a tempo change may select a
+different phase on each side. If a selected four-beat grid predicts one
+downbeat immediately outside a run, and the model placed a candidate one beat
+away, the label moves to the predicted beat only when its PCM activity satisfies
+the same 1.2 salience ratio. This repairs a displaced label at a reconstructed
+tempo boundary without extrapolating a bar grid through a long unknown region.
+The decision is recorded as `bar_level_downbeats_selected`.
+
+This stage changes only downbeat labels and confidence. It neither inserts nor
+removes beat timestamps and therefore cannot improve ordinary beat F1 or tempo
+accuracy by itself. Observation-only callers that omit PCM activity retain the
+backend's downbeat decisions.
+
 ## Robust BPM curve
 
 The normalized observations pass through two deterministic filters:
@@ -186,7 +214,8 @@ The estimator is deterministic and training-free, but its input is still
 model-derived. Missed beats, inserted subdivisions, and incorrect metrical
 levels can propagate into the tempo curve. The recovery rules correct bounded
 cases with stable evidence on both sides; they cannot reconstruct a long span
-of missing evidence or infer musical intent from an ambiguous pulse alone.
+of missing evidence, determine bar phase without an acoustic accent, or infer
+musical intent from an ambiguous pulse alone.
 
 The defaults are internal product policy rather than parameters users must
 supply. They will be tightened or replaced only against the checked-in

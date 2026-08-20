@@ -36,6 +36,8 @@ pub struct EstimatorOptions {
     pub half_time_min_bpm: f64,
     /// Required retained-to-discarded onset salience ratio for half-time selection.
     pub half_time_salience_ratio: f64,
+    /// Required strong-to-weak accent ratio before half-bar downbeats are rejected.
+    pub half_bar_downbeat_salience_ratio: f64,
     /// Longest model-smeared ramp still classified as a tempo jump.
     pub jump_transition_max_s: f64,
 }
@@ -56,6 +58,7 @@ impl Default for EstimatorOptions {
             minimum_silence_s: 0.8,
             half_time_min_bpm: 150.0,
             half_time_salience_ratio: 1.35,
+            half_bar_downbeat_salience_ratio: 1.2,
             jump_transition_max_s: 4.0,
         }
     }
@@ -138,6 +141,9 @@ impl TempoMapEstimator {
         {
             prepared = repaired;
             warnings.push("short_transition_beat_grid_recovered".to_string());
+        }
+        if select_bar_level_downbeats(&mut prepared, &self.options) {
+            warnings.push("bar_level_downbeats_selected".to_string());
         }
 
         let TempoEstimate {
@@ -277,6 +283,8 @@ fn validate_options(options: &EstimatorOptions) -> Result<(), AnalysisError> {
         || options.half_time_min_bpm <= 0.0
         || !options.half_time_salience_ratio.is_finite()
         || options.half_time_salience_ratio <= 1.0
+        || !options.half_bar_downbeat_salience_ratio.is_finite()
+        || options.half_bar_downbeat_salience_ratio <= 1.0
         || !options.jump_transition_max_s.is_finite()
         || options.jump_transition_max_s <= 0.0
     {
@@ -516,6 +524,125 @@ fn nearest_activity_db(activity: &[crate::AudioActivityPoint], time_s: f64) -> O
             float_order((left.time_s - time_s).abs(), (right.time_s - time_s).abs())
         })
         .map(|point| point.relative_db)
+}
+
+fn select_bar_level_downbeats(input: &mut RhythmObservations, options: &EstimatorOptions) -> bool {
+    const MINIMUM_CANDIDATES_PER_RUN: usize = 6;
+
+    if input.activity.is_empty() {
+        return false;
+    }
+    let candidates = input
+        .beats
+        .iter()
+        .enumerate()
+        .filter(|(_, beat)| beat.downbeat_confidence >= 0.5)
+        .map(|(index, _)| index)
+        .collect::<Vec<_>>();
+    if candidates.len() < MINIMUM_CANDIDATES_PER_RUN {
+        return false;
+    }
+
+    let mut changed = false;
+    let mut selected_runs = Vec::new();
+    let mut run_start = 0;
+    for run_end in 1..=candidates.len() {
+        let continues_half_bar_run = run_end < candidates.len()
+            && candidates[run_end].saturating_sub(candidates[run_end - 1]) == 2;
+        if continues_half_bar_run {
+            continue;
+        }
+
+        let run = &candidates[run_start..run_end];
+        if run.len() >= MINIMUM_CANDIDATES_PER_RUN {
+            let phase_scores =
+                [0_usize, 1].map(|phase| mean_candidate_phase_salience(input, run, phase));
+            let selected_phase = usize::from(phase_scores[1] > phase_scores[0]);
+            let retained = phase_scores[selected_phase];
+            let discarded = phase_scores[1 - selected_phase].max(1e-9);
+            if retained / discarded >= options.half_bar_downbeat_salience_ratio {
+                for (ordinal, &beat_index) in run.iter().enumerate() {
+                    if ordinal % 2 != selected_phase {
+                        input.beats[beat_index].downbeat_confidence = 0.0;
+                    }
+                }
+                selected_runs.push((run_start, run_end, selected_phase));
+                changed = true;
+            }
+        }
+        run_start = run_end;
+    }
+    for (start, end, phase) in selected_runs {
+        let run = &candidates[start..end];
+        let first_selected = run[phase];
+        if first_selected >= 4 && start > 0 {
+            changed |= realign_boundary_downbeat(
+                input,
+                first_selected - 4,
+                candidates[start - 1],
+                options.half_bar_downbeat_salience_ratio,
+            );
+        }
+        let last_selected = run
+            .iter()
+            .enumerate()
+            .rev()
+            .find(|(ordinal, _)| ordinal % 2 == phase)
+            .map(|(_, &beat_index)| beat_index)
+            .expect("selected downbeat run contains its selected phase");
+        if end < candidates.len() && last_selected + 4 < input.beats.len() {
+            changed |= realign_boundary_downbeat(
+                input,
+                last_selected + 4,
+                candidates[end],
+                options.half_bar_downbeat_salience_ratio,
+            );
+        }
+    }
+    changed
+}
+
+fn realign_boundary_downbeat(
+    input: &mut RhythmObservations,
+    expected_index: usize,
+    displaced_index: usize,
+    salience_ratio: f64,
+) -> bool {
+    if expected_index.abs_diff(displaced_index) > 1
+        || input.beats[expected_index].downbeat_confidence >= 0.5
+        || input.beats[displaced_index].downbeat_confidence < 0.5
+    {
+        return false;
+    }
+    let expected_salience = beat_activity_salience(input, expected_index);
+    let displaced_salience = beat_activity_salience(input, displaced_index).max(1e-9);
+    if expected_salience / displaced_salience < salience_ratio {
+        return false;
+    }
+    input.beats[expected_index].downbeat_confidence =
+        input.beats[displaced_index].downbeat_confidence;
+    input.beats[displaced_index].downbeat_confidence = 0.0;
+    true
+}
+
+fn beat_activity_salience(input: &RhythmObservations, beat_index: usize) -> f64 {
+    nearest_activity_db(&input.activity, input.beats[beat_index].time_s)
+        .map_or(0.0, |relative_db| 10.0_f64.powf(relative_db / 20.0))
+}
+
+fn mean_candidate_phase_salience(
+    input: &RhythmObservations,
+    candidates: &[usize],
+    phase: usize,
+) -> f64 {
+    let values = candidates
+        .iter()
+        .skip(phase)
+        .step_by(2)
+        .filter_map(|&index| nearest_activity_db(&input.activity, input.beats[index].time_s))
+        .map(|relative_db| 10.0_f64.powf(relative_db / 20.0))
+        .collect::<Vec<_>>();
+    values.iter().sum::<f64>() / usize_to_f64(values.len())
 }
 
 fn preferred_reference(raw_bpms: &[f64], options: &EstimatorOptions) -> f64 {
@@ -1274,6 +1401,128 @@ mod tests {
         let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
         assert!((analysis.global_bpm.unwrap() - 180.0).abs() < 0.01);
         assert_eq!(analysis.beats.len(), 41);
+    }
+
+    #[test]
+    fn stronger_alternating_accents_select_bar_level_downbeats() {
+        let mut input = observations_from_bpms(&[120.0; 40]);
+        for (index, beat) in input.beats.iter_mut().enumerate() {
+            beat.downbeat_confidence = if index.is_multiple_of(2) { 0.9 } else { 0.1 };
+        }
+        input.activity = input
+            .beats
+            .iter()
+            .enumerate()
+            .map(|(index, beat)| AudioActivityPoint {
+                time_s: beat.time_s,
+                rms: if index.is_multiple_of(4) { 1.0 } else { 0.5 },
+                relative_db: if index.is_multiple_of(4) { 0.0 } else { -6.0 },
+            })
+            .collect();
+
+        let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
+        let downbeat_indices = analysis
+            .beats
+            .iter()
+            .enumerate()
+            .filter(|(_, beat)| beat.downbeat)
+            .map(|(index, _)| index)
+            .collect::<Vec<_>>();
+        assert_eq!(downbeat_indices, (0..=40).step_by(4).collect::<Vec<_>>());
+        assert!(
+            analysis
+                .warnings
+                .contains(&"bar_level_downbeats_selected".to_string())
+        );
+    }
+
+    #[test]
+    fn equally_salient_half_bar_accents_preserve_model_downbeats() {
+        let mut input = observations_from_bpms(&[120.0; 40]);
+        for (index, beat) in input.beats.iter_mut().enumerate() {
+            beat.downbeat_confidence = if index.is_multiple_of(2) { 0.9 } else { 0.1 };
+        }
+        input.activity = input
+            .beats
+            .iter()
+            .map(|beat| AudioActivityPoint {
+                time_s: beat.time_s,
+                rms: 1.0,
+                relative_db: 0.0,
+            })
+            .collect();
+
+        let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
+        assert_eq!(
+            analysis.beats.iter().filter(|beat| beat.downbeat).count(),
+            21
+        );
+        assert!(
+            !analysis
+                .warnings
+                .contains(&"bar_level_downbeats_selected".to_string())
+        );
+    }
+
+    #[test]
+    fn quarter_bar_downbeat_candidates_are_not_reinterpreted() {
+        let mut input = observations_from_bpms(&[120.0; 40]);
+        input.activity = input
+            .beats
+            .iter()
+            .enumerate()
+            .map(|(index, beat)| AudioActivityPoint {
+                time_s: beat.time_s,
+                rms: if index.is_multiple_of(8) { 1.0 } else { 0.5 },
+                relative_db: if index.is_multiple_of(8) { 0.0 } else { -6.0 },
+            })
+            .collect();
+
+        let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
+        assert_eq!(
+            analysis.beats.iter().filter(|beat| beat.downbeat).count(),
+            11
+        );
+        assert!(
+            !analysis
+                .warnings
+                .contains(&"bar_level_downbeats_selected".to_string())
+        );
+    }
+
+    #[test]
+    fn displaced_boundary_downbeat_is_realigned_to_selected_bar_grid() {
+        let mut input = observations_from_bpms(&[120.0; 44]);
+        for beat in &mut input.beats {
+            beat.downbeat_confidence = 0.1;
+        }
+        for index in (0..=20).step_by(2) {
+            input.beats[index].downbeat_confidence = 0.9;
+        }
+        input.beats[23].downbeat_confidence = 0.9;
+        for index in (26..=44).step_by(2) {
+            input.beats[index].downbeat_confidence = 0.9;
+        }
+        input.activity = input
+            .beats
+            .iter()
+            .enumerate()
+            .map(|(index, beat)| AudioActivityPoint {
+                time_s: beat.time_s,
+                rms: if index.is_multiple_of(4) { 1.0 } else { 0.25 },
+                relative_db: if index.is_multiple_of(4) { 0.0 } else { -12.0 },
+            })
+            .collect();
+
+        let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
+        let downbeat_indices = analysis
+            .beats
+            .iter()
+            .enumerate()
+            .filter(|(_, beat)| beat.downbeat)
+            .map(|(index, _)| index)
+            .collect::<Vec<_>>();
+        assert_eq!(downbeat_indices, (0..=44).step_by(4).collect::<Vec<_>>());
     }
 
     #[test]

@@ -55,10 +55,11 @@ slice metrics remain the evidence used for engineering decisions.
 
 Each end-to-end case also records the backend's raw beat timestamps and
 beat/downbeat confidence values, the number retained by deterministic analysis,
-the activity-envelope size and low-activity fraction, and the warnings that
-identify silence rejection, half-time selection, or guarded transition-grid
-recovery. These diagnostics explain a metric change without exposing model
-tensors or requiring audio redistribution.
+the final downbeat count, the activity-envelope size and low-activity fraction,
+and the warnings that identify silence rejection, metrical selection,
+bar-phase selection, or guarded transition-grid recovery. These diagnostics
+explain a metric change without exposing model tensors or requiring audio
+redistribution.
 
 `cargo xtask` uses an optimized build because unoptimized neural inference is
 not a meaningful performance baseline. Keep the generated oracle suite in
@@ -74,8 +75,9 @@ cargo xtask score \
   --report D:/rhythm-map-eval/reports/generated-v1.json
 ```
 
-The report distinguishes beat matching, tempo-curve error, and same-kind
-change-point matching. Acceptance thresholds belong to the suite and can be
+The report distinguishes beat matching, downbeat/bar-phase matching,
+tempo-curve error, and same-kind change-point matching. Beat and downbeat F1
+are independent acceptance gates. Thresholds belong to the suite and can be
 overridden for a documented case; they should be tightened only from measured
 product requirements, not adjusted to make a release green.
 

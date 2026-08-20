@@ -49,6 +49,8 @@ pub struct ModelPackIdentity {
 pub struct CaseMetricDelta {
     /// End-to-end minus oracle beat F1.
     pub beat_f1: f64,
+    /// End-to-end minus oracle downbeat F1.
+    pub downbeat_f1: f64,
     /// End-to-end minus oracle median tempo error percentage.
     pub tempo_median_error_percent: Option<f64>,
     /// End-to-end minus oracle p95 tempo error percentage.
@@ -66,6 +68,9 @@ pub struct ObservationDiagnostics {
     pub raw_beats: Vec<ObservedBeat>,
     /// Number of beats retained in the product analysis.
     pub analyzed_beat_count: usize,
+    /// Number of retained beats classified as downbeats after deterministic repair.
+    #[serde(default)]
+    pub analyzed_downbeat_count: usize,
     /// Number of deterministic activity-envelope samples.
     pub activity_point_count: usize,
     /// Quietest activity sample relative to peak level.
@@ -211,11 +216,7 @@ pub fn evaluate_backend_suite(
         let runtime_ms = started.elapsed().as_secs_f64() * 1000.0;
         let end_to_end = evaluate_analysis(&case.id, &analysis, &truth, thresholds);
         let delta = metric_delta(&oracle, &end_to_end);
-        let observation_diagnostics = observation_diagnostics(
-            &observations,
-            analysis.beats.len(),
-            analysis.warnings.clone(),
-        );
+        let observation_diagnostics = observation_diagnostics(&observations, &analysis);
         cases.push(AttributionCase {
             id: case.id.clone(),
             oracle,
@@ -253,8 +254,7 @@ pub fn evaluate_backend_suite(
 
 fn observation_diagnostics(
     observations: &RhythmObservations,
-    analyzed_beat_count: usize,
-    analysis_warnings: Vec<String>,
+    analysis: &Analysis,
 ) -> ObservationDiagnostics {
     let minimum_relative_db = observations
         .activity
@@ -274,11 +274,12 @@ fn observation_diagnostics(
     ObservationDiagnostics {
         source: observations.source.clone(),
         raw_beats: observations.beats.clone(),
-        analyzed_beat_count,
+        analyzed_beat_count: analysis.beats.len(),
+        analyzed_downbeat_count: analysis.beats.iter().filter(|beat| beat.downbeat).count(),
         activity_point_count: observations.activity.len(),
         minimum_relative_db,
         low_activity_fraction,
-        analysis_warnings,
+        analysis_warnings: analysis.warnings.clone(),
     }
 }
 
@@ -418,6 +419,7 @@ fn required_model_path(pack: &VerifiedModelPack, role: ModelArtifactRole) -> Res
 fn metric_delta(oracle: &CaseEvaluation, end_to_end: &CaseEvaluation) -> CaseMetricDelta {
     CaseMetricDelta {
         beat_f1: end_to_end.metrics.beats.f1 - oracle.metrics.beats.f1,
+        downbeat_f1: end_to_end.metrics.downbeats.f1 - oracle.metrics.downbeats.f1,
         tempo_median_error_percent: subtract_options(
             end_to_end.metrics.tempo.median_absolute_error_percent,
             oracle.metrics.tempo.median_absolute_error_percent,

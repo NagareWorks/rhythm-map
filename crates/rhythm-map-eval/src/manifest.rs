@@ -11,6 +11,9 @@ pub struct AcceptanceThresholds {
     pub change_tolerance_s: f64,
     /// Lowest acceptable one-to-one beat F1 score.
     pub min_beat_f1: f64,
+    /// Lowest acceptable one-to-one downbeat F1 score.
+    #[serde(default = "default_min_downbeat_f1")]
+    pub min_downbeat_f1: f64,
     /// Highest acceptable median relative tempo error, as a percentage.
     pub max_tempo_median_error_percent: f64,
     /// Highest acceptable 95th-percentile relative tempo error, as a percentage.
@@ -25,11 +28,16 @@ impl Default for AcceptanceThresholds {
             beat_tolerance_ms: 70.0,
             change_tolerance_s: 1.0,
             min_beat_f1: 0.99,
+            min_downbeat_f1: default_min_downbeat_f1(),
             max_tempo_median_error_percent: 5.0,
             max_tempo_p95_error_percent: 15.0,
             min_change_recall: 0.5,
         }
     }
+}
+
+const fn default_min_downbeat_f1() -> f64 {
+    0.0
 }
 
 /// How an evaluation asset is obtained.
@@ -217,6 +225,7 @@ fn validate_thresholds(thresholds: &AcceptanceThresholds) -> Result<(), String> 
     }
     for (name, value) in [
         ("minimum beat F1", thresholds.min_beat_f1),
+        ("minimum downbeat F1", thresholds.min_downbeat_f1),
         ("minimum change recall", thresholds.min_change_recall),
     ] {
         if !value.is_finite() || !(0.0..=1.0).contains(&value) {

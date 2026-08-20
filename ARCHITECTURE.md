@@ -9,6 +9,7 @@ interleaved PCM
     -> low-activity rejection + evidence-based metrical selection
     -> preliminary normalized tempo curve
     -> guarded short-transition beat-grid recovery
+    -> evidence-based bar-level downbeat selection and boundary realignment
     -> final normalization + robust local tempo curve
     -> piecewise constant/ramp simplification
     -> change points and rhythm-homogeneous sections
@@ -47,11 +48,14 @@ The initial estimator is intentionally training-free:
    transitions.
 5. Reconstruct a transition grid only when duplicate/missed-event evidence is
    present and both adjacent grids are stable.
-6. Recompute octave-equivalent normalization around a robust metrical reference.
-7. Median-filter and locally average in log-tempo space.
-8. Detect direct jumps and short model-smeared transition blocks.
-9. Simplify the curve into constant and ramp segments.
-10. Split rhythm sections at tempo changes and beat/audio discontinuities.
+6. Collapse half-bar downbeat candidates only when alternating PCM accents
+   identify a stronger bar phase, and realign a displaced boundary label when
+   the recovered grid and activity agree.
+7. Recompute octave-equivalent normalization around a robust metrical reference.
+8. Median-filter and locally average in log-tempo space.
+9. Detect direct jumps and short model-smeared transition blocks.
+10. Simplify the curve into constant and ramp segments.
+11. Split rhythm sections at tempo changes and beat/audio discontinuities.
 
 This is a deterministic baseline, not the final research endpoint. Evaluation
 will determine whether a learned change-point/confidence head is needed.

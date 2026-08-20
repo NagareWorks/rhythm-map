@@ -51,6 +51,8 @@ pub struct ChangeMetrics {
 pub struct EvaluationMetrics {
     /// Beat timestamp quality.
     pub beats: BeatMetrics,
+    /// Downbeat timestamp and bar-phase quality.
+    pub downbeats: BeatMetrics,
     /// Tempo curve quality.
     pub tempo: TempoMetrics,
     /// Timing transition quality.
@@ -91,6 +93,21 @@ pub fn evaluate_analysis(
             .collect::<Vec<_>>(),
         thresholds.beat_tolerance_ms / 1000.0,
     );
+    let downbeats = score_beats(
+        &analysis
+            .beats
+            .iter()
+            .filter(|beat| beat.downbeat)
+            .map(|beat| beat.time_s)
+            .collect::<Vec<_>>(),
+        &truth
+            .beats
+            .iter()
+            .filter(|beat| beat.downbeat)
+            .map(|beat| beat.time_s)
+            .collect::<Vec<_>>(),
+        thresholds.beat_tolerance_ms / 1000.0,
+    );
     let tempo = score_tempo(analysis, truth);
     let changes = score_changes(analysis, truth, thresholds.change_tolerance_s);
     let mut failures = Vec::new();
@@ -98,6 +115,12 @@ pub fn evaluate_analysis(
         failures.push(format!(
             "beat F1 {:.4} is below {:.4}",
             beats.f1, thresholds.min_beat_f1
+        ));
+    }
+    if downbeats.f1 < thresholds.min_downbeat_f1 {
+        failures.push(format!(
+            "downbeat F1 {:.4} is below {:.4}",
+            downbeats.f1, thresholds.min_downbeat_f1
         ));
     }
     match tempo.median_absolute_error_percent {
@@ -126,6 +149,7 @@ pub fn evaluate_analysis(
         id: id.into(),
         metrics: EvaluationMetrics {
             beats,
+            downbeats,
             tempo,
             changes,
         },
@@ -262,6 +286,10 @@ fn float_order(left: f64, right: f64) -> Ordering {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::{
+        RecipeSegment, SegmentShape, SyntheticAudioProfile, SyntheticRecipe, generate_truth,
+    };
+    use rhythm_map_core::TempoMapEstimator;
 
     #[test]
     fn beat_matching_is_one_to_one() {
@@ -269,5 +297,38 @@ mod tests {
         assert_eq!(metrics.matched, 2);
         assert!((metrics.precision - 2.0 / 3.0).abs() < 1e-9);
         assert!((metrics.recall - 1.0).abs() < f64::EPSILON);
+    }
+
+    #[test]
+    fn downbeat_gate_is_independent_from_beat_timestamp_gate() {
+        let truth = generate_truth(&SyntheticRecipe {
+            schema_version: 1,
+            id: "downbeat-gate".to_string(),
+            sample_rate: 44_100,
+            beats_per_bar: 4,
+            audio_profile: SyntheticAudioProfile::Click,
+            segments: vec![RecipeSegment {
+                duration_s: 8.0,
+                shape: SegmentShape::Constant { bpm: 120.0 },
+            }],
+        })
+        .unwrap();
+        let mut analysis = TempoMapEstimator::default()
+            .estimate(&truth.ideal_observations())
+            .unwrap();
+        for beat in &mut analysis.beats {
+            beat.downbeat = false;
+            beat.downbeat_confidence = 0.0;
+        }
+        let thresholds = AcceptanceThresholds {
+            min_downbeat_f1: 0.95,
+            ..AcceptanceThresholds::default()
+        };
+
+        let result = evaluate_analysis("downbeat-gate", &analysis, &truth, &thresholds);
+        assert!((result.metrics.beats.f1 - 1.0).abs() < f64::EPSILON);
+        assert!(result.metrics.downbeats.f1.abs() < f64::EPSILON);
+        assert_eq!(result.failures.len(), 1);
+        assert!(result.failures[0].starts_with("downbeat F1"));
     }
 }

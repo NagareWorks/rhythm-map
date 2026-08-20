@@ -80,3 +80,25 @@ The next engineering targets are:
 Regenerate the full JSON report with the command documented in
 `evaluation/README.md`. Do not copy model weights or private evaluation audio
 into the repository.
+
+## Downbeat phase baseline
+
+The suite was extended with an independent downbeat F1 gate of 0.95, then rerun
+after evidence-based half-bar candidate selection and recovered-grid boundary
+realignment. No beat, tempo, or change-point threshold was relaxed.
+
+| Case | Raw / analyzed beats | End to end | Beat F1 | Downbeat F1 | Tempo median error | Tempo P95 error | Change recall | Runtime |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| constant-120 | 32 / 32 | pass | 1.0000 | 1.0000 | 0.00% | 0.00% | 1.00 | 2.31 s |
+| step-120-160 | 45 / 44 | pass | 1.0000 | 1.0000 | 0.29% | 1.32% | 1.00 | 3.23 s |
+| ramp-96-144 | 68 / 68 | fail | 0.6406 | 0.2917 | 2.80% | 50.30% | 0.00 | 10.46 s |
+| gap-128 | 36 / 32 | pass | 1.0000 | 1.0000 | 1.90% | 2.34% | 1.00 | 2.66 s |
+| subdivision-90 | 60 / 30 | pass | 1.0000 | 1.0000 | 1.01% | 1.01% | 1.00 | 3.49 s |
+
+The model-backed analysis time was 22.15 seconds. Before repair, downbeat F1
+was 0.6667 for `constant-120`, 0.6250 for `step-120-160`, and 0.6957 for
+`subdivision-90`; `gap-128` was already 1.0000. The repaired cases now reach
+1.0000 without changing their beat, tempo, or change-point metrics. The
+drumless ramp remains the only failing generated case and is unchanged because
+its primary problem is the upstream beat observation sequence, not an isolated
+bar-phase ambiguity.

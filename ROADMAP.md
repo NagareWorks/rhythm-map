@@ -11,6 +11,8 @@
 - Raw beat/confidence diagnostics and deterministic PCM activity observations.
 - Evidence-based half-time selection, silence-beat rejection, recovery of short
   model-smeared tempo jumps, and guarded duplicate/missed-event grid repair.
+- Independent downbeat/bar-phase evaluation and evidence-based half-bar
+  candidate selection with recovered-grid boundary realignment.
 
 ## Phase 2: product surfaces
 
@@ -45,11 +47,11 @@ Run the same evaluation cases through two paths:
 2. **end-to-end observations** run audio through Beat This! before the same
    estimator and measure the complete product path.
 
-Compare beat F1 and timing error, tempo-curve median/P95 error, change-point
-precision/recall, and section-boundary error by capability slice. Keep at least
-game music, rubato, extreme tempo, compound meter, drumless audio, stops, and
-half/double-time ambiguity as separate slices rather than hiding them in one
-aggregate score.
+Compare beat and downbeat F1 and timing error, tempo-curve median/P95 error,
+change-point precision/recall, and section-boundary error by capability slice.
+Keep at least game music, rubato, extreme tempo, compound meter, drumless audio,
+stops, and half/double-time ambiguity as separate slices rather than hiding
+them in one aggregate score.
 
 Use the difference between the two paths to decide where model work belongs:
 

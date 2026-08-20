@@ -6,6 +6,7 @@
     "beat_tolerance_ms": 70.0,
     "change_tolerance_s": 1.0,
     "min_beat_f1": 0.8,
+    "min_downbeat_f1": 0.6,
     "max_tempo_median_error_percent": 5.0,
     "max_tempo_p95_error_percent": 15.0,
     "min_change_recall": 0.6
