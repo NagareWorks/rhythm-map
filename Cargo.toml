@@ -3,6 +3,7 @@ members = [
     "crates/rhythm-map-core",
     "crates/rhythm-map-beat-this",
     "crates/rhythm-map-cli",
+    "crates/rhythm-map-eval",
     "crates/rhythm-map-ffi",
     "crates/rhythm-map-wasm",
 ]

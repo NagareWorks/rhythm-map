@@ -39,6 +39,22 @@ cargo run -p rhythm-map-cli --release -- \
 The command emits schema-versioned JSON containing beats, a BPM curve, tempo
 segments, change points, and rhythm sections.
 
+## Evaluation
+
+The repository keeps unit tests separate from product acceptance suites. The
+checked-in generated suite has analytic beat, tempo, ramp, jump, and silence
+ground truth and is a required CI gate:
+
+```bash
+cargo xtask eval
+```
+
+`cargo xtask render --output <directory>` produces disposable click-track WAV
+files for end-to-end backend evaluation. Public and private real-music cases use
+content-addressed external audio references, so possession of a track never
+silently becomes permission to redistribute it. See
+[`evaluation/README.md`](evaluation/README.md) for the data and license policy.
+
 ## Core API
 
 ```rust,no_run

@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "id": "private-real-music-v1",
+  "description": "Template only. Copy to evaluation/private/ and never commit audio or local paths.",
+  "thresholds": {
+    "beat_tolerance_ms": 70.0,
+    "change_tolerance_s": 1.0,
+    "min_beat_f1": 0.8,
+    "max_tempo_median_error_percent": 5.0,
+    "max_tempo_p95_error_percent": 15.0,
+    "min_change_recall": 0.6
+  },
+  "cases": [
+    {
+      "id": "replace-with-content-hash-id",
+      "input": {
+        "kind": "external",
+        "truth": "truth/replace-with-local-annotation.json",
+        "audio": {
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "local_file_hint": "replace-with-filename.ext"
+        }
+      },
+      "tags": ["variable-tempo", "private"],
+      "provenance": {
+        "kind": "private",
+        "audio_license": "replace-with-exact-local-use-basis",
+        "annotation_license": "replace-with-exact-annotation-license",
+        "redistributable": false,
+        "commercial_evaluation_allowed": false,
+        "attribution": null,
+        "source_url": null
+      }
+    }
+  ]
+}

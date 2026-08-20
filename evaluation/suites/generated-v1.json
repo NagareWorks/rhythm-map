@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "id": "generated-v1",
+  "description": "Exact synthetic timing cases for deterministic core regression and rendered backend evaluation.",
+  "thresholds": {
+    "beat_tolerance_ms": 70.0,
+    "change_tolerance_s": 1.0,
+    "min_beat_f1": 0.99,
+    "max_tempo_median_error_percent": 5.0,
+    "max_tempo_p95_error_percent": 15.0,
+    "min_change_recall": 0.5
+  },
+  "cases": [
+    {
+      "id": "constant-120",
+      "input": { "kind": "generated", "recipe": "recipes/constant-120.json" },
+      "tags": ["constant", "4-4"],
+      "provenance": {
+        "kind": "generated",
+        "audio_license": "Apache-2.0",
+        "annotation_license": "Apache-2.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true
+      }
+    },
+    {
+      "id": "step-120-160",
+      "input": { "kind": "generated", "recipe": "recipes/step-120-160.json" },
+      "tags": ["tempo-jump", "4-4"],
+      "provenance": {
+        "kind": "generated",
+        "audio_license": "Apache-2.0",
+        "annotation_license": "Apache-2.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true
+      }
+    },
+    {
+      "id": "ramp-96-144",
+      "input": { "kind": "generated", "recipe": "recipes/ramp-96-144.json" },
+      "tags": ["tempo-ramp", "4-4"],
+      "provenance": {
+        "kind": "generated",
+        "audio_license": "Apache-2.0",
+        "annotation_license": "Apache-2.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true
+      }
+    },
+    {
+      "id": "gap-128",
+      "input": { "kind": "generated", "recipe": "recipes/gap-128.json" },
+      "tags": ["rhythm-discontinuity", "silence", "4-4"],
+      "provenance": {
+        "kind": "generated",
+        "audio_license": "Apache-2.0",
+        "annotation_license": "Apache-2.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true
+      }
+    }
+  ]
+}

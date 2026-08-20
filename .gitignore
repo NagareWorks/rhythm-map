@@ -1,4 +1,7 @@
 /target/
+/evaluation/cache/
+/evaluation/private/
+/evaluation/reports/
 *.onnx
 *.ort
 *.rten

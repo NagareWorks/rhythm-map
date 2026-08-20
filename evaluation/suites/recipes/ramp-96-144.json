@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "id": "ramp-96-144",
+  "sample_rate": 44100,
+  "beats_per_bar": 4,
+  "segments": [
+    { "duration_s": 10.0, "kind": "constant", "bpm": 96.0 },
+    { "duration_s": 10.0, "kind": "linear_ramp", "start_bpm": 96.0, "end_bpm": 144.0 },
+    { "duration_s": 10.0, "kind": "constant", "bpm": 144.0 }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "id": "constant-120",
+  "sample_rate": 44100,
+  "beats_per_bar": 4,
+  "segments": [
+    { "duration_s": 16.0, "kind": "constant", "bpm": 120.0 }
+  ]
+}
