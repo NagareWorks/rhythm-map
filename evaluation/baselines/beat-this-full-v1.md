@@ -6,6 +6,8 @@ Measured on 2026-08-20 with an optimized build and the checked-in
 Runtime is machine-specific and is recorded only as a diagnostic, not an
 acceptance threshold.
 
+## Initial baseline
+
 | Case | Oracle | End to end | Beat F1 | Tempo median error | Tempo P95 error | Change recall | Runtime |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | constant-120 | pass | pass | 1.0000 | 0.00% | 0.00% | 1.00 | 2.87 s |
@@ -20,13 +22,31 @@ decision is therefore `observation_path`: failures emerge after audio is
 converted into beat observations, but the paired test alone does not prove that
 the neural network should be replaced.
 
-The first engineering targets are:
+## Observation-recovery baseline
 
-1. add metrical-level normalization for the clear half/double-time failure in
-   `subdivision-90`;
-2. inspect raw observations around jumps and gaps before changing change-point
-   thresholds;
-3. calibrate the drumless ramp profile against licensed real examples so a
+The same model and suite were rerun after adding raw observation diagnostics,
+PCM activity, evidence-based half-time selection, silence-event rejection, and
+short smeared-jump recovery.
+
+| Case | Raw / analyzed beats | End to end | Beat F1 | Tempo median error | Tempo P95 error | Change recall | Runtime |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| constant-120 | 32 / 32 | pass | 1.0000 | 0.00% | 0.00% | 1.00 | 2.37 s |
+| step-120-160 | 45 / 45 | fail | 0.8989 | 1.32% | 19.63% | 1.00 | 2.72 s |
+| ramp-96-144 | 68 / 68 | fail | 0.6406 | 2.80% | 50.30% | 0.00 | 12.16 s |
+| gap-128 | 36 / 32 | pass | 1.0000 | 1.90% | 2.34% | 1.00 | 3.23 s |
+| subdivision-90 | 60 / 30 | pass | 1.0000 | 1.01% | 1.01% | 1.00 | 3.63 s |
+
+Total model-backed analysis time was about 24.11 seconds. The acceptance
+thresholds were unchanged. `gap-128` and `subdivision-90` now pass completely,
+and `step-120-160` recovers its change point. Its remaining beat and P95 tempo
+failures come from incorrect events during the model's roughly three-second
+transition; the drumless ramp remains an unresolved observation-path case.
+
+The next engineering targets are:
+
+1. distinguish isolated duplicate/missed events around abrupt tempo changes
+   without suppressing real subdivisions;
+2. calibrate the drumless ramp profile against licensed real examples so a
    synthetic timbre mismatch is not mistaken for a general model limitation.
 
 Regenerate the full JSON report with the command documented in

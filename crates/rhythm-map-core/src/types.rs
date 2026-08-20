@@ -27,6 +27,17 @@ pub struct ObservedBeat {
     pub downbeat_confidence: f64,
 }
 
+/// Deterministic short-time audio activity measurement.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct AudioActivityPoint {
+    /// Center of the analysis window in seconds.
+    pub time_s: f64,
+    /// Root-mean-square signal level before normalization.
+    pub rms: f64,
+    /// Signal level in decibels relative to the loudest window.
+    pub relative_db: f64,
+}
+
 /// Backend-neutral observations consumed by the timing estimator.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct RhythmObservations {
@@ -34,6 +45,9 @@ pub struct RhythmObservations {
     pub duration_s: f64,
     /// Sorted beat observations.
     pub beats: Vec<ObservedBeat>,
+    /// Optional deterministic activity envelope derived from decoded PCM.
+    #[serde(default)]
+    pub activity: Vec<AudioActivityPoint>,
     /// Source model metadata.
     pub source: ModelInfo,
 }

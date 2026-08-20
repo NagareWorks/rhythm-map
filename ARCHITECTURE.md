@@ -5,7 +5,8 @@
 ```text
 interleaved PCM
     -> observation backend
-    -> beat/downbeat events + frame confidence
+    -> beat/downbeat events + frame confidence + PCM activity
+    -> low-activity rejection + evidence-based metrical selection
     -> metrical-level normalization
     -> robust local tempo curve
     -> piecewise constant/ramp simplification
@@ -20,8 +21,9 @@ without changing consumers.
 ## Observation boundary
 
 Backends implement `RhythmObservationBackend` and return `RhythmObservations`.
-They may expose confidence, model identity, and frame rate, but no backend tensor
-type crosses into the core schema.
+They may expose confidence, model identity, frame rate, and an optional activity
+envelope, but no backend tensor type crosses into the core schema. The engine
+adds a deterministic PCM activity envelope when a backend does not provide one.
 
 The default Beat This adapter consumes its frame logits to attach confidence to
 events. The tempo estimator never depends on the upstream crate's Rust structs.
@@ -38,12 +40,14 @@ the same structure through `serde-wasm-bindgen`.
 The initial estimator is intentionally training-free:
 
 1. Reject invalid or unsorted event sequences.
-2. Generate inter-beat tempo observations.
-3. Normalize octave-equivalent candidates around a robust metrical reference.
-4. Median-filter and locally average in log-tempo space.
-5. Detect sustained jumps with left/right robust windows.
-6. Simplify the curve into constant and ramp segments.
-7. Split rhythm sections at tempo changes and long beat discontinuities.
+2. Reject model events inside sustained low-activity spans.
+3. Select half-time only when alternating onset salience supports it.
+4. Generate inter-beat tempo observations.
+5. Normalize octave-equivalent candidates around a robust metrical reference.
+6. Median-filter and locally average in log-tempo space.
+7. Detect direct jumps and short model-smeared transition blocks.
+8. Simplify the curve into constant and ramp segments.
+9. Split rhythm sections at tempo changes and beat/audio discontinuities.
 
 This is a deterministic baseline, not the final research endpoint. Evaluation
 will determine whether a learned change-point/confidence head is needed.

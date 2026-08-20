@@ -6,7 +6,9 @@ use std::{
 
 use anyhow::{Context, Result, bail};
 use rhythm_map_beat_this::BeatThisBackend;
-use rhythm_map_core::{Analysis, Engine, TempoMapEstimator};
+use rhythm_map_core::{
+    Analysis, Engine, ModelInfo, ObservedBeat, RhythmObservations, TempoMapEstimator,
+};
 use rhythm_map_models::{ModelArtifactRole, VerifiedModelPack, verify_model_pack};
 use serde::{Deserialize, Serialize};
 
@@ -55,6 +57,25 @@ pub struct CaseMetricDelta {
     pub change_recall: f64,
 }
 
+/// Raw backend events and compact PCM-activity diagnostics for one case.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct ObservationDiagnostics {
+    /// Backend and model identity attached to the raw events.
+    pub source: ModelInfo,
+    /// Exact beat/confidence events before deterministic filtering or metrical selection.
+    pub raw_beats: Vec<ObservedBeat>,
+    /// Number of beats retained in the product analysis.
+    pub analyzed_beat_count: usize,
+    /// Number of deterministic activity-envelope samples.
+    pub activity_point_count: usize,
+    /// Quietest activity sample relative to peak level.
+    pub minimum_relative_db: Option<f64>,
+    /// Fraction of activity samples at or below -40 dB.
+    pub low_activity_fraction: f64,
+    /// Deterministic filtering and metrical-selection decisions.
+    pub analysis_warnings: Vec<String>,
+}
+
 /// Oracle and end-to-end results for one case.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct AttributionCase {
@@ -66,6 +87,8 @@ pub struct AttributionCase {
     pub end_to_end: CaseEvaluation,
     /// Directional end-to-end metric difference.
     pub delta: CaseMetricDelta,
+    /// Raw beat/confidence events and activity summary used for diagnosis.
+    pub observations: ObservationDiagnostics,
     /// Wall-clock time spent in end-to-end audio analysis.
     pub end_to_end_runtime_ms: f64,
 }
@@ -179,17 +202,26 @@ pub fn evaluate_backend_suite(
         let samples = synthesize_audio(&recipe, &truth)
             .with_context(|| format!("synthesizing case {}", case.id))?;
         let started = Instant::now();
+        let observations = engine
+            .observe_pcm(&samples, recipe.sample_rate, 1)
+            .with_context(|| format!("observing backend case {}", case.id))?;
         let analysis = engine
-            .analyze_pcm(&samples, recipe.sample_rate, 1)
-            .with_context(|| format!("running backend case {}", case.id))?;
+            .analyze_observations(&observations)
+            .with_context(|| format!("estimating backend case {}", case.id))?;
         let runtime_ms = started.elapsed().as_secs_f64() * 1000.0;
         let end_to_end = evaluate_analysis(&case.id, &analysis, &truth, thresholds);
         let delta = metric_delta(&oracle, &end_to_end);
+        let observation_diagnostics = observation_diagnostics(
+            &observations,
+            analysis.beats.len(),
+            analysis.warnings.clone(),
+        );
         cases.push(AttributionCase {
             id: case.id.clone(),
             oracle,
             end_to_end,
             delta,
+            observations: observation_diagnostics,
             end_to_end_runtime_ms: runtime_ms,
         });
     }
@@ -217,6 +249,37 @@ pub fn evaluate_backend_suite(
         attribution,
         cases,
     })
+}
+
+fn observation_diagnostics(
+    observations: &RhythmObservations,
+    analyzed_beat_count: usize,
+    analysis_warnings: Vec<String>,
+) -> ObservationDiagnostics {
+    let minimum_relative_db = observations
+        .activity
+        .iter()
+        .map(|point| point.relative_db)
+        .min_by(f64::total_cmp);
+    let low_activity_count = observations
+        .activity
+        .iter()
+        .filter(|point| point.relative_db <= -40.0)
+        .count();
+    let low_activity_fraction = if observations.activity.is_empty() {
+        0.0
+    } else {
+        usize_to_f64(low_activity_count) / usize_to_f64(observations.activity.len())
+    };
+    ObservationDiagnostics {
+        source: observations.source.clone(),
+        raw_beats: observations.beats.clone(),
+        analyzed_beat_count,
+        activity_point_count: observations.activity.len(),
+        minimum_relative_db,
+        low_activity_fraction,
+        analysis_warnings,
+    }
 }
 
 fn validate_beat_this_contract(model_pack: &VerifiedModelPack) -> Result<()> {
@@ -369,4 +432,9 @@ fn metric_delta(oracle: &CaseEvaluation, end_to_end: &CaseEvaluation) -> CaseMet
 
 fn subtract_options(left: Option<f64>, right: Option<f64>) -> Option<f64> {
     left.zip(right).map(|(left, right)| left - right)
+}
+
+#[allow(clippy::cast_precision_loss)]
+fn usize_to_f64(value: usize) -> f64 {
+    value as f64
 }

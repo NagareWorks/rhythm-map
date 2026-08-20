@@ -7,6 +7,7 @@ mod types;
 pub use engine::{BackendError, Engine, EngineError, RhythmObservationBackend};
 pub use estimator::{AnalysisError, EstimatorOptions, TempoMapEstimator};
 pub use types::{
-    ANALYSIS_SCHEMA_VERSION, Analysis, BeatEvent, ChangeKind, ChangePoint, ModelInfo, ObservedBeat,
-    RhythmObservations, RhythmSection, TempoHypothesis, TempoPoint, TempoSegment, TempoSegmentKind,
+    ANALYSIS_SCHEMA_VERSION, Analysis, AudioActivityPoint, BeatEvent, ChangeKind, ChangePoint,
+    ModelInfo, ObservedBeat, RhythmObservations, RhythmSection, TempoHypothesis, TempoPoint,
+    TempoSegment, TempoSegmentKind,
 };

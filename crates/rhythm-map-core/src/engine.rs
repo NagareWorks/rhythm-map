@@ -1,6 +1,6 @@
 use thiserror::Error;
 
-use crate::{Analysis, AnalysisError, RhythmObservations, TempoMapEstimator};
+use crate::{Analysis, AnalysisError, AudioActivityPoint, RhythmObservations, TempoMapEstimator};
 
 /// Error returned by an observation backend.
 #[derive(Debug, Clone, Error)]
@@ -75,6 +75,24 @@ where
         sample_rate: u32,
         channels: u16,
     ) -> Result<Analysis, EngineError> {
+        let observations = self.observe_pcm(samples, sample_rate, channels)?;
+        Ok(self.estimator.estimate(&observations)?)
+    }
+
+    /// Decode the backend-neutral observation layer without running the timing
+    /// estimator. A deterministic activity envelope is added when the backend
+    /// does not provide one.
+    ///
+    /// # Errors
+    ///
+    /// Returns [`EngineError`] for invalid PCM layout or backend inference
+    /// failures.
+    pub fn observe_pcm(
+        &mut self,
+        samples: &[f32],
+        sample_rate: u32,
+        channels: u16,
+    ) -> Result<RhythmObservations, EngineError> {
         if sample_rate == 0 {
             return Err(EngineError::InvalidAudio(
                 "sample rate must be non-zero".to_string(),
@@ -103,8 +121,24 @@ where
             &mono
         };
 
-        let observations = self.backend.observe_mono(samples, sample_rate)?;
-        Ok(self.estimator.estimate(&observations)?)
+        let mut observations = self.backend.observe_mono(samples, sample_rate)?;
+        if observations.activity.is_empty() {
+            observations.activity = extract_audio_activity(samples, sample_rate);
+        }
+        Ok(observations)
+    }
+
+    /// Run the deterministic estimator on an already captured observation set.
+    ///
+    /// # Errors
+    ///
+    /// Returns [`AnalysisError`] when observations or estimator policy are
+    /// invalid.
+    pub fn analyze_observations(
+        &self,
+        observations: &RhythmObservations,
+    ) -> Result<Analysis, AnalysisError> {
+        self.estimator.estimate(observations)
     }
 
     /// Borrow the backend for backend-specific lifecycle operations.
@@ -116,6 +150,48 @@ where
     pub const fn backend_mut(&mut self) -> &mut B {
         &mut self.backend
     }
+}
+
+fn extract_audio_activity(samples: &[f32], sample_rate: u32) -> Vec<AudioActivityPoint> {
+    if samples.is_empty() {
+        return Vec::new();
+    }
+    let window = usize::try_from((sample_rate / 10).max(1)).expect("sample rate fits usize");
+    let hop = usize::try_from((sample_rate / 20).max(1)).expect("sample rate fits usize");
+    let mut activity = (0..samples.len())
+        .step_by(hop)
+        .map(|center| {
+            let start = center.saturating_sub(window / 2);
+            let end = (center + window / 2 + 1).min(samples.len());
+            let mean_square = samples[start..end]
+                .iter()
+                .map(|sample| f64::from(*sample).powi(2))
+                .sum::<f64>()
+                / usize_to_f64(end - start);
+            AudioActivityPoint {
+                time_s: usize_to_f64(center) / f64::from(sample_rate),
+                rms: mean_square.sqrt(),
+                relative_db: 0.0,
+            }
+        })
+        .collect::<Vec<_>>();
+    let peak = activity
+        .iter()
+        .map(|point| point.rms)
+        .fold(0.0_f64, f64::max);
+    for point in &mut activity {
+        point.relative_db = if peak <= f64::EPSILON {
+            -120.0
+        } else {
+            (20.0 * (point.rms / peak).max(1e-6).log10()).clamp(-120.0, 0.0)
+        };
+    }
+    activity
+}
+
+#[allow(clippy::cast_precision_loss)]
+fn usize_to_f64(value: usize) -> f64 {
+    value as f64
 }
 
 #[cfg(test)]
@@ -149,6 +225,7 @@ mod tests {
                         downbeat_confidence: 0.0,
                     },
                 ],
+                activity: Vec::new(),
                 source: ModelInfo {
                     backend: "test".to_string(),
                     model: "test".to_string(),
@@ -173,5 +250,18 @@ mod tests {
             engine.analyze_pcm(&[0.0, 1.0, 2.0], 48_000, 2),
             Err(EngineError::InvalidAudio(_))
         ));
+    }
+
+    #[test]
+    fn adds_activity_envelope_to_backend_observations() {
+        let mut engine = Engine::new(RecordingBackend::default(), TempoMapEstimator::default());
+        let observations = engine.observe_pcm(&vec![0.5; 2_000], 1_000, 1).unwrap();
+        assert!(!observations.activity.is_empty());
+        assert!(
+            observations
+                .activity
+                .iter()
+                .all(|point| point.relative_db.abs() < 1e-9)
+        );
     }
 }

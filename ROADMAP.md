@@ -8,6 +8,9 @@
 - CLI, C ABI, and observation-driven WASM API.
 - Synthetic constant/step/ramp tests and a licensed evaluation manifest.
 - Verified Beat This model-pack manifest and paired oracle/end-to-end evaluation.
+- Raw beat/confidence diagnostics and deterministic PCM activity observations.
+- Evidence-based half-time selection, silence-beat rejection, and recovery of
+  short model-smeared tempo jumps.
 
 ## Phase 2: product surfaces
 

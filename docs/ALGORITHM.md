@@ -12,16 +12,30 @@ backend-neutral `RhythmObservations`:
 
 - beat timestamps;
 - downbeat timestamps;
-- per-event confidence derived from 50 Hz beat and downbeat logits; and
+- per-event confidence derived from 50 Hz beat and downbeat logits;
+- a deterministic short-time PCM activity envelope; and
 - model identity and audio duration.
 
 No model tensor or Beat This-specific type crosses into `rhythm-map-core`.
 Alternative trackers and caller-supplied observations therefore use the same
 tempo-map estimator and produce the same `Analysis` schema.
 
-Beat timestamps in the current output are the backend observations. The
-estimator enriches and analyzes them but does not yet move a beat to a locally
-optimized grid position.
+The estimator never moves an event to a locally optimized grid position. It can
+reject events inside sustained low-activity spans or select one phase of a
+strong/weak alternating sequence when the evidence supports a half-time
+interpretation. Paired evaluation reports retain the raw backend events and
+confidence values before these decisions.
+
+## Audio activity and silence
+
+The end-to-end engine computes RMS over centered 100 ms windows at a 50 ms hop
+and converts each value to decibels relative to the loudest window. A span at or
+below -40 dB for at least 0.8 seconds is treated as low activity. Backend beats
+inside that span are rejected before tempo estimation, and the span midpoint is
+reported as `rhythm_discontinuity`.
+
+This is deterministic PCM evidence, not another neural model. Observation-only
+callers may omit the envelope; in that case no activity-based filtering occurs.
 
 ## Local tempo observations
 
@@ -54,6 +68,15 @@ The small level penalty avoids unnecessary octave changes when two candidates
 are otherwise similarly plausible. Half- and double-time alternatives are
 also preserved in `tempo_hypotheses`; the public result does not pretend that
 metrical ambiguity has disappeared.
+
+Before interval normalization, a second evidence-based rule handles inserted
+subdivisions. When the raw median is at least 150 BPM and its half lies in the
+preferred band, the estimator compares the mean audio salience of the two
+alternating event phases. It keeps the stronger phase only when its
+confidence-weighted activity is at least 1.35 times the discarded phase. Equal
+salience therefore preserves a genuine fast pulse instead of blindly dividing
+every high tempo by two. The decision is recorded as
+`metrical_level_selected_half_time`.
 
 ## Robust BPM curve
 
@@ -102,20 +125,24 @@ Three independent deterministic detectors contribute change points.
 At each eligible curve index, the estimator compares the median of the two
 preceding BPM points with the median of the current and next BPM points. A
 sustained relative difference of at least 12 percent produces `tempo_jump`.
-Same-kind detections within 0.75 seconds are merged, retaining the strongest.
+The simplified segments provide a second path: a consecutive ramp block lasting
+at most four seconds with stable plateaus on both sides and at least the same
+12-percent endpoint difference is treated as a model-smeared jump, timestamped
+at the start of the transition. Same-kind detections within 0.75 seconds are
+merged, retaining the strongest.
 
 ### Ramp boundary
 
-A transition between `constant` and `ramp` produces `ramp_boundary` when the
-ramp lasts at least four seconds and changes by at least 5 percent. A boundary
-within 0.5 seconds of an existing change is not duplicated.
+Consecutive ramp segments are considered as one block. A significant block
+longer than the four-second jump limit produces `ramp_boundary` at its available
+constant/ramp edges.
 
 ### Rhythm discontinuity
 
 An inter-beat gap produces `rhythm_discontinuity` when it is both longer than
-one second and more than 3.5 times the median beat interval. Its timestamp is
-the midpoint of the gap. This can represent a deliberate stop, silence, or a
-period where the observation backend lost the pulse.
+one second and more than 3.5 times the median beat interval. A sustained PCM
+low-activity span produces the same kind even if the neural backend hallucinates
+a regular pulse through silence. Both use the span midpoint.
 
 ## Rhythm-homogeneous sections
 

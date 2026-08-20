@@ -98,6 +98,7 @@ impl RhythmObservationBackend for BeatThisBackend {
         Ok(RhythmObservations {
             duration_s: usize_to_f64(samples.len()) / f64::from(sample_rate),
             beats,
+            activity: Vec::new(),
             source: ModelInfo {
                 backend: "beat-this-rten".to_string(),
                 model: self.model_name.clone(),

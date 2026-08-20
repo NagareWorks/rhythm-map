@@ -15,8 +15,8 @@ pub use metrics::{
 };
 pub use runner::{
     AttributionCase, AttributionDecision, BottleneckEvaluation, CaseMetricDelta, ModelPackIdentity,
-    SuiteEvaluation, evaluate_backend_suite, evaluate_core_suite, render_suite,
-    score_prediction_directory,
+    ObservationDiagnostics, SuiteEvaluation, evaluate_backend_suite, evaluate_core_suite,
+    render_suite, score_prediction_directory,
 };
 pub use synthetic::{
     GeneratedTruth, RecipeSegment, SegmentShape, SyntheticAudioProfile, SyntheticRecipe, TruthBeat,
