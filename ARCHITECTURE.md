@@ -47,6 +47,8 @@ The initial estimator is intentionally training-free:
 
 This is a deterministic baseline, not the final research endpoint. Evaluation
 will determine whether a learned change-point/confidence head is needed.
+The formulas, default thresholds, and output interpretation are documented in
+[`docs/ALGORITHM.md`](docs/ALGORITHM.md).
 
 ## Model packages
 

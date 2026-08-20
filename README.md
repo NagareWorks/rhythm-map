@@ -85,7 +85,9 @@ own decoded audio.
 - Native, C ABI, WASM, CLI, and future GUI packages consume the same schema.
 
 See [`ARCHITECTURE.md`](ARCHITECTURE.md) for the component contracts and
-[`ROADMAP.md`](ROADMAP.md) for the staged implementation plan.
+[`docs/ALGORITHM.md`](docs/ALGORITHM.md) for the current deterministic timing
+algorithm. [`ROADMAP.md`](ROADMAP.md) records the staged implementation and the
+evidence required before adding learned components.
 
 ## License
 
