@@ -3,8 +3,8 @@ use std::cmp::Ordering;
 use thiserror::Error;
 
 use crate::{
-    ANALYSIS_SCHEMA_VERSION, Analysis, BeatEvent, ChangeKind, ChangePoint, RhythmObservations,
-    RhythmSection, TempoHypothesis, TempoPoint, TempoSegment, TempoSegmentKind,
+    ANALYSIS_SCHEMA_VERSION, Analysis, BeatEvent, ChangeKind, ChangePoint, ObservedBeat,
+    RhythmObservations, RhythmSection, TempoHypothesis, TempoPoint, TempoSegment, TempoSegmentKind,
 };
 
 /// Tunable policy for deterministic tempo-map inference.
@@ -104,12 +104,10 @@ impl TempoMapEstimator {
         validate_observations(input)?;
 
         let PreparedObservations {
-            observations: prepared,
+            observations: mut prepared,
             silence_regions,
             mut warnings,
         } = prepare_observations(input, &self.options);
-
-        let beats = beat_events(&prepared);
 
         if prepared.beats.len() < 3 {
             warnings.push("too_few_beats_for_tempo_curve".to_string());
@@ -117,7 +115,7 @@ impl TempoMapEstimator {
                 schema_version: ANALYSIS_SCHEMA_VERSION,
                 duration_s: input.duration_s,
                 source: input.source.clone(),
-                beats,
+                beats: beat_events(&prepared),
                 global_bpm: None,
                 tempo_hypotheses: Vec::new(),
                 tempo_curve: Vec::new(),
@@ -134,33 +132,20 @@ impl TempoMapEstimator {
             });
         }
 
-        let intervals = prepared
-            .beats
-            .windows(2)
-            .map(|pair| pair[1].time_s - pair[0].time_s)
-            .collect::<Vec<_>>();
-        let raw_bpms = intervals.iter().map(|dt| 60.0 / dt).collect::<Vec<_>>();
-        let reference = preferred_reference(&raw_bpms, &self.options);
-        let normalized = raw_bpms
-            .iter()
-            .map(|&bpm| normalize_metrical_level(bpm, reference, &self.options))
-            .collect::<Vec<_>>();
-        let smoothed = smooth_log_tempo(&normalized, self.options.smoothing_window);
+        let preliminary = build_tempo_estimate(&prepared, input.duration_s, &self.options);
+        if let Some(repaired) =
+            recover_short_transition_grids(&prepared, &preliminary.tempo_segments, &self.options)
+        {
+            prepared = repaired;
+            warnings.push("short_transition_beat_grid_recovered".to_string());
+        }
 
-        let tempo_curve = smoothed
-            .iter()
-            .enumerate()
-            .map(|(index, &bpm)| {
-                let pair = &prepared.beats[index..=index + 1];
-                let observation_confidence = pair[0].confidence.min(pair[1].confidence);
-                let deviation = (normalized[index] / bpm).log2().abs();
-                TempoPoint {
-                    time_s: (pair[0].time_s + pair[1].time_s) * 0.5,
-                    bpm,
-                    confidence: (observation_confidence * (-8.0 * deviation).exp()).clamp(0.0, 1.0),
-                }
-            })
-            .collect::<Vec<_>>();
+        let TempoEstimate {
+            intervals,
+            smoothed,
+            tempo_curve,
+            tempo_segments,
+        } = build_tempo_estimate(&prepared, input.duration_s, &self.options);
 
         let global_bpm = median(smoothed.clone());
         let tempo_hypotheses = metrical_hypotheses(global_bpm, &self.options);
@@ -168,13 +153,6 @@ impl TempoMapEstimator {
             warnings.push("metrical_level_has_half_or_double_time_alternatives".to_string());
         }
 
-        let knot_indices = simplify_curve(&tempo_curve, self.options.curve_tolerance_octaves);
-        let tempo_segments = build_segments(
-            &tempo_curve,
-            &knot_indices,
-            input.duration_s,
-            self.options.constant_ratio,
-        );
         let mut change_points = detect_jumps(&tempo_curve, self.options.jump_ratio);
         add_segment_transitions(
             &tempo_segments,
@@ -198,7 +176,7 @@ impl TempoMapEstimator {
             schema_version: ANALYSIS_SCHEMA_VERSION,
             duration_s: input.duration_s,
             source: input.source.clone(),
-            beats,
+            beats: beat_events(&prepared),
             global_bpm: Some(global_bpm),
             tempo_hypotheses,
             tempo_curve,
@@ -207,6 +185,59 @@ impl TempoMapEstimator {
             rhythm_sections,
             warnings,
         })
+    }
+}
+
+struct TempoEstimate {
+    intervals: Vec<f64>,
+    smoothed: Vec<f64>,
+    tempo_curve: Vec<TempoPoint>,
+    tempo_segments: Vec<TempoSegment>,
+}
+
+fn build_tempo_estimate(
+    input: &RhythmObservations,
+    duration_s: f64,
+    options: &EstimatorOptions,
+) -> TempoEstimate {
+    let intervals = input
+        .beats
+        .windows(2)
+        .map(|pair| pair[1].time_s - pair[0].time_s)
+        .collect::<Vec<_>>();
+    let raw_bpms = intervals.iter().map(|dt| 60.0 / dt).collect::<Vec<_>>();
+    let reference = preferred_reference(&raw_bpms, options);
+    let normalized = raw_bpms
+        .iter()
+        .map(|&bpm| normalize_metrical_level(bpm, reference, options))
+        .collect::<Vec<_>>();
+    let smoothed = smooth_log_tempo(&normalized, options.smoothing_window);
+    let tempo_curve = smoothed
+        .iter()
+        .enumerate()
+        .map(|(index, &bpm)| {
+            let pair = &input.beats[index..=index + 1];
+            let observation_confidence = pair[0].confidence.min(pair[1].confidence);
+            let deviation = (normalized[index] / bpm).log2().abs();
+            TempoPoint {
+                time_s: (pair[0].time_s + pair[1].time_s) * 0.5,
+                bpm,
+                confidence: (observation_confidence * (-8.0 * deviation).exp()).clamp(0.0, 1.0),
+            }
+        })
+        .collect::<Vec<_>>();
+    let knot_indices = simplify_curve(&tempo_curve, options.curve_tolerance_octaves);
+    let tempo_segments = build_segments(
+        &tempo_curve,
+        &knot_indices,
+        duration_s,
+        options.constant_ratio,
+    );
+    TempoEstimate {
+        intervals,
+        smoothed,
+        tempo_curve,
+        tempo_segments,
     }
 }
 
@@ -680,32 +711,55 @@ fn detect_jumps(curve: &[TempoPoint], jump_ratio: f64) -> Vec<ChangePoint> {
     changes
 }
 
-fn add_segment_transitions(
-    segments: &[TempoSegment],
-    jump_ratio: f64,
-    jump_transition_max_s: f64,
-    changes: &mut Vec<ChangePoint>,
-) {
+#[derive(Debug, Clone, Copy)]
+struct SegmentTransition {
+    ramp_start: usize,
+    ramp_end: usize,
+    before_bpm: f64,
+    after_bpm: f64,
+    confidence: f64,
+}
+
+impl SegmentTransition {
+    fn start_s(self, segments: &[TempoSegment]) -> f64 {
+        segments[self.ramp_start].start_s
+    }
+
+    fn end_s(self, segments: &[TempoSegment]) -> f64 {
+        segments[self.ramp_end - 1].end_s
+    }
+
+    fn duration_s(self, segments: &[TempoSegment]) -> f64 {
+        self.end_s(segments) - self.start_s(segments)
+    }
+
+    fn is_bracketed(self, segments: &[TempoSegment]) -> bool {
+        self.ramp_start > 0 && self.ramp_end < segments.len()
+    }
+}
+
+fn segment_transitions(segments: &[TempoSegment], jump_ratio: f64) -> Vec<SegmentTransition> {
+    let mut transitions = Vec::new();
     let mut index = 0;
     while index < segments.len() {
         if segments[index].kind != TempoSegmentKind::Ramp {
             index += 1;
             continue;
         }
-        let start = index;
+        let ramp_start = index;
         while index < segments.len() && segments[index].kind == TempoSegmentKind::Ramp {
             index += 1;
         }
-        let end = index;
-        let first = &segments[start];
-        let last = &segments[end - 1];
-        let before_bpm = if start > 0 {
-            segments[start - 1].end_bpm
+        let ramp_end = index;
+        let first = &segments[ramp_start];
+        let last = &segments[ramp_end - 1];
+        let before_bpm = if ramp_start > 0 {
+            segments[ramp_start - 1].end_bpm
         } else {
             first.start_bpm
         };
-        let after_bpm = if end < segments.len() {
-            segments[end].start_bpm
+        let after_bpm = if ramp_end < segments.len() {
+            segments[ramp_end].start_bpm
         } else {
             last.end_bpm
         };
@@ -713,38 +767,252 @@ fn add_segment_transitions(
         if ratio < jump_ratio.ln_1p() {
             continue;
         }
-        let duration_s = last.end_s - first.start_s;
-        let confidence = segments[start..end]
+        let confidence = segments[ramp_start..ramp_end]
             .iter()
             .map(|segment| segment.confidence)
             .sum::<f64>()
-            / usize_to_f64(end - start);
-        if start > 0 && end < segments.len() && duration_s <= jump_transition_max_s {
+            / usize_to_f64(ramp_end - ramp_start);
+        transitions.push(SegmentTransition {
+            ramp_start,
+            ramp_end,
+            before_bpm,
+            after_bpm,
+            confidence,
+        });
+    }
+    transitions
+}
+
+#[derive(Debug, Clone, Copy)]
+struct RegularGrid {
+    origin: f64,
+    period: f64,
+    maximum_error: f64,
+}
+
+fn fit_regular_grid(beats: &[&ObservedBeat]) -> Option<RegularGrid> {
+    if beats.len() < 6 {
+        return None;
+    }
+    let mean_index = (usize_to_f64(beats.len()) - 1.0) * 0.5;
+    let mean_time = beats.iter().map(|beat| beat.time_s).sum::<f64>() / usize_to_f64(beats.len());
+    let (numerator, denominator) =
+        beats
+            .iter()
+            .enumerate()
+            .fold((0.0, 0.0), |(numerator, denominator), (index, beat)| {
+                let centered_index = usize_to_f64(index) - mean_index;
+                (
+                    numerator + centered_index * (beat.time_s - mean_time),
+                    denominator + centered_index.powi(2),
+                )
+            });
+    let period = numerator / denominator;
+    if !period.is_finite() || period <= 0.0 {
+        return None;
+    }
+    let origin = mean_time - period * mean_index;
+    let maximum_error = beats
+        .iter()
+        .enumerate()
+        .map(|(index, beat)| (beat.time_s - origin - period * usize_to_f64(index)).abs())
+        .fold(0.0_f64, f64::max);
+    Some(RegularGrid {
+        origin,
+        period,
+        maximum_error,
+    })
+}
+
+fn recover_short_transition_grids(
+    input: &RhythmObservations,
+    segments: &[TempoSegment],
+    options: &EstimatorOptions,
+) -> Option<RhythmObservations> {
+    let mut repaired = input.clone();
+    let mut changed = false;
+    for transition in segment_transitions(segments, options.jump_ratio) {
+        if !transition.is_bracketed(segments)
+            || transition.duration_s(segments) > options.jump_transition_max_s
+        {
+            continue;
+        }
+        if let Some(beats) = recover_transition_grid(&repaired.beats, segments, transition, options)
+        {
+            repaired.beats = beats;
+            changed = true;
+        }
+    }
+    changed.then_some(repaired)
+}
+
+fn recover_transition_grid(
+    beats: &[ObservedBeat],
+    segments: &[TempoSegment],
+    transition: SegmentTransition,
+    options: &EstimatorOptions,
+) -> Option<Vec<ObservedBeat>> {
+    let start_s = transition.start_s(segments);
+    let end_s = transition.end_s(segments);
+    let left_segment = &segments[transition.ramp_start - 1];
+    let right_segment = &segments[transition.ramp_end];
+    let left_beats = beats
+        .iter()
+        .filter(|beat| beat.time_s >= left_segment.start_s && beat.time_s < start_s)
+        .collect::<Vec<_>>();
+    let right_beats = beats
+        .iter()
+        .filter(|beat| beat.time_s > end_s && beat.time_s <= right_segment.end_s)
+        .collect::<Vec<_>>();
+    let left_grid = fit_regular_grid(&left_beats)?;
+    let right_grid = fit_regular_grid(&right_beats)?;
+    if left_grid.maximum_error > left_grid.period * 0.08
+        || right_grid.maximum_error > right_grid.period * 0.08
+        || (right_grid.period / left_grid.period).ln().abs() < options.jump_ratio.ln_1p()
+    {
+        return None;
+    }
+
+    let shorter_period = left_grid.period.min(right_grid.period);
+    let longer_period = left_grid.period.max(right_grid.period);
+    let transition_evidence = beats
+        .iter()
+        .filter(|beat| {
+            beat.time_s >= start_s - longer_period && beat.time_s <= end_s + longer_period
+        })
+        .collect::<Vec<_>>();
+    let has_duplicate_or_missed_event = transition_evidence.windows(2).any(|pair| {
+        let interval = pair[1].time_s - pair[0].time_s;
+        interval < shorter_period * 0.65
+            || indicates_missed_event(interval, left_grid.period, right_grid.period)
+    });
+    if !has_duplicate_or_missed_event {
+        return None;
+    }
+
+    let mut grid_time = right_grid.origin;
+    while grid_time - right_grid.period >= start_s {
+        grid_time -= right_grid.period;
+    }
+    while grid_time < start_s {
+        grid_time += right_grid.period;
+    }
+    let first_right_grid_time = grid_time;
+    while grid_time <= end_s && distance_to_grid(grid_time, left_grid) > shorter_period * 0.12 {
+        grid_time += right_grid.period;
+    }
+    if grid_time > end_s {
+        grid_time = first_right_grid_time;
+    }
+    let recovery_start_s = beats
+        .iter()
+        .filter(|beat| beat.time_s <= grid_time)
+        .min_by(|left, right| {
+            float_order(
+                (left.time_s - grid_time).abs(),
+                (right.time_s - grid_time).abs(),
+            )
+        })
+        .filter(|beat| (beat.time_s - grid_time).abs() <= shorter_period * 0.12)
+        .map_or(grid_time, |beat| beat.time_s);
+    let original = beats
+        .iter()
+        .filter(|beat| beat.time_s >= recovery_start_s && beat.time_s <= end_s)
+        .collect::<Vec<_>>();
+    let mut replacement = Vec::new();
+    while grid_time <= end_s {
+        let matched = original
+            .iter()
+            .copied()
+            .min_by(|left, right| {
+                float_order(
+                    (left.time_s - grid_time).abs(),
+                    (right.time_s - grid_time).abs(),
+                )
+            })
+            .filter(|beat| (beat.time_s - grid_time).abs() < right_grid.period * 0.45);
+        replacement.push(ObservedBeat {
+            time_s: grid_time,
+            confidence: matched.map_or(transition.confidence * 0.5, |beat| beat.confidence),
+            downbeat_confidence: matched.map_or(0.0, |beat| beat.downbeat_confidence),
+        });
+        grid_time += right_grid.period;
+    }
+    if replacement.len() == original.len()
+        && replacement
+            .iter()
+            .zip(&original)
+            .all(|(repaired, raw)| (repaired.time_s - raw.time_s).abs() <= right_grid.period * 0.08)
+    {
+        return None;
+    }
+
+    let mut result = beats
+        .iter()
+        .filter(|beat| beat.time_s < recovery_start_s || beat.time_s > end_s)
+        .cloned()
+        .chain(replacement)
+        .collect::<Vec<_>>();
+    result.sort_by(|left, right| float_order(left.time_s, right.time_s));
+    Some(result)
+}
+
+fn distance_to_grid(time_s: f64, grid: RegularGrid) -> f64 {
+    let position = (time_s - grid.origin) / grid.period;
+    (position - position.round()).abs() * grid.period
+}
+
+fn indicates_missed_event(interval: f64, left_period: f64, right_period: f64) -> bool {
+    let matches_single = |period: f64| (interval / period - 1.0).abs() <= 0.2;
+    if matches_single(left_period) || matches_single(right_period) {
+        return false;
+    }
+    [left_period, right_period].iter().any(|period| {
+        let multiple = interval / period;
+        (1.6..=3.25).contains(&multiple) && (multiple - multiple.round()).abs() <= 0.15
+    })
+}
+
+fn add_segment_transitions(
+    segments: &[TempoSegment],
+    jump_ratio: f64,
+    jump_transition_max_s: f64,
+    changes: &mut Vec<ChangePoint>,
+) {
+    for transition in segment_transitions(segments, jump_ratio) {
+        let first = &segments[transition.ramp_start];
+        let last = &segments[transition.ramp_end - 1];
+        if transition.is_bracketed(segments)
+            && transition.duration_s(segments) <= jump_transition_max_s
+        {
             changes.push(ChangePoint {
                 time_s: first.start_s,
                 kind: ChangeKind::TempoJump,
-                score: (confidence * ratio / 0.25).clamp(0.0, 1.0),
-                before_bpm: Some(before_bpm),
-                after_bpm: Some(after_bpm),
+                score: (transition.confidence
+                    * (transition.after_bpm / transition.before_bpm).ln().abs()
+                    / 0.25)
+                    .clamp(0.0, 1.0),
+                before_bpm: Some(transition.before_bpm),
+                after_bpm: Some(transition.after_bpm),
             });
             continue;
         }
-        if start > 0 {
+        if transition.ramp_start > 0 {
             changes.push(ChangePoint {
                 time_s: first.start_s,
                 kind: ChangeKind::RampBoundary,
-                score: confidence,
-                before_bpm: Some(before_bpm),
+                score: transition.confidence,
+                before_bpm: Some(transition.before_bpm),
                 after_bpm: Some(first.start_bpm),
             });
         }
-        if end < segments.len() {
+        if transition.ramp_end < segments.len() {
             changes.push(ChangePoint {
                 time_s: last.end_s,
                 kind: ChangeKind::RampBoundary,
-                score: confidence,
+                score: transition.confidence,
                 before_bpm: Some(last.end_bpm),
-                after_bpm: Some(after_bpm),
+                after_bpm: Some(transition.after_bpm),
             });
         }
     }
@@ -933,6 +1201,12 @@ mod tests {
             analysis.change_points
         );
         assert!(analysis.rhythm_sections.len() >= 2);
+        assert!(
+            !analysis
+                .warnings
+                .contains(&"short_transition_beat_grid_recovered".to_string())
+        );
+        assert_eq!(analysis.beats, beat_events(&input));
     }
 
     #[test]
@@ -1032,7 +1306,7 @@ mod tests {
     #[test]
     fn short_smeared_transition_is_recovered_as_jump() {
         let mut bpms = vec![120.0; 20];
-        bpms.extend([125.0, 135.0, 145.0, 155.0]);
+        bpms.extend([125.0, 130.4, 750.0, 150.0, 130.4, 157.9, 375.0, 272.7]);
         bpms.extend(vec![160.0; 20]);
         let input = observations_from_bpms(&bpms);
         let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
@@ -1045,5 +1319,70 @@ mod tests {
             analysis.tempo_segments,
             analysis.change_points
         );
+        assert!(
+            analysis
+                .warnings
+                .contains(&"short_transition_beat_grid_recovered".to_string()),
+            "segments: {:?}; changes: {:?}; warnings: {:?}",
+            analysis.tempo_segments,
+            analysis.change_points,
+            analysis.warnings
+        );
+        assert!(
+            analysis
+                .beats
+                .windows(2)
+                .all(|pair| pair[1].time_s - pair[0].time_s >= 0.3),
+            "segments: {:?}; beats: {:?}",
+            analysis.tempo_segments,
+            analysis.beats
+        );
+    }
+
+    #[test]
+    fn missed_event_around_step_is_reconstructed() {
+        let mut bpms = vec![120.0; 20];
+        bpms.extend(vec![160.0; 20]);
+        let mut input = observations_from_bpms(&bpms);
+        input.beats.remove(22);
+
+        let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
+        assert!(
+            analysis
+                .warnings
+                .contains(&"short_transition_beat_grid_recovered".to_string()),
+            "segments: {:?}; changes: {:?}; warnings: {:?}",
+            analysis.tempo_segments,
+            analysis.change_points,
+            analysis.warnings
+        );
+        assert_eq!(analysis.beats.len(), 41);
+        assert!(
+            analysis
+                .beats
+                .windows(2)
+                .all(|pair| pair[1].time_s - pair[0].time_s >= 0.3)
+        );
+    }
+
+    #[test]
+    fn isolated_duplicate_without_tempo_change_is_not_suppressed() {
+        let mut input = observations_from_bpms(&[120.0; 40]);
+        input.beats.push(ObservedBeat {
+            time_s: 10.1,
+            confidence: 0.8,
+            downbeat_confidence: 0.0,
+        });
+        input
+            .beats
+            .sort_by(|left, right| float_order(left.time_s, right.time_s));
+
+        let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
+        assert!(
+            !analysis
+                .warnings
+                .contains(&"short_transition_beat_grid_recovered".to_string())
+        );
+        assert_eq!(analysis.beats.len(), input.beats.len());
     }
 }

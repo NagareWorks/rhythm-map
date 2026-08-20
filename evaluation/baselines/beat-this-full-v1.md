@@ -42,12 +42,40 @@ and `step-120-160` recovers its change point. Its remaining beat and P95 tempo
 failures come from incorrect events during the model's roughly three-second
 transition; the drumless ramp remains an unresolved observation-path case.
 
-The next engineering targets are:
+That baseline left two engineering targets:
 
 1. distinguish isolated duplicate/missed events around abrupt tempo changes
    without suppressing real subdivisions;
 2. calibrate the drumless ramp profile against licensed real examples so a
    synthetic timbre mismatch is not mistaken for a general model limitation.
+
+## Guarded transition-grid baseline
+
+The abrupt-transition failure was rerun after adding grid recovery guarded by
+stable plateaus and explicit duplicate/missed-event evidence.
+
+| Case | Raw / analyzed beats | End to end | Beat F1 | Tempo median error | Tempo P95 error | Change recall | Runtime |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| constant-120 | 32 / 32 | pass | 1.0000 | 0.00% | 0.00% | 1.00 | 2.73 s |
+| step-120-160 | 45 / 44 | pass | 1.0000 | 0.29% | 1.32% | 1.00 | 3.37 s |
+| ramp-96-144 | 68 / 68 | fail | 0.6406 | 2.80% | 50.30% | 0.00 | 13.80 s |
+| gap-128 | 36 / 32 | pass | 1.0000 | 1.90% | 2.34% | 1.00 | 3.80 s |
+| subdivision-90 | 60 / 30 | pass | 1.0000 | 1.01% | 1.01% | 1.00 | 4.31 s |
+
+The final run took about 28.00 seconds. Repeated candidate runs with identical
+accuracy metrics ranged from 21.77 to 48.50 seconds, so runtime is retained as a
+host-load-sensitive diagnostic rather than an acceptance claim. Thresholds were
+again unchanged.
+`step-120-160` now passes completely, while constant tempo, silence,
+subdivision, and the genuine ramp path retain their prior accuracy. The only
+remaining failure in this generated suite is the drumless ramp.
+
+The next engineering targets are:
+
+1. validate repaired downbeat phase, not only beat timestamps, around tempo
+   changes; and
+2. calibrate the drumless ramp profile against licensed real examples before
+   changing the observation backend or adding a learned head.
 
 Regenerate the full JSON report with the command documented in
 `evaluation/README.md`. Do not copy model weights or private evaluation audio

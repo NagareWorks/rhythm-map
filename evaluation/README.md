@@ -56,8 +56,9 @@ slice metrics remain the evidence used for engineering decisions.
 Each end-to-end case also records the backend's raw beat timestamps and
 beat/downbeat confidence values, the number retained by deterministic analysis,
 the activity-envelope size and low-activity fraction, and the warnings that
-identify silence rejection or half-time selection. These diagnostics explain a
-metric change without exposing model tensors or requiring audio redistribution.
+identify silence rejection, half-time selection, or guarded transition-grid
+recovery. These diagnostics explain a metric change without exposing model
+tensors or requiring audio redistribution.
 
 `cargo xtask` uses an optimized build because unoptimized neural inference is
 not a meaningful performance baseline. Keep the generated oracle suite in

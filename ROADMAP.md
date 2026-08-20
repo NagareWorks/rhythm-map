@@ -9,8 +9,8 @@
 - Synthetic constant/step/ramp tests and a licensed evaluation manifest.
 - Verified Beat This model-pack manifest and paired oracle/end-to-end evaluation.
 - Raw beat/confidence diagnostics and deterministic PCM activity observations.
-- Evidence-based half-time selection, silence-beat rejection, and recovery of
-  short model-smeared tempo jumps.
+- Evidence-based half-time selection, silence-beat rejection, recovery of short
+  model-smeared tempo jumps, and guarded duplicate/missed-event grid repair.
 
 ## Phase 2: product surfaces
 
@@ -22,6 +22,8 @@
   default merely because it is more accurate in isolation.
 - Separate short model smoke tests from scheduled/release full-suite baselines,
   with per-case progress visible to developers.
+- Run deterministic CI evaluation without release LTO; reserve optimized
+  release builds for model-backed performance baselines.
 - End-to-end browser inference with a measured WASM backend.
 - Native GUI for waveform, beat grid, confidence, and editable tempo segments.
 - Export adapters for common rhythm-game and DAW tempo-map formats.

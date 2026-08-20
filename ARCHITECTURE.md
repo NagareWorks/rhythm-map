@@ -7,8 +7,9 @@ interleaved PCM
     -> observation backend
     -> beat/downbeat events + frame confidence + PCM activity
     -> low-activity rejection + evidence-based metrical selection
-    -> metrical-level normalization
-    -> robust local tempo curve
+    -> preliminary normalized tempo curve
+    -> guarded short-transition beat-grid recovery
+    -> final normalization + robust local tempo curve
     -> piecewise constant/ramp simplification
     -> change points and rhythm-homogeneous sections
     -> versioned Analysis schema
@@ -42,12 +43,15 @@ The initial estimator is intentionally training-free:
 1. Reject invalid or unsorted event sequences.
 2. Reject model events inside sustained low-activity spans.
 3. Select half-time only when alternating onset salience supports it.
-4. Generate inter-beat tempo observations.
-5. Normalize octave-equivalent candidates around a robust metrical reference.
-6. Median-filter and locally average in log-tempo space.
-7. Detect direct jumps and short model-smeared transition blocks.
-8. Simplify the curve into constant and ramp segments.
-9. Split rhythm sections at tempo changes and beat/audio discontinuities.
+4. Generate a preliminary normalized tempo curve and locate short bracketed
+   transitions.
+5. Reconstruct a transition grid only when duplicate/missed-event evidence is
+   present and both adjacent grids are stable.
+6. Recompute octave-equivalent normalization around a robust metrical reference.
+7. Median-filter and locally average in log-tempo space.
+8. Detect direct jumps and short model-smeared transition blocks.
+9. Simplify the curve into constant and ramp segments.
+10. Split rhythm sections at tempo changes and beat/audio discontinuities.
 
 This is a deterministic baseline, not the final research endpoint. Evaluation
 will determine whether a learned change-point/confidence head is needed.

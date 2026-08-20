@@ -20,11 +20,11 @@ No model tensor or Beat This-specific type crosses into `rhythm-map-core`.
 Alternative trackers and caller-supplied observations therefore use the same
 tempo-map estimator and produce the same `Analysis` schema.
 
-The estimator never moves an event to a locally optimized grid position. It can
-reject events inside sustained low-activity spans or select one phase of a
-strong/weak alternating sequence when the evidence supports a half-time
-interpretation. Paired evaluation reports retain the raw backend events and
-confidence values before these decisions.
+The estimator normally preserves backend timestamps. It can reject events
+inside sustained low-activity spans, select one phase of a strong/weak
+alternating sequence, or reconstruct a short corrupted transition from stable
+beat grids on both sides. Paired evaluation reports retain the raw backend
+events and confidence values before these decisions.
 
 ## Audio activity and silence
 
@@ -77,6 +77,29 @@ confidence-weighted activity is at least 1.35 times the discarded phase. Equal
 salience therefore preserves a genuine fast pulse instead of blindly dividing
 every high tempo by two. The decision is recorded as
 `metrical_level_selected_half_time`.
+
+## Short transition beat-grid recovery
+
+A model can smear an abrupt tempo jump across several seconds and emit a mix of
+late, duplicate, or missing events. The estimator only reconstructs this region
+when all of the following evidence is present:
+
+1. the tempo curve contains a ramp block no longer than four seconds;
+2. stable constant-tempo segments bracket the block and differ by at least 12
+   percent;
+3. at least six observed beats on each side fit a linear beat grid with no more
+   than eight percent of one period in maximum timing error; and
+4. the transition contains an interval shorter than 65 percent of both stable
+   periods, or an interval that fits a two- or three-beat multiple of one grid
+   while fitting neither grid's ordinary period.
+
+The right-hand stable grid is fitted by least squares and extrapolated backward
+only across the transition block. Each reconstructed timestamp inherits the
+confidence and downbeat confidence of a nearby raw event when one exists.
+Everything outside the block is preserved. A clean tempo jump, a gradual ramp,
+or an isolated extra event without a tempo change therefore does not trigger
+the repair. The decision is recorded as
+`short_transition_beat_grid_recovered`.
 
 ## Robust BPM curve
 
@@ -161,9 +184,9 @@ as verse, chorus, build, or drop.
 
 The estimator is deterministic and training-free, but its input is still
 model-derived. Missed beats, inserted subdivisions, and incorrect metrical
-levels can propagate into the tempo curve. Median filtering and power-of-two
-normalization correct common local errors; they cannot reconstruct a long span
-of missing evidence.
+levels can propagate into the tempo curve. The recovery rules correct bounded
+cases with stable evidence on both sides; they cannot reconstruct a long span
+of missing evidence or infer musical intent from an ambiguous pulse alone.
 
 The defaults are internal product policy rather than parameters users must
 supply. They will be tightened or replaced only against the checked-in
