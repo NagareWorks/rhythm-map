@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "id": "artbeat-20-ramp-200-to-80",
+  "duration_s": 17.27138321995465,
+  "beats": [
+    {
+      "time_s": 0,
+      "downbeat": false
+    },
+    {
+      "time_s": 0.3,
+      "downbeat": false
+    },
+    {
+      "time_s": 0.6,
+      "downbeat": false
+    },
+    {
+      "time_s": 0.9,
+      "downbeat": false
+    },
+    {
+      "time_s": 1.2,
+      "downbeat": false
+    },
+    {
+      "time_s": 1.5,
+      "downbeat": false
+    },
+    {
+      "time_s": 1.8,
+      "downbeat": false
+    },
+    {
+      "time_s": 2.1,
+      "downbeat": false
+    },
+    {
+      "time_s": 2.4,
+      "downbeat": false
+    },
+    {
+      "time_s": 2.7,
+      "downbeat": false
+    },
+    {
+      "time_s": 3.00237,
+      "downbeat": false
+    },
+    {
+      "time_s": 3.31545,
+      "downbeat": false
+    },
+    {
+      "time_s": 3.628283,
+      "downbeat": false
+    },
+    {
+      "time_s": 3.946876,
+      "downbeat": false
+    },
+    {
+      "time_s": 4.268813,
+      "downbeat": false
+    },
+    {
+      "time_s": 4.599832,
+      "downbeat": false
+    },
+    {
+      "time_s": 4.930556,
+      "downbeat": false
+    },
+    {
+      "time_s": 5.277566,
+      "downbeat": false
+    },
+    {
+      "time_s": 5.62825,
+      "downbeat": false
+    },
+    {
+      "time_s": 5.979454,
+      "downbeat": false
+    },
+    {
+      "time_s": 6.351656,
+      "downbeat": false
+    },
+    {
+      "time_s": 6.729378,
+      "downbeat": false
+    },
+    {
+      "time_s": 7.10574,
+      "downbeat": false
+    },
+    {
+      "time_s": 7.5052,
+      "downbeat": false
+    },
+    {
+      "time_s": 7.90442,
+      "downbeat": false
+    },
+    {
+      "time_s": 8.326336,
+      "downbeat": false
+    },
+    {
+      "time_s": 8.755319,
+      "downbeat": false
+    },
+    {
+      "time_s": 9.199156,
+      "downbeat": false
+    },
+    {
+      "time_s": 9.662883,
+      "downbeat": false
+    },
+    {
+      "time_s": 10.137112,
+      "downbeat": false
+    },
+    {
+      "time_s": 10.640706,
+      "downbeat": false
+    },
+    {
+      "time_s": 11.158231,
+      "downbeat": false
+    },
+    {
+      "time_s": 11.709995,
+      "downbeat": false
+    },
+    {
+      "time_s": 12.28938,
+      "downbeat": false
+    },
+    {
+      "time_s": 12.899002,
+      "downbeat": false
+    },
+    {
+      "time_s": 13.569092,
+      "downbeat": false
+    },
+    {
+      "time_s": 14.271428,
+      "downbeat": false
+    },
+    {
+      "time_s": 15.021428,
+      "downbeat": false
+    },
+    {
+      "time_s": 15.771428,
+      "downbeat": false
+    },
+    {
+      "time_s": 16.521428,
+      "downbeat": false
+    }
+  ],
+  "tempo_segments": [
+    {
+      "start_s": 0,
+      "end_s": 3.00237,
+      "kind": "constant",
+      "start_bpm": 200,
+      "end_bpm": 200
+    },
+    {
+      "start_s": 3.00237,
+      "end_s": 14.271428,
+      "kind": "ramp",
+      "start_bpm": 200,
+      "end_bpm": 80
+    },
+    {
+      "start_s": 14.271428,
+      "end_s": 17.27138321995465,
+      "kind": "constant",
+      "start_bpm": 80,
+      "end_bpm": 80
+    }
+  ],
+  "change_points": [
+    {
+      "time_s": 3.00237,
+      "kind": "ramp_boundary"
+    },
+    {
+      "time_s": 14.271428,
+      "kind": "ramp_boundary"
+    }
+  ]
+}

@@ -3,6 +3,7 @@
 mod dataset;
 mod manifest;
 mod metrics;
+mod public_dataset;
 mod runner;
 mod synthetic;
 mod wav;
@@ -14,6 +15,10 @@ pub use manifest::{
 };
 pub use metrics::{
     BeatMetrics, CaseEvaluation, ChangeMetrics, EvaluationMetrics, TempoMetrics, evaluate_analysis,
+};
+pub use public_dataset::{
+    DatasetFetchAsset, DatasetFetchReport, DatasetFetchStatus, PublicDatasetAsset,
+    PublicDatasetAssetRole, PublicDatasetLock, fetch_public_dataset,
 };
 pub use runner::{
     AttributionCase, AttributionDecision, BottleneckEvaluation, CaseMetricDelta, ModelPackIdentity,

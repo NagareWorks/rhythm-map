@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "id": "artbeat-21-polyrhythm-70-to-105",
+  "duration_s": 12.285668934240363,
+  "beats": [
+    {
+      "time_s": 0,
+      "downbeat": false
+    },
+    {
+      "time_s": 0.857144,
+      "downbeat": false
+    },
+    {
+      "time_s": 1.714287,
+      "downbeat": false
+    },
+    {
+      "time_s": 2.57143,
+      "downbeat": false
+    },
+    {
+      "time_s": 3.428574,
+      "downbeat": false
+    },
+    {
+      "time_s": 4.285717,
+      "downbeat": false
+    },
+    {
+      "time_s": 5.142861,
+      "downbeat": false
+    },
+    {
+      "time_s": 5.71429,
+      "downbeat": false
+    },
+    {
+      "time_s": 6.285719,
+      "downbeat": false
+    },
+    {
+      "time_s": 6.857148,
+      "downbeat": false
+    },
+    {
+      "time_s": 7.428577,
+      "downbeat": false
+    },
+    {
+      "time_s": 8.000006,
+      "downbeat": false
+    },
+    {
+      "time_s": 8.571435,
+      "downbeat": false
+    },
+    {
+      "time_s": 9.142864,
+      "downbeat": false
+    },
+    {
+      "time_s": 9.714293,
+      "downbeat": false
+    },
+    {
+      "time_s": 10.285722,
+      "downbeat": false
+    },
+    {
+      "time_s": 10.857151,
+      "downbeat": false
+    },
+    {
+      "time_s": 11.42858,
+      "downbeat": false
+    },
+    {
+      "time_s": 12.000009,
+      "downbeat": false
+    }
+  ],
+  "tempo_segments": [
+    {
+      "start_s": 0,
+      "end_s": 5.142861,
+      "kind": "constant",
+      "start_bpm": 70,
+      "end_bpm": 70
+    },
+    {
+      "start_s": 5.142861,
+      "end_s": 12.285668934240363,
+      "kind": "constant",
+      "start_bpm": 105,
+      "end_bpm": 105
+    }
+  ],
+  "change_points": [
+    {
+      "time_s": 5.142861,
+      "kind": "tempo_jump"
+    }
+  ]
+}

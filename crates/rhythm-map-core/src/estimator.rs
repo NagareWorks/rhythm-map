@@ -212,19 +212,25 @@ fn build_tempo_estimate(
         .map(|pair| pair[1].time_s - pair[0].time_s)
         .collect::<Vec<_>>();
     let raw_bpms = intervals.iter().map(|dt| 60.0 / dt).collect::<Vec<_>>();
-    let reference = preferred_reference(&raw_bpms, options);
-    let normalized = raw_bpms
+    // The observed cadence is evidence, not a nuisance value to force into a
+    // global preferred band. A sustained 75 -> 150 BPM change is musically
+    // different from a tracker emitting one isolated half- or double-length
+    // interval. The median filter below rejects the latter while preserving
+    // the former. Evidence-based half-time selection happens earlier, against
+    // alternating PCM salience, and alternate global interpretations remain
+    // visible in `tempo_hypotheses`.
+    let bounded = raw_bpms
         .iter()
-        .map(|&bpm| normalize_metrical_level(bpm, reference, options))
+        .map(|&bpm| bpm.clamp(options.min_bpm, options.max_bpm))
         .collect::<Vec<_>>();
-    let smoothed = smooth_log_tempo(&normalized, options.smoothing_window);
+    let smoothed = smooth_log_tempo(&bounded, options.smoothing_window, options.jump_ratio);
     let tempo_curve = smoothed
         .iter()
         .enumerate()
         .map(|(index, &bpm)| {
             let pair = &input.beats[index..=index + 1];
             let observation_confidence = pair[0].confidence.min(pair[1].confidence);
-            let deviation = (normalized[index] / bpm).log2().abs();
+            let deviation = (bounded[index] / bpm).log2().abs();
             TempoPoint {
                 time_s: f64::midpoint(pair[0].time_s, pair[1].time_s),
                 bpm,
@@ -645,51 +651,46 @@ fn mean_candidate_phase_salience(
     values.iter().sum::<f64>() / usize_to_f64(values.len())
 }
 
-fn preferred_reference(raw_bpms: &[f64], options: &EstimatorOptions) -> f64 {
-    let folded = raw_bpms
-        .iter()
-        .map(|&value| {
-            let mut bpm = value;
-            while bpm < options.preferred_min_bpm {
-                bpm *= 2.0;
-            }
-            while bpm > options.preferred_max_bpm {
-                bpm *= 0.5;
-            }
-            bpm
-        })
-        .collect::<Vec<_>>();
-    median(folded)
-}
-
-fn normalize_metrical_level(raw: f64, reference: f64, options: &EstimatorOptions) -> f64 {
-    (-3..=3)
-        .map(|level| (raw * 2.0_f64.powi(level), level))
-        .filter(|(bpm, _)| *bpm >= options.min_bpm && *bpm <= options.max_bpm)
-        .min_by(|(left, left_level), (right, right_level)| {
-            let left_score = (left / reference).log2().abs() + 0.02 * f64::from(left_level.abs());
-            let right_score =
-                (right / reference).log2().abs() + 0.02 * f64::from(right_level.abs());
-            float_order(left_score, right_score)
-        })
-        .map_or(raw.clamp(options.min_bpm, options.max_bpm), |(bpm, _)| bpm)
-}
-
-fn smooth_log_tempo(values: &[f64], window: usize) -> Vec<f64> {
+fn smooth_log_tempo(values: &[f64], window: usize, edge_ratio: f64) -> Vec<f64> {
     let radius = window / 2;
-    let median_filtered = (0..values.len())
+    let metrical_outliers_repaired = (0..values.len())
         .map(|index| {
-            let start = index.saturating_sub(radius);
-            let end = (index + radius + 1).min(values.len());
-            median(values[start..end].to_vec())
+            let left_start = index.saturating_sub(radius);
+            let right_end = (index + radius + 1).min(values.len());
+            let left = &values[left_start..index];
+            let right = &values[index + 1..right_end];
+            if left.is_empty() || right.is_empty() {
+                return values[index];
+            }
+            let left_center = median(left.to_vec());
+            let right_center = median(right.to_vec());
+            if (left_center / right_center).ln().abs() > edge_ratio.ln_1p() {
+                return values[index];
+            }
+            let context = f64::midpoint(left_center, right_center);
+            let octave_offset = (values[index] / context).log2();
+            let nearest_octave = octave_offset.round();
+            if nearest_octave.abs() >= 1.0
+                && (octave_offset - nearest_octave).abs() <= (1.0 + edge_ratio).log2()
+            {
+                context
+            } else {
+                values[index]
+            }
         })
         .collect::<Vec<_>>();
 
-    (0..median_filtered.len())
+    (0..metrical_outliers_repaired.len())
         .map(|index| {
             let start = index.saturating_sub(1);
-            let end = (index + 2).min(median_filtered.len());
-            let mean_log = median_filtered[start..end]
+            let end = (index + 2).min(metrical_outliers_repaired.len());
+            let neighborhood = &metrical_outliers_repaired[start..end];
+            let minimum = neighborhood.iter().copied().fold(f64::INFINITY, f64::min);
+            let maximum = neighborhood.iter().copied().fold(0.0_f64, f64::max);
+            if maximum / minimum > 1.0 + edge_ratio {
+                return metrical_outliers_repaired[index];
+            }
+            let mean_log = metrical_outliers_repaired[start..end]
                 .iter()
                 .map(|value| value.log2())
                 .sum::<f64>()
@@ -874,8 +875,22 @@ fn segment_transitions(segments: &[TempoSegment], jump_ratio: f64) -> Vec<Segmen
             continue;
         }
         let ramp_start = index;
-        while index < segments.len() && segments[index].kind == TempoSegmentKind::Ramp {
-            index += 1;
+        while index < segments.len() {
+            if segments[index].kind == TempoSegmentKind::Ramp {
+                index += 1;
+                continue;
+            }
+            let segment = &segments[index];
+            let mean_bpm = f64::midpoint(segment.start_bpm, segment.end_bpm);
+            let implied_beats = (segment.end_s - segment.start_s) * mean_bpm / 60.0;
+            let bridges_another_ramp = implied_beats < 6.0
+                && index + 1 < segments.len()
+                && segments[index + 1].kind == TempoSegmentKind::Ramp;
+            if bridges_another_ramp {
+                index += 1;
+                continue;
+            }
+            break;
         }
         let ramp_end = index;
         let first = &segments[ramp_start];
@@ -917,6 +932,14 @@ struct RegularGrid {
     maximum_error: f64,
 }
 
+#[derive(Debug, Clone, Copy)]
+struct TransitionGridContext {
+    start_s: f64,
+    end_s: f64,
+    left: RegularGrid,
+    right: RegularGrid,
+}
+
 fn fit_regular_grid(beats: &[&ObservedBeat]) -> Option<RegularGrid> {
     if beats.len() < 6 {
         return None;
@@ -951,6 +974,56 @@ fn fit_regular_grid(beats: &[&ObservedBeat]) -> Option<RegularGrid> {
     })
 }
 
+fn fit_regular_grid_before_boundary(beats: &[&ObservedBeat]) -> Option<(RegularGrid, usize)> {
+    (6..=beats.len()).rev().find_map(|end| {
+        let grid = fit_regular_grid(&beats[..end])?;
+        (grid.maximum_error <= grid.period * 0.08).then_some((grid, end))
+    })
+}
+
+fn fit_regular_grid_after_boundary(beats: &[&ObservedBeat]) -> Option<(RegularGrid, usize)> {
+    (0..=beats.len().saturating_sub(6)).find_map(|start| {
+        let grid = fit_regular_grid(&beats[start..])?;
+        (grid.maximum_error <= grid.period * 0.08).then_some((grid, start))
+    })
+}
+
+fn fit_transition_grid_context(
+    beats: &[ObservedBeat],
+    segments: &[TempoSegment],
+    transition: SegmentTransition,
+) -> Option<TransitionGridContext> {
+    let mut start_s = transition.start_s(segments);
+    let mut end_s = transition.end_s(segments);
+    let left_segment = &segments[transition.ramp_start - 1];
+    let right_segment = &segments[transition.ramp_end];
+    let left_beats = beats
+        .iter()
+        .filter(|beat| beat.time_s >= left_segment.start_s && beat.time_s < start_s)
+        .collect::<Vec<_>>();
+    let right_beats = beats
+        .iter()
+        .filter(|beat| beat.time_s > end_s && beat.time_s <= right_segment.end_s)
+        .collect::<Vec<_>>();
+    let (left, left_end) = fit_regular_grid_before_boundary(&left_beats)?;
+    let (right, right_start) = fit_regular_grid_after_boundary(&right_beats)?;
+    if left_end < left_beats.len() {
+        start_s = start_s.min(f64::midpoint(
+            left_beats[left_end - 1].time_s,
+            left_beats[left_end].time_s,
+        ));
+    }
+    if right_start > 0 {
+        end_s = end_s.max(right_beats[right_start].time_s - right.period * 0.5);
+    }
+    Some(TransitionGridContext {
+        start_s,
+        end_s,
+        left,
+        right,
+    })
+}
+
 fn recover_short_transition_grids(
     input: &RhythmObservations,
     segments: &[TempoSegment],
@@ -979,24 +1052,12 @@ fn recover_transition_grid(
     transition: SegmentTransition,
     options: &EstimatorOptions,
 ) -> Option<Vec<ObservedBeat>> {
-    let start_s = transition.start_s(segments);
-    let end_s = transition.end_s(segments);
-    let left_segment = &segments[transition.ramp_start - 1];
-    let right_segment = &segments[transition.ramp_end];
-    let left_beats = beats
-        .iter()
-        .filter(|beat| beat.time_s >= left_segment.start_s && beat.time_s < start_s)
-        .collect::<Vec<_>>();
-    let right_beats = beats
-        .iter()
-        .filter(|beat| beat.time_s > end_s && beat.time_s <= right_segment.end_s)
-        .collect::<Vec<_>>();
-    let left_grid = fit_regular_grid(&left_beats)?;
-    let right_grid = fit_regular_grid(&right_beats)?;
-    if left_grid.maximum_error > left_grid.period * 0.08
-        || right_grid.maximum_error > right_grid.period * 0.08
-        || (right_grid.period / left_grid.period).ln().abs() < options.jump_ratio.ln_1p()
-    {
+    let context = fit_transition_grid_context(beats, segments, transition)?;
+    let start_s = context.start_s;
+    let end_s = context.end_s;
+    let left_grid = context.left;
+    let right_grid = context.right;
+    if (right_grid.period / left_grid.period).ln().abs() < options.jump_ratio.ln_1p() {
         return None;
     }
 
@@ -1334,6 +1395,65 @@ mod tests {
                 .contains(&"short_transition_beat_grid_recovered".to_string())
         );
         assert_eq!(analysis.beats, beat_events(&input));
+    }
+
+    #[test]
+    fn sustained_octave_related_step_preserves_both_tempos() {
+        let mut bpms = vec![75.0; 20];
+        bpms.extend(vec![150.0; 20]);
+        let input = observations_from_bpms(&bpms);
+        let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
+        let before = analysis
+            .tempo_curve
+            .iter()
+            .filter(|point| point.time_s < 12.0)
+            .map(|point| point.bpm)
+            .collect::<Vec<_>>();
+        let after = analysis
+            .tempo_curve
+            .iter()
+            .filter(|point| point.time_s > 17.0)
+            .map(|point| point.bpm)
+            .collect::<Vec<_>>();
+
+        assert!((median(before) - 75.0).abs() < 0.01);
+        assert!((median(after) - 150.0).abs() < 0.01);
+        assert!(
+            analysis
+                .change_points
+                .iter()
+                .any(|change| change.kind == ChangeKind::TempoJump)
+        );
+    }
+
+    #[test]
+    fn sustained_fast_tempo_is_not_folded_without_salience_evidence() {
+        let input = observations_from_bpms(&[240.0; 32]);
+        let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
+
+        assert!((analysis.global_bpm.unwrap() - 240.0).abs() < 0.01);
+    }
+
+    #[test]
+    fn isolated_missed_beat_does_not_create_a_half_tempo_point() {
+        let mut input = observations_from_bpms(&[120.0; 32]);
+        input.beats.remove(16);
+        let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
+
+        assert!(
+            analysis
+                .tempo_curve
+                .iter()
+                .all(|point| (point.bpm - 120.0).abs() < 0.01)
+        );
+    }
+
+    #[test]
+    fn non_metrical_rubato_gesture_is_not_flattened() {
+        let input = observations_from_bpms(&[100.0, 100.0, 80.0, 100.0, 100.0]);
+        let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
+
+        assert!((analysis.tempo_curve[2].bpm - 80.0).abs() < 0.01);
     }
 
     #[test]

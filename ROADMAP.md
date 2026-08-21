@@ -16,6 +16,10 @@
 - Content-addressed external-audio resolution, strict external truth
   validation, and a private calibration workflow that never stores audio paths
   or bytes in reports.
+- Immutable public-dataset acquisition and an ARTBeaT oracle suite covering 15
+  CC BY 4.0 tempo-step, ramp, rubato, and polyrhythm exercises.
+- Edge-preserving metrical outlier repair that keeps sustained half/double-time
+  tempo changes instead of folding an entire recording into one BPM band.
 
 ## Phase 2: product surfaces
 
@@ -78,3 +82,19 @@ Do not train on the hidden holdout or relax suite thresholds to accommodate a
 candidate. Require a material improvement across the failing slices without a
 regression in constant-tempo, platform, memory, and latency gates before adding
 a learned component to the default distribution.
+
+### Measured bottlenecks
+
+- 2026-08-21: the first ARTBeaT oracle run failed 13 of 15 cases even with exact
+  upstream beat timestamps. Global preferred-band folding erased sustained
+  octave-related changes and ordinary smoothing blurred jump edges, proving the
+  deterministic estimator was the bottleneck for those slices. Replacing that
+  policy with bilateral metrical-outlier evidence and edge-preserving smoothing
+  made all 15 oracle cases pass without changing suite thresholds; the worst
+  tempo P95 error fell to 5.97 percent.
+- 2026-08-21: the paired Beat This full-model run passed 1 of 15 ARTBeaT cases,
+  with mean beat F1 0.8052, while all paired oracle paths passed. The model often
+  remains at a sustained half-time level or omits beats throughout ramps and
+  rubato, so the measured bottleneck is now the observation path. Prefer
+  comparing alternate model decoding/backends over inventing timestamps in
+  deterministic post-processing without acoustic evidence.

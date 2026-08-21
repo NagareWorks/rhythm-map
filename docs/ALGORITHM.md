@@ -49,27 +49,30 @@ raw_bpm[i]  = 60 / interval[i]
 Each observation is placed at the midpoint of its two beats. This produces a
 local time series instead of assigning one BPM to the whole recording.
 
-## Metrical-level normalization
+## Metrical-level selection and robust smoothing
 
 Beat trackers may report a musically plausible half- or double-time level. A
 120 BPM pulse can therefore appear as 60 or 240 BPM without the event times
-being random.
+being random. But the same power-of-two relationship can be a real tempo
+change: 75 to 150 BPM must not be flattened merely because both values share a
+metrical octave.
 
-The estimator first folds every raw observation by powers of two into the
-preferred 70--180 BPM band and takes the median as a robust reference. For each
-raw observation it then considers `raw_bpm * 2^level`, for levels from -3 to 3,
-within the accepted 40--320 BPM range. It chooses the candidate minimizing:
+The estimator therefore preserves the sustained cadence implied by consecutive
+beat timestamps and clamps only to the accepted 40--320 BPM range. Within the
+configured seven-interval window, it compares the median context on the left
+and right of each interval. A center value is repaired only when both contexts
+agree within the 12 percent jump threshold and the center is approximately an
+integer metrical octave away. Each three-point neighborhood is then averaged in
+log-tempo space only when its range also stays below that threshold; otherwise
+the center value is retained so smoothing does not blur a real step. This
+repairs an isolated half- or double-length interval from a missed event while
+retaining a sustained step, ramp, or rubato gesture. It does not fold the whole
+recording into a preferred BPM band.
 
-```text
-abs(log2(candidate / reference)) + 0.02 * abs(level)
-```
+Half- and double-time alternatives are preserved in `tempo_hypotheses`; the
+public result does not pretend that metrical ambiguity has disappeared.
 
-The small level penalty avoids unnecessary octave changes when two candidates
-are otherwise similarly plausible. Half- and double-time alternatives are
-also preserved in `tempo_hypotheses`; the public result does not pretend that
-metrical ambiguity has disappeared.
-
-Before interval normalization, a second evidence-based rule handles inserted
+Before interval smoothing, an evidence-based rule handles inserted
 subdivisions. When the raw median is at least 150 BPM and its half lies in the
 preferred band, the estimator compares the mean audio salience of the two
 alternating event phases. It keeps the stronger phase only when its
@@ -88,7 +91,8 @@ when all of the following evidence is present:
 2. stable constant-tempo segments bracket the block and differ by at least 12
    percent;
 3. at least six observed beats on each side fit a linear beat grid with no more
-   than eight percent of one period in maximum timing error; and
+   than eight percent of one period in maximum timing error (boundary outliers
+   may be trimmed while fitting, then are included in the repaired span); and
 4. the transition contains an interval shorter than 65 percent of both stable
    periods, or an interval that fits a two- or three-beat multiple of one grid
    while fitting neither grid's ordinary period.

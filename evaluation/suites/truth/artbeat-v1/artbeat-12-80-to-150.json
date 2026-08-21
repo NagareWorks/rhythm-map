@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "id": "artbeat-12-80-to-150",
+  "duration_s": 17.424716553287983,
+  "beats": [
+    {
+      "time_s": 0.013281,
+      "downbeat": false
+    },
+    {
+      "time_s": 0.771094,
+      "downbeat": false
+    },
+    {
+      "time_s": 1.525781,
+      "downbeat": false
+    },
+    {
+      "time_s": 2.264063,
+      "downbeat": false
+    },
+    {
+      "time_s": 3.014062,
+      "downbeat": false
+    },
+    {
+      "time_s": 3.767969,
+      "downbeat": false
+    },
+    {
+      "time_s": 4.516406,
+      "downbeat": false
+    },
+    {
+      "time_s": 5.271094,
+      "downbeat": false
+    },
+    {
+      "time_s": 6.013281,
+      "downbeat": false
+    },
+    {
+      "time_s": 6.767187,
+      "downbeat": false
+    },
+    {
+      "time_s": 7.517969,
+      "downbeat": false
+    },
+    {
+      "time_s": 8.270312,
+      "downbeat": false
+    },
+    {
+      "time_s": 9.020833,
+      "downbeat": false
+    },
+    {
+      "time_s": 9.424167,
+      "downbeat": false
+    },
+    {
+      "time_s": 9.815417,
+      "downbeat": false
+    },
+    {
+      "time_s": 10.2175,
+      "downbeat": false
+    },
+    {
+      "time_s": 10.63,
+      "downbeat": false
+    },
+    {
+      "time_s": 11.03,
+      "downbeat": false
+    },
+    {
+      "time_s": 11.420417,
+      "downbeat": false
+    },
+    {
+      "time_s": 11.825833,
+      "downbeat": false
+    },
+    {
+      "time_s": 12.225833,
+      "downbeat": false
+    },
+    {
+      "time_s": 12.629167,
+      "downbeat": false
+    },
+    {
+      "time_s": 13.022917,
+      "downbeat": false
+    },
+    {
+      "time_s": 13.431667,
+      "downbeat": false
+    },
+    {
+      "time_s": 13.83375,
+      "downbeat": false
+    },
+    {
+      "time_s": 14.240417,
+      "downbeat": false
+    },
+    {
+      "time_s": 14.636667,
+      "downbeat": false
+    },
+    {
+      "time_s": 15.035,
+      "downbeat": false
+    },
+    {
+      "time_s": 15.4325,
+      "downbeat": false
+    },
+    {
+      "time_s": 15.83625,
+      "downbeat": false
+    },
+    {
+      "time_s": 16.238333,
+      "downbeat": false
+    },
+    {
+      "time_s": 16.625417,
+      "downbeat": false
+    },
+    {
+      "time_s": 17.019167,
+      "downbeat": false
+    }
+  ],
+  "tempo_segments": [
+    {
+      "start_s": 0,
+      "end_s": 9.020833,
+      "kind": "constant",
+      "start_bpm": 80,
+      "end_bpm": 80
+    },
+    {
+      "start_s": 9.020833,
+      "end_s": 17.424716553287983,
+      "kind": "constant",
+      "start_bpm": 150,
+      "end_bpm": 150
+    }
+  ],
+  "change_points": [
+    {
+      "time_s": 9.020833,
+      "kind": "tempo_jump"
+    }
+  ]
+}

@@ -165,7 +165,7 @@ fn is_supported_audio_path(path: &Path) -> bool {
         })
 }
 
-fn sha256_file(path: &Path) -> Result<String> {
+pub(crate) fn sha256_file(path: &Path) -> Result<String> {
     let file = File::open(path).with_context(|| format!("opening {}", path.display()))?;
     let mut reader = BufReader::new(file);
     let mut digest = Sha256::new();

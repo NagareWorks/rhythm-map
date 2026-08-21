@@ -1,0 +1,394 @@
+{
+  "schema_version": 1,
+  "id": "artbeat-v1",
+  "description": "Public CC BY 4.0 rhythm-challenge audio unseen by the published Beat This training corpus, with beat truth recovered from immutable upstream Ground Truth SVG lines.",
+  "thresholds": {
+    "beat_tolerance_ms": 70,
+    "change_tolerance_s": 1,
+    "min_beat_f1": 0.99,
+    "min_downbeat_f1": 0,
+    "max_tempo_median_error_percent": 5,
+    "max_tempo_p95_error_percent": 15,
+    "min_change_recall": 0.5
+  },
+  "cases": [
+    {
+      "id": "artbeat-05-75-to-150",
+      "input": {
+        "kind": "external",
+        "truth": "truth/artbeat-v1/artbeat-05-75-to-150.json",
+        "audio": {
+          "sha256": "ddff1eadde814bc13896b64ad81b7ba55626be4f7b64dae417d00a2210a0c517",
+          "local_file_hint": "audio/05_ARTBeaT_TempoA_75to150.mp3"
+        }
+      },
+      "tags": [
+        "tempo-jump",
+        "percussive",
+        "double-time"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-4.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "ARTBeaT Dataset by Rico Rosenbusch, FAU, 2024",
+        "source_url": "https://audiolabs-erlangen.de/resources/MIR/2024-ARTBeaT"
+      }
+    },
+    {
+      "id": "artbeat-06-150-to-75",
+      "input": {
+        "kind": "external",
+        "truth": "truth/artbeat-v1/artbeat-06-150-to-75.json",
+        "audio": {
+          "sha256": "196e3f9d0a12b12b7b0936d4de0beb36412f217d55114feac810aad0d303f2e5",
+          "local_file_hint": "audio/06_ARTBeaT_TempoA_150to75.mp3"
+        }
+      },
+      "tags": [
+        "tempo-jump",
+        "percussive",
+        "half-time"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-4.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "ARTBeaT Dataset by Rico Rosenbusch, FAU, 2024",
+        "source_url": "https://audiolabs-erlangen.de/resources/MIR/2024-ARTBeaT"
+      }
+    },
+    {
+      "id": "artbeat-07-75-to-112-5",
+      "input": {
+        "kind": "external",
+        "truth": "truth/artbeat-v1/artbeat-07-75-to-112-5.json",
+        "audio": {
+          "sha256": "458693d0911bc8543b5bb819db01391bbaa2b49fd693faf779f00ff266d7641e",
+          "local_file_hint": "audio/07_ARTBeaT_TempoA_75to112.5.mp3"
+        }
+      },
+      "tags": [
+        "tempo-jump",
+        "percussive"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-4.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "ARTBeaT Dataset by Rico Rosenbusch, FAU, 2024",
+        "source_url": "https://audiolabs-erlangen.de/resources/MIR/2024-ARTBeaT"
+      }
+    },
+    {
+      "id": "artbeat-08-112-5-to-75",
+      "input": {
+        "kind": "external",
+        "truth": "truth/artbeat-v1/artbeat-08-112-5-to-75.json",
+        "audio": {
+          "sha256": "04180b492147efd020d63e79dd444a7a3969b677be1e15c6f1b67256d4b3544b",
+          "local_file_hint": "audio/08_ARTBeaT_TempoA_112.5to75.mp3"
+        }
+      },
+      "tags": [
+        "tempo-jump",
+        "percussive"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-4.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "ARTBeaT Dataset by Rico Rosenbusch, FAU, 2024",
+        "source_url": "https://audiolabs-erlangen.de/resources/MIR/2024-ARTBeaT"
+      }
+    },
+    {
+      "id": "artbeat-09-90-to-80",
+      "input": {
+        "kind": "external",
+        "truth": "truth/artbeat-v1/artbeat-09-90-to-80.json",
+        "audio": {
+          "sha256": "f3bf9837094765fd2ceca45427b16f721ed1b14c31921f829ba26898535d4bdf",
+          "local_file_hint": "audio/09_ARTBeaT_TempoA_90to80.mp3"
+        }
+      },
+      "tags": [
+        "tempo-jump",
+        "percussive",
+        "small-change"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-4.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "ARTBeaT Dataset by Rico Rosenbusch, FAU, 2024",
+        "source_url": "https://audiolabs-erlangen.de/resources/MIR/2024-ARTBeaT"
+      }
+    },
+    {
+      "id": "artbeat-10-90-to-120",
+      "input": {
+        "kind": "external",
+        "truth": "truth/artbeat-v1/artbeat-10-90-to-120.json",
+        "audio": {
+          "sha256": "adde95301f560b88e35075ed2a866989b0ff27a34e62c2fb7e81a68a1584fd24",
+          "local_file_hint": "audio/10_ARTBeaT_TempoA_90to120.mp3"
+        }
+      },
+      "tags": [
+        "tempo-jump",
+        "percussive"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-4.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "ARTBeaT Dataset by Rico Rosenbusch, FAU, 2024",
+        "source_url": "https://audiolabs-erlangen.de/resources/MIR/2024-ARTBeaT"
+      }
+    },
+    {
+      "id": "artbeat-11-60-to-80",
+      "input": {
+        "kind": "external",
+        "truth": "truth/artbeat-v1/artbeat-11-60-to-80.json",
+        "audio": {
+          "sha256": "e9c28da6be8a12ac772df218bd4fdbb3651ec73e0ec9caa745dccba205566fcf",
+          "local_file_hint": "audio/11_ARTBeaT_TempoA_60to80.mp3"
+        }
+      },
+      "tags": [
+        "tempo-jump",
+        "percussive",
+        "slow-tempo"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-4.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "ARTBeaT Dataset by Rico Rosenbusch, FAU, 2024",
+        "source_url": "https://audiolabs-erlangen.de/resources/MIR/2024-ARTBeaT"
+      }
+    },
+    {
+      "id": "artbeat-12-80-to-150",
+      "input": {
+        "kind": "external",
+        "truth": "truth/artbeat-v1/artbeat-12-80-to-150.json",
+        "audio": {
+          "sha256": "33caad5980c9e743365721d6aa321b5ba2959653c5858f4038e32c7ebcffd11a",
+          "local_file_hint": "audio/12_ARTBeaT_TempoA_80to150.mp3"
+        }
+      },
+      "tags": [
+        "tempo-jump",
+        "percussive",
+        "near-double-time"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-4.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "ARTBeaT Dataset by Rico Rosenbusch, FAU, 2024",
+        "source_url": "https://audiolabs-erlangen.de/resources/MIR/2024-ARTBeaT"
+      }
+    },
+    {
+      "id": "artbeat-13-180-to-120",
+      "input": {
+        "kind": "external",
+        "truth": "truth/artbeat-v1/artbeat-13-180-to-120.json",
+        "audio": {
+          "sha256": "4e14088d021e4d78fef2bd6febc3235c445cef83eef26e24e8429fce7e061fa3",
+          "local_file_hint": "audio/13_ARTBeaT_TempoA_180to120.mp3"
+        }
+      },
+      "tags": [
+        "tempo-jump",
+        "percussive",
+        "fast-tempo"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-4.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "ARTBeaT Dataset by Rico Rosenbusch, FAU, 2024",
+        "source_url": "https://audiolabs-erlangen.de/resources/MIR/2024-ARTBeaT"
+      }
+    },
+    {
+      "id": "artbeat-14-240-to-96",
+      "input": {
+        "kind": "external",
+        "truth": "truth/artbeat-v1/artbeat-14-240-to-96.json",
+        "audio": {
+          "sha256": "a96686045df4adee6a0aa4127b70daeeab14d8b9f08124cc78d9af95a860c02c",
+          "local_file_hint": "audio/14_ARTBeaT_TempoA_240to96.mp3"
+        }
+      },
+      "tags": [
+        "tempo-jump",
+        "percussive",
+        "extreme-tempo",
+        "half-double-time"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-4.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "ARTBeaT Dataset by Rico Rosenbusch, FAU, 2024",
+        "source_url": "https://audiolabs-erlangen.de/resources/MIR/2024-ARTBeaT"
+      }
+    },
+    {
+      "id": "artbeat-15-85-to-127-5",
+      "input": {
+        "kind": "external",
+        "truth": "truth/artbeat-v1/artbeat-15-85-to-127-5.json",
+        "audio": {
+          "sha256": "6997c1b5760b2bb86be1fb9e70dd8e7b2c98aa7243423fd64a895b7ad36ca701",
+          "local_file_hint": "audio/15_ARTBeaT_TempoA_85to127.5.mp3"
+        }
+      },
+      "tags": [
+        "tempo-jump",
+        "meter-change",
+        "4-4-to-6-4",
+        "percussive"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-4.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "ARTBeaT Dataset by Rico Rosenbusch, FAU, 2024",
+        "source_url": "https://audiolabs-erlangen.de/resources/MIR/2024-ARTBeaT"
+      }
+    },
+    {
+      "id": "artbeat-18-piano-rubato",
+      "input": {
+        "kind": "external",
+        "truth": "truth/artbeat-v1/artbeat-18-piano-rubato.json",
+        "audio": {
+          "sha256": "3e01831b02777bdc3707677153589ef92645c410303b480e7ef0d1d882dcb82d",
+          "local_file_hint": "audio/18_ARTBeaT_TempoC_piano.mp3"
+        }
+      },
+      "tags": [
+        "rubato",
+        "real-piano",
+        "drumless",
+        "continuous-tempo"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-4.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "ARTBeaT Dataset by Rico Rosenbusch, FAU, 2024",
+        "source_url": "https://audiolabs-erlangen.de/resources/MIR/2024-ARTBeaT"
+      }
+    },
+    {
+      "id": "artbeat-19-ramp-80-to-200",
+      "input": {
+        "kind": "external",
+        "truth": "truth/artbeat-v1/artbeat-19-ramp-80-to-200.json",
+        "audio": {
+          "sha256": "2a581d2079fc21cc5f3657bf5915903552097c39d68c8ddd045ca8e492113e2e",
+          "local_file_hint": "audio/19_ARTBeaT_TempoC_80to200.mp3"
+        }
+      },
+      "tags": [
+        "tempo-ramp",
+        "percussive",
+        "accelerando",
+        "extreme-tempo"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-4.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "ARTBeaT Dataset by Rico Rosenbusch, FAU, 2024",
+        "source_url": "https://audiolabs-erlangen.de/resources/MIR/2024-ARTBeaT"
+      }
+    },
+    {
+      "id": "artbeat-20-ramp-200-to-80",
+      "input": {
+        "kind": "external",
+        "truth": "truth/artbeat-v1/artbeat-20-ramp-200-to-80.json",
+        "audio": {
+          "sha256": "891601d372c08edc760162584f0e2d37b3efacba972b3a8ac6178abdf051fcf6",
+          "local_file_hint": "audio/20_ARTBeaT_TempoC_200to80.mp3"
+        }
+      },
+      "tags": [
+        "tempo-ramp",
+        "percussive",
+        "ritardando",
+        "extreme-tempo"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-4.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "ARTBeaT Dataset by Rico Rosenbusch, FAU, 2024",
+        "source_url": "https://audiolabs-erlangen.de/resources/MIR/2024-ARTBeaT"
+      }
+    },
+    {
+      "id": "artbeat-21-polyrhythm-70-to-105",
+      "input": {
+        "kind": "external",
+        "truth": "truth/artbeat-v1/artbeat-21-polyrhythm-70-to-105.json",
+        "audio": {
+          "sha256": "c6bf4a4268cdf757b971fcc3f2de6c8a63020b09dc12f33cdea083b4e78622c0",
+          "local_file_hint": "audio/21_ARTBeaT_Polyrhythm_140to105.mp3"
+        }
+      },
+      "tags": [
+        "tempo-jump",
+        "polyrhythm",
+        "metric-ambiguity",
+        "half-double-time"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-4.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "ARTBeaT Dataset by Rico Rosenbusch, FAU, 2024",
+        "source_url": "https://audiolabs-erlangen.de/resources/MIR/2024-ARTBeaT"
+      }
+    }
+  ]
+}

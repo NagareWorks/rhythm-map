@@ -6,7 +6,7 @@ use anyhow::{Context, Result, bail};
 use clap::{Parser, Subcommand};
 use rhythm_map_eval::{
     evaluate_backend_suite, evaluate_backend_suite_with_audio_directory, evaluate_core_suite,
-    inspect_audio_asset, render_suite, score_prediction_directory,
+    fetch_public_dataset, inspect_audio_asset, render_suite, score_prediction_directory,
 };
 use rhythm_map_models::verify_model_pack;
 use serde::Serialize;
@@ -67,6 +67,18 @@ enum Command {
         /// Local audio file to hash and decode; the path is not written to the report.
         #[arg(long)]
         input: PathBuf,
+    },
+    /// Fetch and verify a public evaluation dataset outside the Git checkout.
+    DatasetFetch {
+        /// Versioned public-dataset lock manifest.
+        #[arg(long, default_value = "evaluation/datasets/artbeat-v1.json")]
+        manifest: PathBuf,
+        /// Explicit destination directory, normally outside the Git checkout.
+        #[arg(long)]
+        output: PathBuf,
+        /// Also fetch immutable annotation-source artifacts used to audit truth.
+        #[arg(long)]
+        with_annotations: bool,
     },
     /// Render deterministic synthetic WAVs and truth JSON for backend evaluation.
     Render {
@@ -141,6 +153,21 @@ fn main() -> Result<()> {
             println!(
                 "{}",
                 serde_json::to_string_pretty(&inspect_audio_asset(input)?)?
+            );
+            Ok(())
+        }
+        Command::DatasetFetch {
+            manifest,
+            output,
+            with_annotations,
+        } => {
+            println!(
+                "{}",
+                serde_json::to_string_pretty(&fetch_public_dataset(
+                    &manifest,
+                    &output,
+                    with_annotations,
+                )?)?
             );
             Ok(())
         }

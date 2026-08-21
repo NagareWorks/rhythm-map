@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "id": "artbeat-06-150-to-75",
+  "duration_s": 13.599954648526078,
+  "beats": [
+    {
+      "time_s": 0.023333,
+      "downbeat": false
+    },
+    {
+      "time_s": 0.415833,
+      "downbeat": false
+    },
+    {
+      "time_s": 0.8,
+      "downbeat": false
+    },
+    {
+      "time_s": 1.195,
+      "downbeat": false
+    },
+    {
+      "time_s": 1.589167,
+      "downbeat": false
+    },
+    {
+      "time_s": 1.9925,
+      "downbeat": false
+    },
+    {
+      "time_s": 2.4,
+      "downbeat": false
+    },
+    {
+      "time_s": 2.7925,
+      "downbeat": false
+    },
+    {
+      "time_s": 3.1925,
+      "downbeat": false
+    },
+    {
+      "time_s": 3.6,
+      "downbeat": false
+    },
+    {
+      "time_s": 3.995833,
+      "downbeat": false
+    },
+    {
+      "time_s": 4.3925,
+      "downbeat": false
+    },
+    {
+      "time_s": 4.805833,
+      "downbeat": false
+    },
+    {
+      "time_s": 5.2,
+      "downbeat": false
+    },
+    {
+      "time_s": 5.605,
+      "downbeat": false
+    },
+    {
+      "time_s": 6,
+      "downbeat": false
+    },
+    {
+      "time_s": 6.398333,
+      "downbeat": false
+    },
+    {
+      "time_s": 6.809167,
+      "downbeat": false
+    },
+    {
+      "time_s": 7.1925,
+      "downbeat": false
+    },
+    {
+      "time_s": 8,
+      "downbeat": false
+    },
+    {
+      "time_s": 8.7975,
+      "downbeat": false
+    },
+    {
+      "time_s": 9.5925,
+      "downbeat": false
+    },
+    {
+      "time_s": 10.3975,
+      "downbeat": false
+    },
+    {
+      "time_s": 11.2,
+      "downbeat": false
+    },
+    {
+      "time_s": 11.9925,
+      "downbeat": false
+    },
+    {
+      "time_s": 12.795,
+      "downbeat": false
+    }
+  ],
+  "tempo_segments": [
+    {
+      "start_s": 0,
+      "end_s": 7.1925,
+      "kind": "constant",
+      "start_bpm": 150,
+      "end_bpm": 150
+    },
+    {
+      "start_s": 7.1925,
+      "end_s": 13.599954648526078,
+      "kind": "constant",
+      "start_bpm": 75,
+      "end_bpm": 75
+    }
+  ],
+  "change_points": [
+    {
+      "time_s": 7.1925,
+      "kind": "tempo_jump"
+    }
+  ]
+}

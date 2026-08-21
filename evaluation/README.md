@@ -22,6 +22,21 @@ review.
 
 ## Commands
 
+Fetch the public ARTBeaT rhythm-challenge slice outside the checkout. Audio is
+always fetched; `--with-annotations` also retains the official SVG sources used
+to audit checked-in truth:
+
+```bash
+cargo xtask dataset-fetch \
+  --manifest evaluation/datasets/artbeat-v1.json \
+  --output D:/rhythm-map-eval/artbeat-v1 \
+  --with-annotations
+```
+
+The lock verifies exact byte sizes and SHA-256 identities. See
+[`datasets/README.md`](datasets/README.md) for license, attribution, scope, and
+truth derivation.
+
 Gate the deterministic tempo-map estimator using ideal beat observations:
 
 ```bash

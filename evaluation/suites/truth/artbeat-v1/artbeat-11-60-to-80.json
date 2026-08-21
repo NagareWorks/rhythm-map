@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "id": "artbeat-11-60-to-80",
+  "duration_s": 17.406303854875283,
+  "beats": [
+    {
+      "time_s": 0.014063,
+      "downbeat": false
+    },
+    {
+      "time_s": 1.027604,
+      "downbeat": false
+    },
+    {
+      "time_s": 2.046354,
+      "downbeat": false
+    },
+    {
+      "time_s": 3.044271,
+      "downbeat": false
+    },
+    {
+      "time_s": 4.01875,
+      "downbeat": false
+    },
+    {
+      "time_s": 5.034375,
+      "downbeat": false
+    },
+    {
+      "time_s": 6.035937,
+      "downbeat": false
+    },
+    {
+      "time_s": 7.048437,
+      "downbeat": false
+    },
+    {
+      "time_s": 8.030078,
+      "downbeat": false
+    },
+    {
+      "time_s": 8.781641,
+      "downbeat": false
+    },
+    {
+      "time_s": 9.534766,
+      "downbeat": false
+    },
+    {
+      "time_s": 10.275,
+      "downbeat": false
+    },
+    {
+      "time_s": 11.026172,
+      "downbeat": false
+    },
+    {
+      "time_s": 11.780078,
+      "downbeat": false
+    },
+    {
+      "time_s": 12.527344,
+      "downbeat": false
+    },
+    {
+      "time_s": 13.282812,
+      "downbeat": false
+    },
+    {
+      "time_s": 14.023828,
+      "downbeat": false
+    },
+    {
+      "time_s": 14.779297,
+      "downbeat": false
+    },
+    {
+      "time_s": 15.526172,
+      "downbeat": false
+    },
+    {
+      "time_s": 16.28164,
+      "downbeat": false
+    },
+    {
+      "time_s": 17.014062,
+      "downbeat": false
+    }
+  ],
+  "tempo_segments": [
+    {
+      "start_s": 0,
+      "end_s": 8.030078,
+      "kind": "constant",
+      "start_bpm": 60,
+      "end_bpm": 60
+    },
+    {
+      "start_s": 8.030078,
+      "end_s": 17.406303854875283,
+      "kind": "constant",
+      "start_bpm": 80,
+      "end_bpm": 80
+    }
+  ],
+  "change_points": [
+    {
+      "time_s": 8.030078,
+      "kind": "tempo_jump"
+    }
+  ]
+}
