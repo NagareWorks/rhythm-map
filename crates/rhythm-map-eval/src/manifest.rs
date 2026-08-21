@@ -76,7 +76,7 @@ pub struct AssetProvenance {
 /// Content-addressed audio reference that never embeds audio bytes in a suite.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct AudioReference {
-    /// Lowercase SHA-256 of the exact decoded input file bytes.
+    /// Lowercase SHA-256 of the exact encoded audio file bytes.
     pub sha256: String,
     /// Non-authoritative filename hint for a local dataset resolver.
     #[serde(default)]
@@ -168,6 +168,9 @@ impl EvaluationSuite {
                 }
                 CaseInput::External { truth, audio } => {
                     validate_relative_path(&case.id, truth)?;
+                    if let Some(hint) = &audio.local_file_hint {
+                        validate_relative_path(&case.id, hint)?;
+                    }
                     if case.provenance.kind == AssetKind::Generated {
                         return Err(format!(
                             "external case {} cannot use generated provenance",
@@ -275,6 +278,38 @@ mod tests {
                     audio_license: "local-use-only".to_string(),
                     annotation_license: "proprietary".to_string(),
                     redistributable: true,
+                    commercial_evaluation_allowed: false,
+                    attribution: None,
+                    source_url: None,
+                },
+                thresholds: None,
+            }],
+        };
+        assert!(suite.validate().is_err());
+    }
+
+    #[test]
+    fn external_audio_hint_cannot_escape_resolver_root() {
+        let suite = EvaluationSuite {
+            schema_version: 1,
+            id: "private".to_string(),
+            description: "test".to_string(),
+            thresholds: AcceptanceThresholds::default(),
+            cases: vec![EvaluationCase {
+                id: "track".to_string(),
+                input: CaseInput::External {
+                    truth: "track.truth.json".to_string(),
+                    audio: AudioReference {
+                        sha256: "0".repeat(64),
+                        local_file_hint: Some("../track.wav".to_string()),
+                    },
+                },
+                tags: Vec::new(),
+                provenance: AssetProvenance {
+                    kind: AssetKind::Private,
+                    audio_license: "local-use-only".to_string(),
+                    annotation_license: "proprietary".to_string(),
+                    redistributable: false,
                     commercial_evaluation_allowed: false,
                     attribution: None,
                     source_url: None,

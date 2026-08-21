@@ -70,3 +70,19 @@ feature contract, and artifact roles before a product surface loads the files.
 No model is silently downloaded by the core library. A future signature layer
 will authenticate the same content-addressed manifest rather than replace local
 integrity checks.
+
+## Evaluation asset boundary
+
+External evaluation audio is never addressed by an unchecked local path in a
+suite. `rhythm-map-eval` binds an explicit local directory to an
+`ExternalAudioResolver`, verifies the manifest's SHA-256 over exact encoded
+file bytes, and only then passes decoded mono PCM through the ordinary engine.
+Filename hints are optional and non-authoritative; stale hints fall back to a
+deterministic content search below the resolver root. Symbolic links and parent
+path traversal are excluded.
+
+The resolver caches digests during one suite run so each candidate file is
+hashed at most once. Reports retain model identity, capability tags, verified
+external-audio SHA-256, observations, and aggregate metrics, but not filenames,
+resolved paths, or audio bytes. External truth is validated and run through the
+same oracle estimator before backend attribution.

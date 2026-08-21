@@ -5,7 +5,8 @@ use std::{fs, path::PathBuf};
 use anyhow::{Context, Result, bail};
 use clap::{Parser, Subcommand};
 use rhythm_map_eval::{
-    evaluate_backend_suite, evaluate_core_suite, render_suite, score_prediction_directory,
+    evaluate_backend_suite, evaluate_backend_suite_with_audio_directory, evaluate_core_suite,
+    inspect_audio_asset, render_suite, score_prediction_directory,
 };
 use rhythm_map_models::verify_model_pack;
 use serde::Serialize;
@@ -19,7 +20,7 @@ struct Args {
 
 #[derive(Debug, Subcommand)]
 enum Command {
-    /// Gate the core estimator with ideal observations from synthetic recipes.
+    /// Gate the core estimator with ideal observations from generated or external truth.
     Eval {
         /// Evaluation suite manifest.
         #[arg(long, default_value = "evaluation/suites/generated-v1.json")]
@@ -42,6 +43,9 @@ enum Command {
         /// Directory containing the model files named by the manifest.
         #[arg(long)]
         model_dir: PathBuf,
+        /// Directory containing content-addressed external evaluation audio.
+        #[arg(long)]
+        audio_dir: Option<PathBuf>,
         /// Optional JSON report destination.
         #[arg(long)]
         report: Option<PathBuf>,
@@ -57,6 +61,12 @@ enum Command {
         /// Directory containing the model files named by the manifest.
         #[arg(long)]
         model_dir: PathBuf,
+    },
+    /// Print the immutable digest and decoded shape needed by an external case.
+    AudioInspect {
+        /// Local audio file to hash and decode; the path is not written to the report.
+        #[arg(long)]
+        input: PathBuf,
     },
     /// Render deterministic synthetic WAVs and truth JSON for backend evaluation.
     Render {
@@ -95,13 +105,22 @@ fn main() -> Result<()> {
             suite,
             model_pack,
             model_dir,
+            audio_dir,
             report,
             no_fail,
-        } => emit_report(
-            &evaluate_backend_suite(&suite, &model_pack, &model_dir)?,
-            report,
-            no_fail,
-        ),
+        } => {
+            let result = if let Some(audio_dir) = audio_dir {
+                evaluate_backend_suite_with_audio_directory(
+                    &suite,
+                    &model_pack,
+                    &model_dir,
+                    &audio_dir,
+                )?
+            } else {
+                evaluate_backend_suite(&suite, &model_pack, &model_dir)?
+            };
+            emit_report(&result, report, no_fail)
+        }
         Command::ModelVerify {
             model_pack,
             model_dir,
@@ -116,6 +135,13 @@ fn main() -> Result<()> {
                 "manifest_sha256": verified.manifest_sha256(),
             });
             println!("{}", serde_json::to_string_pretty(&output)?);
+            Ok(())
+        }
+        Command::AudioInspect { input } => {
+            println!(
+                "{}",
+                serde_json::to_string_pretty(&inspect_audio_asset(input)?)?
+            );
             Ok(())
         }
         Command::Render { suite, output } => {

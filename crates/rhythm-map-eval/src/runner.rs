@@ -5,7 +5,7 @@ use std::{
 };
 
 use anyhow::{Context, Result, bail};
-use rhythm_map_beat_this::BeatThisBackend;
+use rhythm_map_beat_this::{BeatThisBackend, decode_audio};
 use rhythm_map_core::{
     Analysis, Engine, ModelInfo, ObservedBeat, RhythmObservations, TempoMapEstimator,
 };
@@ -13,8 +13,8 @@ use rhythm_map_models::{ModelArtifactRole, VerifiedModelPack, verify_model_pack}
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    CaseEvaluation, CaseInput, EvaluationCase, EvaluationSuite, GeneratedTruth, SyntheticRecipe,
-    evaluate_analysis, generate_truth,
+    CaseEvaluation, CaseInput, EvaluationCase, EvaluationSuite, ExternalAudioResolver,
+    GeneratedTruth, SyntheticRecipe, evaluate_analysis, generate_truth,
     wav::{render_synthetic_audio, synthesize_audio},
 };
 
@@ -86,6 +86,12 @@ pub struct ObservationDiagnostics {
 pub struct AttributionCase {
     /// Stable case identifier.
     pub id: String,
+    /// Capability slices copied from the suite manifest.
+    #[serde(default)]
+    pub tags: Vec<String>,
+    /// Verified encoded audio identity for an external case.
+    #[serde(default)]
+    pub audio_sha256: Option<String>,
     /// Estimator result from exact beat observations.
     pub oracle: CaseEvaluation,
     /// Product result from rendered audio and the observation backend.
@@ -131,7 +137,7 @@ pub struct BottleneckEvaluation {
     pub cases: Vec<AttributionCase>,
 }
 
-/// Evaluate the timing estimator with ideal observations from every recipe.
+/// Evaluate the timing estimator with ideal observations from every case.
 ///
 /// # Errors
 ///
@@ -141,18 +147,7 @@ pub fn evaluate_core_suite(suite_path: &Path) -> Result<SuiteEvaluation> {
     let estimator = TempoMapEstimator::default();
     let mut cases = Vec::with_capacity(suite.cases.len());
     for case in &suite.cases {
-        let CaseInput::Generated { recipe } = &case.input else {
-            bail!(
-                "core evaluation suite {} contains external case {}",
-                suite.id,
-                case.id
-            );
-        };
-        let recipe = load_recipe(&root.join(recipe))?;
-        if recipe.id != case.id {
-            bail!("case {} points to recipe with id {}", case.id, recipe.id);
-        }
-        let truth = generate_truth(&recipe).map_err(anyhow::Error::msg)?;
+        let truth = load_case_truth(case, &root)?;
         let analysis = estimator
             .estimate(&truth.ideal_observations())
             .with_context(|| format!("estimating case {}", case.id))?;
@@ -162,8 +157,7 @@ pub fn evaluate_core_suite(suite_path: &Path) -> Result<SuiteEvaluation> {
     Ok(suite_report(suite.id, cases))
 }
 
-/// Run rendered synthetic audio through Beat This and compare it with oracle
-/// observations using the same truth and thresholds.
+/// Run generated audio through Beat This and compare it with oracle observations.
 ///
 /// # Errors
 ///
@@ -173,6 +167,34 @@ pub fn evaluate_backend_suite(
     suite_path: &Path,
     model_pack_path: &Path,
     model_root: &Path,
+) -> Result<BottleneckEvaluation> {
+    evaluate_backend_suite_impl(suite_path, model_pack_path, model_root, None)
+}
+
+/// Run generated and content-addressed external audio through Beat This.
+///
+/// External audio remains outside the repository and is resolved below the
+/// explicit directory by the SHA-256 declared in the suite manifest.
+///
+/// # Errors
+///
+/// Returns an error for invalid suites, missing or mismatched external assets,
+/// model loading, decoding, inference, or estimator failures.
+pub fn evaluate_backend_suite_with_audio_directory(
+    suite_path: &Path,
+    model_pack_path: &Path,
+    model_root: &Path,
+    audio_directory: &Path,
+) -> Result<BottleneckEvaluation> {
+    let resolver = ExternalAudioResolver::new(audio_directory)?;
+    evaluate_backend_suite_impl(suite_path, model_pack_path, model_root, Some(&resolver))
+}
+
+fn evaluate_backend_suite_impl(
+    suite_path: &Path,
+    model_pack_path: &Path,
+    model_root: &Path,
+    audio_resolver: Option<&ExternalAudioResolver>,
 ) -> Result<BottleneckEvaluation> {
     let verified = verify_model_pack(model_pack_path, model_root)
         .with_context(|| format!("verifying model pack {}", model_pack_path.display()))?;
@@ -186,29 +208,52 @@ pub fn evaluate_backend_suite(
     let mut cases = Vec::with_capacity(suite.cases.len());
 
     for case in &suite.cases {
-        let CaseInput::Generated { recipe } = &case.input else {
-            bail!(
-                "backend evaluation suite {} contains external case {}",
-                suite.id,
-                case.id
-            );
-        };
-        let recipe = load_recipe(&root.join(recipe))?;
-        if recipe.id != case.id {
-            bail!("case {} points to recipe with id {}", case.id, recipe.id);
-        }
-        let truth = generate_truth(&recipe).map_err(anyhow::Error::msg)?;
+        let truth = load_case_truth(case, &root)?;
         let thresholds = case.thresholds.as_ref().unwrap_or(&suite.thresholds);
         let oracle_analysis = estimator
             .estimate(&truth.ideal_observations())
             .with_context(|| format!("estimating oracle case {}", case.id))?;
         let oracle = evaluate_analysis(&case.id, &oracle_analysis, &truth, thresholds);
 
-        let samples = synthesize_audio(&recipe, &truth)
-            .with_context(|| format!("synthesizing case {}", case.id))?;
+        let (samples, sample_rate, audio_sha256) = match &case.input {
+            CaseInput::Generated { recipe } => {
+                let recipe = load_recipe(&root.join(recipe))?;
+                let samples = synthesize_audio(&recipe, &truth)
+                    .with_context(|| format!("synthesizing case {}", case.id))?;
+                (samples, recipe.sample_rate, None)
+            }
+            CaseInput::External { audio, .. } => {
+                let resolver = audio_resolver.with_context(|| {
+                    format!(
+                        "suite {} contains external case {}; pass an external audio directory",
+                        suite.id, case.id
+                    )
+                })?;
+                let path = resolver
+                    .resolve(audio)
+                    .with_context(|| format!("resolving audio for case {}", case.id))?;
+                let decoded = decode_audio(&path)
+                    .with_context(|| format!("decoding audio for case {}", case.id))?;
+                let decoded_duration_s =
+                    usize_to_f64(decoded.samples.len()) / f64::from(decoded.sample_rate);
+                if (decoded_duration_s - truth.duration_s).abs() > 0.1 {
+                    bail!(
+                        "case {} truth duration {:.6}s differs from decoded audio duration {:.6}s",
+                        case.id,
+                        truth.duration_s,
+                        decoded_duration_s
+                    );
+                }
+                (
+                    decoded.samples,
+                    decoded.sample_rate,
+                    Some(audio.sha256.clone()),
+                )
+            }
+        };
         let started = Instant::now();
         let observations = engine
-            .observe_pcm(&samples, recipe.sample_rate, 1)
+            .observe_pcm(&samples, sample_rate, 1)
             .with_context(|| format!("observing backend case {}", case.id))?;
         let analysis = engine
             .analyze_observations(&observations)
@@ -219,6 +264,8 @@ pub fn evaluate_backend_suite(
         let observation_diagnostics = observation_diagnostics(&observations, &analysis);
         cases.push(AttributionCase {
             id: case.id.clone(),
+            tags: case.tags.clone(),
+            audio_sha256,
             oracle,
             end_to_end,
             delta,
@@ -367,7 +414,7 @@ pub fn score_prediction_directory(
 }
 
 fn load_case_truth(case: &EvaluationCase, root: &Path) -> Result<GeneratedTruth> {
-    match &case.input {
+    let truth = match &case.input {
         CaseInput::Generated { recipe } => {
             let recipe = load_recipe(&root.join(recipe))?;
             generate_truth(&recipe).map_err(anyhow::Error::msg)
@@ -379,7 +426,15 @@ fn load_case_truth(case: &EvaluationCase, root: &Path) -> Result<GeneratedTruth>
             )
             .with_context(|| format!("parsing truth {}", path.display()))
         }
+    }?;
+    truth
+        .validate()
+        .map_err(anyhow::Error::msg)
+        .with_context(|| format!("validating truth for case {}", case.id))?;
+    if truth.id != case.id {
+        bail!("case {} points to truth with id {}", case.id, truth.id);
     }
+    Ok(truth)
 }
 
 fn load_suite(path: &Path) -> Result<(EvaluationSuite, PathBuf)> {

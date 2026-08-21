@@ -540,6 +540,7 @@ dependencies = [
  "rhythm-map-models",
  "serde",
  "serde_json",
+ "sha2",
 ]
 
 [[package]]

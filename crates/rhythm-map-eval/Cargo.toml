@@ -21,6 +21,7 @@ rhythm-map-core = { path = "../rhythm-map-core" }
 rhythm-map-models = { path = "../rhythm-map-models" }
 serde.workspace = true
 serde_json.workspace = true
+sha2.workspace = true
 
 [lints]
 workspace = true

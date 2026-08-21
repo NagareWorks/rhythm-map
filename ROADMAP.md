@@ -13,6 +13,9 @@
   model-smeared tempo jumps, and guarded duplicate/missed-event grid repair.
 - Independent downbeat/bar-phase evaluation and evidence-based half-bar
   candidate selection with recovered-grid boundary realignment.
+- Content-addressed external-audio resolution, strict external truth
+  validation, and a private calibration workflow that never stores audio paths
+  or bytes in reports.
 
 ## Phase 2: product surfaces
 
@@ -32,6 +35,9 @@
 
 ## Phase 3: evidence-driven model work
 
+- Populate separate calibration and holdout manifests for legally held
+  drumless-control, drumless-ramp, drumless-step, rubato, compound-meter, and
+  percussive-control slices.
 - Evaluate game music, rubato, extreme tempo, compound meter, and drumless audio.
 - Add a learned boundary/confidence head only if deterministic analysis is the
   measured bottleneck.

@@ -52,7 +52,9 @@ cargo xtask eval
 
 With an explicitly downloaded and verified model pack, `cargo xtask
 eval-backend` runs the same cases through Beat This and emits a paired
-oracle/end-to-end bottleneck report.
+oracle/end-to-end bottleneck report. External public or private cases add an
+explicit `--audio-dir`; assets are resolved by SHA-256 rather than trusted by
+filename, and local paths are not included in reports.
 
 `cargo xtask render --output <directory>` produces disposable deterministic
 synthetic WAV files for end-to-end backend evaluation. Public and private

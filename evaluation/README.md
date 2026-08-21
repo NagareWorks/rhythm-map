@@ -46,6 +46,23 @@ cargo xtask eval-backend \
   --no-fail
 ```
 
+For a suite containing external audio, add the explicit local audio root:
+
+```bash
+cargo xtask eval-backend \
+  --suite evaluation/private/real-music-v1.json \
+  --model-pack models/beat-this-full-v1.json \
+  --model-dir D:/rhythm-map-models/beat-this-full-v1 \
+  --audio-dir D:/rhythm-map-evaluation-audio \
+  --report D:/rhythm-map-eval/reports/private-real-music-v1.json \
+  --no-fail
+```
+
+The filename hint in a manifest is non-authoritative. The resolver verifies the
+SHA-256 of the exact encoded file bytes and, when the hint is stale, searches
+supported audio below `--audio-dir` by content. It does not follow symbolic
+links. The decoded duration must agree with truth within 100 ms.
+
 The paired report attributes a failing suite to the deterministic estimator
 when the oracle path fails, or to the broader observation path when oracle
 beats pass but rendered audio fails. The latter includes model errors and
@@ -55,11 +72,11 @@ slice metrics remain the evidence used for engineering decisions.
 
 Each end-to-end case also records the backend's raw beat timestamps and
 beat/downbeat confidence values, the number retained by deterministic analysis,
-the final downbeat count, the activity-envelope size and low-activity fraction,
-and the warnings that identify silence rejection, metrical selection,
-bar-phase selection, or guarded transition-grid recovery. These diagnostics
-explain a metric change without exposing model tensors or requiring audio
-redistribution.
+the final downbeat count, capability tags, the verified external-audio SHA-256,
+the activity-envelope size and low-activity fraction, and the warnings that
+identify silence rejection, metrical selection, bar-phase selection, or guarded
+transition-grid recovery. These diagnostics explain a metric change without
+exposing model tensors, filenames, local paths, or audio bytes.
 
 `cargo xtask` uses an optimized build because unoptimized neural inference is
 not a meaningful performance baseline. Keep the generated oracle suite in
@@ -86,10 +103,25 @@ Synthetic recipes select an audio profile. `click` is a sparse timing signal,
 harmonic note onsets without drums. All profiles retain the same analytic beat
 and tempo truth.
 
-## Adding copyrighted evaluation music
+## Adding external evaluation music
 
-Do not copy it below this directory. Create a local manifest below
-`evaluation/private/` (ignored by Git), give the audio an immutable SHA-256,
-record the source and permitted use, and keep independently created annotations
-under an explicitly chosen annotation license. A future dataset resolver will
-map those identities to local or access-controlled files.
+1. Copy `private.example.json` and `truth.example.json` below
+   `evaluation/private/`, which is ignored by Git.
+2. Inspect the exact local asset:
+
+   ```bash
+   cargo xtask audio-inspect --input D:/licensed-audio/example.flac
+   ```
+
+3. Put the reported SHA-256 in the manifest and its decoded duration in truth.
+   The local filename remains only a convenience hint.
+4. Replace the example beats, downbeats, tempo segments, and change points with
+   independently authored annotations.
+5. Run `cargo xtask eval --suite evaluation/private/<suite>.json` first to gate
+   truth and the oracle estimator without requiring audio or a model.
+6. Run `eval-backend` with `--audio-dir` only after the oracle path passes.
+
+Do not copy copyrighted audio into the repository. Record the source and
+permitted use, and keep annotations under an explicitly chosen license. See
+[`CALIBRATION.md`](CALIBRATION.md) for corpus slices, annotation review, holdout
+separation, and the model-versus-estimator decision rule.

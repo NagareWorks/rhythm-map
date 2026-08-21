@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "private-real-music-v1",
-  "description": "Template only. Copy to evaluation/private/ and never commit audio or local paths.",
+  "description": "Template only. Copy this and truth.example.json to evaluation/private/; never commit audio or local paths.",
   "thresholds": {
     "beat_tolerance_ms": 70.0,
     "change_tolerance_s": 1.0,
@@ -16,13 +16,13 @@
       "id": "replace-with-content-hash-id",
       "input": {
         "kind": "external",
-        "truth": "truth/replace-with-local-annotation.json",
+        "truth": "truth.example.json",
         "audio": {
           "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
           "local_file_hint": "replace-with-filename.ext"
         }
       },
-      "tags": ["variable-tempo", "private"],
+      "tags": ["drumless-ramp", "variable-tempo", "private", "calibration"],
       "provenance": {
         "kind": "private",
         "audio_license": "replace-with-exact-local-use-basis",

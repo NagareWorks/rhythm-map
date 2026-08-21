@@ -115,6 +115,66 @@ pub struct GeneratedTruth {
 }
 
 impl GeneratedTruth {
+    /// Validate externally authored truth before it enters evaluation.
+    ///
+    /// # Errors
+    ///
+    /// Returns a description for unsupported schemas, invalid timing values,
+    /// unsorted events, overlapping tempo regions, or invalid BPM values.
+    pub fn validate(&self) -> Result<(), String> {
+        if self.schema_version != 1 {
+            return Err(format!("unsupported truth schema {}", self.schema_version));
+        }
+        if self.id.trim().is_empty() || !self.duration_s.is_finite() || self.duration_s <= 0.0 {
+            return Err("truth id and a finite positive duration are required".to_string());
+        }
+        for beat in &self.beats {
+            if !beat.time_s.is_finite() || beat.time_s < 0.0 || beat.time_s > self.duration_s {
+                return Err("truth beat is outside the audio duration".to_string());
+            }
+        }
+        if self
+            .beats
+            .windows(2)
+            .any(|pair| pair[1].time_s <= pair[0].time_s)
+        {
+            return Err("truth beats must be strictly increasing".to_string());
+        }
+        for segment in &self.tempo_segments {
+            if !segment.start_s.is_finite()
+                || !segment.end_s.is_finite()
+                || segment.start_s < 0.0
+                || segment.end_s <= segment.start_s
+                || segment.end_s > self.duration_s
+            {
+                return Err("truth tempo segment has invalid bounds".to_string());
+            }
+            validate_bpm(segment.start_bpm)?;
+            validate_bpm(segment.end_bpm)?;
+        }
+        if self
+            .tempo_segments
+            .windows(2)
+            .any(|pair| pair[1].start_s < pair[0].end_s)
+        {
+            return Err("truth tempo segments must be ordered and non-overlapping".to_string());
+        }
+        for change in &self.change_points {
+            if !change.time_s.is_finite() || change.time_s < 0.0 || change.time_s > self.duration_s
+            {
+                return Err("truth change point is outside the audio duration".to_string());
+            }
+        }
+        if self
+            .change_points
+            .windows(2)
+            .any(|pair| pair[1].time_s < pair[0].time_s)
+        {
+            return Err("truth change points must be ordered".to_string());
+        }
+        Ok(())
+    }
+
     /// Convert exact labels into ideal backend observations for core evaluation.
     #[must_use]
     pub fn ideal_observations(&self) -> RhythmObservations {
@@ -409,5 +469,33 @@ mod tests {
         assert_eq!(truth.change_points.len(), 2);
         assert_eq!(truth.change_points[0].kind, ChangeKind::RampBoundary);
         assert!((truth.tempo_at(15.0).unwrap() - 120.0).abs() < 1e-9);
+        assert!(truth.validate().is_ok());
+    }
+
+    #[test]
+    fn external_truth_rejects_overlapping_tempo_segments() {
+        let recipe = SyntheticRecipe {
+            schema_version: 1,
+            id: "overlap".to_string(),
+            sample_rate: 44_100,
+            beats_per_bar: 4,
+            audio_profile: SyntheticAudioProfile::Click,
+            segments: vec![RecipeSegment {
+                duration_s: 8.0,
+                shape: SegmentShape::Constant { bpm: 120.0 },
+            }],
+        };
+        let mut truth = generate_truth(&recipe).unwrap();
+        truth.tempo_segments.push(TruthTempoSegment {
+            start_s: 4.0,
+            end_s: 8.0,
+            kind: TempoSegmentKind::Constant,
+            start_bpm: 120.0,
+            end_bpm: 120.0,
+        });
+        assert_eq!(
+            truth.validate(),
+            Err("truth tempo segments must be ordered and non-overlapping".to_string())
+        );
     }
 }
