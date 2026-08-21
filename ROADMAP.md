@@ -106,3 +106,12 @@ a learned component to the default distribution.
   next evaluate sequence-aware tempo/phase decoding and an alternate
   observation backend. Require either path to beat this measured ceiling on
   held-out slices before integrating it into the product.
+- 2026-08-21: missed-beat logit attribution found that only 42 of 128 ARTBeaT
+  misses had an upstream-radius local peak above logit -3; 58 had weaker peaks,
+  18 only appeared with a narrower radius, and 10 had no local peak. A
+  conservative supported-midpoint decoder raised mean beat F1 from 0.8052 to
+  0.8235 and materially improved three cases, but regressed one metrical case.
+  Keep it experimental until separate calibration and holdout slices confirm a
+  net improvement. The very weak step/ramp failures remain evidence for
+  comparing an alternate observation backend rather than expanding grid-based
+  timestamp invention.

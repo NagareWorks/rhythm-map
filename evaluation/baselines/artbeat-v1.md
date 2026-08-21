@@ -71,3 +71,43 @@ failures still require an alternate observation backend or stronger acoustic
 evidence. The upstream-default path was also rerun after exposing logits; all
 report fields except machine-dependent runtime were identical to the baseline
 above.
+
+## Missed-beat evidence
+
+A truth-assisted recoverability run inspected the 50 Hz beat logits inside the
+existing tolerance window for all 128 truth beats missed by the upstream
+decoder:
+
+| Evidence near missed truth beat | Count | Share of misses |
+| --- | ---: | ---: |
+| Radius-3 peak with logit in (-1, 0] | 18 | 14.1% |
+| Radius-3 peak with logit in (-3, -1] | 24 | 18.8% |
+| Radius-3 peak with logit at or below -3 | 58 | 45.3% |
+| Radius-1 peak only | 18 | 14.1% |
+| No radius-1 local peak | 10 | 7.8% |
+
+Only 42 of 128 misses have a radius-three local peak above -3, matching the
+limited ceiling observed in the fixed-threshold sweep. Among the 58 weaker
+radius-three peaks, 24 lie in (-5, -3], 14 in (-7, -5], and 20 at or below -7.
+For `artbeat-05-75-to-150`, all nine missing full-time beats are local peaks but
+their logits are roughly -7 to -9. Treating those frames as beats would override
+strong negative model evidence, not recover a plausible event hidden just below
+the upstream threshold.
+
+An experimental supported-midpoint decoder was then measured. It starts from
+the unchanged upstream events and adds only radius-three peaks above -3 that
+repeat near the midpoint of several adjacent strong-beat gaps. It raised mean
+beat F1 from 0.8052 to 0.8235 while producing 27.00 events per case on average:
+
+| Case | Upstream F1 | Candidate F1 | Event-count change |
+| --- | ---: | ---: | ---: |
+| `artbeat-06-150-to-75` | 0.7727 | 0.9231 | 18 to 26 |
+| `artbeat-14-240-to-96` | 0.7778 | 0.8267 | 31 to 34 |
+| `artbeat-18-piano-rubato` | 0.7568 | 0.8736 | 30 to 43 |
+| `artbeat-15-85-to-127-5` | 0.6486 | 0.6076 | 34 to 39 |
+
+All other cases were unchanged. The material improvements demonstrate that
+sequence support can select useful weak peaks more safely than a global lower
+threshold. The regression demonstrates that ARTBeaT alone is insufficient to
+make it the product default: it must first improve separate calibration and
+holdout slices without changing their metrical level or increasing false beats.

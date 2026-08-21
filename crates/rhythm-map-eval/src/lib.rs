@@ -22,9 +22,12 @@ pub use public_dataset::{
 };
 pub use runner::{
     AttributionCase, AttributionDecision, BottleneckEvaluation, CaseMetricDelta, DecoderPolicy,
-    DecoderSweepCandidate, DecoderSweepCase, DecoderSweepEvaluation, ModelPackIdentity,
+    DecoderRecoverabilityCase, DecoderRecoverabilityEvaluation, DecoderSupportedMidpointPolicy,
+    DecoderSweepCandidate, DecoderSweepCase, DecoderSweepEvaluation, LogitEvidence,
+    MissingBeatEvidence, MissingBeatEvidenceClass, MissingBeatEvidenceCounts, ModelPackIdentity,
     ObservationDiagnostics, SuiteEvaluation, evaluate_backend_suite,
     evaluate_backend_suite_with_audio_directory, evaluate_core_suite,
+    evaluate_decoder_recoverability_with_audio_directory,
     evaluate_decoder_sweep_with_audio_directory, render_suite, score_prediction_directory,
     standard_decoder_policies,
 };

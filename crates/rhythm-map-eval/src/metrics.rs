@@ -159,21 +159,13 @@ pub fn evaluate_analysis(
 }
 
 pub(crate) fn score_beats(predicted: &[f64], expected: &[f64], tolerance_s: f64) -> BeatMetrics {
-    let mut predicted_index = 0;
-    let mut expected_index = 0;
-    let mut errors = Vec::new();
-    while predicted_index < predicted.len() && expected_index < expected.len() {
-        let difference = predicted[predicted_index] - expected[expected_index];
-        if difference.abs() <= tolerance_s {
-            errors.push(difference.abs() * 1000.0);
-            predicted_index += 1;
-            expected_index += 1;
-        } else if difference < 0.0 {
-            predicted_index += 1;
-        } else {
-            expected_index += 1;
-        }
-    }
+    let pairs = match_event_pairs(predicted, expected, tolerance_s);
+    let errors = pairs
+        .iter()
+        .map(|&(predicted_index, expected_index)| {
+            (predicted[predicted_index] - expected[expected_index]).abs() * 1000.0
+        })
+        .collect::<Vec<_>>();
     let matched = errors.len();
     let precision = safe_ratio(matched, predicted.len());
     let recall = safe_ratio(matched, expected.len());
@@ -185,6 +177,29 @@ pub(crate) fn score_beats(predicted: &[f64], expected: &[f64], tolerance_s: f64)
         median_absolute_error_ms: percentile(errors.clone(), 0.5),
         p95_absolute_error_ms: percentile(errors, 0.95),
     }
+}
+
+pub(crate) fn match_event_pairs(
+    predicted: &[f64],
+    expected: &[f64],
+    tolerance_s: f64,
+) -> Vec<(usize, usize)> {
+    let mut predicted_index = 0;
+    let mut expected_index = 0;
+    let mut pairs = Vec::new();
+    while predicted_index < predicted.len() && expected_index < expected.len() {
+        let difference = predicted[predicted_index] - expected[expected_index];
+        if difference.abs() <= tolerance_s {
+            pairs.push((predicted_index, expected_index));
+            predicted_index += 1;
+            expected_index += 1;
+        } else if difference < 0.0 {
+            predicted_index += 1;
+        } else {
+            expected_index += 1;
+        }
+    }
+    pairs
 }
 
 fn score_tempo(analysis: &Analysis, truth: &GeneratedTruth) -> TempoMetrics {

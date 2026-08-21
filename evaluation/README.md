@@ -93,6 +93,24 @@ separately for each case and is only a diagnostic ceiling; it is not a
 deployable result and must not be compared with one fixed decoder as if it
 were one.
 
+To determine whether a stronger decoder has model evidence to work with, inspect
+every truth beat missed by the upstream decoder:
+
+```bash
+cargo xtask decoder-recoverability \
+  --suite evaluation/suites/artbeat-v1.json \
+  --model-pack models/beat-this-full-v1.json \
+  --model-dir D:/rhythm-map-models/beat-this-full-v1 \
+  --audio-dir D:/rhythm-map-eval/artbeat-v1/audio \
+  --report D:/rhythm-map-eval/reports/artbeat-recoverability.json
+```
+
+This is a truth-assisted diagnostic, not a decoder score. For each missed beat
+it records the strongest frame and the strongest radius-one and radius-three
+local peaks inside the existing timing-tolerance window. The aggregate bins
+separate moderate subthreshold evidence from very weak evidence and the absence
+of a local peak. No audio bytes, paths, or model tensors are stored.
+
 The filename hint in a manifest is non-authoritative. The resolver verifies the
 SHA-256 of the exact encoded file bytes and, when the hint is stale, searches
 supported audio below `--audio-dir` by content. It does not follow symbolic

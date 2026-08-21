@@ -1,11 +1,15 @@
 //! Command-line orchestration for reproducible Rhythm Map evaluation.
 
-use std::{fs, path::PathBuf};
+use std::{
+    fs,
+    path::{Path, PathBuf},
+};
 
 use anyhow::{Context, Result, bail};
 use clap::{Parser, Subcommand};
 use rhythm_map_eval::{
     evaluate_backend_suite, evaluate_backend_suite_with_audio_directory, evaluate_core_suite,
+    evaluate_decoder_recoverability_with_audio_directory,
     evaluate_decoder_sweep_with_audio_directory, fetch_public_dataset, inspect_audio_asset,
     render_suite, score_prediction_directory, standard_decoder_policies,
 };
@@ -83,6 +87,24 @@ enum Command {
     },
     /// Compare Beat This logit peak decoders without repeating model inference.
     DecoderSweep {
+        /// Evaluation suite containing independent beat truth.
+        #[arg(long, default_value = "evaluation/suites/artbeat-v1.json")]
+        suite: PathBuf,
+        /// Versioned model-pack manifest.
+        #[arg(long, default_value = "models/beat-this-full-v1.json")]
+        model_pack: PathBuf,
+        /// Directory containing the model files named by the manifest.
+        #[arg(long)]
+        model_dir: PathBuf,
+        /// Directory containing content-addressed external evaluation audio.
+        #[arg(long)]
+        audio_dir: PathBuf,
+        /// Optional JSON report destination.
+        #[arg(long)]
+        report: Option<PathBuf>,
+    },
+    /// Inspect model evidence around truth beats missed by the upstream decoder.
+    DecoderRecoverability {
         /// Evaluation suite containing independent beat truth.
         #[arg(long, default_value = "evaluation/suites/artbeat-v1.json")]
         suite: PathBuf,
@@ -196,16 +218,14 @@ fn main() -> Result<()> {
             model_dir,
             audio_dir,
             report,
-        } => emit_json_report(
-            &evaluate_decoder_sweep_with_audio_directory(
-                &suite,
-                &model_pack,
-                &model_dir,
-                &audio_dir,
-                &standard_decoder_policies(),
-            )?,
+        } => run_decoder_sweep(&suite, &model_pack, &model_dir, &audio_dir, report),
+        Command::DecoderRecoverability {
+            suite,
+            model_pack,
+            model_dir,
+            audio_dir,
             report,
-        ),
+        } => run_decoder_recoverability(&suite, &model_pack, &model_dir, &audio_dir, report),
         Command::Render { suite, output } => {
             for path in render_suite(&suite, &output)? {
                 println!("{}", path.display());
@@ -223,6 +243,40 @@ fn main() -> Result<()> {
             no_fail,
         ),
     }
+}
+
+fn run_decoder_sweep(
+    suite: &Path,
+    model_pack: &Path,
+    model_dir: &Path,
+    audio_dir: &Path,
+    report: Option<PathBuf>,
+) -> Result<()> {
+    emit_json_report(
+        &evaluate_decoder_sweep_with_audio_directory(
+            suite,
+            model_pack,
+            model_dir,
+            audio_dir,
+            &standard_decoder_policies(),
+        )?,
+        report,
+    )
+}
+
+fn run_decoder_recoverability(
+    suite: &Path,
+    model_pack: &Path,
+    model_dir: &Path,
+    audio_dir: &Path,
+    report: Option<PathBuf>,
+) -> Result<()> {
+    emit_json_report(
+        &evaluate_decoder_recoverability_with_audio_directory(
+            suite, model_pack, model_dir, audio_dir,
+        )?,
+        report,
+    )
 }
 
 fn emit_report<T>(report: &T, destination: Option<PathBuf>, no_fail: bool) -> Result<()>

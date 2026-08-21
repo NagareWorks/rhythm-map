@@ -31,6 +31,30 @@ impl Default for PeakPickingOptions {
     }
 }
 
+/// Conservative sequence decoder for weak peaks between strong Beat This events.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct SupportedMidpointOptions {
+    /// Strict lower logit bound for weak candidate peaks.
+    pub candidate_logit_threshold: f32,
+    /// Maximum distance from an interval midpoint as a fraction of that interval.
+    pub maximum_midpoint_offset_ratio: f64,
+    /// Number of strong-beat gaps inspected on either side for run support.
+    pub support_radius_gaps: usize,
+    /// Minimum supported gaps required inside the local support window.
+    pub minimum_supported_gaps: usize,
+}
+
+impl Default for SupportedMidpointOptions {
+    fn default() -> Self {
+        Self {
+            candidate_logit_threshold: -3.0,
+            maximum_midpoint_offset_ratio: 0.15,
+            support_radius_gaps: 2,
+            minimum_supported_gaps: 3,
+        }
+    }
+}
+
 /// One model inference retained before discrete peak decoding.
 #[derive(Debug, Clone)]
 pub struct BeatThisInference {
@@ -138,6 +162,47 @@ impl BeatThisBackend {
         }
         let beat_frames = find_peaks(&inference.beat_logits, options);
         let downbeat_frames = find_peaks(&inference.downbeat_logits, options);
+        Ok(self.observations_from_frames(inference, &beat_frames, &downbeat_frames))
+    }
+
+    /// Decode upstream peaks and recover locally supported weak midpoint peaks.
+    ///
+    /// This candidate never invents a grid timestamp: every added event must be
+    /// a radius-three local maximum above `candidate_logit_threshold`, close to
+    /// the midpoint of two upstream beats, and part of a locally repeated run.
+    ///
+    /// # Errors
+    ///
+    /// Returns [`BackendError`] for invalid options or mismatched logits.
+    pub fn decode_inference_with_supported_midpoints(
+        &self,
+        inference: &BeatThisInference,
+        options: SupportedMidpointOptions,
+    ) -> Result<RhythmObservations, BackendError> {
+        validate_midpoint_options(options)?;
+        if inference.beat_logits.len() != inference.downbeat_logits.len() {
+            return Err(BackendError::new(
+                "Beat This beat and downbeat logits have different lengths",
+            ));
+        }
+        let upstream_options = PeakPickingOptions::default();
+        let upstream_beats = find_peaks(&inference.beat_logits, upstream_options);
+        let candidate_options = PeakPickingOptions {
+            logit_threshold: options.candidate_logit_threshold,
+            ..upstream_options
+        };
+        let candidates = find_peaks(&inference.beat_logits, candidate_options);
+        let beat_frames = recover_supported_midpoints(&upstream_beats, &candidates, options);
+        let downbeat_frames = find_peaks(&inference.downbeat_logits, upstream_options);
+        Ok(self.observations_from_frames(inference, &beat_frames, &downbeat_frames))
+    }
+
+    fn observations_from_frames(
+        &self,
+        inference: &BeatThisInference,
+        beat_frames: &[f64],
+        downbeat_frames: &[f64],
+    ) -> RhythmObservations {
         let beats = beat_frames
             .iter()
             .map(|&frame| frame_to_time(frame))
@@ -148,7 +213,7 @@ impl BeatThisBackend {
             .collect::<Vec<_>>();
         snap_to_beats(&beats, &mut downbeats);
 
-        Ok(RhythmObservations {
+        RhythmObservations {
             duration_s: inference.duration_s,
             beats: observations_from_events(
                 &beats,
@@ -163,7 +228,7 @@ impl BeatThisBackend {
                 version: None,
                 frame_rate_hz: Some(FRAME_RATE_HZ),
             },
-        })
+        }
     }
 }
 
@@ -222,6 +287,83 @@ fn find_peaks(logits: &[f32], options: PeakPickingOptions) -> Vec<f64> {
         })
         .collect::<Vec<_>>();
     deduplicate_peaks(&candidates, options.deduplicate_width_frames)
+}
+
+fn validate_midpoint_options(options: SupportedMidpointOptions) -> Result<(), BackendError> {
+    if !options.candidate_logit_threshold.is_finite() {
+        return Err(BackendError::new(
+            "midpoint candidate logit threshold must be finite",
+        ));
+    }
+    if !options.maximum_midpoint_offset_ratio.is_finite()
+        || !(0.0..=0.5).contains(&options.maximum_midpoint_offset_ratio)
+    {
+        return Err(BackendError::new(
+            "maximum midpoint offset ratio must be finite and between zero and 0.5",
+        ));
+    }
+    if options.minimum_supported_gaps == 0 {
+        return Err(BackendError::new(
+            "minimum supported midpoint gaps must be greater than zero",
+        ));
+    }
+    Ok(())
+}
+
+fn recover_supported_midpoints(
+    upstream_beats: &[f64],
+    candidates: &[f64],
+    options: SupportedMidpointOptions,
+) -> Vec<f64> {
+    let supported = upstream_beats
+        .windows(2)
+        .map(|pair| midpoint_candidate(pair[0], pair[1], candidates, options))
+        .collect::<Vec<_>>();
+    let mut recovered = upstream_beats.to_vec();
+    for (gap_index, candidate) in supported.iter().enumerate() {
+        let Some(candidate) = candidate else {
+            continue;
+        };
+        let start = gap_index.saturating_sub(options.support_radius_gaps);
+        let end = gap_index
+            .saturating_add(options.support_radius_gaps)
+            .saturating_add(1)
+            .min(supported.len());
+        let support_count = supported[start..end]
+            .iter()
+            .filter(|candidate| candidate.is_some())
+            .count();
+        if support_count >= options.minimum_supported_gaps {
+            recovered.push(*candidate);
+        }
+    }
+    recovered.sort_by(f64::total_cmp);
+    recovered.dedup();
+    recovered
+}
+
+fn midpoint_candidate(
+    left: f64,
+    right: f64,
+    candidates: &[f64],
+    options: SupportedMidpointOptions,
+) -> Option<f64> {
+    let gap = right - left;
+    if gap <= 2.0 {
+        return None;
+    }
+    let midpoint = left.midpoint(right);
+    let maximum_offset = gap * options.maximum_midpoint_offset_ratio;
+    candidates
+        .iter()
+        .copied()
+        .filter(|&candidate| candidate > left + 1.0 && candidate < right - 1.0)
+        .filter(|&candidate| (candidate - midpoint).abs() <= maximum_offset)
+        .min_by(|left, right| {
+            (*left - midpoint)
+                .abs()
+                .total_cmp(&(*right - midpoint).abs())
+        })
 }
 
 fn deduplicate_peaks(peaks: &[usize], width: usize) -> Vec<f64> {
@@ -350,5 +492,35 @@ mod tests {
         };
 
         assert_eq!(find_peaks(&logits, options), vec![1.0]);
+    }
+
+    #[test]
+    fn supported_midpoint_run_recovers_real_candidate_peaks() {
+        let upstream = [0.0, 20.0, 40.0, 60.0, 80.0];
+        let candidates = [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0];
+
+        assert_eq!(
+            recover_supported_midpoints(
+                &upstream,
+                &candidates,
+                SupportedMidpointOptions::default()
+            ),
+            candidates
+        );
+    }
+
+    #[test]
+    fn isolated_midpoint_candidate_is_not_recovered() {
+        let upstream = [0.0, 20.0, 40.0, 60.0, 80.0];
+        let candidates = [0.0, 20.0, 30.0, 40.0, 60.0, 80.0];
+
+        assert_eq!(
+            recover_supported_midpoints(
+                &upstream,
+                &candidates,
+                SupportedMidpointOptions::default()
+            ),
+            upstream
+        );
     }
 }

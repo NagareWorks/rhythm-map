@@ -5,7 +5,9 @@ use std::{
 };
 
 use anyhow::{Context, Result, bail};
-use rhythm_map_beat_this::{BeatThisBackend, PeakPickingOptions, decode_audio};
+use rhythm_map_beat_this::{
+    BeatThisBackend, PeakPickingOptions, SupportedMidpointOptions, decode_audio,
+};
 use rhythm_map_core::{
     Analysis, Engine, ModelInfo, ObservedBeat, RhythmObservations, TempoMapEstimator,
 };
@@ -15,7 +17,7 @@ use serde::{Deserialize, Serialize};
 use crate::{
     BeatMetrics, CaseEvaluation, CaseInput, EvaluationCase, EvaluationSuite, ExternalAudioResolver,
     GeneratedTruth, SyntheticRecipe, evaluate_analysis, generate_truth,
-    metrics::score_beats,
+    metrics::{match_event_pairs, score_beats},
     wav::{render_synthetic_audio, synthesize_audio},
 };
 
@@ -149,6 +151,9 @@ pub struct DecoderPolicy {
     pub local_max_radius_frames: usize,
     /// Maximum adjacent-frame distance merged into one peak.
     pub deduplicate_width_frames: usize,
+    /// Optional conservative weak-midpoint recovery after upstream decoding.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub supported_midpoints: Option<DecoderSupportedMidpointPolicy>,
 }
 
 impl DecoderPolicy {
@@ -157,6 +162,30 @@ impl DecoderPolicy {
             logit_threshold: self.logit_threshold,
             local_max_radius_frames: self.local_max_radius_frames,
             deduplicate_width_frames: self.deduplicate_width_frames,
+        }
+    }
+}
+
+/// Serializable supported-midpoint candidate configuration.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct DecoderSupportedMidpointPolicy {
+    /// Strict lower logit bound for weak candidate peaks.
+    pub candidate_logit_threshold: f32,
+    /// Maximum midpoint offset as a fraction of the strong-beat interval.
+    pub maximum_midpoint_offset_ratio: f64,
+    /// Strong-beat gaps inspected on either side.
+    pub support_radius_gaps: usize,
+    /// Minimum locally supported gaps required before insertion.
+    pub minimum_supported_gaps: usize,
+}
+
+impl DecoderSupportedMidpointPolicy {
+    fn options(&self) -> SupportedMidpointOptions {
+        SupportedMidpointOptions {
+            candidate_logit_threshold: self.candidate_logit_threshold,
+            maximum_midpoint_offset_ratio: self.maximum_midpoint_offset_ratio,
+            support_radius_gaps: self.support_radius_gaps,
+            minimum_supported_gaps: self.minimum_supported_gaps,
         }
     }
 }
@@ -204,6 +233,107 @@ pub struct DecoderSweepEvaluation {
     ///
     /// This is a diagnostic upper bound, not a deployable decoder result.
     pub per_case_policy_oracle_mean_beat_f1: f64,
+}
+
+/// Evidence available near one truth beat missed by the upstream decoder.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct MissingBeatEvidence {
+    /// Independently annotated beat timestamp.
+    pub expected_time_s: f64,
+    /// Strongest model frame inside the suite's beat tolerance window.
+    pub strongest_frame: LogitEvidence,
+    /// Strongest radius-one local maximum inside that window.
+    pub radius_1_local_peak: Option<LogitEvidence>,
+    /// Strongest upstream-radius local maximum inside that window.
+    pub radius_3_local_peak: Option<LogitEvidence>,
+    /// Mutually exclusive summary of decoder recoverability.
+    pub class: MissingBeatEvidenceClass,
+}
+
+/// One model frame or local maximum close to a missed truth beat.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct LogitEvidence {
+    /// Frame timestamp at 50 Hz.
+    pub time_s: f64,
+    /// Signed difference from the truth beat.
+    pub offset_ms: f64,
+    /// Raw Beat This beat logit.
+    pub logit: f32,
+    /// Sigmoid probability corresponding to `logit`.
+    pub probability: f64,
+}
+
+/// Evidence tier for a truth beat missed by the upstream decoder.
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum MissingBeatEvidenceClass {
+    /// A radius-three peak above zero exists but was consumed by ordered matching.
+    DefaultEligiblePeak,
+    /// A radius-three peak becomes eligible above logit -1.
+    Radius3PeakAboveMinus1,
+    /// A radius-three peak becomes eligible above logit -3.
+    Radius3PeakAboveMinus3,
+    /// A radius-three peak exists only at logit -3 or below.
+    WeakerRadius3Peak,
+    /// Only a radius-one local maximum exists in the tolerance window.
+    Radius1OnlyPeak,
+    /// No radius-one local maximum exists in the tolerance window.
+    NoLocalPeak,
+}
+
+/// Counts for mutually exclusive missed-beat evidence tiers.
+#[derive(Debug, Clone, Default, Serialize, Deserialize, PartialEq, Eq)]
+pub struct MissingBeatEvidenceCounts {
+    /// Truth beats missed by the upstream decoder.
+    pub missing_beats: usize,
+    /// Misses with a radius-three peak above zero.
+    pub default_eligible_peaks: usize,
+    /// Misses with a radius-three peak in (-1, 0].
+    pub radius_3_peaks_above_minus_1: usize,
+    /// Misses with a radius-three peak in (-3, -1].
+    pub radius_3_peaks_above_minus_3: usize,
+    /// Misses with a radius-three peak at or below -3.
+    pub weaker_radius_3_peaks: usize,
+    /// Misses with a radius-one peak but no radius-three peak.
+    pub radius_1_only_peaks: usize,
+    /// Misses without a radius-one local peak.
+    pub no_local_peaks: usize,
+}
+
+/// Per-case decoder recoverability measurements.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct DecoderRecoverabilityCase {
+    /// Stable case identifier.
+    pub id: String,
+    /// Annotated beat count.
+    pub expected_beat_count: usize,
+    /// Upstream-default decoded beat count.
+    pub predicted_beat_count: usize,
+    /// Truth beats matched by the upstream-default decoder.
+    pub matched_beat_count: usize,
+    /// Evidence-tier counts for missed truth beats.
+    pub counts: MissingBeatEvidenceCounts,
+    /// Detailed evidence for each missed truth beat.
+    pub missing: Vec<MissingBeatEvidence>,
+}
+
+/// Aggregate single-inference diagnosis of missed Beat This events.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct DecoderRecoverabilityEvaluation {
+    /// Report schema version.
+    pub schema_version: u32,
+    /// Stable suite identifier.
+    pub suite_id: String,
+    /// Verified model pack used for every case.
+    pub model_pack: ModelPackIdentity,
+    /// Total annotated beats across the suite.
+    pub expected_beat_count: usize,
+    /// Total truth beats matched by the upstream decoder.
+    pub matched_beat_count: usize,
+    /// Aggregate evidence-tier counts for all misses.
+    pub counts: MissingBeatEvidenceCounts,
+    /// Per-case diagnostics.
+    pub cases: Vec<DecoderRecoverabilityCase>,
 }
 
 /// Evaluate the timing estimator with ideal observations from every case.
@@ -342,6 +472,7 @@ pub fn standard_decoder_policies() -> Vec<DecoderPolicy> {
         logit_threshold: 0.0,
         local_max_radius_frames: 3,
         deduplicate_width_frames: 1,
+        supported_midpoints: None,
     }];
     for threshold in [-0.5_f32, -1.0, -2.0, -3.0] {
         policies.push(DecoderPolicy {
@@ -349,6 +480,7 @@ pub fn standard_decoder_policies() -> Vec<DecoderPolicy> {
             logit_threshold: threshold,
             local_max_radius_frames: 3,
             deduplicate_width_frames: 1,
+            supported_midpoints: None,
         });
     }
     for threshold in [0.0_f32, -1.0, -2.0, -3.0] {
@@ -361,8 +493,22 @@ pub fn standard_decoder_policies() -> Vec<DecoderPolicy> {
             logit_threshold: threshold,
             local_max_radius_frames: 1,
             deduplicate_width_frames: 1,
+            supported_midpoints: None,
         });
     }
+    let midpoint_options = SupportedMidpointOptions::default();
+    policies.push(DecoderPolicy {
+        id: "supported-midpoints-logit-minus-3.0".to_string(),
+        logit_threshold: 0.0,
+        local_max_radius_frames: 3,
+        deduplicate_width_frames: 1,
+        supported_midpoints: Some(DecoderSupportedMidpointPolicy {
+            candidate_logit_threshold: midpoint_options.candidate_logit_threshold,
+            maximum_midpoint_offset_ratio: midpoint_options.maximum_midpoint_offset_ratio,
+            support_radius_gaps: midpoint_options.support_radius_gaps,
+            minimum_supported_gaps: midpoint_options.minimum_supported_gaps,
+        }),
+    });
     policies
 }
 
@@ -431,14 +577,17 @@ pub fn evaluate_decoder_sweep_with_audio_directory(
             .beat_tolerance_ms
             / 1000.0;
         for candidate in &mut candidates {
-            let observations = backend
-                .decode_inference(&inference, candidate.policy.options())
-                .with_context(|| {
-                    format!(
-                        "decoding case {} with policy {}",
-                        case.id, candidate.policy.id
-                    )
-                })?;
+            let decoded = if let Some(midpoints) = &candidate.policy.supported_midpoints {
+                backend.decode_inference_with_supported_midpoints(&inference, midpoints.options())
+            } else {
+                backend.decode_inference(&inference, candidate.policy.options())
+            };
+            let observations = decoded.with_context(|| {
+                format!(
+                    "decoding case {} with policy {}",
+                    case.id, candidate.policy.id
+                )
+            })?;
             let predicted = observations
                 .beats
                 .iter()
@@ -465,6 +614,253 @@ pub fn evaluate_decoder_sweep_with_audio_directory(
         candidates,
         per_case_policy_oracle_mean_beat_f1,
     })
+}
+
+/// Diagnose the model evidence near every truth beat missed by the upstream decoder.
+///
+/// Each audio case is inferred once. Ground truth is used only to inspect the
+/// logits inside the suite's existing beat-tolerance window; this function does
+/// not produce or tune a deployable decoder.
+///
+/// # Errors
+///
+/// Returns an error for invalid suites, model packs, external assets, decoding,
+/// non-finite or empty logits, or inference.
+pub fn evaluate_decoder_recoverability_with_audio_directory(
+    suite_path: &Path,
+    model_pack_path: &Path,
+    model_root: &Path,
+    audio_directory: &Path,
+) -> Result<DecoderRecoverabilityEvaluation> {
+    let verified = verify_model_pack(model_pack_path, model_root)
+        .with_context(|| format!("verifying model pack {}", model_pack_path.display()))?;
+    validate_beat_this_contract(&verified)?;
+    let mel_model = required_model_path(&verified, ModelArtifactRole::MelFrontend)?;
+    let beat_model = required_model_path(&verified, ModelArtifactRole::BeatModel)?;
+    let mut backend = BeatThisBackend::load(&mel_model, &beat_model)?;
+    let resolver = ExternalAudioResolver::new(audio_directory)?;
+    let (suite, root) = load_suite(suite_path)?;
+    let mut cases = Vec::with_capacity(suite.cases.len());
+    let mut aggregate_counts = MissingBeatEvidenceCounts::default();
+    let mut expected_beat_count = 0;
+    let mut matched_beat_count = 0;
+
+    for (case_index, case) in suite.cases.iter().enumerate() {
+        eprintln!(
+            "decoder recoverability {}/{}: {}",
+            case_index + 1,
+            suite.cases.len(),
+            case.id
+        );
+        let truth = load_case_truth(case, &root)?;
+        let (samples, sample_rate, _) =
+            load_case_audio(case, &suite.id, &root, &truth, Some(&resolver))?;
+        let inference = backend
+            .infer_mono(&samples, sample_rate)
+            .with_context(|| format!("inferring recoverability case {}", case.id))?;
+        validate_beat_logits(inference.beat_logits(), &case.id)?;
+        let observations = backend
+            .decode_inference(&inference, PeakPickingOptions::default())
+            .with_context(|| format!("decoding recoverability case {}", case.id))?;
+        let predicted = observations
+            .beats
+            .iter()
+            .map(|beat| beat.time_s)
+            .collect::<Vec<_>>();
+        let expected = truth
+            .beats
+            .iter()
+            .map(|beat| beat.time_s)
+            .collect::<Vec<_>>();
+        let tolerance_s = case
+            .thresholds
+            .as_ref()
+            .unwrap_or(&suite.thresholds)
+            .beat_tolerance_ms
+            / 1000.0;
+        let pairs = match_event_pairs(&predicted, &expected, tolerance_s);
+        let mut matched_expected = vec![false; expected.len()];
+        for &(_, expected_index) in &pairs {
+            matched_expected[expected_index] = true;
+        }
+        let missing = expected
+            .iter()
+            .zip(matched_expected)
+            .filter(|(_, matched)| !matched)
+            .map(|(&expected_time_s, _)| {
+                missing_beat_evidence(inference.beat_logits(), expected_time_s, tolerance_s)
+            })
+            .collect::<Result<Vec<_>>>()
+            .with_context(|| format!("classifying recoverability case {}", case.id))?;
+        let counts = count_missing_evidence(&missing);
+        aggregate_counts.add(&counts);
+        expected_beat_count += expected.len();
+        matched_beat_count += pairs.len();
+        cases.push(DecoderRecoverabilityCase {
+            id: case.id.clone(),
+            expected_beat_count: expected.len(),
+            predicted_beat_count: predicted.len(),
+            matched_beat_count: pairs.len(),
+            counts,
+            missing,
+        });
+    }
+
+    let manifest = verified.manifest();
+    Ok(DecoderRecoverabilityEvaluation {
+        schema_version: 1,
+        suite_id: suite.id,
+        model_pack: ModelPackIdentity {
+            id: manifest.id.clone(),
+            version: manifest.version.clone(),
+            backend: manifest.backend.clone(),
+            manifest_sha256: verified.manifest_sha256().to_string(),
+        },
+        expected_beat_count,
+        matched_beat_count,
+        counts: aggregate_counts,
+        cases,
+    })
+}
+
+fn validate_beat_logits(logits: &[f32], case_id: &str) -> Result<()> {
+    if logits.is_empty() {
+        bail!("Beat This returned no beat logits for case {case_id}");
+    }
+    if logits.iter().any(|logit| !logit.is_finite()) {
+        bail!("Beat This returned non-finite beat logits for case {case_id}");
+    }
+    Ok(())
+}
+
+fn missing_beat_evidence(
+    logits: &[f32],
+    expected_time_s: f64,
+    tolerance_s: f64,
+) -> Result<MissingBeatEvidence> {
+    let (start, end) = evidence_frame_bounds(logits.len(), expected_time_s, tolerance_s)
+        .context("truth beat has no model frame inside its tolerance window")?;
+    let strongest_frame_index = strongest_frame(logits, start, end);
+    let radius_1_peak_index = strongest_local_peak(logits, start, end, 1);
+    let radius_3_peak_index = strongest_local_peak(logits, start, end, 3);
+    let radius_1_local_peak =
+        radius_1_peak_index.map(|index| logit_evidence(logits, index, expected_time_s));
+    let radius_3_local_peak =
+        radius_3_peak_index.map(|index| logit_evidence(logits, index, expected_time_s));
+    let class =
+        classify_missing_evidence(radius_1_local_peak.as_ref(), radius_3_local_peak.as_ref());
+    Ok(MissingBeatEvidence {
+        expected_time_s,
+        strongest_frame: logit_evidence(logits, strongest_frame_index, expected_time_s),
+        radius_1_local_peak,
+        radius_3_local_peak,
+        class,
+    })
+}
+
+#[allow(clippy::cast_possible_truncation, clippy::cast_sign_loss)]
+fn evidence_frame_bounds(
+    frame_count: usize,
+    expected_time_s: f64,
+    tolerance_s: f64,
+) -> Option<(usize, usize)> {
+    if frame_count == 0 || !expected_time_s.is_finite() || !tolerance_s.is_finite() {
+        return None;
+    }
+    let start = ((expected_time_s - tolerance_s).max(0.0) * 50.0).ceil() as usize;
+    let end = ((expected_time_s + tolerance_s).max(0.0) * 50.0).floor() as usize;
+    let end = end.min(frame_count - 1);
+    (start <= end).then_some((start, end))
+}
+
+fn strongest_frame(logits: &[f32], start: usize, end: usize) -> usize {
+    (start..=end)
+        .max_by(|&left, &right| logits[left].total_cmp(&logits[right]))
+        .unwrap_or(start)
+}
+
+fn strongest_local_peak(logits: &[f32], start: usize, end: usize, radius: usize) -> Option<usize> {
+    (start..=end)
+        .filter(|&index| is_local_maximum(logits, index, radius))
+        .max_by(|&left, &right| logits[left].total_cmp(&logits[right]))
+}
+
+fn is_local_maximum(logits: &[f32], index: usize, radius: usize) -> bool {
+    let start = index.saturating_sub(radius);
+    let end = index
+        .saturating_add(radius)
+        .saturating_add(1)
+        .min(logits.len());
+    logits[start..end]
+        .iter()
+        .all(|&neighbor| neighbor <= logits[index])
+}
+
+#[allow(clippy::cast_precision_loss)]
+fn logit_evidence(logits: &[f32], index: usize, expected_time_s: f64) -> LogitEvidence {
+    let time_s = index as f64 / 50.0;
+    let logit = logits[index];
+    LogitEvidence {
+        time_s,
+        offset_ms: (time_s - expected_time_s) * 1000.0,
+        logit,
+        probability: 1.0 / (1.0 + (-f64::from(logit)).exp()),
+    }
+}
+
+fn classify_missing_evidence(
+    radius_1_peak: Option<&LogitEvidence>,
+    radius_3_peak: Option<&LogitEvidence>,
+) -> MissingBeatEvidenceClass {
+    if let Some(peak) = radius_3_peak {
+        if peak.logit > 0.0 {
+            MissingBeatEvidenceClass::DefaultEligiblePeak
+        } else if peak.logit > -1.0 {
+            MissingBeatEvidenceClass::Radius3PeakAboveMinus1
+        } else if peak.logit > -3.0 {
+            MissingBeatEvidenceClass::Radius3PeakAboveMinus3
+        } else {
+            MissingBeatEvidenceClass::WeakerRadius3Peak
+        }
+    } else if radius_1_peak.is_some() {
+        MissingBeatEvidenceClass::Radius1OnlyPeak
+    } else {
+        MissingBeatEvidenceClass::NoLocalPeak
+    }
+}
+
+fn count_missing_evidence(missing: &[MissingBeatEvidence]) -> MissingBeatEvidenceCounts {
+    let mut counts = MissingBeatEvidenceCounts {
+        missing_beats: missing.len(),
+        ..MissingBeatEvidenceCounts::default()
+    };
+    for evidence in missing {
+        match evidence.class {
+            MissingBeatEvidenceClass::DefaultEligiblePeak => counts.default_eligible_peaks += 1,
+            MissingBeatEvidenceClass::Radius3PeakAboveMinus1 => {
+                counts.radius_3_peaks_above_minus_1 += 1;
+            }
+            MissingBeatEvidenceClass::Radius3PeakAboveMinus3 => {
+                counts.radius_3_peaks_above_minus_3 += 1;
+            }
+            MissingBeatEvidenceClass::WeakerRadius3Peak => counts.weaker_radius_3_peaks += 1,
+            MissingBeatEvidenceClass::Radius1OnlyPeak => counts.radius_1_only_peaks += 1,
+            MissingBeatEvidenceClass::NoLocalPeak => counts.no_local_peaks += 1,
+        }
+    }
+    counts
+}
+
+impl MissingBeatEvidenceCounts {
+    fn add(&mut self, other: &Self) {
+        self.missing_beats += other.missing_beats;
+        self.default_eligible_peaks += other.default_eligible_peaks;
+        self.radius_3_peaks_above_minus_1 += other.radius_3_peaks_above_minus_1;
+        self.radius_3_peaks_above_minus_3 += other.radius_3_peaks_above_minus_3;
+        self.weaker_radius_3_peaks += other.weaker_radius_3_peaks;
+        self.radius_1_only_peaks += other.radius_1_only_peaks;
+        self.no_local_peaks += other.no_local_peaks;
+    }
 }
 
 fn finalize_decoder_candidates(candidates: &mut [DecoderSweepCandidate]) -> f64 {
@@ -757,13 +1153,18 @@ mod tests {
     fn standard_decoder_sweep_keeps_upstream_policy_first() {
         let policies = standard_decoder_policies();
 
-        assert_eq!(policies.len(), 9);
+        assert_eq!(policies.len(), 10);
         assert_eq!(policies[0].id, "upstream-default");
         assert_eq!(policies[0].options(), PeakPickingOptions::default());
         assert!(policies.iter().any(|policy| {
             (policy.logit_threshold + 3.0).abs() < f32::EPSILON
                 && policy.local_max_radius_frames == 1
         }));
+        assert!(
+            policies
+                .last()
+                .is_some_and(|policy| policy.supported_midpoints.is_some())
+        );
     }
 
     #[test]
@@ -780,6 +1181,47 @@ mod tests {
         assert!((oracle - 0.7).abs() < f64::EPSILON);
     }
 
+    #[test]
+    fn missed_beat_classifies_subthreshold_upstream_peak() {
+        let mut logits = vec![-10.0; 20];
+        logits[5] = -0.5;
+
+        let evidence = missing_beat_evidence(&logits, 0.1, 0.04).unwrap();
+
+        assert_eq!(
+            evidence.class,
+            MissingBeatEvidenceClass::Radius3PeakAboveMinus1
+        );
+        assert!((evidence.radius_3_local_peak.unwrap().logit + 0.5).abs() < f32::EPSILON);
+        assert!(evidence.strongest_frame.offset_ms.abs() < f64::EPSILON);
+    }
+
+    #[test]
+    fn missed_beat_distinguishes_narrow_peak_from_upstream_peak() {
+        let mut logits = vec![-10.0; 20];
+        logits[5] = -0.5;
+        logits[8] = 1.0;
+
+        let evidence = missing_beat_evidence(&logits, 0.1, 0.02).unwrap();
+
+        assert_eq!(evidence.class, MissingBeatEvidenceClass::Radius1OnlyPeak);
+        assert!(evidence.radius_1_local_peak.is_some());
+        assert!(evidence.radius_3_local_peak.is_none());
+    }
+
+    #[test]
+    fn missed_beat_reports_when_no_local_peak_exists() {
+        let mut logits = vec![-10.0; 20];
+        logits[5] = -0.5;
+        logits[6] = 1.0;
+
+        let evidence = missing_beat_evidence(&logits, 0.1, 0.0).unwrap();
+
+        assert_eq!(evidence.class, MissingBeatEvidenceClass::NoLocalPeak);
+        assert!(evidence.radius_1_local_peak.is_none());
+        assert!((evidence.strongest_frame.logit + 0.5).abs() < f32::EPSILON);
+    }
+
     fn candidate(id: &str, cases: &[(f64, usize)]) -> DecoderSweepCandidate {
         DecoderSweepCandidate {
             policy: DecoderPolicy {
@@ -787,6 +1229,7 @@ mod tests {
                 logit_threshold: 0.0,
                 local_max_radius_frames: 3,
                 deduplicate_width_frames: 1,
+                supported_midpoints: None,
             },
             mean_beat_f1: 0.0,
             mean_beat_precision: 0.0,

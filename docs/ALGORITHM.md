@@ -29,6 +29,16 @@ replay an explicit peak policy for evaluation, but these backend-specific
 diagnostics remain outside `rhythm-map-core` and do not change the default
 algorithm.
 
+The adapter also exposes an experimental supported-midpoint decoder for
+evaluation. It begins with unchanged upstream peaks, searches only radius-three
+local maxima above logit -3, and considers a candidate only when it lies within
+15 percent of the midpoint between two upstream beats. A candidate is inserted
+only when at least three such gaps occur inside a five-gap neighborhood. This
+uses real model peaks plus local phase continuity; it never inserts an
+extrapolated grid timestamp. It is not the default because the first public
+evaluation improved several half-time and rubato cases but regressed one
+metrically ambiguous case.
+
 The estimator normally preserves backend timestamps. It can reject events
 inside sustained low-activity spans, select one phase of a strong/weak
 alternating sequence, or reconstruct a short corrupted transition from stable
