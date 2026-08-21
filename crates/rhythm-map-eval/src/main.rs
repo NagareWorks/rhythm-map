@@ -6,7 +6,8 @@ use anyhow::{Context, Result, bail};
 use clap::{Parser, Subcommand};
 use rhythm_map_eval::{
     evaluate_backend_suite, evaluate_backend_suite_with_audio_directory, evaluate_core_suite,
-    fetch_public_dataset, inspect_audio_asset, render_suite, score_prediction_directory,
+    evaluate_decoder_sweep_with_audio_directory, fetch_public_dataset, inspect_audio_asset,
+    render_suite, score_prediction_directory, standard_decoder_policies,
 };
 use rhythm_map_models::verify_model_pack;
 use serde::Serialize;
@@ -79,6 +80,24 @@ enum Command {
         /// Also fetch immutable annotation-source artifacts used to audit truth.
         #[arg(long)]
         with_annotations: bool,
+    },
+    /// Compare Beat This logit peak decoders without repeating model inference.
+    DecoderSweep {
+        /// Evaluation suite containing independent beat truth.
+        #[arg(long, default_value = "evaluation/suites/artbeat-v1.json")]
+        suite: PathBuf,
+        /// Versioned model-pack manifest.
+        #[arg(long, default_value = "models/beat-this-full-v1.json")]
+        model_pack: PathBuf,
+        /// Directory containing the model files named by the manifest.
+        #[arg(long)]
+        model_dir: PathBuf,
+        /// Directory containing content-addressed external evaluation audio.
+        #[arg(long)]
+        audio_dir: PathBuf,
+        /// Optional JSON report destination.
+        #[arg(long)]
+        report: Option<PathBuf>,
     },
     /// Render deterministic synthetic WAVs and truth JSON for backend evaluation.
     Render {
@@ -171,6 +190,22 @@ fn main() -> Result<()> {
             );
             Ok(())
         }
+        Command::DecoderSweep {
+            suite,
+            model_pack,
+            model_dir,
+            audio_dir,
+            report,
+        } => emit_json_report(
+            &evaluate_decoder_sweep_with_audio_directory(
+                &suite,
+                &model_pack,
+                &model_dir,
+                &audio_dir,
+                &standard_decoder_policies(),
+            )?,
+            report,
+        ),
         Command::Render { suite, output } => {
             for path in render_suite(&suite, &output)? {
                 println!("{}", path.display());
@@ -194,7 +229,18 @@ fn emit_report<T>(report: &T, destination: Option<PathBuf>, no_fail: bool) -> Re
 where
     T: EvaluationOutcome + Serialize,
 {
-    let json = serde_json::to_string_pretty(&report)?;
+    emit_json_report(report, destination)?;
+    if !report.passed() && !no_fail {
+        bail!("evaluation acceptance budgets failed");
+    }
+    Ok(())
+}
+
+fn emit_json_report<T>(report: &T, destination: Option<PathBuf>) -> Result<()>
+where
+    T: Serialize,
+{
+    let json = serde_json::to_string_pretty(report)?;
     if let Some(path) = destination {
         if let Some(parent) = path.parent() {
             fs::create_dir_all(parent).with_context(|| format!("creating {}", parent.display()))?;
@@ -203,9 +249,6 @@ where
             .with_context(|| format!("writing {}", path.display()))?;
     }
     println!("{json}");
-    if !report.passed() && !no_fail {
-        bail!("evaluation acceptance budgets failed");
-    }
     Ok(())
 }
 

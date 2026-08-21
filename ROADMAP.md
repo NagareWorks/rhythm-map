@@ -98,3 +98,11 @@ a learned component to the default distribution.
   rubato, so the measured bottleneck is now the observation path. Prefer
   comparing alternate model decoding/backends over inventing timestamps in
   deterministic post-processing without acoustic evidence.
+- 2026-08-21: a single-inference sweep compared nine Beat This peak decoders.
+  The best fixed threshold/window candidate raised mean beat F1 only from
+  0.8052 to 0.8179, while lower thresholds increasingly traded precision for
+  extra events. A per-case policy oracle reached only 0.8371, and a narrower
+  local-maximum window regressed. Keep the upstream decoder as the default;
+  next evaluate sequence-aware tempo/phase decoding and an alternate
+  observation backend. Require either path to beat this measured ceiling on
+  held-out slices before integrating it into the product.

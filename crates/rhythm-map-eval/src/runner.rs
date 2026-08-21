@@ -5,7 +5,7 @@ use std::{
 };
 
 use anyhow::{Context, Result, bail};
-use rhythm_map_beat_this::{BeatThisBackend, decode_audio};
+use rhythm_map_beat_this::{BeatThisBackend, PeakPickingOptions, decode_audio};
 use rhythm_map_core::{
     Analysis, Engine, ModelInfo, ObservedBeat, RhythmObservations, TempoMapEstimator,
 };
@@ -13,8 +13,9 @@ use rhythm_map_models::{ModelArtifactRole, VerifiedModelPack, verify_model_pack}
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    CaseEvaluation, CaseInput, EvaluationCase, EvaluationSuite, ExternalAudioResolver,
+    BeatMetrics, CaseEvaluation, CaseInput, EvaluationCase, EvaluationSuite, ExternalAudioResolver,
     GeneratedTruth, SyntheticRecipe, evaluate_analysis, generate_truth,
+    metrics::score_beats,
     wav::{render_synthetic_audio, synthesize_audio},
 };
 
@@ -137,6 +138,74 @@ pub struct BottleneckEvaluation {
     pub cases: Vec<AttributionCase>,
 }
 
+/// Named peak-picking policy included in a decoder sweep.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct DecoderPolicy {
+    /// Stable report label.
+    pub id: String,
+    /// Strict lower bound applied to model logits.
+    pub logit_threshold: f32,
+    /// Local-maximum radius on each side, in 50 Hz frames.
+    pub local_max_radius_frames: usize,
+    /// Maximum adjacent-frame distance merged into one peak.
+    pub deduplicate_width_frames: usize,
+}
+
+impl DecoderPolicy {
+    fn options(&self) -> PeakPickingOptions {
+        PeakPickingOptions {
+            logit_threshold: self.logit_threshold,
+            local_max_radius_frames: self.local_max_radius_frames,
+            deduplicate_width_frames: self.deduplicate_width_frames,
+        }
+    }
+}
+
+/// Beat-only result for one case under one peak-picking policy.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct DecoderSweepCase {
+    /// Stable case identifier.
+    pub id: String,
+    /// Number of discrete model events produced by this decoder.
+    pub predicted_beat_count: usize,
+    /// One-to-one beat timing metrics against independent truth.
+    pub beats: BeatMetrics,
+}
+
+/// Aggregate and per-case measurements for one peak-picking policy.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct DecoderSweepCandidate {
+    /// Exact peak-picking policy.
+    pub policy: DecoderPolicy,
+    /// Arithmetic mean of per-case beat F1.
+    pub mean_beat_f1: f64,
+    /// Arithmetic mean of per-case beat precision.
+    pub mean_beat_precision: f64,
+    /// Arithmetic mean of per-case beat recall.
+    pub mean_beat_recall: f64,
+    /// Arithmetic mean of decoded beat counts per case.
+    pub mean_predicted_beat_count: f64,
+    /// Per-case beat metrics.
+    pub cases: Vec<DecoderSweepCase>,
+}
+
+/// Single-inference comparison of several Beat This peak decoders.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct DecoderSweepEvaluation {
+    /// Report schema version.
+    pub schema_version: u32,
+    /// Stable suite identifier.
+    pub suite_id: String,
+    /// Verified model pack used for every candidate.
+    pub model_pack: ModelPackIdentity,
+    /// Candidate policies in caller-provided order.
+    pub candidates: Vec<DecoderSweepCandidate>,
+    /// Mean F1 after choosing the best tested policy separately for each case.
+    ///
+    /// This is a diagnostic upper bound, not a deployable decoder result.
+    pub per_case_policy_oracle_mean_beat_f1: f64,
+}
+
 /// Evaluate the timing estimator with ideal observations from every case.
 ///
 /// # Errors
@@ -215,42 +284,8 @@ fn evaluate_backend_suite_impl(
             .with_context(|| format!("estimating oracle case {}", case.id))?;
         let oracle = evaluate_analysis(&case.id, &oracle_analysis, &truth, thresholds);
 
-        let (samples, sample_rate, audio_sha256) = match &case.input {
-            CaseInput::Generated { recipe } => {
-                let recipe = load_recipe(&root.join(recipe))?;
-                let samples = synthesize_audio(&recipe, &truth)
-                    .with_context(|| format!("synthesizing case {}", case.id))?;
-                (samples, recipe.sample_rate, None)
-            }
-            CaseInput::External { audio, .. } => {
-                let resolver = audio_resolver.with_context(|| {
-                    format!(
-                        "suite {} contains external case {}; pass an external audio directory",
-                        suite.id, case.id
-                    )
-                })?;
-                let path = resolver
-                    .resolve(audio)
-                    .with_context(|| format!("resolving audio for case {}", case.id))?;
-                let decoded = decode_audio(&path)
-                    .with_context(|| format!("decoding audio for case {}", case.id))?;
-                let decoded_duration_s =
-                    usize_to_f64(decoded.samples.len()) / f64::from(decoded.sample_rate);
-                if (decoded_duration_s - truth.duration_s).abs() > 0.1 {
-                    bail!(
-                        "case {} truth duration {:.6}s differs from decoded audio duration {:.6}s",
-                        case.id,
-                        truth.duration_s,
-                        decoded_duration_s
-                    );
-                }
-                (
-                    decoded.samples,
-                    decoded.sample_rate,
-                    Some(audio.sha256.clone()),
-                )
-            }
-        };
+        let (samples, sample_rate, audio_sha256) =
+            load_case_audio(case, &suite.id, &root, &truth, audio_resolver)?;
         let started = Instant::now();
         let observations = engine
             .observe_pcm(&samples, sample_rate, 1)
@@ -297,6 +332,224 @@ fn evaluate_backend_suite_impl(
         attribution,
         cases,
     })
+}
+
+/// Standard threshold and local-maximum sweep around the upstream decoder.
+#[must_use]
+pub fn standard_decoder_policies() -> Vec<DecoderPolicy> {
+    let mut policies = vec![DecoderPolicy {
+        id: "upstream-default".to_string(),
+        logit_threshold: 0.0,
+        local_max_radius_frames: 3,
+        deduplicate_width_frames: 1,
+    }];
+    for threshold in [-0.5_f32, -1.0, -2.0, -3.0] {
+        policies.push(DecoderPolicy {
+            id: format!("logit-minus-{:.1}", -threshold),
+            logit_threshold: threshold,
+            local_max_radius_frames: 3,
+            deduplicate_width_frames: 1,
+        });
+    }
+    for threshold in [0.0_f32, -1.0, -2.0, -3.0] {
+        policies.push(DecoderPolicy {
+            id: if threshold == 0.0 {
+                "radius-1-default-logit".to_string()
+            } else {
+                format!("radius-1-logit-minus-{:.1}", -threshold)
+            },
+            logit_threshold: threshold,
+            local_max_radius_frames: 1,
+            deduplicate_width_frames: 1,
+        });
+    }
+    policies
+}
+
+/// Compare peak-picking policies while running Beat This inference once per case.
+///
+/// This isolates discrete decoding from the neural frontend and model. It
+/// scores raw decoded beat timestamps before deterministic tempo estimation.
+///
+/// # Errors
+///
+/// Returns an error for invalid suites, model packs, external assets, policies,
+/// decoding, or inference.
+pub fn evaluate_decoder_sweep_with_audio_directory(
+    suite_path: &Path,
+    model_pack_path: &Path,
+    model_root: &Path,
+    audio_directory: &Path,
+    policies: &[DecoderPolicy],
+) -> Result<DecoderSweepEvaluation> {
+    if policies.is_empty() {
+        bail!("decoder sweep requires at least one policy");
+    }
+    let verified = verify_model_pack(model_pack_path, model_root)
+        .with_context(|| format!("verifying model pack {}", model_pack_path.display()))?;
+    validate_beat_this_contract(&verified)?;
+    let mel_model = required_model_path(&verified, ModelArtifactRole::MelFrontend)?;
+    let beat_model = required_model_path(&verified, ModelArtifactRole::BeatModel)?;
+    let mut backend = BeatThisBackend::load(&mel_model, &beat_model)?;
+    let resolver = ExternalAudioResolver::new(audio_directory)?;
+    let (suite, root) = load_suite(suite_path)?;
+    let mut candidates = policies
+        .iter()
+        .cloned()
+        .map(|policy| DecoderSweepCandidate {
+            policy,
+            mean_beat_f1: 0.0,
+            mean_beat_precision: 0.0,
+            mean_beat_recall: 0.0,
+            mean_predicted_beat_count: 0.0,
+            cases: Vec::with_capacity(suite.cases.len()),
+        })
+        .collect::<Vec<_>>();
+
+    for (case_index, case) in suite.cases.iter().enumerate() {
+        eprintln!(
+            "decoder sweep {}/{}: {}",
+            case_index + 1,
+            suite.cases.len(),
+            case.id
+        );
+        let truth = load_case_truth(case, &root)?;
+        let (samples, sample_rate, _) =
+            load_case_audio(case, &suite.id, &root, &truth, Some(&resolver))?;
+        let inference = backend
+            .infer_mono(&samples, sample_rate)
+            .with_context(|| format!("inferring decoder sweep case {}", case.id))?;
+        let expected = truth
+            .beats
+            .iter()
+            .map(|beat| beat.time_s)
+            .collect::<Vec<_>>();
+        let tolerance_s = case
+            .thresholds
+            .as_ref()
+            .unwrap_or(&suite.thresholds)
+            .beat_tolerance_ms
+            / 1000.0;
+        for candidate in &mut candidates {
+            let observations = backend
+                .decode_inference(&inference, candidate.policy.options())
+                .with_context(|| {
+                    format!(
+                        "decoding case {} with policy {}",
+                        case.id, candidate.policy.id
+                    )
+                })?;
+            let predicted = observations
+                .beats
+                .iter()
+                .map(|beat| beat.time_s)
+                .collect::<Vec<_>>();
+            candidate.cases.push(DecoderSweepCase {
+                id: case.id.clone(),
+                predicted_beat_count: predicted.len(),
+                beats: score_beats(&predicted, &expected, tolerance_s),
+            });
+        }
+    }
+    let per_case_policy_oracle_mean_beat_f1 = finalize_decoder_candidates(&mut candidates);
+    let manifest = verified.manifest();
+    Ok(DecoderSweepEvaluation {
+        schema_version: 1,
+        suite_id: suite.id,
+        model_pack: ModelPackIdentity {
+            id: manifest.id.clone(),
+            version: manifest.version.clone(),
+            backend: manifest.backend.clone(),
+            manifest_sha256: verified.manifest_sha256().to_string(),
+        },
+        candidates,
+        per_case_policy_oracle_mean_beat_f1,
+    })
+}
+
+fn finalize_decoder_candidates(candidates: &mut [DecoderSweepCandidate]) -> f64 {
+    for candidate in &mut *candidates {
+        let case_count = usize_to_f64(candidate.cases.len());
+        candidate.mean_beat_f1 = candidate
+            .cases
+            .iter()
+            .map(|case| case.beats.f1)
+            .sum::<f64>()
+            / case_count;
+        candidate.mean_beat_precision = candidate
+            .cases
+            .iter()
+            .map(|case| case.beats.precision)
+            .sum::<f64>()
+            / case_count;
+        candidate.mean_beat_recall = candidate
+            .cases
+            .iter()
+            .map(|case| case.beats.recall)
+            .sum::<f64>()
+            / case_count;
+        candidate.mean_predicted_beat_count = candidate
+            .cases
+            .iter()
+            .map(|case| usize_to_f64(case.predicted_beat_count))
+            .sum::<f64>()
+            / case_count;
+    }
+    let case_count = candidates[0].cases.len();
+    (0..case_count)
+        .map(|case_index| {
+            candidates
+                .iter()
+                .map(|candidate| candidate.cases[case_index].beats.f1)
+                .fold(0.0_f64, f64::max)
+        })
+        .sum::<f64>()
+        / usize_to_f64(case_count)
+}
+
+fn load_case_audio(
+    case: &EvaluationCase,
+    suite_id: &str,
+    root: &Path,
+    truth: &GeneratedTruth,
+    audio_resolver: Option<&ExternalAudioResolver>,
+) -> Result<(Vec<f32>, u32, Option<String>)> {
+    match &case.input {
+        CaseInput::Generated { recipe } => {
+            let recipe = load_recipe(&root.join(recipe))?;
+            let samples = synthesize_audio(&recipe, truth)
+                .with_context(|| format!("synthesizing case {}", case.id))?;
+            Ok((samples, recipe.sample_rate, None))
+        }
+        CaseInput::External { audio, .. } => {
+            let resolver = audio_resolver.with_context(|| {
+                format!(
+                    "suite {suite_id} contains external case {}; pass an external audio directory",
+                    case.id
+                )
+            })?;
+            let path = resolver
+                .resolve(audio)
+                .with_context(|| format!("resolving audio for case {}", case.id))?;
+            let decoded = decode_audio(&path)
+                .with_context(|| format!("decoding audio for case {}", case.id))?;
+            let decoded_duration_s =
+                usize_to_f64(decoded.samples.len()) / f64::from(decoded.sample_rate);
+            if (decoded_duration_s - truth.duration_s).abs() > 0.1 {
+                bail!(
+                    "case {} truth duration {:.6}s differs from decoded audio duration {:.6}s",
+                    case.id,
+                    truth.duration_s,
+                    decoded_duration_s
+                );
+            }
+            Ok((
+                decoded.samples,
+                decoded.sample_rate,
+                Some(audio.sha256.clone()),
+            ))
+        }
+    }
 }
 
 fn observation_diagnostics(
@@ -494,4 +747,67 @@ fn subtract_options(left: Option<f64>, right: Option<f64>) -> Option<f64> {
 #[allow(clippy::cast_precision_loss)]
 fn usize_to_f64(value: usize) -> f64 {
     value as f64
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn standard_decoder_sweep_keeps_upstream_policy_first() {
+        let policies = standard_decoder_policies();
+
+        assert_eq!(policies.len(), 9);
+        assert_eq!(policies[0].id, "upstream-default");
+        assert_eq!(policies[0].options(), PeakPickingOptions::default());
+        assert!(policies.iter().any(|policy| {
+            (policy.logit_threshold + 3.0).abs() < f32::EPSILON
+                && policy.local_max_radius_frames == 1
+        }));
+    }
+
+    #[test]
+    fn decoder_policy_oracle_uses_best_candidate_per_case() {
+        let mut candidates = vec![
+            candidate("first", &[(0.4, 4), (0.8, 8)]),
+            candidate("second", &[(0.6, 6), (0.5, 5)]),
+        ];
+
+        let oracle = finalize_decoder_candidates(&mut candidates);
+
+        assert!((candidates[0].mean_beat_f1 - 0.6).abs() < f64::EPSILON);
+        assert!((candidates[0].mean_predicted_beat_count - 6.0).abs() < f64::EPSILON);
+        assert!((oracle - 0.7).abs() < f64::EPSILON);
+    }
+
+    fn candidate(id: &str, cases: &[(f64, usize)]) -> DecoderSweepCandidate {
+        DecoderSweepCandidate {
+            policy: DecoderPolicy {
+                id: id.to_string(),
+                logit_threshold: 0.0,
+                local_max_radius_frames: 3,
+                deduplicate_width_frames: 1,
+            },
+            mean_beat_f1: 0.0,
+            mean_beat_precision: 0.0,
+            mean_beat_recall: 0.0,
+            mean_predicted_beat_count: 0.0,
+            cases: cases
+                .iter()
+                .enumerate()
+                .map(|(index, &(f1, predicted_beat_count))| DecoderSweepCase {
+                    id: format!("case-{index}"),
+                    predicted_beat_count,
+                    beats: BeatMetrics {
+                        matched: 0,
+                        precision: f1,
+                        recall: f1,
+                        f1,
+                        median_absolute_error_ms: None,
+                        p95_absolute_error_ms: None,
+                    },
+                })
+                .collect(),
+        }
+    }
 }

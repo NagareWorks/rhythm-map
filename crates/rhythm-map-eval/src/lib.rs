@@ -21,10 +21,12 @@ pub use public_dataset::{
     PublicDatasetAssetRole, PublicDatasetLock, fetch_public_dataset,
 };
 pub use runner::{
-    AttributionCase, AttributionDecision, BottleneckEvaluation, CaseMetricDelta, ModelPackIdentity,
+    AttributionCase, AttributionDecision, BottleneckEvaluation, CaseMetricDelta, DecoderPolicy,
+    DecoderSweepCandidate, DecoderSweepCase, DecoderSweepEvaluation, ModelPackIdentity,
     ObservationDiagnostics, SuiteEvaluation, evaluate_backend_suite,
-    evaluate_backend_suite_with_audio_directory, evaluate_core_suite, render_suite,
-    score_prediction_directory,
+    evaluate_backend_suite_with_audio_directory, evaluate_core_suite,
+    evaluate_decoder_sweep_with_audio_directory, render_suite, score_prediction_directory,
+    standard_decoder_policies,
 };
 pub use synthetic::{
     GeneratedTruth, RecipeSegment, SegmentShape, SyntheticAudioProfile, SyntheticRecipe, TruthBeat,

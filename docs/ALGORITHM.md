@@ -20,6 +20,15 @@ No model tensor or Beat This-specific type crosses into `rhythm-map-core`.
 Alternative trackers and caller-supplied observations therefore use the same
 tempo-map estimator and produce the same `Analysis` schema.
 
+The default Beat This decoder follows the upstream peak picker: a frame logit
+must be strictly above zero (probability above 0.5), must be maximal within
+three 50 Hz frames on each side, and adjacent peak frames are averaged before
+conversion to timestamps. Downbeat peaks are decoded the same way and snapped
+to the nearest decoded beat. The Beat This adapter can retain frame logits and
+replay an explicit peak policy for evaluation, but these backend-specific
+diagnostics remain outside `rhythm-map-core` and do not change the default
+algorithm.
+
 The estimator normally preserves backend timestamps. It can reject events
 inside sustained low-activity spans, select one phase of a strong/weak
 alternating sequence, or reconstruct a short corrupted transition from stable

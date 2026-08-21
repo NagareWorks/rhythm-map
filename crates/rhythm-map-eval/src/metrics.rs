@@ -158,7 +158,7 @@ pub fn evaluate_analysis(
     }
 }
 
-fn score_beats(predicted: &[f64], expected: &[f64], tolerance_s: f64) -> BeatMetrics {
+pub(crate) fn score_beats(predicted: &[f64], expected: &[f64], tolerance_s: f64) -> BeatMetrics {
     let mut predicted_index = 0;
     let mut expected_index = 0;
     let mut errors = Vec::new();

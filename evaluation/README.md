@@ -73,6 +73,26 @@ cargo xtask eval-backend \
   --no-fail
 ```
 
+To isolate Beat This peak decoding from the neural model and the tempo-map
+estimator, run the decoder sweep. Each audio case is inferred once; the same
+50 Hz beat/downbeat logits are then decoded by every threshold and
+local-maximum policy:
+
+```bash
+cargo xtask decoder-sweep \
+  --suite evaluation/suites/artbeat-v1.json \
+  --model-pack models/beat-this-full-v1.json \
+  --model-dir D:/rhythm-map-models/beat-this-full-v1 \
+  --audio-dir D:/rhythm-map-eval/artbeat-v1/audio \
+  --report D:/rhythm-map-eval/reports/artbeat-decoder-sweep.json
+```
+
+The sweep scores raw decoded beats before tempo estimation. Its
+`per_case_policy_oracle_mean_beat_f1` field chooses the best tested policy
+separately for each case and is only a diagnostic ceiling; it is not a
+deployable result and must not be compared with one fixed decoder as if it
+were one.
+
 The filename hint in a manifest is non-authoritative. The resolver verifies the
 SHA-256 of the exact encoded file bytes and, when the hint is stale, searches
 supported audio below `--audio-dir` by content. It does not follow symbolic

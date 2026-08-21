@@ -8,6 +8,50 @@ use rhythm_map_core::{
 };
 
 type DefaultModel = <RtenRuntime as Runtime>::Model;
+const FRAME_RATE_HZ: f64 = 50.0;
+
+/// Configurable peak-picking policy applied to Beat This frame logits.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct PeakPickingOptions {
+    /// Strict lower logit bound for a peak. Zero equals probability 0.5.
+    pub logit_threshold: f32,
+    /// Number of frames inspected on either side of a candidate maximum.
+    pub local_max_radius_frames: usize,
+    /// Adjacent peak indices at or below this distance are averaged together.
+    pub deduplicate_width_frames: usize,
+}
+
+impl Default for PeakPickingOptions {
+    fn default() -> Self {
+        Self {
+            logit_threshold: 0.0,
+            local_max_radius_frames: 3,
+            deduplicate_width_frames: 1,
+        }
+    }
+}
+
+/// One model inference retained before discrete peak decoding.
+#[derive(Debug, Clone)]
+pub struct BeatThisInference {
+    duration_s: f64,
+    beat_logits: Vec<f32>,
+    downbeat_logits: Vec<f32>,
+}
+
+impl BeatThisInference {
+    /// Per-frame beat logits at 50 frames per second.
+    #[must_use]
+    pub fn beat_logits(&self) -> &[f32] {
+        &self.beat_logits
+    }
+
+    /// Per-frame downbeat logits at 50 frames per second.
+    #[must_use]
+    pub fn downbeat_logits(&self) -> &[f32] {
+        &self.downbeat_logits
+    }
+}
 
 /// Decoded mono audio returned by the convenience file adapter.
 #[derive(Debug, Clone)]
@@ -49,6 +93,78 @@ impl BeatThisBackend {
             model_name,
         })
     }
+
+    /// Run the neural frontend and model while retaining undecoded frame logits.
+    ///
+    /// # Errors
+    ///
+    /// Returns [`BackendError`] when model inference fails.
+    pub fn infer_mono(
+        &mut self,
+        samples: &[f32],
+        sample_rate: u32,
+    ) -> Result<BeatThisInference, BackendError> {
+        if sample_rate == 0 {
+            return Err(BackendError::new("sample rate must be greater than zero"));
+        }
+        let result = self
+            .tracker
+            .analyze_audio(samples, sample_rate)
+            .map_err(|error| BackendError::new(format!("Beat This inference failed: {error}")))?;
+        Ok(BeatThisInference {
+            duration_s: usize_to_f64(samples.len()) / f64::from(sample_rate),
+            beat_logits: result.beat_logits,
+            downbeat_logits: result.downbeat_logits,
+        })
+    }
+
+    /// Decode one retained inference with an explicit peak-picking policy.
+    ///
+    /// # Errors
+    ///
+    /// Returns [`BackendError`] for a non-finite threshold or mismatched logits.
+    pub fn decode_inference(
+        &self,
+        inference: &BeatThisInference,
+        options: PeakPickingOptions,
+    ) -> Result<RhythmObservations, BackendError> {
+        if !options.logit_threshold.is_finite() {
+            return Err(BackendError::new("peak logit threshold must be finite"));
+        }
+        if inference.beat_logits.len() != inference.downbeat_logits.len() {
+            return Err(BackendError::new(
+                "Beat This beat and downbeat logits have different lengths",
+            ));
+        }
+        let beat_frames = find_peaks(&inference.beat_logits, options);
+        let downbeat_frames = find_peaks(&inference.downbeat_logits, options);
+        let beats = beat_frames
+            .iter()
+            .map(|&frame| frame_to_time(frame))
+            .collect::<Vec<_>>();
+        let mut downbeats = downbeat_frames
+            .iter()
+            .map(|&frame| frame_to_time(frame))
+            .collect::<Vec<_>>();
+        snap_to_beats(&beats, &mut downbeats);
+
+        Ok(RhythmObservations {
+            duration_s: inference.duration_s,
+            beats: observations_from_events(
+                &beats,
+                &downbeats,
+                &inference.beat_logits,
+                &inference.downbeat_logits,
+            ),
+            activity: Vec::new(),
+            source: ModelInfo {
+                backend: "beat-this-rten".to_string(),
+                model: self.model_name.clone(),
+                version: None,
+                frame_rate_hz: Some(FRAME_RATE_HZ),
+            },
+        })
+    }
 }
 
 impl RhythmObservationBackend for BeatThisBackend {
@@ -58,54 +174,8 @@ impl RhythmObservationBackend for BeatThisBackend {
         samples: &[f32],
         sample_rate: u32,
     ) -> Result<RhythmObservations, BackendError> {
-        let result = self
-            .tracker
-            .analyze_audio(samples, sample_rate)
-            .map_err(|error| BackendError::new(format!("Beat This inference failed: {error}")))?;
-
-        let beats = result
-            .beats
-            .iter()
-            .map(|&time| {
-                let frame = ((f64::from(time) * 50.0).round() as usize)
-                    .min(result.beat_logits.len().saturating_sub(1));
-                let confidence = result.beat_logits.get(frame).copied().map_or(0.5, sigmoid);
-                let nearest_downbeat = result
-                    .downbeats
-                    .iter()
-                    .map(|&downbeat| (downbeat, (downbeat - time).abs()))
-                    .min_by(|left, right| left.1.total_cmp(&right.1));
-                let downbeat_confidence = nearest_downbeat.map_or(0.0, |(_, distance)| {
-                    if distance <= 0.07 {
-                        result
-                            .downbeat_logits
-                            .get(frame)
-                            .copied()
-                            .map_or(0.75, sigmoid)
-                            .max(0.5)
-                    } else {
-                        0.0
-                    }
-                });
-                ObservedBeat {
-                    time_s: f64::from(time),
-                    confidence,
-                    downbeat_confidence,
-                }
-            })
-            .collect();
-
-        Ok(RhythmObservations {
-            duration_s: usize_to_f64(samples.len()) / f64::from(sample_rate),
-            beats,
-            activity: Vec::new(),
-            source: ModelInfo {
-                backend: "beat-this-rten".to_string(),
-                model: self.model_name.clone(),
-                version: None,
-                frame_rate_hz: Some(50.0),
-            },
-        })
+        let inference = self.infer_mono(samples, sample_rate)?;
+        self.decode_inference(&inference, PeakPickingOptions::default())
     }
 }
 
@@ -127,7 +197,158 @@ fn sigmoid(value: f32) -> f64 {
     1.0 / (1.0 + (-f64::from(value)).exp())
 }
 
+#[allow(clippy::cast_possible_truncation)]
+fn frame_to_time(frame: f64) -> f64 {
+    f64::from((frame / FRAME_RATE_HZ) as f32)
+}
+
+fn find_peaks(logits: &[f32], options: PeakPickingOptions) -> Vec<f64> {
+    let candidates = logits
+        .iter()
+        .enumerate()
+        .filter_map(|(index, &value)| {
+            if value <= options.logit_threshold {
+                return None;
+            }
+            let start = index.saturating_sub(options.local_max_radius_frames);
+            let end = index
+                .saturating_add(options.local_max_radius_frames)
+                .saturating_add(1)
+                .min(logits.len());
+            logits[start..end]
+                .iter()
+                .all(|&neighbor| neighbor <= value)
+                .then_some(index)
+        })
+        .collect::<Vec<_>>();
+    deduplicate_peaks(&candidates, options.deduplicate_width_frames)
+}
+
+fn deduplicate_peaks(peaks: &[usize], width: usize) -> Vec<f64> {
+    let Some(&first) = peaks.first() else {
+        return Vec::new();
+    };
+    let mut result = Vec::new();
+    let mut running_mean = usize_to_f64(first);
+    let mut count = 1.0;
+    for &candidate in &peaks[1..] {
+        let candidate = usize_to_f64(candidate);
+        if candidate - running_mean <= usize_to_f64(width) {
+            count += 1.0;
+            running_mean += (candidate - running_mean) / count;
+        } else {
+            result.push(running_mean);
+            running_mean = candidate;
+            count = 1.0;
+        }
+    }
+    result.push(running_mean);
+    result
+}
+
+fn snap_to_beats(beats: &[f64], downbeats: &mut Vec<f64>) {
+    for downbeat in downbeats.iter_mut() {
+        if let Some(beat) = beats.iter().min_by(|left, right| {
+            (*left - *downbeat)
+                .abs()
+                .total_cmp(&(*right - *downbeat).abs())
+        }) {
+            *downbeat = *beat;
+        }
+    }
+    downbeats.sort_by(f64::total_cmp);
+    downbeats.dedup();
+}
+
+#[allow(clippy::cast_possible_truncation, clippy::cast_sign_loss)]
+fn observations_from_events(
+    beats: &[f64],
+    downbeats: &[f64],
+    beat_logits: &[f32],
+    downbeat_logits: &[f32],
+) -> Vec<ObservedBeat> {
+    beats
+        .iter()
+        .map(|&time_s| {
+            let frame = ((time_s * FRAME_RATE_HZ).round() as usize)
+                .min(beat_logits.len().saturating_sub(1));
+            let downbeat = downbeats
+                .iter()
+                .any(|&candidate| (candidate - time_s).abs() <= 0.07);
+            ObservedBeat {
+                time_s,
+                confidence: beat_logits.get(frame).copied().map_or(0.5, sigmoid),
+                downbeat_confidence: if downbeat {
+                    downbeat_logits
+                        .get(frame)
+                        .copied()
+                        .map_or(0.75, sigmoid)
+                        .max(0.5)
+                } else {
+                    0.0
+                },
+            }
+        })
+        .collect()
+}
+
 #[allow(clippy::cast_precision_loss)]
 fn usize_to_f64(value: usize) -> f64 {
     value as f64
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn default_peak_picker_matches_upstream_rules() {
+        let mut logits = vec![-1.0; 40];
+        logits[5] = 2.0;
+        logits[20] = 1.0;
+        logits[21] = 1.0;
+        logits[30] = -0.1;
+
+        assert_eq!(
+            find_peaks(&logits, PeakPickingOptions::default()),
+            vec![5.0, 20.5]
+        );
+    }
+
+    #[test]
+    fn lower_threshold_recovers_subzero_local_peak() {
+        let logits = [-2.0, -0.5, -2.0];
+        let options = PeakPickingOptions {
+            logit_threshold: -1.0,
+            ..PeakPickingOptions::default()
+        };
+
+        assert_eq!(find_peaks(&logits, options), vec![1.0]);
+    }
+
+    #[test]
+    fn narrower_local_max_window_retains_nearby_peaks() {
+        let logits = [-2.0, 1.0, -1.0, -1.0, 0.5, -2.0];
+        let narrow = PeakPickingOptions {
+            local_max_radius_frames: 1,
+            ..PeakPickingOptions::default()
+        };
+
+        assert_eq!(find_peaks(&logits, narrow), vec![1.0, 4.0]);
+        assert_eq!(
+            find_peaks(&logits, PeakPickingOptions::default()),
+            vec![1.0]
+        );
+    }
+
+    #[test]
+    fn extreme_radius_does_not_overflow() {
+        let logits = [-1.0, 1.0, -1.0];
+        let options = PeakPickingOptions {
+            local_max_radius_frames: usize::MAX,
+            ..PeakPickingOptions::default()
+        };
+
+        assert_eq!(find_peaks(&logits, options), vec![1.0]);
+    }
 }

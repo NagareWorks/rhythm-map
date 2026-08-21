@@ -39,3 +39,35 @@ events that reconstructing exact beat timestamps would require new acoustic
 evidence. This baseline therefore supports evaluating an alternate observation
 backend or decoder before adding more ungrounded post-processing heuristics.
 
+## Peak-decoder attribution
+
+The same model logits were decoded with lower logit thresholds and a narrower
+local-maximum window. Inference ran once per case, and the table scores raw
+decoded beat timestamps before the tempo estimator:
+
+| Policy | Radius | Logit threshold | Mean precision | Mean recall | Mean F1 | Mean events |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Upstream default | 3 | 0.0 | 0.8910 | 0.7526 | 0.8052 | 25.07 |
+| Lower threshold | 3 | -0.5 | 0.8841 | 0.7727 | 0.8144 | 26.20 |
+| Lower threshold | 3 | -1.0 | 0.8743 | 0.7852 | 0.8174 | 27.13 |
+| Lower threshold | 3 | -2.0 | 0.8554 | 0.8002 | 0.8155 | 28.80 |
+| Lower threshold | 3 | -3.0 | 0.8218 | 0.8321 | 0.8179 | 31.27 |
+| Narrow maximum | 1 | 0.0 | 0.8852 | 0.7543 | 0.8043 | 25.33 |
+| Narrow maximum | 1 | -1.0 | 0.8599 | 0.7869 | 0.8125 | 27.80 |
+| Narrow maximum | 1 | -2.0 | 0.8227 | 0.8069 | 0.8032 | 30.80 |
+| Narrow maximum | 1 | -3.0 | 0.7779 | 0.8373 | 0.7970 | 33.93 |
+
+The best fixed candidate improves mean F1 by only 0.0127. Lower thresholds
+trade precision for recall and eventually add many false events; shrinking the
+maximum window does not improve the aggregate. Even choosing the best of these
+nine policies independently for every case reaches only 0.8371 mean F1. That
+oracle choice is unavailable in production, but its low ceiling is useful:
+fixed threshold and local-window tuning are not the primary bottleneck.
+
+Some clips contain weak recoverable peaks, so a sequence-aware decoder may be
+worth evaluating. It must use causal evidence such as tempo/phase continuity
+and beat confidence rather than truth-selected parameters. The remaining hard
+failures still require an alternate observation backend or stronger acoustic
+evidence. The upstream-default path was also rerun after exposing logits; all
+report fields except machine-dependent runtime were identical to the baseline
+above.
