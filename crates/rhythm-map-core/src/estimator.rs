@@ -226,7 +226,7 @@ fn build_tempo_estimate(
             let observation_confidence = pair[0].confidence.min(pair[1].confidence);
             let deviation = (normalized[index] / bpm).log2().abs();
             TempoPoint {
-                time_s: (pair[0].time_s + pair[1].time_s) * 0.5,
+                time_s: f64::midpoint(pair[0].time_s, pair[1].time_s),
                 bpm,
                 confidence: (observation_confidence * (-8.0 * deviation).exp()).clamp(0.0, 1.0),
             }
@@ -1156,7 +1156,7 @@ fn add_discontinuities(
     for (index, &interval) in intervals.iter().enumerate() {
         if interval > typical * factor && interval > 1.0 {
             changes.push(ChangePoint {
-                time_s: (input.beats[index].time_s + input.beats[index + 1].time_s) * 0.5,
+                time_s: f64::midpoint(input.beats[index].time_s, input.beats[index + 1].time_s),
                 kind: ChangeKind::RhythmDiscontinuity,
                 score: (1.0 - typical / interval).clamp(0.0, 1.0),
                 before_bpm: None,
@@ -1166,7 +1166,7 @@ fn add_discontinuities(
     }
     for region in silence_regions {
         changes.push(ChangePoint {
-            time_s: (region.start_s + region.end_s) * 0.5,
+            time_s: f64::midpoint(region.start_s, region.end_s),
             kind: ChangeKind::RhythmDiscontinuity,
             score: ((-region.depth_db - 20.0) / 60.0).clamp(0.0, 1.0),
             before_bpm: None,
@@ -1241,7 +1241,7 @@ fn median(mut values: Vec<f64>) -> f64 {
     values.sort_by(|a, b| float_order(*a, *b));
     let middle = values.len() / 2;
     if values.len().is_multiple_of(2) {
-        (values[middle - 1] + values[middle]) * 0.5
+        f64::midpoint(values[middle - 1], values[middle])
     } else {
         values[middle]
     }

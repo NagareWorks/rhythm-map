@@ -378,7 +378,7 @@ fn derive_change_points(recipe: &SyntheticRecipe, starts: &[f64]) -> Vec<TruthCh
             }
             let end = starts[index] + recipe.segments[index].duration_s;
             result.push(TruthChangePoint {
-                time_s: (starts[first] + end) * 0.5,
+                time_s: f64::midpoint(starts[first], end),
                 kind: ChangeKind::RhythmDiscontinuity,
             });
             index += 1;

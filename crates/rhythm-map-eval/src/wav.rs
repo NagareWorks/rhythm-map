@@ -80,7 +80,7 @@ fn render_percussion(samples: &mut [f32], sample_rate: u32, truth: &GeneratedTru
         if let Some(next) = truth.beats.get(index + 1)
             && next.time_s - beat.time_s < 1.5
         {
-            let subdivision = (beat.time_s + next.time_s) * 0.5;
+            let subdivision = f64::midpoint(beat.time_s, next.time_s);
             add_noise(
                 samples,
                 sample_rate,
