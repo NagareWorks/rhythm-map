@@ -27,6 +27,10 @@
   per-slice holdout gate.
 - Edge-preserving metrical outlier repair that keeps sustained half/double-time
   tempo changes instead of folding an entire recording into one BPM band.
+- An opt-in sequence/phase estimator candidate that rejects bar-inconsistent
+  whole-track half-time folds, removes evidence-supported one-sided edge
+  midpoint extras, and repairs fixed-frame paired quantization jitter without
+  modifying exact timestamp observations.
 
 ## Phase 2: product surfaces
 
@@ -144,6 +148,19 @@ a learned component to the default distribution.
   2.61 percent and raised FSLD from 6 to 7 passes. The registered supported-
   midpoint decoder also reached 7 passes but retained its known ARTBeaT
   regression, and combining the policies added no further pass. Keep both
-  candidates out of the shipping default; the remaining whole-track and edge
-  ambiguities require timestamped holdout evidence and stronger sequence/phase
-  emissions, not broader unconditional half/double folding.
+  candidates out of the shipping default; broader unconditional half/double
+  folding remains unsafe.
+- 2026-08-23: `sequence-phase-v1` resolved two previously one-sided or
+  whole-track failures without a preferred-BPM-band rule. It raised FSLD from 7
+  to 9 of 15 passes: the 60 BPM edge-extra case moved from 96.13/101.43 percent
+  median/P95 error to 0.00/0.99, and the 200 BPM false half-time fold moved from
+  50.00/50.00 to approximately 0.00/2.29. All 15 timestamped ARTBeaT cases had
+  zero change in analyzed event count, end-to-end beat F1 and tempo errors, and
+  oracle tempo errors. Keep it opt-in until an untouched timestamped holdout
+  validates the policy.
+- The remaining whole-track ambiguity with equally plausible metrical levels
+  and edge spans where the model emits no candidate peak cannot be solved by
+  safe core smoothing. Next evaluate an explicit DP/DBN-style path decoder over
+  beat/downbeat logits, preserving ambiguity and avoiding timestamp invention,
+  against tempo-change, rubato, and compound-meter slices. Compare an alternate
+  backend if the decoder cannot recover evidence that Beat This never emitted.

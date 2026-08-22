@@ -85,6 +85,15 @@ pub struct ObservationDiagnostics {
     pub minimum_relative_db: Option<f64>,
     /// Fraction of activity samples at or below -40 dB.
     pub low_activity_fraction: f64,
+    /// Median tempo implied directly by consecutive raw backend events.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub raw_median_bpm: Option<f64>,
+    /// Confidence-weighted PCM salience of the two alternating raw-event phases.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub alternating_phase_salience: Option<[f64; 2]>,
+    /// Mean backend confidence of the two alternating raw-event phases.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub alternating_phase_confidence: Option<[f64; 2]>,
     /// Deterministic filtering and metrical-selection decisions.
     pub analysis_warnings: Vec<String>,
 }
@@ -662,11 +671,11 @@ fn evaluate_backend_suite_impl(
 }
 
 fn validate_estimator_policy(policy_id: Option<&str>) -> Result<()> {
-    if policy_id.is_none_or(|id| id == "metrical-consistency-v1") {
+    if policy_id.is_none_or(|id| matches!(id, "metrical-consistency-v1" | "sequence-phase-v1")) {
         return Ok(());
     }
     bail!(
-        "unknown estimator policy {}; available policies: metrical-consistency-v1",
+        "unknown estimator policy {}; available policies: metrical-consistency-v1, sequence-phase-v1",
         policy_id.expect("checked as some")
     )
 }
@@ -677,6 +686,9 @@ fn estimator_for_policy(policy_id: Option<&str>) -> Result<TempoMapEstimator> {
         Some("metrical-consistency-v1") => {
             TempoMapEstimator::new(EstimatorOptions::metrical_consistency_candidate())
                 .map_err(Into::into)
+        }
+        Some("sequence-phase-v1") => {
+            TempoMapEstimator::new(EstimatorOptions::sequence_phase_candidate()).map_err(Into::into)
         }
         None => Ok(TempoMapEstimator::default()),
         Some(_) => unreachable!("validated estimator policy"),
@@ -1406,6 +1418,48 @@ fn observation_diagnostics(
     } else {
         usize_to_f64(low_activity_count) / usize_to_f64(observations.activity.len())
     };
+    let raw_median_bpm = median_f64(
+        observations
+            .beats
+            .windows(2)
+            .map(|pair| 60.0 / (pair[1].time_s - pair[0].time_s))
+            .collect(),
+    );
+    let alternating_phase_confidence = (observations.beats.len() >= 2).then(|| {
+        [0_usize, 1].map(|phase| {
+            let values = observations.beats.iter().skip(phase).step_by(2);
+            let (sum, count) = values.fold((0.0, 0_usize), |(sum, count), beat| {
+                (sum + beat.confidence.clamp(0.0, 1.0), count + 1)
+            });
+            sum / usize_to_f64(count)
+        })
+    });
+    let alternating_phase_salience =
+        (!observations.activity.is_empty() && observations.beats.len() >= 2).then(|| {
+            [0_usize, 1].map(|phase| {
+                let values = observations
+                    .beats
+                    .iter()
+                    .skip(phase)
+                    .step_by(2)
+                    .map(|beat| {
+                        let relative_db = observations
+                            .activity
+                            .iter()
+                            .min_by(|left, right| {
+                                (left.time_s - beat.time_s)
+                                    .abs()
+                                    .total_cmp(&(right.time_s - beat.time_s).abs())
+                            })
+                            .map_or(0.0, |point| point.relative_db);
+                        beat.confidence.clamp(0.0, 1.0) * 10.0_f64.powf(relative_db / 20.0)
+                    });
+                let (sum, count) = values.fold((0.0, 0_usize), |(sum, count), value| {
+                    (sum + value, count + 1)
+                });
+                sum / usize_to_f64(count)
+            })
+        });
     ObservationDiagnostics {
         source: observations.source.clone(),
         raw_beats: observations.beats.clone(),
@@ -1414,8 +1468,25 @@ fn observation_diagnostics(
         activity_point_count: observations.activity.len(),
         minimum_relative_db,
         low_activity_fraction,
+        raw_median_bpm,
+        alternating_phase_salience,
+        alternating_phase_confidence,
         analysis_warnings: analysis.warnings.clone(),
     }
+}
+
+fn median_f64(mut values: Vec<f64>) -> Option<f64> {
+    values.retain(|value| value.is_finite());
+    if values.is_empty() {
+        return None;
+    }
+    values.sort_by(f64::total_cmp);
+    let middle = values.len() / 2;
+    Some(if values.len().is_multiple_of(2) {
+        f64::midpoint(values[middle - 1], values[middle])
+    } else {
+        values[middle]
+    })
 }
 
 fn validate_beat_this_contract(model_pack: &VerifiedModelPack) -> Result<()> {
@@ -1674,6 +1745,7 @@ mod tests {
     fn estimator_policy_requires_a_registered_id() {
         assert!(validate_estimator_policy(None).is_ok());
         assert!(validate_estimator_policy(Some("metrical-consistency-v1")).is_ok());
+        assert!(validate_estimator_policy(Some("sequence-phase-v1")).is_ok());
         assert!(validate_estimator_policy(Some("tuned-on-holdout")).is_err());
     }
 

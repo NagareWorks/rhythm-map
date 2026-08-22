@@ -99,13 +99,17 @@ cargo xtask eval-backend \
   --model-dir /path/to/verified-model-pack \
   --audio-dir /path/to/fsld-assets \
   --decoder-policy supported-midpoints-logit-minus-3.0 \
-  --estimator-policy metrical-consistency-v1 \
+  --estimator-policy sequence-phase-v1 \
   --no-fail
 ```
 
 Omitting either policy keeps that layer on its shipping default. Reports include
-the selected IDs. Tempo-only suites remain `end_to_end_only`; this command does
-not turn their BPM labels into beat timestamps or a policy oracle.
+the selected IDs. Registered estimator candidates currently include
+`metrical-consistency-v1` and its sequence-aware extension
+`sequence-phase-v1`. Observation diagnostics include the raw median BPM and the
+PCM salience and backend confidence of both alternating event phases. Tempo-only
+suites remain `end_to_end_only`; this command does not turn their BPM labels
+into beat timestamps or a policy oracle.
 
 ## Decision rule
 

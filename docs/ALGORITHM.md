@@ -49,7 +49,9 @@ The estimator normally preserves backend timestamps. It can reject events
 inside sustained low-activity spans, select one phase of a strong/weak
 alternating sequence, or reconstruct a short corrupted transition from stable
 beat grids on both sides. Paired evaluation reports retain the raw backend
-events and confidence values before these decisions.
+events and confidence values before these decisions. They also expose raw
+median BPM plus alternating-phase PCM salience and backend confidence so a
+metrical decision can be audited independently of its final tempo curve.
 
 ## Audio activity and silence
 
@@ -104,6 +106,35 @@ sustained 75 to 150 BPM transition is therefore preserved. Applied repairs are
 reported as `short_metrical_outlier_run_repaired`. The shipping default remains
 the one-interval rule until this candidate passes an independent timestamped
 holdout.
+
+The opt-in `sequence-phase-v1` policy includes that bounded-run repair and adds
+three sequence-level checks for cases that lack symmetric context:
+
+1. A proposed whole-track half-time selection transfers downbeat evidence from
+   discarded subdivisions to the nearest retained beat, then rejects the fold
+   if the resulting downbeats occur less than two retained beats apart. This
+   prevents a strong alternating PCM accent from turning a coherent fast beat
+   sequence into a bar-phase-inconsistent half-time sequence. The rejection is
+   reported as `inconsistent_half_time_selection_rejected`.
+2. A one-sided edge run is treated as spurious double-time only after at least
+   six stable anchor intervals establish a grid and every later observation can
+   be partitioned into retained grid events and midpoint extras through the
+   beginning or end of the track. At least four extras and six retained events
+   are required, and the retained events must carry at least 1.15 times the
+   confidence-weighted PCM evidence of the extras. The estimator only removes
+   observed extras; it never extrapolates new timestamps. The decision is
+   reported as `edge_double_time_events_rejected`.
+3. For a backend with a declared fixed frame rate, an adjacent short/long
+   interval pair may be replaced by its mean when the pair straddles the stable
+   surrounding period and its mean agrees with that context. This corrects
+   opposite frame-quantization errors without changing caller-supplied or
+   oracle timestamps, whose source has no frame rate. The repair is reported as
+   `quantized_interval_jitter_repaired`.
+
+These checks preserve equally supported real tempo doublings, sustained tempo
+changes, rubato, and ambiguous whole-track pulses. `sequence-phase-v1` remains
+a named calibration candidate rather than the shipping default until an
+independent timestamped holdout confirms the choice.
 
 Half- and double-time alternatives are preserved in `tempo_hypotheses`; the
 public result does not pretend that metrical ambiguity has disappeared.

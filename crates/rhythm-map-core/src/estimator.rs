@@ -7,6 +7,16 @@ use crate::{
     RhythmObservations, RhythmSection, TempoHypothesis, TempoPoint, TempoSegment, TempoSegmentKind,
 };
 
+/// Policy used to resolve metrical half/double-time evidence before tempo estimation.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
+pub enum MetricalSelectionPolicy {
+    /// Preserve the original confidence-weighted alternating-salience rule.
+    #[default]
+    SalienceOnly,
+    /// Require sequence and bar-phase consistency and repair supported edge runs.
+    SequencePhaseV1,
+}
+
 /// Tunable policy for deterministic tempo-map inference.
 #[derive(Debug, Clone)]
 pub struct EstimatorOptions {
@@ -38,6 +48,8 @@ pub struct EstimatorOptions {
     pub half_time_min_bpm: f64,
     /// Required retained-to-discarded onset salience ratio for half-time selection.
     pub half_time_salience_ratio: f64,
+    /// Evidence policy used for global and edge metrical-level decisions.
+    pub metrical_selection_policy: MetricalSelectionPolicy,
     /// Required strong-to-weak accent ratio before half-bar downbeats are rejected.
     pub half_bar_downbeat_salience_ratio: f64,
     /// Longest model-smeared ramp still classified as a tempo jump.
@@ -61,6 +73,7 @@ impl Default for EstimatorOptions {
             minimum_silence_s: 0.8,
             half_time_min_bpm: 150.0,
             half_time_salience_ratio: 1.35,
+            metrical_selection_policy: MetricalSelectionPolicy::SalienceOnly,
             half_bar_downbeat_salience_ratio: 1.2,
             jump_transition_max_s: 4.0,
         }
@@ -74,6 +87,17 @@ impl EstimatorOptions {
     pub fn metrical_consistency_candidate() -> Self {
         Self {
             maximum_metrical_outlier_run: 3,
+            ..Self::default()
+        }
+    }
+
+    /// Experimental sequence-aware policy for whole-track and one-sided edge
+    /// metrical decisions. It includes the bounded-run consistency candidate.
+    #[must_use]
+    pub fn sequence_phase_candidate() -> Self {
+        Self {
+            maximum_metrical_outlier_run: 3,
+            metrical_selection_policy: MetricalSelectionPolicy::SequencePhaseV1,
             ..Self::default()
         }
     }
@@ -167,9 +191,13 @@ impl TempoMapEstimator {
             tempo_curve,
             tempo_segments,
             repaired_metrical_run,
+            repaired_interval_jitter,
         } = build_tempo_estimate(&prepared, input.duration_s, &self.options);
         if repaired_metrical_run {
             warnings.push("short_metrical_outlier_run_repaired".to_string());
+        }
+        if repaired_interval_jitter {
+            warnings.push("quantized_interval_jitter_repaired".to_string());
         }
 
         let global_bpm = median(smoothed.clone());
@@ -219,6 +247,7 @@ struct TempoEstimate {
     tempo_curve: Vec<TempoPoint>,
     tempo_segments: Vec<TempoSegment>,
     repaired_metrical_run: bool,
+    repaired_interval_jitter: bool,
 }
 
 fn build_tempo_estimate(
@@ -232,6 +261,14 @@ fn build_tempo_estimate(
         .map(|pair| pair[1].time_s - pair[0].time_s)
         .collect::<Vec<_>>();
     let raw_bpms = intervals.iter().map(|dt| 60.0 / dt).collect::<Vec<_>>();
+    let (raw_bpms, repaired_interval_jitter) = if options.metrical_selection_policy
+        == MetricalSelectionPolicy::SequencePhaseV1
+        && input.source.frame_rate_hz.is_some()
+    {
+        repair_quantized_interval_jitter(&intervals, &raw_bpms, options.jump_ratio)
+    } else {
+        (raw_bpms, false)
+    };
     // The observed cadence is evidence, not a nuisance value to force into a
     // global preferred band. A sustained 75 -> 150 BPM change is musically
     // different from a tracker emitting one isolated half- or double-length
@@ -276,7 +313,52 @@ fn build_tempo_estimate(
         tempo_curve,
         tempo_segments,
         repaired_metrical_run,
+        repaired_interval_jitter,
     }
+}
+
+fn repair_quantized_interval_jitter(
+    intervals: &[f64],
+    raw_bpms: &[f64],
+    tolerance: f64,
+) -> (Vec<f64>, bool) {
+    const CONTEXT_RADIUS: usize = 3;
+    let mut repaired = raw_bpms.to_vec();
+    let mut changed = false;
+    let mut index = 0;
+    while index + 1 < intervals.len() {
+        let left_start = index.saturating_sub(CONTEXT_RADIUS);
+        let right_end = (index + 2 + CONTEXT_RADIUS).min(intervals.len());
+        let context = intervals[left_start..index]
+            .iter()
+            .chain(&intervals[index + 2..right_end])
+            .copied()
+            .collect::<Vec<_>>();
+        if context.len() < 2 {
+            index += 1;
+            continue;
+        }
+        let period = median(context.clone());
+        let stable_context = context
+            .iter()
+            .all(|value| ((value / period) - 1.0).abs() <= tolerance);
+        let pair_mean = f64::midpoint(intervals[index], intervals[index + 1]);
+        let straddles_period = (intervals[index] - period) * (intervals[index + 1] - period) < 0.0;
+        if stable_context
+            && straddles_period
+            && ((pair_mean / period) - 1.0).abs() <= tolerance
+            && (intervals[index] / intervals[index + 1] - 1.0).abs() > tolerance
+        {
+            let bpm = 60.0 / pair_mean;
+            repaired[index] = bpm;
+            repaired[index + 1] = bpm;
+            changed = true;
+            index += 2;
+        } else {
+            index += 1;
+        }
+    }
+    (repaired, changed)
 }
 
 fn beat_events(input: &RhythmObservations) -> Vec<BeatEvent> {
@@ -405,14 +487,27 @@ fn prepare_observations(
         .beats
         .retain(|beat| !inside_silence(beat.time_s, &silence_regions));
     let rejected_silent_beats = input.beats.len() - observations.beats.len();
-    let (observations, selected_half_time) = select_metrical_level(&observations, options);
+    let (observations, repaired_edge_double_time) =
+        if options.metrical_selection_policy == MetricalSelectionPolicy::SequencePhaseV1 {
+            repair_edge_double_time_runs(&observations)
+        } else {
+            (observations, false)
+        };
+    let (observations, selected_half_time, rejected_inconsistent_half_time) =
+        select_metrical_level(&observations, options);
 
     let mut warnings = Vec::new();
     if rejected_silent_beats > 0 {
         warnings.push("low_activity_beats_rejected".to_string());
     }
+    if repaired_edge_double_time {
+        warnings.push("edge_double_time_events_rejected".to_string());
+    }
     if selected_half_time {
         warnings.push("metrical_level_selected_half_time".to_string());
+    }
+    if rejected_inconsistent_half_time {
+        warnings.push("inconsistent_half_time_selection_rejected".to_string());
     }
 
     PreparedObservations {
@@ -499,12 +594,155 @@ fn inside_silence(time_s: f64, regions: &[SilenceRegion]) -> bool {
         .any(|region| time_s >= region.start_s && time_s <= region.end_s)
 }
 
+fn repair_edge_double_time_runs(input: &RhythmObservations) -> (RhythmObservations, bool) {
+    if input.beats.len() < 12 || input.activity.is_empty() {
+        return (input.clone(), false);
+    }
+    let mut removals = forward_edge_double_time_removals(input);
+    let mirrored = mirror_observations(input);
+    removals.extend(
+        forward_edge_double_time_removals(&mirrored)
+            .into_iter()
+            .map(|index| input.beats.len() - index - 1),
+    );
+    removals.sort_unstable();
+    removals.dedup();
+    if removals.is_empty() {
+        return (input.clone(), false);
+    }
+
+    let mut repaired = input.clone();
+    repaired.beats = input
+        .beats
+        .iter()
+        .enumerate()
+        .filter(|(index, _)| removals.binary_search(index).is_err())
+        .map(|(_, beat)| beat.clone())
+        .collect();
+    (repaired, true)
+}
+
+fn mirror_observations(input: &RhythmObservations) -> RhythmObservations {
+    let mut mirrored = input.clone();
+    mirrored.beats = input
+        .beats
+        .iter()
+        .rev()
+        .map(|beat| {
+            let mut beat = beat.clone();
+            beat.time_s = input.duration_s - beat.time_s;
+            beat
+        })
+        .collect();
+    mirrored.activity = input
+        .activity
+        .iter()
+        .rev()
+        .map(|point| {
+            let mut point = point.clone();
+            point.time_s = input.duration_s - point.time_s;
+            point
+        })
+        .collect();
+    mirrored
+}
+
+fn forward_edge_double_time_removals(input: &RhythmObservations) -> Vec<usize> {
+    const ANCHOR_INTERVALS: usize = 6;
+    const ANCHOR_TOLERANCE: f64 = 0.08;
+    const GRID_TOLERANCE: f64 = 0.12;
+    const MIDPOINT_TOLERANCE: f64 = 0.20;
+    const MINIMUM_EXTRAS: usize = 4;
+    const MINIMUM_RETAINED: usize = 6;
+    const MINIMUM_EVIDENCE_RATIO: f64 = 1.15;
+
+    let beats = &input.beats;
+    let mut best = Vec::new();
+    for boundary in ANCHOR_INTERVALS..beats.len().saturating_sub(1) {
+        let anchor_intervals = beats[boundary - ANCHOR_INTERVALS..=boundary]
+            .windows(2)
+            .map(|pair| pair[1].time_s - pair[0].time_s)
+            .collect::<Vec<_>>();
+        let period = median(anchor_intervals.clone());
+        if anchor_intervals
+            .iter()
+            .any(|interval| ((interval / period) - 1.0).abs() > ANCHOR_TOLERANCE)
+        {
+            continue;
+        }
+        let first_gap = beats[boundary + 1].time_s - beats[boundary].time_s;
+        if ((first_gap / period) - 0.5).abs() > GRID_TOLERANCE {
+            continue;
+        }
+
+        let mut current = boundary;
+        let mut cursor = boundary + 1;
+        let mut extras = Vec::new();
+        let mut retained = Vec::new();
+        let mut valid = true;
+        while cursor < beats.len() {
+            let expected = beats[current].time_s + period;
+            let latest = expected + period * GRID_TOLERANCE;
+            let mut candidate = None;
+            let mut index = cursor;
+            while index < beats.len() && beats[index].time_s <= latest {
+                if (beats[index].time_s - expected).abs() <= period * GRID_TOLERANCE {
+                    candidate = Some(index);
+                }
+                index += 1;
+            }
+            let Some(candidate) = candidate else {
+                valid = false;
+                break;
+            };
+            let midpoint = f64::midpoint(beats[current].time_s, beats[candidate].time_s);
+            if (cursor..candidate)
+                .any(|extra| (beats[extra].time_s - midpoint).abs() > period * MIDPOINT_TOLERANCE)
+            {
+                valid = false;
+                break;
+            }
+            extras.extend(cursor..candidate);
+            retained.push(candidate);
+            current = candidate;
+            cursor = candidate + 1;
+        }
+        if !valid
+            || extras.len() < MINIMUM_EXTRAS
+            || retained.len() < MINIMUM_RETAINED
+            || extras.len() <= best.len()
+        {
+            continue;
+        }
+        let retained_evidence = mean_event_evidence(input, &retained);
+        let extra_evidence = mean_event_evidence(input, &extras).max(1e-9);
+        if retained_evidence / extra_evidence >= MINIMUM_EVIDENCE_RATIO {
+            best = extras;
+        }
+    }
+    best
+}
+
+fn mean_event_evidence(input: &RhythmObservations, indices: &[usize]) -> f64 {
+    indices
+        .iter()
+        .map(|&index| {
+            let beat = &input.beats[index];
+            let activity = nearest_activity_db(&input.activity, beat.time_s)
+                .map_or(1.0, |relative_db| 10.0_f64.powf(relative_db / 20.0));
+            beat.confidence.clamp(0.0, 1.0) * activity
+                + 0.25 * beat.downbeat_confidence.clamp(0.0, 1.0)
+        })
+        .sum::<f64>()
+        / usize_to_f64(indices.len())
+}
+
 fn select_metrical_level(
     input: &RhythmObservations,
     options: &EstimatorOptions,
-) -> (RhythmObservations, bool) {
+) -> (RhythmObservations, bool, bool) {
     if input.beats.len() < 8 || input.activity.is_empty() {
-        return (input.clone(), false);
+        return (input.clone(), false, false);
     }
     let raw_bpms = input
         .beats
@@ -517,7 +755,7 @@ fn select_metrical_level(
         || half_bpm < options.preferred_min_bpm
         || half_bpm > options.preferred_max_bpm
     {
-        return (input.clone(), false);
+        return (input.clone(), false, false);
     }
 
     let phase_scores = [0_usize, 1].map(|phase| mean_phase_salience(input, phase));
@@ -525,7 +763,7 @@ fn select_metrical_level(
     let retained = phase_scores[selected_phase];
     let discarded = phase_scores[1 - selected_phase].max(1e-9);
     if retained / discarded < options.half_time_salience_ratio {
-        return (input.clone(), false);
+        return (input.clone(), false, false);
     }
 
     let mut selected = input.clone();
@@ -536,7 +774,48 @@ fn select_metrical_level(
         .step_by(2)
         .cloned()
         .collect();
-    (selected, true)
+    if options.metrical_selection_policy == MetricalSelectionPolicy::SequencePhaseV1 {
+        transfer_discarded_downbeats(input, &mut selected);
+        if folded_downbeat_spacing_is_inconsistent(&selected) {
+            return (input.clone(), false, true);
+        }
+    }
+    (selected, true, false)
+}
+
+fn transfer_discarded_downbeats(input: &RhythmObservations, selected: &mut RhythmObservations) {
+    for source in input
+        .beats
+        .iter()
+        .filter(|beat| beat.downbeat_confidence >= 0.5)
+    {
+        if let Some(target) = selected.beats.iter_mut().min_by(|left, right| {
+            (left.time_s - source.time_s)
+                .abs()
+                .total_cmp(&(right.time_s - source.time_s).abs())
+        }) {
+            target.downbeat_confidence = target
+                .downbeat_confidence
+                .max(source.downbeat_confidence * 0.9);
+        }
+    }
+}
+
+fn folded_downbeat_spacing_is_inconsistent(input: &RhythmObservations) -> bool {
+    let indices = input
+        .beats
+        .iter()
+        .enumerate()
+        .filter_map(|(index, beat)| (beat.downbeat_confidence >= 0.5).then_some(index))
+        .collect::<Vec<_>>();
+    if indices.len() < 3 {
+        return false;
+    }
+    let spacings = indices
+        .windows(2)
+        .map(|pair| usize_to_f64(pair[1] - pair[0]))
+        .collect::<Vec<_>>();
+    median(spacings) < 2.0
 }
 
 fn mean_phase_salience(input: &RhythmObservations, phase: usize) -> f64 {
@@ -1597,6 +1876,54 @@ mod tests {
         let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
 
         assert!((analysis.tempo_curve[2].bpm - 80.0).abs() < 0.01);
+        let candidate = TempoMapEstimator::new(EstimatorOptions::sequence_phase_candidate())
+            .unwrap()
+            .estimate(&input)
+            .unwrap();
+        assert!((candidate.tempo_curve[2].bpm - 80.0).abs() < 0.01);
+    }
+
+    #[test]
+    fn sequence_policy_repairs_opposing_quantized_edge_jitter() {
+        let mut bpms = vec![200.0; 12];
+        bpms.extend([187.5, 230.769_230_769, 187.5]);
+        let mut input = observations_from_bpms(&bpms);
+        input.source.frame_rate_hz = Some(50.0);
+        let analysis = TempoMapEstimator::new(EstimatorOptions::sequence_phase_candidate())
+            .unwrap()
+            .estimate(&input)
+            .unwrap();
+
+        assert!(
+            analysis
+                .tempo_curve
+                .iter()
+                .all(|point| (point.bpm / 200.0 - 1.0).abs() < 0.1),
+            "curve: {:?}",
+            analysis.tempo_curve
+        );
+        assert!(
+            analysis
+                .warnings
+                .contains(&"quantized_interval_jitter_repaired".to_string())
+        );
+    }
+
+    #[test]
+    fn sequence_policy_does_not_quantize_exact_timestamp_observations() {
+        let mut bpms = vec![200.0; 12];
+        bpms.extend([187.5, 230.769_230_769, 187.5]);
+        let input = observations_from_bpms(&bpms);
+        let analysis = TempoMapEstimator::new(EstimatorOptions::sequence_phase_candidate())
+            .unwrap()
+            .estimate(&input)
+            .unwrap();
+
+        assert!(
+            !analysis
+                .warnings
+                .contains(&"quantized_interval_jitter_repaired".to_string())
+        );
     }
 
     #[test]
@@ -1664,6 +1991,129 @@ mod tests {
         let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
         assert!((analysis.global_bpm.unwrap() - 180.0).abs() < 0.01);
         assert_eq!(analysis.beats.len(), 41);
+    }
+
+    #[test]
+    fn sequence_policy_rejects_half_time_with_one_downbeat_per_retained_beat() {
+        let mut input = observations_from_bpms(&[200.0; 40]);
+        for (index, beat) in input.beats.iter_mut().enumerate() {
+            beat.downbeat_confidence = if index.is_multiple_of(2) { 0.9 } else { 0.0 };
+        }
+        input.activity = input
+            .beats
+            .iter()
+            .enumerate()
+            .map(|(index, beat)| AudioActivityPoint {
+                time_s: beat.time_s,
+                rms: if index.is_multiple_of(2) { 1.0 } else { 0.5 },
+                relative_db: if index.is_multiple_of(2) { 0.0 } else { -6.0 },
+            })
+            .collect();
+
+        let analysis = TempoMapEstimator::new(EstimatorOptions::sequence_phase_candidate())
+            .unwrap()
+            .estimate(&input)
+            .unwrap();
+        assert!((analysis.global_bpm.unwrap() - 200.0).abs() < 0.01);
+        assert_eq!(analysis.beats.len(), input.beats.len());
+        assert!(
+            analysis
+                .warnings
+                .contains(&"inconsistent_half_time_selection_rejected".to_string())
+        );
+    }
+
+    #[test]
+    fn sequence_policy_transfers_downbeats_when_selecting_real_subdivisions() {
+        let mut input = observations_from_bpms(&[180.0; 40]);
+        input.activity = input
+            .beats
+            .iter()
+            .enumerate()
+            .map(|(index, beat)| AudioActivityPoint {
+                time_s: beat.time_s,
+                rms: if index.is_multiple_of(2) { 1.0 } else { 0.1 },
+                relative_db: if index.is_multiple_of(2) { 0.0 } else { -20.0 },
+            })
+            .collect();
+
+        let analysis = TempoMapEstimator::new(EstimatorOptions::sequence_phase_candidate())
+            .unwrap()
+            .estimate(&input)
+            .unwrap();
+        assert!((analysis.global_bpm.unwrap() - 90.0).abs() < 0.01);
+        assert!(analysis.beats.iter().any(|beat| beat.downbeat));
+    }
+
+    #[test]
+    fn sequence_policy_rejects_supported_double_time_events_at_track_end() {
+        let mut input = observations_from_bpms(&[60.0; 30]);
+        for integer in 13..=29 {
+            input.beats.push(ObservedBeat {
+                time_s: f64::from(integer) + 0.5,
+                confidence: 0.7,
+                downbeat_confidence: 0.0,
+            });
+        }
+        input
+            .beats
+            .sort_by(|left, right| left.time_s.total_cmp(&right.time_s));
+        input.activity = input
+            .beats
+            .iter()
+            .map(|beat| {
+                let retained = beat.time_s.fract().abs() < 1e-9;
+                AudioActivityPoint {
+                    time_s: beat.time_s,
+                    rms: if retained { 1.0 } else { 0.2 },
+                    relative_db: if retained { 0.0 } else { -14.0 },
+                }
+            })
+            .collect();
+
+        let analysis = TempoMapEstimator::new(EstimatorOptions::sequence_phase_candidate())
+            .unwrap()
+            .estimate(&input)
+            .unwrap();
+        assert!((analysis.global_bpm.unwrap() - 60.0).abs() < 0.01);
+        assert_eq!(analysis.beats.len(), 31);
+        assert!(
+            analysis
+                .warnings
+                .contains(&"edge_double_time_events_rejected".to_string())
+        );
+    }
+
+    #[test]
+    fn sequence_policy_preserves_equally_supported_real_tempo_doubling() {
+        let mut bpms = vec![60.0; 12];
+        bpms.extend([120.0; 24]);
+        let mut input = observations_from_bpms(&bpms);
+        for beat in &mut input.beats {
+            beat.downbeat_confidence = 0.0;
+        }
+        input.activity = input
+            .beats
+            .iter()
+            .map(|beat| AudioActivityPoint {
+                time_s: beat.time_s,
+                rms: 1.0,
+                relative_db: 0.0,
+            })
+            .collect();
+        let expected_count = input.beats.len();
+
+        let analysis = TempoMapEstimator::new(EstimatorOptions::sequence_phase_candidate())
+            .unwrap()
+            .estimate(&input)
+            .unwrap();
+        assert_eq!(analysis.beats.len(), expected_count);
+        assert!((analysis.tempo_curve.last().unwrap().bpm - 120.0).abs() < 0.01);
+        assert!(
+            !analysis
+                .warnings
+                .contains(&"edge_double_time_events_rejected".to_string())
+        );
     }
 
     #[test]

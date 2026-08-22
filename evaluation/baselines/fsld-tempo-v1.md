@@ -58,3 +58,37 @@ On ARTBeaT it reproduced the earlier mean beat-F1 gain from 0.8052 to 0.8235 and
 the known regression on `artbeat-15-85-to-127-5`. Combining both candidates did
 not exceed 7 of 15 FSLD cases. Both therefore remain explicit opt-in policies;
 neither changes the shipping default before independent holdout evidence.
+
+## Sequence and phase candidate
+
+On 2026-08-23, `sequence-phase-v1` was evaluated with the unchanged upstream
+decoder. It includes `metrical-consistency-v1`, adds bar-phase validation to
+whole-track half-time selection, removes one-sided edge midpoint extras only
+when a stable grid and PCM/model evidence support the retained phase, and
+repairs paired fixed-frame quantization jitter. The suite rose from 7 to 9 of
+15 passing cases:
+
+- `fsld-404840-60-bpm` changed from 96.13 percent median and 101.43
+  percent P95 error to 0.00 and 0.99 percent. The analyzed event count changed
+  from 62 to 50 after weak midpoint extras extending to the track edge were
+  rejected.
+- `fsld-439993-200-bpm` changed from 50.00 percent median and P95 error to
+  approximately 0.00 and 2.29 percent. Its raw cadence was already near 200
+  BPM; the earlier salience-only fold produced downbeat evidence on nearly
+  every retained beat, so the sequence policy rejected that inconsistent
+  half-time choice and corrected only opposing frame-quantization jitter.
+
+No other FSLD case changed pass status. Against all 15 timestamped ARTBeaT
+calibration cases, analyzed event counts and end-to-end beat F1, tempo median,
+and tempo P95 were identical to `metrical-consistency-v1`; the corresponding
+oracle tempo metrics were also identical. Exact timestamp observations are
+explicitly excluded from fixed-frame jitter repair.
+
+The remaining failures are not safe targets for another global fold. The 41
+BPM clip has a clean approximately 81 BPM raw cadence, but its alternating
+salience pattern is not unique among correctly decoded material. The 128 BPM
+clip is irregular at both roughly 250 and 125 BPM. The 130 BPM clip has
+supported subdivisions in its interior but loses peaks at the edge; the core
+estimator will not invent the missing timestamps. These need independent
+timestamp truth and, for missing events, an opt-in logits sequence decoder or
+an alternate observation backend.
