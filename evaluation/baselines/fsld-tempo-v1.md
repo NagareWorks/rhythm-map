@@ -42,3 +42,19 @@ calibration evidence for product-level metrical selection, but the absence of
 beat timestamps prevents bottleneck attribution. Changes to the default must
 still be selected here and confirmed on a separate timestamped holdout rather
 than treating these global BPM labels as event-level truth.
+
+## Metrical consistency candidate
+
+On 2026-08-23, `metrical-consistency-v1` was evaluated with the upstream decoder.
+It repaired the bounded three-interval half-time run in
+`fsld-330889-150-bpm`, reducing tempo P95 error from 49.57 percent to about 2.61
+percent and raising the suite from 6 to 7 passing cases. No other FSLD case
+changed. The same estimator candidate produced no beat, median-tempo, or
+P95-tempo metric change on any of the 15 timestamped ARTBeaT calibration cases.
+
+The supported-midpoint decoder also reached 7 of 15 FSLD cases: it repaired the
+130 BPM median and the 150 BPM P95, but the 130 BPM tail remained at half time.
+On ARTBeaT it reproduced the earlier mean beat-F1 gain from 0.8052 to 0.8235 and
+the known regression on `artbeat-15-85-to-127-5`. Combining both candidates did
+not exceed 7 of 15 FSLD cases. Both therefore remain explicit opt-in policies;
+neither changes the shipping default before independent holdout evidence.

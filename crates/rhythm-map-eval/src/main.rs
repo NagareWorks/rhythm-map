@@ -8,7 +8,8 @@ use std::{
 use anyhow::{Context, Result, bail};
 use clap::{Parser, Subcommand};
 use rhythm_map_eval::{
-    evaluate_backend_suite, evaluate_backend_suite_with_audio_directory, evaluate_core_suite,
+    evaluate_backend_suite, evaluate_backend_suite_with_audio_directory,
+    evaluate_backend_suite_with_policies, evaluate_core_suite,
     evaluate_decoder_recoverability_with_audio_directory,
     evaluate_decoder_sweep_with_audio_directory,
     evaluate_named_decoder_policy_with_audio_directory, fetch_public_dataset, inspect_audio_asset,
@@ -52,6 +53,12 @@ enum Command {
         /// Directory containing content-addressed external evaluation audio.
         #[arg(long)]
         audio_dir: Option<PathBuf>,
+        /// Stable decoder policy ID; omitted for the immutable upstream default.
+        #[arg(long, requires = "audio_dir")]
+        decoder_policy: Option<String>,
+        /// Stable deterministic estimator policy ID; omitted for the shipping default.
+        #[arg(long, requires = "audio_dir")]
+        estimator_policy: Option<String>,
         /// Optional JSON report destination.
         #[arg(long)]
         report: Option<PathBuf>,
@@ -184,6 +191,8 @@ fn main() -> Result<()> {
             model_pack,
             model_dir,
             audio_dir,
+            decoder_policy,
+            estimator_policy,
             report,
             no_fail,
         } => run_backend_eval(
@@ -191,6 +200,8 @@ fn main() -> Result<()> {
             &model_pack,
             &model_dir,
             audio_dir.as_deref(),
+            decoder_policy.as_deref(),
+            estimator_policy.as_deref(),
             report,
             no_fail,
         ),
@@ -284,15 +295,29 @@ fn run_model_verify(model_pack: &Path, model_dir: &Path) -> Result<()> {
     Ok(())
 }
 
+#[allow(clippy::too_many_arguments)]
 fn run_backend_eval(
     suite: &Path,
     model_pack: &Path,
     model_dir: &Path,
     audio_dir: Option<&Path>,
+    decoder_policy: Option<&str>,
+    estimator_policy: Option<&str>,
     report: Option<PathBuf>,
     no_fail: bool,
 ) -> Result<()> {
-    let result = if let Some(audio_dir) = audio_dir {
+    let result = if let Some(audio_dir) = audio_dir
+        && (decoder_policy.is_some() || estimator_policy.is_some())
+    {
+        evaluate_backend_suite_with_policies(
+            suite,
+            model_pack,
+            model_dir,
+            audio_dir,
+            decoder_policy,
+            estimator_policy,
+        )?
+    } else if let Some(audio_dir) = audio_dir {
         evaluate_backend_suite_with_audio_directory(suite, model_pack, model_dir, audio_dir)?
     } else {
         evaluate_backend_suite(suite, model_pack, model_dir)?

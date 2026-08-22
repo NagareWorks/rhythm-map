@@ -90,6 +90,23 @@ tempo jumps does not excuse a regression on `rubato`, `drumless`, or
 `metric-ambiguity`. Populate each required slice with more than one independent
 source before treating the result as a product-default decision.
 
+End-to-end tempo calibration may exercise registered product candidates without
+inventing beat truth:
+
+```sh
+cargo xtask eval-backend \
+  --suite evaluation/suites/fsld-tempo-v1.json \
+  --model-dir /path/to/verified-model-pack \
+  --audio-dir /path/to/fsld-assets \
+  --decoder-policy supported-midpoints-logit-minus-3.0 \
+  --estimator-policy metrical-consistency-v1 \
+  --no-fail
+```
+
+Omitting either policy keeps that layer on its shipping default. Reports include
+the selected IDs. Tempo-only suites remain `end_to_end_only`; this command does
+not turn their BPM labels into beat timestamps or a policy oracle.
+
 ## Decision rule
 
 - Oracle passes, end to end fails: inspect Beat This events and bounded

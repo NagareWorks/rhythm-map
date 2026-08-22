@@ -94,6 +94,17 @@ repairs an isolated half- or double-length interval from a missed event while
 retaining a sustained step, ramp, or rubato gesture. It does not fold the whole
 recording into a preferred BPM band.
 
+The opt-in `metrical-consistency-v1` calibration policy extends that repair to
+runs of at most three consecutive intervals. A run is rewritten only when it
+is bounded on both sides, the two surrounding tempo medians agree within the
+jump threshold, and every interval in the run is approximately an integer
+metrical octave from that shared context. Replacement values interpolate in
+log-tempo space between the two boundaries. An edge run, a longer run, or a
+sustained 75 to 150 BPM transition is therefore preserved. Applied repairs are
+reported as `short_metrical_outlier_run_repaired`. The shipping default remains
+the one-interval rule until this candidate passes an independent timestamped
+holdout.
+
 Half- and double-time alternatives are preserved in `tempo_hypotheses`; the
 public result does not pretend that metrical ambiguity has disappeared.
 
@@ -105,6 +116,14 @@ confidence-weighted activity is at least 1.35 times the discarded phase. Equal
 salience therefore preserves a genuine fast pulse instead of blindly dividing
 every high tempo by two. The decision is recorded as
 `metrical_level_selected_half_time`.
+
+Weak double-time events require model evidence rather than estimator-generated
+timestamps. The Beat This adapter therefore exposes the opt-in
+`supported-midpoints-logit-minus-3.0` policy through the same end-to-end
+evaluation path as the upstream decoder. Each inserted event must still be a
+real local maximum in the model logits, near an interval midpoint, and part of
+a supported run. Evaluation reports record both decoder and estimator policy
+IDs so their effects cannot be confused with the default product path.
 
 ## Short transition beat-grid recovery
 

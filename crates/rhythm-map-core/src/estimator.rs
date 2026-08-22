@@ -20,6 +20,8 @@ pub struct EstimatorOptions {
     pub preferred_max_bpm: f64,
     /// Odd median-filter window in inter-beat intervals.
     pub smoothing_window: usize,
+    /// Longest bounded half/double-time outlier run repaired before smoothing.
+    pub maximum_metrical_outlier_run: usize,
     /// Sustained relative tempo difference considered a jump.
     pub jump_ratio: f64,
     /// Relative endpoint difference considered constant.
@@ -50,6 +52,7 @@ impl Default for EstimatorOptions {
             preferred_min_bpm: 70.0,
             preferred_max_bpm: 180.0,
             smoothing_window: 7,
+            maximum_metrical_outlier_run: 1,
             jump_ratio: 0.12,
             constant_ratio: 0.03,
             curve_tolerance_octaves: 0.04,
@@ -60,6 +63,18 @@ impl Default for EstimatorOptions {
             half_time_salience_ratio: 1.35,
             half_bar_downbeat_salience_ratio: 1.2,
             jump_transition_max_s: 4.0,
+        }
+    }
+}
+
+impl EstimatorOptions {
+    /// Experimental calibration candidate that repairs short, bounded runs of
+    /// octave-related interval errors while preserving sustained tempo levels.
+    #[must_use]
+    pub fn metrical_consistency_candidate() -> Self {
+        Self {
+            maximum_metrical_outlier_run: 3,
+            ..Self::default()
         }
     }
 }
@@ -151,7 +166,11 @@ impl TempoMapEstimator {
             smoothed,
             tempo_curve,
             tempo_segments,
+            repaired_metrical_run,
         } = build_tempo_estimate(&prepared, input.duration_s, &self.options);
+        if repaired_metrical_run {
+            warnings.push("short_metrical_outlier_run_repaired".to_string());
+        }
 
         let global_bpm = median(smoothed.clone());
         let tempo_hypotheses = metrical_hypotheses(global_bpm, &self.options);
@@ -199,6 +218,7 @@ struct TempoEstimate {
     smoothed: Vec<f64>,
     tempo_curve: Vec<TempoPoint>,
     tempo_segments: Vec<TempoSegment>,
+    repaired_metrical_run: bool,
 }
 
 fn build_tempo_estimate(
@@ -223,7 +243,12 @@ fn build_tempo_estimate(
         .iter()
         .map(|&bpm| bpm.clamp(options.min_bpm, options.max_bpm))
         .collect::<Vec<_>>();
-    let smoothed = smooth_log_tempo(&bounded, options.smoothing_window, options.jump_ratio);
+    let (smoothed, repaired_metrical_run) = smooth_log_tempo(
+        &bounded,
+        options.smoothing_window,
+        options.jump_ratio,
+        options.maximum_metrical_outlier_run,
+    );
     let tempo_curve = smoothed
         .iter()
         .enumerate()
@@ -250,6 +275,7 @@ fn build_tempo_estimate(
         smoothed,
         tempo_curve,
         tempo_segments,
+        repaired_metrical_run,
     }
 }
 
@@ -279,6 +305,11 @@ fn validate_options(options: &EstimatorOptions) -> Result<(), AnalysisError> {
     if options.smoothing_window == 0 || options.smoothing_window.is_multiple_of(2) {
         return Err(AnalysisError::InvalidOptions(
             "smoothing window must be a positive odd number".to_string(),
+        ));
+    }
+    if options.maximum_metrical_outlier_run == 0 {
+        return Err(AnalysisError::InvalidOptions(
+            "maximum metrical outlier run must be greater than zero".to_string(),
         ));
     }
     if !options.silence_threshold_db.is_finite()
@@ -651,36 +682,43 @@ fn mean_candidate_phase_salience(
     values.iter().sum::<f64>() / usize_to_f64(values.len())
 }
 
-fn smooth_log_tempo(values: &[f64], window: usize, edge_ratio: f64) -> Vec<f64> {
+fn smooth_log_tempo(
+    values: &[f64],
+    window: usize,
+    edge_ratio: f64,
+    maximum_metrical_outlier_run: usize,
+) -> (Vec<f64>, bool) {
     let radius = window / 2;
-    let metrical_outliers_repaired = (0..values.len())
+    let (bounded_runs_repaired, repaired_metrical_run) =
+        repair_bounded_metrical_runs(values, radius, edge_ratio, maximum_metrical_outlier_run);
+    let metrical_outliers_repaired = (0..bounded_runs_repaired.len())
         .map(|index| {
             let left_start = index.saturating_sub(radius);
-            let right_end = (index + radius + 1).min(values.len());
-            let left = &values[left_start..index];
-            let right = &values[index + 1..right_end];
+            let right_end = (index + radius + 1).min(bounded_runs_repaired.len());
+            let left = &bounded_runs_repaired[left_start..index];
+            let right = &bounded_runs_repaired[index + 1..right_end];
             if left.is_empty() || right.is_empty() {
-                return values[index];
+                return bounded_runs_repaired[index];
             }
             let left_center = median(left.to_vec());
             let right_center = median(right.to_vec());
             if (left_center / right_center).ln().abs() > edge_ratio.ln_1p() {
-                return values[index];
+                return bounded_runs_repaired[index];
             }
             let context = f64::midpoint(left_center, right_center);
-            let octave_offset = (values[index] / context).log2();
+            let octave_offset = (bounded_runs_repaired[index] / context).log2();
             let nearest_octave = octave_offset.round();
             if nearest_octave.abs() >= 1.0
                 && (octave_offset - nearest_octave).abs() <= (1.0 + edge_ratio).log2()
             {
                 context
             } else {
-                values[index]
+                bounded_runs_repaired[index]
             }
         })
         .collect::<Vec<_>>();
 
-    (0..metrical_outliers_repaired.len())
+    let smoothed = (0..metrical_outliers_repaired.len())
         .map(|index| {
             let start = index.saturating_sub(1);
             let end = (index + 2).min(metrical_outliers_repaired.len());
@@ -697,7 +735,66 @@ fn smooth_log_tempo(values: &[f64], window: usize, edge_ratio: f64) -> Vec<f64> 
                 / usize_to_f64(end - start);
             2.0_f64.powf(mean_log)
         })
-        .collect()
+        .collect();
+    (smoothed, repaired_metrical_run)
+}
+
+fn repair_bounded_metrical_runs(
+    values: &[f64],
+    radius: usize,
+    edge_ratio: f64,
+    maximum_run: usize,
+) -> (Vec<f64>, bool) {
+    let mut repaired = values.to_vec();
+    if maximum_run < 2 || values.len() < 4 {
+        return (repaired, false);
+    }
+
+    let octave_tolerance = (1.0 + edge_ratio).log2();
+    let mut changed = false;
+    let mut start = 1;
+    while start + 2 < values.len() {
+        let largest_run = maximum_run.min(values.len() - start - 1);
+        let candidate = (2..=largest_run).rev().find_map(|run_length| {
+            let end = start + run_length;
+            let left_start = start.saturating_sub(radius);
+            let right_end = (end + radius).min(values.len());
+            let left = &values[left_start..start];
+            let right = &values[end..right_end];
+            if left.is_empty() || right.is_empty() {
+                return None;
+            }
+            let left_center = median(left.to_vec());
+            let right_center = median(right.to_vec());
+            if (left_center / right_center).ln().abs() > edge_ratio.ln_1p() {
+                return None;
+            }
+            let context = (left_center.log2() + right_center.log2()) * 0.5;
+            values[start..end]
+                .iter()
+                .all(|value| {
+                    let octave_offset = value.log2() - context;
+                    let nearest_octave = octave_offset.round();
+                    nearest_octave.abs() >= 1.0
+                        && (octave_offset - nearest_octave).abs() <= octave_tolerance
+                })
+                .then_some((end, left_center, right_center))
+        });
+
+        let Some((end, left_center, right_center)) = candidate else {
+            start += 1;
+            continue;
+        };
+        let span = usize_to_f64(end - start + 1);
+        for (offset, value) in repaired[start..end].iter_mut().enumerate() {
+            let position = usize_to_f64(offset + 1) / span;
+            *value = 2.0_f64
+                .powf(left_center.log2() + position * (right_center.log2() - left_center.log2()));
+        }
+        changed = true;
+        start = end;
+    }
+    (repaired, changed)
 }
 
 fn metrical_hypotheses(global_bpm: f64, options: &EstimatorOptions) -> Vec<TempoHypothesis> {
@@ -1446,6 +1543,52 @@ mod tests {
                 .iter()
                 .all(|point| (point.bpm - 120.0).abs() < 0.01)
         );
+    }
+
+    #[test]
+    fn bounded_metrical_run_candidate_repairs_three_missing_events() {
+        let mut bpms = vec![150.0; 8];
+        bpms.extend([75.0; 3]);
+        bpms.extend([150.0; 8]);
+        let input = observations_from_bpms(&bpms);
+
+        let baseline = TempoMapEstimator::default().estimate(&input).unwrap();
+        assert!(
+            baseline
+                .tempo_curve
+                .iter()
+                .any(|point| (point.bpm - 150.0).abs() > 1.0)
+        );
+
+        let candidate = TempoMapEstimator::new(EstimatorOptions::metrical_consistency_candidate())
+            .unwrap()
+            .estimate(&input)
+            .unwrap();
+        assert!(
+            candidate
+                .tempo_curve
+                .iter()
+                .all(|point| (point.bpm - 150.0).abs() < 0.01)
+        );
+        assert!(
+            candidate
+                .warnings
+                .contains(&"short_metrical_outlier_run_repaired".to_string())
+        );
+    }
+
+    #[test]
+    fn bounded_metrical_run_candidate_preserves_sustained_octave_step() {
+        let mut bpms = vec![75.0; 20];
+        bpms.extend([150.0; 20]);
+        let input = observations_from_bpms(&bpms);
+        let analysis = TempoMapEstimator::new(EstimatorOptions::metrical_consistency_candidate())
+            .unwrap()
+            .estimate(&input)
+            .unwrap();
+
+        assert!((analysis.tempo_curve.first().unwrap().bpm - 75.0).abs() < 0.01);
+        assert!((analysis.tempo_curve.last().unwrap().bpm - 150.0).abs() < 0.01);
     }
 
     #[test]

@@ -138,3 +138,12 @@ a learned component to the default distribution.
   metrics. The remaining work is corpus population, not another decoder sweep:
   obtain multiple independent legally held sources for each required slice,
   select one policy on calibration, then open the untouched holdout once.
+- 2026-08-23: an opt-in `metrical-consistency-v1` estimator repaired bounded
+  half/double-time runs of up to three intervals without changing any ARTBeaT
+  beat or tempo metric. It lowered FSLD 150 BPM P95 error from 49.57 to about
+  2.61 percent and raised FSLD from 6 to 7 passes. The registered supported-
+  midpoint decoder also reached 7 passes but retained its known ARTBeaT
+  regression, and combining the policies added no further pass. Keep both
+  candidates out of the shipping default; the remaining whole-track and edge
+  ambiguities require timestamped holdout evidence and stronger sequence/phase
+  emissions, not broader unconditional half/double folding.

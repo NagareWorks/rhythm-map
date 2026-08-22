@@ -44,6 +44,22 @@ pub struct SupportedMidpointOptions {
     pub minimum_supported_gaps: usize,
 }
 
+/// Deployable decoding policy used by [`BeatThisBackend`].
+///
+/// The upstream policy remains the default. Alternative policies are explicit
+/// so calibration can exercise the complete product path without changing the
+/// behavior of CLI, FFI, or WASM consumers.
+#[derive(Debug, Clone, Copy, Default, PartialEq)]
+pub enum BeatThisDecoderPolicy {
+    /// Match the decoder shipped by the upstream Rust port.
+    #[default]
+    Upstream,
+    /// Apply an explicit peak-picking configuration.
+    PeakPicking(PeakPickingOptions),
+    /// Recover repeated weak model peaks between strong events.
+    SupportedMidpoints(SupportedMidpointOptions),
+}
+
 impl Default for SupportedMidpointOptions {
     fn default() -> Self {
         Self {
@@ -90,6 +106,7 @@ pub struct DecodedAudio {
 pub struct BeatThisBackend {
     tracker: BeatThis<DefaultModel>,
     model_name: String,
+    decoder_policy: BeatThisDecoderPolicy,
 }
 
 impl BeatThisBackend {
@@ -115,7 +132,15 @@ impl BeatThisBackend {
         Ok(Self {
             tracker,
             model_name,
+            decoder_policy: BeatThisDecoderPolicy::default(),
         })
+    }
+
+    /// Select an explicit deployable decoder policy.
+    #[must_use]
+    pub const fn with_decoder_policy(mut self, policy: BeatThisDecoderPolicy) -> Self {
+        self.decoder_policy = policy;
+        self
     }
 
     /// Run the neural frontend and model while retaining undecoded frame logits.
@@ -240,7 +265,17 @@ impl RhythmObservationBackend for BeatThisBackend {
         sample_rate: u32,
     ) -> Result<RhythmObservations, BackendError> {
         let inference = self.infer_mono(samples, sample_rate)?;
-        self.decode_inference(&inference, PeakPickingOptions::default())
+        match self.decoder_policy {
+            BeatThisDecoderPolicy::Upstream => {
+                self.decode_inference(&inference, PeakPickingOptions::default())
+            }
+            BeatThisDecoderPolicy::PeakPicking(options) => {
+                self.decode_inference(&inference, options)
+            }
+            BeatThisDecoderPolicy::SupportedMidpoints(options) => {
+                self.decode_inference_with_supported_midpoints(&inference, options)
+            }
+        }
     }
 }
 

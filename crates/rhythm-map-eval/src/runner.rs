@@ -7,10 +7,12 @@ use std::{
 
 use anyhow::{Context, Result, bail};
 use rhythm_map_beat_this::{
-    BeatThisBackend, PeakPickingOptions, SupportedMidpointOptions, decode_audio,
+    BeatThisBackend, BeatThisDecoderPolicy, PeakPickingOptions, SupportedMidpointOptions,
+    decode_audio,
 };
 use rhythm_map_core::{
-    Analysis, Engine, ModelInfo, ObservedBeat, RhythmObservations, TempoMapEstimator,
+    Analysis, Engine, EstimatorOptions, ModelInfo, ObservedBeat, RhythmObservations,
+    TempoMapEstimator,
 };
 use rhythm_map_models::{ModelArtifactRole, VerifiedModelPack, verify_model_pack};
 use serde::{Deserialize, Serialize};
@@ -142,6 +144,12 @@ pub struct BottleneckEvaluation {
     pub suite_purpose: SuitePurpose,
     /// Verified model-pack identity.
     pub model_pack: ModelPackIdentity,
+    /// Explicit non-default decoder exercised by this report.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub decoder_policy: Option<DecoderPolicy>,
+    /// Explicit non-default deterministic estimator exercised by this report.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub estimator_policy: Option<String>,
     /// True when the end-to-end path and every available oracle path pass.
     pub passed: bool,
     /// Acceptance-gate bottleneck decision, or `end_to_end_only` without an oracle.
@@ -173,6 +181,13 @@ impl DecoderPolicy {
             local_max_radius_frames: self.local_max_radius_frames,
             deduplicate_width_frames: self.deduplicate_width_frames,
         }
+    }
+
+    fn backend_policy(&self) -> BeatThisDecoderPolicy {
+        self.supported_midpoints.as_ref().map_or_else(
+            || BeatThisDecoderPolicy::PeakPicking(self.options()),
+            |midpoints| BeatThisDecoderPolicy::SupportedMidpoints(midpoints.options()),
+        )
     }
 }
 
@@ -435,7 +450,13 @@ pub fn evaluate_core_suite(suite_path: &Path) -> Result<SuiteEvaluation> {
     let (suite, root) = load_suite(suite_path)?;
     let estimator = TempoMapEstimator::default();
     let mut cases = Vec::with_capacity(suite.cases.len());
-    for case in &suite.cases {
+    for (case_index, case) in suite.cases.iter().enumerate() {
+        eprintln!(
+            "core evaluation {}/{}: {}",
+            case_index + 1,
+            suite.cases.len(),
+            case.id
+        );
         let truth = load_case_truth(case, &root)?;
         let analysis = estimator
             .estimate(&truth.ideal_observations())
@@ -457,7 +478,7 @@ pub fn evaluate_backend_suite(
     model_pack_path: &Path,
     model_root: &Path,
 ) -> Result<BottleneckEvaluation> {
-    evaluate_backend_suite_impl(suite_path, model_pack_path, model_root, None)
+    evaluate_backend_suite_impl(suite_path, model_pack_path, model_root, None, None, None)
 }
 
 /// Run generated and content-addressed external audio through Beat This.
@@ -476,7 +497,69 @@ pub fn evaluate_backend_suite_with_audio_directory(
     audio_directory: &Path,
 ) -> Result<BottleneckEvaluation> {
     let resolver = ExternalAudioResolver::new(audio_directory)?;
-    evaluate_backend_suite_impl(suite_path, model_pack_path, model_root, Some(&resolver))
+    evaluate_backend_suite_impl(
+        suite_path,
+        model_pack_path,
+        model_root,
+        Some(&resolver),
+        None,
+        None,
+    )
+}
+
+/// Run a complete audio-to-analysis calibration with one pre-registered
+/// decoder policy. Unlike decoder-eval, tempo-only suites are accepted because
+/// this path scores only their declared end-to-end truth and never constructs
+/// beat-phase labels.
+///
+/// # Errors
+///
+/// Returns an error for an unknown policy or any ordinary backend-evaluation
+/// failure.
+pub fn evaluate_backend_suite_with_decoder_policy(
+    suite_path: &Path,
+    model_pack_path: &Path,
+    model_root: &Path,
+    audio_directory: &Path,
+    policy_id: &str,
+) -> Result<BottleneckEvaluation> {
+    evaluate_backend_suite_with_policies(
+        suite_path,
+        model_pack_path,
+        model_root,
+        audio_directory,
+        Some(policy_id),
+        None,
+    )
+}
+
+/// Run the complete product path with explicit registered decoder and/or
+/// estimator candidates. This is intended for calibration reports; omitted
+/// policy IDs preserve the shipping defaults.
+///
+/// # Errors
+///
+/// Returns an error for an unknown policy or any ordinary backend-evaluation
+/// failure.
+pub fn evaluate_backend_suite_with_policies(
+    suite_path: &Path,
+    model_pack_path: &Path,
+    model_root: &Path,
+    audio_directory: &Path,
+    decoder_policy_id: Option<&str>,
+    estimator_policy_id: Option<&str>,
+) -> Result<BottleneckEvaluation> {
+    let resolver = ExternalAudioResolver::new(audio_directory)?;
+    let decoder_policy = decoder_policy_id.map(standard_decoder_policy).transpose()?;
+    validate_estimator_policy(estimator_policy_id)?;
+    evaluate_backend_suite_impl(
+        suite_path,
+        model_pack_path,
+        model_root,
+        Some(&resolver),
+        decoder_policy.as_ref(),
+        estimator_policy_id,
+    )
 }
 
 fn evaluate_backend_suite_impl(
@@ -484,6 +567,8 @@ fn evaluate_backend_suite_impl(
     model_pack_path: &Path,
     model_root: &Path,
     audio_resolver: Option<&ExternalAudioResolver>,
+    decoder_policy: Option<&DecoderPolicy>,
+    estimator_policy: Option<&str>,
 ) -> Result<BottleneckEvaluation> {
     let verified = verify_model_pack(model_pack_path, model_root)
         .with_context(|| format!("verifying model pack {}", model_pack_path.display()))?;
@@ -491,12 +576,22 @@ fn evaluate_backend_suite_impl(
     let mel_model = required_model_path(&verified, ModelArtifactRole::MelFrontend)?;
     let beat_model = required_model_path(&verified, ModelArtifactRole::BeatModel)?;
     let backend = BeatThisBackend::load(&mel_model, &beat_model)?;
-    let mut engine = Engine::new(backend, TempoMapEstimator::default());
-    let estimator = TempoMapEstimator::default();
+    let backend = match decoder_policy {
+        Some(policy) => backend.with_decoder_policy(policy.backend_policy()),
+        None => backend,
+    };
+    let estimator = estimator_for_policy(estimator_policy)?;
+    let mut engine = Engine::new(backend, estimator.clone());
     let (suite, root) = load_suite(suite_path)?;
     let mut cases = Vec::with_capacity(suite.cases.len());
 
-    for case in &suite.cases {
+    for (case_index, case) in suite.cases.iter().enumerate() {
+        eprintln!(
+            "backend evaluation {}/{}: {}",
+            case_index + 1,
+            suite.cases.len(),
+            case.id
+        );
         let truth = load_case_truth(case, &root)?;
         let thresholds = case.thresholds.as_ref().unwrap_or(&suite.thresholds);
         let oracle = if truth.beats.is_empty() {
@@ -558,10 +653,34 @@ fn evaluate_backend_suite_impl(
             backend: manifest.backend.clone(),
             manifest_sha256: verified.manifest_sha256().to_string(),
         },
+        decoder_policy: decoder_policy.cloned(),
+        estimator_policy: estimator_policy.map(str::to_string),
         passed: oracle_passed && end_to_end_passed,
         attribution,
         cases,
     })
+}
+
+fn validate_estimator_policy(policy_id: Option<&str>) -> Result<()> {
+    if policy_id.is_none_or(|id| id == "metrical-consistency-v1") {
+        return Ok(());
+    }
+    bail!(
+        "unknown estimator policy {}; available policies: metrical-consistency-v1",
+        policy_id.expect("checked as some")
+    )
+}
+
+fn estimator_for_policy(policy_id: Option<&str>) -> Result<TempoMapEstimator> {
+    validate_estimator_policy(policy_id)?;
+    match policy_id {
+        Some("metrical-consistency-v1") => {
+            TempoMapEstimator::new(EstimatorOptions::metrical_consistency_candidate())
+                .map_err(Into::into)
+        }
+        None => Ok(TempoMapEstimator::default()),
+        Some(_) => unreachable!("validated estimator policy"),
+    }
 }
 
 /// Standard threshold and local-maximum sweep around the upstream decoder.
@@ -1549,6 +1668,13 @@ mod tests {
             "supported-midpoints-logit-minus-3.0"
         );
         assert!(standard_decoder_policy("tuned-on-holdout").is_err());
+    }
+
+    #[test]
+    fn estimator_policy_requires_a_registered_id() {
+        assert!(validate_estimator_policy(None).is_ok());
+        assert!(validate_estimator_policy(Some("metrical-consistency-v1")).is_ok());
+        assert!(validate_estimator_policy(Some("tuned-on-holdout")).is_err());
     }
 
     #[test]
