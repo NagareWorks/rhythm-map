@@ -43,6 +43,20 @@ The lock verifies exact byte sizes and SHA-256 identities. See
 [`datasets/README.md`](datasets/README.md) for license, attribution, scope, and
 truth derivation.
 
+Fetch the independent FSLD fixed-tempo calibration slice without downloading
+its complete 8.8 GB ZIP:
+
+```bash
+cargo xtask dataset-fetch \
+  --manifest evaluation/datasets/fsld-tempo-v1.json \
+  --output D:/rhythm-map-eval/fsld-tempo-v1 \
+  --with-annotations
+```
+
+This suite has independently reviewed BPM but no beat phase. Run only the
+end-to-end backend evaluation shown in `datasets/README.md`; its empty beat and
+change labels intentionally cannot support oracle or decoder-policy claims.
+
 Gate the deterministic tempo-map estimator using ideal beat observations:
 
 ```bash

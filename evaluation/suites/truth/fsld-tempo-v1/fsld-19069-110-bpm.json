@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "fsld-19069-110-bpm",
+  "duration_s": 8.727210884353742,
+  "beats": [],
+  "tempo_segments": [
+    {
+      "start_s": 0,
+      "end_s": 8.727210884353742,
+      "kind": "constant",
+      "start_bpm": 110,
+      "end_bpm": 110
+    }
+  ],
+  "change_points": []
+}

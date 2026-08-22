@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "fsld-439993-200-bpm",
+  "duration_s": 4.799954648526077,
+  "beats": [],
+  "tempo_segments": [
+    {
+      "start_s": 0,
+      "end_s": 4.799954648526077,
+      "kind": "constant",
+      "start_bpm": 200,
+      "end_bpm": 200
+    }
+  ],
+  "change_points": []
+}

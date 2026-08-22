@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "fsld-131423-80-bpm",
+  "duration_s": 11.999954648526078,
+  "beats": [],
+  "tempo_segments": [
+    {
+      "start_s": 0,
+      "end_s": 11.999954648526078,
+      "kind": "constant",
+      "start_bpm": 80,
+      "end_bpm": 80
+    }
+  ],
+  "change_points": []
+}

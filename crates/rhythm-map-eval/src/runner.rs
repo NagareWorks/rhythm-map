@@ -87,7 +87,7 @@ pub struct ObservationDiagnostics {
     pub analysis_warnings: Vec<String>,
 }
 
-/// Oracle and end-to-end results for one case.
+/// Available oracle evidence and the end-to-end result for one case.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct AttributionCase {
     /// Stable case identifier.
@@ -98,12 +98,14 @@ pub struct AttributionCase {
     /// Verified encoded audio identity for an external case.
     #[serde(default)]
     pub audio_sha256: Option<String>,
-    /// Estimator result from exact beat observations.
-    pub oracle: CaseEvaluation,
+    /// Estimator result from exact beat observations, absent for tempo-only truth.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub oracle: Option<CaseEvaluation>,
     /// Product result from rendered audio and the observation backend.
     pub end_to_end: CaseEvaluation,
-    /// Directional end-to-end metric difference.
-    pub delta: CaseMetricDelta,
+    /// Directional end-to-end metric difference, available only with an oracle.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub delta: Option<CaseMetricDelta>,
     /// Raw beat/confidence events and activity summary used for diagnosis.
     pub observations: ObservationDiagnostics,
     /// Wall-clock time spent in end-to-end audio analysis.
@@ -122,11 +124,14 @@ pub enum AttributionDecision {
     ObservationPath,
     /// The deterministic estimator fails even with exact beats.
     DeterministicEstimator,
+    /// The suite has independently labeled output truth but no exact beat events
+    /// from which to construct the estimator-only oracle path.
+    EndToEndOnly,
     /// Both paths satisfy the current acceptance gates.
     NoMeasuredBottleneck,
 }
 
-/// Side-by-side oracle and end-to-end evaluation report.
+/// Oracle attribution where available plus end-to-end evaluation.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct BottleneckEvaluation {
     /// Evaluation report schema version.
@@ -137,9 +142,9 @@ pub struct BottleneckEvaluation {
     pub suite_purpose: SuitePurpose,
     /// Verified model-pack identity.
     pub model_pack: ModelPackIdentity,
-    /// True only when both oracle and end-to-end paths pass.
+    /// True when the end-to-end path and every available oracle path pass.
     pub passed: bool,
-    /// Acceptance-gate bottleneck decision.
+    /// Acceptance-gate bottleneck decision, or `end_to_end_only` without an oracle.
     pub attribution: AttributionDecision,
     /// Per-case paired measurements.
     pub cases: Vec<AttributionCase>,
@@ -494,10 +499,19 @@ fn evaluate_backend_suite_impl(
     for case in &suite.cases {
         let truth = load_case_truth(case, &root)?;
         let thresholds = case.thresholds.as_ref().unwrap_or(&suite.thresholds);
-        let oracle_analysis = estimator
-            .estimate(&truth.ideal_observations())
-            .with_context(|| format!("estimating oracle case {}", case.id))?;
-        let oracle = evaluate_analysis(&case.id, &oracle_analysis, &truth, thresholds);
+        let oracle = if truth.beats.is_empty() {
+            None
+        } else {
+            let oracle_analysis = estimator
+                .estimate(&truth.ideal_observations())
+                .with_context(|| format!("estimating oracle case {}", case.id))?;
+            Some(evaluate_analysis(
+                &case.id,
+                &oracle_analysis,
+                &truth,
+                thresholds,
+            ))
+        };
 
         let (samples, sample_rate, audio_sha256) =
             load_case_audio(case, &suite.id, &root, &truth, audio_resolver)?;
@@ -510,7 +524,9 @@ fn evaluate_backend_suite_impl(
             .with_context(|| format!("estimating backend case {}", case.id))?;
         let runtime_ms = started.elapsed().as_secs_f64() * 1000.0;
         let end_to_end = evaluate_analysis(&case.id, &analysis, &truth, thresholds);
-        let delta = metric_delta(&oracle, &end_to_end);
+        let delta = oracle
+            .as_ref()
+            .map(|oracle| metric_delta(oracle, &end_to_end));
         let observation_diagnostics = observation_diagnostics(&observations, &analysis);
         cases.push(AttributionCase {
             id: case.id.clone(),
@@ -524,18 +540,16 @@ fn evaluate_backend_suite_impl(
         });
     }
 
-    let oracle_passed = cases.iter().all(|case| case.oracle.passed);
+    let oracle_passed = cases
+        .iter()
+        .filter_map(|case| case.oracle.as_ref())
+        .all(|oracle| oracle.passed);
+    let has_unpaired_cases = cases.iter().any(|case| case.oracle.is_none());
     let end_to_end_passed = cases.iter().all(|case| case.end_to_end.passed);
-    let attribution = if !oracle_passed {
-        AttributionDecision::DeterministicEstimator
-    } else if !end_to_end_passed {
-        AttributionDecision::ObservationPath
-    } else {
-        AttributionDecision::NoMeasuredBottleneck
-    };
+    let attribution = attribution_decision(oracle_passed, has_unpaired_cases, end_to_end_passed);
     let manifest = verified.manifest();
     Ok(BottleneckEvaluation {
-        schema_version: 1,
+        schema_version: 2,
         suite_id: suite.id,
         suite_purpose: suite.purpose,
         model_pack: ModelPackIdentity {
@@ -782,6 +796,7 @@ fn evaluate_decoder_candidates_with_audio_directory(
             suite.purpose
         );
     }
+    ensure_timestamped_beat_truth(&suite, &root, operation)?;
     let verified = verify_model_pack(model_pack_path, model_root)
         .with_context(|| format!("verifying model pack {}", model_pack_path.display()))?;
     validate_beat_this_contract(&verified)?;
@@ -913,6 +928,7 @@ pub fn evaluate_decoder_recoverability_with_audio_directory(
             suite.purpose
         );
     }
+    ensure_timestamped_beat_truth(&suite, &root, "decoder recoverability")?;
     let verified = verify_model_pack(model_pack_path, model_root)
         .with_context(|| format!("verifying model pack {}", model_pack_path.display()))?;
     validate_beat_this_contract(&verified)?;
@@ -1366,6 +1382,22 @@ pub fn score_prediction_directory(
     Ok(suite_report(suite.id, suite.purpose, cases))
 }
 
+fn ensure_timestamped_beat_truth(
+    suite: &EvaluationSuite,
+    root: &Path,
+    operation: &str,
+) -> Result<()> {
+    for case in &suite.cases {
+        if load_case_truth(case, root)?.beats.is_empty() {
+            bail!(
+                "{operation} requires timestamped beat truth; case {} is tempo-only",
+                case.id
+            );
+        }
+    }
+    Ok(())
+}
+
 fn load_case_truth(case: &EvaluationCase, root: &Path) -> Result<GeneratedTruth> {
     let truth = match &case.input {
         CaseInput::Generated { recipe } => {
@@ -1445,6 +1477,22 @@ fn metric_delta(oracle: &CaseEvaluation, end_to_end: &CaseEvaluation) -> CaseMet
     }
 }
 
+const fn attribution_decision(
+    oracle_passed: bool,
+    has_unpaired_cases: bool,
+    end_to_end_passed: bool,
+) -> AttributionDecision {
+    if !oracle_passed {
+        AttributionDecision::DeterministicEstimator
+    } else if has_unpaired_cases {
+        AttributionDecision::EndToEndOnly
+    } else if !end_to_end_passed {
+        AttributionDecision::ObservationPath
+    } else {
+        AttributionDecision::NoMeasuredBottleneck
+    }
+}
+
 fn subtract_options(left: Option<f64>, right: Option<f64>) -> Option<f64> {
     left.zip(right).map(|(left, right)| left - right)
 }
@@ -1457,6 +1505,22 @@ fn usize_to_f64(value: usize) -> f64 {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn attribution_does_not_invent_an_oracle_for_tempo_only_cases() {
+        assert_eq!(
+            attribution_decision(true, true, false),
+            AttributionDecision::EndToEndOnly
+        );
+        assert_eq!(
+            attribution_decision(true, false, false),
+            AttributionDecision::ObservationPath
+        );
+        assert_eq!(
+            attribution_decision(false, false, false),
+            AttributionDecision::DeterministicEstimator
+        );
+    }
 
     #[test]
     fn standard_decoder_sweep_keeps_upstream_policy_first() {

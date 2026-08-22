@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "id": "fsld-tempo-v1",
+  "description": "Tempo-only calibration on 15 expert-agreed, well-cut Freesound loops outside the published Beat This training corpus. This suite does not claim beat phase, downbeat, or change-point truth.",
+  "purpose": "calibration",
+  "thresholds": {
+    "beat_tolerance_ms": 70,
+    "change_tolerance_s": 1,
+    "min_beat_f1": 0,
+    "min_downbeat_f1": 0,
+    "max_tempo_median_error_percent": 5,
+    "max_tempo_p95_error_percent": 10,
+    "min_change_recall": 0
+  },
+  "cases": [
+    {
+      "id": "fsld-476866-41-bpm",
+      "input": {
+        "kind": "external",
+        "truth": "truth/fsld-tempo-v1/fsld-476866-41-bpm.json",
+        "audio": {
+          "sha256": "d65f3236d1b3f4baa03ea7cc23509fea8ab545624217681dcb101a53d2639b51",
+          "local_file_hint": "audio/476866.wav"
+        }
+      },
+      "tags": ["tempo-only", "fixed-tempo", "slow-tempo", "percussive", "melodic", "live-sounds"],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-3.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "07152019_3 Bass and Drums Mix MMV3 41 BPM.wav by MikeOscarFoxtrot",
+        "source_url": "https://freesound.org/s/476866/"
+      }
+    },
+    {
+      "id": "fsld-404840-60-bpm",
+      "input": {
+        "kind": "external",
+        "truth": "truth/fsld-tempo-v1/fsld-404840-60-bpm.json",
+        "audio": {
+          "sha256": "2d302a6cad5280ba7301fe82f3fba3764eb6695acc2a17b823fabc09e87b6118",
+          "local_file_hint": "audio/404840.wav"
+        }
+      },
+      "tags": ["tempo-only", "fixed-tempo", "slow-tempo", "percussive", "bass", "chords", "hip-hop"],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "source_url": "https://freesound.org/s/404840/"
+      }
+    },
+    {
+      "id": "fsld-210835-70-bpm",
+      "input": {
+        "kind": "external",
+        "truth": "truth/fsld-tempo-v1/fsld-210835-70-bpm.json",
+        "audio": {
+          "sha256": "9c79acadf1b7514eb9869827339aa606959c09b9b5d6dfc1d51e5586ac23781c",
+          "local_file_hint": "audio/210835.wav"
+        }
+      },
+      "tags": ["tempo-only", "fixed-tempo", "slow-tempo", "drumless", "piano", "melodic"],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "source_url": "https://freesound.org/s/210835/"
+      }
+    },
+    {
+      "id": "fsld-131423-80-bpm",
+      "input": {
+        "kind": "external",
+        "truth": "truth/fsld-tempo-v1/fsld-131423-80-bpm.json",
+        "audio": {
+          "sha256": "67874e011aa0a3acd9a94400ab4c0f1155aedcf1a3807ca1a1cf5eea79e8915a",
+          "local_file_hint": "audio/131423.wav"
+        }
+      },
+      "tags": ["tempo-only", "fixed-tempo", "drumless", "electric-piano", "melodic", "cinematic"],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "source_url": "https://freesound.org/s/131423/"
+      }
+    },
+    {
+      "id": "fsld-219021-90-bpm",
+      "input": {
+        "kind": "external",
+        "truth": "truth/fsld-tempo-v1/fsld-219021-90-bpm.json",
+        "audio": {
+          "sha256": "850be83458a0fb65dd7193fc6b4248ad82308cf47fd9536f4bdef537f0f8aae3",
+          "local_file_hint": "audio/219021.wav"
+        }
+      },
+      "tags": ["tempo-only", "fixed-tempo", "percussive", "global", "electronic"],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "source_url": "https://freesound.org/s/219021/"
+      }
+    },
+    {
+      "id": "fsld-360687-100-bpm",
+      "input": {
+        "kind": "external",
+        "truth": "truth/fsld-tempo-v1/fsld-360687-100-bpm.json",
+        "audio": {
+          "sha256": "626595ce94447d51a2596d2fa0564f77e53c0682ed900aa3953773dc16edc6a9",
+          "local_file_hint": "audio/360687.wav"
+        }
+      },
+      "tags": ["tempo-only", "fixed-tempo", "percussive", "experimental", "hip-hop", "electronic"],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "source_url": "https://freesound.org/s/360687/"
+      }
+    },
+    {
+      "id": "fsld-19069-110-bpm",
+      "input": {
+        "kind": "external",
+        "truth": "truth/fsld-tempo-v1/fsld-19069-110-bpm.json",
+        "audio": {
+          "sha256": "06c77b1f3f388f23593e4df0d05493f18e2f642bb46c74d9efa2eb84343903b1",
+          "local_file_hint": "audio/19069.wav"
+        }
+      },
+      "tags": ["tempo-only", "fixed-tempo", "sparse", "techno", "metric-ambiguity"],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "source_url": "https://freesound.org/s/19069/"
+      }
+    },
+    {
+      "id": "fsld-418991-120-bpm",
+      "input": {
+        "kind": "external",
+        "truth": "truth/fsld-tempo-v1/fsld-418991-120-bpm.json",
+        "audio": {
+          "sha256": "08370afa22a9c782a4019e39ccb763b400f66b95588837661a9bd4fbd7ef65bf",
+          "local_file_hint": "audio/418991.wav"
+        }
+      },
+      "tags": ["tempo-only", "fixed-tempo", "percussive", "kick-snare", "live-drums"],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "source_url": "https://freesound.org/s/418991/"
+      }
+    },
+    {
+      "id": "fsld-124542-128-bpm",
+      "input": {
+        "kind": "external",
+        "truth": "truth/fsld-tempo-v1/fsld-124542-128-bpm.json",
+        "audio": {
+          "sha256": "d0d416d868597843dc59968c2b161bd088c1813f319c189f016a30bf1027a51a",
+          "local_file_hint": "audio/124542.wav"
+        }
+      },
+      "tags": ["tempo-only", "fixed-tempo", "percussive", "no-kick", "glitch", "techno"],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "source_url": "https://freesound.org/s/124542/"
+      }
+    },
+    {
+      "id": "fsld-486302-130-bpm",
+      "input": {
+        "kind": "external",
+        "truth": "truth/fsld-tempo-v1/fsld-486302-130-bpm.json",
+        "audio": {
+          "sha256": "569f34339c827dcdda7bb937cc035d4b8d4af2a9bd5f97ddc3705290b7cf02e4",
+          "local_file_hint": "audio/486302.wav"
+        }
+      },
+      "tags": ["tempo-only", "fixed-tempo", "drumless", "piano", "chords"],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "source_url": "https://freesound.org/s/486302/"
+      }
+    },
+    {
+      "id": "fsld-271070-140-bpm",
+      "input": {
+        "kind": "external",
+        "truth": "truth/fsld-tempo-v1/fsld-271070-140-bpm.json",
+        "audio": {
+          "sha256": "c2d46e8a5629a58f80c7c1183bc7426a92a67257486eb743504946e6cd18319f",
+          "local_file_hint": "audio/271070.wav"
+        }
+      },
+      "tags": ["tempo-only", "fixed-tempo", "drumless", "bass", "dubstep", "four-annotator-consensus"],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "source_url": "https://freesound.org/s/271070/"
+      }
+    },
+    {
+      "id": "fsld-330889-150-bpm",
+      "input": {
+        "kind": "external",
+        "truth": "truth/fsld-tempo-v1/fsld-330889-150-bpm.json",
+        "audio": {
+          "sha256": "b2db6563b99a0ad08cd184c9b0a8ef8dd24c7ff1e078994d822aa44d3b8eac54",
+          "local_file_hint": "audio/330889.wav"
+        }
+      },
+      "tags": ["tempo-only", "fixed-tempo", "drumless", "lead", "melodic", "hip-hop"],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "source_url": "https://freesound.org/s/330889/"
+      }
+    },
+    {
+      "id": "fsld-322315-160-bpm",
+      "input": {
+        "kind": "external",
+        "truth": "truth/fsld-tempo-v1/fsld-322315-160-bpm.json",
+        "audio": {
+          "sha256": "4883eb8549c31956a49c58be86f54a3ff7c0ae112ffd3b40a9f160ca5baf7104",
+          "local_file_hint": "audio/322315.wav"
+        }
+      },
+      "tags": ["tempo-only", "fixed-tempo", "fast-tempo", "percussive", "bass", "gabber", "breakbeat"],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "source_url": "https://freesound.org/s/322315/"
+      }
+    },
+    {
+      "id": "fsld-348652-180-bpm",
+      "input": {
+        "kind": "external",
+        "truth": "truth/fsld-tempo-v1/fsld-348652-180-bpm.json",
+        "audio": {
+          "sha256": "2e6022f3f134ef35601719d64162fe96442f3f8765108772fdc66c57a5b6f0f3",
+          "local_file_hint": "audio/348652.wav"
+        }
+      },
+      "tags": ["tempo-only", "fixed-tempo", "fast-tempo", "percussive", "ghost-break", "metric-ambiguity"],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "source_url": "https://freesound.org/s/348652/"
+      }
+    },
+    {
+      "id": "fsld-439993-200-bpm",
+      "input": {
+        "kind": "external",
+        "truth": "truth/fsld-tempo-v1/fsld-439993-200-bpm.json",
+        "audio": {
+          "sha256": "ade68d1e50780c4c561483ce31d6622682f6040b9892963050fb5e010c0a75c1",
+          "local_file_hint": "audio/439993.wav"
+        }
+      },
+      "tags": ["tempo-only", "fixed-tempo", "extreme-tempo", "percussive", "breakcore", "metric-ambiguity", "filename-conflict"],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-4.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "source_url": "https://freesound.org/s/439993/"
+      }
+    }
+  ]
+}

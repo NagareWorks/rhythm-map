@@ -53,6 +53,23 @@ private suite.
 7. Run the end-to-end path only after the oracle case is accepted. Compare raw
    observations, analyzed events, and metric deltas by slice.
 
+### Tempo-only public labels
+
+Some public corpora provide an independently reviewed global BPM but no beat
+phase. They may be admitted as explicitly tagged `tempo-only` calibration when
+all of the following hold: the audio and annotations have compatible rights,
+multiple reviewers agree, the clip is marked well cut, and the truth contains
+one constant tempo segment but no invented beat timestamps.
+
+Tempo-only cases test BPM/octave selection across timbres. They do not support
+the oracle-observation path, decoder sweeps, beat/downbeat F1, or change-point
+claims. Never manufacture a phase-zero beat grid from BPM and clip duration;
+`well_cut` is not a timestamp annotation. Decoder commands enforce this by
+rejecting a case whose truth has no beat timestamps. Backend report schema v2
+omits `oracle` and `delta` for these cases and declares the suite attribution
+`end_to_end_only`; it must not diagnose an observation-versus-estimator
+bottleneck without the missing oracle evidence.
+
 Do not use model output to initialize hidden holdout annotations. Calibration
 cases used during algorithm development and untouched holdout cases should be
 separate manifests even when their audio shares the same storage directory.

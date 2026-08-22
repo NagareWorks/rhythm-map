@@ -4,7 +4,9 @@ Public audio is managed as immutable external data, not vendored source code.
 Each JSON lock records the upstream page, license, attribution, direct HTTPS
 URLs, exact byte sizes, and SHA-256 identities. `dataset-fetch` installs only
 verified bytes below an explicit output directory and never follows symbolic
-links.
+links. A lock may also name a member of a remote ZIP. In that case the fetcher
+reads the ZIP/ZIP64 directory once, downloads only the selected byte ranges,
+decompresses the member, and verifies the installed member's size and SHA-256.
 
 ## ARTBeaT rhythm challenges v1
 
@@ -55,3 +57,55 @@ makes the locked slice useful as independent public evaluation data; it does
 not by itself prove that no unpublished model development ever used the same
 audio.
 
+## Freesound Loop tempo calibration v1
+
+[`fsld-tempo-v1.json`](fsld-tempo-v1.json) selects 15 loops from the
+[Freesound Loop Dataset v1.0](https://zenodo.org/records/3967852). The full
+audio archive is 8.8 GB; the lock addresses individual ZIP members, so this
+slice downloads about 22 MB of audio plus one shared ZIP directory rather than
+the complete archive.
+
+The cases span 41--200 BPM and include percussion-only, drumless piano, Rhodes,
+bass-only, no-kick, gabber, breakbeat, and sparse electronic material. A case
+was admitted only when at least two expert annotation files agreed on BPM and
+4/4 signature, every annotator marked it `well_cut`, and none marked it
+`discard`. Four annotators agreed on sound 271070. Fourteen selected sounds are
+CC0 1.0; sound 476866 is CC BY 3.0 and carries its attribution in the suite.
+Dataset annotations and metadata are CC BY 4.0.
+
+```bash
+cargo xtask dataset-fetch \
+  --manifest evaluation/datasets/fsld-tempo-v1.json \
+  --output D:/rhythm-map-eval/fsld-tempo-v1 \
+  --with-annotations
+
+cargo xtask eval-backend \
+  --suite evaluation/suites/fsld-tempo-v1.json \
+  --model-pack models/beat-this-full-v1.json \
+  --model-dir D:/rhythm-map-models/beat-this-full-v1 \
+  --audio-dir D:/rhythm-map-eval/fsld-tempo-v1 \
+  --no-fail
+```
+
+FSLD provides BPM, signature, and cut-quality labels, not timestamped beat or
+downbeat phase. The checked-in truth therefore scores only the constant BPM
+curve; beat, downbeat, and change-point gates are deliberately disabled. Do not
+use this suite to claim beat F1 or change-point accuracy, and do not run decoder
+policy selection from its empty beat labels. Decoder commands reject such
+tempo-only truth before loading a model. Backend reports omit the unavailable
+oracle rather than treating it as a failed estimator run, and mark attribution
+as `end_to_end_only`.
+
+FSLD is not one of the 16 datasets in the published Beat This training-data
+release. Its annotation-tool source is hosted on GitHub, but the versioned data
+is a Zenodo archive; submoduling the tool repository would not pin the audio or
+labels used here.
+
+## Candidates intentionally not imported
+
+| Dataset | Decision | Reason |
+| --- | --- | --- |
+| ASAP | Exclude from independent evaluation | It is in the published Beat This training corpus and is CC BY-NC-SA 4.0. |
+| RWC 2.0 | Exclude from independent evaluation | RWC is in the published Beat This training corpus; the new audio and curated annotations are CC BY-NC 4.0. |
+| MOSA | Revisit only after rights clarification | It has useful expressive beat labels, but access is restricted and its usage guidelines limit the stated purpose to research on its recorded modalities. |
+| MTG-Jamendo | Do not use for rhythm truth | Audio licenses vary, dataset use is limited to non-commercial research, and it has no beat timestamp ground truth. |

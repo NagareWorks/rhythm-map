@@ -18,6 +18,10 @@
   or bytes in reports.
 - Immutable public-dataset acquisition and an ARTBeaT oracle suite covering 15
   CC BY 4.0 tempo-step, ramp, rubato, and polyrhythm exercises.
+- Remote ZIP/ZIP64 member acquisition and an independent 15-case FSLD
+  tempo-only calibration slice spanning 41--200 BPM, drumless, sparse,
+  no-kick, breakbeat, and half/double-time ambiguity without inventing beat
+  phase labels.
 - Enforced regression/calibration/holdout suite roles, with truth-assisted
   decoder commands restricted to calibration and a one-candidate-versus-baseline,
   per-slice holdout gate.
@@ -118,6 +122,15 @@ a learned component to the default distribution.
   net improvement. The very weak step/ramp failures remain evidence for
   comparing an alternate observation backend rather than expanding grid-based
   timestamp invention.
+- 2026-08-22: the independent FSLD tempo-only slice passed 6 of 15 end-to-end
+  cases. Nine clips had median BPM error below 5 percent, but three still crossed
+  metrical levels locally; the 41, 60, and 128 BPM clips favored roughly double
+  time, while the 130 and 200 BPM clips favored roughly half time. Because FSLD
+  has no timestamped beat phase, this is evidence of a product-level metrical
+  selection failure but cannot attribute the failure to Beat This versus the
+  deterministic estimator. Keep its report `end_to_end_only`, use it for
+  calibration, and require a separately held timestamped corpus before changing
+  the default policy.
 - 2026-08-22: calibration and holdout roles became executable manifest
   contracts. ARTBeaT is permanently calibration evidence; decoder sweeps and
   recoverability diagnostics accept only calibration suites, while `decoder-eval` runs

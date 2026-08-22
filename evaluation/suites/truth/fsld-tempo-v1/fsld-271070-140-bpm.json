@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "fsld-271070-140-bpm",
+  "duration_s": 6.8585941043083904,
+  "beats": [],
+  "tempo_segments": [
+    {
+      "start_s": 0,
+      "end_s": 6.8585941043083904,
+      "kind": "constant",
+      "start_bpm": 140,
+      "end_bpm": 140
+    }
+  ],
+  "change_points": []
+}

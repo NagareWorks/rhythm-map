@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "fsld-348652-180-bpm",
+  "duration_s": 10.666621315192744,
+  "beats": [],
+  "tempo_segments": [
+    {
+      "start_s": 0,
+      "end_s": 10.666621315192744,
+      "kind": "constant",
+      "start_bpm": 180,
+      "end_bpm": 180
+    }
+  ],
+  "change_points": []
+}

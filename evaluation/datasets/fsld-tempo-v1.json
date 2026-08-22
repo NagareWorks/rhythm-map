@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "id": "freesound-loop-tempo-v1",
+  "version": "1.0-zenodo-3967852-selected-v1",
+  "homepage_url": "https://zenodo.org/records/3967852",
+  "license": "CC-BY-3.0 AND CC0-1.0 AND CC-BY-4.0",
+  "attribution": "Freesound Loop Dataset by Antonio Ramires et al.; sound 476866 by MikeOscarFoxtrot",
+  "assets": [
+    {
+      "path": "audio/476866.wav",
+      "url": "https://zenodo.org/api/records/3967852/files/FSL10K.zip/content",
+      "sha256": "d65f3236d1b3f4baa03ea7cc23509fea8ab545624217681dcb101a53d2639b51",
+      "size_bytes": 1032704,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 8841802341,
+        "member_path": "audio/wav/476866_8785179.wav.wav"
+      }
+    },
+    {
+      "path": "audio/404840.wav",
+      "url": "https://zenodo.org/api/records/3967852/files/FSL10K.zip/content",
+      "sha256": "2d302a6cad5280ba7301fe82f3fba3764eb6695acc2a17b823fabc09e87b6118",
+      "size_bytes": 4411854,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 8841802341,
+        "member_path": "audio/wav/404840_2448533.wav.wav"
+      }
+    },
+    {
+      "path": "audio/210835.wav",
+      "url": "https://zenodo.org/api/records/3967852/files/FSL10K.zip/content",
+      "sha256": "9c79acadf1b7514eb9869827339aa606959c09b9b5d6dfc1d51e5586ac23781c",
+      "size_bytes": 1209678,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 8841802341,
+        "member_path": "audio/wav/210835_1951924.wav.wav"
+      }
+    },
+    {
+      "path": "audio/131423.wav",
+      "url": "https://zenodo.org/api/records/3967852/files/FSL10K.zip/content",
+      "sha256": "67874e011aa0a3acd9a94400ab4c0f1155aedcf1a3807ca1a1cf5eea79e8915a",
+      "size_bytes": 1058478,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 8841802341,
+        "member_path": "audio/wav/131423_2043498.wav.wav"
+      }
+    },
+    {
+      "path": "audio/219021.wav",
+      "url": "https://zenodo.org/api/records/3967852/files/FSL10K.zip/content",
+      "sha256": "850be83458a0fb65dd7193fc6b4248ad82308cf47fd9536f4bdef537f0f8aae3",
+      "size_bytes": 1881678,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 8841802341,
+        "member_path": "audio/wav/219021_2522406.wav.wav"
+      }
+    },
+    {
+      "path": "audio/360687.wav",
+      "url": "https://zenodo.org/api/records/3967852/files/FSL10K.zip/content",
+      "sha256": "626595ce94447d51a2596d2fa0564f77e53c0682ed900aa3953773dc16edc6a9",
+      "size_bytes": 846800,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 8841802341,
+        "member_path": "audio/wav/360687_5450487.wav.wav"
+      }
+    },
+    {
+      "path": "audio/19069.wav",
+      "url": "https://zenodo.org/api/records/3967852/files/FSL10K.zip/content",
+      "sha256": "06c77b1f3f388f23593e4df0d05493f18e2f642bb46c74d9efa2eb84343903b1",
+      "size_bytes": 769822,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 8841802341,
+        "member_path": "audio/wav/19069_34300.wav.wav"
+      }
+    },
+    {
+      "path": "audio/418991.wav",
+      "url": "https://zenodo.org/api/records/3967852/files/FSL10K.zip/content",
+      "sha256": "08370afa22a9c782a4019e39ccb763b400f66b95588837661a9bd4fbd7ef65bf",
+      "size_bytes": 352878,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 8841802341,
+        "member_path": "audio/wav/418991_7052167.wav.wav"
+      }
+    },
+    {
+      "path": "audio/124542.wav",
+      "url": "https://zenodo.org/api/records/3967852/files/FSL10K.zip/content",
+      "sha256": "d0d416d868597843dc59968c2b161bd088c1813f319c189f016a30bf1027a51a",
+      "size_bytes": 662008,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 8841802341,
+        "member_path": "audio/wav/124542_276157.wav.wav"
+      }
+    },
+    {
+      "path": "audio/486302.wav",
+      "url": "https://zenodo.org/api/records/3967852/files/FSL10K.zip/content",
+      "sha256": "569f34339c827dcdda7bb937cc035d4b8d4af2a9bd5f97ddc3705290b7cf02e4",
+      "size_bytes": 651402,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 8841802341,
+        "member_path": "audio/wav/486302_10440610.wav.wav"
+      }
+    },
+    {
+      "path": "audio/271070.wav",
+      "url": "https://zenodo.org/api/records/3967852/files/FSL10K.zip/content",
+      "sha256": "c2d46e8a5629a58f80c7c1183bc7426a92a67257486eb743504946e6cd18319f",
+      "size_bytes": 605010,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 8841802341,
+        "member_path": "audio/wav/271070_5146278.wav.wav"
+      }
+    },
+    {
+      "path": "audio/330889.wav",
+      "url": "https://zenodo.org/api/records/3967852/files/FSL10K.zip/content",
+      "sha256": "b2db6563b99a0ad08cd184c9b0a8ef8dd24c7ff1e078994d822aa44d3b8eac54",
+      "size_bytes": 2259836,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 8841802341,
+        "member_path": "audio/wav/330889_4159791.wav.wav"
+      }
+    },
+    {
+      "path": "audio/322315.wav",
+      "url": "https://zenodo.org/api/records/3967852/files/FSL10K.zip/content",
+      "sha256": "4883eb8549c31956a49c58be86f54a3ff7c0ae112ffd3b40a9f160ca5baf7104",
+      "size_bytes": 2116878,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 8841802341,
+        "member_path": "audio/wav/322315_2994423.wav.wav"
+      }
+    },
+    {
+      "path": "audio/348652.wav",
+      "url": "https://zenodo.org/api/records/3967852/files/FSL10K.zip/content",
+      "sha256": "2e6022f3f134ef35601719d64162fe96442f3f8765108772fdc66c57a5b6f0f3",
+      "size_bytes": 940878,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 8841802341,
+        "member_path": "audio/wav/348652_4508519.wav.wav"
+      }
+    },
+    {
+      "path": "audio/439993.wav",
+      "url": "https://zenodo.org/api/records/3967852/files/FSL10K.zip/content",
+      "sha256": "ade68d1e50780c4c561483ce31d6622682f6040b9892963050fb5e010c0a75c1",
+      "size_bytes": 423478,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 8841802341,
+        "member_path": "audio/wav/439993_9042192.wav.wav"
+      }
+    },
+    {
+      "path": "annotations/annotations.zip",
+      "url": "https://zenodo.org/api/records/3967852/files/annotations.zip/content",
+      "sha256": "e062f1f8e298730df92a879c302ce2c4f718039a3979442abc8aaca1258ac38e",
+      "size_bytes": 1564890,
+      "role": "annotation_source"
+    },
+    {
+      "path": "annotations/metadata.json",
+      "url": "https://zenodo.org/api/records/3967852/files/FSL10K.zip/content",
+      "sha256": "c97b51b7e827c002d2535e572f4bf6b6289d6edce390ea5a673c02045e213bce",
+      "size_bytes": 10494557,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 8841802341,
+        "member_path": "metadata.json"
+      }
+    }
+  ]
+}
