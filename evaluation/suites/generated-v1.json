@@ -2,6 +2,7 @@
   "schema_version": 1,
   "id": "generated-v1",
   "description": "Exact synthetic timing cases for deterministic core regression and rendered backend evaluation.",
+  "purpose": "regression",
   "thresholds": {
     "beat_tolerance_ms": 70.0,
     "change_tolerance_s": 1.0,

@@ -10,7 +10,8 @@ use clap::{Parser, Subcommand};
 use rhythm_map_eval::{
     evaluate_backend_suite, evaluate_backend_suite_with_audio_directory, evaluate_core_suite,
     evaluate_decoder_recoverability_with_audio_directory,
-    evaluate_decoder_sweep_with_audio_directory, fetch_public_dataset, inspect_audio_asset,
+    evaluate_decoder_sweep_with_audio_directory,
+    evaluate_named_decoder_policy_with_audio_directory, fetch_public_dataset, inspect_audio_asset,
     render_suite, score_prediction_directory, standard_decoder_policies,
 };
 use rhythm_map_models::verify_model_pack;
@@ -103,6 +104,30 @@ enum Command {
         #[arg(long)]
         report: Option<PathBuf>,
     },
+    /// Evaluate one preselected decoder policy without exposing a policy sweep.
+    DecoderEval {
+        /// Evaluation suite; this is the only decoder command permitted for holdout suites.
+        #[arg(long)]
+        suite: PathBuf,
+        /// Stable ID from the standard decoder policy registry.
+        #[arg(long)]
+        policy: String,
+        /// Versioned model-pack manifest.
+        #[arg(long, default_value = "models/beat-this-full-v1.json")]
+        model_pack: PathBuf,
+        /// Directory containing the model files named by the manifest.
+        #[arg(long)]
+        model_dir: PathBuf,
+        /// Directory containing content-addressed external evaluation audio.
+        #[arg(long)]
+        audio_dir: PathBuf,
+        /// Optional JSON report destination.
+        #[arg(long)]
+        report: Option<PathBuf>,
+        /// Emit failed beat gates without returning a non-zero exit code.
+        #[arg(long)]
+        no_fail: bool,
+    },
     /// Inspect model evidence around truth beats missed by the upstream decoder.
     DecoderRecoverability {
         /// Evaluation suite containing independent beat truth.
@@ -161,35 +186,18 @@ fn main() -> Result<()> {
             audio_dir,
             report,
             no_fail,
-        } => {
-            let result = if let Some(audio_dir) = audio_dir {
-                evaluate_backend_suite_with_audio_directory(
-                    &suite,
-                    &model_pack,
-                    &model_dir,
-                    &audio_dir,
-                )?
-            } else {
-                evaluate_backend_suite(&suite, &model_pack, &model_dir)?
-            };
-            emit_report(&result, report, no_fail)
-        }
+        } => run_backend_eval(
+            &suite,
+            &model_pack,
+            &model_dir,
+            audio_dir.as_deref(),
+            report,
+            no_fail,
+        ),
         Command::ModelVerify {
             model_pack,
             model_dir,
-        } => {
-            let verified = verify_model_pack(&model_pack, &model_dir)?;
-            let output = serde_json::json!({
-                "schema_version": 1,
-                "verified": true,
-                "id": verified.manifest().id,
-                "version": verified.manifest().version,
-                "backend": verified.manifest().backend,
-                "manifest_sha256": verified.manifest_sha256(),
-            });
-            println!("{}", serde_json::to_string_pretty(&output)?);
-            Ok(())
-        }
+        } => run_model_verify(&model_pack, &model_dir),
         Command::AudioInspect { input } => {
             println!(
                 "{}",
@@ -219,6 +227,23 @@ fn main() -> Result<()> {
             audio_dir,
             report,
         } => run_decoder_sweep(&suite, &model_pack, &model_dir, &audio_dir, report),
+        Command::DecoderEval {
+            suite,
+            policy,
+            model_pack,
+            model_dir,
+            audio_dir,
+            report,
+            no_fail,
+        } => run_decoder_eval(
+            &suite,
+            &policy,
+            &model_pack,
+            &model_dir,
+            &audio_dir,
+            report,
+            no_fail,
+        ),
         Command::DecoderRecoverability {
             suite,
             model_pack,
@@ -245,6 +270,36 @@ fn main() -> Result<()> {
     }
 }
 
+fn run_model_verify(model_pack: &Path, model_dir: &Path) -> Result<()> {
+    let verified = verify_model_pack(model_pack, model_dir)?;
+    let output = serde_json::json!({
+        "schema_version": 1,
+        "verified": true,
+        "id": verified.manifest().id,
+        "version": verified.manifest().version,
+        "backend": verified.manifest().backend,
+        "manifest_sha256": verified.manifest_sha256(),
+    });
+    println!("{}", serde_json::to_string_pretty(&output)?);
+    Ok(())
+}
+
+fn run_backend_eval(
+    suite: &Path,
+    model_pack: &Path,
+    model_dir: &Path,
+    audio_dir: Option<&Path>,
+    report: Option<PathBuf>,
+    no_fail: bool,
+) -> Result<()> {
+    let result = if let Some(audio_dir) = audio_dir {
+        evaluate_backend_suite_with_audio_directory(suite, model_pack, model_dir, audio_dir)?
+    } else {
+        evaluate_backend_suite(suite, model_pack, model_dir)?
+    };
+    emit_report(&result, report, no_fail)
+}
+
 fn run_decoder_sweep(
     suite: &Path,
     model_pack: &Path,
@@ -261,6 +316,25 @@ fn run_decoder_sweep(
             &standard_decoder_policies(),
         )?,
         report,
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+fn run_decoder_eval(
+    suite: &Path,
+    policy: &str,
+    model_pack: &Path,
+    model_dir: &Path,
+    audio_dir: &Path,
+    report: Option<PathBuf>,
+    no_fail: bool,
+) -> Result<()> {
+    emit_report(
+        &evaluate_named_decoder_policy_with_audio_directory(
+            suite, model_pack, model_dir, audio_dir, policy,
+        )?,
+        report,
+        no_fail,
     )
 }
 
@@ -317,6 +391,12 @@ impl EvaluationOutcome for rhythm_map_eval::SuiteEvaluation {
 }
 
 impl EvaluationOutcome for rhythm_map_eval::BottleneckEvaluation {
+    fn passed(&self) -> bool {
+        self.passed
+    }
+}
+
+impl EvaluationOutcome for rhythm_map_eval::DecoderPolicyEvaluation {
     fn passed(&self) -> bool {
         self.passed
     }

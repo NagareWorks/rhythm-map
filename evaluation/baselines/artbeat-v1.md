@@ -4,6 +4,9 @@ Measured on 2026-08-21 with an optimized build, the checked-in ARTBeaT lock,
 and `beat-this-full-v1.json`. The verified model manifest SHA-256 was
 `ccedbfeb35b4f584834df3aca1ea41899ed39fbaf2efad9e2cc71426aed9e23d`.
 Thresholds were not changed for this run.
+ARTBeaT is explicitly classified as calibration because its per-case results
+have already influenced decoder design; none of these clips may be relabeled as
+untouched holdout evidence.
 
 All 15 oracle cases passed. The worst oracle tempo P95 error was 5.97 percent,
 so the deterministic estimator clears this slice when given the official beat
@@ -111,3 +114,20 @@ sequence support can select useful weak peaks more safely than a global lower
 threshold. The regression demonstrates that ARTBeaT alone is insufficient to
 make it the product default: it must first improve separate calibration and
 holdout slices without changing their metrical level or increasing false beats.
+
+The fixed-candidate evaluation contract reproduces those figures and makes the
+capability impact explicit:
+
+| Capability slice | Cases | Upstream F1 | Candidate F1 | Delta |
+| --- | ---: | ---: | ---: | ---: |
+| `half-time` | 1 | 0.7727 | 0.9231 | +0.1503 |
+| `rubato` / `drumless` | 1 | 0.7568 | 0.8736 | +0.1168 |
+| `half-double-time` | 2 | 0.7791 | 0.8036 | +0.0244 |
+| `extreme-tempo` | 3 | 0.7174 | 0.7337 | +0.0163 |
+| `percussive` | 13 | 0.8108 | 0.8230 | +0.0122 |
+| `meter-change` / `4-4-to-6-4` | 1 | 0.6486 | 0.6076 | -0.0411 |
+
+The report correctly fails its no-regression decision because
+`artbeat-15-85-to-127-5` is worse, even though overall mean F1 rises by 0.0183.
+Most rows still contain only one source, so this remains calibration evidence
+rather than a default-policy decision.

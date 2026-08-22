@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "id": "private-real-music-v1",
-  "description": "Template only. Copy this and truth.example.json to evaluation/private/; never commit audio or local paths.",
-  "purpose": "calibration",
+  "id": "private-real-music-holdout-v1",
+  "description": "Template only. Keep this manifest, its truth, and its audio outside Git until one decoder policy has been selected on calibration data.",
+  "purpose": "holdout",
   "thresholds": {
     "beat_tolerance_ms": 70.0,
     "change_tolerance_s": 1.0,
@@ -23,7 +23,7 @@
           "local_file_hint": "replace-with-filename.ext"
         }
       },
-      "tags": ["drumless-ramp", "variable-tempo", "private", "calibration"],
+      "tags": ["drumless-ramp", "variable-tempo", "private", "holdout"],
       "provenance": {
         "kind": "private",
         "audio_license": "replace-with-exact-local-use-basis",

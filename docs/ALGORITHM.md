@@ -39,6 +39,12 @@ extrapolated grid timestamp. It is not the default because the first public
 evaluation improved several half-time and rubato cases but regressed one
 metrically ambiguous case.
 
+The evaluation contract prevents that experimental result from silently
+becoming a default: candidate sweeps and truth-assisted logit inspection run
+only on calibration suites, while a holdout suite accepts one preselected named
+candidate and compares it only with the immutable upstream baseline, reporting
+overall, per-case, and capability-tag deltas.
+
 The estimator normally preserves backend timestamps. It can reject events
 inside sustained low-activity spans, select one phase of a strong/weak
 alternating sequence, or reconstruct a short corrupted transition from stable

@@ -57,6 +57,22 @@ Do not use model output to initialize hidden holdout annotations. Calibration
 cases used during algorithm development and untouched holdout cases should be
 separate manifests even when their audio shares the same storage directory.
 
+Mark those manifests with `"purpose": "calibration"` and
+`"purpose": "holdout"`. The distinction is enforced rather than descriptive:
+truth-assisted `decoder-sweep` and `decoder-recoverability` commands accept only
+a calibration suite. Select one registered policy using calibration results, record
+its ID, then open the holdout only through `decoder-eval --policy <id>`. That
+command compares the one candidate with the immutable upstream baseline but
+does not reveal any other candidate or policy oracle. Do not
+rename already inspected ARTBeaT cases as holdout; they are calibration evidence
+because their per-case results have already influenced decoder design.
+
+The fixed-policy report aggregates every manifest tag. A candidate must be
+examined by capability slice, not only by overall mean: a gain on percussive
+tempo jumps does not excuse a regression on `rubato`, `drumless`, or
+`metric-ambiguity`. Populate each required slice with more than one independent
+source before treating the result as a product-default decision.
+
 ## Decision rule
 
 - Oracle passes, end to end fails: inspect Beat This events and bounded

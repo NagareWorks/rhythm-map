@@ -11,7 +11,7 @@ mod wav;
 pub use dataset::{AudioAssetInspection, ExternalAudioResolver, inspect_audio_asset};
 pub use manifest::{
     AcceptanceThresholds, AssetKind, AssetProvenance, AudioReference, CaseInput, EvaluationCase,
-    EvaluationSuite,
+    EvaluationSuite, SuitePurpose,
 };
 pub use metrics::{
     BeatMetrics, CaseEvaluation, ChangeMetrics, EvaluationMetrics, TempoMetrics, evaluate_analysis,
@@ -22,14 +22,16 @@ pub use public_dataset::{
 };
 pub use runner::{
     AttributionCase, AttributionDecision, BottleneckEvaluation, CaseMetricDelta, DecoderPolicy,
-    DecoderRecoverabilityCase, DecoderRecoverabilityEvaluation, DecoderSupportedMidpointPolicy,
-    DecoderSweepCandidate, DecoderSweepCase, DecoderSweepEvaluation, LogitEvidence,
-    MissingBeatEvidence, MissingBeatEvidenceClass, MissingBeatEvidenceCounts, ModelPackIdentity,
-    ObservationDiagnostics, SuiteEvaluation, evaluate_backend_suite,
-    evaluate_backend_suite_with_audio_directory, evaluate_core_suite,
+    DecoderPolicyComparison, DecoderPolicyEvaluation, DecoderRecoverabilityCase,
+    DecoderRecoverabilityEvaluation, DecoderSliceDelta, DecoderSliceMetrics,
+    DecoderSupportedMidpointPolicy, DecoderSweepCandidate, DecoderSweepCase,
+    DecoderSweepEvaluation, LogitEvidence, MissingBeatEvidence, MissingBeatEvidenceClass,
+    MissingBeatEvidenceCounts, ModelPackIdentity, ObservationDiagnostics, SuiteEvaluation,
+    evaluate_backend_suite, evaluate_backend_suite_with_audio_directory, evaluate_core_suite,
     evaluate_decoder_recoverability_with_audio_directory,
-    evaluate_decoder_sweep_with_audio_directory, render_suite, score_prediction_directory,
-    standard_decoder_policies,
+    evaluate_decoder_sweep_with_audio_directory,
+    evaluate_named_decoder_policy_with_audio_directory, render_suite, score_prediction_directory,
+    standard_decoder_policies, standard_decoder_policy,
 };
 pub use synthetic::{
     GeneratedTruth, RecipeSegment, SegmentShape, SyntheticAudioProfile, SyntheticRecipe, TruthBeat,

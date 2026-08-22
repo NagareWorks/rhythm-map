@@ -18,6 +18,9 @@
   or bytes in reports.
 - Immutable public-dataset acquisition and an ARTBeaT oracle suite covering 15
   CC BY 4.0 tempo-step, ramp, rubato, and polyrhythm exercises.
+- Enforced regression/calibration/holdout suite roles, with truth-assisted
+  decoder commands restricted to calibration and a one-candidate-versus-baseline,
+  per-slice holdout gate.
 - Edge-preserving metrical outlier repair that keeps sustained half/double-time
   tempo changes instead of folding an entire recording into one BPM band.
 
@@ -115,3 +118,10 @@ a learned component to the default distribution.
   net improvement. The very weak step/ramp failures remain evidence for
   comparing an alternate observation backend rather than expanding grid-based
   timestamp invention.
+- 2026-08-22: calibration and holdout roles became executable manifest
+  contracts. ARTBeaT is permanently calibration evidence; decoder sweeps and
+  recoverability diagnostics accept only calibration suites, while `decoder-eval` runs
+  one registered policy and reports overall, per-case, and capability-tag
+  metrics. The remaining work is corpus population, not another decoder sweep:
+  obtain multiple independent legally held sources for each required slice,
+  select one policy on calibration, then open the untouched holdout once.

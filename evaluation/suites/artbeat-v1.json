@@ -2,6 +2,7 @@
   "schema_version": 1,
   "id": "artbeat-v1",
   "description": "Public CC BY 4.0 rhythm-challenge audio unseen by the published Beat This training corpus, with beat truth recovered from immutable upstream Ground Truth SVG lines.",
+  "purpose": "calibration",
   "thresholds": {
     "beat_tolerance_ms": 70,
     "change_tolerance_s": 1,

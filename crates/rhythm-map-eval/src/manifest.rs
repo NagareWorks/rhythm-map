@@ -52,6 +52,19 @@ pub enum AssetKind {
     Private,
 }
 
+/// How a suite may be used during algorithm development.
+#[derive(Debug, Clone, Copy, Default, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum SuitePurpose {
+    /// Stable product regression coverage, not a parameter-selection corpus.
+    #[default]
+    Regression,
+    /// Truth may be inspected and decoder candidates may be compared.
+    Calibration,
+    /// Reserved evidence for evaluating one policy selected elsewhere.
+    Holdout,
+}
+
 /// Rights and origin of audio and annotations are recorded separately.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct AssetProvenance {
@@ -127,6 +140,9 @@ pub struct EvaluationSuite {
     pub id: String,
     /// Human-readable purpose and scope.
     pub description: String,
+    /// Whether truth may be used for tuning or only for a locked evaluation.
+    #[serde(default)]
+    pub purpose: SuitePurpose,
     /// Default acceptance budget.
     #[serde(default)]
     pub thresholds: AcceptanceThresholds,
@@ -262,6 +278,7 @@ mod tests {
             schema_version: 1,
             id: "private".to_string(),
             description: "test".to_string(),
+            purpose: SuitePurpose::Regression,
             thresholds: AcceptanceThresholds::default(),
             cases: vec![EvaluationCase {
                 id: "track".to_string(),
@@ -294,6 +311,7 @@ mod tests {
             schema_version: 1,
             id: "private".to_string(),
             description: "test".to_string(),
+            purpose: SuitePurpose::Regression,
             thresholds: AcceptanceThresholds::default(),
             cases: vec![EvaluationCase {
                 id: "track".to_string(),
@@ -318,5 +336,20 @@ mod tests {
             }],
         };
         assert!(suite.validate().is_err());
+    }
+
+    #[test]
+    fn omitted_suite_purpose_defaults_to_regression() {
+        let suite: EvaluationSuite = serde_json::from_str(
+            r#"{
+                "schema_version": 1,
+                "id": "legacy",
+                "description": "legacy schema-one suite",
+                "cases": []
+            }"#,
+        )
+        .unwrap();
+
+        assert_eq!(suite.purpose, SuitePurpose::Regression);
     }
 }

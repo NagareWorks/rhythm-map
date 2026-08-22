@@ -20,6 +20,12 @@ Every case records whether redistribution and commercial evaluation are
 allowed. These fields document provenance; they are not a substitute for legal
 review.
 
+Every suite also declares a `purpose`: `regression`, `calibration`, or
+`holdout`. Only calibration permits truth-assisted policy sweeps and missed-beat
+diagnostics. Regression and holdout suites accept fixed-policy evaluation but
+reject `decoder-sweep` and `decoder-recoverability`. Reports repeat the declared
+purpose so results cannot be detached from their development role.
+
 ## Commands
 
 Fetch the public ARTBeaT rhythm-challenge slice outside the checkout. Audio is
@@ -93,6 +99,28 @@ separately for each case and is only a diagnostic ceiling; it is not a
 deployable result and must not be compared with one fixed decoder as if it
 were one.
 
+After choosing one policy on calibration data, evaluate that exact registered
+policy on a separate holdout manifest:
+
+```bash
+cargo xtask decoder-eval \
+  --suite evaluation/private/real-music-holdout-v1.json \
+  --policy supported-midpoints-logit-minus-3.0 \
+  --model-pack models/beat-this-full-v1.json \
+  --model-dir D:/rhythm-map-models/beat-this-full-v1 \
+  --audio-dir D:/rhythm-map-evaluation-audio \
+  --report D:/rhythm-map-eval/reports/holdout-supported-midpoints.json
+```
+
+`decoder-eval` runs the named candidate and the immutable `upstream-default`
+baseline in one inference pass. Its report includes overall metrics, per-case
+gates, stable per-tag aggregates such as `rubato`, `drumless`, or
+`metric-ambiguity`, and explicit candidate-minus-baseline deltas. It deliberately
+omits every other candidate and the truth-selected per-case policy oracle. The
+gate requires the candidate's absolute beat budgets and rejects any case-level
+F1 regression. Use `--no-fail` only for exploratory calibration reports, not for
+the final holdout gate.
+
 To determine whether a stronger decoder has model evidence to work with, inspect
 every truth beat missed by the upstream decoder:
 
@@ -158,7 +186,8 @@ and tempo truth.
 
 ## Adding external evaluation music
 
-1. Copy `private.example.json` and `truth.example.json` below
+1. Copy `private.example.json` (or `private-holdout.example.json`) and
+   `truth.example.json` below
    `evaluation/private/`, which is ignored by Git.
 2. Inspect the exact local asset:
 

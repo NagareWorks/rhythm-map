@@ -1,4 +1,5 @@
 use std::{
+    collections::BTreeMap,
     fs,
     path::{Path, PathBuf},
     time::Instant,
@@ -16,7 +17,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     BeatMetrics, CaseEvaluation, CaseInput, EvaluationCase, EvaluationSuite, ExternalAudioResolver,
-    GeneratedTruth, SyntheticRecipe, evaluate_analysis, generate_truth,
+    GeneratedTruth, SuitePurpose, SyntheticRecipe, evaluate_analysis, generate_truth,
     metrics::{match_event_pairs, score_beats},
     wav::{render_synthetic_audio, synthesize_audio},
 };
@@ -28,6 +29,8 @@ pub struct SuiteEvaluation {
     pub schema_version: u32,
     /// Stable suite identifier.
     pub suite_id: String,
+    /// Declared development role of the evaluated suite.
+    pub suite_purpose: SuitePurpose,
     /// True only when every case passes.
     pub passed: bool,
     /// Per-case metrics and failed budgets.
@@ -130,6 +133,8 @@ pub struct BottleneckEvaluation {
     pub schema_version: u32,
     /// Stable suite identifier.
     pub suite_id: String,
+    /// Declared development role of the evaluated suite.
+    pub suite_purpose: SuitePurpose,
     /// Verified model-pack identity.
     pub model_pack: ModelPackIdentity,
     /// True only when both oracle and end-to-end paths pass.
@@ -195,10 +200,33 @@ impl DecoderSupportedMidpointPolicy {
 pub struct DecoderSweepCase {
     /// Stable case identifier.
     pub id: String,
+    /// Capability slices inherited from the suite case.
+    pub tags: Vec<String>,
     /// Number of discrete model events produced by this decoder.
     pub predicted_beat_count: usize,
+    /// Required beat F1 inherited from suite or case thresholds.
+    pub minimum_beat_f1: f64,
+    /// Whether this raw decoder result clears its beat gate.
+    pub passed: bool,
     /// One-to-one beat timing metrics against independent truth.
     pub beats: BeatMetrics,
+}
+
+/// Aggregate raw-beat metrics for one capability tag.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct DecoderSliceMetrics {
+    /// Capability tag shared by the included cases.
+    pub tag: String,
+    /// Number of cases carrying the tag.
+    pub case_count: usize,
+    /// True only when every case in the slice clears its beat gate.
+    pub passed: bool,
+    /// Arithmetic mean of per-case beat precision.
+    pub mean_beat_precision: f64,
+    /// Arithmetic mean of per-case beat recall.
+    pub mean_beat_recall: f64,
+    /// Arithmetic mean of per-case beat F1.
+    pub mean_beat_f1: f64,
 }
 
 /// Aggregate and per-case measurements for one peak-picking policy.
@@ -206,6 +234,8 @@ pub struct DecoderSweepCase {
 pub struct DecoderSweepCandidate {
     /// Exact peak-picking policy.
     pub policy: DecoderPolicy,
+    /// True only when every case clears its raw beat gate.
+    pub passed: bool,
     /// Arithmetic mean of per-case beat F1.
     pub mean_beat_f1: f64,
     /// Arithmetic mean of per-case beat precision.
@@ -214,6 +244,8 @@ pub struct DecoderSweepCandidate {
     pub mean_beat_recall: f64,
     /// Arithmetic mean of decoded beat counts per case.
     pub mean_predicted_beat_count: f64,
+    /// Stable per-tag aggregates for capability-level regression checks.
+    pub slices: Vec<DecoderSliceMetrics>,
     /// Per-case beat metrics.
     pub cases: Vec<DecoderSweepCase>,
 }
@@ -225,6 +257,8 @@ pub struct DecoderSweepEvaluation {
     pub schema_version: u32,
     /// Stable suite identifier.
     pub suite_id: String,
+    /// Calibration is required because this report compares several policies.
+    pub suite_purpose: SuitePurpose,
     /// Verified model pack used for every candidate.
     pub model_pack: ModelPackIdentity,
     /// Candidate policies in caller-provided order.
@@ -233,6 +267,55 @@ pub struct DecoderSweepEvaluation {
     ///
     /// This is a diagnostic upper bound, not a deployable decoder result.
     pub per_case_policy_oracle_mean_beat_f1: f64,
+}
+
+/// Evaluation of one named decoder policy selected before opening a holdout.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct DecoderPolicyEvaluation {
+    /// Report schema version.
+    pub schema_version: u32,
+    /// Stable suite identifier.
+    pub suite_id: String,
+    /// Declared development role of the evaluated suite.
+    pub suite_purpose: SuitePurpose,
+    /// Verified model pack used for evaluation.
+    pub model_pack: ModelPackIdentity,
+    /// Immutable product baseline evaluated in the same inference pass.
+    pub baseline: DecoderSweepCandidate,
+    /// The only selected candidate, including aggregate, slice, and case metrics.
+    pub candidate: DecoderSweepCandidate,
+    /// Candidate deltas against the upstream baseline.
+    pub comparison: DecoderPolicyComparison,
+    /// True when absolute beat gates pass and no case regresses from baseline.
+    pub passed: bool,
+}
+
+/// Fixed candidate comparison against the upstream product decoder.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct DecoderPolicyComparison {
+    /// Candidate minus baseline mean beat F1.
+    pub mean_beat_f1_delta: f64,
+    /// Cases with a strictly lower candidate F1.
+    pub regressed_case_ids: Vec<String>,
+    /// Cases with a strictly higher candidate F1.
+    pub improved_case_ids: Vec<String>,
+    /// Candidate-minus-baseline aggregates for every capability tag.
+    pub slices: Vec<DecoderSliceDelta>,
+}
+
+/// Fixed-policy F1 comparison for one capability tag.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct DecoderSliceDelta {
+    /// Capability tag.
+    pub tag: String,
+    /// Number of cases carrying the tag.
+    pub case_count: usize,
+    /// Upstream decoder mean beat F1.
+    pub baseline_mean_beat_f1: f64,
+    /// Selected candidate mean beat F1.
+    pub candidate_mean_beat_f1: f64,
+    /// Candidate minus baseline mean beat F1.
+    pub mean_beat_f1_delta: f64,
 }
 
 /// Evidence available near one truth beat missed by the upstream decoder.
@@ -324,6 +407,8 @@ pub struct DecoderRecoverabilityEvaluation {
     pub schema_version: u32,
     /// Stable suite identifier.
     pub suite_id: String,
+    /// Calibration is required because this report inspects truth-assisted evidence.
+    pub suite_purpose: SuitePurpose,
     /// Verified model pack used for every case.
     pub model_pack: ModelPackIdentity,
     /// Total annotated beats across the suite.
@@ -353,7 +438,7 @@ pub fn evaluate_core_suite(suite_path: &Path) -> Result<SuiteEvaluation> {
         let thresholds = case.thresholds.as_ref().unwrap_or(&suite.thresholds);
         cases.push(evaluate_analysis(&case.id, &analysis, &truth, thresholds));
     }
-    Ok(suite_report(suite.id, cases))
+    Ok(suite_report(suite.id, suite.purpose, cases))
 }
 
 /// Run generated audio through Beat This and compare it with oracle observations.
@@ -452,6 +537,7 @@ fn evaluate_backend_suite_impl(
     Ok(BottleneckEvaluation {
         schema_version: 1,
         suite_id: suite.id,
+        suite_purpose: suite.purpose,
         model_pack: ModelPackIdentity {
             id: manifest.id.clone(),
             version: manifest.version.clone(),
@@ -512,6 +598,27 @@ pub fn standard_decoder_policies() -> Vec<DecoderPolicy> {
     policies
 }
 
+/// Resolve one immutable policy from the standard decoder registry.
+///
+/// # Errors
+///
+/// Returns an error when `id` does not name a registered policy.
+pub fn standard_decoder_policy(id: &str) -> Result<DecoderPolicy> {
+    let policies = standard_decoder_policies();
+    policies
+        .iter()
+        .find(|policy| policy.id == id)
+        .cloned()
+        .with_context(|| {
+            let available = policies
+                .iter()
+                .map(|policy| policy.id.as_str())
+                .collect::<Vec<_>>()
+                .join(", ");
+            format!("unknown decoder policy {id:?}; available policies: {available}")
+        })
+}
+
 /// Compare peak-picking policies while running Beat This inference once per case.
 ///
 /// This isolates discrete decoding from the neural frontend and model. It
@@ -528,8 +635,152 @@ pub fn evaluate_decoder_sweep_with_audio_directory(
     audio_directory: &Path,
     policies: &[DecoderPolicy],
 ) -> Result<DecoderSweepEvaluation> {
+    let (suite, model_pack, candidates, per_case_policy_oracle_mean_beat_f1) =
+        evaluate_decoder_candidates_with_audio_directory(
+            suite_path,
+            model_pack_path,
+            model_root,
+            audio_directory,
+            policies,
+            "decoder sweep",
+            false,
+        )?;
+    Ok(DecoderSweepEvaluation {
+        schema_version: 1,
+        suite_id: suite.id,
+        suite_purpose: suite.purpose,
+        model_pack,
+        candidates,
+        per_case_policy_oracle_mean_beat_f1,
+    })
+}
+
+/// Evaluate one registered candidate against the fixed upstream baseline.
+///
+/// Unlike a sweep, this entry point exposes only the selected candidate, the
+/// immutable product baseline, and their deltas. It does not expose alternate
+/// candidates or per-case-oracle results. Select the candidate on calibration
+/// data first.
+///
+/// # Errors
+///
+/// Returns an error for an unknown policy, invalid suite, model pack, asset,
+/// decoding failure, or inference failure.
+pub fn evaluate_named_decoder_policy_with_audio_directory(
+    suite_path: &Path,
+    model_pack_path: &Path,
+    model_root: &Path,
+    audio_directory: &Path,
+    policy_id: &str,
+) -> Result<DecoderPolicyEvaluation> {
+    let policy = standard_decoder_policy(policy_id)?;
+    let baseline_policy = standard_decoder_policy("upstream-default")?;
+    let policies = if policy == baseline_policy {
+        vec![baseline_policy.clone()]
+    } else {
+        vec![baseline_policy.clone(), policy]
+    };
+    let (suite, model_pack, mut candidates, _) = evaluate_decoder_candidates_with_audio_directory(
+        suite_path,
+        model_pack_path,
+        model_root,
+        audio_directory,
+        &policies,
+        "decoder evaluation",
+        true,
+    )?;
+    let candidate = candidates
+        .pop()
+        .context("fixed decoder evaluation produced no candidate")?;
+    let baseline = candidates.pop().unwrap_or_else(|| candidate.clone());
+    let comparison = compare_decoder_candidates(&baseline, &candidate)?;
+    let passed = candidate.passed && comparison.regressed_case_ids.is_empty();
+    Ok(DecoderPolicyEvaluation {
+        schema_version: 1,
+        suite_id: suite.id,
+        suite_purpose: suite.purpose,
+        model_pack,
+        baseline,
+        candidate,
+        comparison,
+        passed,
+    })
+}
+
+fn compare_decoder_candidates(
+    baseline: &DecoderSweepCandidate,
+    candidate: &DecoderSweepCandidate,
+) -> Result<DecoderPolicyComparison> {
+    if baseline.cases.len() != candidate.cases.len() {
+        bail!("decoder comparison requires identical case sets");
+    }
+    let mut regressed_case_ids = Vec::new();
+    let mut improved_case_ids = Vec::new();
+    for (baseline_case, candidate_case) in baseline.cases.iter().zip(&candidate.cases) {
+        if baseline_case.id != candidate_case.id {
+            bail!("decoder comparison case order differs");
+        }
+        let delta = candidate_case.beats.f1 - baseline_case.beats.f1;
+        if delta < -f64::EPSILON {
+            regressed_case_ids.push(candidate_case.id.clone());
+        } else if delta > f64::EPSILON {
+            improved_case_ids.push(candidate_case.id.clone());
+        }
+    }
+    let baseline_slices = baseline
+        .slices
+        .iter()
+        .map(|slice| (slice.tag.as_str(), slice))
+        .collect::<BTreeMap<_, _>>();
+    let slices = candidate
+        .slices
+        .iter()
+        .map(|candidate_slice| {
+            let baseline_slice = baseline_slices
+                .get(candidate_slice.tag.as_str())
+                .with_context(|| format!("baseline is missing slice {}", candidate_slice.tag))?;
+            Ok(DecoderSliceDelta {
+                tag: candidate_slice.tag.clone(),
+                case_count: candidate_slice.case_count,
+                baseline_mean_beat_f1: baseline_slice.mean_beat_f1,
+                candidate_mean_beat_f1: candidate_slice.mean_beat_f1,
+                mean_beat_f1_delta: candidate_slice.mean_beat_f1 - baseline_slice.mean_beat_f1,
+            })
+        })
+        .collect::<Result<Vec<_>>>()?;
+    Ok(DecoderPolicyComparison {
+        mean_beat_f1_delta: candidate.mean_beat_f1 - baseline.mean_beat_f1,
+        regressed_case_ids,
+        improved_case_ids,
+        slices,
+    })
+}
+
+#[allow(clippy::too_many_arguments)]
+fn evaluate_decoder_candidates_with_audio_directory(
+    suite_path: &Path,
+    model_pack_path: &Path,
+    model_root: &Path,
+    audio_directory: &Path,
+    policies: &[DecoderPolicy],
+    operation: &str,
+    allow_holdout: bool,
+) -> Result<(
+    EvaluationSuite,
+    ModelPackIdentity,
+    Vec<DecoderSweepCandidate>,
+    f64,
+)> {
     if policies.is_empty() {
-        bail!("decoder sweep requires at least one policy");
+        bail!("{operation} requires at least one policy");
+    }
+    let (suite, root) = load_suite(suite_path)?;
+    if suite.purpose != SuitePurpose::Calibration && !allow_holdout {
+        bail!(
+            "{operation} requires a calibration suite; {} declares {:?}. Select one candidate on calibration data and use decoder-eval for regression or holdout evidence",
+            suite.id,
+            suite.purpose
+        );
     }
     let verified = verify_model_pack(model_pack_path, model_root)
         .with_context(|| format!("verifying model pack {}", model_pack_path.display()))?;
@@ -538,82 +789,104 @@ pub fn evaluate_decoder_sweep_with_audio_directory(
     let beat_model = required_model_path(&verified, ModelArtifactRole::BeatModel)?;
     let mut backend = BeatThisBackend::load(&mel_model, &beat_model)?;
     let resolver = ExternalAudioResolver::new(audio_directory)?;
-    let (suite, root) = load_suite(suite_path)?;
     let mut candidates = policies
         .iter()
         .cloned()
         .map(|policy| DecoderSweepCandidate {
             policy,
+            passed: false,
             mean_beat_f1: 0.0,
             mean_beat_precision: 0.0,
             mean_beat_recall: 0.0,
             mean_predicted_beat_count: 0.0,
+            slices: Vec::new(),
             cases: Vec::with_capacity(suite.cases.len()),
         })
         .collect::<Vec<_>>();
 
     for (case_index, case) in suite.cases.iter().enumerate() {
         eprintln!(
-            "decoder sweep {}/{}: {}",
+            "{operation} {}/{}: {}",
             case_index + 1,
             suite.cases.len(),
             case.id
         );
-        let truth = load_case_truth(case, &root)?;
-        let (samples, sample_rate, _) =
-            load_case_audio(case, &suite.id, &root, &truth, Some(&resolver))?;
-        let inference = backend
-            .infer_mono(&samples, sample_rate)
-            .with_context(|| format!("inferring decoder sweep case {}", case.id))?;
-        let expected = truth
+        score_decoder_case(
+            &mut backend,
+            &resolver,
+            &suite,
+            &root,
+            case,
+            &mut candidates,
+            operation,
+        )?;
+    }
+    let per_case_policy_oracle_mean_beat_f1 = finalize_decoder_candidates(&mut candidates);
+    let manifest = verified.manifest();
+    let model_pack = ModelPackIdentity {
+        id: manifest.id.clone(),
+        version: manifest.version.clone(),
+        backend: manifest.backend.clone(),
+        manifest_sha256: verified.manifest_sha256().to_string(),
+    };
+    Ok((
+        suite,
+        model_pack,
+        candidates,
+        per_case_policy_oracle_mean_beat_f1,
+    ))
+}
+
+#[allow(clippy::too_many_arguments)]
+fn score_decoder_case(
+    backend: &mut BeatThisBackend,
+    resolver: &ExternalAudioResolver,
+    suite: &EvaluationSuite,
+    root: &Path,
+    case: &EvaluationCase,
+    candidates: &mut [DecoderSweepCandidate],
+    operation: &str,
+) -> Result<()> {
+    let truth = load_case_truth(case, root)?;
+    let (samples, sample_rate, _) = load_case_audio(case, &suite.id, root, &truth, Some(resolver))?;
+    let inference = backend
+        .infer_mono(&samples, sample_rate)
+        .with_context(|| format!("inferring {operation} case {}", case.id))?;
+    let expected = truth
+        .beats
+        .iter()
+        .map(|beat| beat.time_s)
+        .collect::<Vec<_>>();
+    let thresholds = case.thresholds.as_ref().unwrap_or(&suite.thresholds);
+    let tolerance_s = thresholds.beat_tolerance_ms / 1000.0;
+    for candidate in candidates {
+        let decoded = if let Some(midpoints) = &candidate.policy.supported_midpoints {
+            backend.decode_inference_with_supported_midpoints(&inference, midpoints.options())
+        } else {
+            backend.decode_inference(&inference, candidate.policy.options())
+        };
+        let observations = decoded.with_context(|| {
+            format!(
+                "decoding case {} with policy {}",
+                case.id, candidate.policy.id
+            )
+        })?;
+        let predicted = observations
             .beats
             .iter()
             .map(|beat| beat.time_s)
             .collect::<Vec<_>>();
-        let tolerance_s = case
-            .thresholds
-            .as_ref()
-            .unwrap_or(&suite.thresholds)
-            .beat_tolerance_ms
-            / 1000.0;
-        for candidate in &mut candidates {
-            let decoded = if let Some(midpoints) = &candidate.policy.supported_midpoints {
-                backend.decode_inference_with_supported_midpoints(&inference, midpoints.options())
-            } else {
-                backend.decode_inference(&inference, candidate.policy.options())
-            };
-            let observations = decoded.with_context(|| {
-                format!(
-                    "decoding case {} with policy {}",
-                    case.id, candidate.policy.id
-                )
-            })?;
-            let predicted = observations
-                .beats
-                .iter()
-                .map(|beat| beat.time_s)
-                .collect::<Vec<_>>();
-            candidate.cases.push(DecoderSweepCase {
-                id: case.id.clone(),
-                predicted_beat_count: predicted.len(),
-                beats: score_beats(&predicted, &expected, tolerance_s),
-            });
-        }
+        let beats = score_beats(&predicted, &expected, tolerance_s);
+        candidate.cases.push(DecoderSweepCase {
+            id: case.id.clone(),
+            tags: case.tags.clone(),
+            predicted_beat_count: predicted.len(),
+            minimum_beat_f1: thresholds.min_beat_f1,
+            passed: beats.f1 >= thresholds.min_beat_f1,
+            beats,
+        });
     }
-    let per_case_policy_oracle_mean_beat_f1 = finalize_decoder_candidates(&mut candidates);
-    let manifest = verified.manifest();
-    Ok(DecoderSweepEvaluation {
-        schema_version: 1,
-        suite_id: suite.id,
-        model_pack: ModelPackIdentity {
-            id: manifest.id.clone(),
-            version: manifest.version.clone(),
-            backend: manifest.backend.clone(),
-            manifest_sha256: verified.manifest_sha256().to_string(),
-        },
-        candidates,
-        per_case_policy_oracle_mean_beat_f1,
-    })
+    Ok(())
 }
 
 /// Diagnose the model evidence near every truth beat missed by the upstream decoder.
@@ -632,6 +905,14 @@ pub fn evaluate_decoder_recoverability_with_audio_directory(
     model_root: &Path,
     audio_directory: &Path,
 ) -> Result<DecoderRecoverabilityEvaluation> {
+    let (suite, root) = load_suite(suite_path)?;
+    if suite.purpose != SuitePurpose::Calibration {
+        bail!(
+            "decoder recoverability requires a calibration suite; {} declares {:?}",
+            suite.id,
+            suite.purpose
+        );
+    }
     let verified = verify_model_pack(model_pack_path, model_root)
         .with_context(|| format!("verifying model pack {}", model_pack_path.display()))?;
     validate_beat_this_contract(&verified)?;
@@ -639,7 +920,6 @@ pub fn evaluate_decoder_recoverability_with_audio_directory(
     let beat_model = required_model_path(&verified, ModelArtifactRole::BeatModel)?;
     let mut backend = BeatThisBackend::load(&mel_model, &beat_model)?;
     let resolver = ExternalAudioResolver::new(audio_directory)?;
-    let (suite, root) = load_suite(suite_path)?;
     let mut cases = Vec::with_capacity(suite.cases.len());
     let mut aggregate_counts = MissingBeatEvidenceCounts::default();
     let mut expected_beat_count = 0;
@@ -710,6 +990,7 @@ pub fn evaluate_decoder_recoverability_with_audio_directory(
     Ok(DecoderRecoverabilityEvaluation {
         schema_version: 1,
         suite_id: suite.id,
+        suite_purpose: suite.purpose,
         model_pack: ModelPackIdentity {
             id: manifest.id.clone(),
             version: manifest.version.clone(),
@@ -866,6 +1147,7 @@ impl MissingBeatEvidenceCounts {
 fn finalize_decoder_candidates(candidates: &mut [DecoderSweepCandidate]) -> f64 {
     for candidate in &mut *candidates {
         let case_count = usize_to_f64(candidate.cases.len());
+        candidate.passed = candidate.cases.iter().all(|case| case.passed);
         candidate.mean_beat_f1 = candidate
             .cases
             .iter()
@@ -890,6 +1172,28 @@ fn finalize_decoder_candidates(candidates: &mut [DecoderSweepCandidate]) -> f64 
             .map(|case| usize_to_f64(case.predicted_beat_count))
             .sum::<f64>()
             / case_count;
+        let mut slices = BTreeMap::<String, Vec<&DecoderSweepCase>>::new();
+        for case in &candidate.cases {
+            for tag in &case.tags {
+                slices.entry(tag.clone()).or_default().push(case);
+            }
+        }
+        candidate.slices = slices
+            .into_iter()
+            .map(|(tag, cases)| {
+                let case_count = usize_to_f64(cases.len());
+                DecoderSliceMetrics {
+                    tag,
+                    case_count: cases.len(),
+                    passed: cases.iter().all(|case| case.passed),
+                    mean_beat_precision: cases.iter().map(|case| case.beats.precision).sum::<f64>()
+                        / case_count,
+                    mean_beat_recall: cases.iter().map(|case| case.beats.recall).sum::<f64>()
+                        / case_count,
+                    mean_beat_f1: cases.iter().map(|case| case.beats.f1).sum::<f64>() / case_count,
+                }
+            })
+            .collect();
     }
     let case_count = candidates[0].cases.len();
     (0..case_count)
@@ -1059,7 +1363,7 @@ pub fn score_prediction_directory(
         let thresholds = case.thresholds.as_ref().unwrap_or(&suite.thresholds);
         cases.push(evaluate_analysis(&case.id, &analysis, &truth, thresholds));
     }
-    Ok(suite_report(suite.id, cases))
+    Ok(suite_report(suite.id, suite.purpose, cases))
 }
 
 fn load_case_truth(case: &EvaluationCase, root: &Path) -> Result<GeneratedTruth> {
@@ -1106,10 +1410,15 @@ fn load_recipe(path: &Path) -> Result<SyntheticRecipe> {
     .with_context(|| format!("parsing recipe {}", path.display()))
 }
 
-fn suite_report(suite_id: String, cases: Vec<CaseEvaluation>) -> SuiteEvaluation {
+fn suite_report(
+    suite_id: String,
+    suite_purpose: SuitePurpose,
+    cases: Vec<CaseEvaluation>,
+) -> SuiteEvaluation {
     SuiteEvaluation {
         schema_version: 1,
         suite_id,
+        suite_purpose,
         passed: cases.iter().all(|case| case.passed),
         cases,
     }
@@ -1168,6 +1477,17 @@ mod tests {
     }
 
     #[test]
+    fn standard_decoder_policy_requires_a_registered_id() {
+        assert_eq!(
+            standard_decoder_policy("supported-midpoints-logit-minus-3.0")
+                .unwrap()
+                .id,
+            "supported-midpoints-logit-minus-3.0"
+        );
+        assert!(standard_decoder_policy("tuned-on-holdout").is_err());
+    }
+
+    #[test]
     fn decoder_policy_oracle_uses_best_candidate_per_case() {
         let mut candidates = vec![
             candidate("first", &[(0.4, 4), (0.8, 8)]),
@@ -1179,6 +1499,29 @@ mod tests {
         assert!((candidates[0].mean_beat_f1 - 0.6).abs() < f64::EPSILON);
         assert!((candidates[0].mean_predicted_beat_count - 6.0).abs() < f64::EPSILON);
         assert!((oracle - 0.7).abs() < f64::EPSILON);
+        assert!(!candidates[0].passed);
+        assert_eq!(candidates[0].slices.len(), 2);
+        assert_eq!(candidates[0].slices[0].tag, "first");
+        assert!((candidates[0].slices[0].mean_beat_f1 - 0.4).abs() < f64::EPSILON);
+        assert!(!candidates[0].slices[0].passed);
+        assert!(candidates[0].slices[1].passed);
+    }
+
+    #[test]
+    fn fixed_decoder_comparison_reports_improvements_and_regressions() {
+        let mut candidates = vec![
+            candidate("upstream-default", &[(0.4, 4), (0.8, 8)]),
+            candidate("selected", &[(0.6, 6), (0.5, 5)]),
+        ];
+        finalize_decoder_candidates(&mut candidates);
+
+        let comparison = compare_decoder_candidates(&candidates[0], &candidates[1]).unwrap();
+
+        assert!((comparison.mean_beat_f1_delta + 0.05).abs() < f64::EPSILON);
+        assert_eq!(comparison.improved_case_ids, ["case-0"]);
+        assert_eq!(comparison.regressed_case_ids, ["case-1"]);
+        assert!((comparison.slices[0].mean_beat_f1_delta - 0.2).abs() < f64::EPSILON);
+        assert!((comparison.slices[1].mean_beat_f1_delta + 0.3).abs() < f64::EPSILON);
     }
 
     #[test]
@@ -1231,16 +1574,21 @@ mod tests {
                 deduplicate_width_frames: 1,
                 supported_midpoints: None,
             },
+            passed: false,
             mean_beat_f1: 0.0,
             mean_beat_precision: 0.0,
             mean_beat_recall: 0.0,
             mean_predicted_beat_count: 0.0,
+            slices: Vec::new(),
             cases: cases
                 .iter()
                 .enumerate()
                 .map(|(index, &(f1, predicted_beat_count))| DecoderSweepCase {
                     id: format!("case-{index}"),
+                    tags: vec![if index == 0 { "first" } else { "second" }.to_string()],
                     predicted_beat_count,
+                    minimum_beat_f1: 0.5,
+                    passed: f1 >= 0.5,
                     beats: BeatMetrics {
                         matched: 0,
                         precision: f1,
