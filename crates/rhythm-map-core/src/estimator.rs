@@ -769,7 +769,7 @@ fn repair_bounded_metrical_runs(
             if (left_center / right_center).ln().abs() > edge_ratio.ln_1p() {
                 return None;
             }
-            let context = (left_center.log2() + right_center.log2()) * 0.5;
+            let context = f64::midpoint(left_center.log2(), right_center.log2());
             values[start..end]
                 .iter()
                 .all(|value| {
