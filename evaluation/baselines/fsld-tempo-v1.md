@@ -92,3 +92,26 @@ supported subdivisions in its interior but loses peaks at the edge; the core
 estimator will not invent the missing timestamps. These need independent
 timestamp truth and, for missing events, an opt-in logits sequence decoder or
 an alternate observation backend.
+
+## Edge-connected Viterbi candidate
+
+On 2026-08-23, `viterbi-edge-logit-minus-3.0-bias-2.0` was combined with
+`sequence-phase-v1`. The decoder requires a connected run of at least six weak
+model peaks plus local and observed-edge support; it never emits a bare path
+grid timestamp. The suite rose from 9 to 10 of 15 passing cases:
+
+- `fsld-19069-110-bpm` gained the supported alternating model peaks needed to
+  keep its tempo curve at the annotated level; P95 tempo error fell from 33.48
+  percent to approximately 2.92 percent while median error remained 1.01
+  percent.
+- `fsld-271070-140-bpm` improved but remained below the suite gate. Its short
+  recovered edge run is tempo-only evidence and is not accepted as timestamp
+  truth.
+- The 128 BPM four-candidate run is rejected, preserving the upstream result.
+  The 130 BPM clip is also unchanged because Beat This has no sufficiently long
+  qualifying edge sequence.
+
+All 15 timestamped ARTBeaT cases remain identical at the raw event-metric level
+to upstream decoding. FSLD does not provide beat timestamps, so the extra 110
+BPM events remain a calibration result rather than permission to change the
+shipping default.

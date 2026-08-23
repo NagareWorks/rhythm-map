@@ -23,8 +23,8 @@ pub use public_dataset::{
 pub use runner::{
     AttributionCase, AttributionDecision, BottleneckEvaluation, CaseMetricDelta, DecoderPolicy,
     DecoderPolicyComparison, DecoderPolicyEvaluation, DecoderRecoverabilityCase,
-    DecoderRecoverabilityEvaluation, DecoderSliceDelta, DecoderSliceMetrics,
-    DecoderSupportedMidpointPolicy, DecoderSweepCandidate, DecoderSweepCase,
+    DecoderRecoverabilityEvaluation, DecoderSequencePathPolicy, DecoderSliceDelta,
+    DecoderSliceMetrics, DecoderSupportedMidpointPolicy, DecoderSweepCandidate, DecoderSweepCase,
     DecoderSweepEvaluation, LogitEvidence, MissingBeatEvidence, MissingBeatEvidenceClass,
     MissingBeatEvidenceCounts, ModelPackIdentity, ObservationDiagnostics, SuiteEvaluation,
     evaluate_backend_suite, evaluate_backend_suite_with_audio_directory,

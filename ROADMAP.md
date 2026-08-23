@@ -31,6 +31,9 @@
   whole-track half-time folds, removes evidence-supported one-sided edge
   midpoint extras, and repairs fixed-frame paired quantization jitter without
   modifying exact timestamp observations.
+- An opt-in edge-connected Viterbi decoder over Beat This logits that preserves
+  upstream events, recovers only long repeated model-peak sequences, and never
+  emits a path-grid timestamp without a local model maximum.
 
 ## Phase 2: product surfaces
 
@@ -164,3 +167,19 @@ a learned component to the default distribution.
   beat/downbeat logits, preserving ambiguity and avoiding timestamp invention,
   against tempo-change, rubato, and compound-meter slices. Compare an alternate
   backend if the decoder cannot recover evidence that Beat This never emitted.
+- 2026-08-23: an edge-connected Viterbi decoder recovered long repeated weak
+  Beat This peaks without changing any of the 15 timestamped ARTBeaT cases. In
+  combination with `sequence-phase-v1`, it raised FSLD from 9 to 10 of 15 by
+  reducing the 110 BPM clip's P95 tempo error from 33.48 to about 2.92 percent.
+  A minimum six-candidate sequence plus local support rejected the regressive
+  four-point 128 BPM edge run. The 130 BPM clip remained unchanged because the
+  model did not emit a sufficiently supported edge sequence. Keep the decoder
+  opt-in pending an independent timestamped holdout; compare an alternate
+  observation backend for the missing-evidence cases instead of weakening the
+  no-invention rule.
+- 2026-08-23: on the development VDI, optimized inference completed the 15-case
+  ARTBeaT decoder matrix in under one minute, while an incremental release-LTO
+  relink took about three minutes and an unoptimized first-case inference took
+  more than one minute. The observed performance issue is build/profile
+  configuration, not Viterbi decoding. Add a non-LTO optimized evaluation
+  profile before expanding routine model-backed CI.

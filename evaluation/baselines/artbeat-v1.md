@@ -131,3 +131,20 @@ The report correctly fails its no-regression decision because
 `artbeat-15-85-to-127-5` is worse, even though overall mean F1 rises by 0.0183.
 Most rows still contain only one source, so this remains calibration evidence
 rather than a default-policy decision.
+
+## Edge-connected Viterbi candidate
+
+On 2026-08-23, a dynamic-programming path over Beat This beat-period and phase
+states was calibrated against the same retained logits. Unrestricted variants
+proved that weak peaks are recoverable, but fixed settings also added false
+events in tempo ramps, meter changes, and rubato. The registered
+`viterbi-edge-logit-minus-3.0-bias-2.0` policy therefore retains upstream
+events and adds only model local maxima belonging to a long weak-peak sequence
+connected to an observed path edge.
+
+The final conservative policy produced the same mean F1 (0.8052), mean
+precision (0.8910), mean recall (0.7526), and mean event count (25.07) as the
+upstream decoder. All 15 per-case event counts and beat metrics were identical.
+This is a no-regression calibration result, not evidence that the candidate is
+universally correct: only a separately held timestamped corpus can validate
+events recovered in audio categories not represented here.

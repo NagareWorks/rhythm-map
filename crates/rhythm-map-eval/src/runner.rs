@@ -7,8 +7,8 @@ use std::{
 
 use anyhow::{Context, Result, bail};
 use rhythm_map_beat_this::{
-    BeatThisBackend, BeatThisDecoderPolicy, PeakPickingOptions, SupportedMidpointOptions,
-    decode_audio,
+    BeatThisBackend, BeatThisDecoderPolicy, PeakPickingOptions, SequencePathOptions,
+    SupportedMidpointOptions, decode_audio,
 };
 use rhythm_map_core::{
     Analysis, Engine, EstimatorOptions, ModelInfo, ObservedBeat, RhythmObservations,
@@ -181,6 +181,9 @@ pub struct DecoderPolicy {
     /// Optional conservative weak-midpoint recovery after upstream decoding.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub supported_midpoints: Option<DecoderSupportedMidpointPolicy>,
+    /// Optional Viterbi path over beat-period and phase states.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub sequence_path: Option<DecoderSequencePathPolicy>,
 }
 
 impl DecoderPolicy {
@@ -193,10 +196,14 @@ impl DecoderPolicy {
     }
 
     fn backend_policy(&self) -> BeatThisDecoderPolicy {
-        self.supported_midpoints.as_ref().map_or_else(
-            || BeatThisDecoderPolicy::PeakPicking(self.options()),
-            |midpoints| BeatThisDecoderPolicy::SupportedMidpoints(midpoints.options()),
-        )
+        match (&self.supported_midpoints, &self.sequence_path) {
+            (Some(midpoints), None) => {
+                BeatThisDecoderPolicy::SupportedMidpoints(midpoints.options())
+            }
+            (None, Some(sequence)) => BeatThisDecoderPolicy::SequencePath(sequence.options()),
+            (None, None) => BeatThisDecoderPolicy::PeakPicking(self.options()),
+            (Some(_), Some(_)) => unreachable!("registered decoder policy is unambiguous"),
+        }
     }
 }
 
@@ -220,6 +227,54 @@ impl DecoderSupportedMidpointPolicy {
             maximum_midpoint_offset_ratio: self.maximum_midpoint_offset_ratio,
             support_radius_gaps: self.support_radius_gaps,
             minimum_supported_gaps: self.minimum_supported_gaps,
+        }
+    }
+}
+
+/// Serializable Viterbi sequence-path candidate configuration.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct DecoderSequencePathPolicy {
+    /// Strict lower logit bound for a local maximum to become an event.
+    pub candidate_logit_threshold: f32,
+    /// Local-maximum radius used for event candidates.
+    pub candidate_local_max_radius_frames: usize,
+    /// Maximum Viterbi-state to model-peak correction distance.
+    pub maximum_peak_correction_frames: usize,
+    /// Slowest represented beat period.
+    pub minimum_bpm: f64,
+    /// Fastest represented beat period.
+    pub maximum_bpm: f64,
+    /// Squared log-period penalty for tempo changes at beat boundaries.
+    pub tempo_change_penalty: f64,
+    /// Log-score prior added when the Viterbi path enters a beat state.
+    pub beat_state_bias: f64,
+    /// Maximum path-beat gap joining events into one weak-event sequence.
+    pub support_radius_beats: usize,
+    /// Minimum weak candidates required in one connected sequence.
+    pub minimum_supported_candidates: usize,
+    /// Minimum weak candidates required in the local support radius.
+    pub minimum_local_supported_candidates: usize,
+    /// Whether recovered weak runs must connect to a model-supported edge.
+    pub require_edge_connection: bool,
+    /// Maximum path-beat distance between a weak run and an observed edge.
+    pub maximum_edge_gap_beats: usize,
+}
+
+impl DecoderSequencePathPolicy {
+    fn options(&self) -> SequencePathOptions {
+        SequencePathOptions {
+            candidate_logit_threshold: self.candidate_logit_threshold,
+            candidate_local_max_radius_frames: self.candidate_local_max_radius_frames,
+            maximum_peak_correction_frames: self.maximum_peak_correction_frames,
+            minimum_bpm: self.minimum_bpm,
+            maximum_bpm: self.maximum_bpm,
+            tempo_change_penalty: self.tempo_change_penalty,
+            beat_state_bias: self.beat_state_bias,
+            support_radius_beats: self.support_radius_beats,
+            minimum_supported_candidates: self.minimum_supported_candidates,
+            minimum_local_supported_candidates: self.minimum_local_supported_candidates,
+            require_edge_connection: self.require_edge_connection,
+            maximum_edge_gap_beats: self.maximum_edge_gap_beats,
         }
     }
 }
@@ -704,6 +759,7 @@ pub fn standard_decoder_policies() -> Vec<DecoderPolicy> {
         local_max_radius_frames: 3,
         deduplicate_width_frames: 1,
         supported_midpoints: None,
+        sequence_path: None,
     }];
     for threshold in [-0.5_f32, -1.0, -2.0, -3.0] {
         policies.push(DecoderPolicy {
@@ -712,6 +768,7 @@ pub fn standard_decoder_policies() -> Vec<DecoderPolicy> {
             local_max_radius_frames: 3,
             deduplicate_width_frames: 1,
             supported_midpoints: None,
+            sequence_path: None,
         });
     }
     for threshold in [0.0_f32, -1.0, -2.0, -3.0] {
@@ -725,6 +782,7 @@ pub fn standard_decoder_policies() -> Vec<DecoderPolicy> {
             local_max_radius_frames: 1,
             deduplicate_width_frames: 1,
             supported_midpoints: None,
+            sequence_path: None,
         });
     }
     let midpoint_options = SupportedMidpointOptions::default();
@@ -739,8 +797,38 @@ pub fn standard_decoder_policies() -> Vec<DecoderPolicy> {
             support_radius_gaps: midpoint_options.support_radius_gaps,
             minimum_supported_gaps: midpoint_options.minimum_supported_gaps,
         }),
+        sequence_path: None,
     });
+    let sequence_options = SequencePathOptions::default();
+    policies.push(sequence_decoder_policy(
+        "viterbi-edge-logit-minus-3.0-bias-2.0",
+        sequence_options,
+    ));
     policies
+}
+
+fn sequence_decoder_policy(id: &str, options: SequencePathOptions) -> DecoderPolicy {
+    DecoderPolicy {
+        id: id.to_string(),
+        logit_threshold: 0.0,
+        local_max_radius_frames: 3,
+        deduplicate_width_frames: 1,
+        supported_midpoints: None,
+        sequence_path: Some(DecoderSequencePathPolicy {
+            candidate_logit_threshold: options.candidate_logit_threshold,
+            candidate_local_max_radius_frames: options.candidate_local_max_radius_frames,
+            maximum_peak_correction_frames: options.maximum_peak_correction_frames,
+            minimum_bpm: options.minimum_bpm,
+            maximum_bpm: options.maximum_bpm,
+            tempo_change_penalty: options.tempo_change_penalty,
+            beat_state_bias: options.beat_state_bias,
+            support_radius_beats: options.support_radius_beats,
+            minimum_supported_candidates: options.minimum_supported_candidates,
+            minimum_local_supported_candidates: options.minimum_local_supported_candidates,
+            require_edge_connection: options.require_edge_connection,
+            maximum_edge_gap_beats: options.maximum_edge_gap_beats,
+        }),
+    }
 }
 
 /// Resolve one immutable policy from the standard decoder registry.
@@ -1006,11 +1094,8 @@ fn score_decoder_case(
     let thresholds = case.thresholds.as_ref().unwrap_or(&suite.thresholds);
     let tolerance_s = thresholds.beat_tolerance_ms / 1000.0;
     for candidate in candidates {
-        let decoded = if let Some(midpoints) = &candidate.policy.supported_midpoints {
-            backend.decode_inference_with_supported_midpoints(&inference, midpoints.options())
-        } else {
-            backend.decode_inference(&inference, candidate.policy.options())
-        };
+        let decoded =
+            backend.decode_inference_with_policy(&inference, candidate.policy.backend_policy());
         let observations = decoded.with_context(|| {
             format!(
                 "decoding case {} with policy {}",
@@ -1716,7 +1801,7 @@ mod tests {
     fn standard_decoder_sweep_keeps_upstream_policy_first() {
         let policies = standard_decoder_policies();
 
-        assert_eq!(policies.len(), 10);
+        assert_eq!(policies.len(), 11);
         assert_eq!(policies[0].id, "upstream-default");
         assert_eq!(policies[0].options(), PeakPickingOptions::default());
         assert!(policies.iter().any(|policy| {
@@ -1725,9 +1810,12 @@ mod tests {
         }));
         assert!(
             policies
-                .last()
-                .is_some_and(|policy| policy.supported_midpoints.is_some())
+                .iter()
+                .any(|policy| policy.supported_midpoints.is_some())
         );
+        assert!(policies.last().is_some_and(|policy| {
+            policy.id == "viterbi-edge-logit-minus-3.0-bias-2.0" && policy.sequence_path.is_some()
+        }));
     }
 
     #[test]
@@ -1737,6 +1825,11 @@ mod tests {
                 .unwrap()
                 .id,
             "supported-midpoints-logit-minus-3.0"
+        );
+        let sequence = standard_decoder_policy("viterbi-edge-logit-minus-3.0-bias-2.0").unwrap();
+        assert_eq!(
+            sequence.backend_policy(),
+            BeatThisDecoderPolicy::SequencePath(SequencePathOptions::default())
         );
         assert!(standard_decoder_policy("tuned-on-holdout").is_err());
     }
@@ -1835,6 +1928,7 @@ mod tests {
                 local_max_radius_frames: 3,
                 deduplicate_width_frames: 1,
                 supported_midpoints: None,
+                sequence_path: None,
             },
             passed: false,
             mean_beat_f1: 0.0,

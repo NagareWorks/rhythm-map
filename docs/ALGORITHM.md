@@ -156,6 +156,45 @@ real local maximum in the model logits, near an interval midpoint, and part of
 a supported run. Evaluation reports record both decoder and estimator policy
 IDs so their effects cannot be confused with the default product path.
 
+## Edge-connected sequence-path recovery
+
+The opt-in `viterbi-edge-logit-minus-3.0-bias-2.0` decoder operates on the
+retained Beat This beat logits before the deterministic estimator. Its dynamic
+programming state is an integer beat period and phase at the backend's 50 Hz
+frame rate. Period states cover 40--320 BPM. Beat and non-beat emissions use
+the Bernoulli log likelihood implied by each logit, with a beat-state bias of
+2.0. A transition between beat periods pays 100 times the squared natural-log
+period ratio, so the path may follow a real tempo change without changing
+period freely at every event.
+
+The best-scoring path is evidence, not an event generator. Every recovered
+timestamp must satisfy all of these checks:
+
+1. it snaps within three frames to a radius-one local maximum above logit -3;
+2. its connected weak-peak sequence contains at least six candidates, with no
+   adjacent candidates more than three path beats apart;
+3. at least three weak candidates lie within three path beats of the emitted
+   event; and
+4. the connected sequence reaches the first or last model-supported path
+   event within two path beats.
+
+All upstream peaks remain unchanged. A path state without a qualifying model
+peak emits nothing, so the decoder cannot fill a silent grid or extrapolate
+through a region where Beat This produced no event evidence. Live backend
+observation and single-inference evaluation share the same policy dispatcher,
+preventing an evaluation-only policy from silently decoding differently in a
+deployed adapter.
+
+On the 15 timestamped ARTBeaT calibration cases, the conservative policy is
+identical to the upstream decoder in every event count and beat metric. When
+combined with `sequence-phase-v1`, it raises the tempo-only FSLD slice from 9
+to 10 passing cases by recovering a long repeated weak-peak sequence in the
+110 BPM clip. Short four-point sequences remain rejected. The 130 BPM clip is
+unchanged because it lacks enough qualifying edge peaks; solving that case in
+this backend would require timestamp invention, a less conservative policy, or
+new observation evidence. The policy therefore remains opt-in until an
+independent timestamped holdout validates the recovered events.
+
 ## Short transition beat-grid recovery
 
 A model can smear an abrupt tempo jump across several seconds and emit a mix of
