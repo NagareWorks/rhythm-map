@@ -1,2 +1,2 @@
 [alias]
-xtask = "run --quiet --release -p rhythm-map-eval --"
+xtask = "run --quiet --profile evaluation -p rhythm-map-eval --"

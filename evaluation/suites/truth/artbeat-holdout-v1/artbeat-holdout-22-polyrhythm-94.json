@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "id": "artbeat-holdout-22-polyrhythm-94",
+  "duration_s": 11.010566893424036,
+  "beats": [
+    {
+      "time_s": 0.001995,
+      "downbeat": false
+    },
+    {
+      "time_s": 0.646942,
+      "downbeat": false
+    },
+    {
+      "time_s": 1.267287,
+      "downbeat": false
+    },
+    {
+      "time_s": 1.926862,
+      "downbeat": false
+    },
+    {
+      "time_s": 2.571144,
+      "downbeat": false
+    },
+    {
+      "time_s": 3.218751,
+      "downbeat": false
+    },
+    {
+      "time_s": 3.84774,
+      "downbeat": false
+    },
+    {
+      "time_s": 4.476065,
+      "downbeat": false
+    },
+    {
+      "time_s": 5.115028,
+      "downbeat": false
+    },
+    {
+      "time_s": 5.761304,
+      "downbeat": false
+    },
+    {
+      "time_s": 6.379656,
+      "downbeat": false
+    },
+    {
+      "time_s": 7.025267,
+      "downbeat": false
+    },
+    {
+      "time_s": 7.663565,
+      "downbeat": false
+    },
+    {
+      "time_s": 8.297874,
+      "downbeat": false
+    },
+    {
+      "time_s": 8.946145,
+      "downbeat": false
+    },
+    {
+      "time_s": 9.586438,
+      "downbeat": false
+    },
+    {
+      "time_s": 10.221412,
+      "downbeat": false
+    }
+  ],
+  "tempo_segments": [
+    {
+      "start_s": 0.0,
+      "end_s": 11.010566893424036,
+      "kind": "constant",
+      "start_bpm": 93.805,
+      "end_bpm": 93.805
+    }
+  ],
+  "change_points": []
+}

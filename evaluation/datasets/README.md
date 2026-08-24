@@ -57,6 +57,48 @@ makes the locked slice useful as independent public evaluation data; it does
 not by itself prove that no unpublished model development ever used the same
 audio.
 
+## ARTBeaT disjoint holdout v1
+
+[`artbeat-holdout-v1.json`](artbeat-holdout-v1.json) locks the nine ARTBeaT
+examples 02--04, 16--17, and 22--25 that are absent from the calibration slice.
+Their published IDs and categories were selected on 2026-08-24, before running
+Beat This inference, to cover arrangement entrances, rhythmic deception,
+polyrhythm, syncopation, 7/8 and 11/8 meter, and half-time risk. The suite fixes
+the registered `viterbi-edge-logit-minus-3.0-bias-2.0` policy and a minimum
+per-case beat F1 of 0.80 before opening the results.
+
+This is a case-disjoint holdout, not a corpus-disjoint generalization claim:
+calibration and holdout audio share the ARTBeaT production environment. It is a
+valid one-time policy-transfer check because none of these cases contributed to
+the decoder sweep or policy choice, while a second timestamped corpus remains
+desirable.
+
+Fetch the locked bytes outside the checkout:
+
+```bash
+cargo xtask dataset-fetch \
+  --manifest evaluation/datasets/artbeat-holdout-v1.json \
+  --output D:/rhythm-map-eval/artbeat-holdout-v1 \
+  --with-annotations
+```
+
+Checked-in truth is reproducibly recovered from the official SVG time axis and
+the blue `Ground Truth` vertical-line group. For one case:
+
+```bash
+cargo xtask artbeat-truth \
+  --id artbeat-holdout-02-arp1 \
+  --annotation D:/rhythm-map-eval/artbeat-holdout-v1/annotations/02_ARTBeaT_Basic_arp1.svg \
+  --audio D:/rhythm-map-eval/artbeat-holdout-v1/audio/02_ARTBeaT_Basic_arp1.mp3 \
+  --output evaluation/suites/truth/artbeat-holdout-v1/artbeat-holdout-02-arp1.json
+```
+
+The importer does not inspect audio features or model output. It derives the
+constant reference tempo from the median interval of official beat timestamps,
+and uses decoded audio only for content identity, duration, and boundary
+validation. ARTBeaT does not publish downbeat labels, so the suite does not gate
+downbeat F1.
+
 ## Freesound Loop tempo calibration v1
 
 [`fsld-tempo-v1.json`](fsld-tempo-v1.json) selects 15 loops from the
@@ -106,6 +148,9 @@ labels used here.
 | Dataset | Decision | Reason |
 | --- | --- | --- |
 | ASAP | Exclude from independent evaluation | It is in the published Beat This training corpus and is CC BY-NC-SA 4.0. |
+| GuitarSet | Exclude from independent evaluation | It is one of the 16 published Beat This training corpora, even though its audio and beat annotations otherwise fit the task. |
+| Groove MIDI Dataset | Exclude from independent evaluation | `groove_midi` is one of the 16 published Beat This training corpora. A new split of the same recordings would not be independent for the final model. |
 | RWC 2.0 | Exclude from independent evaluation | RWC is in the published Beat This training corpus; the new audio and curated annotations are CC BY-NC 4.0. |
 | MOSA | Revisit only after rights clarification | It has useful expressive beat labels, but access is restricted and its usage guidelines limit the stated purpose to research on its recorded modalities. |
 | MTG-Jamendo | Do not use for rhythm truth | Audio licenses vary, dataset use is limited to non-commercial research, and it has no beat timestamp ground truth. |
+| KRAISLER | Revisit only after rights clarification | Its 2026 release has manually refined beat/downbeat annotations and cannot overlap Beat This training, but the record simultaneously says CC BY 4.0 and prohibits commercial use. |

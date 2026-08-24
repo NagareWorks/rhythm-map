@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "id": "artbeat-holdout-17-doom7",
+  "duration_s": 23.96734693877551,
+  "beats": [
+    {
+      "time_s": 0.978261,
+      "downbeat": false
+    },
+    {
+      "time_s": 1.622962,
+      "downbeat": false
+    },
+    {
+      "time_s": 2.279212,
+      "downbeat": false
+    },
+    {
+      "time_s": 2.95924,
+      "downbeat": false
+    },
+    {
+      "time_s": 3.60462,
+      "downbeat": false
+    },
+    {
+      "time_s": 4.259511,
+      "downbeat": false
+    },
+    {
+      "time_s": 4.932066,
+      "downbeat": false
+    },
+    {
+      "time_s": 5.556387,
+      "downbeat": false
+    },
+    {
+      "time_s": 6.207881,
+      "downbeat": false
+    },
+    {
+      "time_s": 6.882474,
+      "downbeat": false
+    },
+    {
+      "time_s": 7.509512,
+      "downbeat": false
+    },
+    {
+      "time_s": 8.158968,
+      "downbeat": false
+    },
+    {
+      "time_s": 8.776496,
+      "downbeat": false
+    },
+    {
+      "time_s": 9.456523,
+      "downbeat": false
+    },
+    {
+      "time_s": 10.108697,
+      "downbeat": false
+    },
+    {
+      "time_s": 10.750001,
+      "downbeat": false
+    },
+    {
+      "time_s": 11.430029,
+      "downbeat": false
+    },
+    {
+      "time_s": 12.087637,
+      "downbeat": false
+    },
+    {
+      "time_s": 12.744567,
+      "downbeat": false
+    },
+    {
+      "time_s": 13.372964,
+      "downbeat": false
+    },
+    {
+      "time_s": 14.005437,
+      "downbeat": false
+    },
+    {
+      "time_s": 14.652176,
+      "downbeat": false
+    },
+    {
+      "time_s": 15.297556,
+      "downbeat": false
+    },
+    {
+      "time_s": 15.964676,
+      "downbeat": false
+    },
+    {
+      "time_s": 16.631116,
+      "downbeat": false
+    },
+    {
+      "time_s": 17.276497,
+      "downbeat": false
+    },
+    {
+      "time_s": 17.918481,
+      "downbeat": false
+    },
+    {
+      "time_s": 18.569975,
+      "downbeat": false
+    },
+    {
+      "time_s": 19.226905,
+      "downbeat": false
+    },
+    {
+      "time_s": 19.885193,
+      "downbeat": false
+    },
+    {
+      "time_s": 20.537367,
+      "downbeat": false
+    },
+    {
+      "time_s": 21.189541,
+      "downbeat": false
+    },
+    {
+      "time_s": 21.841715,
+      "downbeat": false
+    },
+    {
+      "time_s": 22.493889,
+      "downbeat": false
+    },
+    {
+      "time_s": 23.146063,
+      "downbeat": false
+    }
+  ],
+  "tempo_segments": [
+    {
+      "start_s": 0.0,
+      "end_s": 23.96734693877551,
+      "kind": "constant",
+      "start_bpm": 92.0,
+      "end_bpm": 92.0
+    }
+  ],
+  "change_points": []
+}

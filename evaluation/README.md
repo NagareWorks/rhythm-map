@@ -57,6 +57,36 @@ This suite has independently reviewed BPM but no beat phase. Run only the
 end-to-end backend evaluation shown in `datasets/README.md`; its empty beat and
 change labels intentionally cannot support oracle or decoder-policy claims.
 
+Fetch the precommitted, case-disjoint ARTBeaT holdout and retain its auditable
+SVG annotation sources:
+
+```bash
+cargo xtask dataset-fetch \
+  --manifest evaluation/datasets/artbeat-holdout-v1.json \
+  --output D:/rhythm-map-eval/artbeat-holdout-v1 \
+  --with-annotations
+```
+
+Gate the truth and ideal-observation path before model inference, then open the
+holdout once with the decoder policy selected on calibration data:
+
+```bash
+cargo xtask eval \
+  --suite evaluation/suites/artbeat-holdout-v1.json
+
+cargo xtask decoder-eval \
+  --suite evaluation/suites/artbeat-holdout-v1.json \
+  --policy viterbi-edge-logit-minus-3.0-bias-2.0 \
+  --model-pack models/beat-this-full-v1.json \
+  --model-dir D:/rhythm-map-models/beat-this-full-v1 \
+  --audio-dir D:/rhythm-map-eval/artbeat-holdout-v1 \
+  --report D:/rhythm-map-eval/reports/artbeat-holdout-v1.json
+```
+
+This holdout is disjoint from the ARTBeaT calibration cases but shares their
+source corpus; see [`datasets/README.md`](datasets/README.md) for the exact
+scope and non-claims.
+
 Gate the deterministic tempo-map estimator using ideal beat observations:
 
 ```bash

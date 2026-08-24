@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "id": "artbeat-holdout-24-syncopated-94",
+  "duration_s": 21.91297052154195,
+  "beats": [
+    {
+      "time_s": 0.0,
+      "downbeat": false
+    },
+    {
+      "time_s": 0.521739,
+      "downbeat": false
+    },
+    {
+      "time_s": 1.043478,
+      "downbeat": false
+    },
+    {
+      "time_s": 1.565217,
+      "downbeat": false
+    },
+    {
+      "time_s": 2.086956,
+      "downbeat": false
+    },
+    {
+      "time_s": 2.608695,
+      "downbeat": false
+    },
+    {
+      "time_s": 3.130434,
+      "downbeat": false
+    },
+    {
+      "time_s": 3.652173,
+      "downbeat": false
+    },
+    {
+      "time_s": 4.173912,
+      "downbeat": false
+    },
+    {
+      "time_s": 4.695651,
+      "downbeat": false
+    },
+    {
+      "time_s": 5.21739,
+      "downbeat": false
+    },
+    {
+      "time_s": 5.739129,
+      "downbeat": false
+    },
+    {
+      "time_s": 6.260868,
+      "downbeat": false
+    },
+    {
+      "time_s": 6.782607,
+      "downbeat": false
+    },
+    {
+      "time_s": 7.304346,
+      "downbeat": false
+    },
+    {
+      "time_s": 7.826085,
+      "downbeat": false
+    },
+    {
+      "time_s": 8.347824,
+      "downbeat": false
+    },
+    {
+      "time_s": 8.869563,
+      "downbeat": false
+    },
+    {
+      "time_s": 9.391302,
+      "downbeat": false
+    },
+    {
+      "time_s": 9.913041,
+      "downbeat": false
+    },
+    {
+      "time_s": 10.43478,
+      "downbeat": false
+    },
+    {
+      "time_s": 10.956519,
+      "downbeat": false
+    },
+    {
+      "time_s": 11.478258,
+      "downbeat": false
+    },
+    {
+      "time_s": 11.999997,
+      "downbeat": false
+    },
+    {
+      "time_s": 12.521736,
+      "downbeat": false
+    },
+    {
+      "time_s": 13.043475,
+      "downbeat": false
+    },
+    {
+      "time_s": 13.565214,
+      "downbeat": false
+    },
+    {
+      "time_s": 14.086953,
+      "downbeat": false
+    },
+    {
+      "time_s": 14.608692,
+      "downbeat": false
+    },
+    {
+      "time_s": 15.130431,
+      "downbeat": false
+    },
+    {
+      "time_s": 15.65217,
+      "downbeat": false
+    },
+    {
+      "time_s": 16.173909,
+      "downbeat": false
+    },
+    {
+      "time_s": 16.695648,
+      "downbeat": false
+    },
+    {
+      "time_s": 17.217387,
+      "downbeat": false
+    },
+    {
+      "time_s": 17.739126,
+      "downbeat": false
+    },
+    {
+      "time_s": 18.260865,
+      "downbeat": false
+    },
+    {
+      "time_s": 18.782604,
+      "downbeat": false
+    },
+    {
+      "time_s": 19.304343,
+      "downbeat": false
+    },
+    {
+      "time_s": 19.826082,
+      "downbeat": false
+    },
+    {
+      "time_s": 20.347821,
+      "downbeat": false
+    },
+    {
+      "time_s": 20.86956,
+      "downbeat": false
+    },
+    {
+      "time_s": 21.391299,
+      "downbeat": false
+    }
+  ],
+  "tempo_segments": [
+    {
+      "start_s": 0.0,
+      "end_s": 21.91297052154195,
+      "kind": "constant",
+      "start_bpm": 115.0,
+      "end_bpm": 115.0
+    }
+  ],
+  "change_points": []
+}

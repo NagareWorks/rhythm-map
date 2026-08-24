@@ -12,8 +12,8 @@ use rhythm_map_eval::{
     evaluate_backend_suite_with_policies, evaluate_core_suite,
     evaluate_decoder_recoverability_with_audio_directory,
     evaluate_decoder_sweep_with_audio_directory,
-    evaluate_named_decoder_policy_with_audio_directory, fetch_public_dataset, inspect_audio_asset,
-    render_suite, score_prediction_directory, standard_decoder_policies,
+    evaluate_named_decoder_policy_with_audio_directory, fetch_public_dataset, import_artbeat_truth,
+    inspect_audio_asset, render_suite, score_prediction_directory, standard_decoder_policies,
 };
 use rhythm_map_models::verify_model_pack;
 use serde::Serialize;
@@ -80,6 +80,21 @@ enum Command {
         /// Local audio file to hash and decode; the path is not written to the report.
         #[arg(long)]
         input: PathBuf,
+    },
+    /// Recover official ARTBeaT beat truth from a locked Ground Truth SVG.
+    ArtbeatTruth {
+        /// Stable evaluation case identifier.
+        #[arg(long)]
+        id: String,
+        /// Official ARTBeaT sonified-figure SVG containing Ground Truth lines.
+        #[arg(long)]
+        annotation: PathBuf,
+        /// Matching encoded audio, used only for identity and decoded duration.
+        #[arg(long)]
+        audio: PathBuf,
+        /// Generated truth JSON destination.
+        #[arg(long)]
+        output: PathBuf,
     },
     /// Fetch and verify a public evaluation dataset outside the Git checkout.
     DatasetFetch {
@@ -214,6 +229,17 @@ fn main() -> Result<()> {
                 "{}",
                 serde_json::to_string_pretty(&inspect_audio_asset(input)?)?
             );
+            Ok(())
+        }
+        Command::ArtbeatTruth {
+            id,
+            annotation,
+            audio,
+            output,
+        } => {
+            let imported = import_artbeat_truth(id, annotation, audio)?;
+            write_json_file(&output, &imported.truth)?;
+            println!("{}", serde_json::to_string_pretty(&imported)?);
             Ok(())
         }
         Command::DatasetFetch {
@@ -403,6 +429,17 @@ where
     }
     println!("{json}");
     Ok(())
+}
+
+fn write_json_file<T>(path: &Path, value: &T) -> Result<()>
+where
+    T: Serialize,
+{
+    if let Some(parent) = path.parent() {
+        fs::create_dir_all(parent).with_context(|| format!("creating {}", parent.display()))?;
+    }
+    let json = serde_json::to_string_pretty(value)?;
+    fs::write(path, format!("{json}\n")).with_context(|| format!("writing {}", path.display()))
 }
 
 trait EvaluationOutcome {

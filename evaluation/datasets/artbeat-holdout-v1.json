@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "id": "artbeat-rhythm-challenges-holdout-v1",
+  "version": "2024-10-10-precommitted-02-04-16-17-22-25",
+  "homepage_url": "https://audiolabs-erlangen.de/resources/MIR/2024-ARTBeaT",
+  "license": "CC-BY-4.0",
+  "attribution": "ARTBeaT Dataset by Rico Rosenbusch, FAU, 2024",
+  "assets": [
+    {
+      "path": "audio/02_ARTBeaT_Basic_arp1.mp3",
+      "url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/audio_mp3/02_ARTBeaT_Basic_arp1.mp3",
+      "sha256": "cfdb8e08fb5cc6c948d01751036d6473d31677e9504bdcd5131c43344142778a",
+      "size_bytes": 351085,
+      "role": "audio"
+    },
+    {
+      "path": "audio/03_ARTBeaT_Deception_arp2.mp3",
+      "url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/audio_mp3/03_ARTBeaT_Deception_arp2.mp3",
+      "sha256": "d9eb767da2274bacd76cf460d0e58388e8fe3cbf616121e3dfcf40d5c8a3b293",
+      "size_bytes": 363624,
+      "role": "audio"
+    },
+    {
+      "path": "audio/04_ARTBeaT_Polyrhythm_arp3.mp3",
+      "url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/audio_mp3/04_ARTBeaT_Polyrhythm_arp3.mp3",
+      "sha256": "9d2ab4e93f75f37d13d7c6f1a0710ddae0cd2f85cb55e3d92b84d3558a355b20",
+      "size_bytes": 463934,
+      "role": "audio"
+    },
+    {
+      "path": "audio/16_ARTBeaT_Odd_beat7.mp3",
+      "url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/audio_mp3/16_ARTBeaT_Odd_beat7.mp3",
+      "sha256": "86377118f5bd47ccbf7b5064fade8899c5d296ae45116151cfb84f553ebeb8cd",
+      "size_bytes": 311379,
+      "role": "audio"
+    },
+    {
+      "path": "audio/17_ARTBeaT_Odd_doom7.mp3",
+      "url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/audio_mp3/17_ARTBeaT_Odd_doom7.mp3",
+      "sha256": "be3e840fc869a8f6fe992c6d553a37a07bf79e8bf4fc6551182fbcdb100bac7b",
+      "size_bytes": 480653,
+      "role": "audio"
+    },
+    {
+      "path": "audio/22_ARTBeaT_Polyrhythm_94.mp3",
+      "url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/audio_mp3/22_ARTBeaT_Polyrhythm_94.mp3",
+      "sha256": "1e068cdf1b7320898305a8f0b3546d0302c1a043024a1ac65e7f69c241226eb0",
+      "size_bytes": 221518,
+      "role": "audio"
+    },
+    {
+      "path": "audio/23_ARTBeaT_Deception_102.mp3",
+      "url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/audio_mp3/23_ARTBeaT_Deception_102.mp3",
+      "sha256": "93a0908837ac9d7522f1b39aaf79e0994628388b2118b0caccc8c9125539be06",
+      "size_bytes": 392359,
+      "role": "audio"
+    },
+    {
+      "path": "audio/24_ARTBeaT_Syncopated_94.mp3",
+      "url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/audio_mp3/24_ARTBeaT_Syncopated_94.mp3",
+      "sha256": "286dafa4e7fccb59832504ae1570598457c8df724b30eb41bd01ff8187e18b11",
+      "size_bytes": 439379,
+      "role": "audio"
+    },
+    {
+      "path": "audio/25_ARTBeaT_Odd_metal11.mp3",
+      "url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/audio_mp3/25_ARTBeaT_Odd_metal11.mp3",
+      "sha256": "bb73fe086f2566770296bbbb0fbcb113ef6ebcd25f5964ebf9deef95017301cf",
+      "size_bytes": 477518,
+      "role": "audio"
+    },
+    {
+      "path": "annotations/02_ARTBeaT_Basic_arp1.svg",
+      "url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/sonified_figures/02_ARTBeaT_Basic_arp1.svg",
+      "sha256": "34233820c6a4bae6c6d877a8368442bd348dc24e90cdd5461d11a3d5227fa6b0",
+      "size_bytes": 622119,
+      "role": "annotation_source"
+    },
+    {
+      "path": "annotations/03_ARTBeaT_Deception_arp2.svg",
+      "url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/sonified_figures/03_ARTBeaT_Deception_arp2.svg",
+      "sha256": "074c1f6b0c4312d61dfb8459d13edb67ba25fd3e4016e67b3644d45c296d88a8",
+      "size_bytes": 627393,
+      "role": "annotation_source"
+    },
+    {
+      "path": "annotations/04_ARTBeaT_Polyrhythm_arp3.svg",
+      "url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/sonified_figures/04_ARTBeaT_Polyrhythm_arp3.svg",
+      "sha256": "df8888f3a2359187643b479c910283623fc43f829e03f5bb5c77708f2fe086e4",
+      "size_bytes": 613603,
+      "role": "annotation_source"
+    },
+    {
+      "path": "annotations/16_ARTBeaT_Odd_beat7.svg",
+      "url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/sonified_figures/16_ARTBeaT_Odd_beat7.svg",
+      "sha256": "25eef4d9544b7cce37474d623b7d214df77fa096354bd50aa12cc8cde54a3dc8",
+      "size_bytes": 605195,
+      "role": "annotation_source"
+    },
+    {
+      "path": "annotations/17_ARTBeaT_Odd_doom7.svg",
+      "url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/sonified_figures/17_ARTBeaT_Odd_doom7.svg",
+      "sha256": "a577665d24b3203b7b89be115a6e3a9fb82dad383ceffcae01e4a1849327b909",
+      "size_bytes": 633250,
+      "role": "annotation_source"
+    },
+    {
+      "path": "annotations/22_ARTBeaT_Polyrhythm_94.svg",
+      "url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/sonified_figures/22_ARTBeaT_Polyrhythm_94.svg",
+      "sha256": "f0d8b95916d492e80a56f5b03e6b6d46e8f8bfa1a4bdab7a4cad2c8efa670611",
+      "size_bytes": 453673,
+      "role": "annotation_source"
+    },
+    {
+      "path": "annotations/23_ARTBeaT_Deception_102.svg",
+      "url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/sonified_figures/23_ARTBeaT_Deception_102.svg",
+      "sha256": "6e7d6505aa9949caa5d05d4b769deb8c9949d9470e45c9f774d1aa30fbdfb55c",
+      "size_bytes": 586274,
+      "role": "annotation_source"
+    },
+    {
+      "path": "annotations/24_ARTBeaT_Syncopated_94.svg",
+      "url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/sonified_figures/24_ARTBeaT_Syncopated_94.svg",
+      "sha256": "f126a3f2485248f5df435d7cbcabb1c4934dae27e29401be088136ddb3960a28",
+      "size_bytes": 668193,
+      "role": "annotation_source"
+    },
+    {
+      "path": "annotations/25_ARTBeaT_Odd_metal11.svg",
+      "url": "https://audiolabs-erlangen.de/content/resources/MIR/00_2024-ARTBeaT/data/sonified_figures/25_ARTBeaT_Odd_metal11.svg",
+      "sha256": "06121e14324716e060c75e00a877eae018c0a21967c5640d18d2616d866fab23",
+      "size_bytes": 775773,
+      "role": "annotation_source"
+    }
+  ]
+}
