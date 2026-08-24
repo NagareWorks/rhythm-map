@@ -34,6 +34,9 @@
 - An opt-in edge-connected Viterbi decoder over Beat This logits that preserves
   upstream events, recovers only long repeated model-peak sequences, and never
   emits a path-grid timestamp without a local model maximum.
+- A precommitted nine-case, timestamped ARTBeaT holdout with reproducible SVG
+  truth import, plus an optimized non-LTO evaluation profile for routine model
+  experiments.
 
 ## Phase 2: product surfaces
 
@@ -45,17 +48,14 @@
   default merely because it is more accurate in isolation.
 - Separate short model smoke tests from scheduled/release full-suite baselines,
   with per-case progress visible to developers.
-- Run deterministic CI evaluation without release LTO; reserve optimized
-  release builds for model-backed performance baselines.
 - End-to-end browser inference with a measured WASM backend.
 - Native GUI for waveform, beat grid, confidence, and editable tempo segments.
 - Export adapters for common rhythm-game and DAW tempo-map formats.
 
 ## Phase 3: evidence-driven model work
 
-- Populate separate calibration and holdout manifests for legally held
-  drumless-control, drumless-ramp, drumless-step, rubato, compound-meter, and
-  percussive-control slices.
+- Add a corpus-disjoint timestamped source for drumless, rubato, compound-meter,
+  and percussive slices; the current public holdout is case-disjoint ARTBeaT.
 - Evaluate game music, rubato, extreme tempo, compound meter, and drumless audio.
 - Add a learned boundary/confidence head only if deterministic analysis is the
   measured bottleneck.
@@ -139,7 +139,8 @@ a learned component to the default distribution.
   calibration, and require a separately held timestamped corpus before changing
   the default policy.
 - 2026-08-22: calibration and holdout roles became executable manifest
-  contracts. ARTBeaT is permanently calibration evidence; decoder sweeps and
+  contracts. The original 15-case ARTBeaT slice is permanently calibration
+  evidence; decoder sweeps and
   recoverability diagnostics accept only calibration suites, while `decoder-eval` runs
   one registered policy and reports overall, per-case, and capability-tag
   metrics. The remaining work is corpus population, not another decoder sweep:
@@ -173,13 +174,22 @@ a learned component to the default distribution.
   reducing the 110 BPM clip's P95 tempo error from 33.48 to about 2.92 percent.
   A minimum six-candidate sequence plus local support rejected the regressive
   four-point 128 BPM edge run. The 130 BPM clip remained unchanged because the
-  model did not emit a sufficiently supported edge sequence. Keep the decoder
-  opt-in pending an independent timestamped holdout; compare an alternate
-  observation backend for the missing-evidence cases instead of weakening the
-  no-invention rule.
+  model did not emit a sufficiently supported edge sequence. The subsequent
+  disjoint holdout rejected promotion, so keep the decoder opt-in and compare
+  an alternate observation backend for the missing-evidence cases instead of
+  weakening the no-invention rule.
 - 2026-08-23: on the development VDI, optimized inference completed the 15-case
   ARTBeaT decoder matrix in under one minute, while an incremental release-LTO
   relink took about three minutes and an unoptimized first-case inference took
   more than one minute. The observed performance issue is build/profile
-  configuration, not Viterbi decoding. Add a non-LTO optimized evaluation
-  profile before expanding routine model-backed CI.
+  configuration, not Viterbi decoding. `cargo xtask` now uses an optimized
+  non-LTO `evaluation` profile while distribution release builds retain
+  Thin-LTO.
+- 2026-08-24: the registered edge-connected decoder failed its precommitted
+  nine-case ARTBeaT holdout. Mean beat F1 fell from 0.67915 to 0.67771, one
+  syncopated case regressed, and only four cases met the locked 0.80 gate. The
+  11/8 half-time-risk case improved only from 0.76744 to 0.76836. This rejects
+  promotion and confirms that the remaining failures are whole-track pulse or
+  phase ambiguity, not merely weak edge peaks. Do not tune another decoder on
+  the opened holdout; compare an alternate observation backend and expose
+  competing phase hypotheses without inventing timestamps.

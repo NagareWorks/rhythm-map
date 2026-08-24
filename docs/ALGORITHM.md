@@ -192,8 +192,11 @@ to 10 passing cases by recovering a long repeated weak-peak sequence in the
 110 BPM clip. Short four-point sequences remain rejected. The 130 BPM clip is
 unchanged because it lacks enough qualifying edge peaks; solving that case in
 this backend would require timestamp invention, a less conservative policy, or
-new observation evidence. The policy therefore remains opt-in until an
-independent timestamped holdout validates the recovered events.
+new observation evidence. On the precommitted nine-case ARTBeaT disjoint
+holdout, the candidate lowered mean beat F1 from 0.67915 to 0.67771 and
+regressed the syncopated case by adding false events. It therefore remains
+opt-in and must not be promoted. The holdout also shows that edge-connected
+recovery does not solve whole-track pulse-level or phase ambiguity.
 
 ## Short transition beat-grid recovery
 
