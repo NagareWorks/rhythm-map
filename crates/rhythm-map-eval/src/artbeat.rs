@@ -7,7 +7,7 @@ use serde::Serialize;
 
 use crate::{GeneratedTruth, TruthBeat, TruthTempoSegment, inspect_audio_asset};
 
-/// Audit metadata emitted alongside truth recovered from one ARTBeaT SVG.
+/// Audit metadata emitted alongside truth recovered from one `ARTBeaT` SVG.
 #[derive(Debug, Clone, Serialize, PartialEq)]
 pub struct ArtbeatTruthImport {
     /// Generated evaluation truth.
@@ -20,7 +20,7 @@ pub struct ArtbeatTruthImport {
     pub audio_sha256: String,
 }
 
-/// Recover ARTBeaT's plotted `Ground Truth` beat lines from an immutable SVG.
+/// Recover `ARTBeaT`'s plotted `Ground Truth` beat lines from an immutable SVG.
 ///
 /// The importer does not inspect audio features or model output. The SVG time
 /// axis maps the selected vertical-line coordinates back to seconds; the audio
@@ -163,8 +163,8 @@ fn axis_mapping(ticks: &[(f64, f64)]) -> Result<(f64, f64)> {
 
 fn median(values: &[f64]) -> f64 {
     let middle = values.len() / 2;
-    if values.len() % 2 == 0 {
-        (values[middle - 1] + values[middle]) / 2.0
+    if values.len().is_multiple_of(2) {
+        f64::midpoint(values[middle - 1], values[middle])
     } else {
         values[middle]
     }

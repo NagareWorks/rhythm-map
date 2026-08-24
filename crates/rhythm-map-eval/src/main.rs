@@ -81,12 +81,12 @@ enum Command {
         #[arg(long)]
         input: PathBuf,
     },
-    /// Recover official ARTBeaT beat truth from a locked Ground Truth SVG.
+    /// Recover official `ARTBeaT` beat truth from a locked Ground Truth SVG.
     ArtbeatTruth {
         /// Stable evaluation case identifier.
         #[arg(long)]
         id: String,
-        /// Official ARTBeaT sonified-figure SVG containing Ground Truth lines.
+        /// Official `ARTBeaT` sonified-figure SVG containing Ground Truth lines.
         #[arg(long)]
         annotation: PathBuf,
         /// Matching encoded audio, used only for identity and decoded duration.
@@ -224,24 +224,13 @@ fn main() -> Result<()> {
             model_pack,
             model_dir,
         } => run_model_verify(&model_pack, &model_dir),
-        Command::AudioInspect { input } => {
-            println!(
-                "{}",
-                serde_json::to_string_pretty(&inspect_audio_asset(input)?)?
-            );
-            Ok(())
-        }
+        Command::AudioInspect { input } => run_audio_inspect(&input),
         Command::ArtbeatTruth {
             id,
             annotation,
             audio,
             output,
-        } => {
-            let imported = import_artbeat_truth(id, annotation, audio)?;
-            write_json_file(&output, &imported.truth)?;
-            println!("{}", serde_json::to_string_pretty(&imported)?);
-            Ok(())
-        }
+        } => run_artbeat_truth(id, &annotation, &audio, &output),
         Command::DatasetFetch {
             manifest,
             output,
@@ -305,6 +294,21 @@ fn main() -> Result<()> {
             no_fail,
         ),
     }
+}
+
+fn run_audio_inspect(input: &Path) -> Result<()> {
+    println!(
+        "{}",
+        serde_json::to_string_pretty(&inspect_audio_asset(input)?)?
+    );
+    Ok(())
+}
+
+fn run_artbeat_truth(id: String, annotation: &Path, audio: &Path, output: &Path) -> Result<()> {
+    let imported = import_artbeat_truth(id, annotation, audio)?;
+    write_json_file(output, &imported.truth)?;
+    println!("{}", serde_json::to_string_pretty(&imported)?);
+    Ok(())
 }
 
 fn run_model_verify(model_pack: &Path, model_dir: &Path) -> Result<()> {
