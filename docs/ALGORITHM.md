@@ -30,12 +30,32 @@ to 136 bands, yielding the model's 272-value frame input. RTen produces
 beat/downbeat/non-beat probabilities at 50 Hz.
 
 For calibration, BeatNet retains every radius-one pulse maximum as uncommitted
-candidate evidence. Its selected sequence uses one internal variable-tempo
-Viterbi path covering 40--320 BPM. Period changes pay a squared log-ratio
-penalty, and every path event must snap within three frames to a real model
-maximum; an unsupported path state emits no timestamp. This decoder is not a
-product strategy. The initial ARTBeaT evidence and its current promotion block
-are recorded in `evaluation/baselines/artbeat-beatnet-viterbi-v1.md`.
+candidate evidence. The current selected sequence is one internal guarded
+candidate-graph decoder covering 40--320 BPM:
+
+1. the earlier variable-tempo frame grid is retained only as a soft prior and
+   is snapped within three frames to real pulse maxima;
+2. Viterbi states then traverse only real candidate maxima and carry the most
+   recent interval plus phase inside a 2-, 3-, or 4-beat bar;
+3. event evidence is the beat-plus-downbeat versus non-beat log odds, with a
+   tempered beat/downbeat class term for meter phase;
+4. ordinary tempo motion pays a squared log-interval-ratio penalty, while a
+   half/double-time transition pays an additional fixed cost so sustained
+   evidence can change level but isolated events cannot toggle it cheaply;
+5. a candidate path is rejected if it loses over 30 percent of the grid
+   prior's interval continuity, or if multiple added events also reduce
+   continuity; and
+6. one missing track-edge event may be restored only when it is both a real
+   grid-supported maximum and within 30 percent of the selected median
+   interval.
+
+No state can emit a timestamp absent from the neural candidate set. The grid
+prior and graph are fused inside one decoder; they are not caller-selectable
+strategies. The original calibration is recorded in
+`evaluation/baselines/artbeat-beatnet-viterbi-v1.md`, and the guarded graph in
+`evaluation/baselines/artbeat-beatnet-guarded-graph-v2.md`. The implementation
+uses the published BeatNet/madmom joint tempo-meter boundary as an algorithmic
+reference but embeds neither madmom's Python runtime nor its model weights.
 
 The default Beat This decoder follows the upstream peak picker: a frame logit
 must be strictly above zero (probability above 0.5), must be maximal within

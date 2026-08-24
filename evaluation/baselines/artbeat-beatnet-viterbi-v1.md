@@ -40,3 +40,7 @@ zero aggregate gain hides equal numbers of gains and regressions. Continue with
 one improved sequence decoder on this calibration set; do not retain the
 single-frame gate, expose a backend strategy list, or inspect Vienna until one
 complete candidate has been selected.
+
+Follow-up: `artbeat-beatnet-guarded-graph-v2.md` records the single merged
+decoder that supersedes this calibration candidate without exposing v1 as a
+runtime strategy.

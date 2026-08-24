@@ -304,3 +304,24 @@ a learned component to the default distribution.
   add a runtime backend selector: first improve the one BeatNet sequence
   decoder on calibration, review the published model's training-corpus
   provenance, and preselect one complete candidate for the untouched holdout.
+- 2026-08-24: reproduced BeatNet's published offline joint tempo-meter boundary
+  with 2/3/4-beat bar states. A hard DBN observation model reached 0.8071 mean
+  beat F1 and over-constrained meter changes, piano rubato, and decelerating
+  ramps; a softened variant reached 0.8085. Reject both rather than retain
+  another selectable strategy.
+- 2026-08-24: replaced the virtual-grid-only BeatNet selector with one guarded
+  candidate graph. It scores only real pulse maxima, carries interval and bar
+  phase, treats the old grid as a soft prior, allows penalized half/double-time
+  transitions, rejects paths that materially destroy interval continuity, and
+  restores a track-edge event only from a real grid-supported maximum. On the
+  same 15-case ARTBeaT calibration, mean beat F1 rose from 0.8080 to 0.8536,
+  precision from 0.8418 to 0.8513, recall from 0.8264 to 0.8894, and complete
+  passes from 1 to 3. Four cases improved, ten were unchanged, and piano
+  rubato regressed by about 0.04; 90-to-120 and 240-to-96 reached beat F1 1.0,
+  while the two tempo ramps rose to about 0.91 and 0.82. Keep this as the one
+  experimental BeatNet decoder and do not open Vienna yet. The remaining
+  piano error is a genuine model-supported half/double-time ambiguity: the
+  wrong dense path wins the internal evidence score by a wide margin, so a BPM
+  band or another calibration-derived threshold would hide rather than solve
+  it. Next obtain independent meter/accent evidence or retain the ambiguity in
+  the product result before selecting the one holdout candidate.

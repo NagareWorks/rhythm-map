@@ -17,16 +17,13 @@ use rubato::{
     WindowFunction,
 };
 
+use crate::decoder::decode_candidate_path;
 use crate::frontend::{BeatNetFrontend, FEATURE_DIMENSION, SAMPLE_RATE_HZ};
 
+mod decoder;
 mod frontend;
 
 const FRAME_RATE_HZ: f64 = 50.0;
-const MINIMUM_BPM: f64 = 40.0;
-const MAXIMUM_BPM: f64 = 320.0;
-const TEMPO_CHANGE_PENALTY: f64 = 100.0;
-const BEAT_STATE_BIAS: f64 = 2.0;
-const MAXIMUM_PEAK_CORRECTION_FRAMES: usize = 3;
 
 /// Neural activations retained before discrete event selection.
 #[derive(Debug, Clone)]
@@ -161,7 +158,8 @@ impl BeatNetBackend {
                 downbeat_confidence: event.downbeat_confidence,
             })
             .collect();
-        let beats = decode_activation_path(&pulse, &candidate_frames)
+        let selected_frames = decode_activation_path(inference, &candidate_frames);
+        let beats = selected_frames
             .into_iter()
             .filter_map(|frame| observation_at(inference, frame, pulse[frame]))
             .collect();
@@ -172,7 +170,7 @@ impl BeatNetBackend {
             activity: Vec::new(),
             onsets: Vec::new(),
             source: ModelInfo {
-                backend: "beatnet-rten-viterbi-v1-experimental".to_string(),
+                backend: "beatnet-rten-guarded-graph-v2-experimental".to_string(),
                 model: self.model_name.clone(),
                 version: None,
                 frame_rate_hz: Some(FRAME_RATE_HZ),
@@ -262,110 +260,13 @@ fn local_maxima(values: &[f32]) -> Vec<usize> {
     maxima
 }
 
-fn decode_activation_path(probabilities: &[f32], candidates: &[usize]) -> Vec<usize> {
-    if probabilities.is_empty() || candidates.is_empty() {
-        return Vec::new();
-    }
-    let path = viterbi_beat_path(probabilities);
-    let mut snapped = Vec::new();
-    let mut last = None;
-    for frame in path {
-        let candidate = candidates
-            .iter()
-            .copied()
-            .filter(|candidate| last.is_none_or(|last| *candidate > last))
-            .filter(|candidate| candidate.abs_diff(frame) <= MAXIMUM_PEAK_CORRECTION_FRAMES)
-            .min_by_key(|candidate| candidate.abs_diff(frame));
-        if let Some(candidate) = candidate {
-            snapped.push(candidate);
-            last = Some(candidate);
-        }
-    }
-    snapped
-}
-
-#[allow(clippy::cast_possible_truncation, clippy::cast_sign_loss)]
-fn viterbi_beat_path(probabilities: &[f32]) -> Vec<usize> {
-    let minimum_period = (60.0 * FRAME_RATE_HZ / MAXIMUM_BPM).ceil() as usize;
-    let maximum_period = (60.0 * FRAME_RATE_HZ / MINIMUM_BPM).floor() as usize;
-    let periods = (minimum_period..=maximum_period).collect::<Vec<_>>();
-    let mut offsets = Vec::with_capacity(periods.len());
-    let mut total_states = 0;
-    for &period in &periods {
-        offsets.push(total_states);
-        total_states += period;
-    }
-
-    let (beat_emission, nonbeat_emission) = activation_emissions(probabilities[0]);
-    let mut scores = vec![f64::NEG_INFINITY; total_states];
-    for (&period, &offset) in periods.iter().zip(&offsets) {
-        scores[offset] = beat_emission;
-        scores[offset + 1..offset + period].fill(nonbeat_emission);
-    }
-    let mut back_periods = vec![u16::MAX; probabilities.len() * periods.len()];
-
-    for (frame, &probability) in probabilities.iter().enumerate().skip(1) {
-        let (beat_emission, nonbeat_emission) = activation_emissions(probability);
-        let mut next = vec![f64::NEG_INFINITY; total_states];
-        for (period_index, (&period, &offset)) in periods.iter().zip(&offsets).enumerate() {
-            for phase in 1..period {
-                next[offset + phase] = scores[offset + phase - 1] + nonbeat_emission;
-            }
-            let mut best_transition = f64::NEG_INFINITY;
-            let mut best_period_index = 0;
-            for (source_index, (&source_period, &source_offset)) in
-                periods.iter().zip(&offsets).enumerate()
-            {
-                let log_ratio = (usize_to_f64(period) / usize_to_f64(source_period)).ln();
-                let penalty = TEMPO_CHANGE_PENALTY * log_ratio * log_ratio;
-                let score = scores[source_offset + source_period - 1] - penalty;
-                if score > best_transition {
-                    best_transition = score;
-                    best_period_index = source_index;
-                }
-            }
-            next[offset] = best_transition + beat_emission;
-            back_periods[frame * periods.len() + period_index] =
-                u16::try_from(best_period_index).expect("period state count fits u16");
-        }
-        scores = next;
-    }
-
-    let mut period_index = 0;
-    let mut phase = 0;
-    let mut terminal_best = f64::NEG_INFINITY;
-    for (candidate_period, (&period, &offset)) in periods.iter().zip(&offsets).enumerate() {
-        for candidate_phase in 0..period {
-            let score = scores[offset + candidate_phase];
-            if score > terminal_best {
-                period_index = candidate_period;
-                phase = candidate_phase;
-                terminal_best = score;
-            }
-        }
-    }
-    let mut beats = Vec::new();
-    for frame in (0..probabilities.len()).rev() {
-        if phase == 0 {
-            beats.push(frame);
-        }
-        if frame == 0 {
-            break;
-        }
-        if phase == 0 {
-            period_index = usize::from(back_periods[frame * periods.len() + period_index]);
-            phase = periods[period_index] - 1;
-        } else {
-            phase -= 1;
-        }
-    }
-    beats.reverse();
-    beats
-}
-
-fn activation_emissions(probability: f32) -> (f64, f64) {
-    let probability = f64::from(probability).clamp(1e-7, 1.0 - 1e-7);
-    (probability.ln() + BEAT_STATE_BIAS, (-probability).ln_1p())
+fn decode_activation_path(inference: &BeatNetInference, candidates: &[usize]) -> Vec<usize> {
+    decode_candidate_path(
+        &inference.beat_probabilities,
+        &inference.downbeat_probabilities,
+        &inference.nonbeat_probabilities,
+        candidates,
+    )
 }
 
 #[allow(clippy::cast_precision_loss)]
@@ -383,13 +284,30 @@ mod tests {
     }
 
     #[test]
-    fn activation_path_snaps_only_to_real_peaks() {
-        let mut probabilities = vec![0.01; 100];
+    fn activation_path_emits_only_real_peaks() {
+        let mut beat_probabilities = vec![0.001; 110];
+        let mut downbeat_probabilities = vec![0.001; 110];
+        let mut nonbeat_probabilities = vec![0.998; 110];
         for frame in [10, 30, 50, 70, 90] {
-            probabilities[frame] = 0.95;
+            beat_probabilities[frame] = 0.94;
+            nonbeat_probabilities[frame] = 0.05;
         }
-        let candidates = local_maxima(&probabilities);
-        let decoded = decode_activation_path(&probabilities, &candidates);
+        downbeat_probabilities[10] = 0.94;
+        beat_probabilities[10] = 0.01;
+        let inference = BeatNetInference {
+            duration_s: 2.2,
+            beat_probabilities,
+            downbeat_probabilities,
+            nonbeat_probabilities,
+        };
+        let pulse = inference
+            .beat_probabilities
+            .iter()
+            .zip(&inference.downbeat_probabilities)
+            .map(|(beat, downbeat)| beat + downbeat)
+            .collect::<Vec<_>>();
+        let candidates = local_maxima(&pulse);
+        let decoded = decode_activation_path(&inference, &candidates);
         assert_eq!(decoded, [10, 30, 50, 70, 90]);
     }
 
