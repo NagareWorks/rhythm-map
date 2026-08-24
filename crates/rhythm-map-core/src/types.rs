@@ -60,6 +60,15 @@ pub struct AudioOnsetPoint {
     pub time_s: f64,
     /// Positive spectral flux normalized to `[0, 1]` within the track.
     pub strength: f64,
+    /// Normalized onset strength contributed by frequencies below 250 Hz.
+    #[serde(default)]
+    pub low_strength: f64,
+    /// Normalized onset strength contributed by 250 Hz through 2 kHz.
+    #[serde(default)]
+    pub mid_strength: f64,
+    /// Normalized onset strength contributed by frequencies above 2 kHz.
+    #[serde(default)]
+    pub high_strength: f64,
 }
 
 /// Backend-neutral observations consumed by the timing estimator.

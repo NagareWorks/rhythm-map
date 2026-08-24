@@ -476,6 +476,12 @@ fn validate_observations(input: &RhythmObservations) -> Result<(), AnalysisError
             || point.time_s > input.duration_s
             || !point.strength.is_finite()
             || !(0.0..=1.0).contains(&point.strength)
+            || !point.low_strength.is_finite()
+            || !(0.0..=1.0).contains(&point.low_strength)
+            || !point.mid_strength.is_finite()
+            || !(0.0..=1.0).contains(&point.mid_strength)
+            || !point.high_strength.is_finite()
+            || !(0.0..=1.0).contains(&point.high_strength)
         {
             return Err(AnalysisError::InvalidValue(
                 "audio onset point is invalid".to_string(),

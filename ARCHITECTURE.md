@@ -27,7 +27,9 @@ They may expose confidence, model identity, frame rate, and optional activity
 and onset envelopes, but no backend tensor type crosses into the core schema.
 The engine adds deterministic PCM activity and spectral-flux onset envelopes
 when a backend does not provide them. Both remain backend-neutral evidence;
-neither is itself a beat decision.
+neither is itself a beat decision. The onset envelope includes low, mid, and
+high-frequency contributions computed from the same FFT so future consumers
+can distinguish bass/body accents from high-frequency subdivisions.
 
 `RhythmObservations.beat_candidates` carries sorted, uncommitted timestamps that
 are supported by the backend but were not necessarily selected as beats. The

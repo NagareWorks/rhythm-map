@@ -87,16 +87,23 @@ previous frame contributes:
 flux[t]     = sum_k max(0, magnitude[t, k] - magnitude[t - 1, k])
 onset[t]    = log(1 + flux[t])
 strength[t] = onset[t] / max_t(onset[t])
+band[t, b]  = strength[t] * flux[t, b] / flux[t]
 ```
 
 The first frame establishes the magnitude baseline and has zero flux. Strength
 is therefore finite and track-normalized to `[0, 1]`; it is salience within one
-recording, not a calibrated probability that a frame is a beat. Calibration
-reports include the mean onset strength at real backend candidates added by the
-midpoint hypothesis. On ARTBeaT this evidence was correlated with useful
-augmentation but did not separate it from false subdivisions, so it remains a
-diagnostic observation and does not choose a pulse hypothesis. The result is
-recorded in `evaluation/baselines/artbeat-spectral-flux-v5.md`.
+recording, not a calibrated probability that a frame is a beat. Each frame also
+splits that normalized strength into low (below 250 Hz), mid (250 Hz through
+2 kHz), and high (above 2 kHz) contributions whose sum equals `strength[t]`.
+The split reuses the same FFT and does not run another model.
+
+Calibration reports include the mean full-band and band-split onset strength at
+real backend candidates added by the midpoint hypothesis. Full-band strength,
+frequency-band balance, whole-track downbeat periodicity, and a local repeated-
+downbeat rule were each insufficient to select a pulse without regressions.
+They remain diagnostics and do not change hypothesis ranking. Results are
+recorded in `evaluation/baselines/artbeat-spectral-flux-v5.md` and
+`evaluation/baselines/artbeat-band-bar-evidence-v6-v8.md`.
 
 The estimator normally preserves backend timestamps. It can reject events
 inside sustained low-activity spans, select one phase of a strong/weak

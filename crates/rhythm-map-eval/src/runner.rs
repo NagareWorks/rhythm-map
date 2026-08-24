@@ -11,8 +11,8 @@ use rhythm_map_beat_this::{
     SupportedMidpointOptions, decode_audio,
 };
 use rhythm_map_core::{
-    Analysis, BeatCandidate, Engine, EstimatorOptions, ModelInfo, ObservedBeat, RhythmObservations,
-    TempoMapEstimator,
+    Analysis, AudioOnsetPoint, BeatCandidate, Engine, EstimatorOptions, ModelInfo, ObservedBeat,
+    RhythmObservations, TempoMapEstimator,
 };
 use rhythm_map_models::{ModelArtifactRole, VerifiedModelPack, verify_model_pack};
 use serde::{Deserialize, Serialize};
@@ -152,6 +152,9 @@ pub struct PulseEvidenceBreakdown {
     /// Mean spectral-flux strength at added candidate events.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub mean_added_candidate_onset_strength: Option<f64>,
+    /// Mean low/mid/high contributions to normalized onset strength at additions.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub mean_added_candidate_onset_bands: Option<[f64; 3]>,
 }
 
 /// One truth-scored pulse/phase hypothesis built only from backend timestamps.
@@ -817,7 +820,7 @@ fn evaluate_backend_suite_impl(
     let attribution = attribution_decision(oracle_passed, has_unpaired_cases, end_to_end_passed);
     let manifest = verified.manifest();
     Ok(BottleneckEvaluation {
-        schema_version: 4,
+        schema_version: 5,
         suite_id: suite.id,
         suite_purpose: suite.purpose,
         model_pack: ModelPackIdentity {
@@ -1955,6 +1958,7 @@ fn pulse_evidence_breakdown(
             added_candidate_fraction: 0.0,
             mean_added_candidate_evidence: None,
             mean_added_candidate_onset_strength: None,
+            mean_added_candidate_onset_bands: None,
         };
     }
     let event_evidence = events
@@ -1975,6 +1979,7 @@ fn pulse_evidence_breakdown(
             added_candidate_fraction: 0.0,
             mean_added_candidate_evidence: None,
             mean_added_candidate_onset_strength: None,
+            mean_added_candidate_onset_bands: None,
         };
     };
     let mean_log_error = intervals
@@ -2022,6 +2027,7 @@ fn pulse_evidence_breakdown(
     let mean_added_candidate_onset_strength = (!added_onset_strength.is_empty()).then(|| {
         added_onset_strength.iter().sum::<f64>() / usize_to_f64(added_onset_strength.len())
     });
+    let mean_added_candidate_onset_bands = mean_added_onset_bands(observations, events);
     PulseEvidenceBreakdown {
         mean_event_evidence,
         interval_continuity,
@@ -2029,7 +2035,25 @@ fn pulse_evidence_breakdown(
         added_candidate_fraction: added_candidate_fraction.clamp(0.0, 1.0),
         mean_added_candidate_evidence,
         mean_added_candidate_onset_strength,
+        mean_added_candidate_onset_bands,
     }
+}
+
+fn mean_added_onset_bands(
+    observations: &RhythmObservations,
+    events: &[HypothesisEvent],
+) -> Option<[f64; 3]> {
+    let (sums, count) = events
+        .iter()
+        .filter(|event| !event.selected)
+        .filter_map(|event| nearest_onset_point(observations, event.time_s))
+        .fold(([0.0_f64; 3], 0_usize), |(mut sums, count), point| {
+            sums[0] += point.low_strength;
+            sums[1] += point.mid_strength;
+            sums[2] += point.high_strength;
+            (sums, count + 1)
+        });
+    (count > 0).then(|| sums.map(|sum| sum / usize_to_f64(count)))
 }
 
 fn hypothesis_event_evidence(observations: &RhythmObservations, event: &HypothesisEvent) -> f64 {
@@ -2049,15 +2073,15 @@ fn hypothesis_event_evidence(observations: &RhythmObservations, event: &Hypothes
 }
 
 fn nearest_onset_strength(observations: &RhythmObservations, time_s: f64) -> Option<f64> {
-    observations
-        .onsets
-        .iter()
-        .min_by(|left, right| {
-            (left.time_s - time_s)
-                .abs()
-                .total_cmp(&(right.time_s - time_s).abs())
-        })
-        .map(|point| point.strength)
+    nearest_onset_point(observations, time_s).map(|point| point.strength)
+}
+
+fn nearest_onset_point(observations: &RhythmObservations, time_s: f64) -> Option<&AudioOnsetPoint> {
+    observations.onsets.iter().min_by(|left, right| {
+        (left.time_s - time_s)
+            .abs()
+            .total_cmp(&(right.time_s - time_s).abs())
+    })
 }
 
 fn median_f64(mut values: Vec<f64>) -> Option<f64> {

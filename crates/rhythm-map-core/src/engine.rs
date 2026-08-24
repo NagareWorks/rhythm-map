@@ -251,16 +251,36 @@ fn extract_audio_onsets(samples: &[f32], sample_rate: u32) -> Vec<AudioOnsetPoin
             .process(&mut input, &mut spectrum)
             .expect("real FFT buffers match the planned transform");
         let mut flux = 0.0;
-        for (bin, previous) in spectrum.iter().skip(1).zip(&mut previous_magnitudes[1..]) {
+        let mut band_flux = [0.0_f64; 3];
+        for (bin_index, (bin, previous)) in spectrum
+            .iter()
+            .zip(&mut previous_magnitudes)
+            .enumerate()
+            .skip(1)
+        {
             let magnitude = f64::from(bin.norm());
             if !first_frame {
-                flux += (magnitude - *previous).max(0.0);
+                let positive_flux = (magnitude - *previous).max(0.0);
+                flux += positive_flux;
+                let frequency_hz =
+                    usize_to_f64(bin_index) * usize_to_f64(sample_rate) / usize_to_f64(fft_size);
+                let band = if frequency_hz < 250.0 {
+                    0
+                } else if frequency_hz <= 2_000.0 {
+                    1
+                } else {
+                    2
+                };
+                band_flux[band] += positive_flux;
             }
             *previous = magnitude;
         }
         onsets.push(AudioOnsetPoint {
             time_s: usize_to_f64(center) / usize_to_f64(sample_rate),
             strength: flux.ln_1p(),
+            low_strength: onset_band_share(band_flux[0], flux),
+            mid_strength: onset_band_share(band_flux[1], flux),
+            high_strength: onset_band_share(band_flux[2], flux),
         });
         first_frame = false;
     }
@@ -269,13 +289,28 @@ fn extract_audio_onsets(samples: &[f32], sample_rate: u32) -> Vec<AudioOnsetPoin
         .map(|point| point.strength)
         .fold(0.0_f64, f64::max);
     for point in &mut onsets {
-        point.strength = if peak <= f64::EPSILON {
-            0.0
-        } else {
-            (point.strength / peak).clamp(0.0, 1.0)
-        };
+        point.strength = normalize_onset_strength(point.strength, peak);
+        point.low_strength *= point.strength;
+        point.mid_strength *= point.strength;
+        point.high_strength *= point.strength;
     }
     onsets
+}
+
+fn onset_band_share(band_flux: f64, total_flux: f64) -> f64 {
+    if total_flux <= f64::EPSILON {
+        0.0
+    } else {
+        (band_flux / total_flux).clamp(0.0, 1.0)
+    }
+}
+
+fn normalize_onset_strength(value: f64, peak: f64) -> f64 {
+    if peak <= f64::EPSILON {
+        0.0
+    } else {
+        (value / peak).clamp(0.0, 1.0)
+    }
 }
 
 #[allow(clippy::cast_precision_loss)]
@@ -369,6 +404,15 @@ mod tests {
             point.time_s.is_finite()
                 && point.strength.is_finite()
                 && (0.0..=1.0).contains(&point.strength)
+                && point.low_strength.is_finite()
+                && (0.0..=1.0).contains(&point.low_strength)
+                && point.mid_strength.is_finite()
+                && (0.0..=1.0).contains(&point.mid_strength)
+                && point.high_strength.is_finite()
+                && (0.0..=1.0).contains(&point.high_strength)
+                && (point.low_strength + point.mid_strength + point.high_strength - point.strength)
+                    .abs()
+                    <= 1e-9
         }));
         assert!(observations.onsets[0].strength.abs() <= f64::EPSILON);
         let strongest = observations
@@ -378,6 +422,32 @@ mod tests {
             .unwrap();
         assert!(strongest.strength > 0.9);
         assert!((strongest.time_s - 0.5).abs() <= 0.02);
+    }
+
+    #[test]
+    fn separates_low_and_high_frequency_onset_contributions() {
+        fn strongest_burst_onset(frequency_hz: f32) -> AudioOnsetPoint {
+            let sample_rate = 16_000_u32;
+            let mut samples = vec![0.0_f32; 16_000];
+            let mut phase = 0.0_f32;
+            let phase_step = std::f32::consts::TAU * frequency_hz / 16_000.0;
+            for sample in &mut samples[8_000..] {
+                *sample = phase.cos();
+                phase += phase_step;
+            }
+            extract_audio_onsets(&samples, sample_rate)
+                .into_iter()
+                .max_by(|left, right| left.strength.total_cmp(&right.strength))
+                .unwrap()
+        }
+
+        let low = strongest_burst_onset(100.0);
+        let high = strongest_burst_onset(4_000.0);
+
+        assert!((low.time_s - 0.5).abs() <= 0.02);
+        assert!((high.time_s - 0.5).abs() <= 0.02);
+        assert!(low.low_strength > high.low_strength);
+        assert!(high.high_strength > low.high_strength);
     }
 
     #[test]

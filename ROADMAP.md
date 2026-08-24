@@ -244,3 +244,17 @@ a learned component to the default distribution.
   about 0.41 and 0.28. Keep onset strength as auditable observation metadata,
   not a pulse selector or another strategy. A safe selector still needs meter-
   or structure-level evidence and a fresh precommitted holdout.
+- 2026-08-24: split the existing spectral flux into low, mid, and high
+  contributions without another FFT or model pass. Useful midpoint
+  augmentations averaged 0.35 high-frequency contribution versus 0.21 for
+  non-improving cases, but the regressive 60-to-80 case also scored 0.33.
+  Frequency balance is useful metadata but not a selector.
+- 2026-08-24: whole-track downbeat periodicity was rejected because useful and
+  regressive cases shared the same 4-to-8 and 8-to-8 event-density shifts. A
+  stricter local rule activated 10/15 ARTBeaT cases, improved five, regressed
+  five, and moved activated-case mean beat F1 only from 0.7809 to 0.7910. The
+  post-hoc combination with mean onset strength above 0.6 selected four gains
+  and no regressions, but that threshold was observed on opened calibration
+  data and must not be promoted. Remove both bar algorithms rather than retain
+  another strategy. Further selection work requires a genuinely untouched
+  timestamped corpus or independent meter evidence from another backend.
