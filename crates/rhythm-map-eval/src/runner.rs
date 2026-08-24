@@ -85,6 +85,9 @@ pub struct ObservationDiagnostics {
     pub analyzed_downbeat_count: usize,
     /// Number of deterministic activity-envelope samples.
     pub activity_point_count: usize,
+    /// Number of deterministic spectral-flux onset samples.
+    #[serde(default)]
+    pub onset_point_count: usize,
     /// Quietest activity sample relative to peak level.
     pub minimum_relative_db: Option<f64>,
     /// Fraction of activity samples at or below -40 dB.
@@ -98,6 +101,9 @@ pub struct ObservationDiagnostics {
     /// Mean backend confidence of the two alternating raw-event phases.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub alternating_phase_confidence: Option<[f64; 2]>,
+    /// Mean spectral-flux onset strength of the two alternating raw-event phases.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub alternating_phase_onset_strength: Option<[f64; 2]>,
     /// Deterministic filtering and metrical-selection decisions.
     pub analysis_warnings: Vec<String>,
 }
@@ -143,6 +149,9 @@ pub struct PulseEvidenceBreakdown {
     /// Mean evidence of added candidate events, absent when none were added.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub mean_added_candidate_evidence: Option<f64>,
+    /// Mean spectral-flux strength at added candidate events.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub mean_added_candidate_onset_strength: Option<f64>,
 }
 
 /// One truth-scored pulse/phase hypothesis built only from backend timestamps.
@@ -808,7 +817,7 @@ fn evaluate_backend_suite_impl(
     let attribution = attribution_decision(oracle_passed, has_unpaired_cases, end_to_end_passed);
     let manifest = verified.manifest();
     Ok(BottleneckEvaluation {
-        schema_version: 3,
+        schema_version: 4,
         suite_id: suite.id,
         suite_purpose: suite.purpose,
         model_pack: ModelPackIdentity {
@@ -1645,6 +1654,21 @@ fn observation_diagnostics(
                 sum / usize_to_f64(count)
             })
         });
+    let alternating_phase_onset_strength =
+        (!observations.onsets.is_empty() && observations.beats.len() >= 2).then(|| {
+            [0_usize, 1].map(|phase| {
+                let values = observations
+                    .beats
+                    .iter()
+                    .skip(phase)
+                    .step_by(2)
+                    .map(|beat| nearest_onset_strength(observations, beat.time_s).unwrap_or(0.0));
+                let (sum, count) = values.fold((0.0, 0_usize), |(sum, count), value| {
+                    (sum + value, count + 1)
+                });
+                sum / usize_to_f64(count)
+            })
+        });
     ObservationDiagnostics {
         source: observations.source.clone(),
         raw_beats: observations.beats.clone(),
@@ -1652,11 +1676,13 @@ fn observation_diagnostics(
         analyzed_beat_count: analysis.beats.len(),
         analyzed_downbeat_count: analysis.beats.iter().filter(|beat| beat.downbeat).count(),
         activity_point_count: observations.activity.len(),
+        onset_point_count: observations.onsets.len(),
         minimum_relative_db,
         low_activity_fraction,
         raw_median_bpm,
         alternating_phase_salience,
         alternating_phase_confidence,
+        alternating_phase_onset_strength,
         analysis_warnings: analysis.warnings.clone(),
     }
 }
@@ -1928,6 +1954,7 @@ fn pulse_evidence_breakdown(
             selected_evidence_retention: 0.0,
             added_candidate_fraction: 0.0,
             mean_added_candidate_evidence: None,
+            mean_added_candidate_onset_strength: None,
         };
     }
     let event_evidence = events
@@ -1947,6 +1974,7 @@ fn pulse_evidence_breakdown(
             selected_evidence_retention: 0.0,
             added_candidate_fraction: 0.0,
             mean_added_candidate_evidence: None,
+            mean_added_candidate_onset_strength: None,
         };
     };
     let mean_log_error = intervals
@@ -1986,12 +2014,21 @@ fn pulse_evidence_breakdown(
         / usize_to_f64(observations.beats.len().saturating_sub(1).max(1));
     let mean_added_candidate_evidence = (!added_evidence.is_empty())
         .then(|| added_evidence.iter().sum::<f64>() / usize_to_f64(added_evidence.len()));
+    let added_onset_strength = events
+        .iter()
+        .filter(|event| !event.selected)
+        .filter_map(|event| nearest_onset_strength(observations, event.time_s))
+        .collect::<Vec<_>>();
+    let mean_added_candidate_onset_strength = (!added_onset_strength.is_empty()).then(|| {
+        added_onset_strength.iter().sum::<f64>() / usize_to_f64(added_onset_strength.len())
+    });
     PulseEvidenceBreakdown {
         mean_event_evidence,
         interval_continuity,
         selected_evidence_retention,
         added_candidate_fraction: added_candidate_fraction.clamp(0.0, 1.0),
         mean_added_candidate_evidence,
+        mean_added_candidate_onset_strength,
     }
 }
 
@@ -2009,6 +2046,18 @@ fn hypothesis_event_evidence(observations: &RhythmObservations, event: &Hypothes
             10.0_f64.powf(point.relative_db / 20.0).clamp(0.0, 1.0)
         });
     0.75 * confidence + 0.20 * activity + 0.05 * event.downbeat_confidence.clamp(0.0, 1.0)
+}
+
+fn nearest_onset_strength(observations: &RhythmObservations, time_s: f64) -> Option<f64> {
+    observations
+        .onsets
+        .iter()
+        .min_by(|left, right| {
+            (left.time_s - time_s)
+                .abs()
+                .total_cmp(&(right.time_s - time_s).abs())
+        })
+        .map(|point| point.strength)
 }
 
 fn median_f64(mut values: Vec<f64>) -> Option<f64> {
@@ -2291,6 +2340,7 @@ mod tests {
                 })
                 .collect(),
             activity: Vec::new(),
+            onsets: Vec::new(),
             source: ModelInfo {
                 backend: "test".to_string(),
                 model: "test".to_string(),
@@ -2342,6 +2392,7 @@ mod tests {
                 .collect(),
             beat_candidates: Vec::new(),
             activity: Vec::new(),
+            onsets: Vec::new(),
             source: ModelInfo {
                 backend: "test".to_string(),
                 model: "test".to_string(),
@@ -2384,6 +2435,7 @@ mod tests {
                 .collect(),
             beat_candidates: Vec::new(),
             activity: Vec::new(),
+            onsets: Vec::new(),
             source: ModelInfo {
                 backend: "test".to_string(),
                 model: "test".to_string(),

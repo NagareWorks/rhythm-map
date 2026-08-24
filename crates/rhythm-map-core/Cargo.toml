@@ -15,6 +15,7 @@ default = []
 experimental-policies = []
 
 [dependencies]
+realfft.workspace = true
 serde.workspace = true
 thiserror.workspace = true
 

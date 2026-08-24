@@ -470,6 +470,18 @@ fn validate_observations(input: &RhythmObservations) -> Result<(), AnalysisError
             ));
         }
     }
+    for point in &input.onsets {
+        if !point.time_s.is_finite()
+            || point.time_s < 0.0
+            || point.time_s > input.duration_s
+            || !point.strength.is_finite()
+            || !(0.0..=1.0).contains(&point.strength)
+        {
+            return Err(AnalysisError::InvalidValue(
+                "audio onset point is invalid".to_string(),
+            ));
+        }
+    }
     if input
         .beats
         .windows(2)
@@ -493,6 +505,15 @@ fn validate_observations(input: &RhythmObservations) -> Result<(), AnalysisError
     {
         return Err(AnalysisError::InvalidValue(
             "beat candidate timestamps must be strictly increasing".to_string(),
+        ));
+    }
+    if input
+        .onsets
+        .windows(2)
+        .any(|pair| pair[1].time_s <= pair[0].time_s)
+    {
+        return Err(AnalysisError::InvalidValue(
+            "audio onset timestamps must be strictly increasing".to_string(),
         ));
     }
     Ok(())
@@ -684,6 +705,16 @@ fn mirror_observations(input: &RhythmObservations) -> RhythmObservations {
         .collect();
     mirrored.activity = input
         .activity
+        .iter()
+        .rev()
+        .map(|point| {
+            let mut point = point.clone();
+            point.time_s = input.duration_s - point.time_s;
+            point
+        })
+        .collect();
+    mirrored.onsets = input
+        .onsets
         .iter()
         .rev()
         .map(|point| {
@@ -1770,6 +1801,7 @@ mod tests {
             beats,
             beat_candidates: Vec::new(),
             activity: Vec::new(),
+            onsets: Vec::new(),
             source: ModelInfo {
                 backend: "test".to_string(),
                 model: "synthetic".to_string(),

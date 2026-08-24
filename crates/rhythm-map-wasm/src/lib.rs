@@ -52,6 +52,7 @@ pub fn analyze_timing(
         beats,
         beat_candidates: Vec::new(),
         activity: Vec::new(),
+        onsets: Vec::new(),
         source: ModelInfo {
             backend: "wasm-host-observations".to_string(),
             model: "host".to_string(),

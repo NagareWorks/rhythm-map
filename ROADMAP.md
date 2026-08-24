@@ -228,3 +228,19 @@ a learned component to the default distribution.
   sequence decoder that accumulates coherent midpoint evidence across runs and
   penalizes normal/double-time state transitions; do not lower a global
   threshold or expose a product Strategy list.
+- 2026-08-24: a truth-free two-state midpoint gap path was rejected on ARTBeaT.
+  It activated 11/15 cases, improved six, regressed five, and lowered mean
+  top-1 beat F1 from 0.8052 to 0.7699. All activations formed one nearly
+  whole-track run: stable subdivision peaks are phase-indistinguishable from
+  missing double-time beats. Do not retain this as another policy or tune its
+  thresholds on the opened calibration set. The next discriminator must add
+  independent beat-level evidence; otherwise preserve explicit metrical
+  ambiguity instead of selecting an alternative sequence.
+- 2026-08-24: added a backend-neutral, deterministic spectral-flux onset
+  envelope and measured it at real midpoint candidates. Cases where midpoint
+  augmentation improved by more than 0.02 F1 averaged 0.55 onset strength,
+  versus 0.45 for non-improving cases, but the distributions overlap: the
+  regressive 85-to-127.5 case scored about 0.69 while useful ramp cases scored
+  about 0.41 and 0.28. Keep onset strength as auditable observation metadata,
+  not a pulse selector or another strategy. A safe selector still needs meter-
+  or structure-level evidence and a fresh precommitted holdout.

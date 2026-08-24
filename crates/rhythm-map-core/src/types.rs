@@ -53,6 +53,15 @@ pub struct AudioActivityPoint {
     pub relative_db: f64,
 }
 
+/// Deterministic spectral-flux onset measurement derived from decoded PCM.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct AudioOnsetPoint {
+    /// Center of the analysis window in seconds.
+    pub time_s: f64,
+    /// Positive spectral flux normalized to `[0, 1]` within the track.
+    pub strength: f64,
+}
+
 /// Backend-neutral observations consumed by the timing estimator.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct RhythmObservations {
@@ -66,6 +75,9 @@ pub struct RhythmObservations {
     /// Optional deterministic activity envelope derived from decoded PCM.
     #[serde(default)]
     pub activity: Vec<AudioActivityPoint>,
+    /// Optional deterministic onset envelope derived from decoded PCM.
+    #[serde(default)]
+    pub onsets: Vec<AudioOnsetPoint>,
     /// Source model metadata.
     pub source: ModelInfo,
 }

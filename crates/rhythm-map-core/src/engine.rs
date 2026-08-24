@@ -1,7 +1,8 @@
+use realfft::RealFftPlanner;
 use thiserror::Error;
 
 use crate::estimator::TempoMapEstimator;
-use crate::{Analysis, AnalysisError, AudioActivityPoint, RhythmObservations};
+use crate::{Analysis, AnalysisError, AudioActivityPoint, AudioOnsetPoint, RhythmObservations};
 
 /// Error returned by an observation backend.
 #[derive(Debug, Clone, Error)]
@@ -95,8 +96,8 @@ where
     }
 
     /// Decode the backend-neutral observation layer without running the timing
-    /// estimator. A deterministic activity envelope is added when the backend
-    /// does not provide one.
+    /// estimator. Deterministic activity and spectral-flux onset envelopes are
+    /// added when the backend does not provide them.
     ///
     /// # Errors
     ///
@@ -139,6 +140,9 @@ where
         let mut observations = self.backend.observe_mono(samples, sample_rate)?;
         if observations.activity.is_empty() {
             observations.activity = extract_audio_activity(samples, sample_rate);
+        }
+        if observations.onsets.is_empty() {
+            observations.onsets = extract_audio_onsets(samples, sample_rate);
         }
         Ok(observations)
     }
@@ -204,6 +208,76 @@ fn extract_audio_activity(samples: &[f32], sample_rate: u32) -> Vec<AudioActivit
     activity
 }
 
+#[allow(clippy::cast_possible_truncation)]
+fn extract_audio_onsets(samples: &[f32], sample_rate: u32) -> Vec<AudioOnsetPoint> {
+    if samples.is_empty() {
+        return Vec::new();
+    }
+    let sample_rate = usize::try_from(sample_rate).expect("sample rate fits usize");
+    let nominal_window = (sample_rate / 25).clamp(64, 8_192);
+    let fft_size = nominal_window.next_power_of_two().min(8_192);
+    let hop = (sample_rate / 100).max(1);
+    let window_denominator = usize_to_f64(fft_size.saturating_sub(1).max(1));
+    let window = (0..fft_size)
+        .map(|index| {
+            let phase = 2.0 * std::f64::consts::PI * usize_to_f64(index) / window_denominator;
+            (0.5 - 0.5 * phase.cos()) as f32
+        })
+        .collect::<Vec<_>>();
+    let mut planner = RealFftPlanner::<f32>::new();
+    let transform = planner.plan_fft_forward(fft_size);
+    let mut input = transform.make_input_vec();
+    let mut spectrum = transform.make_output_vec();
+    let mut previous_magnitudes = vec![0.0_f64; spectrum.len()];
+    let mut onsets = Vec::with_capacity(samples.len().div_ceil(hop));
+    let half_window = fft_size / 2;
+    let mut first_frame = true;
+    for center in (0..samples.len()).step_by(hop) {
+        input.fill(0.0);
+        let source_start = center.saturating_sub(half_window);
+        let window_offset = half_window.saturating_sub(center);
+        let available = (samples.len() - source_start).min(fft_size - window_offset);
+        for (target, (&sample, &weight)) in input[window_offset..window_offset + available]
+            .iter_mut()
+            .zip(
+                samples[source_start..source_start + available]
+                    .iter()
+                    .zip(&window[window_offset..window_offset + available]),
+            )
+        {
+            *target = sample * weight;
+        }
+        transform
+            .process(&mut input, &mut spectrum)
+            .expect("real FFT buffers match the planned transform");
+        let mut flux = 0.0;
+        for (bin, previous) in spectrum.iter().skip(1).zip(&mut previous_magnitudes[1..]) {
+            let magnitude = f64::from(bin.norm());
+            if !first_frame {
+                flux += (magnitude - *previous).max(0.0);
+            }
+            *previous = magnitude;
+        }
+        onsets.push(AudioOnsetPoint {
+            time_s: usize_to_f64(center) / usize_to_f64(sample_rate),
+            strength: flux.ln_1p(),
+        });
+        first_frame = false;
+    }
+    let peak = onsets
+        .iter()
+        .map(|point| point.strength)
+        .fold(0.0_f64, f64::max);
+    for point in &mut onsets {
+        point.strength = if peak <= f64::EPSILON {
+            0.0
+        } else {
+            (point.strength / peak).clamp(0.0, 1.0)
+        };
+    }
+    onsets
+}
+
 #[allow(clippy::cast_precision_loss)]
 fn usize_to_f64(value: usize) -> f64 {
     value as f64
@@ -242,6 +316,7 @@ mod tests {
                 ],
                 beat_candidates: Vec::new(),
                 activity: Vec::new(),
+                onsets: Vec::new(),
                 source: ModelInfo {
                     backend: "test".to_string(),
                     model: "test".to_string(),
@@ -279,6 +354,30 @@ mod tests {
                 .iter()
                 .all(|point| point.relative_db.abs() < 1e-9)
         );
+    }
+
+    #[test]
+    fn adds_normalized_spectral_flux_onsets() {
+        let mut samples = vec![0.0; 4_000];
+        samples[2_000] = 1.0;
+        let mut engine = Engine::new(RecordingBackend::default());
+
+        let observations = engine.observe_pcm(&samples, 4_000, 1).unwrap();
+
+        assert!(!observations.onsets.is_empty());
+        assert!(observations.onsets.iter().all(|point| {
+            point.time_s.is_finite()
+                && point.strength.is_finite()
+                && (0.0..=1.0).contains(&point.strength)
+        }));
+        assert!(observations.onsets[0].strength.abs() <= f64::EPSILON);
+        let strongest = observations
+            .onsets
+            .iter()
+            .max_by(|left, right| left.strength.total_cmp(&right.strength))
+            .unwrap();
+        assert!(strongest.strength > 0.9);
+        assert!((strongest.time_s - 0.5).abs() <= 0.02);
     }
 
     #[test]

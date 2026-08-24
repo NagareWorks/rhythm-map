@@ -409,6 +409,7 @@ impl BeatThisBackend {
                 })
                 .collect(),
             activity: Vec::new(),
+            onsets: Vec::new(),
             source: ModelInfo {
                 backend: "beat-this-rten".to_string(),
                 model: self.model_name.clone(),

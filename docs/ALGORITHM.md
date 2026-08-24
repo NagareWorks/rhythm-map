@@ -13,7 +13,8 @@ backend-neutral `RhythmObservations`:
 - beat timestamps;
 - downbeat timestamps;
 - per-event confidence derived from 50 Hz beat and downbeat logits;
-- a deterministic short-time PCM activity envelope; and
+- a deterministic short-time PCM activity envelope;
+- a deterministic short-time spectral-flux onset envelope; and
 - model identity and audio duration.
 
 No model tensor or Beat This-specific type crosses into `rhythm-map-core`.
@@ -76,6 +77,26 @@ the ranking placed below the primary result.
 The first ARTBeaT run and its rejected naive ranking are recorded in
 `evaluation/baselines/artbeat-candidate-coverage-v1.md`. Ranking weights remain
 an evaluation candidate, not a product option.
+
+The PCM onset envelope is computed at an approximately 10 ms hop with a
+centered approximately 40 ms Hann window, rounded up to a power-of-two FFT
+size. For every non-DC frequency bin, only positive magnitude growth from the
+previous frame contributes:
+
+```text
+flux[t]     = sum_k max(0, magnitude[t, k] - magnitude[t - 1, k])
+onset[t]    = log(1 + flux[t])
+strength[t] = onset[t] / max_t(onset[t])
+```
+
+The first frame establishes the magnitude baseline and has zero flux. Strength
+is therefore finite and track-normalized to `[0, 1]`; it is salience within one
+recording, not a calibrated probability that a frame is a beat. Calibration
+reports include the mean onset strength at real backend candidates added by the
+midpoint hypothesis. On ARTBeaT this evidence was correlated with useful
+augmentation but did not separate it from false subdivisions, so it remains a
+diagnostic observation and does not choose a pulse hypothesis. The result is
+recorded in `evaluation/baselines/artbeat-spectral-flux-v5.md`.
 
 The estimator normally preserves backend timestamps. It can reject events
 inside sustained low-activity spans, select one phase of a strong/weak

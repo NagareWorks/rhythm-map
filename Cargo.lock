@@ -659,6 +659,7 @@ dependencies = [
 name = "rhythm-map-core"
 version = "0.1.0"
 dependencies = [
+ "realfft",
  "serde",
  "thiserror",
 ]

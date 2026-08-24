@@ -152,11 +152,14 @@ filenames, annotations, and per-case oracle scores are forbidden selector
 inputs.
 
 For calibration suites with timestamped beat truth, `eval-backend` report
-schema 3 additionally emits `candidate_evidence` and
-`pulse_hypothesis_coverage`. Candidate recall asks whether any real backend
-local maximum exists near each truth beat. It separately reports candidate
-recall and confidence for truth beats missed by the selected sequence, because
-the all-beat median is otherwise dominated by events the decoder already kept.
+schema 4 additionally emits `candidate_evidence`, spectral-flux onset
+diagnostics, and `pulse_hypothesis_coverage`. The onset envelope is
+backend-neutral and deterministic; its strength is reported independently and
+does not alter hypothesis ranking. Candidate recall asks whether any real
+backend local maximum exists near each truth beat. It separately reports
+candidate recall and confidence for truth beats missed by the selected
+sequence, because the all-beat median is otherwise dominated by events the
+decoder already kept.
 Top-K coverage then scores a fixed, truth-free set consisting of the selected
 sequence, two alternating half-time phases, and an optional real-midpoint
 augmentation. The same fields are omitted from regression and holdout reports

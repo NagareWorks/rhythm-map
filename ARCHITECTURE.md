@@ -5,7 +5,7 @@
 ```text
 interleaved PCM
     -> observation backend
-    -> beat/downbeat events + frame confidence + PCM activity
+    -> beat/downbeat events + frame confidence + PCM activity/onset evidence
     -> low-activity rejection + evidence-based metrical selection
     -> preliminary normalized tempo curve
     -> guarded short-transition beat-grid recovery
@@ -23,9 +23,11 @@ without changing consumers.
 ## Observation boundary
 
 Backends implement `RhythmObservationBackend` and return `RhythmObservations`.
-They may expose confidence, model identity, frame rate, and an optional activity
-envelope, but no backend tensor type crosses into the core schema. The engine
-adds a deterministic PCM activity envelope when a backend does not provide one.
+They may expose confidence, model identity, frame rate, and optional activity
+and onset envelopes, but no backend tensor type crosses into the core schema.
+The engine adds deterministic PCM activity and spectral-flux onset envelopes
+when a backend does not provide them. Both remain backend-neutral evidence;
+neither is itself a beat decision.
 
 `RhythmObservations.beat_candidates` carries sorted, uncommitted timestamps that
 are supported by the backend but were not necessarily selected as beats. The
@@ -74,8 +76,10 @@ recall and top-K pulse/phase coverage. The initial hypothesis set contains the
 selected sequence, its two alternating half-time phases, and a double-time
 sequence augmented only with real midpoint candidate peaks. Construction and
 ranking use backend confidence, PCM activity, downbeat evidence, interval
-continuity, and explicit selected-evidence retention; truth is applied only
-afterward for evaluation. Holdout reports never expose this oracle comparison.
+continuity, and explicit selected-evidence retention; spectral-flux strength is
+reported independently for calibration but does not yet alter the rank. Truth
+is applied only afterward for evaluation. Holdout reports never expose this
+oracle comparison.
 
 ## Tempo inference
 
