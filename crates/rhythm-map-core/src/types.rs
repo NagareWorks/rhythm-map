@@ -27,6 +27,21 @@ pub struct ObservedBeat {
     pub downbeat_confidence: f64,
 }
 
+/// Uncommitted beat evidence exposed by an observation backend.
+///
+/// Candidates must correspond to timestamps supported by the backend. They are
+/// not accepted beats and the timing estimator deliberately ignores them until
+/// a separately validated hypothesis algorithm promotes a subset.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct BeatCandidate {
+    /// Time from the beginning of the decoded audio.
+    pub time_s: f64,
+    /// Beat confidence in `[0, 1]`.
+    pub confidence: f64,
+    /// Downbeat confidence at the same timestamp in `[0, 1]`.
+    pub downbeat_confidence: f64,
+}
+
 /// Deterministic short-time audio activity measurement.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct AudioActivityPoint {
@@ -45,6 +60,9 @@ pub struct RhythmObservations {
     pub duration_s: f64,
     /// Sorted beat observations.
     pub beats: Vec<ObservedBeat>,
+    /// Sorted model-supported alternatives not committed to the beat sequence.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub beat_candidates: Vec<BeatCandidate>,
     /// Optional deterministic activity envelope derived from decoded PCM.
     #[serde(default)]
     pub activity: Vec<AudioActivityPoint>,

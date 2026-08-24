@@ -444,6 +444,18 @@ fn validate_observations(input: &RhythmObservations) -> Result<(), AnalysisError
             ));
         }
     }
+    for candidate in &input.beat_candidates {
+        if !candidate.time_s.is_finite()
+            || candidate.time_s < 0.0
+            || candidate.time_s > input.duration_s
+            || !candidate.confidence.is_finite()
+            || !candidate.downbeat_confidence.is_finite()
+        {
+            return Err(AnalysisError::InvalidValue(
+                "beat candidate is outside the observation contract".to_string(),
+            ));
+        }
+    }
     for point in &input.activity {
         if !point.time_s.is_finite()
             || point.time_s < 0.0
@@ -472,6 +484,15 @@ fn validate_observations(input: &RhythmObservations) -> Result<(), AnalysisError
     {
         return Err(AnalysisError::InvalidValue(
             "audio activity timestamps must be strictly increasing".to_string(),
+        ));
+    }
+    if input
+        .beat_candidates
+        .windows(2)
+        .any(|pair| pair[1].time_s <= pair[0].time_s)
+    {
+        return Err(AnalysisError::InvalidValue(
+            "beat candidate timestamps must be strictly increasing".to_string(),
         ));
     }
     Ok(())
@@ -649,6 +670,16 @@ fn mirror_observations(input: &RhythmObservations) -> RhythmObservations {
             let mut beat = beat.clone();
             beat.time_s = input.duration_s - beat.time_s;
             beat
+        })
+        .collect();
+    mirrored.beat_candidates = input
+        .beat_candidates
+        .iter()
+        .rev()
+        .map(|candidate| {
+            let mut candidate = candidate.clone();
+            candidate.time_s = input.duration_s - candidate.time_s;
+            candidate
         })
         .collect();
     mirrored.activity = input
@@ -1713,7 +1744,7 @@ fn usize_to_f64(value: usize) -> f64 {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::{AudioActivityPoint, ModelInfo, ObservedBeat};
+    use crate::{AudioActivityPoint, BeatCandidate, ModelInfo, ObservedBeat};
 
     fn observations_from_bpms(bpms: &[f64]) -> RhythmObservations {
         let mut time = 0.0;
@@ -1737,6 +1768,7 @@ mod tests {
         RhythmObservations {
             duration_s: time + 0.25,
             beats,
+            beat_candidates: Vec::new(),
             activity: Vec::new(),
             source: ModelInfo {
                 backend: "test".to_string(),
@@ -1764,6 +1796,47 @@ mod tests {
                 .iter()
                 .all(|change| change.kind != ChangeKind::TempoJump)
         );
+    }
+
+    #[test]
+    fn uncommitted_candidates_do_not_change_shipping_analysis() {
+        let baseline = observations_from_bpms(&[120.0; 16]);
+        let mut with_candidates = baseline.clone();
+        with_candidates.beat_candidates = vec![BeatCandidate {
+            time_s: 0.25,
+            confidence: 0.99,
+            downbeat_confidence: 0.99,
+        }];
+
+        assert_eq!(
+            TempoMapEstimator::default().estimate(&baseline).unwrap(),
+            TempoMapEstimator::default()
+                .estimate(&with_candidates)
+                .unwrap()
+        );
+    }
+
+    #[test]
+    fn candidate_timestamps_must_be_strictly_increasing() {
+        let mut input = observations_from_bpms(&[120.0; 8]);
+        input.beat_candidates = vec![
+            BeatCandidate {
+                time_s: 1.0,
+                confidence: 0.5,
+                downbeat_confidence: 0.1,
+            },
+            BeatCandidate {
+                time_s: 0.5,
+                confidence: 0.6,
+                downbeat_confidence: 0.2,
+            },
+        ];
+
+        assert!(matches!(
+            TempoMapEstimator::default().estimate(&input),
+            Err(AnalysisError::InvalidValue(message))
+                if message.contains("candidate timestamps")
+        ));
     }
 
     #[test]

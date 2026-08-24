@@ -50,6 +50,7 @@ pub fn analyze_timing(
     let observations = RhythmObservations {
         duration_s,
         beats,
+        beat_candidates: Vec::new(),
         activity: Vec::new(),
         source: ModelInfo {
             backend: "wasm-host-observations".to_string(),

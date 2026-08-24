@@ -203,3 +203,28 @@ a learned component to the default distribution.
   a CC BY 4.0 label with an additional non-commercial restriction. It is not a
   runtime dependency and remains blocked even as an evaluation-only corpus
   until the rights holder provides a clear, commercially usable grant.
+- 2026-08-24: added backend-neutral uncommitted beat candidates and calibration-
+  only pulse/phase coverage. Beat This retains one real frame per radius-one
+  local-maximum plateau without a confidence floor. A fixed truth-free
+  hypothesis generator compares the selected sequence, both alternating
+  half-time phases, and real-midpoint augmentation; no candidate changes the
+  shipping result. Use candidate recall and best-top-K F1 to decide whether the
+  next bottleneck is missing backend evidence, hypothesis construction, or
+  truth-free ranking.
+- 2026-08-24: the 15-case ARTBeaT calibration measured 0.9820 mean candidate
+  recall, 0.8052 selected-sequence beat F1, and a 0.8370 best-top-K ceiling.
+  The initial confidence/continuity ranker achieved only 0.5224 top-1 F1 and
+  selected the truth-best hypothesis in 0/15 cases because deleting alternating
+  events artificially improved regularity. Treat this as a rejected scoring
+  baseline. The next candidate must explicitly account for retained and
+  discarded backend evidence, remain truth-free at ranking time, and stay
+  evaluation-only until a fresh precommitted holdout exists.
+- 2026-08-24: miss-only attribution found real candidate peaks near 118 of 128
+  truth beats omitted by the selected sequence (0.9219 micro recall), but the
+  median of per-case median miss confidence was only 0.0323. The retention-aware
+  ranker safely restored mean top-1 F1 to the selected baseline of 0.8052 and
+  ranked the truth-best member first in 9/15 cases, yet chose `selected` in all
+  15. Do not promote it as a selector. Next build one evaluation-only local
+  sequence decoder that accumulates coherent midpoint evidence across runs and
+  penalizes normal/double-time state transitions; do not lower a global
+  threshold or expose a product Strategy list.

@@ -240,6 +240,7 @@ mod tests {
                         downbeat_confidence: 0.0,
                     },
                 ],
+                beat_candidates: Vec::new(),
                 activity: Vec::new(),
                 source: ModelInfo {
                     backend: "test".to_string(),

@@ -151,6 +151,23 @@ input class can be identified from truth-free runtime evidence. Dataset IDs,
 filenames, annotations, and per-case oracle scores are forbidden selector
 inputs.
 
+For calibration suites with timestamped beat truth, `eval-backend` report
+schema 3 additionally emits `candidate_evidence` and
+`pulse_hypothesis_coverage`. Candidate recall asks whether any real backend
+local maximum exists near each truth beat. It separately reports candidate
+recall and confidence for truth beats missed by the selected sequence, because
+the all-beat median is otherwise dominated by events the decoder already kept.
+Top-K coverage then scores a fixed, truth-free set consisting of the selected
+sequence, two alternating half-time phases, and an optional real-midpoint
+augmentation. The same fields are omitted from regression and holdout reports
+so their truth cannot become an implicit per-case router.
+
+Each hypothesis includes an evidence breakdown. Ranking charges a half-time
+subset for discarded selected-event evidence in addition to measuring event
+strength and interval continuity. The calibration history in
+`baselines/artbeat-candidate-coverage-v1.md` records why the earlier unpenalized
+confidence/continuity score was rejected.
+
 After choosing one policy on calibration data, evaluate that exact registered
 policy on a separate holdout manifest:
 

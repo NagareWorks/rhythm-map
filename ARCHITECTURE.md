@@ -27,6 +27,13 @@ They may expose confidence, model identity, frame rate, and an optional activity
 envelope, but no backend tensor type crosses into the core schema. The engine
 adds a deterministic PCM activity envelope when a backend does not provide one.
 
+`RhythmObservations.beat_candidates` carries sorted, uncommitted timestamps that
+are supported by the backend but were not necessarily selected as beats. The
+shipping estimator validates but deliberately ignores this field. It exists so
+evaluation can distinguish absent model evidence from a wrong pulse/phase
+choice without lowering the product decoder threshold or inventing grid times.
+Every candidate timestamp must come from the backend itself.
+
 The default Beat This adapter consumes its frame logits to attach confidence to
 events. The tempo estimator never depends on the upstream crate's Rust structs.
 
@@ -61,6 +68,14 @@ unless all of the following become true:
 Only then may the engine contain an internal strategy selector. The selected
 strategy still does not become a user-facing rhythm parameter; uncertainty and
 metrical alternatives belong in `Analysis` output.
+
+Before that selector gate is considered, calibration measures candidate-evidence
+recall and top-K pulse/phase coverage. The initial hypothesis set contains the
+selected sequence, its two alternating half-time phases, and a double-time
+sequence augmented only with real midpoint candidate peaks. Construction and
+ranking use backend confidence, PCM activity, downbeat evidence, interval
+continuity, and explicit selected-evidence retention; truth is applied only
+afterward for evaluation. Holdout reports never expose this oracle comparison.
 
 ## Tempo inference
 

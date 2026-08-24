@@ -11,7 +11,7 @@ use rhythm_map_beat_this::{
     SupportedMidpointOptions, decode_audio,
 };
 use rhythm_map_core::{
-    Analysis, Engine, EstimatorOptions, ModelInfo, ObservedBeat, RhythmObservations,
+    Analysis, BeatCandidate, Engine, EstimatorOptions, ModelInfo, ObservedBeat, RhythmObservations,
     TempoMapEstimator,
 };
 use rhythm_map_models::{ModelArtifactRole, VerifiedModelPack, verify_model_pack};
@@ -74,6 +74,10 @@ pub struct ObservationDiagnostics {
     pub source: ModelInfo,
     /// Exact beat/confidence events before deterministic filtering or metrical selection.
     pub raw_beats: Vec<ObservedBeat>,
+    /// Number of uncommitted model-supported local maxima available for
+    /// hypothesis construction.
+    #[serde(default)]
+    pub candidate_beat_count: usize,
     /// Number of beats retained in the product analysis.
     pub analyzed_beat_count: usize,
     /// Number of retained beats classified as downbeats after deterministic repair.
@@ -98,6 +102,87 @@ pub struct ObservationDiagnostics {
     pub analysis_warnings: Vec<String>,
 }
 
+/// Truth-side coverage of backend candidate evidence before sequence selection.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct CandidateEvidenceCoverage {
+    /// Number of backend candidates inspected.
+    pub candidate_count: usize,
+    /// Number of independently annotated beats.
+    pub expected_beat_count: usize,
+    /// Truth beats with at least one model-supported candidate in tolerance.
+    pub matched_expected_beat_count: usize,
+    /// Fraction of truth beats with candidate evidence.
+    pub recall: f64,
+    /// Median confidence of the strongest candidate near each covered truth beat.
+    pub median_matched_confidence: Option<f64>,
+    /// Truth beats that the backend's selected sequence did not cover.
+    #[serde(default)]
+    pub selected_missed_expected_beat_count: usize,
+    /// Selected-sequence misses with a model-supported candidate in tolerance.
+    #[serde(default)]
+    pub candidate_covered_selected_miss_count: usize,
+    /// Fraction of selected-sequence misses recoverable from candidate evidence.
+    #[serde(default)]
+    pub selected_miss_candidate_recall: f64,
+    /// Median strongest-candidate confidence for covered selected-sequence misses.
+    #[serde(default)]
+    pub median_selected_miss_candidate_confidence: Option<f64>,
+}
+
+/// Truth-free evidence terms used to rank one pulse/phase hypothesis.
+#[derive(Debug, Clone, Default, Serialize, Deserialize, PartialEq)]
+pub struct PulseEvidenceBreakdown {
+    /// Mean confidence, PCM salience, and downbeat evidence of retained events.
+    pub mean_event_evidence: f64,
+    /// Exponential score for log-interval consistency in `[0, 1]`.
+    pub interval_continuity: f64,
+    /// Fraction of total selected-sequence evidence preserved by this hypothesis.
+    pub selected_evidence_retention: f64,
+    /// Fraction of selected-beat gaps supplied by real candidate events.
+    pub added_candidate_fraction: f64,
+    /// Mean evidence of added candidate events, absent when none were added.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub mean_added_candidate_evidence: Option<f64>,
+}
+
+/// One truth-scored pulse/phase hypothesis built only from backend timestamps.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct PulseHypothesisEvaluation {
+    /// Stable construction label, not a product strategy ID.
+    pub id: String,
+    /// One-based rank from truth-free evidence scoring.
+    pub rank: usize,
+    /// Uncalibrated confidence/continuity score used for ranking.
+    pub evidence_score: f64,
+    /// Auditable truth-free terms explaining `evidence_score` and its inputs.
+    #[serde(default)]
+    pub evidence: PulseEvidenceBreakdown,
+    /// Metrical octave relative to the selected backend sequence.
+    pub metrical_level: i8,
+    /// Alternating phase for half-time subsets, otherwise absent.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub phase: Option<usize>,
+    /// Exact backend-supported timestamps in this hypothesis.
+    pub beat_times_s: Vec<f64>,
+    /// One-to-one score against independent beat truth.
+    pub beats: BeatMetrics,
+}
+
+/// Top-K coverage of pulse/phase alternatives generated without truth access.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct PulseHypothesisCoverage {
+    /// Number of ranked hypotheses included in the coverage budget.
+    pub top_k: usize,
+    /// Beat F1 of the truth-free top-ranked hypothesis.
+    pub top_1_beat_f1: f64,
+    /// Best beat F1 available anywhere in the top-K set.
+    pub best_top_k_beat_f1: f64,
+    /// Hypothesis with the best beat F1, used only for attribution.
+    pub best_hypothesis_id: String,
+    /// Hypotheses in descending truth-free evidence order.
+    pub hypotheses: Vec<PulseHypothesisEvaluation>,
+}
+
 /// Available oracle evidence and the end-to-end result for one case.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct AttributionCase {
@@ -119,6 +204,13 @@ pub struct AttributionCase {
     pub delta: Option<CaseMetricDelta>,
     /// Raw beat/confidence events and activity summary used for diagnosis.
     pub observations: ObservationDiagnostics,
+    /// Candidate evidence coverage, absent when timestamped beat truth is unavailable.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub candidate_evidence: Option<CandidateEvidenceCoverage>,
+    /// Competing pulse/phase coverage, emitted only for calibration suites with
+    /// timestamped beat truth.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub pulse_hypothesis_coverage: Option<PulseHypothesisCoverage>,
     /// Wall-clock time spent in end-to-end audio analysis.
     pub end_to_end_runtime_ms: f64,
 }
@@ -687,6 +779,12 @@ fn evaluate_backend_suite_impl(
             .as_ref()
             .map(|oracle| metric_delta(oracle, &end_to_end));
         let observation_diagnostics = observation_diagnostics(&observations, &analysis);
+        let (candidate_evidence, pulse_hypothesis_coverage) = calibration_observation_evidence(
+            suite.purpose,
+            &truth,
+            &observations,
+            thresholds.beat_tolerance_ms / 1000.0,
+        );
         cases.push(AttributionCase {
             id: case.id.clone(),
             tags: case.tags.clone(),
@@ -695,6 +793,8 @@ fn evaluate_backend_suite_impl(
             end_to_end,
             delta,
             observations: observation_diagnostics,
+            candidate_evidence,
+            pulse_hypothesis_coverage,
             end_to_end_runtime_ms: runtime_ms,
         });
     }
@@ -708,7 +808,7 @@ fn evaluate_backend_suite_impl(
     let attribution = attribution_decision(oracle_passed, has_unpaired_cases, end_to_end_passed);
     let manifest = verified.manifest();
     Ok(BottleneckEvaluation {
-        schema_version: 2,
+        schema_version: 3,
         suite_id: suite.id,
         suite_purpose: suite.purpose,
         model_pack: ModelPackIdentity {
@@ -1548,6 +1648,7 @@ fn observation_diagnostics(
     ObservationDiagnostics {
         source: observations.source.clone(),
         raw_beats: observations.beats.clone(),
+        candidate_beat_count: observations.beat_candidates.len(),
         analyzed_beat_count: analysis.beats.len(),
         analyzed_downbeat_count: analysis.beats.iter().filter(|beat| beat.downbeat).count(),
         activity_point_count: observations.activity.len(),
@@ -1558,6 +1659,356 @@ fn observation_diagnostics(
         alternating_phase_confidence,
         analysis_warnings: analysis.warnings.clone(),
     }
+}
+
+fn candidate_evidence_coverage(
+    candidates: &[BeatCandidate],
+    selected: &[ObservedBeat],
+    expected: &[f64],
+    tolerance_s: f64,
+) -> CandidateEvidenceCoverage {
+    let mut matched_confidences = expected
+        .iter()
+        .filter_map(|expected_time| {
+            candidates
+                .iter()
+                .filter(|candidate| (candidate.time_s - expected_time).abs() <= tolerance_s)
+                .map(|candidate| candidate.confidence)
+                .max_by(f64::total_cmp)
+        })
+        .collect::<Vec<_>>();
+    let matched_expected_beat_count = matched_confidences.len();
+    let selected_misses = expected
+        .iter()
+        .filter(|expected_time| {
+            !selected
+                .iter()
+                .any(|beat| (beat.time_s - **expected_time).abs() <= tolerance_s)
+        })
+        .copied()
+        .collect::<Vec<_>>();
+    let selected_missed_expected_beat_count = selected_misses.len();
+    let selected_miss_confidences = selected_misses
+        .iter()
+        .filter_map(|expected_time| {
+            candidates
+                .iter()
+                .filter(|candidate| (candidate.time_s - expected_time).abs() <= tolerance_s)
+                .map(|candidate| candidate.confidence)
+                .max_by(f64::total_cmp)
+        })
+        .collect::<Vec<_>>();
+    let candidate_covered_selected_miss_count = selected_miss_confidences.len();
+    CandidateEvidenceCoverage {
+        candidate_count: candidates.len(),
+        expected_beat_count: expected.len(),
+        matched_expected_beat_count,
+        recall: if expected.is_empty() {
+            1.0
+        } else {
+            usize_to_f64(matched_expected_beat_count) / usize_to_f64(expected.len())
+        },
+        median_matched_confidence: median_f64(std::mem::take(&mut matched_confidences)),
+        selected_missed_expected_beat_count,
+        candidate_covered_selected_miss_count,
+        selected_miss_candidate_recall: if selected_misses.is_empty() {
+            1.0
+        } else {
+            usize_to_f64(candidate_covered_selected_miss_count)
+                / usize_to_f64(selected_misses.len())
+        },
+        median_selected_miss_candidate_confidence: median_f64(selected_miss_confidences),
+    }
+}
+
+fn calibration_observation_evidence(
+    suite_purpose: SuitePurpose,
+    truth: &GeneratedTruth,
+    observations: &RhythmObservations,
+    tolerance_s: f64,
+) -> (
+    Option<CandidateEvidenceCoverage>,
+    Option<PulseHypothesisCoverage>,
+) {
+    if suite_purpose != SuitePurpose::Calibration || truth.beats.is_empty() {
+        return (None, None);
+    }
+    let expected = truth
+        .beats
+        .iter()
+        .map(|beat| beat.time_s)
+        .collect::<Vec<_>>();
+    (
+        Some(candidate_evidence_coverage(
+            &observations.beat_candidates,
+            &observations.beats,
+            &expected,
+            tolerance_s,
+        )),
+        Some(evaluate_pulse_hypothesis_coverage(
+            observations,
+            &expected,
+            tolerance_s,
+        )),
+    )
+}
+
+#[derive(Debug, Clone)]
+struct HypothesisEvent {
+    time_s: f64,
+    confidence: f64,
+    downbeat_confidence: f64,
+    selected: bool,
+}
+
+#[derive(Debug, Clone)]
+struct PulseHypothesis {
+    id: &'static str,
+    metrical_level: i8,
+    phase: Option<usize>,
+    events: Vec<HypothesisEvent>,
+    evidence_score: f64,
+    evidence: PulseEvidenceBreakdown,
+}
+
+fn evaluate_pulse_hypothesis_coverage(
+    observations: &RhythmObservations,
+    expected: &[f64],
+    tolerance_s: f64,
+) -> PulseHypothesisCoverage {
+    let mut hypotheses = build_pulse_hypotheses(observations);
+    hypotheses.sort_by(|left, right| {
+        right
+            .evidence_score
+            .total_cmp(&left.evidence_score)
+            .then_with(|| left.id.cmp(right.id))
+    });
+    let evaluations = hypotheses
+        .into_iter()
+        .enumerate()
+        .map(|(index, hypothesis)| {
+            let beat_times_s = hypothesis
+                .events
+                .iter()
+                .map(|event| event.time_s)
+                .collect::<Vec<_>>();
+            let beats = score_beats(&beat_times_s, expected, tolerance_s);
+            PulseHypothesisEvaluation {
+                id: hypothesis.id.to_string(),
+                rank: index + 1,
+                evidence_score: hypothesis.evidence_score,
+                evidence: hypothesis.evidence,
+                metrical_level: hypothesis.metrical_level,
+                phase: hypothesis.phase,
+                beat_times_s,
+                beats,
+            }
+        })
+        .collect::<Vec<_>>();
+    let top_1_beat_f1 = evaluations.first().map_or(0.0, |item| item.beats.f1);
+    let best = evaluations
+        .iter()
+        .max_by(|left, right| left.beats.f1.total_cmp(&right.beats.f1));
+    PulseHypothesisCoverage {
+        top_k: evaluations.len(),
+        top_1_beat_f1,
+        best_top_k_beat_f1: best.map_or(0.0, |item| item.beats.f1),
+        best_hypothesis_id: best.map_or_else(String::new, |item| item.id.clone()),
+        hypotheses: evaluations,
+    }
+}
+
+fn build_pulse_hypotheses(observations: &RhythmObservations) -> Vec<PulseHypothesis> {
+    let selected = observations
+        .beats
+        .iter()
+        .map(|beat| HypothesisEvent {
+            time_s: beat.time_s,
+            confidence: beat.confidence,
+            downbeat_confidence: beat.downbeat_confidence,
+            selected: true,
+        })
+        .collect::<Vec<_>>();
+    let mut hypotheses = vec![pulse_hypothesis(
+        observations,
+        "selected",
+        0,
+        None,
+        selected.clone(),
+    )];
+
+    if selected.len() >= 8 {
+        for phase in [0_usize, 1] {
+            hypotheses.push(pulse_hypothesis(
+                observations,
+                if phase == 0 {
+                    "half_time_phase_0"
+                } else {
+                    "half_time_phase_1"
+                },
+                -1,
+                Some(phase),
+                selected.iter().skip(phase).step_by(2).cloned().collect(),
+            ));
+        }
+    }
+
+    let mut augmented = selected.clone();
+    let mut additions = Vec::new();
+    for pair in selected.windows(2) {
+        let gap = pair[1].time_s - pair[0].time_s;
+        let midpoint = f64::midpoint(pair[0].time_s, pair[1].time_s);
+        let maximum_offset = gap * 0.2;
+        if let Some(candidate) = observations
+            .beat_candidates
+            .iter()
+            .filter(|candidate| candidate.time_s > pair[0].time_s)
+            .filter(|candidate| candidate.time_s < pair[1].time_s)
+            .filter(|candidate| (candidate.time_s - midpoint).abs() <= maximum_offset)
+            .max_by(|left, right| {
+                left.confidence.total_cmp(&right.confidence).then_with(|| {
+                    (right.time_s - midpoint)
+                        .abs()
+                        .total_cmp(&(left.time_s - midpoint).abs())
+                })
+            })
+        {
+            additions.push(HypothesisEvent {
+                time_s: candidate.time_s,
+                confidence: candidate.confidence,
+                downbeat_confidence: candidate.downbeat_confidence,
+                selected: false,
+            });
+        }
+    }
+    if additions.len() >= 3 {
+        augmented.extend(additions);
+        augmented.sort_by(|left, right| left.time_s.total_cmp(&right.time_s));
+        augmented.dedup_by(|left, right| (left.time_s - right.time_s).abs() <= f64::EPSILON);
+        hypotheses.push(pulse_hypothesis(
+            observations,
+            "candidate_midpoint_augmented",
+            1,
+            None,
+            augmented,
+        ));
+    }
+    hypotheses
+}
+
+fn pulse_hypothesis(
+    observations: &RhythmObservations,
+    id: &'static str,
+    metrical_level: i8,
+    phase: Option<usize>,
+    events: Vec<HypothesisEvent>,
+) -> PulseHypothesis {
+    let evidence = pulse_evidence_breakdown(observations, &events);
+    let evidence_score = 0.45 * evidence.mean_event_evidence
+        + 0.30 * evidence.interval_continuity
+        + 0.25 * evidence.selected_evidence_retention;
+    PulseHypothesis {
+        id,
+        metrical_level,
+        phase,
+        events,
+        evidence_score,
+        evidence,
+    }
+}
+
+fn pulse_evidence_breakdown(
+    observations: &RhythmObservations,
+    events: &[HypothesisEvent],
+) -> PulseEvidenceBreakdown {
+    if events.len() < 3 {
+        return PulseEvidenceBreakdown {
+            mean_event_evidence: 0.0,
+            interval_continuity: 0.0,
+            selected_evidence_retention: 0.0,
+            added_candidate_fraction: 0.0,
+            mean_added_candidate_evidence: None,
+        };
+    }
+    let event_evidence = events
+        .iter()
+        .map(|event| hypothesis_event_evidence(observations, event))
+        .collect::<Vec<_>>();
+    let mean_event_evidence = event_evidence.iter().sum::<f64>() / usize_to_f64(events.len());
+    let intervals = events
+        .windows(2)
+        .map(|pair| pair[1].time_s - pair[0].time_s)
+        .filter(|interval| *interval > 0.0)
+        .collect::<Vec<_>>();
+    let Some(median_interval) = median_f64(intervals.clone()) else {
+        return PulseEvidenceBreakdown {
+            mean_event_evidence,
+            interval_continuity: 0.0,
+            selected_evidence_retention: 0.0,
+            added_candidate_fraction: 0.0,
+            mean_added_candidate_evidence: None,
+        };
+    };
+    let mean_log_error = intervals
+        .iter()
+        .map(|interval| (interval / median_interval).ln().abs())
+        .sum::<f64>()
+        / usize_to_f64(intervals.len());
+    let interval_continuity = (-4.0 * mean_log_error).exp();
+    let total_selected_evidence = observations
+        .beats
+        .iter()
+        .map(|beat| HypothesisEvent {
+            time_s: beat.time_s,
+            confidence: beat.confidence,
+            downbeat_confidence: beat.downbeat_confidence,
+            selected: true,
+        })
+        .map(|event| hypothesis_event_evidence(observations, &event))
+        .sum::<f64>();
+    let retained_selected_evidence = events
+        .iter()
+        .zip(&event_evidence)
+        .filter_map(|(event, evidence)| event.selected.then_some(*evidence))
+        .sum::<f64>();
+    let selected_evidence_retention = if total_selected_evidence > 0.0 {
+        (retained_selected_evidence / total_selected_evidence).clamp(0.0, 1.0)
+    } else {
+        usize_to_f64(events.iter().filter(|event| event.selected).count())
+            / usize_to_f64(observations.beats.len().max(1))
+    };
+    let added_evidence = events
+        .iter()
+        .zip(&event_evidence)
+        .filter_map(|(event, evidence)| (!event.selected).then_some(*evidence))
+        .collect::<Vec<_>>();
+    let added_candidate_fraction = usize_to_f64(added_evidence.len())
+        / usize_to_f64(observations.beats.len().saturating_sub(1).max(1));
+    let mean_added_candidate_evidence = (!added_evidence.is_empty())
+        .then(|| added_evidence.iter().sum::<f64>() / usize_to_f64(added_evidence.len()));
+    PulseEvidenceBreakdown {
+        mean_event_evidence,
+        interval_continuity,
+        selected_evidence_retention,
+        added_candidate_fraction: added_candidate_fraction.clamp(0.0, 1.0),
+        mean_added_candidate_evidence,
+    }
+}
+
+fn hypothesis_event_evidence(observations: &RhythmObservations, event: &HypothesisEvent) -> f64 {
+    let confidence = event.confidence.clamp(0.0, 1.0);
+    let activity = observations
+        .activity
+        .iter()
+        .min_by(|left, right| {
+            (left.time_s - event.time_s)
+                .abs()
+                .total_cmp(&(right.time_s - event.time_s).abs())
+        })
+        .map_or(confidence, |point| {
+            10.0_f64.powf(point.relative_db / 20.0).clamp(0.0, 1.0)
+        });
+    0.75 * confidence + 0.20 * activity + 0.05 * event.downbeat_confidence.clamp(0.0, 1.0)
 }
 
 fn median_f64(mut values: Vec<f64>) -> Option<f64> {
@@ -1780,6 +2231,173 @@ fn usize_to_f64(value: usize) -> f64 {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn candidate_coverage_counts_truth_without_promoting_candidates() {
+        let candidates = vec![
+            BeatCandidate {
+                time_s: 0.02,
+                confidence: 0.2,
+                downbeat_confidence: 0.1,
+            },
+            BeatCandidate {
+                time_s: 0.04,
+                confidence: 0.8,
+                downbeat_confidence: 0.2,
+            },
+            BeatCandidate {
+                time_s: 1.03,
+                confidence: 0.4,
+                downbeat_confidence: 0.1,
+            },
+        ];
+
+        let selected = [ObservedBeat {
+            time_s: 0.0,
+            confidence: 1.0,
+            downbeat_confidence: 0.0,
+        }];
+        let coverage = candidate_evidence_coverage(&candidates, &selected, &[0.0, 0.5, 1.0], 0.07);
+
+        assert_eq!(coverage.candidate_count, 3);
+        assert_eq!(coverage.matched_expected_beat_count, 2);
+        assert!((coverage.recall - 2.0 / 3.0).abs() < 1e-9);
+        assert!((coverage.median_matched_confidence.unwrap() - 0.6).abs() < f64::EPSILON);
+        assert_eq!(coverage.selected_missed_expected_beat_count, 2);
+        assert_eq!(coverage.candidate_covered_selected_miss_count, 1);
+        assert!((coverage.selected_miss_candidate_recall - 0.5).abs() < f64::EPSILON);
+        assert!(
+            (coverage.median_selected_miss_candidate_confidence.unwrap() - 0.4).abs()
+                < f64::EPSILON
+        );
+    }
+
+    #[test]
+    fn pulse_hypotheses_cover_both_half_time_phases_without_inventing_events() {
+        let observations = RhythmObservations {
+            duration_s: 8.0,
+            beats: (0..8)
+                .map(|index| ObservedBeat {
+                    time_s: usize_to_f64(index),
+                    confidence: 0.9,
+                    downbeat_confidence: 0.0,
+                })
+                .collect(),
+            beat_candidates: (0..7)
+                .map(|index| BeatCandidate {
+                    time_s: usize_to_f64(index) + 0.5,
+                    confidence: 0.2,
+                    downbeat_confidence: 0.0,
+                })
+                .collect(),
+            activity: Vec::new(),
+            source: ModelInfo {
+                backend: "test".to_string(),
+                model: "test".to_string(),
+                version: None,
+                frame_rate_hz: None,
+            },
+        };
+        let expected = [0.0, 2.0, 4.0, 6.0];
+
+        let coverage = evaluate_pulse_hypothesis_coverage(&observations, &expected, 0.01);
+
+        assert_eq!(coverage.top_k, 4);
+        assert_eq!(coverage.hypotheses[0].id, "selected");
+        assert_eq!(coverage.best_hypothesis_id, "half_time_phase_0");
+        assert!((coverage.best_top_k_beat_f1 - 1.0).abs() < f64::EPSILON);
+        let half_time = coverage
+            .hypotheses
+            .iter()
+            .find(|hypothesis| hypothesis.id == "half_time_phase_0")
+            .unwrap();
+        assert!(half_time.evidence.selected_evidence_retention < 0.6);
+        let augmented = coverage
+            .hypotheses
+            .iter()
+            .find(|hypothesis| hypothesis.id == "candidate_midpoint_augmented")
+            .unwrap();
+        assert!(augmented.beat_times_s.iter().all(|time| {
+            observations
+                .beats
+                .iter()
+                .any(|beat| (beat.time_s - *time).abs() <= f64::EPSILON)
+                || observations
+                    .beat_candidates
+                    .iter()
+                    .any(|candidate| (candidate.time_s - *time).abs() <= f64::EPSILON)
+        }));
+    }
+
+    #[test]
+    fn pulse_hypothesis_rank_does_not_depend_on_truth() {
+        let observations = RhythmObservations {
+            duration_s: 8.0,
+            beats: (0..8)
+                .map(|index| ObservedBeat {
+                    time_s: usize_to_f64(index),
+                    confidence: 0.9,
+                    downbeat_confidence: 0.0,
+                })
+                .collect(),
+            beat_candidates: Vec::new(),
+            activity: Vec::new(),
+            source: ModelInfo {
+                backend: "test".to_string(),
+                model: "test".to_string(),
+                version: None,
+                frame_rate_hz: None,
+            },
+        };
+
+        let full_truth = (0..8).map(usize_to_f64).collect::<Vec<_>>();
+        let half_truth = (0..8).step_by(2).map(usize_to_f64).collect::<Vec<_>>();
+        let full = evaluate_pulse_hypothesis_coverage(&observations, &full_truth, 0.01);
+        let half = evaluate_pulse_hypothesis_coverage(&observations, &half_truth, 0.01);
+        let ranked = |coverage: &PulseHypothesisCoverage| {
+            coverage
+                .hypotheses
+                .iter()
+                .map(|hypothesis| {
+                    (
+                        hypothesis.id.clone(),
+                        hypothesis.rank,
+                        hypothesis.evidence_score,
+                    )
+                })
+                .collect::<Vec<_>>()
+        };
+
+        assert_eq!(ranked(&full), ranked(&half));
+    }
+
+    #[test]
+    fn pulse_hypothesis_rank_can_select_a_supported_half_time_phase() {
+        let observations = RhythmObservations {
+            duration_s: 8.0,
+            beats: (0..8)
+                .map(|index| ObservedBeat {
+                    time_s: usize_to_f64(index),
+                    confidence: if index % 2 == 0 { 1.0 } else { 0.0 },
+                    downbeat_confidence: 0.0,
+                })
+                .collect(),
+            beat_candidates: Vec::new(),
+            activity: Vec::new(),
+            source: ModelInfo {
+                backend: "test".to_string(),
+                model: "test".to_string(),
+                version: None,
+                frame_rate_hz: None,
+            },
+        };
+        let expected = (0..8).step_by(2).map(usize_to_f64).collect::<Vec<_>>();
+
+        let coverage = evaluate_pulse_hypothesis_coverage(&observations, &expected, 0.01);
+
+        assert_eq!(coverage.hypotheses[0].id, "half_time_phase_0");
+        assert!((coverage.top_1_beat_f1 - 1.0).abs() < f64::EPSILON);
+    }
 
     #[test]
     fn attribution_does_not_invent_an_oracle_for_tempo_only_cases() {

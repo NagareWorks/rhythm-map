@@ -45,6 +45,38 @@ only on calibration suites, while a holdout suite accepts one preselected named
 candidate and compares it only with the immutable upstream baseline, reporting
 overall, per-case, and capability-tag deltas.
 
+### Candidate evidence and pulse coverage
+
+The Beat This adapter also retains one real frame from every radius-one local
+maximum plateau in the beat logits. No confidence floor is applied at this
+stage. These points are serialized only in backend-neutral observations as
+uncommitted `beat_candidates`; they do not change the selected beats or any
+shipping analysis result.
+
+Candidate coverage is reported twice: over all annotated beats, and over only
+the annotated beats missed by the selected backend sequence. The second slice
+prevents already-selected high-confidence events from hiding weak evidence at
+the exact timestamps that a recovery algorithm would need to promote.
+
+Calibration reports use that evidence to construct at most four whole-track
+pulse hypotheses: the selected sequence, its two alternating half-time phases,
+and a midpoint-augmented sequence when at least three real candidate peaks lie
+near selected-beat midpoints. No regular grid timestamp is generated. The
+hypotheses are ranked without truth using an auditable evidence score: 45%
+mean event evidence, 30% log-interval continuity, and 25% preservation of the
+selected sequence's total evidence. Event evidence combines backend beat
+confidence, local PCM activity, and downbeat confidence. This prevents a
+half-time subset from winning merely because deleting every other strong event
+makes its intervals more regular, while still allowing a genuinely weak
+alternating phase to be removed. Independent beat truth is then used to report
+top-1 and best-top-K F1. This separates three cases: no candidate evidence,
+evidence present but no coherent hypothesis, and a coherent alternative that
+the ranking placed below the primary result.
+
+The first ARTBeaT run and its rejected naive ranking are recorded in
+`evaluation/baselines/artbeat-candidate-coverage-v1.md`. Ranking weights remain
+an evaluation candidate, not a product option.
+
 The estimator normally preserves backend timestamps. It can reject events
 inside sustained low-activity spans, select one phase of a strong/weak
 alternating sequence, or reconstruct a short corrupted transition from stable

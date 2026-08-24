@@ -189,6 +189,7 @@ impl GeneratedTruth {
                     downbeat_confidence: if beat.downbeat { 1.0 } else { 0.0 },
                 })
                 .collect(),
+            beat_candidates: Vec::new(),
             activity: Vec::new(),
             source: ModelInfo {
                 backend: "evaluation".to_string(),

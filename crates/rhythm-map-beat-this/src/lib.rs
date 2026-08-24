@@ -4,7 +4,8 @@ use std::path::Path;
 
 use beat_this::{BeatThis, RtenRuntime, Runtime};
 use rhythm_map_core::{
-    BackendError, ModelInfo, ObservedBeat, RhythmObservationBackend, RhythmObservations,
+    BackendError, BeatCandidate, ModelInfo, ObservedBeat, RhythmObservationBackend,
+    RhythmObservations,
 };
 
 type DefaultModel = <RtenRuntime as Runtime>::Model;
@@ -392,6 +393,21 @@ impl BeatThisBackend {
                 &inference.beat_logits,
                 &inference.downbeat_logits,
             ),
+            beat_candidates: candidate_peak_frames(&inference.beat_logits)
+                .into_iter()
+                .filter_map(|frame| {
+                    let time_s = frame_to_time(usize_to_f64(frame));
+                    (time_s <= inference.duration_s).then(|| BeatCandidate {
+                        time_s,
+                        confidence: sigmoid(inference.beat_logits[frame]),
+                        downbeat_confidence: inference
+                            .downbeat_logits
+                            .get(frame)
+                            .copied()
+                            .map_or(0.0, sigmoid),
+                    })
+                })
+                .collect(),
             activity: Vec::new(),
             source: ModelInfo {
                 backend: "beat-this-rten".to_string(),
@@ -465,6 +481,38 @@ fn find_peaks(logits: &[f32], options: PeakPickingOptions) -> Vec<f64> {
         })
         .collect::<Vec<_>>();
     deduplicate_peaks(&candidates, options.deduplicate_width_frames)
+}
+
+/// Return one real model frame for every radius-one local-maximum plateau.
+/// No confidence floor is applied: later evidence coverage must be able to
+/// distinguish "the model emitted a weak peak" from "no peak existed".
+fn candidate_peak_frames(logits: &[f32]) -> Vec<usize> {
+    let local_maxima = logits
+        .iter()
+        .enumerate()
+        .filter_map(|(index, &value)| {
+            if !value.is_finite() {
+                return None;
+            }
+            let start = index.saturating_sub(1);
+            let end = index.saturating_add(2).min(logits.len());
+            logits[start..end]
+                .iter()
+                .all(|&neighbor| !neighbor.is_finite() || neighbor <= value)
+                .then_some(index)
+        })
+        .collect::<Vec<_>>();
+    let mut peaks = Vec::new();
+    let mut start = 0;
+    while start < local_maxima.len() {
+        let mut end = start + 1;
+        while end < local_maxima.len() && local_maxima[end] == local_maxima[end - 1] + 1 {
+            end += 1;
+        }
+        peaks.push(local_maxima[start + (end - start - 1) / 2]);
+        start = end;
+    }
+    peaks
 }
 
 #[cfg(feature = "experimental-policies")]
@@ -996,6 +1044,20 @@ mod tests {
         };
 
         assert_eq!(find_peaks(&logits, options), vec![1.0]);
+    }
+
+    #[test]
+    fn candidate_peaks_keep_one_real_frame_per_plateau_without_a_floor() {
+        let logits = [-5.0, -1.0, -1.0, -1.0, -4.0, -3.0, -4.0];
+
+        assert_eq!(candidate_peak_frames(&logits), vec![2, 5]);
+    }
+
+    #[test]
+    fn candidate_peaks_reject_non_finite_frames() {
+        let logits = [-2.0, f32::NAN, -1.0, -2.0];
+
+        assert_eq!(candidate_peak_frames(&logits), vec![0, 2]);
     }
 
     #[test]
