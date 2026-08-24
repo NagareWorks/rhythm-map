@@ -1,7 +1,7 @@
 //! WASM bindings for training-free timing analysis from beat observations.
 
 use rhythm_map_core::{
-    ANALYSIS_SCHEMA_VERSION, ModelInfo, ObservedBeat, RhythmObservations, TempoMapEstimator,
+    ANALYSIS_SCHEMA_VERSION, ModelInfo, ObservedBeat, RhythmObservations, analyze_observations,
 };
 use wasm_bindgen::prelude::*;
 
@@ -58,8 +58,7 @@ pub fn analyze_timing(
             frame_rate_hz: None,
         },
     };
-    let analysis = TempoMapEstimator::default()
-        .estimate(&observations)
+    let analysis = analyze_observations(&observations)
         .map_err(|error| JsValue::from_str(&error.to_string()))?;
     serde_wasm_bindgen::to_value(&analysis).map_err(|error| JsValue::from_str(&error.to_string()))
 }

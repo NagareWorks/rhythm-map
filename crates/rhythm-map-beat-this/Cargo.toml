@@ -8,6 +8,12 @@ license.workspace = true
 repository.workspace = true
 authors.workspace = true
 
+[features]
+default = []
+# Raw decoder candidates are research tools for rhythm-map-eval, not product
+# choices exposed by CLI, FFI, WASM, or ordinary adapter builds.
+experimental-policies = []
+
 [dependencies]
 beat-this = "1.0.0"
 rhythm-map-core = { path = "../rhythm-map-core" }

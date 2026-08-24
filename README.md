@@ -65,7 +65,7 @@ of a track never silently becomes permission to redistribute it. See
 ## Core API
 
 ```rust,no_run
-use rhythm_map_core::{Engine, TempoMapEstimator};
+use rhythm_map_core::Engine;
 use rhythm_map_beat_this::BeatThisBackend;
 
 # fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -73,11 +73,16 @@ let backend = BeatThisBackend::load(
     "models/mel_spectrogram.onnx",
     "models/beat_this.onnx",
 )?;
-let mut engine = Engine::new(backend, TempoMapEstimator::default());
+let mut engine = Engine::new(backend);
 let analysis = engine.analyze_pcm(&mono_samples, sample_rate, 1)?;
 # Ok(())
 # }
 ```
+
+This is the product policy: callers do not select decoder, half/double-time,
+threshold, smoothing, or phase strategies. Named candidates are compiled only
+for the non-published evaluation tooling. A validated improvement replaces the
+default; it does not add another normal-use mode.
 
 The core accepts interleaved `f32` PCM. File decoding belongs to CLI/GUI
 adapters, keeping the library usable from engines and browser hosts that already

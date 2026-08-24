@@ -645,7 +645,7 @@ fn evaluate_backend_suite_impl(
         None => backend,
     };
     let estimator = estimator_for_policy(estimator_policy)?;
-    let mut engine = Engine::new(backend, estimator.clone());
+    let mut engine = Engine::with_estimator(backend, estimator.clone());
     let (suite, root) = load_suite(suite_path)?;
     let mut cases = Vec::with_capacity(suite.cases.len());
 

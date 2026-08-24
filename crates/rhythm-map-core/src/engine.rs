@@ -1,6 +1,7 @@
 use thiserror::Error;
 
-use crate::{Analysis, AnalysisError, AudioActivityPoint, RhythmObservations, TempoMapEstimator};
+use crate::estimator::TempoMapEstimator;
+use crate::{Analysis, AnalysisError, AudioActivityPoint, RhythmObservations};
 
 /// Error returned by an observation backend.
 #[derive(Debug, Clone, Error)]
@@ -57,9 +58,23 @@ impl<B> Engine<B>
 where
     B: RhythmObservationBackend,
 {
-    /// Compose an engine from explicit, independently replaceable components.
+    /// Compose an engine with the single shipping analysis policy.
     #[must_use]
-    pub const fn new(backend: B, estimator: TempoMapEstimator) -> Self {
+    pub fn new(backend: B) -> Self {
+        Self {
+            backend,
+            estimator: TempoMapEstimator::default(),
+        }
+    }
+
+    /// Compose an evaluation engine with an explicit candidate estimator.
+    ///
+    /// This is intentionally feature-gated out of normal product builds. A
+    /// candidate that passes promotion replaces the shipping policy instead of
+    /// becoming another user-facing option.
+    #[cfg(feature = "experimental-policies")]
+    #[must_use]
+    pub const fn with_estimator(backend: B, estimator: TempoMapEstimator) -> Self {
         Self { backend, estimator }
     }
 
@@ -238,14 +253,14 @@ mod tests {
 
     #[test]
     fn downmixes_interleaved_stereo() {
-        let mut engine = Engine::new(RecordingBackend::default(), TempoMapEstimator::default());
+        let mut engine = Engine::new(RecordingBackend::default());
         engine.analyze_pcm(&[1.0, -1.0, 0.5, 0.25], 2, 2).unwrap();
         assert_eq!(engine.backend().last_samples, [0.0, 0.375]);
     }
 
     #[test]
     fn rejects_invalid_interleaving() {
-        let mut engine = Engine::new(RecordingBackend::default(), TempoMapEstimator::default());
+        let mut engine = Engine::new(RecordingBackend::default());
         assert!(matches!(
             engine.analyze_pcm(&[0.0, 1.0, 2.0], 48_000, 2),
             Err(EngineError::InvalidAudio(_))
@@ -254,7 +269,7 @@ mod tests {
 
     #[test]
     fn adds_activity_envelope_to_backend_observations() {
-        let mut engine = Engine::new(RecordingBackend::default(), TempoMapEstimator::default());
+        let mut engine = Engine::new(RecordingBackend::default());
         let observations = engine.observe_pcm(&vec![0.5; 2_000], 1_000, 1).unwrap();
         assert!(!observations.activity.is_empty());
         assert!(
@@ -263,5 +278,15 @@ mod tests {
                 .iter()
                 .all(|point| point.relative_db.abs() < 1e-9)
         );
+    }
+
+    #[test]
+    fn engine_and_observation_facade_share_the_shipping_policy() {
+        let mut engine = Engine::new(RecordingBackend::default());
+        let observations = engine.observe_pcm(&[0.0; 2], 2, 1).unwrap();
+        let engine_analysis = engine.analyze_observations(&observations).unwrap();
+        let facade_analysis = crate::analyze_observations(&observations).unwrap();
+
+        assert_eq!(engine_analysis, facade_analysis);
     }
 }

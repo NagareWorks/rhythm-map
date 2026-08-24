@@ -143,6 +143,14 @@ separately for each case and is only a diagnostic ceiling; it is not a
 deployable result and must not be compared with one fixed decoder as if it
 were one.
 
+Named policies in this crate are evaluation candidates, not product modes. A
+candidate that clears promotion replaces the single product implementation. A
+runtime selector is permitted only after a precommitted experiment proves both
+that the alternatives are irreducibly input-dependent and that the applicable
+input class can be identified from truth-free runtime evidence. Dataset IDs,
+filenames, annotations, and per-case oracle scores are forbidden selector
+inputs.
+
 After choosing one policy on calibration data, evaluate that exact registered
 policy on a separate holdout manifest:
 

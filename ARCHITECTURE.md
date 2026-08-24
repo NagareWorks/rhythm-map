@@ -37,6 +37,31 @@ versions. Native Rust callers use typed structures. The C ABI initially returns
 the same schema as owned UTF-8 JSON to avoid exposing Rust layouts. WASM returns
 the same structure through `serde-wasm-bindgen`.
 
+## Product policy boundary
+
+Every product surface has one zero-tuning musical-analysis path. Rust callers
+construct `Engine::new(backend)`, while CLI, C ABI, and WASM route through the
+same shipping estimator. BPM bands, smoothing thresholds, half/double-time
+rules, and decoder candidates are not product inputs.
+
+Research candidates live behind the `experimental-policies` Cargo feature used
+by the non-published `rhythm-map-eval` crate. They are comparison instruments,
+not supported modes. A candidate with no measured regression is merged into and
+replaces the single shipping implementation after independent validation. A
+candidate that improves one slice and regresses another remains evaluation-only
+unless all of the following become true:
+
+1. The alternatives represent a real, irreducible difference between musical
+   inputs rather than an unfinished algorithm.
+2. The applicable input class can be detected from runtime evidence without
+   labels, filenames, truth annotations, or dataset identity.
+3. A precommitted selector beats the single policy on an untouched holdout with
+   no protected-slice regression.
+
+Only then may the engine contain an internal strategy selector. The selected
+strategy still does not become a user-facing rhythm parameter; uncertainty and
+metrical alternatives belong in `Analysis` output.
+
 ## Tempo inference
 
 The initial estimator is intentionally training-free:

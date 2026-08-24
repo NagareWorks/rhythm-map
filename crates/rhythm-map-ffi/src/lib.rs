@@ -9,7 +9,7 @@ use std::slice;
 use std::sync::Mutex;
 
 use rhythm_map_beat_this::BeatThisBackend;
-use rhythm_map_core::{Engine, TempoMapEstimator};
+use rhythm_map_core::Engine;
 
 thread_local! {
     static LAST_ERROR: RefCell<CString> = RefCell::new(CString::default());
@@ -42,7 +42,7 @@ pub unsafe extern "C" fn rhythm_map_analyzer_new(
         let beat = c_path(beat_model_path)?;
         let backend = BeatThisBackend::load(&mel, &beat).map_err(|error| error.to_string())?;
         Ok(Box::into_raw(Box::new(RhythmMapAnalyzer {
-            engine: Mutex::new(Engine::new(backend, TempoMapEstimator::default())),
+            engine: Mutex::new(Engine::new(backend)),
         })))
     })
 }

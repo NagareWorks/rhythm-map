@@ -96,7 +96,7 @@ repairs an isolated half- or double-length interval from a missed event while
 retaining a sustained step, ramp, or rubato gesture. It does not fold the whole
 recording into a preferred BPM band.
 
-The opt-in `metrical-consistency-v1` calibration policy extends that repair to
+The evaluation-only `metrical-consistency-v1` candidate extends that repair to
 runs of at most three consecutive intervals. A run is rewritten only when it
 is bounded on both sides, the two surrounding tempo medians agree within the
 jump threshold, and every interval in the run is approximately an integer
@@ -107,7 +107,8 @@ reported as `short_metrical_outlier_run_repaired`. The shipping default remains
 the one-interval rule until this candidate passes an independent timestamped
 holdout.
 
-The opt-in `sequence-phase-v1` policy includes that bounded-run repair and adds
+The evaluation-only `sequence-phase-v1` candidate includes that bounded-run
+repair and adds
 three sequence-level checks for cases that lack symmetric context:
 
 1. A proposed whole-track half-time selection transfers downbeat evidence from
@@ -133,8 +134,8 @@ three sequence-level checks for cases that lack symmetric context:
 
 These checks preserve equally supported real tempo doublings, sustained tempo
 changes, rubato, and ambiguous whole-track pulses. `sequence-phase-v1` remains
-a named calibration candidate rather than the shipping default until an
-independent timestamped holdout confirms the choice.
+a named evaluation candidate rather than a product strategy until independent
+timestamped evidence supports merging it into the single shipping algorithm.
 
 Half- and double-time alternatives are preserved in `tempo_hypotheses`; the
 public result does not pretend that metrical ambiguity has disappeared.
@@ -149,7 +150,7 @@ every high tempo by two. The decision is recorded as
 `metrical_level_selected_half_time`.
 
 Weak double-time events require model evidence rather than estimator-generated
-timestamps. The Beat This adapter therefore exposes the opt-in
+timestamps. The evaluation build of the Beat This adapter therefore exposes the
 `supported-midpoints-logit-minus-3.0` policy through the same end-to-end
 evaluation path as the upstream decoder. Each inserted event must still be a
 real local maximum in the model logits, near an interval midpoint, and part of
@@ -158,7 +159,8 @@ IDs so their effects cannot be confused with the default product path.
 
 ## Edge-connected sequence-path recovery
 
-The opt-in `viterbi-edge-logit-minus-3.0-bias-2.0` decoder operates on the
+The evaluation-only `viterbi-edge-logit-minus-3.0-bias-2.0` decoder operates on
+the
 retained Beat This beat logits before the deterministic estimator. Its dynamic
 programming state is an integer beat period and phase at the backend's 50 Hz
 frame rate. Period states cover 40--320 BPM. Beat and non-beat emissions use
@@ -194,8 +196,8 @@ unchanged because it lacks enough qualifying edge peaks; solving that case in
 this backend would require timestamp invention, a less conservative policy, or
 new observation evidence. On the precommitted nine-case ARTBeaT disjoint
 holdout, the candidate lowered mean beat F1 from 0.67915 to 0.67771 and
-regressed the syncopated case by adding false events. It therefore remains
-opt-in and must not be promoted. The holdout also shows that edge-connected
+regressed the syncopated case by adding false events. It therefore remains a
+research experiment and must not be promoted. The holdout also shows that edge-connected
 recovery does not solve whole-track pulse-level or phase ambiguity.
 
 ## Short transition beat-grid recovery

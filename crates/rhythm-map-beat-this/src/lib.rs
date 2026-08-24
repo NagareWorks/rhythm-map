@@ -10,122 +10,138 @@ use rhythm_map_core::{
 type DefaultModel = <RtenRuntime as Runtime>::Model;
 const FRAME_RATE_HZ: f64 = 50.0;
 
-/// Configurable peak-picking policy applied to Beat This frame logits.
-#[derive(Debug, Clone, Copy, PartialEq)]
-pub struct PeakPickingOptions {
-    /// Strict lower logit bound for a peak. Zero equals probability 0.5.
-    pub logit_threshold: f32,
-    /// Number of frames inspected on either side of a candidate maximum.
-    pub local_max_radius_frames: usize,
-    /// Adjacent peak indices at or below this distance are averaged together.
-    pub deduplicate_width_frames: usize,
-}
+mod decoder_candidates {
+    /// Configurable peak-picking candidate applied to Beat This frame logits.
+    #[derive(Debug, Clone, Copy, PartialEq)]
+    pub struct PeakPickingOptions {
+        /// Strict lower logit bound for a peak. Zero equals probability 0.5.
+        pub logit_threshold: f32,
+        /// Number of frames inspected on either side of a candidate maximum.
+        pub local_max_radius_frames: usize,
+        /// Adjacent peak indices at or below this distance are averaged together.
+        pub deduplicate_width_frames: usize,
+    }
 
-impl Default for PeakPickingOptions {
-    fn default() -> Self {
-        Self {
-            logit_threshold: 0.0,
-            local_max_radius_frames: 3,
-            deduplicate_width_frames: 1,
+    impl Default for PeakPickingOptions {
+        fn default() -> Self {
+            Self {
+                logit_threshold: 0.0,
+                local_max_radius_frames: 3,
+                deduplicate_width_frames: 1,
+            }
+        }
+    }
+
+    /// Conservative sequence decoder for weak peaks between strong Beat This events.
+    #[cfg(any(feature = "experimental-policies", test))]
+    #[derive(Debug, Clone, Copy, PartialEq)]
+    pub struct SupportedMidpointOptions {
+        /// Strict lower logit bound for weak candidate peaks.
+        pub candidate_logit_threshold: f32,
+        /// Maximum distance from an interval midpoint as a fraction of that interval.
+        pub maximum_midpoint_offset_ratio: f64,
+        /// Number of strong-beat gaps inspected on either side for run support.
+        pub support_radius_gaps: usize,
+        /// Minimum supported gaps required inside the local support window.
+        pub minimum_supported_gaps: usize,
+    }
+
+    /// Viterbi beat-path options over Beat This frame logits.
+    ///
+    /// The path models beat period and phase, but emitted events must still snap to
+    /// real local maxima in the model output. The decoder never emits a bare grid
+    /// timestamp.
+    #[cfg(any(feature = "experimental-policies", test))]
+    #[derive(Debug, Clone, Copy, PartialEq)]
+    pub struct SequencePathOptions {
+        /// Strict lower logit bound for a local maximum to become an event.
+        pub candidate_logit_threshold: f32,
+        /// Local-maximum radius used for event candidates.
+        pub candidate_local_max_radius_frames: usize,
+        /// Maximum frame distance between a Viterbi beat state and a model peak.
+        pub maximum_peak_correction_frames: usize,
+        /// Slowest period represented by the path.
+        pub minimum_bpm: f64,
+        /// Fastest period represented by the path.
+        pub maximum_bpm: f64,
+        /// Squared log-period penalty applied when tempo changes at a beat.
+        pub tempo_change_penalty: f64,
+        /// Log-score prior added when the path enters a beat state.
+        pub beat_state_bias: f64,
+        /// Maximum path-beat gap joining events into one weak-event sequence.
+        pub support_radius_beats: usize,
+        /// Minimum weak candidates required in one connected sequence.
+        pub minimum_supported_candidates: usize,
+        /// Minimum weak candidates required in the local support radius around an
+        /// emitted event.
+        pub minimum_local_supported_candidates: usize,
+        /// Require every recovered weak run to connect to the first or last
+        /// model-supported beat-path event.
+        pub require_edge_connection: bool,
+        /// Maximum path-beat distance from a recovered run to an observed edge.
+        pub maximum_edge_gap_beats: usize,
+    }
+
+    /// Evaluation-only decoder candidate used by [`BeatThisBackend`].
+    ///
+    /// The upstream decoder is the single product behavior. Candidates are
+    /// explicit only so calibration can exercise the complete implementation
+    /// path without turning them into CLI, FFI, or WASM options.
+    #[cfg(feature = "experimental-policies")]
+    #[derive(Debug, Clone, Copy, Default, PartialEq)]
+    pub enum BeatThisDecoderPolicy {
+        /// Match the decoder shipped by the upstream Rust port.
+        #[default]
+        Upstream,
+        /// Apply an explicit peak-picking configuration.
+        PeakPicking(PeakPickingOptions),
+        /// Recover repeated weak model peaks between strong events.
+        SupportedMidpoints(SupportedMidpointOptions),
+        /// Decode a variable-tempo beat path and retain only supported model peaks.
+        SequencePath(SequencePathOptions),
+    }
+
+    #[cfg(any(feature = "experimental-policies", test))]
+    impl Default for SupportedMidpointOptions {
+        fn default() -> Self {
+            Self {
+                candidate_logit_threshold: -3.0,
+                maximum_midpoint_offset_ratio: 0.15,
+                support_radius_gaps: 2,
+                minimum_supported_gaps: 3,
+            }
+        }
+    }
+
+    #[cfg(any(feature = "experimental-policies", test))]
+    impl Default for SequencePathOptions {
+        fn default() -> Self {
+            Self {
+                candidate_logit_threshold: -3.0,
+                candidate_local_max_radius_frames: 1,
+                maximum_peak_correction_frames: 3,
+                minimum_bpm: 40.0,
+                maximum_bpm: 320.0,
+                tempo_change_penalty: 100.0,
+                beat_state_bias: 2.0,
+                support_radius_beats: 3,
+                minimum_supported_candidates: 6,
+                minimum_local_supported_candidates: 3,
+                require_edge_connection: true,
+                maximum_edge_gap_beats: 2,
+            }
         }
     }
 }
 
-/// Conservative sequence decoder for weak peaks between strong Beat This events.
-#[derive(Debug, Clone, Copy, PartialEq)]
-pub struct SupportedMidpointOptions {
-    /// Strict lower logit bound for weak candidate peaks.
-    pub candidate_logit_threshold: f32,
-    /// Maximum distance from an interval midpoint as a fraction of that interval.
-    pub maximum_midpoint_offset_ratio: f64,
-    /// Number of strong-beat gaps inspected on either side for run support.
-    pub support_radius_gaps: usize,
-    /// Minimum supported gaps required inside the local support window.
-    pub minimum_supported_gaps: usize,
-}
-
-/// Viterbi beat-path options over Beat This frame logits.
-///
-/// The path models beat period and phase, but emitted events must still snap to
-/// real local maxima in the model output. The decoder never emits a bare grid
-/// timestamp.
-#[derive(Debug, Clone, Copy, PartialEq)]
-pub struct SequencePathOptions {
-    /// Strict lower logit bound for a local maximum to become an event.
-    pub candidate_logit_threshold: f32,
-    /// Local-maximum radius used for event candidates.
-    pub candidate_local_max_radius_frames: usize,
-    /// Maximum frame distance between a Viterbi beat state and a model peak.
-    pub maximum_peak_correction_frames: usize,
-    /// Slowest period represented by the path.
-    pub minimum_bpm: f64,
-    /// Fastest period represented by the path.
-    pub maximum_bpm: f64,
-    /// Squared log-period penalty applied when tempo changes at a beat.
-    pub tempo_change_penalty: f64,
-    /// Log-score prior added when the path enters a beat state.
-    pub beat_state_bias: f64,
-    /// Maximum path-beat gap joining events into one weak-event sequence.
-    pub support_radius_beats: usize,
-    /// Minimum weak candidates required in one connected sequence.
-    pub minimum_supported_candidates: usize,
-    /// Minimum weak candidates required in the local support radius around an
-    /// emitted event.
-    pub minimum_local_supported_candidates: usize,
-    /// Require every recovered weak run to connect to the first or last
-    /// model-supported beat-path event.
-    pub require_edge_connection: bool,
-    /// Maximum path-beat distance from a recovered run to an observed edge.
-    pub maximum_edge_gap_beats: usize,
-}
-
-/// Deployable decoding policy used by [`BeatThisBackend`].
-///
-/// The upstream policy remains the default. Alternative policies are explicit
-/// so calibration can exercise the complete product path without changing the
-/// behavior of CLI, FFI, or WASM consumers.
-#[derive(Debug, Clone, Copy, Default, PartialEq)]
-pub enum BeatThisDecoderPolicy {
-    /// Match the decoder shipped by the upstream Rust port.
-    #[default]
-    Upstream,
-    /// Apply an explicit peak-picking configuration.
-    PeakPicking(PeakPickingOptions),
-    /// Recover repeated weak model peaks between strong events.
-    SupportedMidpoints(SupportedMidpointOptions),
-    /// Decode a variable-tempo beat path and retain only supported model peaks.
-    SequencePath(SequencePathOptions),
-}
-
-impl Default for SupportedMidpointOptions {
-    fn default() -> Self {
-        Self {
-            candidate_logit_threshold: -3.0,
-            maximum_midpoint_offset_ratio: 0.15,
-            support_radius_gaps: 2,
-            minimum_supported_gaps: 3,
-        }
-    }
-}
-
-impl Default for SequencePathOptions {
-    fn default() -> Self {
-        Self {
-            candidate_logit_threshold: -3.0,
-            candidate_local_max_radius_frames: 1,
-            maximum_peak_correction_frames: 3,
-            minimum_bpm: 40.0,
-            maximum_bpm: 320.0,
-            tempo_change_penalty: 100.0,
-            beat_state_bias: 2.0,
-            support_radius_beats: 3,
-            minimum_supported_candidates: 6,
-            minimum_local_supported_candidates: 3,
-            require_edge_connection: true,
-            maximum_edge_gap_beats: 2,
-        }
-    }
-}
+#[cfg(not(feature = "experimental-policies"))]
+use decoder_candidates::PeakPickingOptions;
+#[cfg(feature = "experimental-policies")]
+pub use decoder_candidates::{
+    BeatThisDecoderPolicy, PeakPickingOptions, SequencePathOptions, SupportedMidpointOptions,
+};
+#[cfg(all(not(feature = "experimental-policies"), test))]
+use decoder_candidates::{SequencePathOptions, SupportedMidpointOptions};
 
 /// One model inference retained before discrete peak decoding.
 #[derive(Debug, Clone)]
@@ -162,6 +178,7 @@ pub struct DecodedAudio {
 pub struct BeatThisBackend {
     tracker: BeatThis<DefaultModel>,
     model_name: String,
+    #[cfg(feature = "experimental-policies")]
     decoder_policy: BeatThisDecoderPolicy,
 }
 
@@ -188,11 +205,13 @@ impl BeatThisBackend {
         Ok(Self {
             tracker,
             model_name,
+            #[cfg(feature = "experimental-policies")]
             decoder_policy: BeatThisDecoderPolicy::default(),
         })
     }
 
-    /// Select an explicit deployable decoder policy.
+    /// Select an explicit evaluation decoder candidate.
+    #[cfg(feature = "experimental-policies")]
     #[must_use]
     pub const fn with_decoder_policy(mut self, policy: BeatThisDecoderPolicy) -> Self {
         self.decoder_policy = policy;
@@ -228,7 +247,16 @@ impl BeatThisBackend {
     /// # Errors
     ///
     /// Returns [`BackendError`] for a non-finite threshold or mismatched logits.
+    #[cfg(feature = "experimental-policies")]
     pub fn decode_inference(
+        &self,
+        inference: &BeatThisInference,
+        options: PeakPickingOptions,
+    ) -> Result<RhythmObservations, BackendError> {
+        self.decode_peak_picking(inference, options)
+    }
+
+    fn decode_peak_picking(
         &self,
         inference: &BeatThisInference,
         options: PeakPickingOptions,
@@ -255,6 +283,7 @@ impl BeatThisBackend {
     /// # Errors
     ///
     /// Returns [`BackendError`] for invalid options or mismatched logits.
+    #[cfg(feature = "experimental-policies")]
     pub fn decode_inference_with_supported_midpoints(
         &self,
         inference: &BeatThisInference,
@@ -289,6 +318,7 @@ impl BeatThisBackend {
     /// # Errors
     ///
     /// Returns [`BackendError`] for invalid options or mismatched logits.
+    #[cfg(feature = "experimental-policies")]
     pub fn decode_inference_with_sequence_path(
         &self,
         inference: &BeatThisInference,
@@ -307,7 +337,7 @@ impl BeatThisBackend {
         Ok(self.observations_from_frames(inference, &beat_frames, &downbeat_frames))
     }
 
-    /// Decode retained logits through one explicit deployable policy.
+    /// Decode retained logits through one explicit evaluation candidate.
     ///
     /// This is the shared dispatch point for live backend observation and
     /// single-inference evaluation, preventing those paths from interpreting a
@@ -316,6 +346,7 @@ impl BeatThisBackend {
     /// # Errors
     ///
     /// Returns [`BackendError`] when the selected policy or inference is invalid.
+    #[cfg(feature = "experimental-policies")]
     pub fn decode_inference_with_policy(
         &self,
         inference: &BeatThisInference,
@@ -323,10 +354,10 @@ impl BeatThisBackend {
     ) -> Result<RhythmObservations, BackendError> {
         match policy {
             BeatThisDecoderPolicy::Upstream => {
-                self.decode_inference(inference, PeakPickingOptions::default())
+                self.decode_peak_picking(inference, PeakPickingOptions::default())
             }
             BeatThisDecoderPolicy::PeakPicking(options) => {
-                self.decode_inference(inference, options)
+                self.decode_peak_picking(inference, options)
             }
             BeatThisDecoderPolicy::SupportedMidpoints(options) => {
                 self.decode_inference_with_supported_midpoints(inference, options)
@@ -380,7 +411,14 @@ impl RhythmObservationBackend for BeatThisBackend {
         sample_rate: u32,
     ) -> Result<RhythmObservations, BackendError> {
         let inference = self.infer_mono(samples, sample_rate)?;
-        self.decode_inference_with_policy(&inference, self.decoder_policy)
+        #[cfg(feature = "experimental-policies")]
+        {
+            self.decode_inference_with_policy(&inference, self.decoder_policy)
+        }
+        #[cfg(not(feature = "experimental-policies"))]
+        {
+            self.decode_peak_picking(&inference, PeakPickingOptions::default())
+        }
     }
 }
 
@@ -429,6 +467,7 @@ fn find_peaks(logits: &[f32], options: PeakPickingOptions) -> Vec<f64> {
     deduplicate_peaks(&candidates, options.deduplicate_width_frames)
 }
 
+#[cfg(feature = "experimental-policies")]
 fn validate_midpoint_options(options: SupportedMidpointOptions) -> Result<(), BackendError> {
     if !options.candidate_logit_threshold.is_finite() {
         return Err(BackendError::new(
@@ -450,6 +489,7 @@ fn validate_midpoint_options(options: SupportedMidpointOptions) -> Result<(), Ba
     Ok(())
 }
 
+#[cfg(any(feature = "experimental-policies", test))]
 fn validate_sequence_path_options(options: SequencePathOptions) -> Result<(), BackendError> {
     if !options.candidate_logit_threshold.is_finite() {
         return Err(BackendError::new(
@@ -491,6 +531,7 @@ fn validate_sequence_path_options(options: SequencePathOptions) -> Result<(), Ba
     Ok(())
 }
 
+#[cfg(any(feature = "experimental-policies", test))]
 fn decode_sequence_path(
     logits: &[f32],
     upstream_beats: &[f64],
@@ -524,11 +565,13 @@ fn decode_sequence_path(
     beats
 }
 
+#[cfg(any(feature = "experimental-policies", test))]
 fn bpm_to_period_frames(bpm: f64) -> f64 {
     60.0 * FRAME_RATE_HZ / bpm
 }
 
 #[allow(clippy::cast_possible_truncation, clippy::cast_sign_loss)]
+#[cfg(any(feature = "experimental-policies", test))]
 fn period_frame_bounds(options: SequencePathOptions) -> (usize, usize) {
     (
         bpm_to_period_frames(options.maximum_bpm).ceil() as usize,
@@ -536,6 +579,7 @@ fn period_frame_bounds(options: SequencePathOptions) -> (usize, usize) {
     )
 }
 
+#[cfg(any(feature = "experimental-policies", test))]
 fn viterbi_beat_path(logits: &[f32], options: SequencePathOptions) -> Vec<usize> {
     let (minimum_period, maximum_period) = period_frame_bounds(options);
     let periods = (minimum_period..=maximum_period).collect::<Vec<_>>();
@@ -615,6 +659,7 @@ fn viterbi_beat_path(logits: &[f32], options: SequencePathOptions) -> Vec<usize>
     beats
 }
 
+#[cfg(any(feature = "experimental-policies", test))]
 fn log_sigmoid(value: f32) -> f64 {
     let value = f64::from(value);
     if value >= 0.0 {
@@ -624,6 +669,7 @@ fn log_sigmoid(value: f32) -> f64 {
     }
 }
 
+#[cfg(any(feature = "experimental-policies", test))]
 fn snap_path_to_candidates(
     path: &[usize],
     candidates: &[f64],
@@ -647,6 +693,7 @@ fn snap_path_to_candidates(
         .collect()
 }
 
+#[cfg(any(feature = "experimental-policies", test))]
 fn supported_path_additions(
     snapped: &[(usize, f64)],
     upstream_beats: &[f64],
@@ -702,6 +749,7 @@ fn supported_path_additions(
         .collect()
 }
 
+#[cfg(any(feature = "experimental-policies", test))]
 fn connected_addition_count(
     addition_indices: &[usize],
     target: usize,
@@ -724,6 +772,7 @@ fn connected_addition_count(
     last - first + 1
 }
 
+#[cfg(any(feature = "experimental-policies", test))]
 fn edge_connected_addition_range(
     additions: &[(usize, f64, bool)],
     support_radius_beats: usize,
@@ -763,6 +812,7 @@ fn edge_connected_addition_range(
     Some((prefix_end, suffix_start))
 }
 
+#[cfg(any(feature = "experimental-policies", test))]
 fn recover_supported_midpoints(
     upstream_beats: &[f64],
     candidates: &[f64],
@@ -795,6 +845,7 @@ fn recover_supported_midpoints(
     recovered
 }
 
+#[cfg(any(feature = "experimental-policies", test))]
 fn midpoint_candidate(
     left: f64,
     right: f64,

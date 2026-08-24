@@ -27,11 +27,11 @@
   per-slice holdout gate.
 - Edge-preserving metrical outlier repair that keeps sustained half/double-time
   tempo changes instead of folding an entire recording into one BPM band.
-- An opt-in sequence/phase estimator candidate that rejects bar-inconsistent
+- An evaluation-only sequence/phase estimator candidate that rejects bar-inconsistent
   whole-track half-time folds, removes evidence-supported one-sided edge
   midpoint extras, and repairs fixed-frame paired quantization jitter without
   modifying exact timestamp observations.
-- An opt-in edge-connected Viterbi decoder over Beat This logits that preserves
+- An evaluation-only edge-connected Viterbi decoder over Beat This logits that preserves
   upstream events, recovers only long repeated model-peak sequences, and never
   emits a path-grid timestamp without a local model maximum.
 - A precommitted nine-case, timestamped ARTBeaT holdout with reproducible SVG
@@ -146,7 +146,7 @@ a learned component to the default distribution.
   metrics. The remaining work is corpus population, not another decoder sweep:
   obtain multiple independent legally held sources for each required slice,
   select one policy on calibration, then open the untouched holdout once.
-- 2026-08-23: an opt-in `metrical-consistency-v1` estimator repaired bounded
+- 2026-08-23: an evaluation-only `metrical-consistency-v1` estimator repaired bounded
   half/double-time runs of up to three intervals without changing any ARTBeaT
   beat or tempo metric. It lowered FSLD 150 BPM P95 error from 49.57 to about
   2.61 percent and raised FSLD from 6 to 7 passes. The registered supported-
@@ -160,8 +160,8 @@ a learned component to the default distribution.
   median/P95 error to 0.00/0.99, and the 200 BPM false half-time fold moved from
   50.00/50.00 to approximately 0.00/2.29. All 15 timestamped ARTBeaT cases had
   zero change in analyzed event count, end-to-end beat F1 and tempo errors, and
-  oracle tempo errors. Keep it opt-in until an untouched timestamped holdout
-  validates the policy.
+  oracle tempo errors. Keep it evaluation-only until an untouched timestamped
+  holdout validates merging it into the product algorithm.
 - The remaining whole-track ambiguity with equally plausible metrical levels
   and edge spans where the model emits no candidate peak cannot be solved by
   safe core smoothing. Next evaluate an explicit DP/DBN-style path decoder over
@@ -175,7 +175,7 @@ a learned component to the default distribution.
   A minimum six-candidate sequence plus local support rejected the regressive
   four-point 128 BPM edge run. The 130 BPM clip remained unchanged because the
   model did not emit a sufficiently supported edge sequence. The subsequent
-  disjoint holdout rejected promotion, so keep the decoder opt-in and compare
+  disjoint holdout rejected promotion, so keep the decoder evaluation-only and compare
   an alternate observation backend for the missing-evidence cases instead of
   weakening the no-invention rule.
 - 2026-08-23: on the development VDI, optimized inference completed the 15-case
@@ -193,3 +193,13 @@ a learned component to the default distribution.
   phase ambiguity, not merely weak edge peaks. Do not tune another decoder on
   the opened holdout; compare an alternate observation backend and expose
   competing phase hypotheses without inventing timestamps.
+- 2026-08-24: product policy was narrowed to one zero-tuning shipping estimator
+  across Rust, CLI, C ABI, and WASM. Named decoder and estimator candidates are
+  evaluation-only experiments. Do not introduce an internal strategy selector
+  merely because candidates trade wins and regressions: first prove an
+  irreducible music-class split, a truth-free runtime classifier for that split,
+  and a no-regression gain on a precommitted untouched holdout.
+- 2026-08-24: do not integrate KRAISLER while its repository metadata combines
+  a CC BY 4.0 label with an additional non-commercial restriction. It is not a
+  runtime dependency and remains blocked even as an evaluation-only corpus
+  until the rights holder provides a clear, commercially usable grant.

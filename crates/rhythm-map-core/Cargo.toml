@@ -8,6 +8,12 @@ license.workspace = true
 repository.workspace = true
 authors.workspace = true
 
+[features]
+default = []
+# Candidate estimators are available to the non-published evaluation crate, but
+# are intentionally absent from the normal product API.
+experimental-policies = []
+
 [dependencies]
 serde.workspace = true
 thiserror.workspace = true

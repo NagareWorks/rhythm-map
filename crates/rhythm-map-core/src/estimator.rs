@@ -83,6 +83,7 @@ impl Default for EstimatorOptions {
 impl EstimatorOptions {
     /// Experimental calibration candidate that repairs short, bounded runs of
     /// octave-related interval errors while preserving sustained tempo levels.
+    #[cfg(any(feature = "experimental-policies", test))]
     #[must_use]
     pub fn metrical_consistency_candidate() -> Self {
         Self {
@@ -93,6 +94,7 @@ impl EstimatorOptions {
 
     /// Experimental sequence-aware policy for whole-track and one-sided edge
     /// metrical decisions. It includes the bounded-run consistency candidate.
+    #[cfg(any(feature = "experimental-policies", test))]
     #[must_use]
     pub fn sequence_phase_candidate() -> Self {
         Self {
@@ -130,6 +132,7 @@ impl TempoMapEstimator {
     ///
     /// Returns [`AnalysisError::InvalidOptions`] for an inconsistent tempo
     /// range or smoothing window.
+    #[cfg(any(feature = "experimental-policies", test))]
     pub fn new(options: EstimatorOptions) -> Result<Self, AnalysisError> {
         validate_options(&options)?;
         Ok(Self { options })
@@ -239,6 +242,20 @@ impl TempoMapEstimator {
             warnings,
         })
     }
+}
+
+/// Analyze backend-neutral observations with Rhythm Map's single shipping
+/// policy.
+///
+/// Candidate policies are deliberately unavailable through this function. A
+/// candidate may replace this implementation only after it passes the product
+/// promotion gates; callers never need to select a musical-analysis strategy.
+///
+/// # Errors
+///
+/// Returns [`AnalysisError`] when timestamps, duration, or ordering are invalid.
+pub fn analyze_observations(input: &RhythmObservations) -> Result<Analysis, AnalysisError> {
+    TempoMapEstimator::default().estimate(input)
 }
 
 struct TempoEstimate {
