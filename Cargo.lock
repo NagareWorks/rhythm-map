@@ -645,6 +645,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "rhythm-map-beatnet"
+version = "0.1.0"
+dependencies = [
+ "realfft",
+ "rhythm-map-core",
+ "rten",
+ "rten-tensor",
+ "rubato",
+]
+
+[[package]]
 name = "rhythm-map-cli"
 version = "0.1.0"
 dependencies = [
@@ -673,6 +684,7 @@ dependencies = [
  "flate2",
  "regex",
  "rhythm-map-beat-this",
+ "rhythm-map-beatnet",
  "rhythm-map-core",
  "rhythm-map-models",
  "serde",

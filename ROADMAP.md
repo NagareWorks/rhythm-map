@@ -294,3 +294,13 @@ a learned component to the default distribution.
   data and must not be promoted. Remove both bar algorithms rather than retain
   another strategy. Further selection work requires a genuinely untouched
   timestamped corpus or independent meter evidence from another backend.
+- 2026-08-24: a pure-Rust BeatNet technical spike passed RTen ONNX execution
+  and reproduced the published 272-feature madmom-compatible frontend. On the
+  15-case ARTBeaT calibration suite its raw local maxima covered 459/460 truth
+  beats (99.78% micro recall), versus 450/460 for Beat This, so the alternative
+  backend supplies some genuinely missing evidence. A single evidence-snapped
+  variable-tempo Viterbi path reached mean beat F1 0.8080 versus Beat This
+  0.8052, but improved seven cases and regressed seven. Do not open Vienna or
+  add a runtime backend selector: first improve the one BeatNet sequence
+  decoder on calibration, review the published model's training-corpus
+  provenance, and preselect one complete candidate for the untouched holdout.

@@ -19,6 +19,7 @@ clap.workspace = true
 flate2.workspace = true
 regex.workspace = true
 rhythm-map-beat-this = { path = "../rhythm-map-beat-this", features = ["experimental-policies"] }
+rhythm-map-beatnet = { path = "../rhythm-map-beatnet" }
 rhythm-map-core = { path = "../rhythm-map-core", features = ["experimental-policies"] }
 rhythm-map-models = { path = "../rhythm-map-models" }
 serde.workspace = true

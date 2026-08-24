@@ -21,6 +21,22 @@ No model tensor or Beat This-specific type crosses into `rhythm-map-core`.
 Alternative trackers and caller-supplied observations therefore use the same
 tempo-map estimator and produce the same `Analysis` schema.
 
+The experimental BeatNet adapter exercises this boundary without Python. A
+native Rust frontend resamples mono PCM to 22,050 Hz, uses centered 1,411-sample
+Hann frames every 441 samples, applies 24 logarithmic triangular filters per
+octave, takes `log10(1 + magnitude)`, and appends the positive one-frame
+spectral difference. FFT resolution collapses duplicate low-frequency filters
+to 136 bands, yielding the model's 272-value frame input. RTen produces
+beat/downbeat/non-beat probabilities at 50 Hz.
+
+For calibration, BeatNet retains every radius-one pulse maximum as uncommitted
+candidate evidence. Its selected sequence uses one internal variable-tempo
+Viterbi path covering 40--320 BPM. Period changes pay a squared log-ratio
+penalty, and every path event must snap within three frames to a real model
+maximum; an unsupported path state emits no timestamp. This decoder is not a
+product strategy. The initial ARTBeaT evidence and its current promotion block
+are recorded in `evaluation/baselines/artbeat-beatnet-viterbi-v1.md`.
+
 The default Beat This decoder follows the upstream peak picker: a frame logit
 must be strictly above zero (probability above 0.5), must be maximal within
 three 50 Hz frames on each side, and adjacent peak frames are averaged before

@@ -12,3 +12,12 @@ The optional evaluation submodule at
 annotations and symbolic score artifacts from the Vienna 4x22 Piano Corpus by
 Werner Goebl, with match-file updates by the Institute of Computational
 Perception. Evaluation audio is not distributed in this Git repository.
+
+The optional experimental BeatNet model pack uses the BeatNet ONNX model by
+Mojtaba Heydari, Frank Cwitkowitz, and Zhiyao Duan under CC BY 4.0. Model files
+are not distributed by this repository. The Rust frontend interoperates with
+BeatNet's published feature contract and reimplements behavior from the
+BSD-licensed madmom signal, STFT, logarithmic-filterbank, and spectrogram
+difference modules. See `models/README.md` for pinned provenance and the
+remaining training-corpus review requirement, and
+`licenses/madmom-BSD-3-Clause.txt` for the retained source license terms.

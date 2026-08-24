@@ -111,6 +111,24 @@ cargo xtask eval-backend \
   --no-fail
 ```
 
+Compare the experimental BeatNet observation path only on the already-open
+ARTBeaT calibration suite:
+
+```bash
+cargo xtask eval-beatnet \
+  --suite evaluation/suites/artbeat-v1.json \
+  --model-pack models/beatnet-v1.json \
+  --model-dir D:/rhythm-map-models/beatnet-v1 \
+  --audio-dir D:/rhythm-map-eval/artbeat-v1/audio \
+  --report D:/rhythm-map-eval/reports/artbeat-beatnet-viterbi-v1.json \
+  --no-fail
+```
+
+`eval-beatnet` rejects regression and holdout suite roles. Its decoder follows
+a variable-tempo Viterbi path but emits only timestamps that can be snapped to
+a real BeatNet pulse maximum. This is developer calibration evidence, not a
+second end-user strategy or a selectable shipping backend.
+
 For a suite containing external audio, add the explicit local audio root:
 
 ```bash

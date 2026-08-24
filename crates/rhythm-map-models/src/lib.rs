@@ -63,8 +63,23 @@ pub struct ModelConversion {
 pub struct FeatureContract {
     /// PCM sample rate expected by the log-mel front end.
     pub sample_rate_hz: u32,
-    /// Number of log-mel bands consumed by the beat model.
+    /// Number of frequency bands emitted by the audio frontend.
+    ///
+    /// The serialized name is retained for schema-v1 compatibility even when
+    /// a backend uses a non-mel logarithmic filterbank.
     pub mel_bands: u32,
+    /// Complete per-frame model input width, including derived features.
+    #[serde(default)]
+    pub input_feature_count: Option<u32>,
+    /// Analysis window length in PCM samples, when fixed.
+    #[serde(default)]
+    pub window_size_samples: Option<u32>,
+    /// Analysis hop length in PCM samples, when fixed.
+    #[serde(default)]
+    pub hop_size_samples: Option<u32>,
+    /// Stable description of the frontend feature family.
+    #[serde(default)]
+    pub feature_kind: Option<String>,
     /// Activation frame rate emitted by the model.
     pub frame_rate_hz: f64,
     /// Maximum inference chunk length in seconds, when fixed.
@@ -80,6 +95,8 @@ pub enum ModelArtifactRole {
     MelFrontend,
     /// Beat and downbeat prediction graph.
     BeatModel,
+    /// Self-contained rhythm activation graph with a native Rust frontend.
+    RhythmModel,
 }
 
 /// Content-addressed file in a model pack.
@@ -190,6 +207,7 @@ impl ModelPackManifest {
     ///
     /// Returns [`ModelPackError::InvalidManifest`] for an unsafe or incomplete
     /// manifest.
+    #[allow(clippy::too_many_lines)]
     pub fn validate(&self) -> Result<(), ModelPackError> {
         if self.schema_version != MODEL_PACK_SCHEMA_VERSION {
             return Err(ModelPackError::InvalidManifest(format!(
@@ -231,6 +249,18 @@ impl ModelPackManifest {
         }
         if self.feature_contract.sample_rate_hz == 0
             || self.feature_contract.mel_bands == 0
+            || self
+                .feature_contract
+                .input_feature_count
+                .is_some_and(|value| value == 0)
+            || self
+                .feature_contract
+                .window_size_samples
+                .is_some_and(|value| value == 0)
+            || self
+                .feature_contract
+                .hop_size_samples
+                .is_some_and(|value| value == 0)
             || !self.feature_contract.frame_rate_hz.is_finite()
             || self.feature_contract.frame_rate_hz <= 0.0
             || self
@@ -240,6 +270,16 @@ impl ModelPackManifest {
         {
             return Err(ModelPackError::InvalidManifest(
                 "feature contract values must be finite and positive".to_string(),
+            ));
+        }
+        if self
+            .feature_contract
+            .feature_kind
+            .as_deref()
+            .is_some_and(|value| value.trim().is_empty())
+        {
+            return Err(ModelPackError::InvalidManifest(
+                "feature kind must not be empty when present".to_string(),
             ));
         }
         if self.artifacts.is_empty() {
@@ -275,7 +315,16 @@ impl ModelPackManifest {
                 )));
             }
         }
-        for required in [ModelArtifactRole::MelFrontend, ModelArtifactRole::BeatModel] {
+        let required_roles: &[ModelArtifactRole] = match self.backend.as_str() {
+            "beat-this-rten" => &[ModelArtifactRole::MelFrontend, ModelArtifactRole::BeatModel],
+            "beatnet-rten-experimental" => &[ModelArtifactRole::RhythmModel],
+            backend => {
+                return Err(ModelPackError::InvalidManifest(format!(
+                    "unsupported model-pack backend {backend:?}"
+                )));
+            }
+        };
+        for &required in required_roles {
             if !roles.contains(&required) {
                 return Err(ModelPackError::InvalidManifest(format!(
                     "missing required artifact role {required:?}"
@@ -425,6 +474,13 @@ mod tests {
     fn checked_in_full_pack_is_schema_valid() {
         let manifest: ModelPackManifest =
             serde_json::from_str(include_str!("../../../models/beat-this-full-v1.json")).unwrap();
+        manifest.validate().unwrap();
+    }
+
+    #[test]
+    fn checked_in_beatnet_pack_is_schema_valid() {
+        let manifest: ModelPackManifest =
+            serde_json::from_str(include_str!("../../../models/beatnet-v1.json")).unwrap();
         manifest.validate().unwrap();
     }
 }

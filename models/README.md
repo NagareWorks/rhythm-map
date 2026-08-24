@@ -61,3 +61,28 @@ different model pack, record the original model URL, immutable revision,
 checksum, license, conversion command, converter version, and feature contract.
 Future signed manifests will authenticate this same content-addressed contract;
 signature support will not replace local SHA-256 verification.
+
+## Experimental BeatNet model pack
+
+[`beatnet-v1.json`](beatnet-v1.json) pins the 1.6 MB ONNX graph at BeatNet
+commit `be864a4b0f126aa90aeabdeedf23f48865e09512`, its CC BY 4.0 grant, exact
+SHA-256, and the complete 22,050 Hz / 1,411-sample window / 441-sample hop /
+272-feature contract. `rhythm-map-beatnet` implements the matching
+log-frequency spectrogram and positive-difference frontend in Rust and runs the
+graph with RTen; it does not embed Python, PyTorch, or madmom.
+
+Download the artifact URL from the manifest into an external directory and
+verify it before calibration:
+
+```bash
+cargo xtask model-verify \
+  --model-pack models/beatnet-v1.json \
+  --model-dir /path/to/beatnet-v1
+```
+
+The repository and model are marked [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/),
+which permits commercial reuse with attribution. That grant does not by itself establish redistribution rights
+for every recording used to train the published weights. The pinned upstream
+configuration names Ballroom, Beatles, CMR, and Rock Corpus as training data
+and GTZAN as test data. Keep this pack experimental until those training-corpus
+provenance implications have been reviewed for the intended distribution.

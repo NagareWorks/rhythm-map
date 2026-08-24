@@ -10,9 +10,10 @@ use rhythm_map_beat_this::{
     BeatThisBackend, BeatThisDecoderPolicy, PeakPickingOptions, SequencePathOptions,
     SupportedMidpointOptions, decode_audio,
 };
+use rhythm_map_beatnet::BeatNetBackend;
 use rhythm_map_core::{
     Analysis, AudioOnsetPoint, BeatCandidate, Engine, EstimatorOptions, ModelInfo, ObservedBeat,
-    RhythmObservations, TempoMapEstimator,
+    RhythmObservationBackend, RhythmObservations, TempoMapEstimator,
 };
 use rhythm_map_models::{ModelArtifactRole, VerifiedModelPack, verify_model_pack};
 use serde::{Deserialize, Serialize};
@@ -748,6 +749,61 @@ fn evaluate_backend_suite_impl(
         Some(policy) => backend.with_decoder_policy(policy.backend_policy()),
         None => backend,
     };
+    let model_pack = model_pack_identity(&verified);
+    evaluate_loaded_backend_suite(
+        suite_path,
+        audio_resolver,
+        decoder_policy,
+        estimator_policy,
+        backend,
+        model_pack,
+    )
+}
+
+/// Evaluate the experimental `BeatNet` backend on calibration data only.
+///
+/// This entry point deliberately rejects regression and holdout suites. Select
+/// one complete candidate from calibration evidence before opening a holdout.
+///
+/// # Errors
+///
+/// Returns an error for a non-calibration suite, an incompatible model pack,
+/// missing audio, or ordinary inference/evaluation failures.
+pub fn evaluate_beatnet_calibration_suite(
+    suite_path: &Path,
+    model_pack_path: &Path,
+    model_root: &Path,
+    audio_directory: &Path,
+) -> Result<BottleneckEvaluation> {
+    let (suite, _) = load_suite(suite_path)?;
+    if suite.purpose != SuitePurpose::Calibration {
+        bail!(
+            "BeatNet candidate evaluation requires a calibration suite; {} declares {:?}",
+            suite.id,
+            suite.purpose
+        );
+    }
+    let verified = verify_model_pack(model_pack_path, model_root)
+        .with_context(|| format!("verifying model pack {}", model_pack_path.display()))?;
+    validate_beatnet_contract(&verified)?;
+    let model_path = required_model_path(&verified, ModelArtifactRole::RhythmModel)?;
+    let backend = BeatNetBackend::load(model_path)?;
+    let resolver = ExternalAudioResolver::new(audio_directory)?;
+    let model_pack = model_pack_identity(&verified);
+    evaluate_loaded_backend_suite(suite_path, Some(&resolver), None, None, backend, model_pack)
+}
+
+fn evaluate_loaded_backend_suite<B>(
+    suite_path: &Path,
+    audio_resolver: Option<&ExternalAudioResolver>,
+    decoder_policy: Option<&DecoderPolicy>,
+    estimator_policy: Option<&str>,
+    backend: B,
+    model_pack: ModelPackIdentity,
+) -> Result<BottleneckEvaluation>
+where
+    B: RhythmObservationBackend,
+{
     let estimator = estimator_for_policy(estimator_policy)?;
     let mut engine = Engine::with_estimator(backend, estimator.clone());
     let (suite, root) = load_suite(suite_path)?;
@@ -818,23 +874,27 @@ fn evaluate_backend_suite_impl(
     let has_unpaired_cases = cases.iter().any(|case| case.oracle.is_none());
     let end_to_end_passed = cases.iter().all(|case| case.end_to_end.passed);
     let attribution = attribution_decision(oracle_passed, has_unpaired_cases, end_to_end_passed);
-    let manifest = verified.manifest();
     Ok(BottleneckEvaluation {
         schema_version: 5,
         suite_id: suite.id,
         suite_purpose: suite.purpose,
-        model_pack: ModelPackIdentity {
-            id: manifest.id.clone(),
-            version: manifest.version.clone(),
-            backend: manifest.backend.clone(),
-            manifest_sha256: verified.manifest_sha256().to_string(),
-        },
+        model_pack,
         decoder_policy: decoder_policy.cloned(),
         estimator_policy: estimator_policy.map(str::to_string),
         passed: oracle_passed && end_to_end_passed,
         attribution,
         cases,
     })
+}
+
+fn model_pack_identity(verified: &VerifiedModelPack) -> ModelPackIdentity {
+    let manifest = verified.manifest();
+    ModelPackIdentity {
+        id: manifest.id.clone(),
+        version: manifest.version.clone(),
+        backend: manifest.backend.clone(),
+        manifest_sha256: verified.manifest_sha256().to_string(),
+    }
 }
 
 fn validate_estimator_policy(policy_id: Option<&str>) -> Result<()> {
@@ -2119,6 +2179,31 @@ fn validate_beat_this_contract(model_pack: &VerifiedModelPack) -> Result<()> {
             contract.sample_rate_hz,
             contract.mel_bands,
             contract.frame_rate_hz
+        );
+    }
+    Ok(())
+}
+
+fn validate_beatnet_contract(model_pack: &VerifiedModelPack) -> Result<()> {
+    let manifest = model_pack.manifest();
+    if manifest.backend != "beatnet-rten-experimental" {
+        bail!(
+            "model pack {} declares backend {}, expected beatnet-rten-experimental",
+            manifest.id,
+            manifest.backend
+        );
+    }
+    let contract = &manifest.feature_contract;
+    if contract.sample_rate_hz != 22_050
+        || contract.mel_bands != 136
+        || contract.input_feature_count != Some(272)
+        || contract.window_size_samples != Some(1_411)
+        || contract.hop_size_samples != Some(441)
+        || (contract.frame_rate_hz - 50.0).abs() > f64::EPSILON
+    {
+        bail!(
+            "model pack {} has an incompatible BeatNet feature contract",
+            manifest.id
         );
     }
     Ok(())

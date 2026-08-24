@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "beatnet-bda-rten",
+  "version": "be864a4-onnx",
+  "backend": "beatnet-rten-experimental",
+  "source": {
+    "repository": "https://github.com/Hashim-K/beatnet",
+    "revision": "be864a4b0f126aa90aeabdeedf23f48865e09512",
+    "license": "CC-BY-4.0",
+    "conversion": {
+      "tool": "onnx/exportModel.py",
+      "command": "python exportModel.py",
+      "source_checkpoint": "BeatNet model 1 (GTZAN-out)"
+    }
+  },
+  "feature_contract": {
+    "sample_rate_hz": 22050,
+    "mel_bands": 136,
+    "input_feature_count": 272,
+    "window_size_samples": 1411,
+    "hop_size_samples": 441,
+    "feature_kind": "madmom-log-frequency-plus-positive-difference",
+    "frame_rate_hz": 50.0,
+    "chunk_duration_s": null
+  },
+  "artifacts": [
+    {
+      "role": "rhythm_model",
+      "file": "beatnet_bda.onnx",
+      "sha256": "5fa4361efb92dfb005a58aeb56fb794dbe5d29881267eb358a26c6db61f2b4ca",
+      "size_bytes": 1622791,
+      "download_url": "https://raw.githubusercontent.com/Hashim-K/beatnet/be864a4b0f126aa90aeabdeedf23f48865e09512/onnx/beatnet_bda.onnx"
+    }
+  ]
+}

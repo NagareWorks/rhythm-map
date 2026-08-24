@@ -24,6 +24,8 @@ the first long-term package boundaries:
 - `rhythm-map-core`: stable analysis schema, backend trait, engine, and
   training-free tempo-map estimator.
 - `rhythm-map-beat-this`: optional Beat This! adapter using pure-Rust `rten`.
+- `rhythm-map-beatnet`: calibration-only BeatNet adapter with a native Rust
+  feature frontend and evidence-preserving variable-tempo path decoder.
 - `rhythm-map-cli`: end-to-end audio-file analysis to JSON.
 - `rhythm-map-models`: versioned provenance and SHA-256 model-pack verification.
 - `rhythm-map-ffi`: versioned C ABI for `.dll`, `.so`, and static libraries.

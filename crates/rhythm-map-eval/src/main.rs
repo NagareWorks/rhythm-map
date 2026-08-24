@@ -9,7 +9,7 @@ use anyhow::{Context, Result, bail};
 use clap::{Parser, Subcommand};
 use rhythm_map_eval::{
     evaluate_backend_suite, evaluate_backend_suite_with_audio_directory,
-    evaluate_backend_suite_with_policies, evaluate_core_suite,
+    evaluate_backend_suite_with_policies, evaluate_beatnet_calibration_suite, evaluate_core_suite,
     evaluate_decoder_recoverability_with_audio_directory,
     evaluate_decoder_sweep_with_audio_directory,
     evaluate_named_decoder_policy_with_audio_directory, fetch_public_dataset, import_artbeat_truth,
@@ -64,6 +64,27 @@ enum Command {
         #[arg(long)]
         report: Option<PathBuf>,
         /// Emit failures without returning a non-zero exit code.
+        #[arg(long)]
+        no_fail: bool,
+    },
+    /// Compare the experimental `BeatNet` observation path on calibration data.
+    EvalBeatnet {
+        /// Calibration suite; regression and holdout roles are rejected.
+        #[arg(long, default_value = "evaluation/suites/artbeat-v1.json")]
+        suite: PathBuf,
+        /// Pinned `BeatNet` model-pack manifest.
+        #[arg(long, default_value = "models/beatnet-v1.json")]
+        model_pack: PathBuf,
+        /// Directory containing `beatnet_bda.onnx`.
+        #[arg(long)]
+        model_dir: PathBuf,
+        /// Directory containing content-addressed external evaluation audio.
+        #[arg(long)]
+        audio_dir: PathBuf,
+        /// Optional JSON report destination.
+        #[arg(long)]
+        report: Option<PathBuf>,
+        /// Emit failed acceptance gates without returning a non-zero exit code.
         #[arg(long)]
         no_fail: bool,
     },
@@ -210,6 +231,7 @@ enum Command {
     },
 }
 
+#[allow(clippy::too_many_lines)]
 fn main() -> Result<()> {
     match Args::parse().command {
         Command::Eval {
@@ -233,6 +255,18 @@ fn main() -> Result<()> {
             audio_dir.as_deref(),
             decoder_policy.as_deref(),
             estimator_policy.as_deref(),
+            report,
+            no_fail,
+        ),
+        Command::EvalBeatnet {
+            suite,
+            model_pack,
+            model_dir,
+            audio_dir,
+            report,
+            no_fail,
+        } => emit_report(
+            &evaluate_beatnet_calibration_suite(&suite, &model_pack, &model_dir, &audio_dir)?,
             report,
             no_fail,
         ),

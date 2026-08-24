@@ -1,0 +1,19 @@
+[package]
+name = "rhythm-map-beatnet"
+description = "Experimental BeatNet observation backend for Rhythm Map"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+realfft.workspace = true
+rhythm-map-core = { path = "../rhythm-map-core" }
+rten.workspace = true
+rten-tensor.workspace = true
+rubato.workspace = true
+
+[lints]
+workspace = true
