@@ -143,6 +143,57 @@ release. Its annotation-tool source is hosted on GitHub, but the versioned data
 is a Zenodo archive; submoduling the tool repository would not pin the audio or
 labels used here.
 
+## Vienna 4x22 expressive-piano holdout v1
+
+[`vienna4x22-holdout-v1.json`](vienna4x22-holdout-v1.json) locks 12 performances
+from the [Vienna 4x22 Piano Corpus](https://doi.org/10.21939/4X22): all four
+published excerpts, with performers p01, p08, and p15 selected by a fixed rule.
+The selection and thresholds were committed before any Beat This inference.
+It covers expressive rubato, 2/4 and 3/4 simple meter, 6/8 compound meter,
+pickups, beat phase, and downbeats.
+
+The score-performance match files, score sources, upstream license, and change
+history are pinned as the `evaluation/datasets/sources/vienna4x22` Git
+submodule at commit `1033ade0899bfd03a89f370c9ad5d8443ddccd3e`. Audio is
+not stored in Git. The lock addresses only the selected WAV members of the
+official 1.3 GB ZIP, so acquisition transfers roughly 193 MB:
+
+```bash
+git submodule update --init evaluation/datasets/sources/vienna4x22
+
+cargo xtask dataset-fetch \
+  --manifest evaluation/datasets/vienna4x22-holdout-v1.json \
+  --output D:/rhythm-map-eval/vienna4x22-v1
+```
+
+Truth is generated without listening to model output. For each score onset, the
+importer takes the median performed onset tick across aligned chord notes. It
+constructs the musical beat grid from meter, treating 6/8 as two dotted-quarter
+tactus beats per bar and retaining pickups. A beat missing an exact performed
+onset is linearly interpolated only when aligned score positions exist on both
+sides. Match ticks are converted through the declared MIDI clock; decoded audio
+supplies only exact duration and content identity. For example:
+
+```bash
+cargo xtask vienna-truth \
+  --id vienna4x22-chopin-op38-p01 \
+  --match evaluation/datasets/sources/vienna4x22/match/Chopin_op38_p01.match \
+  --audio D:/rhythm-map-eval/vienna4x22-v1/audio/Chopin_op38_p01.wav \
+  --output evaluation/suites/truth/vienna4x22-holdout-v1/vienna4x22-chopin-op38-p01.json
+```
+
+Adjacent recovered beat timestamps define beat-local tempo truth. Expressive
+rubato is not relabeled as a discrete structural change, so the suite has no
+change-point recall gate. The corpus and repository contents are CC BY 4.0;
+required attribution is recorded in both the dataset lock and suite.
+
+Vienna 4x22 is absent from the 16 corpora named in the published Beat This
+training-data release, making this a corpus-disjoint check relative to that
+published list. As with every public model, this cannot prove that no
+unpublished experiment ever encountered the recordings. This holdout may be
+opened once for a preselected shipping candidate; it must not become another
+decoder or threshold sweep.
+
 ## Candidates intentionally not imported
 
 | Dataset | Decision | Reason |

@@ -352,4 +352,30 @@ mod tests {
 
         assert_eq!(suite.purpose, SuitePurpose::Regression);
     }
+
+    #[test]
+    fn pinned_vienna_holdout_manifest_and_truth_are_valid() {
+        let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let suite_path = root.join("evaluation/suites/vienna4x22-holdout-v1.json");
+        let suite: EvaluationSuite =
+            serde_json::from_slice(&std::fs::read(&suite_path).expect("read Vienna holdout suite"))
+                .expect("parse Vienna holdout suite");
+        suite.validate().expect("validate Vienna holdout suite");
+        assert_eq!(suite.purpose, SuitePurpose::Holdout);
+        assert_eq!(suite.cases.len(), 12);
+
+        for case in &suite.cases {
+            let CaseInput::External { truth, .. } = &case.input else {
+                panic!("Vienna holdout case must be external");
+            };
+            let truth_path = suite_path.parent().expect("suite parent").join(truth);
+            let truth: crate::GeneratedTruth =
+                serde_json::from_slice(&std::fs::read(&truth_path).expect("read Vienna truth"))
+                    .expect("parse Vienna truth");
+            truth.validate().expect("validate Vienna truth");
+            assert_eq!(truth.id, case.id);
+            assert!(!truth.beats.is_empty());
+            assert!(truth.beats.iter().any(|beat| beat.downbeat));
+        }
+    }
 }

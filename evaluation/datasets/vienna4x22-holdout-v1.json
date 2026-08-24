@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "id": "vienna4x22-holdout-v1",
+  "version": "1.0.0-p01-p08-p15",
+  "homepage_url": "https://doi.org/10.21939/4X22",
+  "license": "CC-BY-4.0",
+  "attribution": "Vienna 4x22 Piano Corpus by Werner Goebl; match-file updates by the Institute of Computational Perception",
+  "assets": [
+    {
+      "path": "audio/Chopin_op10_no3_p01.wav",
+      "url": "https://datasets.mdw.ac.at/media/content_files/8dec8d0a-c4da-4a96-b290-a3ba783c03ba.zip",
+      "sha256": "660d8ebd492206340e5efb436722fc8cd721488b4d61ad608af063c0f759d029",
+      "size_bytes": 15103876,
+      "role": "audio",
+      "zip_member": { "archive_size_bytes": 1295130820, "member_path": "audio/Chopin_Etude/Chopin_op10_no3_p01.wav" }
+    },
+    {
+      "path": "audio/Chopin_op10_no3_p08.wav",
+      "url": "https://datasets.mdw.ac.at/media/content_files/8dec8d0a-c4da-4a96-b290-a3ba783c03ba.zip",
+      "sha256": "dfa9cee234dda3f91b2dd592ac66957bc8ac5f203a00bd47f84facf3e7e72c90",
+      "size_bytes": 12594108,
+      "role": "audio",
+      "zip_member": { "archive_size_bytes": 1295130820, "member_path": "audio/Chopin_Etude/Chopin_op10_no3_p08.wav" }
+    },
+    {
+      "path": "audio/Chopin_op10_no3_p15.wav",
+      "url": "https://datasets.mdw.ac.at/media/content_files/8dec8d0a-c4da-4a96-b290-a3ba783c03ba.zip",
+      "sha256": "e236aa34d94b969e6617c9d4a9f587247f03331ea760c3ba7e3036a490f5b6da",
+      "size_bytes": 16186308,
+      "role": "audio",
+      "zip_member": { "archive_size_bytes": 1295130820, "member_path": "audio/Chopin_Etude/Chopin_op10_no3_p15.wav" }
+    },
+    {
+      "path": "audio/Chopin_op38_p01.wav",
+      "url": "https://datasets.mdw.ac.at/media/content_files/8dec8d0a-c4da-4a96-b290-a3ba783c03ba.zip",
+      "sha256": "808a6a3e66a468e89f010a6d6e43c86b50ac6b73fad7307c3e0ffa7da9816ff5",
+      "size_bytes": 22614396,
+      "role": "audio",
+      "zip_member": { "archive_size_bytes": 1295130820, "member_path": "audio/Chopin_Ballade/Chopin_op38_p01.wav" }
+    },
+    {
+      "path": "audio/Chopin_op38_p08.wav",
+      "url": "https://datasets.mdw.ac.at/media/content_files/8dec8d0a-c4da-4a96-b290-a3ba783c03ba.zip",
+      "sha256": "2c8262f06f1aa3efe54f83365ca71c1510306669a76768c859e28a8b224100e0",
+      "size_bytes": 23845772,
+      "role": "audio",
+      "zip_member": { "archive_size_bytes": 1295130820, "member_path": "audio/Chopin_Ballade/Chopin_op38_p08.wav" }
+    },
+    {
+      "path": "audio/Chopin_op38_p15.wav",
+      "url": "https://datasets.mdw.ac.at/media/content_files/8dec8d0a-c4da-4a96-b290-a3ba783c03ba.zip",
+      "sha256": "8a7efd42d065089a69cd56bfd9993e26b95b98f55d570c7be17444a4e7deb4d9",
+      "size_bytes": 22314780,
+      "role": "audio",
+      "zip_member": { "archive_size_bytes": 1295130820, "member_path": "audio/Chopin_Ballade/Chopin_op38_p15.wav" }
+    },
+    {
+      "path": "audio/Mozart_K331_1st-mov_p01.wav",
+      "url": "https://datasets.mdw.ac.at/media/content_files/8dec8d0a-c4da-4a96-b290-a3ba783c03ba.zip",
+      "sha256": "b51cc4950ffbcf7348c4e606d2d6f38adba40bcc7aebc07896708fd6b165ca89",
+      "size_bytes": 18626476,
+      "role": "audio",
+      "zip_member": { "archive_size_bytes": 1295130820, "member_path": "audio/Mozart/Mozart_K331_1st-mov_p01.wav" }
+    },
+    {
+      "path": "audio/Mozart_K331_1st-mov_p08.wav",
+      "url": "https://datasets.mdw.ac.at/media/content_files/8dec8d0a-c4da-4a96-b290-a3ba783c03ba.zip",
+      "sha256": "6373e02c403625653649245533091ee6df8d52de05043ebe6fbfc27a2d924c32",
+      "size_bytes": 18992268,
+      "role": "audio",
+      "zip_member": { "archive_size_bytes": 1295130820, "member_path": "audio/Mozart/Mozart_K331_1st-mov_p08.wav" }
+    },
+    {
+      "path": "audio/Mozart_K331_1st-mov_p15.wav",
+      "url": "https://datasets.mdw.ac.at/media/content_files/8dec8d0a-c4da-4a96-b290-a3ba783c03ba.zip",
+      "sha256": "b8fc502e407535296e75757a46931ef7a449e9684f606b567ef362d0f334f7aa",
+      "size_bytes": 19565392,
+      "role": "audio",
+      "zip_member": { "archive_size_bytes": 1295130820, "member_path": "audio/Mozart/Mozart_K331_1st-mov_p15.wav" }
+    },
+    {
+      "path": "audio/Schubert_D783_no15_p01.wav",
+      "url": "https://datasets.mdw.ac.at/media/content_files/8dec8d0a-c4da-4a96-b290-a3ba783c03ba.zip",
+      "sha256": "f294e7cf4e0e03494bd5a38f7786b327f3ef7bf665e938353e29dbcd37d3b333",
+      "size_bytes": 7056120,
+      "role": "audio",
+      "zip_member": { "archive_size_bytes": 1295130820, "member_path": "audio/Schubert/Schubert_D783_no15_p01.wav" }
+    },
+    {
+      "path": "audio/Schubert_D783_no15_p08.wav",
+      "url": "https://datasets.mdw.ac.at/media/content_files/8dec8d0a-c4da-4a96-b290-a3ba783c03ba.zip",
+      "sha256": "e2f754ea32983b6a8b5e6571ee95d8af2b4ac420534b904cc862b881a72ae982",
+      "size_bytes": 7139320,
+      "role": "audio",
+      "zip_member": { "archive_size_bytes": 1295130820, "member_path": "audio/Schubert/Schubert_D783_no15_p08.wav" }
+    },
+    {
+      "path": "audio/Schubert_D783_no15_p15.wav",
+      "url": "https://datasets.mdw.ac.at/media/content_files/8dec8d0a-c4da-4a96-b290-a3ba783c03ba.zip",
+      "sha256": "41493c045879f85db03b8d249f71a894896c15aff9b87dff6e0ed5e87175adb8",
+      "size_bytes": 9481400,
+      "role": "audio",
+      "zip_member": { "archive_size_bytes": 1295130820, "member_path": "audio/Schubert/Schubert_D783_no15_p15.wav" }
+    }
+  ]
+}

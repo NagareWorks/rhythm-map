@@ -6,3 +6,9 @@ which is a port of the MIT-licensed Beat This! model by the Institute of
 Computational Perception, Johannes Kepler University Linz. Model files are not
 distributed by this repository. See `models/README.md` for provenance and
 license requirements.
+
+The optional evaluation submodule at
+`evaluation/datasets/sources/vienna4x22` contains CC BY 4.0 score-performance
+annotations and symbolic score artifacts from the Vienna 4x22 Piano Corpus by
+Werner Goebl, with match-file updates by the Institute of Computational
+Perception. Evaluation audio is not distributed in this Git repository.

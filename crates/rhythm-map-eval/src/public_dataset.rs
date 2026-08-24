@@ -867,6 +867,18 @@ mod tests {
     }
 
     #[test]
+    fn pinned_vienna_dataset_lock_is_valid() {
+        let path = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../../evaluation/datasets/vienna4x22-holdout-v1.json");
+        let lock: PublicDatasetLock =
+            serde_json::from_slice(&fs::read(path).expect("read Vienna dataset lock"))
+                .expect("parse Vienna dataset lock");
+        lock.validate().expect("validate Vienna dataset lock");
+        assert_eq!(lock.assets.len(), 12);
+        assert!(lock.assets.iter().all(|asset| asset.zip_member.is_some()));
+    }
+
+    #[test]
     fn central_directory_resolves_regular_and_zip64_entries() {
         let regular = central_entry("audio/regular.wav", 80, 100, 42, &[]);
         assert_eq!(

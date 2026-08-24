@@ -13,7 +13,8 @@ use rhythm_map_eval::{
     evaluate_decoder_recoverability_with_audio_directory,
     evaluate_decoder_sweep_with_audio_directory,
     evaluate_named_decoder_policy_with_audio_directory, fetch_public_dataset, import_artbeat_truth,
-    inspect_audio_asset, render_suite, score_prediction_directory, standard_decoder_policies,
+    import_vienna_truth, inspect_audio_asset, render_suite, score_prediction_directory,
+    standard_decoder_policies,
 };
 use rhythm_map_models::verify_model_pack;
 use serde::Serialize;
@@ -89,6 +90,21 @@ enum Command {
         /// Official `ARTBeaT` sonified-figure SVG containing Ground Truth lines.
         #[arg(long)]
         annotation: PathBuf,
+        /// Matching encoded audio, used only for identity and decoded duration.
+        #[arg(long)]
+        audio: PathBuf,
+        /// Generated truth JSON destination.
+        #[arg(long)]
+        output: PathBuf,
+    },
+    /// Recover expressive beat/downbeat truth from a Vienna 4x22 match file.
+    ViennaTruth {
+        /// Stable evaluation case identifier.
+        #[arg(long)]
+        id: String,
+        /// Official score-performance match annotation.
+        #[arg(long = "match")]
+        match_file: PathBuf,
         /// Matching encoded audio, used only for identity and decoded duration.
         #[arg(long)]
         audio: PathBuf,
@@ -231,21 +247,17 @@ fn main() -> Result<()> {
             audio,
             output,
         } => run_artbeat_truth(id, &annotation, &audio, &output),
+        Command::ViennaTruth {
+            id,
+            match_file,
+            audio,
+            output,
+        } => run_vienna_truth(id, &match_file, &audio, &output),
         Command::DatasetFetch {
             manifest,
             output,
             with_annotations,
-        } => {
-            println!(
-                "{}",
-                serde_json::to_string_pretty(&fetch_public_dataset(
-                    &manifest,
-                    &output,
-                    with_annotations,
-                )?)?
-            );
-            Ok(())
-        }
+        } => run_dataset_fetch(&manifest, &output, with_annotations),
         Command::DecoderSweep {
             suite,
             model_pack,
@@ -304,8 +316,21 @@ fn run_audio_inspect(input: &Path) -> Result<()> {
     Ok(())
 }
 
+fn run_dataset_fetch(manifest: &Path, output: &Path, with_annotations: bool) -> Result<()> {
+    let report = fetch_public_dataset(manifest, output, with_annotations)?;
+    println!("{}", serde_json::to_string_pretty(&report)?);
+    Ok(())
+}
+
 fn run_artbeat_truth(id: String, annotation: &Path, audio: &Path, output: &Path) -> Result<()> {
     let imported = import_artbeat_truth(id, annotation, audio)?;
+    write_json_file(output, &imported.truth)?;
+    println!("{}", serde_json::to_string_pretty(&imported)?);
+    Ok(())
+}
+
+fn run_vienna_truth(id: String, match_file: &Path, audio: &Path, output: &Path) -> Result<()> {
+    let imported = import_vienna_truth(id, match_file, audio)?;
     write_json_file(output, &imported.truth)?;
     println!("{}", serde_json::to_string_pretty(&imported)?);
     Ok(())

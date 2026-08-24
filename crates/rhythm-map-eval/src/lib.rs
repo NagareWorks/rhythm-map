@@ -7,6 +7,7 @@ mod metrics;
 mod public_dataset;
 mod runner;
 mod synthetic;
+mod vienna;
 mod wav;
 
 pub use artbeat::{ArtbeatTruthImport, import_artbeat_truth};
@@ -41,3 +42,4 @@ pub use synthetic::{
     GeneratedTruth, RecipeSegment, SegmentShape, SyntheticAudioProfile, SyntheticRecipe, TruthBeat,
     TruthChangePoint, TruthTempoSegment, generate_truth,
 };
+pub use vienna::{ViennaTruthImport, import_vienna_truth};

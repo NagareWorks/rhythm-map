@@ -1,9 +1,16 @@
 # Rhythm Map
 
-Rhythm Map is an offline music timing analysis engine for rhythm games, chart
-editors, DAWs, and media tools. It turns beat/downbeat observations into a
+Rhythm Map is an offline, embeddable audio metadata engine. It derives
+structured information that ordinary audio containers do not carry and exposes
+the same typed results through Rust, CLI/GUI, C ABI, and WASM surfaces.
+
+The first production capability is rhythm/time-map analysis for rhythm games,
+chart editors, DAWs, and media tools. It turns beat/downbeat observations into a
 versioned, confidence-aware tempo map with BPM curves, constant/ramp segments,
-change points, and rhythm-homogeneous sections.
+change points, and rhythm-homogeneous sections. Later capability packs will add
+whole-track and section-level style analysis, probabilistic AI-generation
+signals, and MIDI-assisted key-sound segmentation without coupling those models
+or dependencies to the timing core.
 
 The project deliberately does **not** train or replace a beat tracker in its
 first phase. The default backend reuses the MIT-licensed Beat This! model via
@@ -11,7 +18,8 @@ the `beat-this` Rust crate, while the public API remains backend-independent.
 
 ## Status
 
-This repository is at `0.1.0` and establishes the long-term package boundaries:
+This repository is at `0.1.0`. The implemented rhythm/time-map pack establishes
+the first long-term package boundaries:
 
 - `rhythm-map-core`: stable analysis schema, backend trait, engine, and
   training-free tempo-map estimator.
@@ -23,7 +31,9 @@ This repository is at `0.1.0` and establishes the long-term package boundaries:
   browser audio inference is the next WASM milestone.
 
 The current rhythm sections are tempo/rhythm-homogeneous regions, not semantic
-labels such as verse, chorus, or drop.
+labels such as verse, chorus, or drop. Semantic structure and section style
+belong to a future optional style pack and may refer to the timing regions
+without changing their meaning.
 
 ## Quick start
 
@@ -93,13 +103,18 @@ own decoded audio.
 - Beat tracking is an interchangeable observation backend, not the public API.
 - A BPM curve is inferred robustly; it is not raw `60 / beat_interval` jitter.
 - Metrical half/double-time ambiguity is surfaced instead of hidden.
+- Capability packs are optional at build/package time but remain zero-tuning at
+  the normal call boundary.
+- Every inferred field carries source/provenance and confidence appropriate to
+  the claim; AI origin is a suspicion score, never a fabricated verdict.
 - Models, source code, and training data have separate provenance records.
 - Native, C ABI, WASM, CLI, and future GUI packages consume the same schema.
 
 See [`ARCHITECTURE.md`](ARCHITECTURE.md) for the component contracts and
 [`docs/ALGORITHM.md`](docs/ALGORITHM.md) for the current deterministic timing
-algorithm. [`ROADMAP.md`](ROADMAP.md) records the staged implementation and the
-evidence required before adding learned components.
+algorithm. [`docs/METADATA-PACKS.md`](docs/METADATA-PACKS.md) defines how later
+analysis capabilities compose without losing the one-call product contract.
+[`ROADMAP.md`](ROADMAP.md) records staged implementation and evidence gates.
 
 ## License
 

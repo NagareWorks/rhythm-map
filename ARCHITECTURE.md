@@ -1,5 +1,20 @@
 # Architecture
 
+## Product boundary
+
+Rhythm Map is a modular audio metadata engine, not permanently a timing-only
+library. The current `Analysis` schema is the payload of the first
+`rhythm/time-map` capability pack. Future style, provenance, and MIDI-assisted
+packs share decoding, time coordinates, provenance conventions, and product
+surfaces, but do not become fields hidden inside the tempo estimator.
+
+Packaging selects capabilities; ordinary users select no analysis strategies.
+A CLI/GUI distribution may include several packs, while a small game-engine DLL
+or browser WASM build may include only rhythm analysis. Within every included
+pack, one top-level call applies the shipping policy and returns confidence and
+warnings. The durable composition contract is specified in
+[`docs/METADATA-PACKS.md`](docs/METADATA-PACKS.md).
+
 ## Pipeline
 
 ```text
@@ -47,6 +62,11 @@ events. The tempo estimator never depends on the upstream crate's Rust structs.
 versions. Native Rust callers use typed structures. The C ABI initially returns
 the same schema as owned UTF-8 JSON to avoid exposing Rust layouts. WASM returns
 the same structure through `serde-wasm-bindgen`.
+
+When a second production capability pack ships, product surfaces will wrap pack
+payloads in one versioned audio-metadata document. The existing timing payload
+keeps its own schema version so adding or omitting another pack does not rewrite
+the meaning of BPM, beat, section, or confidence fields.
 
 ## Product policy boundary
 

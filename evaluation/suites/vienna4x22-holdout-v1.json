@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "id": "vienna4x22-holdout-v1",
+  "description": "Precommitted corpus-disjoint expressive-piano holdout. Four works and performers p01, p08, and p15 were selected before any Beat This inference; this suite must not be used for policy selection.",
+  "purpose": "holdout",
+  "thresholds": {
+    "beat_tolerance_ms": 70,
+    "change_tolerance_s": 1,
+    "min_beat_f1": 0.8,
+    "min_downbeat_f1": 0.6,
+    "max_tempo_median_error_percent": 10,
+    "max_tempo_p95_error_percent": 25,
+    "min_change_recall": 0
+  },
+  "cases": [
+    {
+      "id": "vienna4x22-chopin-op10-no3-p01",
+      "input": { "kind": "external", "truth": "truth/vienna4x22-holdout-v1/vienna4x22-chopin-op10-no3-p01.json", "audio": { "sha256": "660d8ebd492206340e5efb436722fc8cd721488b4d61ad608af063c0f759d029", "local_file_hint": "audio/Chopin_op10_no3_p01.wav" } },
+      "tags": ["expressive-piano", "rubato", "simple-meter", "2-4", "pickup", "downbeat"],
+      "provenance": { "kind": "public", "audio_license": "CC-BY-4.0", "annotation_license": "CC-BY-4.0", "redistributable": true, "commercial_evaluation_allowed": true, "attribution": "Vienna 4x22 Piano Corpus by Werner Goebl; match-file updates by the Institute of Computational Perception", "source_url": "https://doi.org/10.21939/4X22" }
+    },
+    {
+      "id": "vienna4x22-chopin-op10-no3-p08",
+      "input": { "kind": "external", "truth": "truth/vienna4x22-holdout-v1/vienna4x22-chopin-op10-no3-p08.json", "audio": { "sha256": "dfa9cee234dda3f91b2dd592ac66957bc8ac5f203a00bd47f84facf3e7e72c90", "local_file_hint": "audio/Chopin_op10_no3_p08.wav" } },
+      "tags": ["expressive-piano", "rubato", "simple-meter", "2-4", "pickup", "downbeat"],
+      "provenance": { "kind": "public", "audio_license": "CC-BY-4.0", "annotation_license": "CC-BY-4.0", "redistributable": true, "commercial_evaluation_allowed": true, "attribution": "Vienna 4x22 Piano Corpus by Werner Goebl; match-file updates by the Institute of Computational Perception", "source_url": "https://doi.org/10.21939/4X22" }
+    },
+    {
+      "id": "vienna4x22-chopin-op10-no3-p15",
+      "input": { "kind": "external", "truth": "truth/vienna4x22-holdout-v1/vienna4x22-chopin-op10-no3-p15.json", "audio": { "sha256": "e236aa34d94b969e6617c9d4a9f587247f03331ea760c3ba7e3036a490f5b6da", "local_file_hint": "audio/Chopin_op10_no3_p15.wav" } },
+      "tags": ["expressive-piano", "rubato", "simple-meter", "2-4", "pickup", "downbeat"],
+      "provenance": { "kind": "public", "audio_license": "CC-BY-4.0", "annotation_license": "CC-BY-4.0", "redistributable": true, "commercial_evaluation_allowed": true, "attribution": "Vienna 4x22 Piano Corpus by Werner Goebl; match-file updates by the Institute of Computational Perception", "source_url": "https://doi.org/10.21939/4X22" }
+    },
+    {
+      "id": "vienna4x22-chopin-op38-p01",
+      "input": { "kind": "external", "truth": "truth/vienna4x22-holdout-v1/vienna4x22-chopin-op38-p01.json", "audio": { "sha256": "808a6a3e66a468e89f010a6d6e43c86b50ac6b73fad7307c3e0ffa7da9816ff5", "local_file_hint": "audio/Chopin_op38_p01.wav" } },
+      "tags": ["expressive-piano", "rubato", "compound-meter", "6-8", "pickup", "downbeat"],
+      "provenance": { "kind": "public", "audio_license": "CC-BY-4.0", "annotation_license": "CC-BY-4.0", "redistributable": true, "commercial_evaluation_allowed": true, "attribution": "Vienna 4x22 Piano Corpus by Werner Goebl; match-file updates by the Institute of Computational Perception", "source_url": "https://doi.org/10.21939/4X22" }
+    },
+    {
+      "id": "vienna4x22-chopin-op38-p08",
+      "input": { "kind": "external", "truth": "truth/vienna4x22-holdout-v1/vienna4x22-chopin-op38-p08.json", "audio": { "sha256": "2c8262f06f1aa3efe54f83365ca71c1510306669a76768c859e28a8b224100e0", "local_file_hint": "audio/Chopin_op38_p08.wav" } },
+      "tags": ["expressive-piano", "rubato", "compound-meter", "6-8", "pickup", "downbeat"],
+      "provenance": { "kind": "public", "audio_license": "CC-BY-4.0", "annotation_license": "CC-BY-4.0", "redistributable": true, "commercial_evaluation_allowed": true, "attribution": "Vienna 4x22 Piano Corpus by Werner Goebl; match-file updates by the Institute of Computational Perception", "source_url": "https://doi.org/10.21939/4X22" }
+    },
+    {
+      "id": "vienna4x22-chopin-op38-p15",
+      "input": { "kind": "external", "truth": "truth/vienna4x22-holdout-v1/vienna4x22-chopin-op38-p15.json", "audio": { "sha256": "8a7efd42d065089a69cd56bfd9993e26b95b98f55d570c7be17444a4e7deb4d9", "local_file_hint": "audio/Chopin_op38_p15.wav" } },
+      "tags": ["expressive-piano", "rubato", "compound-meter", "6-8", "pickup", "downbeat"],
+      "provenance": { "kind": "public", "audio_license": "CC-BY-4.0", "annotation_license": "CC-BY-4.0", "redistributable": true, "commercial_evaluation_allowed": true, "attribution": "Vienna 4x22 Piano Corpus by Werner Goebl; match-file updates by the Institute of Computational Perception", "source_url": "https://doi.org/10.21939/4X22" }
+    },
+    {
+      "id": "vienna4x22-mozart-k331-1st-mov-p01",
+      "input": { "kind": "external", "truth": "truth/vienna4x22-holdout-v1/vienna4x22-mozart-k331-1st-mov-p01.json", "audio": { "sha256": "b51cc4950ffbcf7348c4e606d2d6f38adba40bcc7aebc07896708fd6b165ca89", "local_file_hint": "audio/Mozart_K331_1st-mov_p01.wav" } },
+      "tags": ["expressive-piano", "rubato", "compound-meter", "6-8", "downbeat"],
+      "provenance": { "kind": "public", "audio_license": "CC-BY-4.0", "annotation_license": "CC-BY-4.0", "redistributable": true, "commercial_evaluation_allowed": true, "attribution": "Vienna 4x22 Piano Corpus by Werner Goebl; match-file updates by the Institute of Computational Perception", "source_url": "https://doi.org/10.21939/4X22" }
+    },
+    {
+      "id": "vienna4x22-mozart-k331-1st-mov-p08",
+      "input": { "kind": "external", "truth": "truth/vienna4x22-holdout-v1/vienna4x22-mozart-k331-1st-mov-p08.json", "audio": { "sha256": "6373e02c403625653649245533091ee6df8d52de05043ebe6fbfc27a2d924c32", "local_file_hint": "audio/Mozart_K331_1st-mov_p08.wav" } },
+      "tags": ["expressive-piano", "rubato", "compound-meter", "6-8", "downbeat"],
+      "provenance": { "kind": "public", "audio_license": "CC-BY-4.0", "annotation_license": "CC-BY-4.0", "redistributable": true, "commercial_evaluation_allowed": true, "attribution": "Vienna 4x22 Piano Corpus by Werner Goebl; match-file updates by the Institute of Computational Perception", "source_url": "https://doi.org/10.21939/4X22" }
+    },
+    {
+      "id": "vienna4x22-mozart-k331-1st-mov-p15",
+      "input": { "kind": "external", "truth": "truth/vienna4x22-holdout-v1/vienna4x22-mozart-k331-1st-mov-p15.json", "audio": { "sha256": "b8fc502e407535296e75757a46931ef7a449e9684f606b567ef362d0f334f7aa", "local_file_hint": "audio/Mozart_K331_1st-mov_p15.wav" } },
+      "tags": ["expressive-piano", "rubato", "compound-meter", "6-8", "downbeat"],
+      "provenance": { "kind": "public", "audio_license": "CC-BY-4.0", "annotation_license": "CC-BY-4.0", "redistributable": true, "commercial_evaluation_allowed": true, "attribution": "Vienna 4x22 Piano Corpus by Werner Goebl; match-file updates by the Institute of Computational Perception", "source_url": "https://doi.org/10.21939/4X22" }
+    },
+    {
+      "id": "vienna4x22-schubert-d783-no15-p01",
+      "input": { "kind": "external", "truth": "truth/vienna4x22-holdout-v1/vienna4x22-schubert-d783-no15-p01.json", "audio": { "sha256": "f294e7cf4e0e03494bd5a38f7786b327f3ef7bf665e938353e29dbcd37d3b333", "local_file_hint": "audio/Schubert_D783_no15_p01.wav" } },
+      "tags": ["expressive-piano", "rubato", "simple-meter", "3-4", "pickup", "downbeat"],
+      "provenance": { "kind": "public", "audio_license": "CC-BY-4.0", "annotation_license": "CC-BY-4.0", "redistributable": true, "commercial_evaluation_allowed": true, "attribution": "Vienna 4x22 Piano Corpus by Werner Goebl; match-file updates by the Institute of Computational Perception", "source_url": "https://doi.org/10.21939/4X22" }
+    },
+    {
+      "id": "vienna4x22-schubert-d783-no15-p08",
+      "input": { "kind": "external", "truth": "truth/vienna4x22-holdout-v1/vienna4x22-schubert-d783-no15-p08.json", "audio": { "sha256": "e2f754ea32983b6a8b5e6571ee95d8af2b4ac420534b904cc862b881a72ae982", "local_file_hint": "audio/Schubert_D783_no15_p08.wav" } },
+      "tags": ["expressive-piano", "rubato", "simple-meter", "3-4", "pickup", "downbeat"],
+      "provenance": { "kind": "public", "audio_license": "CC-BY-4.0", "annotation_license": "CC-BY-4.0", "redistributable": true, "commercial_evaluation_allowed": true, "attribution": "Vienna 4x22 Piano Corpus by Werner Goebl; match-file updates by the Institute of Computational Perception", "source_url": "https://doi.org/10.21939/4X22" }
+    },
+    {
+      "id": "vienna4x22-schubert-d783-no15-p15",
+      "input": { "kind": "external", "truth": "truth/vienna4x22-holdout-v1/vienna4x22-schubert-d783-no15-p15.json", "audio": { "sha256": "41493c045879f85db03b8d249f71a894896c15aff9b87dff6e0ed5e87175adb8", "local_file_hint": "audio/Schubert_D783_no15_p15.wav" } },
+      "tags": ["expressive-piano", "rubato", "simple-meter", "3-4", "pickup", "downbeat"],
+      "provenance": { "kind": "public", "audio_license": "CC-BY-4.0", "annotation_license": "CC-BY-4.0", "redistributable": true, "commercial_evaluation_allowed": true, "attribution": "Vienna 4x22 Piano Corpus by Werner Goebl; match-file updates by the Institute of Computational Perception", "source_url": "https://doi.org/10.21939/4X22" }
+    }
+  ]
+}

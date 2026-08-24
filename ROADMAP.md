@@ -1,5 +1,27 @@
 # Roadmap
 
+## Product horizon: audio metadata engine
+
+Timing analysis is the first capability pack, not the permanent limit of the
+product. Rhythm Map will grow into an offline, embeddable metadata engine whose
+features are selected at build/package time while each included feature remains
+one-call and zero-tuning in normal use. The durable composition and uncertainty
+rules are recorded in [`docs/METADATA-PACKS.md`](docs/METADATA-PACKS.md).
+
+Planned capability order after the timing foundation is shippable:
+
+1. section-aware style metadata, reusing shared audio decoding and interval
+   references but owning its taxonomy, model, and evaluation;
+2. MIDI-assisted audio alignment and key-sound cut suggestions for rhythm-game
+   authoring, with MIDI treated as optional evidence;
+3. AI-origin suspiciousness as an explicitly probabilistic research pack only
+   after unseen-generator and production-chain evaluation exists.
+
+These are not reasons to merge every analysis into `rhythm-map-core` or one
+mandatory model. A future pack gets a crate only when it has meaningful behavior
+and artifacts to own, and every product surface includes only the packs selected
+for that distribution.
+
 ## Phase 1: training-free timing engine
 
 - Beat This adapter and parity fixtures.
@@ -37,6 +59,8 @@
 - A precommitted nine-case, timestamped ARTBeaT holdout with reproducible SVG
   truth import, plus an optimized non-LTO evaluation profile for routine model
   experiments.
+- A pinned CC BY 4.0 Vienna 4x22 annotation source and Rust match importer for
+  corpus-disjoint expressive-piano beat/downbeat and beat-local tempo truth.
 
 ## Phase 2: product surfaces
 
@@ -52,7 +76,19 @@
 - Native GUI for waveform, beat grid, confidence, and editable tempo segments.
 - Export adapters for common rhythm-game and DAW tempo-map formats.
 
-## Phase 3: evidence-driven model work
+## Phase 3: broaden metadata capabilities
+
+- Define the aggregate metadata document after a second pack has real output;
+  preserve the existing timing schema as an independently versioned payload.
+- Implement and evaluate a section/style pack with a versioned taxonomy and
+  out-of-domain uncertainty.
+- Implement MIDI/audio alignment and key-sound cut candidates before attempting
+  general source separation.
+- Research AI-origin signals separately; require calibrated suspiciousness,
+  generator-disjoint evaluation, codec/mastering robustness, and prominent
+  non-verdict semantics before any product distribution.
+
+## Phase 4: evidence-driven timing model work
 
 - Add a corpus-disjoint timestamped source for drumless, rubato, compound-meter,
   and percussive slices; the current public holdout is case-disjoint ARTBeaT.
