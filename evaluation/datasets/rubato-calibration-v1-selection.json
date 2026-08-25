@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "id": "rubato-calibration-v1",
+  "status": "selection-locked",
+  "purpose": "calibration",
+  "source": {
+    "title": "RUBATO: A Multi-Version Benchmark for Robust Music Transcription and Analysis",
+    "version": "0.3",
+    "record_doi": "10.5281/zenodo.21159596",
+    "published": "2026-07-03",
+    "dataset_license": "CC-BY-3.0",
+    "archive": {
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "size_bytes": 6258528269,
+      "md5": "3bd78b8dd94dec16516e0b9f32f87810"
+    },
+    "metadata_versions": {
+      "url": "https://zenodo.org/records/21159596/files/metadata_versions.csv?download=1",
+      "size_bytes": 83095,
+      "md5": "3ca20578812c07ae587508b8ff261313",
+      "sha256": "1e702f7b886bf4ac565641ada5035927318b03a708679ec236fe1b7dd38df323"
+    },
+    "metadata_works": {
+      "url": "https://zenodo.org/records/21159596/files/metadata_works.csv?download=1",
+      "size_bytes": 1920,
+      "md5": "36b1e6f1d9a5bfeb33d26aea3046ea24",
+      "sha256": "ae70c6b1be00e37e2c77fdc91cb75804b9c1f2af0424927a4978d329ae400f06"
+    }
+  },
+  "selection_policy": {
+    "version_types": ["OV", "OV-R", "AR", "AR-R"],
+    "audio_license_allowlist": ["CC0", "CC-BY-3.0", "CC-BY-4.0"],
+    "minimum_recording_year": 2000,
+    "recording_year_source": "first four-digit year in the upstream version field",
+    "excluded_version_types": ["AD", "AD-S", "SR", "SR-R", "SY"],
+    "notes": "The year floor conservatively avoids relying on RUBATO's EU public-domain rationale for historical recordings. Synthetic versions, reproduction-piano renderings, and structurally deviating adaptations are excluded from the first real-performance calibration slice."
+  },
+  "expected": {
+    "tracks": 25,
+    "works": 12,
+    "duration_seconds": 6490.03369614512
+  },
+  "tracks": [
+    { "filename": "Bach_BWV1007-01_AR-MacLeod2011", "version_type": "AR", "instrumentation": "Dulcimer", "duration_seconds": 128.90403628117915, "audio_license": "CC-BY-3.0" },
+    { "filename": "Bach_BWV1007-01_OV-Milman2022", "version_type": "OV", "instrumentation": "Cello", "duration_seconds": 138.9736961451247, "audio_license": "CC-BY-3.0" },
+    { "filename": "Beethoven_Op072-0_OV-Henning2017", "version_type": "OV", "instrumentation": "Orchestra", "duration_seconds": 403.49319727891157, "audio_license": "CC-BY-3.0" },
+    { "filename": "Berlioz_H048-04_OV-Dennis2016", "version_type": "OV", "instrumentation": "Orchestra", "duration_seconds": 272.50938775510207, "audio_license": "CC-BY-3.0" },
+    { "filename": "Boccherini_G275-03_OV-Krux2022", "version_type": "OV", "instrumentation": "Strings", "duration_seconds": 162.62240362811792, "audio_license": "CC0" },
+    { "filename": "Brahms_Op115-01_OV-SchmittA2025", "version_type": "OV", "instrumentation": "Clarinet; Strings", "duration_seconds": 620.2119727891156, "audio_license": "CC-BY-3.0" },
+    { "filename": "Brahms_Op115-01_OV-Steffens2008", "version_type": "OV", "instrumentation": "Clarinet; Strings", "duration_seconds": 622.2947845804989, "audio_license": "CC0" },
+    { "filename": "Handel_HWV040-1-01_AR-ButtnerFmaj2025", "version_type": "AR", "instrumentation": "Voice; Piano", "duration_seconds": 162.28548752834467, "audio_license": "CC-BY-3.0" },
+    { "filename": "Handel_HWV040-1-01_AR-ButtnerGmaj2025", "version_type": "AR", "instrumentation": "Voice; Piano", "duration_seconds": 164.34702947845804, "audio_license": "CC-BY-3.0" },
+    { "filename": "Handel_HWV040-1-01_AR-R-Bra2020", "version_type": "AR-R", "instrumentation": "Accordeons", "duration_seconds": 153.6, "audio_license": "CC-BY-4.0" },
+    { "filename": "Mozart_KV618_AR-Papalin2012", "version_type": "AR", "instrumentation": "Choir; Recorders", "duration_seconds": 161.0, "audio_license": "CC-BY-3.0" },
+    { "filename": "Mozart_KV618_OV-GliArmonici2015", "version_type": "OV", "instrumentation": "Choir; Strings; Organ", "duration_seconds": 206.7134693877551, "audio_license": "CC0" },
+    { "filename": "Mussorgsky_PicturesAtAnExhibition-10_OV-Bertoglio2012", "version_type": "OV", "instrumentation": "Piano", "duration_seconds": 281.2371882086168, "audio_license": "CC-BY-3.0" },
+    { "filename": "Mussorgsky_PicturesAtAnExhibition-10_OV-R-Staab2016", "version_type": "OV-R", "instrumentation": "Piano", "duration_seconds": 326.0778684807256, "audio_license": "CC-BY-3.0" },
+    { "filename": "Schubert_D733-01_AR-Staab2012", "version_type": "AR", "instrumentation": "Piano", "duration_seconds": 203.34802721088437, "audio_license": "CC-BY-3.0" },
+    { "filename": "Schubert_D733-01_OV-ButtnerWeiss2025", "version_type": "OV", "instrumentation": "Piano4hands", "duration_seconds": 207.16018140589568, "audio_license": "CC-BY-3.0" },
+    { "filename": "Schumann_Op039-05_OV-Buttner2025", "version_type": "OV", "instrumentation": "Voice; Piano", "duration_seconds": 244.51310657596372, "audio_license": "CC0" },
+    { "filename": "Schumann_Op039-05_OV-Pizarro2012", "version_type": "OV", "instrumentation": "Voice; Piano", "duration_seconds": 225.14113378684806, "audio_license": "CC-BY-3.0" },
+    { "filename": "Verdi_Nabucco-VaPensiero_AR-R-Operaphilia2022", "version_type": "AR-R", "instrumentation": "Choir; Piano; Strings; Harp", "duration_seconds": 308.19265306122446, "audio_license": "CC-BY-3.0" },
+    { "filename": "Verdi_Nabucco-VaPensiero_OV-Garcia2015", "version_type": "OV", "instrumentation": "Choir; Orchestra", "duration_seconds": 295.9934693877551, "audio_license": "CC-BY-3.0" },
+    { "filename": "Verdi_Nabucco-VaPensiero_OV-LibrosVivos2007", "version_type": "OV", "instrumentation": "Choir; Orchestra", "duration_seconds": 278.0208616780045, "audio_license": "CC0" },
+    { "filename": "Verdi_Nabucco-VaPensiero_OV-Secci2020", "version_type": "OV", "instrumentation": "Choir; Orchestra", "duration_seconds": 308.5757823129252, "audio_license": "CC-BY-3.0" },
+    { "filename": "Vivaldi_RV269-01_AR-Bra2021", "version_type": "AR", "instrumentation": "Accordeons", "duration_seconds": 190.92897959183674, "audio_license": "CC-BY-4.0" },
+    { "filename": "Vivaldi_RV269-01_AR-ModenaChamber2022", "version_type": "AR", "instrumentation": "Strings; Harpsichord", "duration_seconds": 213.89061224489797, "audio_license": "CC0" },
+    { "filename": "Vivaldi_RV269-01_AR-R-Intartaglia2011", "version_type": "AR-R", "instrumentation": "Organ", "duration_seconds": 209.99836734693878, "audio_license": "CC-BY-3.0" }
+  ]
+}

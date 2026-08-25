@@ -197,6 +197,38 @@ for `local-metrical-path-v1`, frozen at commit
 and must never become calibration data, another decoder sweep, or a source of
 threshold changes.
 
+## RUBATO real-performance calibration v1 (selection locked)
+
+[`rubato-calibration-v1-selection.json`](rubato-calibration-v1-selection.json)
+freezes the first calibration slice from
+[RUBATO v0.3](https://doi.org/10.5281/zenodo.21159596), a 2026 multi-version
+benchmark with audio-time beat and measure annotations, structure annotations,
+and score-to-audio warping paths. RUBATO postdates Beat This and is absent from
+its 16 published training corpora. Unlike the permanently closed Vienna
+holdout, this slice is explicitly available for estimator calibration.
+
+The upstream record contains 566 versions across 15 works. The first slice is
+deliberately narrower: 25 OV/OV-R/AR/AR-R tracks, 12 works, and about 1.80 hours
+of real performances. It admits only CC0, CC BY 3.0, and CC BY 4.0 audio whose
+upstream version field names a recording year of 2000 or later. This avoids
+depending on the paper's EU-specific public-domain rationale for pre-1963
+recordings. NC, ND, SA, ambiguous-license, synthetic, reproduction-piano, and
+structurally deviating adaptation versions are excluded from the initial
+slice.
+
+This is a selection lock, not yet a `dataset-fetch` lock. RUBATO is published
+as one 6.3 GB Zenodo ZIP rather than a source repository, so a Git submodule
+would not identify the data. The next acquisition step is to address only the
+25 locked WAV, beat, measure, and structure members through ZIP range requests,
+record their SHA-256 identities, and generate checked-in truth without using
+model output. Do not download or vendor the complete archive into the checkout.
+
+The multi-version design is especially valuable here: the same musical clock
+is observed through solo strings, ensembles, orchestra, choir, voice and piano,
+accordion, organ, dulcimer, and piano. That lets calibration distinguish a
+stable musical-time policy from timbre-specific success, rather than adding
+another piano-only average.
+
 ## Candidates intentionally not imported
 
 | Dataset | Decision | Reason |
@@ -208,3 +240,7 @@ threshold changes.
 | MOSA | Revisit only after rights clarification | It has useful expressive beat labels, but access is restricted and its usage guidelines limit the stated purpose to research on its recorded modalities. |
 | MTG-Jamendo | Do not use for rhythm truth | Audio licenses vary, dataset use is limited to non-commercial research, and it has no beat timestamp ground truth. |
 | KRAISLER | Revisit only after rights clarification | Its 2026 release has manually refined beat/downbeat annotations and cannot overlap Beat This training, but the record simultaneously says CC BY 4.0 and prohibits commercial use. |
+| ATEPP | Do not use for real-audio evaluation | Its released CC BY 4.0 corpus contains transcribed MIDI and some MusicXML, but the original audio is not distributed because of copyright. |
+| SMD | Do not import | It has excellent synchronized real audio and MIDI, but the corpus is CC BY-NC-SA 3.0. |
+| MAESTRO | Do not import | Its audio/MIDI alignment is strong, but the dataset is CC BY-NC-SA 4.0 and ASAP-derived tracks overlap a published Beat This training corpus. |
+| MusicNet | Keep as a secondary provenance-audited source | It is absent from Beat This training and exposes score-aligned real audio, but the original Zenodo record has no single explicit corpus license; recordings must be cleared individually. RUBATO provides direct beat truth and a cleaner first slice. |
