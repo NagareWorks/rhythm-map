@@ -44,3 +44,7 @@ strongly prefers the dense half/double-time alternative, so forcing a BPM band
 would conceal unresolved ambiguity. Keep v2 experimental, retain explicit
 metrical alternatives, and do not open the holdout until independent meter or
 accent evidence can preselect one complete result.
+
+Follow-up: `artbeat-beatnet-explicit-hypotheses-v3.md` preserves this primary
+decoder and makes its real-timestamp metrical alternatives part of analysis
+schema v2 instead of hiding them in evaluation-only diagnostics.

@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 /// Current serialized analysis schema version.
-pub const ANALYSIS_SCHEMA_VERSION: u32 = 1;
+pub const ANALYSIS_SCHEMA_VERSION: u32 = 2;
 
 /// Identity and timing contract of an observation backend.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -102,6 +102,34 @@ pub struct BeatEvent {
     pub downbeat: bool,
     /// Downbeat confidence.
     pub downbeat_confidence: f64,
+}
+
+/// Construction used for one backend-supported beat-sequence interpretation.
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum BeatSequenceHypothesisKind {
+    /// The sequence selected for the primary tempo-map analysis.
+    Selected,
+    /// One alternating phase of the selected sequence interpreted at half-time.
+    HalfTime,
+    /// Real backend candidates inserted near selected interval midpoints.
+    DoubleTime,
+}
+
+/// One auditable metrical interpretation made only from backend-supported times.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct BeatSequenceHypothesis {
+    /// How this sequence was constructed from the observation layer.
+    pub kind: BeatSequenceHypothesisKind,
+    /// Power-of-two relation to the primary selected sequence.
+    pub metrical_level: i8,
+    /// Alternating phase for a half-time interpretation.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub phase: Option<u8>,
+    /// Truth-free score relative to the strongest returned hypothesis.
+    pub relative_score: f64,
+    /// Strictly increasing backend-supported beat timestamps.
+    pub beat_times_s: Vec<f64>,
 }
 
 /// A sampled point on the regularized tempo curve.
@@ -206,6 +234,9 @@ pub struct Analysis {
     pub source: ModelInfo,
     /// Beat and downbeat events.
     pub beats: Vec<BeatEvent>,
+    /// Auditable selected and alternative backend-supported beat sequences.
+    #[serde(default)]
+    pub beat_hypotheses: Vec<BeatSequenceHypothesis>,
     /// Preferred global tempo summary.
     pub global_bpm: Option<f64>,
     /// Alternative half/double-time interpretations.

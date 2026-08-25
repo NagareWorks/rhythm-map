@@ -35,10 +35,11 @@ models, licenses, evaluation suites, feature gates, and resource budget.
 
 ### `rhythm/time-map`
 
-Implemented first. It returns beat/downbeat timestamps, BPM hypotheses and
-curve, constant/ramp tempo segments, timing change points, and
-tempo/rhythm-homogeneous sections. Beat observations remain an interchangeable
-backend input; deterministic time-map analysis is a separate layer.
+Implemented first. It returns beat/downbeat timestamps, auditable alternative
+beat sequences, BPM hypotheses and curve, constant/ramp tempo segments, timing
+change points, and tempo/rhythm-homogeneous sections. Beat observations remain
+an interchangeable backend input; deterministic time-map analysis is a
+separate layer.
 
 ### `style`
 

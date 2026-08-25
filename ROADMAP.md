@@ -325,3 +325,21 @@ a learned component to the default distribution.
   band or another calibration-derived threshold would hide rather than solve
   it. Next obtain independent meter/accent evidence or retain the ambiguity in
   the product result before selecting the one holdout candidate.
+- 2026-08-25: tested two truth-free attempts to force a unique piano-rubato
+  selection and rejected both. A PCM-only adaptive half-time path reached beat
+  F1 0.45 versus the selected 0.59 and found only a 1.09 retained/discarded
+  accent ratio; ordinary spectral flux and RMS do not separate the dense model
+  peaks. Removing the candidate graph's per-event bias left piano unchanged,
+  reduced mean ARTBeaT F1 from 0.8536 to 0.8364, and regressed three real
+  variable-tempo cases. Retain neither experiment and do not expose their
+  constants as strategies.
+- 2026-08-25: promoted metrical uncertainty into analysis schema v2 as
+  `beat_hypotheses`. The product now returns selected, alternating half-time,
+  and real-candidate-supported double-time sequences with normalized
+  truth-free evidence scores. Discarded observed events remain candidates,
+  unsupported timestamps are never invented, and alternatives outside
+  40--320 BPM are omitted. ARTBeaT primary metrics and all 15 selected paths
+  are unchanged; piano explicitly reports competitive half-time scores instead
+  of presenting the dense path as unqualified certainty. Next investigate a
+  locally varying metrical path backed by genuinely independent long-range
+  meter/harmonic evidence before opening Vienna.

@@ -3,8 +3,9 @@ use std::cmp::Ordering;
 use thiserror::Error;
 
 use crate::{
-    ANALYSIS_SCHEMA_VERSION, Analysis, BeatEvent, ChangeKind, ChangePoint, ObservedBeat,
-    RhythmObservations, RhythmSection, TempoHypothesis, TempoPoint, TempoSegment, TempoSegmentKind,
+    ANALYSIS_SCHEMA_VERSION, Analysis, BeatCandidate, BeatEvent, BeatSequenceHypothesis,
+    BeatSequenceHypothesisKind, ChangeKind, ChangePoint, ObservedBeat, RhythmObservations,
+    RhythmSection, TempoHypothesis, TempoPoint, TempoSegment, TempoSegmentKind,
 };
 
 /// Policy used to resolve metrical half/double-time evidence before tempo estimation.
@@ -161,6 +162,7 @@ impl TempoMapEstimator {
                 duration_s: input.duration_s,
                 source: input.source.clone(),
                 beats: beat_events(&prepared),
+                beat_hypotheses: beat_sequence_hypotheses(&prepared, &self.options),
                 global_bpm: None,
                 tempo_hypotheses: Vec::new(),
                 tempo_curve: Vec::new(),
@@ -204,6 +206,7 @@ impl TempoMapEstimator {
         }
 
         let global_bpm = median(smoothed.clone());
+        let beat_hypotheses = beat_sequence_hypotheses(&prepared, &self.options);
         let tempo_hypotheses = metrical_hypotheses(global_bpm, &self.options);
         if tempo_hypotheses.len() > 1 {
             warnings.push("metrical_level_has_half_or_double_time_alternatives".to_string());
@@ -233,6 +236,7 @@ impl TempoMapEstimator {
             duration_s: input.duration_s,
             source: input.source.clone(),
             beats: beat_events(&prepared),
+            beat_hypotheses,
             global_bpm: Some(global_bpm),
             tempo_hypotheses,
             tempo_curve,
@@ -551,6 +555,9 @@ fn prepare_observations(
     observations
         .beats
         .retain(|beat| !inside_silence(beat.time_s, &silence_regions));
+    observations
+        .beat_candidates
+        .retain(|candidate| !inside_silence(candidate.time_s, &silence_regions));
     let rejected_silent_beats = input.beats.len() - observations.beats.len();
     let (observations, repaired_edge_double_time) =
         if options.metrical_selection_policy == MetricalSelectionPolicy::SequencePhaseV1 {
@@ -684,6 +691,17 @@ fn repair_edge_double_time_runs(input: &RhythmObservations) -> (RhythmObservatio
         .filter(|(index, _)| removals.binary_search(index).is_err())
         .map(|(_, beat)| beat.clone())
         .collect();
+    repaired
+        .beat_candidates
+        .extend(removals.iter().map(|&index| {
+            let beat = &input.beats[index];
+            BeatCandidate {
+                time_s: beat.time_s,
+                confidence: beat.confidence,
+                downbeat_confidence: beat.downbeat_confidence,
+            }
+        }));
+    sort_and_deduplicate_candidates(&mut repaired.beat_candidates);
     (repaired, true)
 }
 
@@ -859,6 +877,19 @@ fn select_metrical_level(
         .step_by(2)
         .cloned()
         .collect();
+    selected.beat_candidates.extend(
+        input
+            .beats
+            .iter()
+            .enumerate()
+            .filter(|(index, _)| index % 2 != selected_phase)
+            .map(|(_, beat)| BeatCandidate {
+                time_s: beat.time_s,
+                confidence: beat.confidence,
+                downbeat_confidence: beat.downbeat_confidence,
+            }),
+    );
+    sort_and_deduplicate_candidates(&mut selected.beat_candidates);
     if options.metrical_selection_policy == MetricalSelectionPolicy::SequencePhaseV1 {
         transfer_discarded_downbeats(input, &mut selected);
         if folded_downbeat_spacing_is_inconsistent(&selected) {
@@ -866,6 +897,11 @@ fn select_metrical_level(
         }
     }
     (selected, true, false)
+}
+
+fn sort_and_deduplicate_candidates(candidates: &mut Vec<BeatCandidate>) {
+    candidates.sort_by(|left, right| float_order(left.time_s, right.time_s));
+    candidates.dedup_by(|left, right| (left.time_s - right.time_s).abs() <= f64::EPSILON);
 }
 
 fn transfer_discarded_downbeats(input: &RhythmObservations, selected: &mut RhythmObservations) {
@@ -1173,6 +1209,193 @@ fn metrical_hypotheses(global_bpm: f64, options: &EstimatorOptions) -> Vec<Tempo
             })
         })
         .collect()
+}
+
+#[derive(Debug, Clone)]
+struct HypothesisBeat {
+    time_s: f64,
+    confidence: f64,
+    downbeat_confidence: f64,
+    selected: bool,
+}
+
+fn beat_sequence_hypotheses(
+    input: &RhythmObservations,
+    options: &EstimatorOptions,
+) -> Vec<BeatSequenceHypothesis> {
+    let selected = input
+        .beats
+        .iter()
+        .map(|beat| HypothesisBeat {
+            time_s: beat.time_s,
+            confidence: beat.confidence,
+            downbeat_confidence: beat.downbeat_confidence,
+            selected: true,
+        })
+        .collect::<Vec<_>>();
+    if selected.is_empty() {
+        return Vec::new();
+    }
+    if selected.len() < 3 {
+        return vec![BeatSequenceHypothesis {
+            kind: BeatSequenceHypothesisKind::Selected,
+            metrical_level: 0,
+            phase: None,
+            relative_score: 1.0,
+            beat_times_s: selected.iter().map(|event| event.time_s).collect(),
+        }];
+    }
+
+    let mut scored = vec![(
+        BeatSequenceHypothesisKind::Selected,
+        0_i8,
+        None,
+        selected.clone(),
+    )];
+    if selected.len() >= 8 && sequence_bpm_is_in_range(&selected, -1, options) {
+        for phase in [0_usize, 1] {
+            scored.push((
+                BeatSequenceHypothesisKind::HalfTime,
+                -1,
+                Some(u8::try_from(phase).expect("alternating phase fits u8")),
+                selected.iter().skip(phase).step_by(2).cloned().collect(),
+            ));
+        }
+    }
+
+    let mut doubled = selected.clone();
+    let mut additions = Vec::new();
+    for pair in selected.windows(2) {
+        let gap = pair[1].time_s - pair[0].time_s;
+        let midpoint = f64::midpoint(pair[0].time_s, pair[1].time_s);
+        let maximum_offset = gap * 0.2;
+        if let Some(candidate) = input
+            .beat_candidates
+            .iter()
+            .filter(|candidate| candidate.time_s > pair[0].time_s)
+            .filter(|candidate| candidate.time_s < pair[1].time_s)
+            .filter(|candidate| (candidate.time_s - midpoint).abs() <= maximum_offset)
+            .max_by(|left, right| {
+                left.confidence.total_cmp(&right.confidence).then_with(|| {
+                    (right.time_s - midpoint)
+                        .abs()
+                        .total_cmp(&(left.time_s - midpoint).abs())
+                })
+            })
+        {
+            additions.push(HypothesisBeat {
+                time_s: candidate.time_s,
+                confidence: candidate.confidence,
+                downbeat_confidence: candidate.downbeat_confidence,
+                selected: false,
+            });
+        }
+    }
+    if additions.len() >= 3 && sequence_bpm_is_in_range(&selected, 1, options) {
+        doubled.extend(additions);
+        doubled.sort_by(|left, right| float_order(left.time_s, right.time_s));
+        doubled.dedup_by(|left, right| (left.time_s - right.time_s).abs() <= f64::EPSILON);
+        scored.push((BeatSequenceHypothesisKind::DoubleTime, 1, None, doubled));
+    }
+
+    let mut hypotheses = scored
+        .into_iter()
+        .map(|(kind, metrical_level, phase, events)| {
+            let score = beat_sequence_score(input, &events);
+            (
+                BeatSequenceHypothesis {
+                    kind,
+                    metrical_level,
+                    phase,
+                    relative_score: score,
+                    beat_times_s: events.iter().map(|event| event.time_s).collect(),
+                },
+                score,
+            )
+        })
+        .collect::<Vec<_>>();
+    let maximum_score = hypotheses
+        .iter()
+        .map(|(_, score)| *score)
+        .fold(0.0_f64, f64::max)
+        .max(1e-9);
+    for (hypothesis, score) in &mut hypotheses {
+        hypothesis.relative_score = (*score / maximum_score).clamp(0.0, 1.0);
+    }
+    hypotheses
+        .into_iter()
+        .map(|(hypothesis, _)| hypothesis)
+        .collect()
+}
+
+fn sequence_bpm_is_in_range(
+    selected: &[HypothesisBeat],
+    metrical_level: i8,
+    options: &EstimatorOptions,
+) -> bool {
+    let intervals = selected
+        .windows(2)
+        .map(|pair| pair[1].time_s - pair[0].time_s)
+        .collect::<Vec<_>>();
+    if intervals.is_empty() {
+        return false;
+    }
+    let bpm = 60.0 / median(intervals) * 2.0_f64.powi(i32::from(metrical_level));
+    bpm >= options.min_bpm && bpm <= options.max_bpm
+}
+
+fn beat_sequence_score(input: &RhythmObservations, events: &[HypothesisBeat]) -> f64 {
+    if events.len() < 3 {
+        return 0.0;
+    }
+    let evidence = events
+        .iter()
+        .map(|event| hypothesis_beat_evidence(input, event))
+        .collect::<Vec<_>>();
+    let mean_event_evidence = evidence.iter().sum::<f64>() / usize_to_f64(evidence.len());
+    let intervals = events
+        .windows(2)
+        .map(|pair| pair[1].time_s - pair[0].time_s)
+        .collect::<Vec<_>>();
+    let median_interval = median(intervals.clone());
+    let mean_log_error = intervals
+        .iter()
+        .map(|interval| (interval / median_interval).ln().abs())
+        .sum::<f64>()
+        / usize_to_f64(intervals.len());
+    let interval_continuity = (-4.0 * mean_log_error).exp();
+    let total_selected_evidence = input
+        .beats
+        .iter()
+        .map(|beat| HypothesisBeat {
+            time_s: beat.time_s,
+            confidence: beat.confidence,
+            downbeat_confidence: beat.downbeat_confidence,
+            selected: true,
+        })
+        .map(|event| hypothesis_beat_evidence(input, &event))
+        .sum::<f64>();
+    let retained_selected_evidence = events
+        .iter()
+        .zip(&evidence)
+        .filter_map(|(event, evidence)| event.selected.then_some(*evidence))
+        .sum::<f64>();
+    let selected_evidence_retention = if total_selected_evidence > 0.0 {
+        (retained_selected_evidence / total_selected_evidence).clamp(0.0, 1.0)
+    } else {
+        usize_to_f64(events.iter().filter(|event| event.selected).count())
+            / usize_to_f64(input.beats.len().max(1))
+    };
+    0.45 * mean_event_evidence + 0.30 * interval_continuity + 0.25 * selected_evidence_retention
+}
+
+fn hypothesis_beat_evidence(input: &RhythmObservations, event: &HypothesisBeat) -> f64 {
+    let confidence = event.confidence.clamp(0.0, 1.0);
+    let activity = nearest_activity_db(&input.activity, event.time_s)
+        .map_or(confidence, |relative_db| {
+            10.0_f64.powf(relative_db / 20.0).clamp(0.0, 1.0)
+        });
+    0.75 * confidence + 0.20 * activity + 0.05 * event.downbeat_confidence.clamp(0.0, 1.0)
 }
 
 fn simplify_curve(points: &[TempoPoint], tolerance: f64) -> Vec<usize> {
@@ -2100,6 +2323,99 @@ mod tests {
             analysis
                 .warnings
                 .contains(&"metrical_level_selected_half_time".to_string())
+        );
+        let doubled = analysis
+            .beat_hypotheses
+            .iter()
+            .find(|hypothesis| hypothesis.kind == BeatSequenceHypothesisKind::DoubleTime)
+            .expect("discarded real beats remain available as a double-time alternative");
+        assert_eq!(doubled.beat_times_s.len(), input.beats.len());
+        assert!(doubled.beat_times_s.iter().all(|time_s| {
+            input
+                .beats
+                .iter()
+                .any(|beat| (beat.time_s - *time_s).abs() <= f64::EPSILON)
+        }));
+    }
+
+    #[test]
+    fn beat_sequence_hypotheses_never_invent_timestamps() {
+        let mut input = observations_from_bpms(&[120.0; 12]);
+        input.beat_candidates = input
+            .beats
+            .windows(2)
+            .map(|pair| BeatCandidate {
+                time_s: f64::midpoint(pair[0].time_s, pair[1].time_s),
+                confidence: 0.6,
+                downbeat_confidence: 0.0,
+            })
+            .collect();
+        let supported = input
+            .beats
+            .iter()
+            .map(|beat| beat.time_s)
+            .chain(
+                input
+                    .beat_candidates
+                    .iter()
+                    .map(|candidate| candidate.time_s),
+            )
+            .collect::<Vec<_>>();
+
+        let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
+
+        assert_eq!(analysis.schema_version, 2);
+        assert_eq!(analysis.beat_hypotheses.len(), 4);
+        assert!(analysis.beat_hypotheses.iter().any(|hypothesis| {
+            hypothesis.kind == BeatSequenceHypothesisKind::HalfTime && hypothesis.phase == Some(0)
+        }));
+        assert!(analysis.beat_hypotheses.iter().any(|hypothesis| {
+            hypothesis.kind == BeatSequenceHypothesisKind::HalfTime && hypothesis.phase == Some(1)
+        }));
+        assert!(analysis.beat_hypotheses.iter().any(|hypothesis| {
+            hypothesis.kind == BeatSequenceHypothesisKind::DoubleTime
+                && hypothesis.beat_times_s.len() == input.beats.len() * 2 - 1
+        }));
+        assert!(analysis.beat_hypotheses.iter().all(|hypothesis| {
+            (0.0..=1.0).contains(&hypothesis.relative_score)
+                && hypothesis
+                    .beat_times_s
+                    .windows(2)
+                    .all(|pair| pair[0] < pair[1])
+                && hypothesis.beat_times_s.iter().all(|time_s| {
+                    supported
+                        .iter()
+                        .any(|supported| (*supported - *time_s).abs() <= f64::EPSILON)
+                })
+        }));
+    }
+
+    #[test]
+    fn beat_sequence_hypotheses_respect_the_supported_tempo_range() {
+        let mut input = observations_from_bpms(&[240.0; 12]);
+        input.beat_candidates = input
+            .beats
+            .windows(2)
+            .map(|pair| BeatCandidate {
+                time_s: f64::midpoint(pair[0].time_s, pair[1].time_s),
+                confidence: 0.9,
+                downbeat_confidence: 0.0,
+            })
+            .collect();
+
+        let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
+
+        assert!(
+            analysis
+                .beat_hypotheses
+                .iter()
+                .any(|hypothesis| { hypothesis.kind == BeatSequenceHypothesisKind::HalfTime })
+        );
+        assert!(
+            analysis
+                .beat_hypotheses
+                .iter()
+                .all(|hypothesis| { hypothesis.kind != BeatSequenceHypothesisKind::DoubleTime })
         );
     }
 

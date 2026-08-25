@@ -233,8 +233,22 @@ changes, rubato, and ambiguous whole-track pulses. `sequence-phase-v1` remains
 a named evaluation candidate rather than a product strategy until independent
 timestamped evidence supports merging it into the single shipping algorithm.
 
-Half- and double-time alternatives are preserved in `tempo_hypotheses`; the
-public result does not pretend that metrical ambiguity has disappeared.
+Half- and double-time alternatives are preserved at two levels. The compact
+`tempo_hypotheses` field reports octave-related global BPM summaries. Analysis
+schema v2 also returns `beat_hypotheses`, containing the selected sequence, both
+alternating half-time phases when their implied tempo remains in range, and a
+double-time sequence when real backend candidates support enough interval
+midpoints. Every listed time must come from an accepted beat or backend
+candidate; hypothesis construction never interpolates a timestamp.
+
+Sequence scores are truth-free and relative, not calibrated probabilities. For
+each sequence the estimator combines mean event evidence (45 percent),
+log-interval continuity (30 percent), and retained selected-sequence evidence
+(25 percent), then normalizes the strongest returned sequence to 1.0. A
+half-time or edge-cleanup decision moves discarded real events back into the
+candidate pool so the result remains auditable. Hypotheses outside the same
+40--320 BPM analysis range are omitted. They are result metadata rather than
+caller-selectable strategies and do not silently replace the primary tempo map.
 
 Before interval smoothing, an evidence-based rule handles inserted
 subdivisions. When the raw median is at least 150 BPM and its half lies in the

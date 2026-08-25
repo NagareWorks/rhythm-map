@@ -120,7 +120,7 @@ cargo xtask eval-beatnet \
   --model-pack models/beatnet-v1.json \
   --model-dir D:/rhythm-map-models/beatnet-v1 \
   --audio-dir D:/rhythm-map-eval/artbeat-v1/audio \
-  --report D:/rhythm-map-eval/reports/artbeat-beatnet-guarded-graph-v2.json \
+  --report D:/rhythm-map-eval/reports/artbeat-beatnet-explicit-hypotheses-v3.json \
   --no-fail
 ```
 
@@ -128,7 +128,10 @@ cargo xtask eval-beatnet \
 fuses a grid prior with beat/downbeat/non-beat evidence, but every emitted
 timestamp must still be a real BeatNet pulse maximum. This is developer
 calibration evidence, not a second end-user strategy or a selectable shipping
-backend.
+backend. Analysis schema v2 additionally exposes the selected and supported
+half/double-time beat sequences with truth-free relative scores; calibration
+report schema v6 records those exact product hypotheses under observation
+diagnostics.
 
 For a suite containing external audio, add the explicit local audio root:
 
