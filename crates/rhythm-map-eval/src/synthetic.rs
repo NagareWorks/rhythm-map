@@ -192,6 +192,7 @@ impl GeneratedTruth {
             beat_candidates: Vec::new(),
             activity: Vec::new(),
             onsets: Vec::new(),
+            harmonic_changes: Vec::new(),
             source: ModelInfo {
                 backend: "evaluation".to_string(),
                 model: "ideal_observations".to_string(),

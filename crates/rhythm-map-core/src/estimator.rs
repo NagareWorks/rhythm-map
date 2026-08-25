@@ -55,6 +55,9 @@ pub struct EstimatorOptions {
     pub half_bar_downbeat_salience_ratio: f64,
     /// Longest model-smeared ramp still classified as a tempo jump.
     pub jump_transition_max_s: f64,
+    /// Include the fixed calibration candidate whose pulse level may vary locally.
+    #[cfg(any(feature = "experimental-policies", test))]
+    pub include_local_metrical_path_hypothesis: bool,
 }
 
 impl Default for EstimatorOptions {
@@ -77,6 +80,8 @@ impl Default for EstimatorOptions {
             metrical_selection_policy: MetricalSelectionPolicy::SalienceOnly,
             half_bar_downbeat_salience_ratio: 1.2,
             jump_transition_max_s: 4.0,
+            #[cfg(any(feature = "experimental-policies", test))]
+            include_local_metrical_path_hypothesis: false,
         }
     }
 }
@@ -101,6 +106,17 @@ impl EstimatorOptions {
         Self {
             maximum_metrical_outlier_run: 3,
             metrical_selection_policy: MetricalSelectionPolicy::SequencePhaseV1,
+            ..Self::default()
+        }
+    }
+
+    /// Experimental candidate that adds one locally varying, harmonic-aware
+    /// real-timestamp path to the ambiguity result without changing primary beats.
+    #[cfg(any(feature = "experimental-policies", test))]
+    #[must_use]
+    pub fn local_metrical_path_candidate() -> Self {
+        Self {
+            include_local_metrical_path_hypothesis: true,
             ..Self::default()
         }
     }
@@ -139,6 +155,10 @@ impl TempoMapEstimator {
         Ok(Self { options })
     }
 
+    pub(crate) const fn requires_harmonic_changes(&self) -> bool {
+        local_metrical_path_enabled(&self.options)
+    }
+
     /// Analyze backend-neutral beat observations.
     ///
     /// # Errors
@@ -151,6 +171,7 @@ impl TempoMapEstimator {
 
         let PreparedObservations {
             observations: mut prepared,
+            hypothesis_source,
             silence_regions,
             mut warnings,
         } = prepare_observations(input, &self.options);
@@ -162,7 +183,11 @@ impl TempoMapEstimator {
                 duration_s: input.duration_s,
                 source: input.source.clone(),
                 beats: beat_events(&prepared),
-                beat_hypotheses: beat_sequence_hypotheses(&prepared, &self.options),
+                beat_hypotheses: beat_sequence_hypotheses(
+                    &prepared,
+                    &hypothesis_source,
+                    &self.options,
+                ),
                 global_bpm: None,
                 tempo_hypotheses: Vec::new(),
                 tempo_curve: Vec::new(),
@@ -206,7 +231,8 @@ impl TempoMapEstimator {
         }
 
         let global_bpm = median(smoothed.clone());
-        let beat_hypotheses = beat_sequence_hypotheses(&prepared, &self.options);
+        let beat_hypotheses =
+            beat_sequence_hypotheses(&prepared, &hypothesis_source, &self.options);
         let tempo_hypotheses = metrical_hypotheses(global_bpm, &self.options);
         if tempo_hypotheses.len() > 1 {
             warnings.push("metrical_level_has_half_or_double_time_alternatives".to_string());
@@ -460,6 +486,27 @@ fn validate_observations(input: &RhythmObservations) -> Result<(), AnalysisError
             ));
         }
     }
+    validate_audio_evidence(input)?;
+    if input
+        .beats
+        .windows(2)
+        .any(|pair| pair[1].time_s <= pair[0].time_s)
+    {
+        return Err(AnalysisError::UnsortedBeats);
+    }
+    if input
+        .beat_candidates
+        .windows(2)
+        .any(|pair| pair[1].time_s <= pair[0].time_s)
+    {
+        return Err(AnalysisError::InvalidValue(
+            "beat candidate timestamps must be strictly increasing".to_string(),
+        ));
+    }
+    Ok(())
+}
+
+fn validate_audio_evidence(input: &RhythmObservations) -> Result<(), AnalysisError> {
     for point in &input.activity {
         if !point.time_s.is_finite()
             || point.time_s < 0.0
@@ -492,12 +539,17 @@ fn validate_observations(input: &RhythmObservations) -> Result<(), AnalysisError
             ));
         }
     }
-    if input
-        .beats
-        .windows(2)
-        .any(|pair| pair[1].time_s <= pair[0].time_s)
-    {
-        return Err(AnalysisError::UnsortedBeats);
+    for point in &input.harmonic_changes {
+        if !point.time_s.is_finite()
+            || point.time_s < 0.0
+            || point.time_s > input.duration_s
+            || !point.strength.is_finite()
+            || !(0.0..=1.0).contains(&point.strength)
+        {
+            return Err(AnalysisError::InvalidValue(
+                "audio harmonic-change point is invalid".to_string(),
+            ));
+        }
     }
     if input
         .activity
@@ -509,21 +561,21 @@ fn validate_observations(input: &RhythmObservations) -> Result<(), AnalysisError
         ));
     }
     if input
-        .beat_candidates
-        .windows(2)
-        .any(|pair| pair[1].time_s <= pair[0].time_s)
-    {
-        return Err(AnalysisError::InvalidValue(
-            "beat candidate timestamps must be strictly increasing".to_string(),
-        ));
-    }
-    if input
         .onsets
         .windows(2)
         .any(|pair| pair[1].time_s <= pair[0].time_s)
     {
         return Err(AnalysisError::InvalidValue(
             "audio onset timestamps must be strictly increasing".to_string(),
+        ));
+    }
+    if input
+        .harmonic_changes
+        .windows(2)
+        .any(|pair| pair[1].time_s <= pair[0].time_s)
+    {
+        return Err(AnalysisError::InvalidValue(
+            "audio harmonic-change timestamps must be strictly increasing".to_string(),
         ));
     }
     Ok(())
@@ -538,6 +590,7 @@ struct SilenceRegion {
 
 struct PreparedObservations {
     observations: RhythmObservations,
+    hypothesis_source: RhythmObservations,
     silence_regions: Vec<SilenceRegion>,
     warnings: Vec<String>,
 }
@@ -558,6 +611,7 @@ fn prepare_observations(
     observations
         .beat_candidates
         .retain(|candidate| !inside_silence(candidate.time_s, &silence_regions));
+    let hypothesis_source = observations.clone();
     let rejected_silent_beats = input.beats.len() - observations.beats.len();
     let (observations, repaired_edge_double_time) =
         if options.metrical_selection_policy == MetricalSelectionPolicy::SequencePhaseV1 {
@@ -584,6 +638,7 @@ fn prepare_observations(
 
     PreparedObservations {
         observations,
+        hypothesis_source,
         silence_regions,
         warnings,
     }
@@ -739,6 +794,16 @@ fn mirror_observations(input: &RhythmObservations) -> RhythmObservations {
         .collect();
     mirrored.onsets = input
         .onsets
+        .iter()
+        .rev()
+        .map(|point| {
+            let mut point = point.clone();
+            point.time_s = input.duration_s - point.time_s;
+            point
+        })
+        .collect();
+    mirrored.harmonic_changes = input
+        .harmonic_changes
         .iter()
         .rev()
         .map(|point| {
@@ -1219,8 +1284,16 @@ struct HypothesisBeat {
     selected: bool,
 }
 
+type BeatHypothesisCandidate = (
+    BeatSequenceHypothesisKind,
+    i8,
+    Option<u8>,
+    Vec<HypothesisBeat>,
+);
+
 fn beat_sequence_hypotheses(
     input: &RhythmObservations,
+    hypothesis_source: &RhythmObservations,
     options: &EstimatorOptions,
 ) -> Vec<BeatSequenceHypothesis> {
     let selected = input
@@ -1297,7 +1370,19 @@ fn beat_sequence_hypotheses(
         doubled.dedup_by(|left, right| (left.time_s - right.time_s).abs() <= f64::EPSILON);
         scored.push((BeatSequenceHypothesisKind::DoubleTime, 1, None, doubled));
     }
+    if local_metrical_path_enabled(options)
+        && let Some(path) = locally_varying_metrical_path(hypothesis_source, options)
+    {
+        scored.push((BeatSequenceHypothesisKind::LocallyVarying, 0, None, path));
+    }
 
+    score_beat_sequence_hypotheses(input, scored)
+}
+
+fn score_beat_sequence_hypotheses(
+    input: &RhythmObservations,
+    scored: Vec<BeatHypothesisCandidate>,
+) -> Vec<BeatSequenceHypothesis> {
     let mut hypotheses = scored
         .into_iter()
         .map(|(kind, metrical_level, phase, events)| {
@@ -1326,6 +1411,167 @@ fn beat_sequence_hypotheses(
         .into_iter()
         .map(|(hypothesis, _)| hypothesis)
         .collect()
+}
+
+#[cfg(any(feature = "experimental-policies", test))]
+const fn local_metrical_path_enabled(options: &EstimatorOptions) -> bool {
+    options.include_local_metrical_path_hypothesis
+}
+
+#[cfg(not(any(feature = "experimental-policies", test)))]
+const fn local_metrical_path_enabled(_options: &EstimatorOptions) -> bool {
+    false
+}
+
+fn locally_varying_metrical_path(
+    input: &RhythmObservations,
+    options: &EstimatorOptions,
+) -> Option<Vec<HypothesisBeat>> {
+    const MINIMUM_EVENTS: usize = 8;
+    const EVENT_THRESHOLD: f64 = 0.95;
+    const TEMPO_WEIGHT: f64 = 2.0;
+    const METRICAL_SWITCH_COST: f64 = 0.5;
+    const HARMONIC_WEIGHT: f64 = 5.0;
+    let candidates = &input.beat_candidates;
+    if candidates.len() < MINIMUM_EVENTS
+        || input.harmonic_changes.len() < candidates.len().saturating_div(2)
+    {
+        return None;
+    }
+    let minimum_interval = 60.0 / options.max_bpm;
+    let maximum_interval = 60.0 / options.min_bpm;
+    let count = candidates.len();
+    let mut scores = vec![f64::NEG_INFINITY; count * count];
+    let mut back = vec![usize::MAX; count * count];
+    let event_score = |index: usize| {
+        candidates[index].confidence
+            + 0.1 * candidates[index].downbeat_confidence
+            + HARMONIC_WEIGHT
+                * nearest_harmonic_change_strength(input, candidates[index].time_s).unwrap_or(0.0)
+            - EVENT_THRESHOLD
+    };
+    for first in 0..count {
+        if candidates[first].time_s > maximum_interval {
+            break;
+        }
+        for second in first + 1..count {
+            let interval = candidates[second].time_s - candidates[first].time_s;
+            if interval > maximum_interval {
+                break;
+            }
+            if interval >= minimum_interval {
+                scores[first * count + second] = event_score(first) + event_score(second);
+            }
+        }
+    }
+    for previous in 0..count {
+        for current in previous + 1..count {
+            let state = previous * count + current;
+            if !scores[state].is_finite() {
+                continue;
+            }
+            let previous_interval = candidates[current].time_s - candidates[previous].time_s;
+            for next in current + 1..count {
+                let next_interval = candidates[next].time_s - candidates[current].time_s;
+                if next_interval > maximum_interval {
+                    break;
+                }
+                if next_interval < minimum_interval {
+                    continue;
+                }
+                let log_ratio = (next_interval / previous_interval).ln();
+                let ordinary = TEMPO_WEIGHT * log_ratio.powi(2);
+                let octave = METRICAL_SWITCH_COST
+                    + TEMPO_WEIGHT * (log_ratio.abs() - std::f64::consts::LN_2).powi(2);
+                let next_score = scores[state] + event_score(next) - ordinary.min(octave);
+                let next_state = current * count + next;
+                if next_score > scores[next_state] {
+                    scores[next_state] = next_score;
+                    back[next_state] = previous;
+                }
+            }
+        }
+    }
+    let path = best_local_metrical_path_indices(
+        candidates,
+        &scores,
+        &back,
+        input.duration_s,
+        maximum_interval,
+    )?;
+    if path.len() < MINIMUM_EVENTS {
+        return None;
+    }
+    let events = path
+        .into_iter()
+        .map(|index| {
+            let candidate = &candidates[index];
+            HypothesisBeat {
+                time_s: candidate.time_s,
+                confidence: candidate.confidence,
+                downbeat_confidence: candidate.downbeat_confidence,
+                selected: input
+                    .beats
+                    .iter()
+                    .any(|beat| (beat.time_s - candidate.time_s).abs() <= f64::EPSILON),
+            }
+        })
+        .collect::<Vec<_>>();
+    let differs_from_selected = events.len() != input.beats.len()
+        || events
+            .iter()
+            .zip(&input.beats)
+            .any(|(event, beat)| (event.time_s - beat.time_s).abs() > f64::EPSILON);
+    differs_from_selected.then_some(events)
+}
+
+fn best_local_metrical_path_indices(
+    candidates: &[BeatCandidate],
+    scores: &[f64],
+    back: &[usize],
+    duration_s: f64,
+    maximum_interval: f64,
+) -> Option<Vec<usize>> {
+    let count = candidates.len();
+    let mut terminal = None;
+    for previous in 0..count {
+        for (current, candidate) in candidates.iter().enumerate().skip(previous + 1) {
+            if candidate.time_s < duration_s - maximum_interval {
+                continue;
+            }
+            let state = previous * count + current;
+            if scores[state].is_finite() && terminal.is_none_or(|(_, _, best)| scores[state] > best)
+            {
+                terminal = Some((previous, current, scores[state]));
+            }
+        }
+    }
+    let (mut previous, mut current, _) = terminal?;
+    let mut path = vec![current, previous];
+    loop {
+        let predecessor = back[previous * count + current];
+        if predecessor == usize::MAX {
+            break;
+        }
+        current = previous;
+        previous = predecessor;
+        path.push(previous);
+    }
+    path.reverse();
+    Some(path)
+}
+
+fn nearest_harmonic_change_strength(input: &RhythmObservations, time_s: f64) -> Option<f64> {
+    input
+        .harmonic_changes
+        .iter()
+        .min_by(|left, right| {
+            (left.time_s - time_s)
+                .abs()
+                .total_cmp(&(right.time_s - time_s).abs())
+        })
+        .filter(|point| (point.time_s - time_s).abs() <= 0.02)
+        .map(|point| point.strength)
 }
 
 fn sequence_bpm_is_in_range(
@@ -2031,6 +2277,7 @@ mod tests {
             beat_candidates: Vec::new(),
             activity: Vec::new(),
             onsets: Vec::new(),
+            harmonic_changes: Vec::new(),
             source: ModelInfo {
                 backend: "test".to_string(),
                 model: "synthetic".to_string(),
@@ -2364,7 +2611,7 @@ mod tests {
 
         let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
 
-        assert_eq!(analysis.schema_version, 2);
+        assert_eq!(analysis.schema_version, 3);
         assert_eq!(analysis.beat_hypotheses.len(), 4);
         assert!(analysis.beat_hypotheses.iter().any(|hypothesis| {
             hypothesis.kind == BeatSequenceHypothesisKind::HalfTime && hypothesis.phase == Some(0)
@@ -2387,6 +2634,83 @@ mod tests {
                         .iter()
                         .any(|supported| (*supported - *time_s).abs() <= f64::EPSILON)
                 })
+        }));
+    }
+
+    #[test]
+    fn only_local_metrical_candidate_requests_harmonic_changes() {
+        assert!(!TempoMapEstimator::default().requires_harmonic_changes());
+        let candidate =
+            TempoMapEstimator::new(EstimatorOptions::local_metrical_path_candidate()).unwrap();
+        assert!(candidate.requires_harmonic_changes());
+    }
+
+    #[test]
+    fn local_metrical_candidate_uses_harmonic_evidence_and_real_timestamps() {
+        let candidates = (0..=32)
+            .map(|index| {
+                let time_s = usize_to_f64(index) * 0.25;
+                let retained = time_s >= 4.0 || index.is_multiple_of(2);
+                BeatCandidate {
+                    time_s,
+                    confidence: if retained { 0.9 } else { 0.2 },
+                    downbeat_confidence: if retained { 0.5 } else { 0.0 },
+                }
+            })
+            .collect::<Vec<_>>();
+        let mut input = observations_from_bpms(&[240.0; 31]);
+        input.duration_s = 8.0;
+        input.beats = candidates
+            .iter()
+            .map(|candidate| ObservedBeat {
+                time_s: candidate.time_s,
+                confidence: candidate.confidence,
+                downbeat_confidence: candidate.downbeat_confidence,
+            })
+            .collect();
+        input.beat_candidates.clone_from(&candidates);
+        input.harmonic_changes = candidates
+            .iter()
+            .enumerate()
+            .map(|(index, candidate)| crate::AudioHarmonicChangePoint {
+                time_s: candidate.time_s,
+                strength: if candidate.time_s >= 4.0 || index.is_multiple_of(2) {
+                    0.1
+                } else {
+                    0.0
+                },
+            })
+            .collect();
+
+        let analysis = TempoMapEstimator::new(EstimatorOptions::local_metrical_path_candidate())
+            .unwrap()
+            .estimate(&input)
+            .unwrap();
+        let path = analysis
+            .beat_hypotheses
+            .iter()
+            .find(|hypothesis| hypothesis.kind == BeatSequenceHypothesisKind::LocallyVarying)
+            .expect("candidate should expose one locally varying path");
+        let intervals = path
+            .beat_times_s
+            .windows(2)
+            .map(|pair| pair[1] - pair[0])
+            .collect::<Vec<_>>();
+
+        assert!(
+            intervals
+                .iter()
+                .any(|interval| (*interval - 0.5).abs() < 1e-9)
+        );
+        assert!(
+            intervals
+                .iter()
+                .any(|interval| (*interval - 0.25).abs() < 1e-9)
+        );
+        assert!(path.beat_times_s.iter().all(|time_s| {
+            candidates
+                .iter()
+                .any(|candidate| (candidate.time_s - *time_s).abs() <= f64::EPSILON)
         }));
     }
 

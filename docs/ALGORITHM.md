@@ -17,6 +17,10 @@ backend-neutral `RhythmObservations`:
 - a deterministic short-time spectral-flux onset envelope; and
 - model identity and audio duration.
 
+An explicit calibration policy can additionally request deterministic harmonic-
+change evidence at model-supported beat candidates. The shipping estimator does
+not request or compute this extra feature.
+
 No model tensor or Beat This-specific type crosses into `rhythm-map-core`.
 Alternative trackers and caller-supplied observations therefore use the same
 tempo-map estimator and produce the same `Analysis` schema.
@@ -95,11 +99,11 @@ the annotated beats missed by the selected backend sequence. The second slice
 prevents already-selected high-confidence events from hiding weak evidence at
 the exact timestamps that a recovery algorithm would need to promote.
 
-Calibration reports use that evidence to construct at most four whole-track
-pulse hypotheses: the selected sequence, its two alternating half-time phases,
-and a midpoint-augmented sequence when at least three real candidate peaks lie
-near selected-beat midpoints. No regular grid timestamp is generated. The
-hypotheses are ranked without truth using an auditable evidence score: 45%
+Calibration reports normally use that evidence to construct at most four whole-
+track pulse hypotheses: the selected sequence, its two alternating half-time
+phases, and a midpoint-augmented sequence when at least three real candidate
+peaks lie near selected-beat midpoints. No regular grid timestamp is generated.
+The hypotheses are ranked without truth using an auditable evidence score: 45%
 mean event evidence, 30% log-interval continuity, and 25% preservation of the
 selected sequence's total evidence. Event evidence combines backend beat
 confidence, local PCM activity, and downbeat confidence. This prevents a
@@ -140,6 +144,48 @@ downbeat rule were each insufficient to select a pulse without regressions.
 They remain diagnostics and do not change hypothesis ranking. Results are
 recorded in `evaluation/baselines/artbeat-spectral-flux-v5.md` and
 `evaluation/baselines/artbeat-band-bar-evidence-v6-v8.md`.
+
+### Experimental locally varying metrical path
+
+The named calibration policy `local-metrical-path-v1` adds one fifth hypothesis
+whose pulse level may change within the track. It is necessary as a parallel
+hypothesis because a fixed whole-track half-time phase cannot represent music
+whose annotated pulse changes from every other model peak to every model peak.
+It is not a user-selectable product strategy and never replaces the primary beat
+sequence or tempo map.
+
+The independent evidence is a harmonic-change descriptor evaluated only at the
+union of accepted beats and real backend candidates. Around each supported time
+`t`, the engine takes pitch-class profiles centered at `t - 100 ms` and
+`t + 100 ms`. Each profile uses an approximately 80 ms Hann window rounded up
+to a power-of-two FFT size and clamped to 1,024--8,192 samples. Magnitudes from
+55 Hz through 5 kHz are mapped to the nearest chromatic pitch class, transformed
+with `log(1 + magnitude)`, and L2-normalized. The reported strength is the cosine
+distance between the two profiles in `[0, 1]`. This is deterministic PCM
+analysis, not another trained model.
+
+A dynamic program then traverses only `beat_candidates` at intervals inside the
+same 40--320 BPM range. A node receives beat confidence, one tenth of downbeat
+confidence, and five times harmonic-change strength, less a fixed 0.95 event
+cost. Consecutive intervals pay the cheaper of:
+
+```text
+ordinary tempo motion = 2 * log(next_interval / previous_interval)^2
+metrical switch       = 0.5 + 2 * (abs(log ratio) - log(2))^2
+```
+
+The second branch permits an explicit but penalized local half/double-time
+switch. A path must contain at least eight real candidates, begin and end within
+one maximum allowed beat interval of the track edges, and have harmonic evidence
+for at least half the candidate set. It is omitted when it duplicates the
+selected sequence. No timestamp is interpolated, quantized, or extrapolated.
+
+These constants are one frozen calibration candidate, not knobs exposed to
+callers. Its output is ranked with the same truth-free sequence score used by
+the other hypotheses; harmonic change guides path construction but the returned
+relative score remains comparable evidence metadata, not a probability. The
+ARTBeaT result is recorded in
+`evaluation/baselines/artbeat-beatnet-local-metrical-path-v4.md`.
 
 The estimator normally preserves backend timestamps. It can reject events
 inside sustained low-activity spans, select one phase of a strong/weak
@@ -235,11 +281,16 @@ timestamped evidence supports merging it into the single shipping algorithm.
 
 Half- and double-time alternatives are preserved at two levels. The compact
 `tempo_hypotheses` field reports octave-related global BPM summaries. Analysis
-schema v2 also returns `beat_hypotheses`, containing the selected sequence, both
+schema v3 returns `beat_hypotheses`, containing the selected sequence, both
 alternating half-time phases when their implied tempo remains in range, and a
 double-time sequence when real backend candidates support enough interval
 midpoints. Every listed time must come from an accepted beat or backend
 candidate; hypothesis construction never interpolates a timestamp.
+
+When the experimental local-path policy is enabled, the same field may contain
+`locally_varying`. Its `metrical_level` is zero because it is not one global
+power-of-two transform; its changing level is represented by the intervals in
+the returned path. Default analysis does not emit this kind.
 
 Sequence scores are truth-free and relative, not calibrated probabilities. For
 each sequence the estimator combines mean event evidence (45 percent),

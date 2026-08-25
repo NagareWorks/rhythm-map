@@ -343,3 +343,17 @@ a learned component to the default distribution.
   of presenting the dense path as unqualified certainty. Next investigate a
   locally varying metrical path backed by genuinely independent long-range
   meter/harmonic evidence before opening Vienna.
+- 2026-08-25: added the frozen evaluation candidate
+  `local-metrical-path-v1` and analysis schema v3. It computes chroma cosine
+  distance around model-supported events and uses that evidence in a candidate-
+  only dynamic program with penalized local half/double-time transitions. The
+  default selected paths and mean beat F1 remain exactly unchanged across all
+  15 ARTBeaT calibration cases. Best-top-K mean beat F1 rises from 0.8620 to
+  0.9180: seven cases improve, none regress, and piano rubato rises from 0.5873
+  to 0.8041. Ordinary zero-mean onset autocorrelation was rejected because it
+  still favored the dense piano pulse. The local path is necessary as an
+  additional hypothesis but is not yet a unique selector: it is emitted on 13
+  cases and can itself be worse than the primary path. Keep one shipping
+  algorithm and no public strategy selector. Next freeze this complete candidate
+  for a one-shot Vienna holdout, then design a truth-free ambiguity selector
+  only if the holdout confirms that locally varying coverage generalizes.

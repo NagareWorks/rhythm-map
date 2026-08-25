@@ -119,8 +119,8 @@ cargo xtask eval-beatnet \
   --suite evaluation/suites/artbeat-v1.json \
   --model-pack models/beatnet-v1.json \
   --model-dir D:/rhythm-map-models/beatnet-v1 \
-  --audio-dir D:/rhythm-map-eval/artbeat-v1/audio \
-  --report D:/rhythm-map-eval/reports/artbeat-beatnet-explicit-hypotheses-v3.json \
+  --audio-dir D:/rhythm-map-eval/artbeat-v1 \
+  --report D:/rhythm-map-eval/reports/artbeat-beatnet-local-metrical-path-v4.json \
   --no-fail
 ```
 
@@ -128,10 +128,12 @@ cargo xtask eval-beatnet \
 fuses a grid prior with beat/downbeat/non-beat evidence, but every emitted
 timestamp must still be a real BeatNet pulse maximum. This is developer
 calibration evidence, not a second end-user strategy or a selectable shipping
-backend. Analysis schema v2 additionally exposes the selected and supported
-half/double-time beat sequences with truth-free relative scores; calibration
-report schema v6 records those exact product hypotheses under observation
-diagnostics.
+backend. Analysis schema v3 exposes the selected and supported half/double-time
+beat sequences with truth-free relative scores. This command also enables the
+fixed `local-metrical-path-v1` calibration candidate, which adds deterministic
+harmonic-change observations and one real-timestamp path whose metrical level
+may vary locally. Calibration report schema v7 records those exact hypotheses
+under observation diagnostics. The primary selected sequence remains unchanged.
 
 For a suite containing external audio, add the explicit local audio root:
 
@@ -173,8 +175,8 @@ input class can be identified from truth-free runtime evidence. Dataset IDs,
 filenames, annotations, and per-case oracle scores are forbidden selector
 inputs.
 
-For calibration suites with timestamped beat truth, `eval-backend` report
-schema 5 additionally emits `candidate_evidence`, full-band and low/mid/high
+For calibration suites with timestamped beat truth, current reports additionally
+emit `candidate_evidence`, full-band and low/mid/high
 spectral-flux onset diagnostics, and `pulse_hypothesis_coverage`. The onset
 envelope is backend-neutral and deterministic; its strength is reported
 independently and does not alter hypothesis ranking. Candidate recall asks
@@ -182,10 +184,12 @@ whether any real backend local maximum exists near each truth beat. It
 separately reports candidate recall and confidence for truth beats missed by
 the selected sequence, because the all-beat median is otherwise dominated by
 events the decoder already kept.
-Top-K coverage then scores a fixed, truth-free set consisting of the selected
-sequence, two alternating half-time phases, and an optional real-midpoint
-augmentation. The same fields are omitted from regression and holdout reports
-so their truth cannot become an implicit per-case router.
+Top-K coverage normally scores a fixed, truth-free set consisting of the
+selected sequence, two alternating half-time phases, and an optional real-
+midpoint augmentation. `local-metrical-path-v1` adds one locally varying path
+constructed from real candidates plus deterministic harmonic-change evidence.
+The same fields are omitted from regression and holdout reports so their truth
+cannot become an implicit per-case router.
 
 Each hypothesis includes an evidence breakdown. Ranking charges a half-time
 subset for discarded selected-event evidence in addition to measuring event

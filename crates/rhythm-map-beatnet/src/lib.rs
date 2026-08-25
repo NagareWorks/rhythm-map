@@ -169,6 +169,7 @@ impl BeatNetBackend {
             beat_candidates,
             activity: Vec::new(),
             onsets: Vec::new(),
+            harmonic_changes: Vec::new(),
             source: ModelInfo {
                 backend: "beatnet-rten-guarded-graph-v2-experimental".to_string(),
                 model: self.model_name.clone(),

@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 /// Current serialized analysis schema version.
-pub const ANALYSIS_SCHEMA_VERSION: u32 = 2;
+pub const ANALYSIS_SCHEMA_VERSION: u32 = 3;
 
 /// Identity and timing contract of an observation backend.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -71,6 +71,15 @@ pub struct AudioOnsetPoint {
     pub high_strength: f64,
 }
 
+/// Deterministic chroma-distance evidence measured around a model-supported event.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct AudioHarmonicChangePoint {
+    /// Model-supported timestamp around which the comparison was measured.
+    pub time_s: f64,
+    /// Cosine distance between pitch-class profiles before and after the event.
+    pub strength: f64,
+}
+
 /// Backend-neutral observations consumed by the timing estimator.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct RhythmObservations {
@@ -87,6 +96,9 @@ pub struct RhythmObservations {
     /// Optional deterministic onset envelope derived from decoded PCM.
     #[serde(default)]
     pub onsets: Vec<AudioOnsetPoint>,
+    /// Optional deterministic harmonic-change evidence at supported event times.
+    #[serde(default)]
+    pub harmonic_changes: Vec<AudioHarmonicChangePoint>,
     /// Source model metadata.
     pub source: ModelInfo,
 }
@@ -114,6 +126,8 @@ pub enum BeatSequenceHypothesisKind {
     HalfTime,
     /// Real backend candidates inserted near selected interval midpoints.
     DoubleTime,
+    /// A candidate-graph path whose local pulse level may change over time.
+    LocallyVarying,
 }
 
 /// One auditable metrical interpretation made only from backend-supported times.

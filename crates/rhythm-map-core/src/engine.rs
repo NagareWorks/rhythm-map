@@ -2,7 +2,10 @@ use realfft::RealFftPlanner;
 use thiserror::Error;
 
 use crate::estimator::TempoMapEstimator;
-use crate::{Analysis, AnalysisError, AudioActivityPoint, AudioOnsetPoint, RhythmObservations};
+use crate::{
+    Analysis, AnalysisError, AudioActivityPoint, AudioHarmonicChangePoint, AudioOnsetPoint,
+    RhythmObservations,
+};
 
 /// Error returned by an observation backend.
 #[derive(Debug, Clone, Error)]
@@ -143,6 +146,26 @@ where
         }
         if observations.onsets.is_empty() {
             observations.onsets = extract_audio_onsets(samples, sample_rate);
+        }
+        if self.estimator.requires_harmonic_changes()
+            && observations.harmonic_changes.is_empty()
+            && observations.beat_candidates.len() >= 8
+        {
+            let mut supported_times = observations
+                .beats
+                .iter()
+                .map(|beat| beat.time_s)
+                .chain(
+                    observations
+                        .beat_candidates
+                        .iter()
+                        .map(|candidate| candidate.time_s),
+                )
+                .collect::<Vec<_>>();
+            supported_times.sort_by(f64::total_cmp);
+            supported_times.dedup_by(|left, right| (*left - *right).abs() <= f64::EPSILON);
+            observations.harmonic_changes =
+                extract_harmonic_changes(samples, sample_rate, &supported_times);
         }
         Ok(observations)
     }
@@ -297,6 +320,84 @@ fn extract_audio_onsets(samples: &[f32], sample_rate: u32) -> Vec<AudioOnsetPoin
     onsets
 }
 
+#[allow(
+    clippy::cast_possible_truncation,
+    clippy::cast_precision_loss,
+    clippy::cast_sign_loss
+)]
+fn extract_harmonic_changes(
+    samples: &[f32],
+    sample_rate: u32,
+    supported_times: &[f64],
+) -> Vec<AudioHarmonicChangePoint> {
+    if samples.is_empty() || supported_times.is_empty() {
+        return Vec::new();
+    }
+    let target_window = (f64::from(sample_rate) * 0.08).round() as usize;
+    let fft_size = target_window.clamp(1_024, 8_192).next_power_of_two();
+    let mut planner = RealFftPlanner::<f32>::new();
+    let transform = planner.plan_fft_forward(fft_size);
+    let mut input = transform.make_input_vec();
+    let mut spectrum = transform.make_output_vec();
+    let mut pitch_class_profile = |time_s: f64| {
+        let center = (time_s.max(0.0) * f64::from(sample_rate)) as usize;
+        let start = center.saturating_sub(fft_size / 2).min(samples.len());
+        input.fill(0.0);
+        let available = samples.len().saturating_sub(start).min(fft_size);
+        for (index, (&sample, target)) in samples[start..start + available]
+            .iter()
+            .zip(&mut input)
+            .enumerate()
+        {
+            let phase =
+                2.0 * std::f32::consts::PI * index as f32 / fft_size.saturating_sub(1) as f32;
+            *target = sample * (0.5 - 0.5 * phase.cos());
+        }
+        transform
+            .process(&mut input, &mut spectrum)
+            .expect("real FFT buffers match the planned transform");
+        let mut profile = [0.0_f64; 12];
+        for (bin_index, bin) in spectrum.iter().enumerate().skip(1) {
+            let frequency_hz =
+                usize_to_f64(bin_index) * f64::from(sample_rate) / usize_to_f64(fft_size);
+            if !(55.0..=5_000.0).contains(&frequency_hz) {
+                continue;
+            }
+            let midi_note = (69.0 + 12.0 * (frequency_hz / 440.0).log2()).round() as i32;
+            let pitch_class =
+                usize::try_from(midi_note.rem_euclid(12)).expect("pitch class is non-negative");
+            profile[pitch_class] += f64::from(bin.norm()).ln_1p();
+        }
+        let norm = profile
+            .iter()
+            .map(|value| value * value)
+            .sum::<f64>()
+            .sqrt();
+        (norm > 1e-12).then(|| {
+            for value in &mut profile {
+                *value /= norm;
+            }
+            profile
+        })
+    };
+    supported_times
+        .iter()
+        .map(|&time_s| {
+            let before = pitch_class_profile(time_s - 0.1);
+            let after = pitch_class_profile(time_s + 0.1);
+            let strength = before.zip(after).map_or(0.0, |(before, after)| {
+                (1.0 - before
+                    .iter()
+                    .zip(after)
+                    .map(|(left, right)| left * right)
+                    .sum::<f64>())
+                .clamp(0.0, 1.0)
+            });
+            AudioHarmonicChangePoint { time_s, strength }
+        })
+        .collect()
+}
+
 fn onset_band_share(band_flux: f64, total_flux: f64) -> f64 {
     if total_flux <= f64::EPSILON {
         0.0
@@ -352,6 +453,7 @@ mod tests {
                 beat_candidates: Vec::new(),
                 activity: Vec::new(),
                 onsets: Vec::new(),
+                harmonic_changes: Vec::new(),
                 source: ModelInfo {
                     backend: "test".to_string(),
                     model: "test".to_string(),
@@ -448,6 +550,26 @@ mod tests {
         assert!((high.time_s - 0.5).abs() <= 0.02);
         assert!(low.low_strength > high.low_strength);
         assert!(high.high_strength > low.high_strength);
+    }
+
+    #[test]
+    #[allow(clippy::cast_possible_truncation)]
+    fn harmonic_change_distinguishes_a_pitch_transition_from_a_stable_tone() {
+        let sample_rate = 16_000_u32;
+        let mut stable = Vec::with_capacity(32_000);
+        let mut changed = Vec::with_capacity(32_000);
+        for index in 0..32_000 {
+            let time_s = usize_to_f64(index) / f64::from(sample_rate);
+            stable.push((std::f64::consts::TAU * 440.0 * time_s).sin() as f32);
+            let frequency = if time_s < 1.0 { 440.0 } else { 523.251 };
+            changed.push((std::f64::consts::TAU * frequency * time_s).sin() as f32);
+        }
+
+        let stable_change = extract_harmonic_changes(&stable, sample_rate, &[1.0])[0].strength;
+        let pitch_change = extract_harmonic_changes(&changed, sample_rate, &[1.0])[0].strength;
+
+        assert!(stable_change < 0.05);
+        assert!(pitch_change > stable_change + 0.1);
     }
 
     #[test]

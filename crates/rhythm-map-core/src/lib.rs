@@ -9,8 +9,8 @@ pub use estimator::{AnalysisError, analyze_observations};
 #[cfg(feature = "experimental-policies")]
 pub use estimator::{EstimatorOptions, MetricalSelectionPolicy, TempoMapEstimator};
 pub use types::{
-    ANALYSIS_SCHEMA_VERSION, Analysis, AudioActivityPoint, AudioOnsetPoint, BeatCandidate,
-    BeatEvent, BeatSequenceHypothesis, BeatSequenceHypothesisKind, ChangeKind, ChangePoint,
-    ModelInfo, ObservedBeat, RhythmObservations, RhythmSection, TempoHypothesis, TempoPoint,
-    TempoSegment, TempoSegmentKind,
+    ANALYSIS_SCHEMA_VERSION, Analysis, AudioActivityPoint, AudioHarmonicChangePoint,
+    AudioOnsetPoint, BeatCandidate, BeatEvent, BeatSequenceHypothesis, BeatSequenceHypothesisKind,
+    ChangeKind, ChangePoint, ModelInfo, ObservedBeat, RhythmObservations, RhythmSection,
+    TempoHypothesis, TempoPoint, TempoSegment, TempoSegmentKind,
 };

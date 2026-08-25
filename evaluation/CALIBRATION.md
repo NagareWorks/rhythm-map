@@ -106,8 +106,11 @@ cargo xtask eval-backend \
 Omitting either policy keeps that layer on its shipping default. Reports include
 the selected IDs. Registered estimator candidates currently include
 `metrical-consistency-v1` and its sequence-aware extension
-`sequence-phase-v1`. Observation diagnostics include the raw median BPM and the
-PCM salience and backend confidence of both alternating event phases. Tempo-only
+`sequence-phase-v1`, plus `local-metrical-path-v1` for the BeatNet calibration
+path. The last candidate adds a hypothesis only; it does not replace the
+primary beat sequence or tempo map. Observation diagnostics include the raw
+median BPM and the PCM salience and backend confidence of both alternating event
+phases. Tempo-only
 suites remain `end_to_end_only`; this command does not turn their BPM labels
 into beat timestamps or a policy oracle.
 

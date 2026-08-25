@@ -90,6 +90,9 @@ pub struct ObservationDiagnostics {
     /// Number of deterministic spectral-flux onset samples.
     #[serde(default)]
     pub onset_point_count: usize,
+    /// Number of deterministic harmonic-change samples at supported events.
+    #[serde(default)]
+    pub harmonic_change_point_count: usize,
     /// Quietest activity sample relative to peak level.
     pub minimum_relative_db: Option<f64>,
     /// Fraction of activity samples at or below -40 dB.
@@ -794,7 +797,14 @@ pub fn evaluate_beatnet_calibration_suite(
     let backend = BeatNetBackend::load(model_path)?;
     let resolver = ExternalAudioResolver::new(audio_directory)?;
     let model_pack = model_pack_identity(&verified);
-    evaluate_loaded_backend_suite(suite_path, Some(&resolver), None, None, backend, model_pack)
+    evaluate_loaded_backend_suite(
+        suite_path,
+        Some(&resolver),
+        None,
+        Some("local-metrical-path-v1"),
+        backend,
+        model_pack,
+    )
 }
 
 fn evaluate_loaded_backend_suite<B>(
@@ -880,7 +890,7 @@ where
     let end_to_end_passed = cases.iter().all(|case| case.end_to_end.passed);
     let attribution = attribution_decision(oracle_passed, has_unpaired_cases, end_to_end_passed);
     Ok(BottleneckEvaluation {
-        schema_version: 6,
+        schema_version: 7,
         suite_id: suite.id,
         suite_purpose: suite.purpose,
         model_pack,
@@ -903,11 +913,16 @@ fn model_pack_identity(verified: &VerifiedModelPack) -> ModelPackIdentity {
 }
 
 fn validate_estimator_policy(policy_id: Option<&str>) -> Result<()> {
-    if policy_id.is_none_or(|id| matches!(id, "metrical-consistency-v1" | "sequence-phase-v1")) {
+    if policy_id.is_none_or(|id| {
+        matches!(
+            id,
+            "metrical-consistency-v1" | "sequence-phase-v1" | "local-metrical-path-v1"
+        )
+    }) {
         return Ok(());
     }
     bail!(
-        "unknown estimator policy {}; available policies: metrical-consistency-v1, sequence-phase-v1",
+        "unknown estimator policy {}; available policies: metrical-consistency-v1, sequence-phase-v1, local-metrical-path-v1",
         policy_id.expect("checked as some")
     )
 }
@@ -921,6 +936,10 @@ fn estimator_for_policy(policy_id: Option<&str>) -> Result<TempoMapEstimator> {
         }
         Some("sequence-phase-v1") => {
             TempoMapEstimator::new(EstimatorOptions::sequence_phase_candidate()).map_err(Into::into)
+        }
+        Some("local-metrical-path-v1") => {
+            TempoMapEstimator::new(EstimatorOptions::local_metrical_path_candidate())
+                .map_err(Into::into)
         }
         None => Ok(TempoMapEstimator::default()),
         Some(_) => unreachable!("validated estimator policy"),
@@ -1745,6 +1764,7 @@ fn observation_diagnostics(
         analyzed_downbeat_count: analysis.beats.iter().filter(|beat| beat.downbeat).count(),
         activity_point_count: observations.activity.len(),
         onset_point_count: observations.onsets.len(),
+        harmonic_change_point_count: observations.harmonic_changes.len(),
         minimum_relative_db,
         low_activity_fraction,
         raw_median_bpm,
@@ -1970,6 +1990,7 @@ fn product_pulse_hypothesis(
         (BeatSequenceHypothesisKind::HalfTime, Some(0)) => "half_time_phase_0",
         (BeatSequenceHypothesisKind::HalfTime, Some(1)) => "half_time_phase_1",
         (BeatSequenceHypothesisKind::DoubleTime, _) => "candidate_midpoint_augmented",
+        (BeatSequenceHypothesisKind::LocallyVarying, _) => "locally_varying_metrical_path",
         (BeatSequenceHypothesisKind::HalfTime, _) => return None,
     };
     let evidence = pulse_evidence_breakdown(&evidence_observations, &events);
@@ -2427,6 +2448,7 @@ mod tests {
                 .collect(),
             activity: Vec::new(),
             onsets: Vec::new(),
+            harmonic_changes: Vec::new(),
             source: ModelInfo {
                 backend: "test".to_string(),
                 model: "test".to_string(),
@@ -2483,6 +2505,7 @@ mod tests {
             beat_candidates: Vec::new(),
             activity: Vec::new(),
             onsets: Vec::new(),
+            harmonic_changes: Vec::new(),
             source: ModelInfo {
                 backend: "test".to_string(),
                 model: "test".to_string(),
@@ -2534,6 +2557,7 @@ mod tests {
             beat_candidates: Vec::new(),
             activity: Vec::new(),
             onsets: Vec::new(),
+            harmonic_changes: Vec::new(),
             source: ModelInfo {
                 backend: "test".to_string(),
                 model: "test".to_string(),
@@ -2614,6 +2638,7 @@ mod tests {
         assert!(validate_estimator_policy(None).is_ok());
         assert!(validate_estimator_policy(Some("metrical-consistency-v1")).is_ok());
         assert!(validate_estimator_policy(Some("sequence-phase-v1")).is_ok());
+        assert!(validate_estimator_policy(Some("local-metrical-path-v1")).is_ok());
         assert!(validate_estimator_policy(Some("tuned-on-holdout")).is_err());
     }
 
