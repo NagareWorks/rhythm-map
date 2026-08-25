@@ -191,8 +191,11 @@ Vienna 4x22 is absent from the 16 corpora named in the published Beat This
 training-data release, making this a corpus-disjoint check relative to that
 published list. As with every public model, this cannot prove that no
 unpublished experiment ever encountered the recordings. This holdout may be
-opened once for a preselected shipping candidate; it must not become another
-decoder or threshold sweep.
+opened once for a preselected shipping candidate. It was opened on 2026-08-25
+for `local-metrical-path-v1`, frozen at commit
+`03fc058b3e0607faec53ab0ab9cb6d6425b9d8a5`. It is now historical test evidence
+and must never become calibration data, another decoder sweep, or a source of
+threshold changes.
 
 ## Candidates intentionally not imported
 

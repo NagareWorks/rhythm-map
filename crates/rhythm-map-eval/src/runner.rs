@@ -203,6 +203,108 @@ pub struct PulseHypothesisCoverage {
     pub hypotheses: Vec<PulseHypothesisEvaluation>,
 }
 
+/// Aggregate beat metrics for one fixed holdout interpretation.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct BeatHypothesisAggregate {
+    /// Number of holdout cases included in the aggregate.
+    pub case_count: usize,
+    /// True only when every included case clears its precommitted beat gate.
+    pub passed: bool,
+    /// Arithmetic mean of per-case beat precision.
+    pub mean_beat_precision: f64,
+    /// Arithmetic mean of per-case beat recall.
+    pub mean_beat_recall: f64,
+    /// Arithmetic mean of per-case beat F1.
+    pub mean_beat_f1: f64,
+}
+
+/// Per-tag comparison for one preselected beat-hypothesis holdout.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct BeatHypothesisHoldoutSlice {
+    /// Capability tag shared by the included cases.
+    pub tag: String,
+    /// Number of cases carrying the tag.
+    pub case_count: usize,
+    /// Mean primary selected-sequence beat F1.
+    pub primary_mean_beat_f1: f64,
+    /// Mean F1 after truth-free evidence chooses primary or local path.
+    pub truth_free_choice_mean_beat_f1: f64,
+    /// Truth-assisted coverage ceiling from primary and local paths.
+    pub coverage_ceiling_mean_beat_f1: f64,
+}
+
+/// One case in a fixed `BeatNet` beat-hypothesis holdout evaluation.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct BeatHypothesisHoldoutCase {
+    /// Stable case identifier.
+    pub id: String,
+    /// Capability slices inherited from the suite manifest.
+    pub tags: Vec<String>,
+    /// Verified encoded audio identity.
+    pub audio_sha256: String,
+    /// Required beat F1 inherited from the precommitted suite.
+    pub minimum_beat_f1: f64,
+    /// Primary selected-sequence metrics.
+    pub primary: BeatMetrics,
+    /// Local-path metrics, absent when the fixed algorithm emitted no distinct path.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub local_path: Option<BeatMetrics>,
+    /// Truth-free relative score of the primary selected sequence.
+    pub primary_relative_score: f64,
+    /// Truth-free relative score of the local path, when emitted.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub local_path_relative_score: Option<f64>,
+    /// Sequence selected by existing truth-free relative evidence.
+    pub truth_free_choice: String,
+    /// Beat metrics of the truth-free choice.
+    pub truth_free_choice_beats: BeatMetrics,
+    /// Truth-assisted best member of only the primary/local pair.
+    pub coverage_best_choice: String,
+    /// Beat metrics of the truth-assisted coverage ceiling.
+    pub coverage_ceiling_beats: BeatMetrics,
+    /// End-to-end observation and hypothesis runtime.
+    pub runtime_ms: f64,
+}
+
+/// One-shot evaluation of one preselected `BeatNet` hypothesis candidate.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct BeatHypothesisHoldoutEvaluation {
+    /// Report schema version.
+    pub schema_version: u32,
+    /// Stable suite identifier.
+    pub suite_id: String,
+    /// Holdout is required by this entry point.
+    pub suite_purpose: SuitePurpose,
+    /// Verified model pack used for the single inference pass.
+    pub model_pack: ModelPackIdentity,
+    /// Exact preselected hypothesis policy.
+    pub estimator_policy: String,
+    /// Commit that froze the candidate algorithm before opening the holdout.
+    pub candidate_definition_commit: String,
+    /// Aggregate primary selected-sequence metrics.
+    pub primary: BeatHypothesisAggregate,
+    /// Aggregate metrics from the existing truth-free relative-score choice.
+    pub truth_free_choice: BeatHypothesisAggregate,
+    /// Truth-assisted primary/local coverage ceiling; not deployable.
+    pub coverage_ceiling: BeatHypothesisAggregate,
+    /// Number of cases where a distinct local path was emitted.
+    pub local_path_emitted_case_count: usize,
+    /// Mean local-path F1 over emitted cases only.
+    pub emitted_local_path_mean_beat_f1: Option<f64>,
+    /// Cases improved by the truth-free choice relative to primary.
+    pub truth_free_improved_case_ids: Vec<String>,
+    /// Cases regressed by the truth-free choice relative to primary.
+    pub truth_free_regressed_case_ids: Vec<String>,
+    /// Cases where the local path increases the truth-assisted coverage ceiling.
+    pub local_coverage_gain_case_ids: Vec<String>,
+    /// Stable capability-tag aggregates.
+    pub slices: Vec<BeatHypothesisHoldoutSlice>,
+    /// Per-case fixed-candidate measurements.
+    pub cases: Vec<BeatHypothesisHoldoutCase>,
+    /// True only when the truth-free choice clears every gate without regression.
+    pub passed: bool,
+}
+
 /// Available oracle evidence and the end-to-end result for one case.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct AttributionCase {
@@ -805,6 +907,144 @@ pub fn evaluate_beatnet_calibration_suite(
         backend,
         model_pack,
     )
+}
+
+/// Evaluate the one preselected locally varying `BeatNet` hypothesis on a holdout.
+///
+/// This entry point accepts no sweep and exposes no raw observations. It reports
+/// the primary sequence, the existing truth-free evidence choice, and a clearly
+/// labeled truth-assisted coverage ceiling for only the primary/local pair.
+///
+/// # Errors
+///
+/// Returns an error unless the suite is a timestamped holdout and `policy_id`
+/// names the frozen `local-metrical-path-v1` candidate.
+pub fn evaluate_beatnet_hypothesis_holdout(
+    suite_path: &Path,
+    model_pack_path: &Path,
+    model_root: &Path,
+    audio_directory: &Path,
+    policy_id: &str,
+) -> Result<BeatHypothesisHoldoutEvaluation> {
+    if policy_id != "local-metrical-path-v1" {
+        bail!(
+            "BeatNet hypothesis holdout accepts only the preselected local-metrical-path-v1 policy"
+        );
+    }
+    let (suite, root) = load_suite(suite_path)?;
+    if suite.purpose != SuitePurpose::Holdout {
+        bail!(
+            "BeatNet hypothesis holdout requires a holdout suite; {} declares {:?}",
+            suite.id,
+            suite.purpose
+        );
+    }
+    ensure_timestamped_beat_truth(&suite, &root, "BeatNet hypothesis holdout")?;
+    let verified = verify_model_pack(model_pack_path, model_root)
+        .with_context(|| format!("verifying model pack {}", model_pack_path.display()))?;
+    validate_beatnet_contract(&verified)?;
+    let model_path = required_model_path(&verified, ModelArtifactRole::RhythmModel)?;
+    let backend = BeatNetBackend::load(model_path)?;
+    let estimator = estimator_for_policy(Some(policy_id))?;
+    let mut engine = Engine::with_estimator(backend, estimator);
+    let resolver = ExternalAudioResolver::new(audio_directory)?;
+    let mut cases = Vec::with_capacity(suite.cases.len());
+    for (case_index, case) in suite.cases.iter().enumerate() {
+        eprintln!(
+            "BeatNet hypothesis holdout {}/{}: {}",
+            case_index + 1,
+            suite.cases.len(),
+            case.id
+        );
+        cases.push(evaluate_beatnet_hypothesis_holdout_case(
+            &mut engine,
+            &resolver,
+            &suite,
+            &root,
+            case,
+        )?);
+    }
+    Ok(finalize_beat_hypothesis_holdout(
+        suite,
+        model_pack_identity(&verified),
+        policy_id,
+        cases,
+    ))
+}
+
+fn evaluate_beatnet_hypothesis_holdout_case(
+    engine: &mut Engine<BeatNetBackend>,
+    resolver: &ExternalAudioResolver,
+    suite: &EvaluationSuite,
+    root: &Path,
+    case: &EvaluationCase,
+) -> Result<BeatHypothesisHoldoutCase> {
+    let truth = load_case_truth(case, root)?;
+    let thresholds = case.thresholds.as_ref().unwrap_or(&suite.thresholds);
+    let (samples, sample_rate, audio_sha256) =
+        load_case_audio(case, &suite.id, root, &truth, Some(resolver))?;
+    let started = Instant::now();
+    let observations = engine
+        .observe_pcm(&samples, sample_rate, 1)
+        .with_context(|| format!("observing holdout case {}", case.id))?;
+    let analysis = engine
+        .analyze_observations(&observations)
+        .with_context(|| format!("estimating holdout case {}", case.id))?;
+    let expected = truth
+        .beats
+        .iter()
+        .map(|beat| beat.time_s)
+        .collect::<Vec<_>>();
+    let tolerance_s = thresholds.beat_tolerance_ms / 1000.0;
+    let primary = analysis
+        .beat_hypotheses
+        .iter()
+        .find(|hypothesis| hypothesis.kind == BeatSequenceHypothesisKind::Selected)
+        .context("analysis did not expose its selected beat hypothesis")?;
+    let local = analysis
+        .beat_hypotheses
+        .iter()
+        .find(|hypothesis| hypothesis.kind == BeatSequenceHypothesisKind::LocallyVarying);
+    let primary_beats = score_beats(&primary.beat_times_s, &expected, tolerance_s);
+    let local_beats = local.map(|path| score_beats(&path.beat_times_s, &expected, tolerance_s));
+    let truth_free_uses_local =
+        local.is_some_and(|path| path.relative_score > primary.relative_score);
+    let coverage_uses_local = local_beats
+        .as_ref()
+        .is_some_and(|metrics| metrics.f1 > primary_beats.f1);
+    Ok(BeatHypothesisHoldoutCase {
+        id: case.id.clone(),
+        tags: case.tags.clone(),
+        audio_sha256: audio_sha256.context("holdout case did not resolve external audio")?,
+        minimum_beat_f1: thresholds.min_beat_f1,
+        primary: primary_beats.clone(),
+        local_path: local_beats.clone(),
+        primary_relative_score: primary.relative_score,
+        local_path_relative_score: local.map(|path| path.relative_score),
+        truth_free_choice: hypothesis_choice_id(truth_free_uses_local).to_string(),
+        truth_free_choice_beats: if truth_free_uses_local {
+            local_beats
+                .clone()
+                .expect("local score exists when local path is selected")
+        } else {
+            primary_beats.clone()
+        },
+        coverage_best_choice: hypothesis_choice_id(coverage_uses_local).to_string(),
+        coverage_ceiling_beats: if coverage_uses_local {
+            local_beats.expect("local score exists when local path improves coverage")
+        } else {
+            primary_beats
+        },
+        runtime_ms: started.elapsed().as_secs_f64() * 1000.0,
+    })
+}
+
+const fn hypothesis_choice_id(local: bool) -> &'static str {
+    if local {
+        "locally_varying_metrical_path"
+    } else {
+        "selected"
+    }
 }
 
 fn evaluate_loaded_backend_suite<B>(
@@ -1633,6 +1873,109 @@ fn finalize_decoder_candidates(candidates: &mut [DecoderSweepCandidate]) -> f64 
         })
         .sum::<f64>()
         / usize_to_f64(case_count)
+}
+
+fn finalize_beat_hypothesis_holdout(
+    suite: EvaluationSuite,
+    model_pack: ModelPackIdentity,
+    policy_id: &str,
+    cases: Vec<BeatHypothesisHoldoutCase>,
+) -> BeatHypothesisHoldoutEvaluation {
+    let primary = aggregate_holdout_metrics(&cases, |case| &case.primary);
+    let truth_free_choice = aggregate_holdout_metrics(&cases, |case| &case.truth_free_choice_beats);
+    let coverage_ceiling = aggregate_holdout_metrics(&cases, |case| &case.coverage_ceiling_beats);
+    let local_scores = cases
+        .iter()
+        .filter_map(|case| case.local_path.as_ref().map(|metrics| metrics.f1))
+        .collect::<Vec<_>>();
+    let emitted_local_path_mean_beat_f1 = (!local_scores.is_empty())
+        .then(|| local_scores.iter().sum::<f64>() / usize_to_f64(local_scores.len()));
+    let truth_free_improved_case_ids = cases
+        .iter()
+        .filter(|case| case.truth_free_choice_beats.f1 > case.primary.f1 + f64::EPSILON)
+        .map(|case| case.id.clone())
+        .collect::<Vec<_>>();
+    let truth_free_regressed_case_ids = cases
+        .iter()
+        .filter(|case| case.truth_free_choice_beats.f1 + f64::EPSILON < case.primary.f1)
+        .map(|case| case.id.clone())
+        .collect::<Vec<_>>();
+    let local_coverage_gain_case_ids = cases
+        .iter()
+        .filter(|case| case.coverage_ceiling_beats.f1 > case.primary.f1 + f64::EPSILON)
+        .map(|case| case.id.clone())
+        .collect::<Vec<_>>();
+    let slices = holdout_hypothesis_slices(&cases);
+    let passed = truth_free_choice.passed && truth_free_regressed_case_ids.is_empty();
+    BeatHypothesisHoldoutEvaluation {
+        schema_version: 1,
+        suite_id: suite.id,
+        suite_purpose: suite.purpose,
+        model_pack,
+        estimator_policy: policy_id.to_string(),
+        candidate_definition_commit: "03fc058b3e0607faec53ab0ab9cb6d6425b9d8a5".to_string(),
+        primary,
+        truth_free_choice,
+        coverage_ceiling,
+        local_path_emitted_case_count: local_scores.len(),
+        emitted_local_path_mean_beat_f1,
+        truth_free_improved_case_ids,
+        truth_free_regressed_case_ids,
+        local_coverage_gain_case_ids,
+        slices,
+        cases,
+        passed,
+    }
+}
+
+fn aggregate_holdout_metrics<'a>(
+    cases: &'a [BeatHypothesisHoldoutCase],
+    select: impl Fn(&'a BeatHypothesisHoldoutCase) -> &'a BeatMetrics,
+) -> BeatHypothesisAggregate {
+    let metrics = cases.iter().map(select).collect::<Vec<_>>();
+    let count = usize_to_f64(metrics.len().max(1));
+    BeatHypothesisAggregate {
+        case_count: metrics.len(),
+        passed: cases
+            .iter()
+            .zip(&metrics)
+            .all(|(case, metrics)| metrics.f1 >= case.minimum_beat_f1),
+        mean_beat_precision: metrics.iter().map(|metrics| metrics.precision).sum::<f64>() / count,
+        mean_beat_recall: metrics.iter().map(|metrics| metrics.recall).sum::<f64>() / count,
+        mean_beat_f1: metrics.iter().map(|metrics| metrics.f1).sum::<f64>() / count,
+    }
+}
+
+fn holdout_hypothesis_slices(
+    cases: &[BeatHypothesisHoldoutCase],
+) -> Vec<BeatHypothesisHoldoutSlice> {
+    let mut grouped = BTreeMap::<String, Vec<&BeatHypothesisHoldoutCase>>::new();
+    for case in cases {
+        for tag in &case.tags {
+            grouped.entry(tag.clone()).or_default().push(case);
+        }
+    }
+    grouped
+        .into_iter()
+        .map(|(tag, cases)| {
+            let count = usize_to_f64(cases.len());
+            BeatHypothesisHoldoutSlice {
+                tag,
+                case_count: cases.len(),
+                primary_mean_beat_f1: cases.iter().map(|case| case.primary.f1).sum::<f64>() / count,
+                truth_free_choice_mean_beat_f1: cases
+                    .iter()
+                    .map(|case| case.truth_free_choice_beats.f1)
+                    .sum::<f64>()
+                    / count,
+                coverage_ceiling_mean_beat_f1: cases
+                    .iter()
+                    .map(|case| case.coverage_ceiling_beats.f1)
+                    .sum::<f64>()
+                    / count,
+            }
+        })
+        .collect()
 }
 
 fn load_case_audio(
@@ -2720,6 +3063,53 @@ mod tests {
         assert!((evidence.strongest_frame.logit + 0.5).abs() < f32::EPSILON);
     }
 
+    #[test]
+    fn hypothesis_holdout_rejects_any_unfrozen_policy_before_loading_assets() {
+        let error = evaluate_beatnet_hypothesis_holdout(
+            Path::new("missing-suite.json"),
+            Path::new("missing-model-pack.json"),
+            Path::new("missing-model-root"),
+            Path::new("missing-audio-root"),
+            "tuned-on-holdout",
+        )
+        .unwrap_err();
+
+        assert!(error.to_string().contains("local-metrical-path-v1"));
+    }
+
+    #[test]
+    fn hypothesis_holdout_rejects_calibration_before_loading_models() {
+        let suite =
+            Path::new(env!("CARGO_MANIFEST_DIR")).join("../../evaluation/suites/artbeat-v1.json");
+        let error = evaluate_beatnet_hypothesis_holdout(
+            &suite,
+            Path::new("missing-model-pack.json"),
+            Path::new("missing-model-root"),
+            Path::new("missing-audio-root"),
+            "local-metrical-path-v1",
+        )
+        .unwrap_err();
+
+        assert!(error.to_string().contains("requires a holdout suite"));
+    }
+
+    #[test]
+    fn holdout_aggregates_keep_truth_free_choice_separate_from_coverage_ceiling() {
+        let cases = vec![
+            holdout_case("improved", "simple-meter", 0.6, 0.8, 0.8),
+            holdout_case("coverage-only", "compound-meter", 0.7, 0.6, 0.9),
+        ];
+
+        let primary = aggregate_holdout_metrics(&cases, |case| &case.primary);
+        let ranked = aggregate_holdout_metrics(&cases, |case| &case.truth_free_choice_beats);
+        let ceiling = aggregate_holdout_metrics(&cases, |case| &case.coverage_ceiling_beats);
+
+        assert!((primary.mean_beat_f1 - 0.65).abs() < f64::EPSILON);
+        assert!((ranked.mean_beat_f1 - 0.7).abs() < f64::EPSILON);
+        assert!((ceiling.mean_beat_f1 - 0.85).abs() < f64::EPSILON);
+        assert_eq!(holdout_hypothesis_slices(&cases).len(), 2);
+    }
+
     fn candidate(id: &str, cases: &[(f64, usize)]) -> DecoderSweepCandidate {
         DecoderSweepCandidate {
             policy: DecoderPolicy {
@@ -2755,6 +3145,41 @@ mod tests {
                     },
                 })
                 .collect(),
+        }
+    }
+
+    fn holdout_case(
+        id: &str,
+        tag: &str,
+        primary_f1: f64,
+        ranked_f1: f64,
+        ceiling_f1: f64,
+    ) -> BeatHypothesisHoldoutCase {
+        BeatHypothesisHoldoutCase {
+            id: id.to_string(),
+            tags: vec![tag.to_string()],
+            audio_sha256: "0".repeat(64),
+            minimum_beat_f1: 0.5,
+            primary: beat_metrics(primary_f1),
+            local_path: Some(beat_metrics(ceiling_f1)),
+            primary_relative_score: 1.0,
+            local_path_relative_score: Some(0.9),
+            truth_free_choice: "selected".to_string(),
+            truth_free_choice_beats: beat_metrics(ranked_f1),
+            coverage_best_choice: "locally_varying_metrical_path".to_string(),
+            coverage_ceiling_beats: beat_metrics(ceiling_f1),
+            runtime_ms: 1.0,
+        }
+    }
+
+    fn beat_metrics(f1: f64) -> BeatMetrics {
+        BeatMetrics {
+            matched: 0,
+            precision: f1,
+            recall: f1,
+            f1,
+            median_absolute_error_ms: None,
+            p95_absolute_error_ms: None,
         }
     }
 }

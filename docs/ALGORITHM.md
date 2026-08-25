@@ -186,6 +186,9 @@ the other hypotheses; harmonic change guides path construction but the returned
 relative score remains comparable evidence metadata, not a probability. The
 ARTBeaT result is recorded in
 `evaluation/baselines/artbeat-beatnet-local-metrical-path-v4.md`.
+Its one-shot corpus-disjoint Vienna follow-up is recorded in
+`evaluation/baselines/vienna4x22-beatnet-local-metrical-path-v1.md`; that opened
+holdout is evidence only and cannot be used to change these constants.
 
 The estimator normally preserves backend timestamps. It can reject events
 inside sustained low-activity spans, select one phase of a strong/weak

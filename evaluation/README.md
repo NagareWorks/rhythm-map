@@ -135,6 +135,28 @@ harmonic-change observations and one real-timestamp path whose metrical level
 may vary locally. Calibration report schema v7 records those exact hypotheses
 under observation diagnostics. The primary selected sequence remains unchanged.
 
+After freezing `local-metrical-path-v1` on calibration, open a timestamped
+holdout exactly once through the fixed-candidate command:
+
+```bash
+cargo xtask eval-beatnet-holdout \
+  --suite evaluation/suites/vienna4x22-holdout-v1.json \
+  --policy local-metrical-path-v1 \
+  --model-pack models/beatnet-v1.json \
+  --model-dir D:/rhythm-map-models/beatnet-v1 \
+  --audio-dir D:/rhythm-map-eval/vienna4x22-v1 \
+  --report D:/rhythm-map-eval/reports/vienna4x22-beatnet-local-metrical-path-v1.json \
+  --no-fail
+```
+
+This command accepts only a `holdout` suite and the single registered policy.
+It emits no raw observations or policy sweep. `primary` is the selected BeatNet
+sequence; `truth_free_choice` chooses between primary and local path using only
+their existing relative evidence; `coverage_ceiling` uses holdout truth to show
+whether either member contains a better path and is explicitly not deployable.
+The one-shot result is recorded in
+`baselines/vienna4x22-beatnet-local-metrical-path-v1.md`.
+
 For a suite containing external audio, add the explicit local audio root:
 
 ```bash

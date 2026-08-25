@@ -357,3 +357,15 @@ a learned component to the default distribution.
   algorithm and no public strategy selector. Next freeze this complete candidate
   for a one-shot Vienna holdout, then design a truth-free ambiguity selector
   only if the holdout confirms that locally varying coverage generalizes.
+- 2026-08-25: opened the precommitted Vienna 4x22 holdout exactly once for the
+  `local-metrical-path-v1` definition frozen at commit `03fc058`. The local path
+  was emitted on 6/12 performances and improved beat F1 in all six, raising the
+  truth-assisted primary/local coverage ceiling from 0.4018 to 0.4772. This
+  confirms that the additional hypothesis generalizes beyond ARTBeaT, especially
+  on 6/8 and Schubert 3/4 material. It does not solve product selection: the
+  existing truth-free relative score chose the primary path in all 12 cases, so
+  deployable F1 remained 0.4018, and no case cleared the locked 0.8 gate even at
+  the coverage ceiling. Vienna is now permanently closed to tuning. Preserve the
+  local path as an internal parallel hypothesis, keep the shipping path
+  unchanged, and develop any selector or missing 2/4 coverage only on new
+  calibration data before obtaining another independently precommitted holdout.

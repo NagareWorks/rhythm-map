@@ -9,7 +9,8 @@ use anyhow::{Context, Result, bail};
 use clap::{Parser, Subcommand};
 use rhythm_map_eval::{
     evaluate_backend_suite, evaluate_backend_suite_with_audio_directory,
-    evaluate_backend_suite_with_policies, evaluate_beatnet_calibration_suite, evaluate_core_suite,
+    evaluate_backend_suite_with_policies, evaluate_beatnet_calibration_suite,
+    evaluate_beatnet_hypothesis_holdout, evaluate_core_suite,
     evaluate_decoder_recoverability_with_audio_directory,
     evaluate_decoder_sweep_with_audio_directory,
     evaluate_named_decoder_policy_with_audio_directory, fetch_public_dataset, import_artbeat_truth,
@@ -72,6 +73,30 @@ enum Command {
         /// Calibration suite; regression and holdout roles are rejected.
         #[arg(long, default_value = "evaluation/suites/artbeat-v1.json")]
         suite: PathBuf,
+        /// Pinned `BeatNet` model-pack manifest.
+        #[arg(long, default_value = "models/beatnet-v1.json")]
+        model_pack: PathBuf,
+        /// Directory containing `beatnet_bda.onnx`.
+        #[arg(long)]
+        model_dir: PathBuf,
+        /// Directory containing content-addressed external evaluation audio.
+        #[arg(long)]
+        audio_dir: PathBuf,
+        /// Optional JSON report destination.
+        #[arg(long)]
+        report: Option<PathBuf>,
+        /// Emit failed acceptance gates without returning a non-zero exit code.
+        #[arg(long)]
+        no_fail: bool,
+    },
+    /// Evaluate one preselected `BeatNet` hypothesis on a timestamped holdout.
+    EvalBeatnetHoldout {
+        /// Precommitted timestamped holdout suite.
+        #[arg(long)]
+        suite: PathBuf,
+        /// Exact frozen estimator policy ID.
+        #[arg(long)]
+        policy: String,
         /// Pinned `BeatNet` model-pack manifest.
         #[arg(long, default_value = "models/beatnet-v1.json")]
         model_pack: PathBuf,
@@ -267,6 +292,25 @@ fn main() -> Result<()> {
             no_fail,
         } => emit_report(
             &evaluate_beatnet_calibration_suite(&suite, &model_pack, &model_dir, &audio_dir)?,
+            report,
+            no_fail,
+        ),
+        Command::EvalBeatnetHoldout {
+            suite,
+            policy,
+            model_pack,
+            model_dir,
+            audio_dir,
+            report,
+            no_fail,
+        } => emit_report(
+            &evaluate_beatnet_hypothesis_holdout(
+                &suite,
+                &model_pack,
+                &model_dir,
+                &audio_dir,
+                &policy,
+            )?,
             report,
             no_fail,
         ),
@@ -522,6 +566,12 @@ impl EvaluationOutcome for rhythm_map_eval::BottleneckEvaluation {
 }
 
 impl EvaluationOutcome for rhythm_map_eval::DecoderPolicyEvaluation {
+    fn passed(&self) -> bool {
+        self.passed
+    }
+}
+
+impl EvaluationOutcome for rhythm_map_eval::BeatHypothesisHoldoutEvaluation {
     fn passed(&self) -> bool {
         self.passed
     }
