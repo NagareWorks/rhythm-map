@@ -207,7 +207,7 @@ and score-to-audio warping paths. RUBATO postdates Beat This and is absent from
 its 16 published training corpora. Unlike the permanently closed Vienna
 holdout, this slice is explicitly available for estimator calibration.
 
-The upstream record contains 566 versions across 15 works. The first slice is
+The upstream record contains 566 versions across 14 works. The first slice is
 deliberately narrower: 25 OV/OV-R/AR/AR-R tracks, 12 works, and about 1.80 hours
 of real performances. It admits only CC0, CC BY 3.0, and CC BY 4.0 audio whose
 upstream version field names a recording year of 2000 or later. This avoids
@@ -261,6 +261,27 @@ is observed through solo strings, ensembles, orchestra, choir, voice and piano,
 accordion, organ, dulcimer, and piano. That lets calibration distinguish a
 stable musical-time policy from timbre-specific success, rather than adding
 another piano-only average.
+
+## RUBATO work-disjoint holdout v1
+
+[`rubato-holdout-v1-selection.json`](rubato-holdout-v1-selection.json) freezes
+four real performances from the only two RUBATO works absent from the 12-work
+calibration slice. The selection was committed before running either beat
+backend on these recordings. It contains three violin-and-piano versions of
+Beethoven Op. 47 and one choir-and-orchestra version of Handel HWV 56, totaling
+about 39.7 minutes.
+
+All four recordings are from 2000 or later and carry CC BY-SA licenses. Those
+licenses allow commercial use; their attribution and share-alike obligations
+will be preserved in the completed acquisition lock and suite. The holdout has
+no NC, ND, ambiguous-license, synthetic, reproduction-piano, or structurally
+deviating material.
+
+The selection file is intentionally not yet an acquisition manifest. The
+byte-addressed asset lock, checked-in truth, and suite must be derived without
+model output before this holdout is opened. Calibration may inform one frozen
+selector, but the four holdout recordings must not be used for threshold
+selection, diagnostics, or per-case policy changes.
 
 ## Candidates intentionally not imported
 

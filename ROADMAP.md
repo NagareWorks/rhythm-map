@@ -500,3 +500,12 @@ a learned component to the default distribution.
   ambiguity should be visible to consumers but is not the dominant repair
   target. A canonical selector still requires genuinely different perceived-
   beat or meter evidence and a fresh holdout.
+- 2026-08-27: froze `rubato-holdout-v1` before model inference as the acceptance
+  set for a future canonical selector. Its four commercially usable CC BY-SA
+  recordings come from Beethoven Op. 47 and Handel HWV 56, the only two works
+  absent from the 12-work RUBATO calibration slice, so the split is work-
+  disjoint rather than merely recording-disjoint. The selection excludes NC,
+  ND, ambiguous-license, synthetic, reproduction-piano, and structurally
+  deviating material. Complete the byte-addressed lock, truth, suite, selector
+  identity, and thresholds before opening it; never use these recordings for
+  selector diagnostics or tuning.

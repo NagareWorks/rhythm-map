@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "id": "rubato-holdout-v1",
+  "status": "selection-locked",
+  "purpose": "holdout",
+  "source": {
+    "title": "RUBATO: A Multi-Version Benchmark for Robust Music Transcription and Analysis",
+    "version": "0.3",
+    "record_doi": "10.5281/zenodo.21159596",
+    "published": "2026-07-03",
+    "dataset_license": "CC-BY-3.0",
+    "archive": {
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "size_bytes": 6258528269,
+      "md5": "3bd78b8dd94dec16516e0b9f32f87810"
+    },
+    "metadata_versions": {
+      "url": "https://zenodo.org/records/21159596/files/metadata_versions.csv?download=1",
+      "size_bytes": 83095,
+      "md5": "3ca20578812c07ae587508b8ff261313",
+      "sha256": "1e702f7b886bf4ac565641ada5035927318b03a708679ec236fe1b7dd38df323"
+    },
+    "metadata_works": {
+      "url": "https://zenodo.org/records/21159596/files/metadata_works.csv?download=1",
+      "size_bytes": 1920,
+      "md5": "36b1e6f1d9a5bfeb33d26aea3046ea24",
+      "sha256": "ae70c6b1be00e37e2c77fdc91cb75804b9c1f2af0424927a4978d329ae400f06"
+    }
+  },
+  "selection_policy": {
+    "relationship_to_calibration": "work-disjoint",
+    "excluded_calibration_works": [
+      "BWV1007-01",
+      "RV269-01",
+      "HWV040-1-01",
+      "G275-03",
+      "KV618",
+      "Op072-0",
+      "D733-01",
+      "H048-04",
+      "Op039-05",
+      "Nabucco-VaPensiero",
+      "PicturesAtAnExhibition-10",
+      "Op115-01"
+    ],
+    "included_works": ["Op047-01", "HWV056-2-44"],
+    "version_types": ["OV", "OV-R", "AR", "AR-R"],
+    "audio_license_allowlist": ["CC-BY-SA-2.0", "CC-BY-SA-4.0"],
+    "minimum_recording_year": 2000,
+    "recording_year_source": "first four-digit year in the upstream version field",
+    "excluded_version_types": ["AD", "AD-S", "SR", "SR-R", "SY"],
+    "notes": "Frozen before any model inference on these recordings. Share-alike licenses permit commercial evaluation and redistribution under their terms; no NC, ND, ambiguous-license, synthetic, reproduction-piano, or structurally deviating versions are included. The four tracks cover two works absent from rubato-calibration-v1."
+  },
+  "expected": {
+    "tracks": 4,
+    "works": 2,
+    "duration_seconds": 2383.621224489796
+  },
+  "tracks": [
+    {
+      "filename": "Beethoven_Op047-01_OV-Anghelescu2010",
+      "work_id": "Op047-01",
+      "version_type": "OV",
+      "instrumentation": "Violin; Piano",
+      "duration_seconds": 658.1289795918367,
+      "audio_license": "CC-BY-SA-4.0"
+    },
+    {
+      "filename": "Beethoven_Op047-01_OV-Croitoru2010",
+      "work_id": "Op047-01",
+      "version_type": "OV",
+      "instrumentation": "Violin; Piano",
+      "duration_seconds": 747.9466666666667,
+      "audio_license": "CC-BY-SA-4.0"
+    },
+    {
+      "filename": "Beethoven_Op047-01_OV-Poochikian2024",
+      "work_id": "Op047-01",
+      "version_type": "OV",
+      "instrumentation": "Violin; Piano",
+      "duration_seconds": 756.4480725623582,
+      "audio_license": "CC-BY-SA-4.0"
+    },
+    {
+      "filename": "Handel_HWV056-2-44_OV-Cutter2003",
+      "work_id": "HWV056-2-44",
+      "version_type": "OV",
+      "instrumentation": "Choir; Orchestra",
+      "duration_seconds": 221.09750566893425,
+      "audio_license": "CC-BY-SA-2.0"
+    }
+  ]
+}

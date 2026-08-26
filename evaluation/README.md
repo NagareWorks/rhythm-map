@@ -94,6 +94,11 @@ metrical shift. It also groups contiguous points above the requested error
 threshold. It rejects regression and holdout suites so timestamp-level truth
 cannot leak into policy selection.
 
+The work-disjoint `rubato-holdout-v1` selection is frozen separately from this
+calibration suite. Do not inspect its audio with a model until its completed
+asset lock, truth, suite, selector identity, and acceptance thresholds have
+been committed.
+
 Fetch the precommitted, case-disjoint ARTBeaT holdout and retain its auditable
 SVG annotation sources:
 
