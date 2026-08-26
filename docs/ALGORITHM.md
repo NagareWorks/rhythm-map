@@ -297,7 +297,7 @@ timestamped evidence supports merging it into the single shipping algorithm.
 
 Half- and double-time alternatives are preserved at two levels. The compact
 `tempo_hypotheses` field reports octave-related global BPM summaries. Analysis
-schema v3 returns `beat_hypotheses`, containing the selected sequence, both
+schema v4 returns `beat_hypotheses`, containing the selected sequence, both
 alternating half-time phases when their implied tempo remains in range, and a
 double-time sequence when real backend candidates support enough interval
 midpoints. Every listed time must come from an accepted beat or backend
@@ -309,6 +309,24 @@ not one global power-of-two transform; its changing level is represented by the
 intervals in the returned path. The warning
 `locally_varying_metrical_hypothesis_available` makes its presence easy to
 detect without implying that it was selected.
+
+Schema v4 also returns `metrical_ambiguity_regions` for time-local differences
+between `selected` and `locally_varying`. Timestamps shared exactly by both
+backend-supported paths are anchors. Every maximal anchor-to-anchor span that
+contains a real event unique to either path becomes one region. The fields
+`left_anchored` and `right_anchored` distinguish four cases:
+
+- `false/true`: leading-edge ambiguity with only a right anchor;
+- `true/true`: a bounded interior ambiguity;
+- `true/false`: trailing-edge ambiguity with only a left anchor; and
+- `false/false`: whole-track disagreement with no common anchor.
+
+Region boundaries at zero or the audio duration are interval bounds, not
+synthesized beat timestamps. The result records only event counts and the
+complete alternative's truth-free score; consumers can inspect the referenced
+beat hypothesis for exact real timestamps. A one-sided or unanchored region is
+therefore visible to an editor without being treated as permission to extend or
+select a beat grid.
 
 Sequence scores are truth-free and relative, not calibrated probabilities. For
 each sequence the estimator combines mean event evidence (45 percent),

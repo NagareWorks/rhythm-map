@@ -357,6 +357,7 @@ mod tests {
                 },
             ],
             beat_hypotheses: Vec::new(),
+            metrical_ambiguity_regions: Vec::new(),
             global_bpm: Some(120.0),
             tempo_hypotheses: Vec::new(),
             tempo_curve: vec![

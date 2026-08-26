@@ -4,8 +4,8 @@ use thiserror::Error;
 
 use crate::{
     ANALYSIS_SCHEMA_VERSION, Analysis, BeatCandidate, BeatEvent, BeatSequenceHypothesis,
-    BeatSequenceHypothesisKind, ChangeKind, ChangePoint, ObservedBeat, RhythmObservations,
-    RhythmSection, TempoHypothesis, TempoPoint, TempoSegment, TempoSegmentKind,
+    BeatSequenceHypothesisKind, ChangeKind, ChangePoint, MetricalAmbiguityRegion, ObservedBeat,
+    RhythmObservations, RhythmSection, TempoHypothesis, TempoPoint, TempoSegment, TempoSegmentKind,
 };
 
 /// Policy used to resolve metrical half/double-time evidence before tempo estimation.
@@ -169,30 +169,13 @@ impl TempoMapEstimator {
         } = prepare_observations(input, &self.options);
 
         if prepared.beats.len() < 3 {
-            warnings.push("too_few_beats_for_tempo_curve".to_string());
-            let beat_hypotheses =
-                beat_sequence_hypotheses(&prepared, &hypothesis_source, &self.options);
-            add_metrical_hypothesis_warnings(&beat_hypotheses, &mut warnings);
-            return Ok(Analysis {
-                schema_version: ANALYSIS_SCHEMA_VERSION,
-                duration_s: input.duration_s,
-                source: input.source.clone(),
-                beats: beat_events(&prepared),
-                beat_hypotheses,
-                global_bpm: None,
-                tempo_hypotheses: Vec::new(),
-                tempo_curve: Vec::new(),
-                tempo_segments: Vec::new(),
-                change_points: Vec::new(),
-                rhythm_sections: vec![RhythmSection {
-                    start_s: 0.0,
-                    end_s: input.duration_s,
-                    bpm: None,
-                    stability: 0.0,
-                    beat_count: prepared.beats.len(),
-                }],
+            return Ok(too_few_beats_analysis(
+                input,
+                &prepared,
+                &hypothesis_source,
+                &self.options,
                 warnings,
-            });
+            ));
         }
 
         let preliminary = build_tempo_estimate(&prepared, input.duration_s, &self.options);
@@ -225,6 +208,8 @@ impl TempoMapEstimator {
         let beat_hypotheses =
             beat_sequence_hypotheses(&prepared, &hypothesis_source, &self.options);
         add_metrical_hypothesis_warnings(&beat_hypotheses, &mut warnings);
+        let metrical_ambiguity_regions =
+            metrical_ambiguity_regions(&beat_hypotheses, input.duration_s);
         let tempo_hypotheses = metrical_hypotheses(global_bpm, &self.options);
         if tempo_hypotheses.len() > 1 {
             warnings.push("metrical_level_has_half_or_double_time_alternatives".to_string());
@@ -255,6 +240,7 @@ impl TempoMapEstimator {
             source: input.source.clone(),
             beats: beat_events(&prepared),
             beat_hypotheses,
+            metrical_ambiguity_regions,
             global_bpm: Some(global_bpm),
             tempo_hypotheses,
             tempo_curve,
@@ -263,6 +249,40 @@ impl TempoMapEstimator {
             rhythm_sections,
             warnings,
         })
+    }
+}
+
+fn too_few_beats_analysis(
+    input: &RhythmObservations,
+    prepared: &RhythmObservations,
+    hypothesis_source: &RhythmObservations,
+    options: &EstimatorOptions,
+    mut warnings: Vec<String>,
+) -> Analysis {
+    warnings.push("too_few_beats_for_tempo_curve".to_string());
+    let beat_hypotheses = beat_sequence_hypotheses(prepared, hypothesis_source, options);
+    add_metrical_hypothesis_warnings(&beat_hypotheses, &mut warnings);
+    let metrical_ambiguity_regions = metrical_ambiguity_regions(&beat_hypotheses, input.duration_s);
+    Analysis {
+        schema_version: ANALYSIS_SCHEMA_VERSION,
+        duration_s: input.duration_s,
+        source: input.source.clone(),
+        beats: beat_events(prepared),
+        beat_hypotheses,
+        metrical_ambiguity_regions,
+        global_bpm: None,
+        tempo_hypotheses: Vec::new(),
+        tempo_curve: Vec::new(),
+        tempo_segments: Vec::new(),
+        change_points: Vec::new(),
+        rhythm_sections: vec![RhythmSection {
+            start_s: 0.0,
+            end_s: input.duration_s,
+            bpm: None,
+            stability: 0.0,
+            beat_count: prepared.beats.len(),
+        }],
+        warnings,
     }
 }
 
@@ -1497,6 +1517,121 @@ fn add_metrical_hypothesis_warnings(
     {
         warnings.push("locally_varying_metrical_hypothesis_available".to_string());
     }
+}
+
+fn metrical_ambiguity_regions(
+    hypotheses: &[BeatSequenceHypothesis],
+    duration_s: f64,
+) -> Vec<MetricalAmbiguityRegion> {
+    let Some(selected) = hypotheses
+        .iter()
+        .find(|hypothesis| hypothesis.kind == BeatSequenceHypothesisKind::Selected)
+    else {
+        return Vec::new();
+    };
+    hypotheses
+        .iter()
+        .filter(|hypothesis| hypothesis.kind == BeatSequenceHypothesisKind::LocallyVarying)
+        .flat_map(|alternative| disagreement_regions_between(selected, alternative, duration_s))
+        .collect()
+}
+
+fn disagreement_regions_between(
+    selected: &BeatSequenceHypothesis,
+    alternative: &BeatSequenceHypothesis,
+    duration_s: f64,
+) -> Vec<MetricalAmbiguityRegion> {
+    let anchors = common_hypothesis_times(&selected.beat_times_s, &alternative.beat_times_s);
+    let mut bounds = Vec::with_capacity(anchors.len() + 1);
+    if let Some(&first) = anchors.first() {
+        bounds.push((0.0, first, false, true));
+        bounds.extend(
+            anchors
+                .windows(2)
+                .map(|pair| (pair[0], pair[1], true, true)),
+        );
+        bounds.push((
+            *anchors.last().expect("first anchor exists"),
+            duration_s,
+            true,
+            false,
+        ));
+    } else {
+        bounds.push((0.0, duration_s, false, false));
+    }
+
+    bounds
+        .into_iter()
+        .filter_map(|(start_s, end_s, left_anchored, right_anchored)| {
+            let primary_only_beat_count = unsupported_hypothesis_time_count(
+                &selected.beat_times_s,
+                &alternative.beat_times_s,
+                start_s,
+                end_s,
+                left_anchored,
+                right_anchored,
+            );
+            let alternative_only_beat_count = unsupported_hypothesis_time_count(
+                &alternative.beat_times_s,
+                &selected.beat_times_s,
+                start_s,
+                end_s,
+                left_anchored,
+                right_anchored,
+            );
+            (primary_only_beat_count != 0 || alternative_only_beat_count != 0).then_some(
+                MetricalAmbiguityRegion {
+                    start_s,
+                    end_s,
+                    left_anchored,
+                    right_anchored,
+                    alternative_kind: alternative.kind,
+                    alternative_relative_score: alternative.relative_score,
+                    primary_only_beat_count,
+                    alternative_only_beat_count,
+                },
+            )
+        })
+        .collect()
+}
+
+fn common_hypothesis_times(left: &[f64], right: &[f64]) -> Vec<f64> {
+    let mut left_index = 0;
+    let mut right_index = 0;
+    let mut common = Vec::new();
+    while left_index < left.len() && right_index < right.len() {
+        let difference = left[left_index] - right[right_index];
+        if difference.abs() <= f64::EPSILON {
+            common.push(left[left_index]);
+            left_index += 1;
+            right_index += 1;
+        } else if difference < 0.0 {
+            left_index += 1;
+        } else {
+            right_index += 1;
+        }
+    }
+    common
+}
+
+fn unsupported_hypothesis_time_count(
+    source: &[f64],
+    other: &[f64],
+    start_s: f64,
+    end_s: f64,
+    left_anchored: bool,
+    right_anchored: bool,
+) -> usize {
+    source
+        .iter()
+        .filter(|&&time_s| {
+            (time_s > start_s || (!left_anchored && time_s >= start_s))
+                && (time_s < end_s || (!right_anchored && time_s <= end_s))
+                && !other
+                    .iter()
+                    .any(|&candidate| (candidate - time_s).abs() <= f64::EPSILON)
+        })
+        .count()
 }
 
 fn locally_varying_metrical_path(
@@ -2755,7 +2890,7 @@ mod tests {
 
         let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
 
-        assert_eq!(analysis.schema_version, 3);
+        assert_eq!(analysis.schema_version, 4);
         assert_eq!(analysis.beat_hypotheses.len(), 4);
         assert!(analysis.beat_hypotheses.iter().any(|hypothesis| {
             hypothesis.kind == BeatSequenceHypothesisKind::HalfTime && hypothesis.phase == Some(0)
@@ -2872,6 +3007,55 @@ mod tests {
                 .warnings
                 .contains(&"locally_varying_metrical_hypothesis_available".to_string())
         );
+        assert!(!analysis.metrical_ambiguity_regions.is_empty());
+        assert!(analysis.metrical_ambiguity_regions.iter().all(|region| {
+            region.alternative_kind == BeatSequenceHypothesisKind::LocallyVarying
+                && (region.alternative_relative_score - path.relative_score).abs() <= f64::EPSILON
+                && region.primary_only_beat_count + region.alternative_only_beat_count > 0
+        }));
+    }
+
+    #[test]
+    fn metrical_ambiguity_regions_preserve_edge_anchor_state() {
+        let selected = BeatSequenceHypothesis {
+            kind: BeatSequenceHypothesisKind::Selected,
+            metrical_level: 0,
+            phase: None,
+            relative_score: 1.0,
+            beat_times_s: vec![1.0, 2.0, 3.0, 4.0, 5.0],
+        };
+        let local = BeatSequenceHypothesis {
+            kind: BeatSequenceHypothesisKind::LocallyVarying,
+            metrical_level: 0,
+            phase: None,
+            relative_score: 0.8,
+            beat_times_s: vec![0.5, 1.0, 2.5, 3.0, 5.0, 5.5],
+        };
+
+        let regions = metrical_ambiguity_regions(&[selected, local], 6.0);
+
+        assert_eq!(regions.len(), 4);
+        assert_eq!(
+            (regions[0].left_anchored, regions[0].right_anchored),
+            (false, true)
+        );
+        assert_eq!(
+            (regions[1].left_anchored, regions[1].right_anchored),
+            (true, true)
+        );
+        assert_eq!(
+            (regions[2].left_anchored, regions[2].right_anchored),
+            (true, true)
+        );
+        assert_eq!(
+            (regions[3].left_anchored, regions[3].right_anchored),
+            (true, false)
+        );
+        assert_eq!(regions[0].alternative_only_beat_count, 1);
+        assert_eq!(regions[1].primary_only_beat_count, 1);
+        assert_eq!(regions[1].alternative_only_beat_count, 1);
+        assert_eq!(regions[2].primary_only_beat_count, 1);
+        assert_eq!(regions[3].alternative_only_beat_count, 1);
     }
 
     #[test]

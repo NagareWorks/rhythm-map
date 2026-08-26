@@ -13,9 +13,9 @@ use rhythm_map_beat_this::{
 use rhythm_map_beatnet::BeatNetBackend;
 use rhythm_map_core::{
     Analysis, AudioOnsetPoint, BackendError, BeatCandidate, BeatSequenceHypothesis,
-    BeatSequenceHypothesisKind, Engine, EstimatorOptions, ModelInfo, ObservedBeat,
-    RhythmActivationSeries, RhythmObservationBackend, RhythmObservations, TempoMapEstimator,
-    TempoSegmentKind,
+    BeatSequenceHypothesisKind, Engine, EstimatorOptions, MetricalAmbiguityRegion, ModelInfo,
+    ObservedBeat, RhythmActivationSeries, RhythmObservationBackend, RhythmObservations,
+    TempoMapEstimator, TempoSegmentKind,
 };
 use rhythm_map_models::{ModelArtifactRole, VerifiedModelPack, verify_model_pack};
 use serde::{Deserialize, Serialize};
@@ -135,6 +135,9 @@ pub struct ObservationDiagnostics {
     /// Product-visible selected and alternative real-timestamp sequences.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub beat_hypotheses: Vec<BeatSequenceHypothesis>,
+    /// Product-visible time-localized disagreement between selected and local beats.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub metrical_ambiguity_regions: Vec<MetricalAmbiguityRegion>,
     /// Deterministic filtering and metrical-selection decisions.
     pub analysis_warnings: Vec<String>,
 }
@@ -1334,7 +1337,7 @@ where
         .as_ref()
         .map(|cache| cache.backend_contract.to_string());
     Ok(BottleneckEvaluation {
-        schema_version: 10,
+        schema_version: 11,
         suite_id: suite.id,
         suite_purpose: suite.purpose,
         model_pack: context.model_pack,
@@ -2398,6 +2401,7 @@ fn observation_diagnostics(
         alternating_phase_confidence,
         alternating_phase_onset_strength,
         beat_hypotheses: analysis.beat_hypotheses.clone(),
+        metrical_ambiguity_regions: analysis.metrical_ambiguity_regions.clone(),
         analysis_warnings: analysis.warnings.clone(),
     }
 }

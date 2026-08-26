@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 /// Current serialized analysis schema version.
-pub const ANALYSIS_SCHEMA_VERSION: u32 = 3;
+pub const ANALYSIS_SCHEMA_VERSION: u32 = 4;
 
 /// Identity and timing contract of an observation backend.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -168,6 +168,28 @@ pub struct BeatSequenceHypothesis {
     pub beat_times_s: Vec<f64>,
 }
 
+/// One maximal region where the primary and a supported metrical alternative
+/// contain different real beat timestamps.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct MetricalAmbiguityRegion {
+    /// Region start in audio seconds.
+    pub start_s: f64,
+    /// Region end in audio seconds.
+    pub end_s: f64,
+    /// Whether both sequences contain the beat at the left boundary.
+    pub left_anchored: bool,
+    /// Whether both sequences contain the beat at the right boundary.
+    pub right_anchored: bool,
+    /// Construction of the competing sequence.
+    pub alternative_kind: BeatSequenceHypothesisKind,
+    /// Truth-free score of the complete competing sequence.
+    pub alternative_relative_score: f64,
+    /// Number of primary-only real beat timestamps inside the region.
+    pub primary_only_beat_count: usize,
+    /// Number of alternative-only real beat timestamps inside the region.
+    pub alternative_only_beat_count: usize,
+}
+
 /// A sampled point on the regularized tempo curve.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct TempoPoint {
@@ -273,6 +295,9 @@ pub struct Analysis {
     /// Auditable selected and alternative backend-supported beat sequences.
     #[serde(default)]
     pub beat_hypotheses: Vec<BeatSequenceHypothesis>,
+    /// Time-localized disagreement between selected and locally varying beats.
+    #[serde(default)]
+    pub metrical_ambiguity_regions: Vec<MetricalAmbiguityRegion>,
     /// Preferred global tempo summary.
     pub global_bpm: Option<f64>,
     /// Alternative half/double-time interpretations.

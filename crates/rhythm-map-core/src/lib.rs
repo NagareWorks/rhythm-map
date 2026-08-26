@@ -11,6 +11,7 @@ pub use estimator::{EstimatorOptions, MetricalSelectionPolicy, TempoMapEstimator
 pub use types::{
     ANALYSIS_SCHEMA_VERSION, Analysis, AudioActivityPoint, AudioHarmonicChangePoint,
     AudioOnsetPoint, BeatCandidate, BeatEvent, BeatSequenceHypothesis, BeatSequenceHypothesisKind,
-    ChangeKind, ChangePoint, ModelInfo, ObservedBeat, RhythmActivationSeries, RhythmObservations,
-    RhythmSection, TempoHypothesis, TempoPoint, TempoSegment, TempoSegmentKind,
+    ChangeKind, ChangePoint, MetricalAmbiguityRegion, ModelInfo, ObservedBeat,
+    RhythmActivationSeries, RhythmObservations, RhythmSection, TempoHypothesis, TempoPoint,
+    TempoSegment, TempoSegmentKind,
 };

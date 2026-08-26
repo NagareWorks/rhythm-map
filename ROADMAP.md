@@ -489,3 +489,14 @@ a learned component to the default distribution.
   old `local-metrical-path-v1` name is a report-compatibility alias, not a second
   product strategy. Canonical selection remains blocked on genuinely different
   perceived-beat or meter evidence.
+- 2026-08-27: added analysis schema v4 `metrical_ambiguity_regions` instead of
+  another track-edge repair heuristic. Shared real timestamps between selected
+  and locally varying hypotheses define anchors; the product reports leading,
+  bounded, trailing, and fully unanchored disagreement spans with event counts
+  and the alternative score, but never inserts, deletes, or selects a beat.
+  Cached ARTBeaT replay exposed 40 regions in 10/15 cases: 34 bounded interior,
+  three leading, three trailing, and zero fully unanchored. Primary metrics,
+  hypotheses, and warnings exactly matched schema v3. This confirms edge
+  ambiguity should be visible to consumers but is not the dominant repair
+  target. A canonical selector still requires genuinely different perceived-
+  beat or meter evidence and a fresh holdout.

@@ -50,10 +50,11 @@ cargo run -p rhythm-map-cli --release -- \
 ```
 
 The command emits schema-versioned JSON containing selected beats, supported
-metrical beat alternatives, a BPM curve, tempo segments, change points, and
-rhythm sections. A locally varying alternative appears automatically only when
-real backend timestamps and independent harmonic evidence support it; it never
-silently replaces the selected time map.
+metrical beat alternatives, their time-localized ambiguity regions, a BPM
+curve, tempo segments, change points, and rhythm sections. A locally varying
+alternative appears automatically only when real backend timestamps and
+independent harmonic evidence support it; it never silently replaces the
+selected time map.
 
 ## Evaluation
 

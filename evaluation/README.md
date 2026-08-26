@@ -159,14 +159,14 @@ estimator A/B reuses identical model evidence without allowing labels into the
 cache. Cache files include decoded sample rate/count validation and exact
 round-trip floating-point JSON. Keep the directory outside the checkout.
 
-Backend report schema v10 records the versioned `observation_cache_contract`,
+Backend report schema v11 records the versioned `observation_cache_contract`,
 adds per-case `observation_cache_hit`, and may retain a backend's uniform dense
 pulse/downbeat activation series under observation diagnostics. Dense evidence
 is not copied into product `Analysis` output. Runtime fields from a cold and hot
 report are not directly comparable as end-to-end model benchmarks; all
 observations, analyses, and metrics must otherwise be identical.
 
-Schema v10 also keeps two kinds of truth-assisted diagnosis separate from product
+Schema v11 also keeps two kinds of truth-assisted diagnosis separate from product
 selection. `beat_error_location` splits timestamped calibration misses and
 extras into leading, interior, trailing, and completely unanchored counts, and
 reports how many misses still have raw backend support. The field is absent on
@@ -193,14 +193,16 @@ cargo xtask eval-beatnet \
 fuses a grid prior with beat/downbeat/non-beat evidence, but every emitted
 timestamp must still be a real BeatNet pulse maximum. This is developer
 calibration evidence, not a second end-user strategy or a selectable shipping
-backend. Analysis schema v3 exposes the selected and supported half/double-time
-beat sequences with truth-free relative scores. The shipping estimator and this
-command both attempt the fixed harmonic-aware local path automatically.
+backend. Analysis schema v4 exposes the selected and supported half/double-time
+beat sequences with truth-free relative scores plus time-localized disagreement
+regions. The shipping estimator and this command both attempt the fixed
+harmonic-aware local path automatically.
 `local-metrical-path-v1` remains accepted by frozen evaluation workflows as a
 compatibility name for the same behavior. It adds at most one real-timestamp
-path whose metrical level may vary locally. Calibration report schema v10
-records those exact hypotheses and optional dense activations under observation
-diagnostics. The primary selected sequence remains unchanged.
+path whose metrical level may vary locally. Calibration report schema v11
+records those exact hypotheses, their time-localized disagreement regions, and
+optional dense activations under observation diagnostics. The primary selected
+sequence remains unchanged.
 
 After freezing `local-metrical-path-v1` on calibration, open a timestamped
 holdout exactly once through the fixed-candidate command:
