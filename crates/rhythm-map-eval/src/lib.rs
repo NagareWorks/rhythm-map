@@ -5,6 +5,7 @@ mod dataset;
 mod manifest;
 mod metrics;
 mod public_dataset;
+mod rubato;
 mod runner;
 mod synthetic;
 mod vienna;
@@ -23,6 +24,7 @@ pub use public_dataset::{
     DatasetFetchAsset, DatasetFetchReport, DatasetFetchStatus, PublicDatasetAsset,
     PublicDatasetAssetRole, PublicDatasetLock, fetch_public_dataset,
 };
+pub use rubato::{RubatoStructureSegment, RubatoTruthImport, import_rubato_truth};
 pub use runner::{
     AttributionCase, AttributionDecision, BeatHypothesisAggregate, BeatHypothesisHoldoutCase,
     BeatHypothesisHoldoutEvaluation, BeatHypothesisHoldoutSlice, BottleneckEvaluation,

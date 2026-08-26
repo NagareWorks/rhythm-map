@@ -1,0 +1,1124 @@
+{
+  "schema_version": 1,
+  "id": "rubato-calibration-v1",
+  "version": "0.3",
+  "homepage_url": "https://doi.org/10.5281/zenodo.21159596",
+  "license": "CC0-1.0 AND CC-BY-3.0 AND CC-BY-4.0",
+  "attribution": "RUBATO v0.3; track identifiers and recording-level licenses are preserved in the evaluation suite.",
+  "assets": [
+    {
+      "path": "audio/Bach_BWV1007-01_AR-MacLeod2011.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "3b4e219d54a698d5de7a3622ee46e1652ce44e06782691a53a0163bc10bae736",
+      "size_bytes": 5684712,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Bach_BWV1007-01_AR-MacLeod2011.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Bach_BWV1007-01_AR-MacLeod2011.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "eccca37e8bbc028c02a35de497d21fc451b0bb4a76fcdf44ec7c1c1194f089c0",
+      "size_bytes": 6444,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Bach_BWV1007-01_AR-MacLeod2011.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Bach_BWV1007-01_AR-MacLeod2011.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "5ce27e757203910d45c76c410d74dabd14ae6ca6cd9fb1ed24b03c178aa4a4db",
+      "size_bytes": 1635,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Bach_BWV1007-01_AR-MacLeod2011.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Bach_BWV1007-01_AR-MacLeod2011.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "08d6aec6426f8a5236b41b3ce1fb3b5d0895bcbc26a51ccc97051d7e10e077a9",
+      "size_bytes": 51,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Bach_BWV1007-01_AR-MacLeod2011.csv"
+      }
+    },
+    {
+      "path": "audio/Bach_BWV1007-01_OV-Milman2022.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "b57525accae925ff8aaca1ee9f1048d956d1f37e75ec6b3db8f05cc8f17817da",
+      "size_bytes": 6128784,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Bach_BWV1007-01_OV-Milman2022.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Bach_BWV1007-01_OV-Milman2022.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "3928ecc88bd7d03690ad3cef48df4c21fc54e690a00fdf7e9f61b26d588b3685",
+      "size_bytes": 6470,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Bach_BWV1007-01_OV-Milman2022.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Bach_BWV1007-01_OV-Milman2022.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "b027b6f9a8104a1611eee96647d690fb1a74473b5f924f63e0a3e3667dddf1f1",
+      "size_bytes": 1640,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Bach_BWV1007-01_OV-Milman2022.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Bach_BWV1007-01_OV-Milman2022.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "3896af6604646930e6b2354c2c634c77dfceedf2d017629ecc92e692503ba0e4",
+      "size_bytes": 51,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Bach_BWV1007-01_OV-Milman2022.csv"
+      }
+    },
+    {
+      "path": "audio/Beethoven_Op072-0_OV-Henning2017.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "840011dbbbc7dbeee4755466a72ad2736452b7e0486091b8cb97b918044a67e9",
+      "size_bytes": 17794094,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Beethoven_Op072-0_OV-Henning2017.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Beethoven_Op072-0_OV-Henning2017.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "7d558586ee0cb950ea0cbb27d4453a7ad3006442f623bbc25d05ac59bc86b8b7",
+      "size_bytes": 24587,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Beethoven_Op072-0_OV-Henning2017.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Beethoven_Op072-0_OV-Henning2017.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "b08923d18c09711935582bdc747b38a7d6b71f45a7997e0ca8505860bfc26203",
+      "size_bytes": 12322,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Beethoven_Op072-0_OV-Henning2017.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Beethoven_Op072-0_OV-Henning2017.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "eb7beb8080c39e18fe08023c9fe485a25c376e71b3148fae1c545811d071f7e0",
+      "size_bytes": 60,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Beethoven_Op072-0_OV-Henning2017.csv"
+      }
+    },
+    {
+      "path": "audio/Berlioz_H048-04_OV-Dennis2016.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "e5946d1f1176b1165f9e7fac03e32c729b421bbae376db64f839f4287d245bf6",
+      "size_bytes": 12017708,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Berlioz_H048-04_OV-Dennis2016.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Berlioz_H048-04_OV-Dennis2016.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "781a5092fc6df9851078f637ed70134f7ba9ce05f67d18f2a193f3bfae8aef50",
+      "size_bytes": 13917,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Berlioz_H048-04_OV-Dennis2016.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Berlioz_H048-04_OV-Dennis2016.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "5ed99a6302afa930edc7c06e6058673bb37c16a3ebeb11e8f9e6533ec26cda30",
+      "size_bytes": 6989,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Berlioz_H048-04_OV-Dennis2016.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Berlioz_H048-04_OV-Dennis2016.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "46535fd14edc0c49d610a8e821c5f51cfb178143d4070baef4d69cd35c332497",
+      "size_bytes": 212,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Berlioz_H048-04_OV-Dennis2016.csv"
+      }
+    },
+    {
+      "path": "audio/Boccherini_G275-03_OV-Krux2022.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "0176a58324aa4a93455ce47b205edef5b4a96912bf17bf86acd1cdd9c8acf42d",
+      "size_bytes": 7171692,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Boccherini_G275-03_OV-Krux2022.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Boccherini_G275-03_OV-Krux2022.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "86c7748f861f6812fc6a03bc036b150d4991cc5d671852cd7b98b565bcabe118",
+      "size_bytes": 9447,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Boccherini_G275-03_OV-Krux2022.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Boccherini_G275-03_OV-Krux2022.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "a72243695278b0d89375c905b91702becece1995bb74a4375d93b3eba8694776",
+      "size_bytes": 3122,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Boccherini_G275-03_OV-Krux2022.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Boccherini_G275-03_OV-Krux2022.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "663c2b6f8c3423719c598cd17b1eef39dca2ecda40771209072ddd95571b54cf",
+      "size_bytes": 430,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Boccherini_G275-03_OV-Krux2022.csv"
+      }
+    },
+    {
+      "path": "audio/Brahms_Op115-01_OV-SchmittA2025.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "14b025da3140d4a57c3102065ba0b956a25b12496f272647c3bafba6f9f4430a",
+      "size_bytes": 27351392,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Brahms_Op115-01_OV-SchmittA2025.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Brahms_Op115-01_OV-SchmittA2025.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "a19528a5231afce203ce855528c4418f8b6642c8f1294ecc707ceed3b76f8f0f",
+      "size_bytes": 17402,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Brahms_Op115-01_OV-SchmittA2025.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Brahms_Op115-01_OV-SchmittA2025.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "1af4f13471ff5ec27a7229eb4153da0a3b26315966599685344367992d929c0f",
+      "size_bytes": 8736,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Brahms_Op115-01_OV-SchmittA2025.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Brahms_Op115-01_OV-SchmittA2025.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "874bafbfa0f8714e4e3e7b9eec9f4ee878deb6e0e74af6382f391e9ae35fc154",
+      "size_bytes": 180,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Brahms_Op115-01_OV-SchmittA2025.csv"
+      }
+    },
+    {
+      "path": "audio/Brahms_Op115-01_OV-Steffens2008.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "ede6c956f98605f468a1932424d6f33561bdb9724c84811a4019acaa74650f6c",
+      "size_bytes": 27443244,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Brahms_Op115-01_OV-Steffens2008.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Brahms_Op115-01_OV-Steffens2008.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "f39fc70a8cbcaeb6733dbf5102c345b45c5e8a1bf0f372b09dbc06680e75e2c0",
+      "size_bytes": 17383,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Brahms_Op115-01_OV-Steffens2008.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Brahms_Op115-01_OV-Steffens2008.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "190adf90c1bc759fa9abc4ad8d5acde8c34e81890f6efebee7a464d896d02a5b",
+      "size_bytes": 8724,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Brahms_Op115-01_OV-Steffens2008.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Brahms_Op115-01_OV-Steffens2008.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "d7c21ab0d959c86c6e4ada258558ffa44594b9c0ef7125eb88fd8ef71fd79532",
+      "size_bytes": 173,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Brahms_Op115-01_OV-Steffens2008.csv"
+      }
+    },
+    {
+      "path": "audio/Handel_HWV040-1-01_AR-ButtnerFmaj2025.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "5fee1c79ff4373b61a66882fcb73dc36cb12629eadb76980e47c7dc196ef9d16",
+      "size_bytes": 7156834,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Handel_HWV040-1-01_AR-ButtnerFmaj2025.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Handel_HWV040-1-01_AR-ButtnerFmaj2025.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "685b56a1aaa2b10f95a9366d6e8cdc01e4f5b9243b9525fc3f667e754ecda736",
+      "size_bytes": 6165,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Handel_HWV040-1-01_AR-ButtnerFmaj2025.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Handel_HWV040-1-01_AR-ButtnerFmaj2025.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "a5582ed7e0daf9332efefb1b74e01aa200b393cd05611a5e6c92271a2ce9ecdf",
+      "size_bytes": 2028,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Handel_HWV040-1-01_AR-ButtnerFmaj2025.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Handel_HWV040-1-01_AR-ButtnerFmaj2025.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "acde117468fa249ef29fc108017b1e51a8cd18f1fa2052ff86b5d1279373c4f5",
+      "size_bytes": 125,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Handel_HWV040-1-01_AR-ButtnerFmaj2025.csv"
+      }
+    },
+    {
+      "path": "audio/Handel_HWV040-1-01_AR-ButtnerGmaj2025.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "7194e9fc821302c6318b32b836a074a48c05a303ca7cebc87fb2a14d5981b5d3",
+      "size_bytes": 7247748,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Handel_HWV040-1-01_AR-ButtnerGmaj2025.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Handel_HWV040-1-01_AR-ButtnerGmaj2025.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "64abb2fa9c0c10a72d0cd8f1e555df73a182a7b03ff45e076b9ad42dbbe86f5c",
+      "size_bytes": 5551,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Handel_HWV040-1-01_AR-ButtnerGmaj2025.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Handel_HWV040-1-01_AR-ButtnerGmaj2025.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "18c16f013568c4b274426df1dde45341771af1acd2fade3295499b10819d0083",
+      "size_bytes": 1827,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Handel_HWV040-1-01_AR-ButtnerGmaj2025.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Handel_HWV040-1-01_AR-ButtnerGmaj2025.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "ddd033466200f8075816746ed95c4973743a8e31f165e75ba54eda8754832c8d",
+      "size_bytes": 141,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Handel_HWV040-1-01_AR-ButtnerGmaj2025.csv"
+      }
+    },
+    {
+      "path": "audio/Handel_HWV040-1-01_AR-R-Bra2020.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "4a45277ac9ffed4328583cbc30df1e642339e993a63bc113d8e6e02a2425112d",
+      "size_bytes": 6773804,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Handel_HWV040-1-01_AR-R-Bra2020.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Handel_HWV040-1-01_AR-R-Bra2020.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "a734a6b985e9b5bbc60325d6bb0b12c1f8110d99ba90f05e280948a832c4fab9",
+      "size_bytes": 6150,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Handel_HWV040-1-01_AR-R-Bra2020.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Handel_HWV040-1-01_AR-R-Bra2020.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "1787b9d858c283038fd4c09fe9952ca5d361812b680c2aadd28665e6ea523252",
+      "size_bytes": 2017,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Handel_HWV040-1-01_AR-R-Bra2020.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Handel_HWV040-1-01_AR-R-Bra2020.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "79149d0df4d5209a7197e519413ed6c9de67ccc1d3d58059caa71d03e52b52b1",
+      "size_bytes": 123,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Handel_HWV040-1-01_AR-R-Bra2020.csv"
+      }
+    },
+    {
+      "path": "audio/Mozart_KV618_AR-Papalin2012.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "896320885ec7f71145a5672d96c26db1242744633cb95ccf247a2f896f11db82",
+      "size_bytes": 7100144,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Mozart_KV618_AR-Papalin2012.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Mozart_KV618_AR-Papalin2012.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "9ee3125ead6680395c68d5f7a09f61fc7aa2c4578539078cb7458c1c54ec8b19",
+      "size_bytes": 3528,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Mozart_KV618_AR-Papalin2012.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Mozart_KV618_AR-Papalin2012.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "52622aff7280297da508206b32fe03c7b2baa2442301f9b53737d1f87b50afc1",
+      "size_bytes": 1796,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Mozart_KV618_AR-Papalin2012.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Mozart_KV618_AR-Papalin2012.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "7f4eca8632e9c8704fe6a9b07b2db43239da23644c7b5f66f3c05d93fdcae3ac",
+      "size_bytes": 205,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Mozart_KV618_AR-Papalin2012.csv"
+      }
+    },
+    {
+      "path": "audio/Mozart_KV618_OV-GliArmonici2015.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "d03c21133e025c9d12f94ad9eebf4595651c76801613261b7548e2849b858a42",
+      "size_bytes": 9116108,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Mozart_KV618_OV-GliArmonici2015.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Mozart_KV618_OV-GliArmonici2015.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "6c3f0a3fcd7dfba0689a32ce48038fcf1cd2bc08479a6b9b2fed57f759c57dca",
+      "size_bytes": 3543,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Mozart_KV618_OV-GliArmonici2015.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Mozart_KV618_OV-GliArmonici2015.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "b9d9567be3e9c2ad39021e474a15ce7d39a7aa1affd05c14d3a255b41676c9c8",
+      "size_bytes": 1804,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Mozart_KV618_OV-GliArmonici2015.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Mozart_KV618_OV-GliArmonici2015.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "f250f49c2fca91ee485ed33f213127451ae787b04b32fbf8b79f7a0f6d550c9e",
+      "size_bytes": 206,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Mozart_KV618_OV-GliArmonici2015.csv"
+      }
+    },
+    {
+      "path": "audio/Mussorgsky_PicturesAtAnExhibition-10_OV-Bertoglio2012.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "ab457b00d5da373a204b3300fa574b46e117c9959470913a6032a374bf3c5bbf",
+      "size_bytes": 12402604,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Mussorgsky_PicturesAtAnExhibition-10_OV-Bertoglio2012.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Mussorgsky_PicturesAtAnExhibition-10_OV-Bertoglio2012.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "ab9ab0578f3035206bc69a36f0b5b7ed1fd3f77da4471095595a1121038a7bf8",
+      "size_bytes": 14733,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Mussorgsky_PicturesAtAnExhibition-10_OV-Bertoglio2012.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Mussorgsky_PicturesAtAnExhibition-10_OV-Bertoglio2012.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "3ce59447d8df01687fc77412f6aeca7d02985027dea8bca413131bb444246019",
+      "size_bytes": 6851,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Mussorgsky_PicturesAtAnExhibition-10_OV-Bertoglio2012.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Mussorgsky_PicturesAtAnExhibition-10_OV-Bertoglio2012.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "96e9f4af6d55b93de9ef73c8d39b832a4823edda1c322396356215632a7b5d41",
+      "size_bytes": 334,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Mussorgsky_PicturesAtAnExhibition-10_OV-Bertoglio2012.csv"
+      }
+    },
+    {
+      "path": "audio/Mussorgsky_PicturesAtAnExhibition-10_OV-R-Staab2016.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "00129b67f8fc519de34ad6d36fcad00388aa6d9da49dde1c0cc4fc990f52e2be",
+      "size_bytes": 14380078,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Mussorgsky_PicturesAtAnExhibition-10_OV-R-Staab2016.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Mussorgsky_PicturesAtAnExhibition-10_OV-R-Staab2016.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "af3e6dceb763d672e44096c933b9350bf0baf498eac186ce3d14c0564a181d21",
+      "size_bytes": 12992,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Mussorgsky_PicturesAtAnExhibition-10_OV-R-Staab2016.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Mussorgsky_PicturesAtAnExhibition-10_OV-R-Staab2016.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "d7da90c69b178fe252098c4644a80df4607fc8f09918f51fdfe3e81edff940cc",
+      "size_bytes": 6043,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Mussorgsky_PicturesAtAnExhibition-10_OV-R-Staab2016.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Mussorgsky_PicturesAtAnExhibition-10_OV-R-Staab2016.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "645deb5e7438f88ea479d0177af4ac3ad568b2faeaea08d75de7d5a7a32cd025",
+      "size_bytes": 263,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Mussorgsky_PicturesAtAnExhibition-10_OV-R-Staab2016.csv"
+      }
+    },
+    {
+      "path": "audio/Schubert_D733-01_AR-Staab2012.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "4cee48e973fd8ff0797c1219e43b07cd2078d6b6882ebeb34e951270d0b4aa30",
+      "size_bytes": 8967692,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Schubert_D733-01_AR-Staab2012.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Schubert_D733-01_AR-Staab2012.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "74f7502e9d9da4846bc062ea6d917ae06c19dfd008a070a3dbfcdeaf8d0626d0",
+      "size_bytes": 12937,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Schubert_D733-01_AR-Staab2012.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Schubert_D733-01_AR-Staab2012.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "8ba56e0dcee8993e30c9354c43da79830ceb16778376056f95c8580f0335cd8c",
+      "size_bytes": 6469,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Schubert_D733-01_AR-Staab2012.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Schubert_D733-01_AR-Staab2012.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "b4dc30043cd20cfcc4cc678741b11ea08c309e91d46ae7e38009fac444c9a228",
+      "size_bytes": 321,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Schubert_D733-01_AR-Staab2012.csv"
+      }
+    },
+    {
+      "path": "audio/Schubert_D733-01_OV-ButtnerWeiss2025.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "d2e57e05adc0ffbf8020f690928a873aeff6cbe6a5570db59f13b88946cfaae8",
+      "size_bytes": 9135808,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Schubert_D733-01_OV-ButtnerWeiss2025.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Schubert_D733-01_OV-ButtnerWeiss2025.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "5fe813c522d190d70bdd909e586b05abcd095a9859a59dfa9774925f650390c1",
+      "size_bytes": 12945,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Schubert_D733-01_OV-ButtnerWeiss2025.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Schubert_D733-01_OV-ButtnerWeiss2025.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "14696aaae62d7db0112bc2df0318fcac3bbb43601d7ab6f7cb46e08a7b6b7cfa",
+      "size_bytes": 6497,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Schubert_D733-01_OV-ButtnerWeiss2025.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Schubert_D733-01_OV-ButtnerWeiss2025.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "9f0b9e180b361e31ca55ef3d878f9d95aa7daf56228317e767a333674b4bf545",
+      "size_bytes": 331,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Schubert_D733-01_OV-ButtnerWeiss2025.csv"
+      }
+    },
+    {
+      "path": "audio/Schumann_Op039-05_OV-Buttner2025.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "dad5d6157139a75334ed30ee8d4cc7d35c14fde6c2bea50896aff7fcfaaa1ff5",
+      "size_bytes": 10783072,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Schumann_Op039-05_OV-Buttner2025.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Schumann_Op039-05_OV-Buttner2025.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "1f75b1e0aadcb79385e2bd725b899caa5aa95c32837e1dd6fdfbdd4fa753dde1",
+      "size_bytes": 8111,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Schumann_Op039-05_OV-Buttner2025.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Schumann_Op039-05_OV-Buttner2025.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "ea617289924baa290cd4d617c6da2f32b080d98213c9a6bcb757c13727283c42",
+      "size_bytes": 2665,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Schumann_Op039-05_OV-Buttner2025.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Schumann_Op039-05_OV-Buttner2025.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "78ebdd3d3b5e7be406d69ee96cf48e9eb804df4cdbd0bc0680ed44d1116baa02",
+      "size_bytes": 250,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Schumann_Op039-05_OV-Buttner2025.csv"
+      }
+    },
+    {
+      "path": "audio/Schumann_Op039-05_OV-Pizarro2012.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "26d1cae0297e96a5da7c33f50e2e4db32d6af1e897fe7be1e40f1f7a4faa44b9",
+      "size_bytes": 9928768,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Schumann_Op039-05_OV-Pizarro2012.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Schumann_Op039-05_OV-Pizarro2012.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "73d15cdc4ee207a44de1d7b5babe1dec2958a2288c74be33023f686b5685ac65",
+      "size_bytes": 8113,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Schumann_Op039-05_OV-Pizarro2012.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Schumann_Op039-05_OV-Pizarro2012.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "dadcf0e2c19fc098bebf56c00273ad0521265d438a38d49aaa3eeaa1b0ef01d3",
+      "size_bytes": 2660,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Schumann_Op039-05_OV-Pizarro2012.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Schumann_Op039-05_OV-Pizarro2012.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "cf002414fcc76a9cc92653b5f15b3db58a6a15711b8762f32f3b000066a7c914",
+      "size_bytes": 250,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Schumann_Op039-05_OV-Pizarro2012.csv"
+      }
+    },
+    {
+      "path": "audio/Verdi_Nabucco-VaPensiero_AR-R-Operaphilia2022.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "a8a65dde5137e28f74955df50ba61c188ae16f095b920d3d7f734a9fa70e2305",
+      "size_bytes": 13591340,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Verdi_Nabucco-VaPensiero_AR-R-Operaphilia2022.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Verdi_Nabucco-VaPensiero_AR-R-Operaphilia2022.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "c3f02128690fce7aa0d1f7200a2b1b08d6c3accf53e9856b6c3067b13fd04e5c",
+      "size_bytes": 7711,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Verdi_Nabucco-VaPensiero_AR-R-Operaphilia2022.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Verdi_Nabucco-VaPensiero_AR-R-Operaphilia2022.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "3cbc5442e4f9b03c84b7a9f585ff105e30b7da10a208cd4b88fad72e3835c12d",
+      "size_bytes": 1768,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Verdi_Nabucco-VaPensiero_AR-R-Operaphilia2022.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Verdi_Nabucco-VaPensiero_AR-R-Operaphilia2022.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "84ab9861f3072a04411a1515f3e116bbbc296792ffe605595b04b17a89e7add9",
+      "size_bytes": 193,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Verdi_Nabucco-VaPensiero_AR-R-Operaphilia2022.csv"
+      }
+    },
+    {
+      "path": "audio/Verdi_Nabucco-VaPensiero_OV-Garcia2015.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "58ae7ff618b4ac08179ca85568f6fa9432417fbfda5c7a4868c95eea66417b8a",
+      "size_bytes": 13053356,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Verdi_Nabucco-VaPensiero_OV-Garcia2015.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Verdi_Nabucco-VaPensiero_OV-Garcia2015.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "03cf64832c74cd5f60a3a9ac8f0517d980bd4e8159bd53a9192646b26d30ee2d",
+      "size_bytes": 7968,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Verdi_Nabucco-VaPensiero_OV-Garcia2015.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Verdi_Nabucco-VaPensiero_OV-Garcia2015.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "a7a4e63c3d911aaf6f66cb79b93e49d4750bd50ca5f5f34fc7376b849b41648c",
+      "size_bytes": 2011,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Verdi_Nabucco-VaPensiero_OV-Garcia2015.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Verdi_Nabucco-VaPensiero_OV-Garcia2015.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "95dcd3b03a785ee467727c78facf6d08a06cac80ab977fe32b12596832b6b8cc",
+      "size_bytes": 214,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Verdi_Nabucco-VaPensiero_OV-Garcia2015.csv"
+      }
+    },
+    {
+      "path": "audio/Verdi_Nabucco-VaPensiero_OV-LibrosVivos2007.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "1b213cfacc643b210b6e8f32213cb0ea7a353eb38b05cca5956f282583d04190",
+      "size_bytes": 12260764,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Verdi_Nabucco-VaPensiero_OV-LibrosVivos2007.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Verdi_Nabucco-VaPensiero_OV-LibrosVivos2007.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "e196cb15673bdb7a192b85f8fbe96ce39287170058581d48dcd55e87ab17f4f3",
+      "size_bytes": 7962,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Verdi_Nabucco-VaPensiero_OV-LibrosVivos2007.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Verdi_Nabucco-VaPensiero_OV-LibrosVivos2007.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "f9566538b8ecaa641f779c7e0f7fc0b50b1af29d7eb4300f57c533849872a06f",
+      "size_bytes": 2014,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Verdi_Nabucco-VaPensiero_OV-LibrosVivos2007.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Verdi_Nabucco-VaPensiero_OV-LibrosVivos2007.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "14895aea5a4d6fb6f710eddce2135dffae5cdaa4db71eb3dd0a0282532a1509a",
+      "size_bytes": 215,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Verdi_Nabucco-VaPensiero_OV-LibrosVivos2007.csv"
+      }
+    },
+    {
+      "path": "audio/Verdi_Nabucco-VaPensiero_OV-Secci2020.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "9a11bb411d2ad8c99838355180a795a9401c1369c325df6f01f755e81da34f7b",
+      "size_bytes": 13608236,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Verdi_Nabucco-VaPensiero_OV-Secci2020.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Verdi_Nabucco-VaPensiero_OV-Secci2020.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "e15a4b72e947b262ac246932f468befc77e563f772a92f68356cfd3612eb23aa",
+      "size_bytes": 7961,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Verdi_Nabucco-VaPensiero_OV-Secci2020.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Verdi_Nabucco-VaPensiero_OV-Secci2020.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "542e20f78ec0298e65be45bf75b4698834e64f5f64fcdb82143e40c3683b797f",
+      "size_bytes": 2019,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Verdi_Nabucco-VaPensiero_OV-Secci2020.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Verdi_Nabucco-VaPensiero_OV-Secci2020.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "6aa676749defa2ec1a3cdfa0df339754c1a88d9c6f097f7977facb6482005713",
+      "size_bytes": 215,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Verdi_Nabucco-VaPensiero_OV-Secci2020.csv"
+      }
+    },
+    {
+      "path": "audio/Vivaldi_RV269-01_AR-Bra2021.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "25928e5993da83fb5df89a5d08f08e0033ef9e5787eab4ea6864b20034ade654",
+      "size_bytes": 8420012,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Vivaldi_RV269-01_AR-Bra2021.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Vivaldi_RV269-01_AR-Bra2021.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "55cb79d3359e912d6bbc7c69a0e569b61660d8e15b283664d2ee86ba2da498db",
+      "size_bytes": 12706,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Vivaldi_RV269-01_AR-Bra2021.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Vivaldi_RV269-01_AR-Bra2021.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "b4decc0adbb2ab3e787ec7e282fad54e044e2aceccc351e5403b4343628c6222",
+      "size_bytes": 3216,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Vivaldi_RV269-01_AR-Bra2021.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Vivaldi_RV269-01_AR-Bra2021.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "3b0989caf802eb02c5c6ee3f30259668c9b3b9f35a4f66069f64f385a62e32a2",
+      "size_bytes": 207,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Vivaldi_RV269-01_AR-Bra2021.csv"
+      }
+    },
+    {
+      "path": "audio/Vivaldi_RV269-01_AR-ModenaChamber2022.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "210aa600e039d44824ff31f31070490ecbfa2f92ef8f555532560fef52f66e2c",
+      "size_bytes": 9432620,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Vivaldi_RV269-01_AR-ModenaChamber2022.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Vivaldi_RV269-01_AR-ModenaChamber2022.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "d8da6c0b4683b86baa869b5fb839e30cfe4ed5c5aa017319a13584d3ab11bfea",
+      "size_bytes": 12738,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Vivaldi_RV269-01_AR-ModenaChamber2022.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Vivaldi_RV269-01_AR-ModenaChamber2022.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "9324628ae018e3eca64e3a1570caa5edb79d11b9f2639a1ff34a20585b3f20a2",
+      "size_bytes": 3219,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Vivaldi_RV269-01_AR-ModenaChamber2022.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Vivaldi_RV269-01_AR-ModenaChamber2022.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "a893d326ed594751ea3cbf05051943e87d1955ecb5c7402106553692d50a686d",
+      "size_bytes": 207,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Vivaldi_RV269-01_AR-ModenaChamber2022.csv"
+      }
+    },
+    {
+      "path": "audio/Vivaldi_RV269-01_AR-R-Intartaglia2011.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "e2bde23fbc01bea0255f7e582414886b2f3dd56f573a0b654aaa8269d0390ea2",
+      "size_bytes": 9260972,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Vivaldi_RV269-01_AR-R-Intartaglia2011.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Vivaldi_RV269-01_AR-R-Intartaglia2011.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "644c33080f0c1c37f43155a9dc1285c57680739639279876db4f6711c3f7ba53",
+      "size_bytes": 12307,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Vivaldi_RV269-01_AR-R-Intartaglia2011.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Vivaldi_RV269-01_AR-R-Intartaglia2011.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "265ffe5d96b5e336a4c54e062657cae6b17b09a49c544a53cbc910cc7a356adf",
+      "size_bytes": 2790,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Vivaldi_RV269-01_AR-R-Intartaglia2011.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Vivaldi_RV269-01_AR-R-Intartaglia2011.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "c0309f75b15f7b97eb151ad0db994bb082f3e39022a919b623c527154cc51b93",
+      "size_bytes": 179,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Vivaldi_RV269-01_AR-R-Intartaglia2011.csv"
+      }
+    },
+    {
+      "path": "metadata/metadata_versions.csv",
+      "url": "https://zenodo.org/records/21159596/files/metadata_versions.csv?download=1",
+      "sha256": "1e702f7b886bf4ac565641ada5035927318b03a708679ec236fe1b7dd38df323",
+      "size_bytes": 83095,
+      "role": "annotation_source"
+    },
+    {
+      "path": "metadata/metadata_works.csv",
+      "url": "https://zenodo.org/records/21159596/files/metadata_works.csv?download=1",
+      "sha256": "ae70c6b1be00e37e2c77fdc91cb75804b9c1f2af0424927a4978d329ae400f06",
+      "size_bytes": 1920,
+      "role": "annotation_source"
+    }
+  ]
+}

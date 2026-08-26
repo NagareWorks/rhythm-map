@@ -197,7 +197,7 @@ for `local-metrical-path-v1`, frozen at commit
 and must never become calibration data, another decoder sweep, or a source of
 threshold changes.
 
-## RUBATO real-performance calibration v1 (selection locked)
+## RUBATO real-performance calibration v1
 
 [`rubato-calibration-v1-selection.json`](rubato-calibration-v1-selection.json)
 freezes the first calibration slice from
@@ -216,12 +216,45 @@ recordings. NC, ND, SA, ambiguous-license, synthetic, reproduction-piano, and
 structurally deviating adaptation versions are excluded from the initial
 slice.
 
-This is a selection lock, not yet a `dataset-fetch` lock. RUBATO is published
-as one 6.3 GB Zenodo ZIP rather than a source repository, so a Git submodule
-would not identify the data. The next acquisition step is to address only the
-25 locked WAV, beat, measure, and structure members through ZIP range requests,
-record their SHA-256 identities, and generate checked-in truth without using
-model output. Do not download or vendor the complete archive into the checkout.
+[`rubato-calibration-v1.json`](rubato-calibration-v1.json) is the completed
+acquisition lock. It pins 25 WAVs, 75 beat/measure/structure CSVs, and the two
+upstream metadata tables: 102 individually SHA-256-addressed assets. RUBATO is
+published as one 6.3 GB Zenodo ZIP rather than a source repository, so a Git
+submodule would not identify the data. The fetcher reads the ZIP64 directory
+and downloads only the selected members; do not download or vendor the complete
+archive into the checkout.
+
+```bash
+cargo xtask dataset-fetch \
+  --manifest evaluation/datasets/rubato-calibration-v1.json \
+  --output D:/rhythm-map-eval/rubato-calibration-v1 \
+  --with-annotations
+```
+
+[`rubato-calibration-v1.json`](../suites/rubato-calibration-v1.json) is the
+matching 25-case calibration suite. Checked-in truth is generated solely from
+the official physical-time CSVs. Measure timestamps mark matching beats as
+downbeats, and adjacent beat intervals define beat-local BPM. Structure labels
+are validated and emitted by the importer as separate section metadata; they
+are not mislabeled as tempo change points. For one track:
+
+```bash
+cargo xtask rubato-truth \
+  --id rubato-bach-bwv1007-01-ov-milman2022 \
+  --beat D:/rhythm-map-eval/rubato-calibration-v1/annotations/beat/Bach_BWV1007-01_OV-Milman2022.csv \
+  --measure D:/rhythm-map-eval/rubato-calibration-v1/annotations/measure/Bach_BWV1007-01_OV-Milman2022.csv \
+  --structure D:/rhythm-map-eval/rubato-calibration-v1/annotations/structure/Bach_BWV1007-01_OV-Milman2022.csv \
+  --audio D:/rhythm-map-eval/rubato-calibration-v1/audio/Bach_BWV1007-01_OV-Milman2022.wav \
+  --output evaluation/suites/truth/rubato-calibration-v1/rubato-bach-bwv1007-01-ov-milman2022.json
+```
+
+The importer does not silently repair upstream edge cases. Official beats are
+retained even when an interval would imply more than the truth schema's 1000
+BPM ceiling; only that BPM interval is omitted and counted in the audit report.
+Terminal beat or measure markers up to 100 ms beyond decoded audio, caused by
+frame quantization, remain in the immutable annotation but are omitted from
+scored truth rather than clamped to an invented timestamp. Larger boundary
+errors are rejected.
 
 The multi-version design is especially valuable here: the same musical clock
 is observed through solo strings, ensembles, orchestra, choir, voice and piano,

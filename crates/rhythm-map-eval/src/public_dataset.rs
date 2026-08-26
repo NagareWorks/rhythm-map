@@ -398,6 +398,7 @@ struct ZipEntry {
     local_header_offset: u64,
 }
 
+#[allow(clippy::too_many_lines)]
 fn download_zip_member(
     agent: &Agent,
     asset: &PublicDatasetAsset,
@@ -418,48 +419,65 @@ fn download_zip_member(
         bail!("ZIP member {} is empty", source.member_path);
     }
 
-    let fixed_header_end = checked_range_end(entry.local_header_offset, 30, "local header")?;
-    let fixed_header = request_range(
-        agent,
-        &asset.url,
+    // A local ZIP extra field is at most u16::MAX bytes. Fetching that bounded
+    // allowance together with the member data avoids three latency-heavy HTTP
+    // requests per selected file while remaining correct when local and
+    // central-directory extra fields have different lengths.
+    let maximum_entry_size = 30_u64
+        .checked_add(u64::try_from(source.member_path.len())?)
+        .and_then(|size| size.checked_add(u64::from(u16::MAX)))
+        .and_then(|size| size.checked_add(entry.compressed_size))
+        .context("ZIP member request size overflow")?;
+    let request_end = checked_range_end(
         entry.local_header_offset,
-        fixed_header_end,
-    )?;
-    if read_u32(&fixed_header, 0)? != 0x0403_4b50 {
+        maximum_entry_size,
+        "ZIP member request",
+    )?
+    .min(source.archive_size_bytes - 1);
+    let entry_bytes = request_range(agent, &asset.url, entry.local_header_offset, request_end)?;
+    if read_u32(&entry_bytes, 0)? != 0x0403_4b50 {
         bail!(
             "ZIP member {} has an invalid local header",
             source.member_path
         );
     }
-    let name_length = usize::from(read_u16(&fixed_header, 26)?);
-    let extra_length = usize::from(read_u16(&fixed_header, 28)?);
-    let header_rest_size = u64::try_from(name_length + extra_length)
-        .context("ZIP member local header is too large")?;
-    let header_rest_offset = entry
-        .local_header_offset
-        .checked_add(30)
-        .context("ZIP member local header offset overflow")?;
-    let header_rest_end = checked_range_end(header_rest_offset, header_rest_size, "local header")?;
-    let header_rest = request_range(agent, &asset.url, header_rest_offset, header_rest_end)?;
-    let local_name = std::str::from_utf8(&header_rest[..name_length])
-        .context("ZIP local member name is not UTF-8")?;
+    let name_length = usize::from(read_u16(&entry_bytes, 26)?);
+    let extra_length = usize::from(read_u16(&entry_bytes, 28)?);
+    let name_start = 30_usize;
+    let name_end = name_start
+        .checked_add(name_length)
+        .context("ZIP local member name overflow")?;
+    let data_start = name_end
+        .checked_add(extra_length)
+        .context("ZIP local member header overflow")?;
+    let data_end = data_start
+        .checked_add(usize::try_from(entry.compressed_size)?)
+        .context("ZIP member data overflow")?;
+    let local_name = std::str::from_utf8(
+        entry_bytes
+            .get(name_start..name_end)
+            .context("ZIP local member name is truncated")?,
+    )
+    .context("ZIP local member name is not UTF-8")?;
     if local_name != source.member_path {
         bail!(
             "ZIP local member name {local_name:?} does not match {:?}",
             source.member_path
         );
     }
-    let data_offset = header_rest_end
-        .checked_add(1)
+    let compressed = entry_bytes
+        .get(data_start..data_end)
+        .context("ZIP member data is truncated")?;
+    let absolute_data_end = entry
+        .local_header_offset
+        .checked_add(u64::try_from(data_end)?)
         .context("ZIP member data offset overflow")?;
-    let data_end = checked_range_end(data_offset, entry.compressed_size, "member data")?;
-    if data_end >= source.archive_size_bytes {
+    if absolute_data_end > source.archive_size_bytes {
         bail!(
             "ZIP member {} exceeds the locked archive",
             source.member_path
         );
     }
-    let compressed = request_range(agent, &asset.url, data_offset, data_end)?;
     let mut output = File::create(temporary)
         .with_context(|| format!("creating extracted member {}", temporary.display()))?;
     let output_limit = asset
@@ -876,6 +894,31 @@ mod tests {
         lock.validate().expect("validate Vienna dataset lock");
         assert_eq!(lock.assets.len(), 12);
         assert!(lock.assets.iter().all(|asset| asset.zip_member.is_some()));
+    }
+
+    #[test]
+    fn pinned_rubato_dataset_lock_is_valid() {
+        let path = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../../evaluation/datasets/rubato-calibration-v1.json");
+        let lock: PublicDatasetLock =
+            serde_json::from_slice(&fs::read(path).expect("read RUBATO dataset lock"))
+                .expect("parse RUBATO dataset lock");
+        lock.validate().expect("validate RUBATO dataset lock");
+        assert_eq!(lock.assets.len(), 102);
+        assert_eq!(
+            lock.assets
+                .iter()
+                .filter(|asset| asset.role == PublicDatasetAssetRole::Audio)
+                .count(),
+            25
+        );
+        assert_eq!(
+            lock.assets
+                .iter()
+                .filter(|asset| asset.zip_member.is_some())
+                .count(),
+            100
+        );
     }
 
     #[test]

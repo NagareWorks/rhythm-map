@@ -378,4 +378,32 @@ mod tests {
             assert!(truth.beats.iter().any(|beat| beat.downbeat));
         }
     }
+
+    #[test]
+    fn pinned_rubato_calibration_manifest_and_truth_are_valid() {
+        let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let suite_path = root.join("evaluation/suites/rubato-calibration-v1.json");
+        let suite: EvaluationSuite =
+            serde_json::from_slice(&std::fs::read(&suite_path).expect("read RUBATO suite"))
+                .expect("parse RUBATO suite");
+        suite.validate().expect("validate RUBATO suite");
+        assert_eq!(suite.purpose, SuitePurpose::Calibration);
+        assert_eq!(suite.cases.len(), 25);
+
+        for case in &suite.cases {
+            let CaseInput::External { truth, .. } = &case.input else {
+                panic!("RUBATO calibration case must be external");
+            };
+            assert!(case.provenance.commercial_evaluation_allowed);
+            let truth_path = suite_path.parent().expect("suite parent").join(truth);
+            let truth: crate::GeneratedTruth =
+                serde_json::from_slice(&std::fs::read(&truth_path).expect("read RUBATO truth"))
+                    .expect("parse RUBATO truth");
+            truth.validate().expect("validate RUBATO truth");
+            assert_eq!(truth.id, case.id);
+            assert!(truth.beats.iter().any(|beat| beat.downbeat));
+            assert!(!truth.tempo_segments.is_empty());
+            assert!(truth.change_points.is_empty());
+        }
+    }
 }

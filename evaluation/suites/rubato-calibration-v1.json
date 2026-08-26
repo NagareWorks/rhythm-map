@@ -1,0 +1,733 @@
+{
+  "schema_version": 1,
+  "id": "rubato-calibration-v1",
+  "description": "Commercial-compatible, corpus-disjoint relative to the published Beat This training list, multi-instrument real-performance calibration with official physical-time beat, measure, and structure annotations. Structure labels remain audit metadata and are not treated as tempo change points.",
+  "purpose": "calibration",
+  "thresholds": {
+    "beat_tolerance_ms": 70,
+    "change_tolerance_s": 1,
+    "min_beat_f1": 0.8,
+    "min_downbeat_f1": 0.6,
+    "max_tempo_median_error_percent": 10,
+    "max_tempo_p95_error_percent": 25,
+    "min_change_recall": 0
+  },
+  "cases": [
+    {
+      "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-bach-bwv1007-01-ar-macleod2011.json",
+        "audio": {
+          "sha256": "3b4e219d54a698d5de7a3622ee46e1652ce44e06782691a53a0163bc10bae736",
+          "local_file_hint": "audio/Bach_BWV1007-01_AR-MacLeod2011.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "arrangement",
+        "dulcimer"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-3.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Bach_BWV1007-01_AR-MacLeod2011, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-bach-bwv1007-01-ov-milman2022.json",
+        "audio": {
+          "sha256": "b57525accae925ff8aaca1ee9f1048d956d1f37e75ec6b3db8f05cc8f17817da",
+          "local_file_hint": "audio/Bach_BWV1007-01_OV-Milman2022.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "original-version",
+        "cello"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-3.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Bach_BWV1007-01_OV-Milman2022, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-beethoven-op072-0-ov-henning2017",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-beethoven-op072-0-ov-henning2017.json",
+        "audio": {
+          "sha256": "840011dbbbc7dbeee4755466a72ad2736452b7e0486091b8cb97b918044a67e9",
+          "local_file_hint": "audio/Beethoven_Op072-0_OV-Henning2017.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "original-version",
+        "orchestra"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-3.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Beethoven_Op072-0_OV-Henning2017, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-berlioz-h048-04-ov-dennis2016.json",
+        "audio": {
+          "sha256": "e5946d1f1176b1165f9e7fac03e32c729b421bbae376db64f839f4287d245bf6",
+          "local_file_hint": "audio/Berlioz_H048-04_OV-Dennis2016.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "original-version",
+        "orchestra"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-3.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Berlioz_H048-04_OV-Dennis2016, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-boccherini-g275-03-ov-krux2022",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-boccherini-g275-03-ov-krux2022.json",
+        "audio": {
+          "sha256": "0176a58324aa4a93455ce47b205edef5b4a96912bf17bf86acd1cdd9c8acf42d",
+          "local_file_hint": "audio/Boccherini_G275-03_OV-Krux2022.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "original-version",
+        "strings"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Boccherini_G275-03_OV-Krux2022, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-brahms-op115-01-ov-schmitta2025",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-brahms-op115-01-ov-schmitta2025.json",
+        "audio": {
+          "sha256": "14b025da3140d4a57c3102065ba0b956a25b12496f272647c3bafba6f9f4430a",
+          "local_file_hint": "audio/Brahms_Op115-01_OV-SchmittA2025.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "original-version",
+        "clarinet",
+        "strings"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-3.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Brahms_Op115-01_OV-SchmittA2025, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-brahms-op115-01-ov-steffens2008",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-brahms-op115-01-ov-steffens2008.json",
+        "audio": {
+          "sha256": "ede6c956f98605f468a1932424d6f33561bdb9724c84811a4019acaa74650f6c",
+          "local_file_hint": "audio/Brahms_Op115-01_OV-Steffens2008.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "original-version",
+        "clarinet",
+        "strings"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Brahms_Op115-01_OV-Steffens2008, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-handel-hwv040-1-01-ar-buttnerfmaj2025.json",
+        "audio": {
+          "sha256": "5fee1c79ff4373b61a66882fcb73dc36cb12629eadb76980e47c7dc196ef9d16",
+          "local_file_hint": "audio/Handel_HWV040-1-01_AR-ButtnerFmaj2025.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "arrangement",
+        "voice",
+        "piano"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-3.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Handel_HWV040-1-01_AR-ButtnerFmaj2025, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-handel-hwv040-1-01-ar-buttnergmaj2025.json",
+        "audio": {
+          "sha256": "7194e9fc821302c6318b32b836a074a48c05a303ca7cebc87fb2a14d5981b5d3",
+          "local_file_hint": "audio/Handel_HWV040-1-01_AR-ButtnerGmaj2025.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "arrangement",
+        "voice",
+        "piano"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-3.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Handel_HWV040-1-01_AR-ButtnerGmaj2025, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-handel-hwv040-1-01-ar-r-bra2020.json",
+        "audio": {
+          "sha256": "4a45277ac9ffed4328583cbc30df1e642339e993a63bc113d8e6e02a2425112d",
+          "local_file_hint": "audio/Handel_HWV040-1-01_AR-R-Bra2020.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "restored-arrangement",
+        "accordeons"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-4.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Handel_HWV040-1-01_AR-R-Bra2020, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-mozart-kv618-ar-papalin2012",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-mozart-kv618-ar-papalin2012.json",
+        "audio": {
+          "sha256": "896320885ec7f71145a5672d96c26db1242744633cb95ccf247a2f896f11db82",
+          "local_file_hint": "audio/Mozart_KV618_AR-Papalin2012.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "arrangement",
+        "choir",
+        "recorders"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-3.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Mozart_KV618_AR-Papalin2012, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-mozart-kv618-ov-gliarmonici2015.json",
+        "audio": {
+          "sha256": "d03c21133e025c9d12f94ad9eebf4595651c76801613261b7548e2849b858a42",
+          "local_file_hint": "audio/Mozart_KV618_OV-GliArmonici2015.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "original-version",
+        "choir",
+        "strings",
+        "organ"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Mozart_KV618_OV-GliArmonici2015, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012.json",
+        "audio": {
+          "sha256": "ab457b00d5da373a204b3300fa574b46e117c9959470913a6032a374bf3c5bbf",
+          "local_file_hint": "audio/Mussorgsky_PicturesAtAnExhibition-10_OV-Bertoglio2012.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "original-version",
+        "piano"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-3.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Mussorgsky_PicturesAtAnExhibition-10_OV-Bertoglio2012, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016.json",
+        "audio": {
+          "sha256": "00129b67f8fc519de34ad6d36fcad00388aa6d9da49dde1c0cc4fc990f52e2be",
+          "local_file_hint": "audio/Mussorgsky_PicturesAtAnExhibition-10_OV-R-Staab2016.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "restored-original",
+        "piano"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-3.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Mussorgsky_PicturesAtAnExhibition-10_OV-R-Staab2016, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-schubert-d733-01-ar-staab2012",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-schubert-d733-01-ar-staab2012.json",
+        "audio": {
+          "sha256": "4cee48e973fd8ff0797c1219e43b07cd2078d6b6882ebeb34e951270d0b4aa30",
+          "local_file_hint": "audio/Schubert_D733-01_AR-Staab2012.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "arrangement",
+        "piano"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-3.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Schubert_D733-01_AR-Staab2012, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-schubert-d733-01-ov-buttnerweiss2025.json",
+        "audio": {
+          "sha256": "d2e57e05adc0ffbf8020f690928a873aeff6cbe6a5570db59f13b88946cfaae8",
+          "local_file_hint": "audio/Schubert_D733-01_OV-ButtnerWeiss2025.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "original-version",
+        "piano4hands"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-3.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Schubert_D733-01_OV-ButtnerWeiss2025, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-schumann-op039-05-ov-buttner2025",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-schumann-op039-05-ov-buttner2025.json",
+        "audio": {
+          "sha256": "dad5d6157139a75334ed30ee8d4cc7d35c14fde6c2bea50896aff7fcfaaa1ff5",
+          "local_file_hint": "audio/Schumann_Op039-05_OV-Buttner2025.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "original-version",
+        "voice",
+        "piano"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Schumann_Op039-05_OV-Buttner2025, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-schumann-op039-05-ov-pizarro2012.json",
+        "audio": {
+          "sha256": "26d1cae0297e96a5da7c33f50e2e4db32d6af1e897fe7be1e40f1f7a4faa44b9",
+          "local_file_hint": "audio/Schumann_Op039-05_OV-Pizarro2012.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "original-version",
+        "voice",
+        "piano"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-3.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Schumann_Op039-05_OV-Pizarro2012, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022.json",
+        "audio": {
+          "sha256": "a8a65dde5137e28f74955df50ba61c188ae16f095b920d3d7f734a9fa70e2305",
+          "local_file_hint": "audio/Verdi_Nabucco-VaPensiero_AR-R-Operaphilia2022.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "restored-arrangement",
+        "choir",
+        "piano",
+        "strings",
+        "harp"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-3.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Verdi_Nabucco-VaPensiero_AR-R-Operaphilia2022, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-verdi-nabucco-vapensiero-ov-garcia2015.json",
+        "audio": {
+          "sha256": "58ae7ff618b4ac08179ca85568f6fa9432417fbfda5c7a4868c95eea66417b8a",
+          "local_file_hint": "audio/Verdi_Nabucco-VaPensiero_OV-Garcia2015.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "original-version",
+        "choir",
+        "orchestra"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-3.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Verdi_Nabucco-VaPensiero_OV-Garcia2015, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-verdi-nabucco-vapensiero-ov-librosvivos2007.json",
+        "audio": {
+          "sha256": "1b213cfacc643b210b6e8f32213cb0ea7a353eb38b05cca5956f282583d04190",
+          "local_file_hint": "audio/Verdi_Nabucco-VaPensiero_OV-LibrosVivos2007.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "original-version",
+        "choir",
+        "orchestra"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Verdi_Nabucco-VaPensiero_OV-LibrosVivos2007, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-verdi-nabucco-vapensiero-ov-secci2020.json",
+        "audio": {
+          "sha256": "9a11bb411d2ad8c99838355180a795a9401c1369c325df6f01f755e81da34f7b",
+          "local_file_hint": "audio/Verdi_Nabucco-VaPensiero_OV-Secci2020.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "original-version",
+        "choir",
+        "orchestra"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-3.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Verdi_Nabucco-VaPensiero_OV-Secci2020, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-vivaldi-rv269-01-ar-bra2021.json",
+        "audio": {
+          "sha256": "25928e5993da83fb5df89a5d08f08e0033ef9e5787eab4ea6864b20034ade654",
+          "local_file_hint": "audio/Vivaldi_RV269-01_AR-Bra2021.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "arrangement",
+        "accordeons"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-4.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Vivaldi_RV269-01_AR-Bra2021, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-vivaldi-rv269-01-ar-modenachamber2022.json",
+        "audio": {
+          "sha256": "210aa600e039d44824ff31f31070490ecbfa2f92ef8f555532560fef52f66e2c",
+          "local_file_hint": "audio/Vivaldi_RV269-01_AR-ModenaChamber2022.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "arrangement",
+        "strings",
+        "harpsichord"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC0-1.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Vivaldi_RV269-01_AR-ModenaChamber2022, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+      "input": {
+        "kind": "external",
+        "truth": "truth/rubato-calibration-v1/rubato-vivaldi-rv269-01-ar-r-intartaglia2011.json",
+        "audio": {
+          "sha256": "e2bde23fbc01bea0255f7e582414886b2f3dd56f573a0b654aaa8269d0390ea2",
+          "local_file_hint": "audio/Vivaldi_RV269-01_AR-R-Intartaglia2011.wav"
+        }
+      },
+      "tags": [
+        "real-performance",
+        "rubato",
+        "downbeat",
+        "structure-annotated",
+        "restored-arrangement",
+        "organ"
+      ],
+      "provenance": {
+        "kind": "public",
+        "audio_license": "CC-BY-3.0",
+        "annotation_license": "CC-BY-3.0",
+        "redistributable": true,
+        "commercial_evaluation_allowed": true,
+        "attribution": "RUBATO v0.3, Vivaldi_RV269-01_AR-R-Intartaglia2011, DOI 10.5281/zenodo.21159596",
+        "source_url": "https://doi.org/10.5281/zenodo.21159596"
+      }
+    }
+  ]
+}

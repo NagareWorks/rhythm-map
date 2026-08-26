@@ -61,6 +61,9 @@ for that distribution.
   experiments.
 - A pinned CC BY 4.0 Vienna 4x22 annotation source and Rust match importer for
   corpus-disjoint expressive-piano beat/downbeat and beat-local tempo truth.
+- A locked 25-track RUBATO v0.3 real-performance calibration suite spanning 12
+  works and multiple instruments, with ZIP-range acquisition plus official
+  beat, measure/downbeat, structure, and beat-local tempo truth import.
 
 ## Phase 2: product surfaces
 
@@ -369,3 +372,13 @@ a learned component to the default distribution.
   local path as an internal parallel hypothesis, keep the shipping path
   unchanged, and develop any selector or missing 2/4 coverage only on new
   calibration data before obtaining another independently precommitted holdout.
+- 2026-08-26: the new 25-case RUBATO core-oracle calibration passed beat and
+  downbeat F1 exactly on all cases but passed the tempo budgets on only 20/25.
+  Both Mozart KV618 performances and three of four Verdi performances failed
+  tempo P95 despite exact input timestamps; mean tempo median/P95 error was
+  2.64/16.18 percent. This is new multi-instrument evidence that the remaining
+  tempo-level and local-curve failure is deterministic, not a reason to retrain
+  Beat This. Calibrate meter-aware tempo interpretation on RUBATO without
+  forcing a preferred BPM band, changing official timestamps, or reopening the
+  Vienna holdout. The full Beat This run is a scheduled/offline job because the
+  VDI projected multi-hour inference for 1.8 hours of audio.

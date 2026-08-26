@@ -14,8 +14,8 @@ use rhythm_map_eval::{
     evaluate_decoder_recoverability_with_audio_directory,
     evaluate_decoder_sweep_with_audio_directory,
     evaluate_named_decoder_policy_with_audio_directory, fetch_public_dataset, import_artbeat_truth,
-    import_vienna_truth, inspect_audio_asset, render_suite, score_prediction_directory,
-    standard_decoder_policies,
+    import_rubato_truth, import_vienna_truth, inspect_audio_asset, render_suite,
+    score_prediction_directory, standard_decoder_policies,
 };
 use rhythm_map_models::verify_model_pack;
 use serde::Serialize;
@@ -151,6 +151,27 @@ enum Command {
         /// Official score-performance match annotation.
         #[arg(long = "match")]
         match_file: PathBuf,
+        /// Matching encoded audio, used only for identity and decoded duration.
+        #[arg(long)]
+        audio: PathBuf,
+        /// Generated truth JSON destination.
+        #[arg(long)]
+        output: PathBuf,
+    },
+    /// Recover beat, downbeat, tempo, and structure truth from RUBATO CSVs.
+    RubatoTruth {
+        /// Stable evaluation case identifier.
+        #[arg(long)]
+        id: String,
+        /// Official physical-time beat annotation.
+        #[arg(long)]
+        beat: PathBuf,
+        /// Official physical-time measure annotation.
+        #[arg(long)]
+        measure: PathBuf,
+        /// Official physical-time structure annotation.
+        #[arg(long)]
+        structure: PathBuf,
         /// Matching encoded audio, used only for identity and decoded duration.
         #[arg(long)]
         audio: PathBuf,
@@ -331,6 +352,14 @@ fn main() -> Result<()> {
             audio,
             output,
         } => run_vienna_truth(id, &match_file, &audio, &output),
+        Command::RubatoTruth {
+            id,
+            beat,
+            measure,
+            structure,
+            audio,
+            output,
+        } => run_rubato_truth(id, &beat, &measure, &structure, &audio, &output),
         Command::DatasetFetch {
             manifest,
             output,
@@ -409,6 +438,20 @@ fn run_artbeat_truth(id: String, annotation: &Path, audio: &Path, output: &Path)
 
 fn run_vienna_truth(id: String, match_file: &Path, audio: &Path, output: &Path) -> Result<()> {
     let imported = import_vienna_truth(id, match_file, audio)?;
+    write_json_file(output, &imported.truth)?;
+    println!("{}", serde_json::to_string_pretty(&imported)?);
+    Ok(())
+}
+
+fn run_rubato_truth(
+    id: String,
+    beat: &Path,
+    measure: &Path,
+    structure: &Path,
+    audio: &Path,
+    output: &Path,
+) -> Result<()> {
+    let imported = import_rubato_truth(id, beat, measure, structure, audio)?;
     write_json_file(output, &imported.truth)?;
     println!("{}", serde_json::to_string_pretty(&imported)?);
     Ok(())

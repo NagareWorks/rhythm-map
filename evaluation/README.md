@@ -57,6 +57,32 @@ This suite has independently reviewed BPM but no beat phase. Run only the
 end-to-end backend evaluation shown in `datasets/README.md`; its empty beat and
 change labels intentionally cannot support oracle or decoder-policy claims.
 
+Fetch the RUBATO multi-instrument real-performance calibration slice. The
+ZIP64-aware fetcher transfers only 25 WAVs and their beat, measure, and
+structure CSVs from the 6.3 GB archive:
+
+```bash
+cargo xtask dataset-fetch \
+  --manifest evaluation/datasets/rubato-calibration-v1.json \
+  --output D:/rhythm-map-eval/rubato-calibration-v1 \
+  --with-annotations
+
+cargo xtask eval \
+  --suite evaluation/suites/rubato-calibration-v1.json \
+  --no-fail
+
+cargo xtask eval-backend \
+  --suite evaluation/suites/rubato-calibration-v1.json \
+  --model-pack models/beat-this-full-v1.json \
+  --model-dir D:/rhythm-map-models/beat-this-full-v1 \
+  --audio-dir D:/rhythm-map-eval/rubato-calibration-v1 \
+  --report D:/rhythm-map-eval/reports/rubato-calibration-v1.json \
+  --no-fail
+```
+
+RUBATO is calibration data, not a replacement holdout. Its structure labels
+remain separate metadata and do not become tempo-change truth.
+
 Fetch the precommitted, case-disjoint ARTBeaT holdout and retain its auditable
 SVG annotation sources:
 
