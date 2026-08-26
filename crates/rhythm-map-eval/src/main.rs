@@ -9,8 +9,8 @@ use anyhow::{Context, Result, bail};
 use clap::{Parser, Subcommand};
 use rhythm_map_eval::{
     BackendEvaluationOptions, diagnose_backend_consensus, diagnose_core_tempo_suite,
-    evaluate_backend_suite_with_options, evaluate_beatnet_calibration_suite,
-    evaluate_beatnet_hypothesis_holdout, evaluate_core_suite,
+    diagnose_local_metrical_consensus, evaluate_backend_suite_with_options,
+    evaluate_beatnet_calibration_suite, evaluate_beatnet_hypothesis_holdout, evaluate_core_suite,
     evaluate_decoder_recoverability_with_audio_directory,
     evaluate_decoder_sweep_with_audio_directory,
     evaluate_named_decoder_policy_with_audio_directory, fetch_public_dataset, import_artbeat_truth,
@@ -311,6 +311,24 @@ enum Command {
         #[arg(long)]
         report: Option<PathBuf>,
     },
+    /// Test bounded local metrical substitutions across two calibration reports.
+    LocalMetricalDiagnose {
+        /// Timestamped calibration suite shared by both backend reports.
+        #[arg(long)]
+        suite: PathBuf,
+        /// Backend report containing `selected` and locally varying paths.
+        #[arg(long)]
+        primary: PathBuf,
+        /// Independent backend report containing decoded and dense pulse evidence.
+        #[arg(long)]
+        secondary: PathBuf,
+        /// Timestamp tolerance used for independent event support.
+        #[arg(long, default_value_t = 0.07)]
+        tolerance_s: f64,
+        /// Optional JSON report destination.
+        #[arg(long)]
+        report: Option<PathBuf>,
+    },
 }
 
 #[allow(clippy::too_many_lines)]
@@ -471,7 +489,35 @@ fn main() -> Result<()> {
             tolerance_s,
             report,
         } => run_consensus_diagnosis(&primary, &secondary, tolerance_s, report),
+        Command::LocalMetricalDiagnose {
+            suite,
+            primary,
+            secondary,
+            tolerance_s,
+            report,
+        } => run_local_metrical_diagnosis(&suite, &primary, &secondary, tolerance_s, report),
     }
+}
+
+fn run_local_metrical_diagnosis(
+    suite: &Path,
+    primary: &Path,
+    secondary: &Path,
+    tolerance_s: f64,
+    report: Option<PathBuf>,
+) -> Result<()> {
+    let primary_report = serde_json::from_slice(
+        &fs::read(primary).with_context(|| format!("reading {}", primary.display()))?,
+    )
+    .with_context(|| format!("parsing {}", primary.display()))?;
+    let secondary_report = serde_json::from_slice(
+        &fs::read(secondary).with_context(|| format!("reading {}", secondary.display()))?,
+    )
+    .with_context(|| format!("parsing {}", secondary.display()))?;
+    emit_json_report(
+        &diagnose_local_metrical_consensus(&primary_report, &secondary_report, suite, tolerance_s)?,
+        report,
+    )
 }
 
 fn run_consensus_diagnosis(

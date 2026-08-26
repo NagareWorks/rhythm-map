@@ -463,3 +463,18 @@ a learned component to the default distribution.
   selectable strategy. The next selector experiment must address locally
   changing metrical level with independent evidence rather than tune another
   whole-track 2/3/4 periodic threshold.
+- 2026-08-27: implemented that local experiment as
+  `anchored-pareto-decoded-event-dense-pulse-v1`. It compares only maximal
+  selected/local disagreement spans between timestamps shared by both paths;
+  unanchored track-edge spans remain unchanged, and a bounded local span must
+  strictly improve both BeatNet decoded-event decisions and dense pulse
+  Bernoulli likelihood. The rule has no fitted weight or BPM band, selects nine
+  ARTBeaT regions, and improves three cases. It still fails calibration because
+  both BeatNet representations endorse four wrong sparse-pulse substitutions in
+  the early 240 BPM part of `240-to-96`; that case loses about 0.11 beat F1 and
+  aggregate mean F1 falls from 0.80516 to 0.80308. Keep the implementation as a
+  reproducible diagnostic and do not promote it. The remaining ambiguity is not
+  localization but canonical beat-level semantics shared by both beat models.
+  A next selector needs genuinely different evidence trained or annotated for
+  perceived beat/meter level; until then, publish competing supported paths and
+  confidence instead of silently choosing a BPM convention.

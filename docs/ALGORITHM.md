@@ -334,6 +334,42 @@ version appeared to improve two cases without regressions, but the complete
 safe but produces no calibration gain, so neither version is a shipping
 selector. The result remains explicitly ambiguous.
 
+### Local metrical consensus diagnosis
+
+The calibration command `local-metrical-diagnose` tests whether the independent
+backend can support only the parts of a locally varying path where it differs
+from the primary `selected` path. It does not divide a track into fixed windows.
+Instead, timestamps shared exactly by the two primary-backend paths are anchors;
+each maximal span between adjacent anchors is one independently auditable
+decision region. Leading and trailing disagreement spans have only one anchor,
+so they are reported but never changed. This preserves the explicit uncertainty
+at track edges rather than extrapolating a pulse level from one-sided context.
+
+Inside a bounded region, every timestamp occurs in exactly one of the two paths.
+The diagnostic evaluates the same binary decisions using two representations
+from the independent backend:
+
+1. whether its decoded sequence contains an event within the ordinary 70 ms
+   comparison tolerance; and
+2. the Bernoulli log likelihood from its undecoded dense pulse activation at
+   that timestamp.
+
+The local region replaces the selected region only when both mean margins are
+strictly positive. Ties preserve the primary path. There is no fitted weight,
+BPM band, fixed track-window count, or new user strategy, and the resulting path
+still contains only timestamps already present in one primary-backend
+hypothesis.
+
+This conservative rule is nevertheless rejected. On ARTBeaT it selects nine
+bounded regions and improves three cases, but regresses `240-to-96`: both BeatNet
+representations prefer removing annotated fast-pulse events in four early
+regions. Mean beat F1 falls from 0.80516 to 0.80308. Agreement between two beat
+models therefore cannot establish the musically canonical half/double-time
+level when both make the same metrical interpretation. The implementation stays
+as a reproducible diagnostic; it does not alter the shipping path. The result is
+recorded in
+`evaluation/baselines/artbeat-local-metrical-consensus-v1.md`.
+
 Before interval smoothing, an evidence-based rule handles inserted
 subdivisions. When the raw median is at least 150 BPM and its half lies in the
 preferred band, the estimator compares the mean audio salience of the two

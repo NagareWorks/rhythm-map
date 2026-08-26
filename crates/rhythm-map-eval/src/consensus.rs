@@ -538,7 +538,7 @@ fn meter_pattern_evidence(
     })
 }
 
-fn validate_inputs(
+pub(crate) fn validate_inputs(
     primary: &BottleneckEvaluation,
     secondary: &BottleneckEvaluation,
     agreement_tolerance_s: f64,

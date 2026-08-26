@@ -3,6 +3,7 @@
 mod artbeat;
 mod consensus;
 mod dataset;
+mod local_consensus;
 mod manifest;
 mod metrics;
 mod observation_cache;
@@ -20,6 +21,10 @@ pub use consensus::{
     MeterPatternEvidence, diagnose_backend_consensus,
 };
 pub use dataset::{AudioAssetInspection, ExternalAudioResolver, inspect_audio_asset};
+pub use local_consensus::{
+    LocalMetricalConsensusCase, LocalMetricalConsensusDiagnosis, LocalMetricalConsensusRegion,
+    diagnose_local_metrical_consensus,
+};
 pub use manifest::{
     AcceptanceThresholds, AssetKind, AssetProvenance, AudioReference, CaseInput, EvaluationCase,
     EvaluationSuite, SuitePurpose,
