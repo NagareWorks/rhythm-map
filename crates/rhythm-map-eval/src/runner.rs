@@ -14,7 +14,7 @@ use rhythm_map_beatnet::BeatNetBackend;
 use rhythm_map_core::{
     Analysis, AudioOnsetPoint, BackendError, BeatCandidate, BeatSequenceHypothesis,
     BeatSequenceHypothesisKind, Engine, EstimatorOptions, ModelInfo, ObservedBeat,
-    RhythmObservationBackend, RhythmObservations, TempoMapEstimator,
+    RhythmObservationBackend, RhythmObservations, TempoMapEstimator, TempoSegmentKind,
 };
 use rhythm_map_models::{ModelArtifactRole, VerifiedModelPack, verify_model_pack};
 use serde::{Deserialize, Serialize};
@@ -160,6 +160,65 @@ pub struct CandidateEvidenceCoverage {
     /// Median strongest-candidate confidence for covered selected-sequence misses.
     #[serde(default)]
     pub median_selected_miss_candidate_confidence: Option<f64>,
+}
+
+/// Counts of beat errors relative to the first and last matched anchors.
+#[derive(Debug, Clone, Default, Serialize, Deserialize, PartialEq, Eq)]
+pub struct LocatedBeatErrorCounts {
+    /// Errors before the first matched beat.
+    pub leading: usize,
+    /// Errors between the first and last matched beats.
+    pub interior: usize,
+    /// Errors after the last matched beat.
+    pub trailing: usize,
+    /// Errors from a sequence with no matched anchor at all.
+    pub unanchored: usize,
+}
+
+/// Truth-assisted location of selected-sequence beat errors.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct BeatErrorLocation {
+    /// Number of independently annotated beats.
+    pub expected_beat_count: usize,
+    /// Number of beats returned by the primary product sequence.
+    pub selected_beat_count: usize,
+    /// Number of one-to-one matches within the suite tolerance.
+    pub matched_beat_count: usize,
+    /// Annotated beats absent from the selected sequence, split by location.
+    pub missed_truth_beats: LocatedBeatErrorCounts,
+    /// Selected events without a matching annotation, split by location.
+    pub selected_extra_beats: LocatedBeatErrorCounts,
+    /// Missed truth beats that still have a raw backend event or candidate in
+    /// tolerance, split by the same location.
+    pub candidate_supported_missed_truth_beats: LocatedBeatErrorCounts,
+}
+
+/// One octave-related global tempo alternative scored against fixed-tempo truth.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct FixedTempoHypothesisEvaluation {
+    /// Power-of-two relation to the primary selected tempo.
+    pub metrical_level: i8,
+    /// Candidate global BPM returned by the product analysis.
+    pub bpm: f64,
+    /// Truth-free relative score returned by the product analysis.
+    pub relative_score: f64,
+    /// Absolute relative error against the independently labeled fixed tempo.
+    pub absolute_error_percent: f64,
+}
+
+/// Truth-assisted coverage of product-visible global tempo alternatives.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct FixedTempoHypothesisCoverage {
+    /// Independently labeled constant tempo.
+    pub expected_bpm: f64,
+    /// Error of the primary selected global BPM.
+    pub selected_error_percent: f64,
+    /// Lowest error available among the returned half/selected/double alternatives.
+    pub best_top_k_error_percent: f64,
+    /// Metrical level of the truth-assisted best alternative.
+    pub best_metrical_level: i8,
+    /// Product-visible alternatives in their stable metrical-level order.
+    pub hypotheses: Vec<FixedTempoHypothesisEvaluation>,
 }
 
 /// Truth-free evidence terms used to rank one pulse/phase hypothesis.
@@ -352,6 +411,14 @@ pub struct AttributionCase {
     /// timestamped beat truth.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pulse_hypothesis_coverage: Option<PulseHypothesisCoverage>,
+    /// Truth-assisted location of beat misses and extras, emitted only for
+    /// calibration suites with timestamped beat truth.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub beat_error_location: Option<BeatErrorLocation>,
+    /// Coverage of product-visible global half/double-time alternatives, emitted
+    /// only for calibration cases with one fixed-tempo truth segment.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub fixed_tempo_hypothesis_coverage: Option<FixedTempoHypothesisCoverage>,
     /// Whether raw observations came from the optional evaluation cache.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub observation_cache_hit: Option<bool>,
@@ -1225,6 +1292,15 @@ where
             &evaluated.analysis,
             thresholds.beat_tolerance_ms / 1000.0,
         );
+        let beat_error_location = calibration_beat_error_location(
+            suite.purpose,
+            &truth,
+            &evaluated.observations,
+            &evaluated.analysis,
+            thresholds.beat_tolerance_ms / 1000.0,
+        );
+        let fixed_tempo_hypothesis_coverage =
+            fixed_tempo_hypothesis_coverage(suite.purpose, &truth, &evaluated.analysis);
         cases.push(AttributionCase {
             id: case.id.clone(),
             tags: case.tags.clone(),
@@ -1235,6 +1311,8 @@ where
             observations: observation_diagnostics,
             candidate_evidence,
             pulse_hypothesis_coverage,
+            beat_error_location,
+            fixed_tempo_hypothesis_coverage,
             observation_cache_hit: evaluated.observation_cache_hit,
             end_to_end_runtime_ms: evaluated.runtime_ms,
         });
@@ -1252,7 +1330,7 @@ where
         .as_ref()
         .map(|cache| cache.backend_contract.to_string());
     Ok(BottleneckEvaluation {
-        schema_version: 8,
+        schema_version: 9,
         suite_id: suite.id,
         suite_purpose: suite.purpose,
         model_pack: context.model_pack,
@@ -2413,6 +2491,170 @@ fn calibration_observation_evidence(
     )
 }
 
+fn calibration_beat_error_location(
+    suite_purpose: SuitePurpose,
+    truth: &GeneratedTruth,
+    observations: &RhythmObservations,
+    analysis: &Analysis,
+    tolerance_s: f64,
+) -> Option<BeatErrorLocation> {
+    if suite_purpose != SuitePurpose::Calibration || truth.beats.is_empty() {
+        return None;
+    }
+    let selected = analysis
+        .beats
+        .iter()
+        .map(|beat| beat.time_s)
+        .collect::<Vec<_>>();
+    let expected = truth
+        .beats
+        .iter()
+        .map(|beat| beat.time_s)
+        .collect::<Vec<_>>();
+    let mut supported = observations
+        .beats
+        .iter()
+        .map(|beat| beat.time_s)
+        .chain(
+            observations
+                .beat_candidates
+                .iter()
+                .map(|candidate| candidate.time_s),
+        )
+        .collect::<Vec<_>>();
+    supported.sort_by(f64::total_cmp);
+    supported.dedup_by(|left, right| (*left - *right).abs() <= f64::EPSILON);
+    Some(locate_beat_errors(
+        &selected,
+        &expected,
+        &supported,
+        tolerance_s,
+    ))
+}
+
+fn locate_beat_errors(
+    selected: &[f64],
+    expected: &[f64],
+    supported: &[f64],
+    tolerance_s: f64,
+) -> BeatErrorLocation {
+    let pairs = match_event_pairs(selected, expected, tolerance_s);
+    let mut matched_selected = vec![false; selected.len()];
+    let mut matched_expected = vec![false; expected.len()];
+    for &(selected_index, expected_index) in &pairs {
+        matched_selected[selected_index] = true;
+        matched_expected[expected_index] = true;
+    }
+    let selected_anchors = matched_anchor_range(&matched_selected);
+    let expected_anchors = matched_anchor_range(&matched_expected);
+    let missed_truth_beats = located_unmatched_counts(&matched_expected, expected_anchors);
+    let selected_extra_beats = located_unmatched_counts(&matched_selected, selected_anchors);
+    let mut candidate_supported_missed_truth_beats = LocatedBeatErrorCounts::default();
+    for (index, &time_s) in expected.iter().enumerate() {
+        if matched_expected[index]
+            || !supported
+                .iter()
+                .any(|supported| (*supported - time_s).abs() <= tolerance_s)
+        {
+            continue;
+        }
+        increment_located_count(
+            &mut candidate_supported_missed_truth_beats,
+            index,
+            expected_anchors,
+        );
+    }
+    BeatErrorLocation {
+        expected_beat_count: expected.len(),
+        selected_beat_count: selected.len(),
+        matched_beat_count: pairs.len(),
+        missed_truth_beats,
+        selected_extra_beats,
+        candidate_supported_missed_truth_beats,
+    }
+}
+
+fn matched_anchor_range(matched: &[bool]) -> Option<(usize, usize)> {
+    Some((
+        matched.iter().position(|matched| *matched)?,
+        matched.iter().rposition(|matched| *matched)?,
+    ))
+}
+
+fn located_unmatched_counts(
+    matched: &[bool],
+    anchors: Option<(usize, usize)>,
+) -> LocatedBeatErrorCounts {
+    let mut counts = LocatedBeatErrorCounts::default();
+    for (index, matched) in matched.iter().enumerate() {
+        if !matched {
+            increment_located_count(&mut counts, index, anchors);
+        }
+    }
+    counts
+}
+
+fn increment_located_count(
+    counts: &mut LocatedBeatErrorCounts,
+    index: usize,
+    anchors: Option<(usize, usize)>,
+) {
+    match anchors {
+        Some((first, _)) if index < first => counts.leading += 1,
+        Some((_, last)) if index > last => counts.trailing += 1,
+        Some(_) => counts.interior += 1,
+        None => counts.unanchored += 1,
+    }
+}
+
+fn fixed_tempo_hypothesis_coverage(
+    suite_purpose: SuitePurpose,
+    truth: &GeneratedTruth,
+    analysis: &Analysis,
+) -> Option<FixedTempoHypothesisCoverage> {
+    if suite_purpose != SuitePurpose::Calibration {
+        return None;
+    }
+    let expected_bpm = fixed_truth_bpm(truth)?;
+    let selected_bpm = analysis.global_bpm?;
+    let hypotheses = analysis
+        .tempo_hypotheses
+        .iter()
+        .map(|hypothesis| FixedTempoHypothesisEvaluation {
+            metrical_level: hypothesis.metrical_level,
+            bpm: hypothesis.bpm,
+            relative_score: hypothesis.relative_score,
+            absolute_error_percent: relative_tempo_error_percent(hypothesis.bpm, expected_bpm),
+        })
+        .collect::<Vec<_>>();
+    let best = hypotheses.iter().min_by(|left, right| {
+        left.absolute_error_percent
+            .total_cmp(&right.absolute_error_percent)
+    })?;
+    Some(FixedTempoHypothesisCoverage {
+        expected_bpm,
+        selected_error_percent: relative_tempo_error_percent(selected_bpm, expected_bpm),
+        best_top_k_error_percent: best.absolute_error_percent,
+        best_metrical_level: best.metrical_level,
+        hypotheses,
+    })
+}
+
+fn fixed_truth_bpm(truth: &GeneratedTruth) -> Option<f64> {
+    let [segment] = truth.tempo_segments.as_slice() else {
+        return None;
+    };
+    (segment.kind == TempoSegmentKind::Constant
+        && segment.start_s.abs() <= f64::EPSILON
+        && (segment.end_s - truth.duration_s).abs() <= f64::EPSILON
+        && (segment.start_bpm - segment.end_bpm).abs() <= f64::EPSILON)
+        .then_some(segment.start_bpm)
+}
+
+fn relative_tempo_error_percent(actual_bpm: f64, expected_bpm: f64) -> f64 {
+    ((actual_bpm - expected_bpm) / expected_bpm).abs() * 100.0
+}
+
 #[derive(Debug, Clone)]
 struct HypothesisEvent {
     time_s: f64,
@@ -3007,6 +3249,101 @@ mod tests {
         assert_eq!(cold.analysis, hot.analysis);
 
         std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn beat_error_location_separates_edges_from_interior_errors() {
+        let selected = [-0.5, 1.0, 2.5, 3.0, 4.5];
+        let expected = [0.0, 1.0, 2.0, 3.0, 4.0];
+        let supported = [0.02, 1.0, 3.0, 3.98];
+
+        let location = locate_beat_errors(&selected, &expected, &supported, 0.05);
+
+        assert_eq!(location.matched_beat_count, 2);
+        assert_eq!(
+            location.missed_truth_beats,
+            LocatedBeatErrorCounts {
+                leading: 1,
+                interior: 1,
+                trailing: 1,
+                unanchored: 0,
+            }
+        );
+        assert_eq!(location.selected_extra_beats, location.missed_truth_beats);
+        assert_eq!(
+            location.candidate_supported_missed_truth_beats,
+            LocatedBeatErrorCounts {
+                leading: 1,
+                interior: 0,
+                trailing: 1,
+                unanchored: 0,
+            }
+        );
+    }
+
+    #[test]
+    fn beat_error_location_marks_sequences_without_an_anchor() {
+        let location = locate_beat_errors(&[10.0, 11.0], &[0.0, 1.0, 2.0], &[1.0], 0.05);
+
+        assert_eq!(location.matched_beat_count, 0);
+        assert_eq!(location.missed_truth_beats.unanchored, 3);
+        assert_eq!(location.selected_extra_beats.unanchored, 2);
+        assert_eq!(
+            location.candidate_supported_missed_truth_beats.unanchored,
+            1
+        );
+    }
+
+    #[test]
+    fn fixed_tempo_coverage_exposes_a_correct_half_time_alternative() {
+        let observations = RhythmObservations {
+            duration_s: 2.0,
+            beats: (0..4)
+                .map(|index| ObservedBeat {
+                    time_s: usize_to_f64(index) * 0.5,
+                    confidence: 1.0,
+                    downbeat_confidence: 0.0,
+                })
+                .collect(),
+            beat_candidates: Vec::new(),
+            activity: Vec::new(),
+            onsets: Vec::new(),
+            harmonic_changes: Vec::new(),
+            source: ModelInfo {
+                backend: "fixture".to_string(),
+                model: "fixture".to_string(),
+                version: None,
+                frame_rate_hz: None,
+            },
+        };
+        let analysis = TempoMapEstimator::default()
+            .estimate(&observations)
+            .unwrap();
+        let truth = GeneratedTruth {
+            schema_version: 1,
+            id: "fixed-60".to_string(),
+            duration_s: 2.0,
+            beats: Vec::new(),
+            tempo_segments: vec![crate::TruthTempoSegment {
+                start_s: 0.0,
+                end_s: 2.0,
+                kind: TempoSegmentKind::Constant,
+                start_bpm: 60.0,
+                end_bpm: 60.0,
+            }],
+            change_points: Vec::new(),
+        };
+
+        let coverage =
+            fixed_tempo_hypothesis_coverage(SuitePurpose::Calibration, &truth, &analysis).unwrap();
+
+        assert!((coverage.selected_error_percent - 100.0).abs() < 1e-9);
+        assert!(coverage.best_top_k_error_percent < 1e-9);
+        assert_eq!(coverage.best_metrical_level, -1);
+        assert_eq!(coverage.hypotheses.len(), 3);
+        assert!(
+            fixed_tempo_hypothesis_coverage(SuitePurpose::Holdout, &truth, &analysis).is_none()
+        );
     }
 
     #[test]

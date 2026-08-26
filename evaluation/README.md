@@ -159,10 +159,20 @@ estimator A/B reuses identical model evidence without allowing labels into the
 cache. Cache files include decoded sample rate/count validation and exact
 round-trip floating-point JSON. Keep the directory outside the checkout.
 
-Backend report schema v8 records the versioned `observation_cache_contract` and
+Backend report schema v9 records the versioned `observation_cache_contract` and
 adds per-case `observation_cache_hit`. Runtime fields from a cold and hot report
 are not directly comparable as end-to-end model benchmarks; all observations,
 analyses, and metrics must otherwise be identical.
+
+Schema v9 also keeps two kinds of truth-assisted diagnosis separate from product
+selection. `beat_error_location` splits timestamped calibration misses and
+extras into leading, interior, trailing, and completely unanchored counts, and
+reports how many misses still have raw backend support. The field is absent on
+holdouts and tempo-only cases. `fixed_tempo_hypothesis_coverage` scores the
+already product-visible global half/selected/double alternatives only when a
+calibration case has one constant truth segment. Its `best_top_k_error_percent`
+is a coverage ceiling, not a deployable selector result; no truth changes the
+primary tempo map or any hypothesis score.
 
 Compare the experimental BeatNet observation path only on the already-open
 ARTBeaT calibration suite:
@@ -185,7 +195,7 @@ backend. Analysis schema v3 exposes the selected and supported half/double-time
 beat sequences with truth-free relative scores. This command also enables the
 fixed `local-metrical-path-v1` calibration candidate, which adds deterministic
 harmonic-change observations and one real-timestamp path whose metrical level
-may vary locally. Calibration report schema v8 records those exact hypotheses
+may vary locally. Calibration report schema v9 records those exact hypotheses
 under observation diagnostics. The primary selected sequence remains unchanged.
 
 After freezing `local-metrical-path-v1` on calibration, open a timestamped

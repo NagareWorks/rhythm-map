@@ -410,3 +410,21 @@ a learned component to the default distribution.
   `sequence-phase-v1` changed one ARTBeaT warning but changed no beat or tempo
   metric. Keep it evaluation-only: a shipping behavior without measured gain
   would add another hidden branch rather than improve the unified algorithm.
+- 2026-08-26: populated the content-addressed observation cache for all 15
+  ARTBeaT and 15 FSLD calibration cases, then added report-schema-v9 attribution
+  that separates global fixed-tempo hypothesis coverage from leading, interior,
+  and trailing timestamp errors. FSLD cold/hot replay preserved every result
+  exactly while reducing summed case runtime from 528,919 ms to 399 ms (1325x).
+  The shipping primary passes 6/15 FSLD cases, but the existing product-visible
+  half/selected/double alternatives contain a global BPM within 5 percent of
+  truth on 14/15; the 140 BPM case remains 12.82 percent away even at that
+  coverage ceiling. On ARTBeaT, selected-sequence misses split into 2 leading,
+  121 interior, and 5 trailing beats, with backend candidates supporting
+  2/112/4 respectively. This rules out track-edge repair as the main ARTBeaT
+  bottleneck and shows that whole-track hypothesis construction is mostly
+  adequate; truth-free selection and locally varying internal paths remain the
+  unresolved work. Replaying the current evidence-required `sequence-phase-v1`
+  yields 8/15 FSLD passes, not the historical 9/15: it still safely fixes the
+  60 BPM edge-extra and 200 BPM false-half-time cases, while the stricter support
+  rule no longer clears the 150 BPM P95 gate. Do not weaken observation support
+  or promote the candidate without a fresh precommitted timestamped holdout.

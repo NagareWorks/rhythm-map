@@ -1,5 +1,12 @@
 # FSLD tempo v1 public baseline
 
+> This file retains the historical 2026-08-22 candidate measurements. A
+> schema-v9 replay on 2026-08-26, after observation-supported local repair was
+> tightened, produces 8/15 rather than 9/15 passes for `sequence-phase-v1`.
+> The 60 BPM and 200 BPM gains remain; the 150 BPM case no longer clears its P95
+> gate. See `ROADMAP.md` for the current attribution and do not treat the older
+> aggregate below as the present promotion result.
+
 Measured on 2026-08-22 with an optimized build, the checked-in FSLD member
 lock, and `beat-this-full-v1.json`. The verified model manifest SHA-256 was
 `ccedbfeb35b4f584834df3aca1ea41899ed39fbaf2efad9e2cc71426aed9e23d`.

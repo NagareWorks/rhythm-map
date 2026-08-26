@@ -28,13 +28,14 @@ pub use public_dataset::{
 };
 pub use rubato::{RubatoStructureSegment, RubatoTruthImport, import_rubato_truth};
 pub use runner::{
-    AttributionCase, AttributionDecision, BackendEvaluationOptions, BeatHypothesisAggregate,
-    BeatHypothesisHoldoutCase, BeatHypothesisHoldoutEvaluation, BeatHypothesisHoldoutSlice,
-    BottleneckEvaluation, CandidateEvidenceCoverage, CaseMetricDelta, DecoderPolicy,
-    DecoderPolicyComparison, DecoderPolicyEvaluation, DecoderRecoverabilityCase,
+    AttributionCase, AttributionDecision, BackendEvaluationOptions, BeatErrorLocation,
+    BeatHypothesisAggregate, BeatHypothesisHoldoutCase, BeatHypothesisHoldoutEvaluation,
+    BeatHypothesisHoldoutSlice, BottleneckEvaluation, CandidateEvidenceCoverage, CaseMetricDelta,
+    DecoderPolicy, DecoderPolicyComparison, DecoderPolicyEvaluation, DecoderRecoverabilityCase,
     DecoderRecoverabilityEvaluation, DecoderSequencePathPolicy, DecoderSliceDelta,
     DecoderSliceMetrics, DecoderSupportedMidpointPolicy, DecoderSweepCandidate, DecoderSweepCase,
-    DecoderSweepEvaluation, LogitEvidence, MissingBeatEvidence, MissingBeatEvidenceClass,
+    DecoderSweepEvaluation, FixedTempoHypothesisCoverage, FixedTempoHypothesisEvaluation,
+    LocatedBeatErrorCounts, LogitEvidence, MissingBeatEvidence, MissingBeatEvidenceClass,
     MissingBeatEvidenceCounts, ModelPackIdentity, ObservationDiagnostics, PulseEvidenceBreakdown,
     PulseHypothesisCoverage, PulseHypothesisEvaluation, SuiteEvaluation, evaluate_backend_suite,
     evaluate_backend_suite_with_audio_directory, evaluate_backend_suite_with_decoder_policy,
