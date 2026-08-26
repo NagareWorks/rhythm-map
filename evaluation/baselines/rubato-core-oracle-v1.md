@@ -23,14 +23,19 @@ cargo xtask eval \
 
 | Metric | Result |
 | --- | ---: |
-| Passing cases | 20/25 |
+| Passing cases | 25/25 |
 | Mean beat F1 | 1.0000 |
 | Mean downbeat F1 | 1.0000 |
-| Mean tempo median error | 2.6407% |
-| Mean tempo P95 error | 16.1781% |
+| Mean tempo median error | 0.1548% |
+| Mean tempo P95 error | 4.5714% |
 
 All beat and downbeat timestamps survive the ideal-observation path exactly.
-Five cases fail only the locked tempo-error budgets:
+Every case now passes its locked tempo-error budgets.
+
+## Diagnosed initial failure
+
+The first run passed only 20/25 with mean tempo median/P95 error of
+2.6407/16.1781 percent. The five failures were:
 
 | Case | Median tempo error | P95 tempo error |
 | --- | ---: | ---: |
@@ -49,13 +54,26 @@ Mozart terminal beat and matching measure marker occur 7.5 ms beyond decoded
 audio due to frame quantization; both remain in the immutable CSVs and are
 omitted from scored truth rather than moved to an invented timestamp.
 
-## Decision
+Timestamp-level diagnostics showed that all three existing estimator candidates
+produced the same failures. The primary curve was clamping raw cadence to the
+40--320 BPM range: every truth point in the slower Mozart Gli Armonici
+performance is below 40 BPM, while the same floor distorted expressive slow
+intervals in the other Mozart and Verdi recordings.
 
-The five failures are deterministic estimator failures because the observation
-timestamps are already exact. Do not weaken suite budgets or retrain Beat This
-for them. Use this open calibration set to improve meter-aware tempo level and
-local tempo representation, preserving explicit metrical ambiguity when the
-evidence cannot choose safely.
+## Decision and resolution
+
+The five failures were deterministic estimator failures because the observation
+timestamps were already exact. The unified estimator now preserves any positive
+finite cadence implied by accepted beat timestamps. Its 40--320 BPM bounds
+remain only on publishable metrical alternatives, where they prevent unusable
+hypotheses without rewriting the primary tempo curve. A 28 BPM or 360 BPM
+observation therefore remains 28 or 360 BPM. No threshold was weakened, no
+timestamp was changed or invented, and no new user-selectable strategy was
+added.
+
+The updated suite passes 25/25 and improves or preserves every case. Only 25 of
+6,694 scored points remain above 25 percent error; every one is an isolated
+robust-smoothing outlier, so no contiguous high-error region remains.
 
 A full Beat This run was not made part of this integration gate: on the
 development VDI the first 128-second track remained in inference after more

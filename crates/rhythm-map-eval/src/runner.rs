@@ -1167,7 +1167,7 @@ fn validate_estimator_policy(policy_id: Option<&str>) -> Result<()> {
     )
 }
 
-fn estimator_for_policy(policy_id: Option<&str>) -> Result<TempoMapEstimator> {
+pub(crate) fn estimator_for_policy(policy_id: Option<&str>) -> Result<TempoMapEstimator> {
     validate_estimator_policy(policy_id)?;
     match policy_id {
         Some("metrical-consistency-v1") => {
@@ -2623,7 +2623,7 @@ fn ensure_timestamped_beat_truth(
     Ok(())
 }
 
-fn load_case_truth(case: &EvaluationCase, root: &Path) -> Result<GeneratedTruth> {
+pub(crate) fn load_case_truth(case: &EvaluationCase, root: &Path) -> Result<GeneratedTruth> {
     let truth = match &case.input {
         CaseInput::Generated { recipe } => {
             let recipe = load_recipe(&root.join(recipe))?;
@@ -2647,7 +2647,7 @@ fn load_case_truth(case: &EvaluationCase, root: &Path) -> Result<GeneratedTruth>
     Ok(truth)
 }
 
-fn load_suite(path: &Path) -> Result<(EvaluationSuite, PathBuf)> {
+pub(crate) fn load_suite(path: &Path) -> Result<(EvaluationSuite, PathBuf)> {
     let suite: EvaluationSuite = serde_json::from_slice(
         &fs::read(path).with_context(|| format!("reading suite {}", path.display()))?,
     )

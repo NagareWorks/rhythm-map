@@ -8,6 +8,7 @@ mod public_dataset;
 mod rubato;
 mod runner;
 mod synthetic;
+mod tempo_diagnostics;
 mod vienna;
 mod wav;
 
@@ -46,5 +47,9 @@ pub use runner::{
 pub use synthetic::{
     GeneratedTruth, RecipeSegment, SegmentShape, SyntheticAudioProfile, SyntheticRecipe, TruthBeat,
     TruthChangePoint, TruthTempoSegment, generate_truth,
+};
+pub use tempo_diagnostics::{
+    TempoDiagnosticCase, TempoDiagnosticEvaluation, TempoDiagnosticPoint, TempoErrorRun,
+    diagnose_core_tempo_suite,
 };
 pub use vienna::{ViennaTruthImport, import_vienna_truth};

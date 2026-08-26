@@ -77,10 +77,12 @@ separate manifests even when their audio shares the same storage directory.
 Mark those manifests with `"purpose": "calibration"` and
 `"purpose": "holdout"`. The distinction is enforced rather than descriptive:
 truth-assisted `decoder-sweep` and `decoder-recoverability` commands accept only
-a calibration suite. Select one registered policy using calibration results, record
-its ID, then open the holdout only through `decoder-eval --policy <id>`. That
-command compares the one candidate with the immutable upstream baseline but
-does not reveal any other candidate or policy oracle. Do not
+calibration suites. The same restriction applies to `tempo-diagnose`, whose
+per-timestamp truth ratios would otherwise expose holdout answers. Select one
+registered policy using calibration results, record its ID, then open the
+holdout only through `decoder-eval --policy <id>`. That command compares the one
+candidate with the immutable upstream baseline but does not reveal any other
+candidate or policy oracle. Do not
 rename already inspected ARTBeaT cases as holdout; they are calibration evidence
 because their per-case results have already influenced decoder design.
 

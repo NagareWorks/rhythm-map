@@ -21,9 +21,13 @@ pub enum MetricalSelectionPolicy {
 /// Tunable policy for deterministic tempo-map inference.
 #[derive(Debug, Clone)]
 pub struct EstimatorOptions {
-    /// Lowest accepted tempo candidate.
+    /// Lowest tempo supported when publishing metrical alternatives.
+    ///
+    /// The primary local curve still preserves slower observed cadence.
     pub min_bpm: f64,
-    /// Highest accepted tempo candidate.
+    /// Highest tempo supported when publishing metrical alternatives.
+    ///
+    /// The primary local curve still preserves faster observed cadence.
     pub max_bpm: f64,
     /// Lower edge of the preferred metrical band.
     pub preferred_min_bpm: f64,
@@ -323,12 +327,9 @@ fn build_tempo_estimate(
     // the former. Evidence-based half-time selection happens earlier, against
     // alternating PCM salience, and alternate global interpretations remain
     // visible in `tempo_hypotheses`.
-    let bounded = raw_bpms
-        .iter()
-        .map(|&bpm| bpm.clamp(options.min_bpm, options.max_bpm))
-        .collect::<Vec<_>>();
+    let cadence_bpms = raw_bpms;
     let (smoothed, repaired_metrical_run) = smooth_log_tempo(
-        &bounded,
+        &cadence_bpms,
         options.smoothing_window,
         options.jump_ratio,
         options.maximum_metrical_outlier_run,
@@ -339,7 +340,7 @@ fn build_tempo_estimate(
         .map(|(index, &bpm)| {
             let pair = &input.beats[index..=index + 1];
             let observation_confidence = pair[0].confidence.min(pair[1].confidence);
-            let deviation = (bounded[index] / bpm).log2().abs();
+            let deviation = (cadence_bpms[index] / bpm).log2().abs();
             TempoPoint {
                 time_s: f64::midpoint(pair[0].time_s, pair[1].time_s),
                 bpm,
@@ -2304,6 +2305,27 @@ mod tests {
                 .iter()
                 .all(|change| change.kind != ChangeKind::TempoJump)
         );
+    }
+
+    #[test]
+    fn observed_cadence_outside_hypothesis_range_is_not_clamped() {
+        for expected_bpm in [28.0, 360.0] {
+            let input = observations_from_bpms(&[expected_bpm; 16]);
+            let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
+            assert!((analysis.global_bpm.unwrap() - expected_bpm).abs() < 0.01);
+            assert!(
+                analysis
+                    .tempo_curve
+                    .iter()
+                    .all(|point| (point.bpm - expected_bpm).abs() < 0.01)
+            );
+            assert!(
+                analysis
+                    .tempo_hypotheses
+                    .iter()
+                    .all(|hypothesis| { (40.0..=320.0).contains(&hypothesis.bpm) })
+            );
+        }
     }
 
     #[test]

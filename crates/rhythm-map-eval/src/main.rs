@@ -8,7 +8,7 @@ use std::{
 use anyhow::{Context, Result, bail};
 use clap::{Parser, Subcommand};
 use rhythm_map_eval::{
-    evaluate_backend_suite, evaluate_backend_suite_with_audio_directory,
+    diagnose_core_tempo_suite, evaluate_backend_suite, evaluate_backend_suite_with_audio_directory,
     evaluate_backend_suite_with_policies, evaluate_beatnet_calibration_suite,
     evaluate_beatnet_hypothesis_holdout, evaluate_core_suite,
     evaluate_decoder_recoverability_with_audio_directory,
@@ -40,6 +40,24 @@ enum Command {
         /// Emit failures without returning a non-zero exit code.
         #[arg(long)]
         no_fail: bool,
+    },
+    /// Expose per-timestamp tempo and metrical errors on calibration truth.
+    TempoDiagnose {
+        /// Calibration suite manifest.
+        #[arg(long)]
+        suite: PathBuf,
+        /// Optional deterministic estimator policy; omitted for the shipping default.
+        #[arg(long)]
+        estimator_policy: Option<String>,
+        /// Restrict diagnosis to one or more exact case IDs.
+        #[arg(long = "case")]
+        cases: Vec<String>,
+        /// Inclusive absolute-error threshold used to form contiguous error runs.
+        #[arg(long, default_value_t = 25.0)]
+        minimum_error_percent: f64,
+        /// Optional JSON report destination.
+        #[arg(long)]
+        report: Option<PathBuf>,
     },
     /// Compare ideal observations with the Beat This end-to-end audio path.
     EvalBackend {
@@ -285,6 +303,21 @@ fn main() -> Result<()> {
             report,
             no_fail,
         } => emit_report(&evaluate_core_suite(&suite)?, report, no_fail),
+        Command::TempoDiagnose {
+            suite,
+            estimator_policy,
+            cases,
+            minimum_error_percent,
+            report,
+        } => emit_json_report(
+            &diagnose_core_tempo_suite(
+                &suite,
+                estimator_policy.as_deref(),
+                &cases,
+                minimum_error_percent,
+            )?,
+            report,
+        ),
         Command::EvalBackend {
             suite,
             model_pack,

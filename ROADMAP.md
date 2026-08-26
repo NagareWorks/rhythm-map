@@ -382,3 +382,10 @@ a learned component to the default distribution.
   forcing a preferred BPM band, changing official timestamps, or reopening the
   Vienna holdout. The full Beat This run is a scheduled/offline job because the
   VDI projected multi-hour inference for 1.8 hours of audio.
+- 2026-08-26: timestamp-level RUBATO diagnostics isolated the 20/25 result to a
+  single common defect rather than competing musical strategies: the primary
+  tempo curve clamped every cadence to 40--320 BPM. Removing that mutation while
+  retaining the same bounds for published metrical alternatives raises RUBATO
+  to 25/25, lowers mean tempo median/P95 error from 2.6407/16.1781 percent to
+  0.1548/4.5714 percent, and improves or preserves every case. Keep this in the
+  unified shipping algorithm; do not expose a slow-tempo strategy switch.

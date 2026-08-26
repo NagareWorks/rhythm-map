@@ -71,6 +71,11 @@ cargo xtask eval \
   --suite evaluation/suites/rubato-calibration-v1.json \
   --no-fail
 
+cargo xtask tempo-diagnose \
+  --suite evaluation/suites/rubato-calibration-v1.json \
+  --minimum-error-percent 25 \
+  --report D:/rhythm-map-eval/reports/rubato-tempo-diagnostic.json
+
 cargo xtask eval-backend \
   --suite evaluation/suites/rubato-calibration-v1.json \
   --model-pack models/beat-this-full-v1.json \
@@ -81,7 +86,11 @@ cargo xtask eval-backend \
 ```
 
 RUBATO is calibration data, not a replacement holdout. Its structure labels
-remain separate metadata and do not become tempo-change truth.
+remain separate metadata and do not become tempo-change truth. `tempo-diagnose`
+is deliberately calibration-only: it pairs every estimated point with truth,
+reports its BPM ratio and nearest power-of-two metrical shift, and groups
+contiguous points above the requested error threshold. It rejects regression
+and holdout suites so timestamp-level truth cannot leak into policy selection.
 
 Fetch the precommitted, case-disjoint ARTBeaT holdout and retain its auditable
 SVG annotation sources:

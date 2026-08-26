@@ -230,16 +230,17 @@ change: 75 to 150 BPM must not be flattened merely because both values share a
 metrical octave.
 
 The estimator therefore preserves the sustained cadence implied by consecutive
-beat timestamps and clamps only to the accepted 40--320 BPM range. Within the
-configured seven-interval window, it compares the median context on the left
-and right of each interval. A center value is repaired only when both contexts
-agree within the 12 percent jump threshold and the center is approximately an
-integer metrical octave away. Each three-point neighborhood is then averaged in
-log-tempo space only when its range also stays below that threshold; otherwise
-the center value is retained so smoothing does not blur a real step. This
-repairs an isolated half- or double-length interval from a missed event while
-retaining a sustained step, ramp, or rubato gesture. It does not fold the whole
-recording into a preferred BPM band.
+beat timestamps without clamping the primary curve to a BPM band. The 40--320
+BPM bounds apply only to which half/double-time alternatives are published;
+they never rewrite an observed 28 BPM interval as 40 BPM or a 360 BPM interval
+as 320 BPM. Within the configured seven-interval window, the estimator compares
+the median context on the left and right of each interval. A center value is
+repaired only when both contexts agree within the 12 percent jump threshold and
+the center is approximately an integer metrical octave away. Each three-point
+neighborhood is then averaged in log-tempo space only when its range also stays
+below that threshold; otherwise the center value is retained so smoothing does
+not blur a real step. This repairs an isolated half- or double-length interval
+from a missed event while retaining a sustained step, ramp, or rubato gesture.
 
 The evaluation-only `metrical-consistency-v1` candidate extends that repair to
 runs of at most three consecutive intervals. A run is rewritten only when it
@@ -301,7 +302,7 @@ log-interval continuity (30 percent), and retained selected-sequence evidence
 (25 percent), then normalizes the strongest returned sequence to 1.0. A
 half-time or edge-cleanup decision moves discarded real events back into the
 candidate pool so the result remains auditable. Hypotheses outside the same
-40--320 BPM analysis range are omitted. They are result metadata rather than
+40--320 BPM metrical-hypothesis range are omitted. They are result metadata rather than
 caller-selectable strategies and do not silently replace the primary tempo map.
 
 Before interval smoothing, an evidence-based rule handles inserted
@@ -430,7 +431,7 @@ source beats and is reduced exponentially when the unsmoothed observation
 disagrees with the regularized curve:
 
 ```text
-deviation  = abs(log2(normalized_bpm / smoothed_bpm))
+deviation  = abs(log2(raw_bpm / smoothed_bpm))
 confidence = min(beat_confidence) * exp(-8 * deviation)
 ```
 
