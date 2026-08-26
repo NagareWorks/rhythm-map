@@ -159,12 +159,14 @@ estimator A/B reuses identical model evidence without allowing labels into the
 cache. Cache files include decoded sample rate/count validation and exact
 round-trip floating-point JSON. Keep the directory outside the checkout.
 
-Backend report schema v9 records the versioned `observation_cache_contract` and
-adds per-case `observation_cache_hit`. Runtime fields from a cold and hot report
-are not directly comparable as end-to-end model benchmarks; all observations,
-analyses, and metrics must otherwise be identical.
+Backend report schema v10 records the versioned `observation_cache_contract`,
+adds per-case `observation_cache_hit`, and may retain a backend's uniform dense
+pulse/downbeat activation series under observation diagnostics. Dense evidence
+is not copied into product `Analysis` output. Runtime fields from a cold and hot
+report are not directly comparable as end-to-end model benchmarks; all
+observations, analyses, and metrics must otherwise be identical.
 
-Schema v9 also keeps two kinds of truth-assisted diagnosis separate from product
+Schema v10 also keeps two kinds of truth-assisted diagnosis separate from product
 selection. `beat_error_location` splits timestamped calibration misses and
 extras into leading, interior, trailing, and completely unanchored counts, and
 reports how many misses still have raw backend support. The field is absent on
@@ -183,7 +185,7 @@ cargo xtask eval-beatnet \
   --model-pack models/beatnet-v1.json \
   --model-dir D:/rhythm-map-models/beatnet-v1 \
   --audio-dir D:/rhythm-map-eval/artbeat-v1 \
-  --report D:/rhythm-map-eval/reports/artbeat-beatnet-local-metrical-path-v4.json \
+  --report D:/rhythm-map-eval/reports/artbeat-beatnet-dense-meter-v5.json \
   --no-fail
 ```
 
@@ -195,8 +197,9 @@ backend. Analysis schema v3 exposes the selected and supported half/double-time
 beat sequences with truth-free relative scores. This command also enables the
 fixed `local-metrical-path-v1` calibration candidate, which adds deterministic
 harmonic-change observations and one real-timestamp path whose metrical level
-may vary locally. Calibration report schema v9 records those exact hypotheses
-under observation diagnostics. The primary selected sequence remains unchanged.
+may vary locally. Calibration report schema v10 records those exact hypotheses
+and optional dense activations under observation diagnostics. The primary
+selected sequence remains unchanged.
 
 After freezing `local-metrical-path-v1` on calibration, open a timestamped
 holdout exactly once through the fixed-candidate command:
@@ -288,23 +291,26 @@ rerunning inference, compare two reports for the same calibration suite:
 ```bash
 cargo xtask consensus-diagnose \
   --primary D:/rhythm-map-eval/reports/artbeat-cache-default-v9-final.json \
-  --secondary D:/rhythm-map-eval/reports/artbeat-beatnet-local-metrical-path-v4.json \
-  --report D:/rhythm-map-eval/reports/artbeat-beatthis-beatnet-consensus-v2.json
+  --secondary D:/rhythm-map-eval/reports/artbeat-beatnet-dense-meter-v5.json \
+  --report D:/rhythm-map-eval/reports/artbeat-beatthis-beatnet-dense-meter-v3.json
 ```
 
 `consensus-diagnose` ranks the primary report's existing hypotheses only by
 one-to-one agreement with the secondary report's top-ranked sequence. It then
 uses the embedded calibration scores to attribute gains and regressions. Four
 equal-duration window margins expose cases where the two backends' metrical
-relationship changes inside the track. Schema 2 additionally reports a
+relationship changes inside the track. Schema 3 additionally reports a
 meter-gated candidate: an alternative is eligible only when its beat agreement
 and its class-balanced BeatNet downbeat periodicity both strictly improve over
-the primary. The meter score tries every phase of fixed 2/3/4-pulse bars and
-uses no fitted weight or BPM band. This command accepts calibration reports
-only, requires distinct model packs and backend IDs plus identical audio
-identities, and does not change either backend or add a product strategy. A
-passing calibration gate would still require one separately precommitted
-holdout run before any shipping selector could be considered.
+the primary. When available, the meter score samples the uniform pre-decoder
+activation series instead of only events already selected by BeatNet. It tries
+every phase of fixed 2/3/4-pulse bars and uses no fitted weight or BPM band.
+The ARTBeaT dense result changes no case and rejects the apparent improvement
+from decoded-event evidence as selection-biased. This command accepts
+calibration reports only, requires distinct model packs and backend IDs plus
+identical audio identities, and does not change either backend or add a product
+strategy. A passing calibration gate would still require one separately
+precommitted holdout run before any shipping selector could be considered.
 
 After choosing one policy on calibration data, evaluate that exact registered
 policy on a separate holdout manifest:

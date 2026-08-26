@@ -2,6 +2,10 @@
 
 Date: 2026-08-26
 
+Status: superseded and rejected by the dense-activation follow-up in
+`artbeat-beatthis-beatnet-dense-meter-v3.md`. The apparent gain below depended
+on measuring downbeat evidence only at events already selected by BeatNet.
+
 This calibration follows the rejected global-agreement selector in
 `artbeat-beatthis-beatnet-consensus-v1.md`. It tests whether BeatNet's downbeat
 channel can veto relative beat-sequence agreement when that agreement chooses

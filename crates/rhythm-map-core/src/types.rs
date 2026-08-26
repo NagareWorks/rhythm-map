@@ -43,6 +43,24 @@ pub struct BeatCandidate {
     pub downbeat_confidence: f64,
 }
 
+/// Uniformly sampled backend evidence before discrete event selection.
+///
+/// This series is optional because timestamp-only hosts and some observation
+/// backends cannot expose frame-level activations. It is internal evidence for
+/// confidence and metrical interpretation; it is not copied into the public
+/// [`Analysis`] result.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct RhythmActivationSeries {
+    /// Timestamp of the first activation frame.
+    pub start_time_s: f64,
+    /// Uniform activation sampling rate.
+    pub frame_rate_hz: f64,
+    /// Per-frame confidence that the frame belongs to any beat class.
+    pub pulse_confidences: Vec<f32>,
+    /// Per-frame confidence that the frame belongs to a downbeat class.
+    pub downbeat_confidences: Vec<f32>,
+}
+
 /// Deterministic short-time audio activity measurement.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct AudioActivityPoint {
@@ -91,6 +109,9 @@ pub struct RhythmObservations {
     /// Sorted model-supported alternatives not committed to the beat sequence.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub beat_candidates: Vec<BeatCandidate>,
+    /// Optional dense backend evidence retained before peak picking or decoding.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub activations: Option<RhythmActivationSeries>,
     /// Optional deterministic activity envelope derived from decoded PCM.
     #[serde(default)]
     pub activity: Vec<AudioActivityPoint>,

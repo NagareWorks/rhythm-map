@@ -14,7 +14,8 @@ use rhythm_map_beatnet::BeatNetBackend;
 use rhythm_map_core::{
     Analysis, AudioOnsetPoint, BackendError, BeatCandidate, BeatSequenceHypothesis,
     BeatSequenceHypothesisKind, Engine, EstimatorOptions, ModelInfo, ObservedBeat,
-    RhythmObservationBackend, RhythmObservations, TempoMapEstimator, TempoSegmentKind,
+    RhythmActivationSeries, RhythmObservationBackend, RhythmObservations, TempoMapEstimator,
+    TempoSegmentKind,
 };
 use rhythm_map_models::{ModelArtifactRole, VerifiedModelPack, verify_model_pack};
 use serde::{Deserialize, Serialize};
@@ -99,6 +100,9 @@ pub struct ObservationDiagnostics {
     /// hypothesis construction.
     #[serde(default)]
     pub candidate_beat_count: usize,
+    /// Optional uniformly sampled evidence before event decoding.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub activations: Option<RhythmActivationSeries>,
     /// Number of beats retained in the product analysis.
     pub analyzed_beat_count: usize,
     /// Number of retained beats classified as downbeats after deterministic repair.
@@ -1330,7 +1334,7 @@ where
         .as_ref()
         .map(|cache| cache.backend_contract.to_string());
     Ok(BottleneckEvaluation {
-        schema_version: 9,
+        schema_version: 10,
         suite_id: suite.id,
         suite_purpose: suite.purpose,
         model_pack: context.model_pack,
@@ -2381,6 +2385,7 @@ fn observation_diagnostics(
         source: observations.source.clone(),
         raw_beats: observations.beats.clone(),
         candidate_beat_count: observations.beat_candidates.len(),
+        activations: observations.activations.clone(),
         analyzed_beat_count: analysis.beats.len(),
         analyzed_downbeat_count: analysis.beats.iter().filter(|beat| beat.downbeat).count(),
         activity_point_count: observations.activity.len(),
@@ -3196,6 +3201,7 @@ mod tests {
                     })
                     .collect(),
                 beat_candidates: Vec::new(),
+                activations: None,
                 activity: Vec::new(),
                 onsets: Vec::new(),
                 harmonic_changes: Vec::new(),
@@ -3306,6 +3312,7 @@ mod tests {
                 })
                 .collect(),
             beat_candidates: Vec::new(),
+            activations: None,
             activity: Vec::new(),
             onsets: Vec::new(),
             harmonic_changes: Vec::new(),
@@ -3404,6 +3411,7 @@ mod tests {
                     downbeat_confidence: 0.0,
                 })
                 .collect(),
+            activations: None,
             activity: Vec::new(),
             onsets: Vec::new(),
             harmonic_changes: Vec::new(),
@@ -3461,6 +3469,7 @@ mod tests {
                 })
                 .collect(),
             beat_candidates: Vec::new(),
+            activations: None,
             activity: Vec::new(),
             onsets: Vec::new(),
             harmonic_changes: Vec::new(),
@@ -3513,6 +3522,7 @@ mod tests {
                 })
                 .collect(),
             beat_candidates: Vec::new(),
+            activations: None,
             activity: Vec::new(),
             onsets: Vec::new(),
             harmonic_changes: Vec::new(),

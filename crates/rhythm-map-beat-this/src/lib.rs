@@ -413,6 +413,7 @@ impl BeatThisBackend {
                     })
                 })
                 .collect(),
+            activations: None,
             activity: Vec::new(),
             onsets: Vec::new(),
             harmonic_changes: Vec::new(),

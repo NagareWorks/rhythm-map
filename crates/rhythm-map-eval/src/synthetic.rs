@@ -190,6 +190,7 @@ impl GeneratedTruth {
                 })
                 .collect(),
             beat_candidates: Vec::new(),
+            activations: None,
             activity: Vec::new(),
             onsets: Vec::new(),
             harmonic_changes: Vec::new(),

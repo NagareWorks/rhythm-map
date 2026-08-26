@@ -7,8 +7,8 @@
 use std::path::Path;
 
 use rhythm_map_core::{
-    BackendError, BeatCandidate, ModelInfo, ObservedBeat, RhythmObservationBackend,
-    RhythmObservations,
+    BackendError, BeatCandidate, ModelInfo, ObservedBeat, RhythmActivationSeries,
+    RhythmObservationBackend, RhythmObservations,
 };
 use rten::{Model, NodeId, ValueView};
 use rubato::audioadapter_buffers::direct::InterleavedSlice;
@@ -148,6 +148,19 @@ impl BeatNetBackend {
             .zip(&inference.downbeat_probabilities)
             .map(|(beat, downbeat)| beat + downbeat)
             .collect::<Vec<_>>();
+        let activations = RhythmActivationSeries {
+            start_time_s: 0.0,
+            frame_rate_hz: FRAME_RATE_HZ,
+            pulse_confidences: pulse
+                .iter()
+                .map(|probability| probability.clamp(0.0, 1.0))
+                .collect(),
+            downbeat_confidences: inference
+                .downbeat_probabilities
+                .iter()
+                .map(|probability| probability.clamp(0.0, 1.0))
+                .collect(),
+        };
         let candidate_frames = local_maxima(&pulse);
         let beat_candidates = candidate_frames
             .iter()
@@ -167,6 +180,7 @@ impl BeatNetBackend {
             duration_s: inference.duration_s,
             beats,
             beat_candidates,
+            activations: Some(activations),
             activity: Vec::new(),
             onsets: Vec::new(),
             harmonic_changes: Vec::new(),

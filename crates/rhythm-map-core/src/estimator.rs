@@ -784,6 +784,15 @@ fn mirror_observations(input: &RhythmObservations) -> RhythmObservations {
             candidate
         })
         .collect();
+    mirrored.activations = input.activations.as_ref().map(|activations| {
+        let mut mirrored = activations.clone();
+        mirrored.pulse_confidences.reverse();
+        mirrored.downbeat_confidences.reverse();
+        let final_offset = usize_to_f64(activations.pulse_confidences.len().saturating_sub(1))
+            / activations.frame_rate_hz;
+        mirrored.start_time_s = input.duration_s - (activations.start_time_s + final_offset);
+        mirrored
+    });
     mirrored.activity = input
         .activity
         .iter()
@@ -2354,6 +2363,7 @@ mod tests {
             duration_s: time + 0.25,
             beats,
             beat_candidates: Vec::new(),
+            activations: None,
             activity: Vec::new(),
             onsets: Vec::new(),
             harmonic_changes: Vec::new(),

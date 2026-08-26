@@ -1,5 +1,5 @@
 use anyhow::{Context, Result, bail};
-use rhythm_map_core::ObservedBeat;
+use rhythm_map_core::{ObservedBeat, RhythmActivationSeries};
 use serde::{Deserialize, Serialize};
 
 use crate::{
@@ -10,7 +10,17 @@ use crate::{
 const AGREEMENT_WINDOW_COUNT: u32 = 4;
 const METER_PULSE_COUNTS: [usize; 3] = [2, 3, 4];
 const DOWNBEAT_PROBABILITY_FLOOR: f64 = 0.01;
-const METER_GATE_POLICY_ID: &str = "pareto-beat-agreement-downbeat-meter-v1";
+const METER_GATE_POLICY_ID: &str = "pareto-beat-agreement-dense-downbeat-meter-v2";
+
+/// Secondary-backend evidence used to score bar phase for one case.
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum MeterEvidenceSource {
+    /// Uniform frame-level activations before the backend decoded events.
+    DenseActivations,
+    /// Compatibility fallback for an older report containing events only.
+    DecodedEvents,
+}
 
 /// Reproducible diagnosis of a naive cross-backend hypothesis selector.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -79,6 +89,8 @@ pub struct ConsensusDiagnosisCase {
     pub window_agreement_margins: Vec<f64>,
     /// Number of material sign reversals in the quarter-track agreement advantage.
     pub material_support_reversals: usize,
+    /// Secondary-backend representation used for downbeat periodicity.
+    pub meter_evidence_source: MeterEvidenceSource,
     /// Auditable beat-agreement and downbeat-meter scores for every primary hypothesis.
     pub hypotheses: Vec<ConsensusHypothesisDiagnosis>,
     /// Hypothesis retained after requiring agreement and meter evidence to both improve.
@@ -199,7 +211,7 @@ pub fn diagnose_backend_consensus(
     let meter_gated_consensus_delta = meter_gated_consensus_mean_beat_f1 - primary_mean_beat_f1;
 
     Ok(ConsensusDiagnosis {
-        schema_version: 2,
+        schema_version: 3,
         suite_id: primary.suite_id.clone(),
         primary_model_pack: primary.model_pack.clone(),
         secondary_model_pack: secondary.model_pack.clone(),
@@ -263,6 +275,7 @@ fn diagnose_case(
         &primary_coverage.hypotheses,
         secondary_hypothesis,
         &secondary_case.observations.raw_beats,
+        secondary_case.observations.activations.as_ref(),
         agreement_tolerance_s,
     )
     .collect::<Vec<_>>();
@@ -300,6 +313,11 @@ fn diagnose_case(
         naive_consensus_agreement: choice.agreement.clone(),
         material_support_reversals: material_support_reversals(&window_agreement_margins),
         window_agreement_margins,
+        meter_evidence_source: if secondary_case.observations.activations.is_some() {
+            MeterEvidenceSource::DenseActivations
+        } else {
+            MeterEvidenceSource::DecodedEvents
+        },
         hypotheses: hypothesis_diagnostics,
         meter_gated_consensus_hypothesis_id: meter_gated_choice.hypothesis.id.clone(),
         primary_truth_beat_f1: primary_hypothesis.beats.f1,
@@ -321,6 +339,7 @@ fn score_consensus_candidates<'a>(
     hypotheses: &'a [PulseHypothesisEvaluation],
     secondary: &'a PulseHypothesisEvaluation,
     secondary_beats: &'a [ObservedBeat],
+    secondary_activations: Option<&'a RhythmActivationSeries>,
     tolerance_s: f64,
 ) -> impl Iterator<Item = ScoredConsensusCandidate<'a>> {
     hypotheses.iter().map(move |hypothesis| {
@@ -329,8 +348,12 @@ fn score_consensus_candidates<'a>(
             &secondary.beat_times_s,
             tolerance_s,
         );
-        let meter_evidence =
-            best_meter_evidence(&hypothesis.beat_times_s, secondary_beats, tolerance_s);
+        let meter_evidence = best_meter_evidence(
+            &hypothesis.beat_times_s,
+            secondary_beats,
+            secondary_activations,
+            tolerance_s,
+        );
         ScoredConsensusCandidate {
             hypothesis,
             agreement,
@@ -413,11 +436,20 @@ fn most_agreeing_hypothesis<'a>(
 fn best_meter_evidence(
     hypothesis_times: &[f64],
     secondary_beats: &[ObservedBeat],
+    secondary_activations: Option<&RhythmActivationSeries>,
     tolerance_s: f64,
 ) -> Option<MeterPatternEvidence> {
     let probabilities = hypothesis_times
         .iter()
-        .map(|&time_s| downbeat_probability_at(time_s, secondary_beats, tolerance_s))
+        .map(|&time_s| {
+            secondary_activations.map_or_else(
+                || downbeat_probability_at_event(time_s, secondary_beats, tolerance_s),
+                |activations| {
+                    downbeat_probability_at_frame(time_s, activations, tolerance_s)
+                        .unwrap_or(DOWNBEAT_PROBABILITY_FLOOR)
+                },
+            )
+        })
         .collect::<Vec<_>>();
     METER_PULSE_COUNTS
         .into_iter()
@@ -435,7 +467,11 @@ fn best_meter_evidence(
         })
 }
 
-fn downbeat_probability_at(time_s: f64, secondary_beats: &[ObservedBeat], tolerance_s: f64) -> f64 {
+fn downbeat_probability_at_event(
+    time_s: f64,
+    secondary_beats: &[ObservedBeat],
+    tolerance_s: f64,
+) -> f64 {
     secondary_beats
         .iter()
         .min_by(|left, right| {
@@ -446,6 +482,29 @@ fn downbeat_probability_at(time_s: f64, secondary_beats: &[ObservedBeat], tolera
         .filter(|beat| (beat.time_s - time_s).abs() <= tolerance_s)
         .map_or(DOWNBEAT_PROBABILITY_FLOOR, |beat| {
             beat.downbeat_confidence
+                .clamp(DOWNBEAT_PROBABILITY_FLOOR, 1.0 - DOWNBEAT_PROBABILITY_FLOOR)
+        })
+}
+
+#[allow(clippy::cast_possible_truncation, clippy::cast_sign_loss)]
+fn downbeat_probability_at_frame(
+    time_s: f64,
+    activations: &RhythmActivationSeries,
+    tolerance_s: f64,
+) -> Option<f64> {
+    let position = (time_s - activations.start_time_s) * activations.frame_rate_hz;
+    if !position.is_finite() || position < 0.0 {
+        return None;
+    }
+    let frame = position.round() as usize;
+    let frame_time = activations.start_time_s
+        + f64::from(u32::try_from(frame).ok()?) / activations.frame_rate_hz;
+    activations
+        .downbeat_confidences
+        .get(frame)
+        .filter(|_| (frame_time - time_s).abs() <= tolerance_s)
+        .map(|&probability| {
+            f64::from(probability)
                 .clamp(DOWNBEAT_PROBABILITY_FLOOR, 1.0 - DOWNBEAT_PROBABILITY_FLOOR)
         })
 }
@@ -503,6 +562,34 @@ fn validate_inputs(
     }
     if !agreement_tolerance_s.is_finite() || agreement_tolerance_s <= 0.0 {
         bail!("agreement tolerance must be finite and greater than zero");
+    }
+    for case in &secondary.cases {
+        if let Some(activations) = case.observations.activations.as_ref() {
+            validate_activation_series(&case.id, activations)?;
+        }
+    }
+    Ok(())
+}
+
+fn validate_activation_series(case_id: &str, activations: &RhythmActivationSeries) -> Result<()> {
+    if !activations.start_time_s.is_finite()
+        || !activations.frame_rate_hz.is_finite()
+        || activations.frame_rate_hz <= 0.0
+    {
+        bail!("secondary case {case_id} has an invalid activation time base");
+    }
+    if activations.pulse_confidences.is_empty()
+        || activations.pulse_confidences.len() != activations.downbeat_confidences.len()
+    {
+        bail!("secondary case {case_id} has incompatible activation channels");
+    }
+    if activations
+        .pulse_confidences
+        .iter()
+        .chain(&activations.downbeat_confidences)
+        .any(|value| !value.is_finite() || !(0.0..=1.0).contains(value))
+    {
+        bail!("secondary case {case_id} has an invalid activation probability");
     }
     Ok(())
 }
@@ -571,7 +658,7 @@ fn material_support_reversals(margins: &[f64]) -> usize {
 
 #[cfg(test)]
 mod tests {
-    use rhythm_map_core::ObservedBeat;
+    use rhythm_map_core::{ObservedBeat, RhythmActivationSeries};
 
     use crate::{BeatMetrics, PulseEvidenceBreakdown, PulseHypothesisEvaluation};
 
@@ -625,7 +712,27 @@ mod tests {
             })
             .collect::<Vec<_>>();
 
-        let evidence = best_meter_evidence(&times, &secondary, 0.01).unwrap();
+        let evidence = best_meter_evidence(&times, &secondary, None, 0.01).unwrap();
+
+        assert_eq!(evidence.pulses_per_bar, 4);
+        assert_eq!(evidence.phase, 0);
+    }
+
+    #[test]
+    fn dense_meter_evidence_is_not_limited_to_decoded_events() {
+        let times = [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5];
+        let mut downbeat_confidences = vec![0.1; 176];
+        for frame in [0, 100] {
+            downbeat_confidences[frame] = 0.9;
+        }
+        let activations = RhythmActivationSeries {
+            start_time_s: 0.0,
+            frame_rate_hz: 50.0,
+            pulse_confidences: vec![0.5; 176],
+            downbeat_confidences,
+        };
+
+        let evidence = best_meter_evidence(&times, &[], Some(&activations), 0.01).unwrap();
 
         assert_eq!(evidence.pulses_per_bar, 4);
         assert_eq!(evidence.phase, 0);

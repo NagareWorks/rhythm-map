@@ -314,6 +314,26 @@ candidate pool so the result remains auditable. Hypotheses outside the same
 40--320 BPM metrical-hypothesis range are omitted. They are result metadata rather than
 caller-selectable strategies and do not silently replace the primary tempo map.
 
+### Cross-backend meter evidence
+
+Evaluation backends may retain a uniform frame-level pulse/downbeat activation
+series before event decoding. It stays in `RhythmObservations` and evaluation
+reports rather than product `Analysis`, because it is evidence for internal
+confidence and selection experiments, not user-facing beat timestamps.
+
+When comparing a Beat This hypothesis with BeatNet, Rhythm Map samples the
+dense BeatNet downbeat channel at every real timestamp in that hypothesis. For
+each 2-, 3-, and 4-pulse cycle and every phase, it computes a class-balanced
+mean log likelihood: expected downbeats and expected ordinary beats contribute
+equal weight. An alternative can replace the primary only if it strictly
+improves both cross-backend beat agreement and this meter likelihood.
+
+Sampling only at events already selected by BeatNet is invalid: on ARTBeaT that
+version appeared to improve two cases without regressions, but the complete
+50 Hz activations veto all four agreement-driven changes. The dense rule is
+safe but produces no calibration gain, so neither version is a shipping
+selector. The result remains explicitly ambiguous.
+
 Before interval smoothing, an evidence-based rule handles inserted
 subdivisions. When the raw median is at least 150 BPM and its half lies in the
 preferred band, the estimator compares the mean audio salience of the two

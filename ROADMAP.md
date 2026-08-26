@@ -452,3 +452,14 @@ a learned component to the default distribution.
   not a product strategy; the fixed 2/3/4 meter assumption and use of decoded
   rather than dense downbeat activations require a fresh, meter-diverse
   timestamped holdout before promotion.
+- 2026-08-27: removed a decoder-selection bias from the cross-backend meter
+  experiment by retaining BeatNet's complete 50 Hz pulse/downbeat activation
+  series and sampling it at every primary-hypothesis timestamp. The prior
+  decoded-event gate's apparent +0.01581 mean beat F1 does not survive: all
+  four agreement-driven alternatives have negative dense meter margins, so the
+  dense gate changes zero cases and remains at 0.80516 mean F1. Reject the
+  decoded-event candidate and do not spend a fresh holdout on it. Keep dense
+  activations as backend-neutral diagnostic evidence, not product output or a
+  selectable strategy. The next selector experiment must address locally
+  changing metrical level with independent evidence rather than tune another
+  whole-track 2/3/4 periodic threshold.
