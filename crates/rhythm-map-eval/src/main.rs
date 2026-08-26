@@ -8,9 +8,8 @@ use std::{
 use anyhow::{Context, Result, bail};
 use clap::{Parser, Subcommand};
 use rhythm_map_eval::{
-    diagnose_core_tempo_suite, evaluate_backend_suite, evaluate_backend_suite_with_audio_directory,
-    evaluate_backend_suite_with_policies, evaluate_beatnet_calibration_suite,
-    evaluate_beatnet_hypothesis_holdout, evaluate_core_suite,
+    BackendEvaluationOptions, diagnose_core_tempo_suite, evaluate_backend_suite_with_options,
+    evaluate_beatnet_calibration_suite, evaluate_beatnet_hypothesis_holdout, evaluate_core_suite,
     evaluate_decoder_recoverability_with_audio_directory,
     evaluate_decoder_sweep_with_audio_directory,
     evaluate_named_decoder_policy_with_audio_directory, fetch_public_dataset, import_artbeat_truth,
@@ -74,11 +73,14 @@ enum Command {
         #[arg(long)]
         audio_dir: Option<PathBuf>,
         /// Stable decoder policy ID; omitted for the immutable upstream default.
-        #[arg(long, requires = "audio_dir")]
+        #[arg(long)]
         decoder_policy: Option<String>,
         /// Stable deterministic estimator policy ID; omitted for the shipping default.
-        #[arg(long, requires = "audio_dir")]
+        #[arg(long)]
         estimator_policy: Option<String>,
+        /// Optional content-addressed raw-observation cache outside the checkout.
+        #[arg(long)]
+        observation_cache: Option<PathBuf>,
         /// Optional JSON report destination.
         #[arg(long)]
         report: Option<PathBuf>,
@@ -325,6 +327,7 @@ fn main() -> Result<()> {
             audio_dir,
             decoder_policy,
             estimator_policy,
+            observation_cache,
             report,
             no_fail,
         } => run_backend_eval(
@@ -334,6 +337,7 @@ fn main() -> Result<()> {
             audio_dir.as_deref(),
             decoder_policy.as_deref(),
             estimator_policy.as_deref(),
+            observation_cache.as_deref(),
             report,
             no_fail,
         ),
@@ -512,25 +516,21 @@ fn run_backend_eval(
     audio_dir: Option<&Path>,
     decoder_policy: Option<&str>,
     estimator_policy: Option<&str>,
+    observation_cache: Option<&Path>,
     report: Option<PathBuf>,
     no_fail: bool,
 ) -> Result<()> {
-    let result = if let Some(audio_dir) = audio_dir
-        && (decoder_policy.is_some() || estimator_policy.is_some())
-    {
-        evaluate_backend_suite_with_policies(
-            suite,
-            model_pack,
-            model_dir,
-            audio_dir,
+    let result = evaluate_backend_suite_with_options(
+        suite,
+        model_pack,
+        model_dir,
+        BackendEvaluationOptions {
+            audio_directory: audio_dir,
             decoder_policy,
             estimator_policy,
-        )?
-    } else if let Some(audio_dir) = audio_dir {
-        evaluate_backend_suite_with_audio_directory(suite, model_pack, model_dir, audio_dir)?
-    } else {
-        evaluate_backend_suite(suite, model_pack, model_dir)?
-    };
+            observation_cache_directory: observation_cache,
+        },
+    )?;
     emit_report(&result, report, no_fail)
 }
 

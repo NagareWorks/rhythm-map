@@ -398,12 +398,14 @@ a learned component to the default distribution.
   improves again to 0.1544/4.4053 percent, and high-error points fall from 25
   of 6,694 to zero. ARTBeaT ideal metrics remain byte-for-byte unchanged and
   the end-to-end beat F1 remains 0.80516. Keep one shipping algorithm.
-- 2026-08-26: estimator A/B work still repeats expensive ONNX inference because
-  backend observations are not persisted. Add a content-addressed observation
-  cache keyed by audio SHA-256, model-manifest SHA-256, backend contract, and
-  decoder policy so deterministic estimator changes can replay exact beats,
-  candidates, confidence, and audio metadata without rerunning the model. The
-  cache is evaluation infrastructure, not a new runtime strategy.
+- 2026-08-26: added an opt-in content-addressed observation cache keyed by audio
+  SHA-256, model-manifest SHA-256, backend/decode contract, and complete decoder
+  policy. It persists raw beats, candidates, confidence, source identity, and
+  decoded-audio shape only after successful estimation; PCM enrichment and the
+  selected estimator still rerun. A real generated-v1 Beat This cold/hot check
+  preserved every observation and metric exactly while reducing summed per-case
+  analysis time from 322,967 ms to 826 ms (391x). This remains evaluation
+  infrastructure, not a product runtime strategy.
 - 2026-08-26: promoting the adjacent short/long fixed-frame jitter repair from
   `sequence-phase-v1` changed one ARTBeaT warning but changed no beat or tempo
   metric. Keep it evaluation-only: a shipping behavior without measured gain

@@ -144,9 +144,25 @@ compare it with ideal beat observations:
 cargo xtask eval-backend \
   --model-pack models/beat-this-full-v1.json \
   --model-dir D:/rhythm-map-models/beat-this-full-v1 \
+  --observation-cache D:/rhythm-map-eval/observation-cache-v1 \
   --report D:/rhythm-map-eval/reports/beat-this-full-v1.json \
   --no-fail
 ```
+
+`--observation-cache` is optional evaluation infrastructure. A cold run stores
+the raw backend-neutral observations only after they pass deterministic
+estimation; a hot run reloads them and still reruns PCM enrichment, the current
+estimator, and every metric. Entries are addressed by audio SHA-256, exact model
+manifest SHA-256, a versioned backend/decode contract, and the complete decoder
+policy. Estimator policy and truth are deliberately absent from the key, so an
+estimator A/B reuses identical model evidence without allowing labels into the
+cache. Cache files include decoded sample rate/count validation and exact
+round-trip floating-point JSON. Keep the directory outside the checkout.
+
+Backend report schema v8 records the versioned `observation_cache_contract` and
+adds per-case `observation_cache_hit`. Runtime fields from a cold and hot report
+are not directly comparable as end-to-end model benchmarks; all observations,
+analyses, and metrics must otherwise be identical.
 
 Compare the experimental BeatNet observation path only on the already-open
 ARTBeaT calibration suite:
@@ -169,7 +185,7 @@ backend. Analysis schema v3 exposes the selected and supported half/double-time
 beat sequences with truth-free relative scores. This command also enables the
 fixed `local-metrical-path-v1` calibration candidate, which adds deterministic
 harmonic-change observations and one real-timestamp path whose metrical level
-may vary locally. Calibration report schema v7 records those exact hypotheses
+may vary locally. Calibration report schema v8 records those exact hypotheses
 under observation diagnostics. The primary selected sequence remains unchanged.
 
 After freezing `local-metrical-path-v1` on calibration, open a timestamped

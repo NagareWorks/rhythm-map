@@ -4,6 +4,7 @@ mod artbeat;
 mod dataset;
 mod manifest;
 mod metrics;
+mod observation_cache;
 mod public_dataset;
 mod rubato;
 mod runner;
@@ -27,18 +28,18 @@ pub use public_dataset::{
 };
 pub use rubato::{RubatoStructureSegment, RubatoTruthImport, import_rubato_truth};
 pub use runner::{
-    AttributionCase, AttributionDecision, BeatHypothesisAggregate, BeatHypothesisHoldoutCase,
-    BeatHypothesisHoldoutEvaluation, BeatHypothesisHoldoutSlice, BottleneckEvaluation,
-    CandidateEvidenceCoverage, CaseMetricDelta, DecoderPolicy, DecoderPolicyComparison,
-    DecoderPolicyEvaluation, DecoderRecoverabilityCase, DecoderRecoverabilityEvaluation,
-    DecoderSequencePathPolicy, DecoderSliceDelta, DecoderSliceMetrics,
-    DecoderSupportedMidpointPolicy, DecoderSweepCandidate, DecoderSweepCase,
+    AttributionCase, AttributionDecision, BackendEvaluationOptions, BeatHypothesisAggregate,
+    BeatHypothesisHoldoutCase, BeatHypothesisHoldoutEvaluation, BeatHypothesisHoldoutSlice,
+    BottleneckEvaluation, CandidateEvidenceCoverage, CaseMetricDelta, DecoderPolicy,
+    DecoderPolicyComparison, DecoderPolicyEvaluation, DecoderRecoverabilityCase,
+    DecoderRecoverabilityEvaluation, DecoderSequencePathPolicy, DecoderSliceDelta,
+    DecoderSliceMetrics, DecoderSupportedMidpointPolicy, DecoderSweepCandidate, DecoderSweepCase,
     DecoderSweepEvaluation, LogitEvidence, MissingBeatEvidence, MissingBeatEvidenceClass,
     MissingBeatEvidenceCounts, ModelPackIdentity, ObservationDiagnostics, PulseEvidenceBreakdown,
     PulseHypothesisCoverage, PulseHypothesisEvaluation, SuiteEvaluation, evaluate_backend_suite,
     evaluate_backend_suite_with_audio_directory, evaluate_backend_suite_with_decoder_policy,
-    evaluate_backend_suite_with_policies, evaluate_beatnet_calibration_suite,
-    evaluate_beatnet_hypothesis_holdout, evaluate_core_suite,
+    evaluate_backend_suite_with_options, evaluate_backend_suite_with_policies,
+    evaluate_beatnet_calibration_suite, evaluate_beatnet_hypothesis_holdout, evaluate_core_suite,
     evaluate_decoder_recoverability_with_audio_directory,
     evaluate_decoder_sweep_with_audio_directory,
     evaluate_named_decoder_policy_with_audio_directory, render_suite, score_prediction_directory,

@@ -7,14 +7,14 @@ use std::{
 
 use anyhow::{Context, Result, bail};
 use rhythm_map_beat_this::{
-    BeatThisBackend, BeatThisDecoderPolicy, PeakPickingOptions, SequencePathOptions,
-    SupportedMidpointOptions, decode_audio,
+    BeatThisBackend, BeatThisDecoderPolicy, OBSERVATION_CONTRACT, PeakPickingOptions,
+    SequencePathOptions, SupportedMidpointOptions, decode_audio,
 };
 use rhythm_map_beatnet::BeatNetBackend;
 use rhythm_map_core::{
-    Analysis, AudioOnsetPoint, BeatCandidate, BeatSequenceHypothesis, BeatSequenceHypothesisKind,
-    Engine, EstimatorOptions, ModelInfo, ObservedBeat, RhythmObservationBackend,
-    RhythmObservations, TempoMapEstimator,
+    Analysis, AudioOnsetPoint, BackendError, BeatCandidate, BeatSequenceHypothesis,
+    BeatSequenceHypothesisKind, Engine, EstimatorOptions, ModelInfo, ObservedBeat,
+    RhythmObservationBackend, RhythmObservations, TempoMapEstimator,
 };
 use rhythm_map_models::{ModelArtifactRole, VerifiedModelPack, verify_model_pack};
 use serde::{Deserialize, Serialize};
@@ -23,6 +23,9 @@ use crate::{
     BeatMetrics, CaseEvaluation, CaseInput, EvaluationCase, EvaluationSuite, ExternalAudioResolver,
     GeneratedTruth, SuitePurpose, SyntheticRecipe, evaluate_analysis, generate_truth,
     metrics::{match_event_pairs, score_beats},
+    observation_cache::{
+        DecodedAudioIdentity, ObservationCache, ObservationCacheKey, decoded_pcm_sha256,
+    },
     wav::{render_synthetic_audio, synthesize_audio},
 };
 
@@ -52,6 +55,22 @@ pub struct ModelPackIdentity {
     pub backend: String,
     /// SHA-256 of the exact manifest bytes.
     pub manifest_sha256: String,
+}
+
+/// Optional evaluation-only inputs for the complete Beat This backend path.
+///
+/// Observation caching changes only how raw backend observations are obtained;
+/// the selected estimator still runs for every invocation.
+#[derive(Debug, Clone, Copy, Default)]
+pub struct BackendEvaluationOptions<'a> {
+    /// Directory containing content-addressed external evaluation audio.
+    pub audio_directory: Option<&'a Path>,
+    /// Stable non-default decoder policy ID.
+    pub decoder_policy: Option<&'a str>,
+    /// Stable non-default deterministic estimator policy ID.
+    pub estimator_policy: Option<&'a str>,
+    /// Optional content-addressed raw-observation cache directory.
+    pub observation_cache_directory: Option<&'a Path>,
 }
 
 /// End-to-end metric difference relative to oracle observations.
@@ -333,7 +352,11 @@ pub struct AttributionCase {
     /// timestamped beat truth.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pulse_hypothesis_coverage: Option<PulseHypothesisCoverage>,
-    /// Wall-clock time spent in end-to-end audio analysis.
+    /// Whether raw observations came from the optional evaluation cache.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub observation_cache_hit: Option<bool>,
+    /// Wall-clock time spent loading or inferring observations, enriching them
+    /// from PCM, and estimating the time map. Compare only equal cache states.
     pub end_to_end_runtime_ms: f64,
 }
 
@@ -373,6 +396,9 @@ pub struct BottleneckEvaluation {
     /// Explicit non-default deterministic estimator exercised by this report.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub estimator_policy: Option<String>,
+    /// Versioned raw-observation contract used by the optional cache.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub observation_cache_contract: Option<String>,
     /// True when the end-to-end path and every available oracle path pass.
     pub passed: bool,
     /// Acceptance-gate bottleneck decision, or `end_to_end_only` without an oracle.
@@ -756,7 +782,12 @@ pub fn evaluate_backend_suite(
     model_pack_path: &Path,
     model_root: &Path,
 ) -> Result<BottleneckEvaluation> {
-    evaluate_backend_suite_impl(suite_path, model_pack_path, model_root, None, None, None)
+    evaluate_backend_suite_with_options(
+        suite_path,
+        model_pack_path,
+        model_root,
+        BackendEvaluationOptions::default(),
+    )
 }
 
 /// Run generated and content-addressed external audio through Beat This.
@@ -774,14 +805,14 @@ pub fn evaluate_backend_suite_with_audio_directory(
     model_root: &Path,
     audio_directory: &Path,
 ) -> Result<BottleneckEvaluation> {
-    let resolver = ExternalAudioResolver::new(audio_directory)?;
-    evaluate_backend_suite_impl(
+    evaluate_backend_suite_with_options(
         suite_path,
         model_pack_path,
         model_root,
-        Some(&resolver),
-        None,
-        None,
+        BackendEvaluationOptions {
+            audio_directory: Some(audio_directory),
+            ..BackendEvaluationOptions::default()
+        },
     )
 }
 
@@ -827,16 +858,53 @@ pub fn evaluate_backend_suite_with_policies(
     decoder_policy_id: Option<&str>,
     estimator_policy_id: Option<&str>,
 ) -> Result<BottleneckEvaluation> {
-    let resolver = ExternalAudioResolver::new(audio_directory)?;
-    let decoder_policy = decoder_policy_id.map(standard_decoder_policy).transpose()?;
-    validate_estimator_policy(estimator_policy_id)?;
+    evaluate_backend_suite_with_options(
+        suite_path,
+        model_pack_path,
+        model_root,
+        BackendEvaluationOptions {
+            audio_directory: Some(audio_directory),
+            decoder_policy: decoder_policy_id,
+            estimator_policy: estimator_policy_id,
+            observation_cache_directory: None,
+        },
+    )
+}
+
+/// Run the complete Beat This evaluation path with explicit evaluation-only
+/// input and cache options.
+///
+/// # Errors
+///
+/// Returns an error for an unknown policy, invalid cache entry, or any ordinary
+/// backend-evaluation failure.
+pub fn evaluate_backend_suite_with_options(
+    suite_path: &Path,
+    model_pack_path: &Path,
+    model_root: &Path,
+    options: BackendEvaluationOptions<'_>,
+) -> Result<BottleneckEvaluation> {
+    let audio_resolver = options
+        .audio_directory
+        .map(ExternalAudioResolver::new)
+        .transpose()?;
+    let decoder_policy = options
+        .decoder_policy
+        .map(standard_decoder_policy)
+        .transpose()?;
+    validate_estimator_policy(options.estimator_policy)?;
+    let observation_cache = options
+        .observation_cache_directory
+        .map(ObservationCache::new)
+        .transpose()?;
     evaluate_backend_suite_impl(
         suite_path,
         model_pack_path,
         model_root,
-        Some(&resolver),
+        audio_resolver.as_ref(),
         decoder_policy.as_ref(),
-        estimator_policy_id,
+        options.estimator_policy,
+        observation_cache.as_ref(),
     )
 }
 
@@ -847,6 +915,7 @@ fn evaluate_backend_suite_impl(
     audio_resolver: Option<&ExternalAudioResolver>,
     decoder_policy: Option<&DecoderPolicy>,
     estimator_policy: Option<&str>,
+    observation_cache: Option<&ObservationCache>,
 ) -> Result<BottleneckEvaluation> {
     let verified = verify_model_pack(model_pack_path, model_root)
         .with_context(|| format!("verifying model pack {}", model_pack_path.display()))?;
@@ -859,13 +928,27 @@ fn evaluate_backend_suite_impl(
         None => backend,
     };
     let model_pack = model_pack_identity(&verified);
+    let decoder_cache_identity = match decoder_policy {
+        Some(policy) => {
+            serde_json::to_string(policy).context("serializing decoder cache identity")?
+        }
+        None => "upstream-default".to_string(),
+    };
+    let observation_cache = observation_cache.map(|cache| ObservationCacheContext {
+        cache,
+        backend_contract: OBSERVATION_CONTRACT,
+        decoder_identity: &decoder_cache_identity,
+    });
     evaluate_loaded_backend_suite(
         suite_path,
-        audio_resolver,
-        decoder_policy,
-        estimator_policy,
         backend,
-        model_pack,
+        LoadedBackendEvaluationContext {
+            audio_resolver,
+            decoder_policy,
+            estimator_policy,
+            model_pack,
+            observation_cache,
+        },
     )
 }
 
@@ -901,11 +984,14 @@ pub fn evaluate_beatnet_calibration_suite(
     let model_pack = model_pack_identity(&verified);
     evaluate_loaded_backend_suite(
         suite_path,
-        Some(&resolver),
-        None,
-        Some("local-metrical-path-v1"),
         backend,
-        model_pack,
+        LoadedBackendEvaluationContext {
+            audio_resolver: Some(&resolver),
+            decoder_policy: None,
+            estimator_policy: Some("local-metrical-path-v1"),
+            model_pack,
+            observation_cache: None,
+        },
     )
 }
 
@@ -1047,19 +1133,45 @@ const fn hypothesis_choice_id(local: bool) -> &'static str {
     }
 }
 
+struct ObservationCacheContext<'a> {
+    cache: &'a ObservationCache,
+    backend_contract: &'a str,
+    decoder_identity: &'a str,
+}
+
+struct LoadedBackendEvaluationContext<'a> {
+    audio_resolver: Option<&'a ExternalAudioResolver>,
+    decoder_policy: Option<&'a DecoderPolicy>,
+    estimator_policy: Option<&'a str>,
+    model_pack: ModelPackIdentity,
+    observation_cache: Option<ObservationCacheContext<'a>>,
+}
+
+#[derive(Clone, Copy)]
+struct BackendCaseInput<'a> {
+    id: &'a str,
+    samples: &'a [f32],
+    sample_rate: u32,
+    audio_sha256: Option<&'a str>,
+    model_manifest_sha256: &'a str,
+}
+
+struct BackendCaseAnalysis {
+    observations: RhythmObservations,
+    analysis: Analysis,
+    observation_cache_hit: Option<bool>,
+    runtime_ms: f64,
+}
+
 fn evaluate_loaded_backend_suite<B>(
     suite_path: &Path,
-    audio_resolver: Option<&ExternalAudioResolver>,
-    decoder_policy: Option<&DecoderPolicy>,
-    estimator_policy: Option<&str>,
-    backend: B,
-    model_pack: ModelPackIdentity,
+    mut backend: B,
+    context: LoadedBackendEvaluationContext<'_>,
 ) -> Result<BottleneckEvaluation>
 where
     B: RhythmObservationBackend,
 {
-    let estimator = estimator_for_policy(estimator_policy)?;
-    let mut engine = Engine::with_estimator(backend, estimator.clone());
+    let estimator = estimator_for_policy(context.estimator_policy)?;
     let (suite, root) = load_suite(suite_path)?;
     let mut cases = Vec::with_capacity(suite.cases.len());
 
@@ -1087,25 +1199,30 @@ where
         };
 
         let (samples, sample_rate, audio_sha256) =
-            load_case_audio(case, &suite.id, &root, &truth, audio_resolver)?;
-        let started = Instant::now();
-        let observations = engine
-            .observe_pcm(&samples, sample_rate, 1)
-            .with_context(|| format!("observing backend case {}", case.id))?;
-        let analysis = engine
-            .analyze_observations(&observations)
-            .with_context(|| format!("estimating backend case {}", case.id))?;
-        let runtime_ms = started.elapsed().as_secs_f64() * 1000.0;
-        let end_to_end = evaluate_analysis(&case.id, &analysis, &truth, thresholds);
+            load_case_audio(case, &suite.id, &root, &truth, context.audio_resolver)?;
+        let evaluated = analyze_backend_case(
+            &mut backend,
+            &estimator,
+            context.observation_cache.as_ref(),
+            BackendCaseInput {
+                id: &case.id,
+                samples: &samples,
+                sample_rate,
+                audio_sha256: audio_sha256.as_deref(),
+                model_manifest_sha256: &context.model_pack.manifest_sha256,
+            },
+        )?;
+        let end_to_end = evaluate_analysis(&case.id, &evaluated.analysis, &truth, thresholds);
         let delta = oracle
             .as_ref()
             .map(|oracle| metric_delta(oracle, &end_to_end));
-        let observation_diagnostics = observation_diagnostics(&observations, &analysis);
+        let observation_diagnostics =
+            observation_diagnostics(&evaluated.observations, &evaluated.analysis);
         let (candidate_evidence, pulse_hypothesis_coverage) = calibration_observation_evidence(
             suite.purpose,
             &truth,
-            &observations,
-            &analysis,
+            &evaluated.observations,
+            &evaluated.analysis,
             thresholds.beat_tolerance_ms / 1000.0,
         );
         cases.push(AttributionCase {
@@ -1118,7 +1235,8 @@ where
             observations: observation_diagnostics,
             candidate_evidence,
             pulse_hypothesis_coverage,
-            end_to_end_runtime_ms: runtime_ms,
+            observation_cache_hit: evaluated.observation_cache_hit,
+            end_to_end_runtime_ms: evaluated.runtime_ms,
         });
     }
 
@@ -1129,17 +1247,99 @@ where
     let has_unpaired_cases = cases.iter().any(|case| case.oracle.is_none());
     let end_to_end_passed = cases.iter().all(|case| case.end_to_end.passed);
     let attribution = attribution_decision(oracle_passed, has_unpaired_cases, end_to_end_passed);
+    let observation_cache_contract = context
+        .observation_cache
+        .as_ref()
+        .map(|cache| cache.backend_contract.to_string());
     Ok(BottleneckEvaluation {
-        schema_version: 7,
+        schema_version: 8,
         suite_id: suite.id,
         suite_purpose: suite.purpose,
-        model_pack,
-        decoder_policy: decoder_policy.cloned(),
-        estimator_policy: estimator_policy.map(str::to_string),
+        model_pack: context.model_pack,
+        decoder_policy: context.decoder_policy.cloned(),
+        estimator_policy: context.estimator_policy.map(str::to_string),
+        observation_cache_contract,
         passed: oracle_passed && end_to_end_passed,
         attribution,
         cases,
     })
+}
+
+fn analyze_backend_case<B>(
+    backend: &mut B,
+    estimator: &TempoMapEstimator,
+    cache_context: Option<&ObservationCacheContext<'_>>,
+    input: BackendCaseInput<'_>,
+) -> Result<BackendCaseAnalysis>
+where
+    B: RhythmObservationBackend,
+{
+    let started = Instant::now();
+    let decoded_audio = DecodedAudioIdentity::new(input.sample_rate, input.samples.len())?;
+    let cache_key = cache_context
+        .map(|context| {
+            ObservationCacheKey::new(
+                input.audio_sha256.map_or_else(
+                    || decoded_pcm_sha256(input.samples, input.sample_rate),
+                    str::to_string,
+                ),
+                input.model_manifest_sha256.to_string(),
+                context.backend_contract.to_string(),
+                context.decoder_identity.to_string(),
+            )
+        })
+        .transpose()?;
+    let cached = match (cache_context, cache_key.as_ref()) {
+        (Some(context), Some(key)) => context.cache.load(key, decoded_audio)?,
+        _ => None,
+    };
+    let observation_cache_hit = cache_context.map(|_| cached.is_some());
+    let raw_observations = if let Some(observations) = cached {
+        eprintln!("observation cache hit: {}", input.id);
+        observations
+    } else {
+        if cache_context.is_some() {
+            eprintln!("observation cache miss: {}", input.id);
+        }
+        backend
+            .observe_mono(input.samples, input.sample_rate)
+            .with_context(|| format!("observing backend case {}", input.id))?
+    };
+    let replay_backend = ReplayObservationBackend(&raw_observations);
+    let mut engine = Engine::with_estimator(replay_backend, estimator.clone());
+    let observations = engine
+        .observe_pcm(input.samples, input.sample_rate, 1)
+        .with_context(|| format!("enriching backend observations for case {}", input.id))?;
+    let analysis = engine
+        .analyze_observations(&observations)
+        .with_context(|| format!("estimating backend case {}", input.id))?;
+    let runtime_ms = started.elapsed().as_secs_f64() * 1000.0;
+    if observation_cache_hit == Some(false) {
+        let context = cache_context.expect("cache presence matches miss status");
+        context.cache.store(
+            cache_key.as_ref().expect("cache key exists on a miss"),
+            decoded_audio,
+            &raw_observations,
+        )?;
+    }
+    Ok(BackendCaseAnalysis {
+        observations,
+        analysis,
+        observation_cache_hit,
+        runtime_ms,
+    })
+}
+
+struct ReplayObservationBackend<'a>(&'a RhythmObservations);
+
+impl RhythmObservationBackend for ReplayObservationBackend<'_> {
+    fn observe_mono(
+        &mut self,
+        _samples: &[f32],
+        _sample_rate: u32,
+    ) -> Result<RhythmObservations, BackendError> {
+        Ok(self.0.clone())
+    }
 }
 
 fn model_pack_identity(verified: &VerifiedModelPack) -> ModelPackIdentity {
@@ -2729,7 +2929,85 @@ fn usize_to_f64(value: usize) -> f64 {
 
 #[cfg(test)]
 mod tests {
+    use std::time::{SystemTime, UNIX_EPOCH};
+
     use super::*;
+
+    struct CountingBackend {
+        calls: usize,
+    }
+
+    impl RhythmObservationBackend for CountingBackend {
+        fn observe_mono(
+            &mut self,
+            _samples: &[f32],
+            _sample_rate: u32,
+        ) -> std::result::Result<RhythmObservations, BackendError> {
+            self.calls += 1;
+            Ok(RhythmObservations {
+                duration_s: 2.0,
+                beats: (0..4)
+                    .map(|index| ObservedBeat {
+                        time_s: usize_to_f64(index) * 0.5,
+                        confidence: 0.9,
+                        downbeat_confidence: if index == 0 { 0.9 } else { 0.1 },
+                    })
+                    .collect(),
+                beat_candidates: Vec::new(),
+                activity: Vec::new(),
+                onsets: Vec::new(),
+                harmonic_changes: Vec::new(),
+                source: ModelInfo {
+                    backend: "counting".to_string(),
+                    model: "fixture".to_string(),
+                    version: Some("1".to_string()),
+                    frame_rate_hz: Some(50.0),
+                },
+            })
+        }
+    }
+
+    #[test]
+    fn hot_observation_cache_replays_without_calling_backend() {
+        let nonce = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_nanos();
+        let root = std::env::temp_dir().join(format!(
+            "rhythm-map-runner-cache-test-{}-{nonce}",
+            std::process::id()
+        ));
+        let cache = ObservationCache::new(&root).unwrap();
+        let cache_context = ObservationCacheContext {
+            cache: &cache,
+            backend_contract: "counting-observations-v1",
+            decoder_identity: "upstream-default",
+        };
+        let samples = vec![0.0_f32; 200];
+        let manifest_sha256 = "b".repeat(64);
+        let input = BackendCaseInput {
+            id: "cache-case",
+            samples: &samples,
+            sample_rate: 100,
+            audio_sha256: None,
+            model_manifest_sha256: &manifest_sha256,
+        };
+        let estimator = TempoMapEstimator::default();
+        let mut backend = CountingBackend { calls: 0 };
+
+        let cold =
+            analyze_backend_case(&mut backend, &estimator, Some(&cache_context), input).unwrap();
+        let hot =
+            analyze_backend_case(&mut backend, &estimator, Some(&cache_context), input).unwrap();
+
+        assert_eq!(backend.calls, 1);
+        assert_eq!(cold.observation_cache_hit, Some(false));
+        assert_eq!(hot.observation_cache_hit, Some(true));
+        assert_eq!(cold.observations, hot.observations);
+        assert_eq!(cold.analysis, hot.analysis);
+
+        std::fs::remove_dir_all(root).unwrap();
+    }
 
     #[test]
     fn candidate_coverage_counts_truth_without_promoting_candidates() {

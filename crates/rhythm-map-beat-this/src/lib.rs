@@ -11,6 +11,11 @@ use rhythm_map_core::{
 type DefaultModel = <RtenRuntime as Runtime>::Model;
 const FRAME_RATE_HZ: f64 = 50.0;
 
+/// Cache-invalidation identity for decoded-audio preprocessing and raw Beat
+/// This observation semantics. Bump this whenever identical audio, model, and
+/// decoder inputs could produce a differently interpreted observation payload.
+pub const OBSERVATION_CONTRACT: &str = "beat-this-rten-observations-v1+decode-audio-v1";
+
 mod decoder_candidates {
     /// Configurable peak-picking candidate applied to Beat This frame logits.
     #[derive(Debug, Clone, Copy, PartialEq)]
