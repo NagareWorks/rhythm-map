@@ -1,6 +1,7 @@
 //! Reproducible evaluation contracts and deterministic rhythm fixtures.
 
 mod artbeat;
+mod consensus;
 mod dataset;
 mod manifest;
 mod metrics;
@@ -14,6 +15,7 @@ mod vienna;
 mod wav;
 
 pub use artbeat::{ArtbeatTruthImport, import_artbeat_truth};
+pub use consensus::{ConsensusDiagnosis, ConsensusDiagnosisCase, diagnose_backend_consensus};
 pub use dataset::{AudioAssetInspection, ExternalAudioResolver, inspect_audio_asset};
 pub use manifest::{
     AcceptanceThresholds, AssetKind, AssetProvenance, AudioReference, CaseInput, EvaluationCase,

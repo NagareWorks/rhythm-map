@@ -282,6 +282,26 @@ strength and interval continuity. The calibration history in
 `baselines/artbeat-candidate-coverage-v1.md` records why the earlier unpenalized
 confidence/continuity score was rejected.
 
+To test whether an independent backend can rank those hypotheses without
+rerunning inference, compare two reports for the same calibration suite:
+
+```bash
+cargo xtask consensus-diagnose \
+  --primary D:/rhythm-map-eval/reports/artbeat-cache-default-v9-final.json \
+  --secondary D:/rhythm-map-eval/reports/artbeat-beatnet-local-metrical-path-v4.json \
+  --report D:/rhythm-map-eval/reports/artbeat-beatthis-beatnet-consensus-v1.json
+```
+
+`consensus-diagnose` ranks the primary report's existing hypotheses only by
+one-to-one agreement with the secondary report's top-ranked sequence. It then
+uses the embedded calibration scores to attribute gains and regressions. Four
+equal-duration window margins expose cases where the two backends' metrical
+relationship changes inside the track. This command accepts calibration
+reports only, requires distinct model packs and backend IDs plus identical audio
+identities, and does not change either backend or add a product strategy. A
+passing calibration gate would still require one separately precommitted
+holdout run before any shipping selector could be considered.
+
 After choosing one policy on calibration data, evaluate that exact registered
 policy on a separate holdout manifest:
 

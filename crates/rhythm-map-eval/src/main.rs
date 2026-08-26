@@ -8,8 +8,9 @@ use std::{
 use anyhow::{Context, Result, bail};
 use clap::{Parser, Subcommand};
 use rhythm_map_eval::{
-    BackendEvaluationOptions, diagnose_core_tempo_suite, evaluate_backend_suite_with_options,
-    evaluate_beatnet_calibration_suite, evaluate_beatnet_hypothesis_holdout, evaluate_core_suite,
+    BackendEvaluationOptions, diagnose_backend_consensus, diagnose_core_tempo_suite,
+    evaluate_backend_suite_with_options, evaluate_beatnet_calibration_suite,
+    evaluate_beatnet_hypothesis_holdout, evaluate_core_suite,
     evaluate_decoder_recoverability_with_audio_directory,
     evaluate_decoder_sweep_with_audio_directory,
     evaluate_named_decoder_policy_with_audio_directory, fetch_public_dataset, import_artbeat_truth,
@@ -295,6 +296,21 @@ enum Command {
         #[arg(long)]
         no_fail: bool,
     },
+    /// Test a naive global-agreement selector across two calibration reports.
+    ConsensusDiagnose {
+        /// Backend report whose already-published hypotheses may be reranked.
+        #[arg(long)]
+        primary: PathBuf,
+        /// Independent backend report supplying its top-ranked beat sequence.
+        #[arg(long)]
+        secondary: PathBuf,
+        /// One-to-one timestamp tolerance used for backend agreement.
+        #[arg(long, default_value_t = 0.07)]
+        tolerance_s: f64,
+        /// Optional JSON report destination.
+        #[arg(long)]
+        report: Option<PathBuf>,
+    },
 }
 
 #[allow(clippy::too_many_lines)]
@@ -449,7 +465,33 @@ fn main() -> Result<()> {
             report,
             no_fail,
         ),
+        Command::ConsensusDiagnose {
+            primary,
+            secondary,
+            tolerance_s,
+            report,
+        } => run_consensus_diagnosis(&primary, &secondary, tolerance_s, report),
     }
+}
+
+fn run_consensus_diagnosis(
+    primary: &Path,
+    secondary: &Path,
+    tolerance_s: f64,
+    report: Option<PathBuf>,
+) -> Result<()> {
+    let primary_report = serde_json::from_slice(
+        &fs::read(primary).with_context(|| format!("reading {}", primary.display()))?,
+    )
+    .with_context(|| format!("parsing {}", primary.display()))?;
+    let secondary_report = serde_json::from_slice(
+        &fs::read(secondary).with_context(|| format!("reading {}", secondary.display()))?,
+    )
+    .with_context(|| format!("parsing {}", secondary.display()))?;
+    emit_json_report(
+        &diagnose_backend_consensus(&primary_report, &secondary_report, tolerance_s)?,
+        report,
+    )
 }
 
 fn run_audio_inspect(input: &Path) -> Result<()> {

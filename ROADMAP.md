@@ -428,3 +428,15 @@ a learned component to the default distribution.
   60 BPM edge-extra and 200 BPM false-half-time cases, while the stricter support
   rule no longer clears the 150 BPM P95 gate. Do not weaken observation support
   or promote the candidate without a fresh precommitted timestamped holdout.
+- 2026-08-26: added a calibration-only cross-backend consensus diagnosis and
+  compared Beat This hypotheses against BeatNet's independently inferred
+  primary beat sequence. Naive global timestamp agreement improved three
+  ARTBeaT cases but regressed `60-to-80` by 0.26 beat F1, reducing mean F1 from
+  0.80516 to 0.80416. Quarter-track margins show the backend relationship flips
+  inside that clip: BeatNet tracks roughly double-time early and the same level
+  late. Therefore do not add a second-model selector or a user-visible strategy.
+  The useful role of independent backend evidence is to raise confidence when
+  whole-track level and phase agree, and to preserve or localize ambiguity when
+  they do not. The next selector experiment needs an absolute meter/downbeat
+  anchor or a locally varying path; global beat-sequence agreement cannot decide
+  which octave-related pulse is musically canonical.
