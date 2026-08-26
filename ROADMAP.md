@@ -440,3 +440,15 @@ a learned component to the default distribution.
   they do not. The next selector experiment needs an absolute meter/downbeat
   anchor or a locally varying path; global beat-sequence agreement cannot decide
   which octave-related pulse is musically canonical.
+- 2026-08-26: extended the consensus diagnosis with a weight-free meter gate.
+  BeatNet downbeat confidence alone is not a safe selector: maximizing its
+  2/3/4-pulse periodic likelihood drops ARTBeaT mean beat F1 to 0.71893 and
+  regresses seven cases. Requiring an alternative to strictly improve both
+  cross-backend beat agreement and class-balanced downbeat periodic likelihood
+  is materially safer on calibration: it changes only `75-to-150` and
+  `ramp-80-to-200`, raises mean F1 from 0.80516 to 0.82097, and has zero case
+  regressions. It also vetoes the prior `60-to-80` failure because its meter
+  margin is slightly negative. Keep this as one frozen evaluation candidate,
+  not a product strategy; the fixed 2/3/4 meter assumption and use of decoded
+  rather than dense downbeat activations require a fresh, meter-diverse
+  timestamped holdout before promotion.

@@ -1,4 +1,5 @@
 use anyhow::{Context, Result, bail};
+use rhythm_map_core::ObservedBeat;
 use serde::{Deserialize, Serialize};
 
 use crate::{
@@ -7,6 +8,9 @@ use crate::{
 };
 
 const AGREEMENT_WINDOW_COUNT: u32 = 4;
+const METER_PULSE_COUNTS: [usize; 3] = [2, 3, 4];
+const DOWNBEAT_PROBABILITY_FLOOR: f64 = 0.01;
+const METER_GATE_POLICY_ID: &str = "pareto-beat-agreement-downbeat-meter-v1";
 
 /// Reproducible diagnosis of a naive cross-backend hypothesis selector.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -21,6 +25,12 @@ pub struct ConsensusDiagnosis {
     pub secondary_model_pack: ModelPackIdentity,
     /// One-to-one timestamp tolerance used only for backend agreement.
     pub agreement_tolerance_s: f64,
+    /// Frozen truth-free conjunction evaluated by the meter-gated fields.
+    pub meter_gate_policy_id: String,
+    /// Fixed pulse-cycle vocabulary evaluated for every hypothesis and phase.
+    pub meter_pulse_counts: Vec<usize>,
+    /// Downbeat probability assigned where the secondary report has no event.
+    pub missing_downbeat_probability: f64,
     /// Mean annotated beat F1 of the primary backend's own top-ranked hypothesis.
     pub primary_mean_beat_f1: f64,
     /// Mean annotated beat F1 after choosing the hypothesis with greatest global agreement.
@@ -34,6 +44,16 @@ pub struct ConsensusDiagnosis {
     /// True only when calibration has positive mean gain and no case regression.
     /// A separate precommitted holdout would still be required for promotion.
     pub passes_calibration_gate: bool,
+    /// Mean annotated beat F1 when agreement and meter evidence must both improve.
+    pub meter_gated_consensus_mean_beat_f1: f64,
+    /// Directional difference from the unchanged primary selection.
+    pub meter_gated_consensus_delta: f64,
+    /// Number of calibration cases improved by the meter-gated selector.
+    pub meter_gated_improved_cases: usize,
+    /// Number of calibration cases degraded by the meter-gated selector.
+    pub meter_gated_regressed_cases: usize,
+    /// Calibration-only gate; a precommitted holdout is still required.
+    pub meter_gated_passes_calibration_gate: bool,
     /// Per-case agreement and truth-assisted attribution.
     pub cases: Vec<ConsensusDiagnosisCase>,
 }
@@ -59,12 +79,52 @@ pub struct ConsensusDiagnosisCase {
     pub window_agreement_margins: Vec<f64>,
     /// Number of material sign reversals in the quarter-track agreement advantage.
     pub material_support_reversals: usize,
+    /// Auditable beat-agreement and downbeat-meter scores for every primary hypothesis.
+    pub hypotheses: Vec<ConsensusHypothesisDiagnosis>,
+    /// Hypothesis retained after requiring agreement and meter evidence to both improve.
+    pub meter_gated_consensus_hypothesis_id: String,
     /// Annotated F1 before consensus; calibration attribution only.
     pub primary_truth_beat_f1: f64,
     /// Annotated F1 after naive consensus; calibration attribution only.
     pub naive_consensus_truth_beat_f1: f64,
     /// Directional annotated F1 change; never used for selection.
     pub truth_beat_f1_delta: f64,
+    /// Annotated F1 after meter-gated consensus; calibration attribution only.
+    pub meter_gated_consensus_truth_beat_f1: f64,
+    /// Directional annotated F1 change; never used for selection.
+    pub meter_gated_truth_beat_f1_delta: f64,
+}
+
+/// Truth-free cross-backend scores for one primary-backend hypothesis.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct ConsensusHypothesisDiagnosis {
+    /// Stable construction label from the primary report.
+    pub id: String,
+    /// Original truth-free primary-backend rank.
+    pub rank: usize,
+    /// One-to-one agreement with the secondary backend's top-ranked sequence.
+    pub agreement: BeatMetrics,
+    /// Agreement advantage over the unchanged primary hypothesis.
+    pub agreement_margin: f64,
+    /// Best class-balanced downbeat periodicity over common 2/3/4-pulse bars.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub meter_evidence: Option<MeterPatternEvidence>,
+    /// Meter log-likelihood advantage over the unchanged primary hypothesis.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub meter_log_likelihood_margin: Option<f64>,
+    /// Whether both truth-free scores strictly dominate the unchanged primary.
+    pub meter_gate_eligible: bool,
+}
+
+/// Best downbeat phase pattern available for one beat-sequence hypothesis.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct MeterPatternEvidence {
+    /// Pulses per bar in the best of the fixed 2/3/4-pulse candidates.
+    pub pulses_per_bar: usize,
+    /// Zero-based downbeat phase within that pulse cycle.
+    pub phase: usize,
+    /// Balanced mean log likelihood for downbeat and non-downbeat positions.
+    pub log_likelihood: f64,
 }
 
 /// Diagnose whether a second observation backend can safely choose among the
@@ -123,19 +183,42 @@ pub fn diagnose_backend_consensus(
         .filter(|case| case.truth_beat_f1_delta < -f64::EPSILON)
         .count();
     let naive_consensus_delta = naive_consensus_mean_beat_f1 - primary_mean_beat_f1;
+    let meter_gated_consensus_mean_beat_f1 = cases
+        .iter()
+        .map(|case| case.meter_gated_consensus_truth_beat_f1)
+        .sum::<f64>()
+        / case_count;
+    let meter_gated_improved_cases = cases
+        .iter()
+        .filter(|case| case.meter_gated_truth_beat_f1_delta > f64::EPSILON)
+        .count();
+    let meter_gated_regressed_cases = cases
+        .iter()
+        .filter(|case| case.meter_gated_truth_beat_f1_delta < -f64::EPSILON)
+        .count();
+    let meter_gated_consensus_delta = meter_gated_consensus_mean_beat_f1 - primary_mean_beat_f1;
 
     Ok(ConsensusDiagnosis {
-        schema_version: 1,
+        schema_version: 2,
         suite_id: primary.suite_id.clone(),
         primary_model_pack: primary.model_pack.clone(),
         secondary_model_pack: secondary.model_pack.clone(),
         agreement_tolerance_s,
+        meter_gate_policy_id: METER_GATE_POLICY_ID.to_string(),
+        meter_pulse_counts: METER_PULSE_COUNTS.to_vec(),
+        missing_downbeat_probability: DOWNBEAT_PROBABILITY_FLOOR,
         primary_mean_beat_f1,
         naive_consensus_mean_beat_f1,
         naive_consensus_delta,
         improved_cases,
         regressed_cases,
         passes_calibration_gate: naive_consensus_delta > f64::EPSILON && regressed_cases == 0,
+        meter_gated_consensus_mean_beat_f1,
+        meter_gated_consensus_delta,
+        meter_gated_improved_cases,
+        meter_gated_regressed_cases,
+        meter_gated_passes_calibration_gate: meter_gated_consensus_delta > f64::EPSILON
+            && meter_gated_regressed_cases == 0,
         cases,
     })
 }
@@ -176,39 +259,132 @@ fn diagnose_case(
         .iter()
         .min_by_key(|hypothesis| hypothesis.rank)
         .with_context(|| format!("secondary case {} has no hypotheses", primary_case.id))?;
-    let (choice, choice_agreement) = most_agreeing_hypothesis(
+    let candidates = score_consensus_candidates(
         &primary_coverage.hypotheses,
         secondary_hypothesis,
+        &secondary_case.observations.raw_beats,
         agreement_tolerance_s,
     )
-    .with_context(|| format!("primary case {} has no hypotheses", primary_case.id))?;
-    let primary_agreement = score_beats(
-        &primary_hypothesis.beat_times_s,
-        &secondary_hypothesis.beat_times_s,
-        agreement_tolerance_s,
-    );
+    .collect::<Vec<_>>();
+    let primary_candidate = candidates
+        .iter()
+        .find(|candidate| candidate.hypothesis.rank == primary_hypothesis.rank)
+        .with_context(|| format!("primary case {} has no hypotheses", primary_case.id))?;
+    let choice = candidates
+        .iter()
+        .max_by(|left, right| compare_consensus_candidates(left, right))
+        .with_context(|| format!("primary case {} has no hypotheses", primary_case.id))?;
+    let meter_gated_choice = candidates
+        .iter()
+        .filter(|candidate| meter_gate_eligible(candidate, primary_candidate))
+        .max_by(|left, right| compare_consensus_candidates(left, right))
+        .unwrap_or(primary_candidate);
+    let primary_agreement = primary_candidate.agreement.clone();
     let window_agreement_margins = window_agreement_margins(
         primary_hypothesis,
-        choice,
+        choice.hypothesis,
         secondary_hypothesis,
         agreement_tolerance_s,
     );
+    let hypothesis_diagnostics = candidates
+        .iter()
+        .map(|candidate| hypothesis_diagnosis(candidate, primary_candidate))
+        .collect();
     Ok(ConsensusDiagnosisCase {
         id: primary_case.id.clone(),
         primary_hypothesis_id: primary_hypothesis.id.clone(),
         secondary_hypothesis_id: secondary_hypothesis.id.clone(),
-        naive_consensus_hypothesis_id: choice.id.clone(),
-        agreement_margin: choice_agreement.f1 - primary_agreement.f1,
+        naive_consensus_hypothesis_id: choice.hypothesis.id.clone(),
+        agreement_margin: choice.agreement.f1 - primary_agreement.f1,
         primary_agreement,
-        naive_consensus_agreement: choice_agreement,
+        naive_consensus_agreement: choice.agreement.clone(),
         material_support_reversals: material_support_reversals(&window_agreement_margins),
         window_agreement_margins,
+        hypotheses: hypothesis_diagnostics,
+        meter_gated_consensus_hypothesis_id: meter_gated_choice.hypothesis.id.clone(),
         primary_truth_beat_f1: primary_hypothesis.beats.f1,
-        naive_consensus_truth_beat_f1: choice.beats.f1,
-        truth_beat_f1_delta: choice.beats.f1 - primary_hypothesis.beats.f1,
+        naive_consensus_truth_beat_f1: choice.hypothesis.beats.f1,
+        truth_beat_f1_delta: choice.hypothesis.beats.f1 - primary_hypothesis.beats.f1,
+        meter_gated_consensus_truth_beat_f1: meter_gated_choice.hypothesis.beats.f1,
+        meter_gated_truth_beat_f1_delta: meter_gated_choice.hypothesis.beats.f1
+            - primary_hypothesis.beats.f1,
     })
 }
 
+struct ScoredConsensusCandidate<'a> {
+    hypothesis: &'a PulseHypothesisEvaluation,
+    agreement: BeatMetrics,
+    meter_evidence: Option<MeterPatternEvidence>,
+}
+
+fn score_consensus_candidates<'a>(
+    hypotheses: &'a [PulseHypothesisEvaluation],
+    secondary: &'a PulseHypothesisEvaluation,
+    secondary_beats: &'a [ObservedBeat],
+    tolerance_s: f64,
+) -> impl Iterator<Item = ScoredConsensusCandidate<'a>> {
+    hypotheses.iter().map(move |hypothesis| {
+        let agreement = score_beats(
+            &hypothesis.beat_times_s,
+            &secondary.beat_times_s,
+            tolerance_s,
+        );
+        let meter_evidence =
+            best_meter_evidence(&hypothesis.beat_times_s, secondary_beats, tolerance_s);
+        ScoredConsensusCandidate {
+            hypothesis,
+            agreement,
+            meter_evidence,
+        }
+    })
+}
+
+fn compare_consensus_candidates(
+    left: &ScoredConsensusCandidate<'_>,
+    right: &ScoredConsensusCandidate<'_>,
+) -> std::cmp::Ordering {
+    left.agreement
+        .f1
+        .total_cmp(&right.agreement.f1)
+        .then_with(|| right.hypothesis.rank.cmp(&left.hypothesis.rank))
+}
+
+fn meter_gate_eligible(
+    candidate: &ScoredConsensusCandidate<'_>,
+    primary: &ScoredConsensusCandidate<'_>,
+) -> bool {
+    candidate.agreement.f1 > primary.agreement.f1
+        && candidate
+            .meter_evidence
+            .as_ref()
+            .zip(primary.meter_evidence.as_ref())
+            .is_some_and(|(candidate_meter, primary_meter)| {
+                candidate_meter.log_likelihood > primary_meter.log_likelihood
+            })
+}
+
+fn hypothesis_diagnosis(
+    candidate: &ScoredConsensusCandidate<'_>,
+    primary: &ScoredConsensusCandidate<'_>,
+) -> ConsensusHypothesisDiagnosis {
+    ConsensusHypothesisDiagnosis {
+        id: candidate.hypothesis.id.clone(),
+        rank: candidate.hypothesis.rank,
+        agreement: candidate.agreement.clone(),
+        agreement_margin: candidate.agreement.f1 - primary.agreement.f1,
+        meter_log_likelihood_margin: candidate
+            .meter_evidence
+            .as_ref()
+            .zip(primary.meter_evidence.as_ref())
+            .map(|(candidate_meter, primary_meter)| {
+                candidate_meter.log_likelihood - primary_meter.log_likelihood
+            }),
+        meter_evidence: candidate.meter_evidence.clone(),
+        meter_gate_eligible: meter_gate_eligible(candidate, primary),
+    }
+}
+
+#[cfg(test)]
 fn most_agreeing_hypothesis<'a>(
     hypotheses: &'a [PulseHypothesisEvaluation],
     secondary: &PulseHypothesisEvaluation,
@@ -232,6 +408,75 @@ fn most_agreeing_hypothesis<'a>(
                     .then_with(|| right_hypothesis.rank.cmp(&left_hypothesis.rank))
             },
         )
+}
+
+fn best_meter_evidence(
+    hypothesis_times: &[f64],
+    secondary_beats: &[ObservedBeat],
+    tolerance_s: f64,
+) -> Option<MeterPatternEvidence> {
+    let probabilities = hypothesis_times
+        .iter()
+        .map(|&time_s| downbeat_probability_at(time_s, secondary_beats, tolerance_s))
+        .collect::<Vec<_>>();
+    METER_PULSE_COUNTS
+        .into_iter()
+        .flat_map(|pulses_per_bar| {
+            (0..pulses_per_bar).filter_map({
+                let probabilities = &probabilities;
+                move |phase| meter_pattern_evidence(probabilities, pulses_per_bar, phase)
+            })
+        })
+        .max_by(|left, right| {
+            left.log_likelihood
+                .total_cmp(&right.log_likelihood)
+                .then_with(|| right.pulses_per_bar.cmp(&left.pulses_per_bar))
+                .then_with(|| right.phase.cmp(&left.phase))
+        })
+}
+
+fn downbeat_probability_at(time_s: f64, secondary_beats: &[ObservedBeat], tolerance_s: f64) -> f64 {
+    secondary_beats
+        .iter()
+        .min_by(|left, right| {
+            (left.time_s - time_s)
+                .abs()
+                .total_cmp(&(right.time_s - time_s).abs())
+        })
+        .filter(|beat| (beat.time_s - time_s).abs() <= tolerance_s)
+        .map_or(DOWNBEAT_PROBABILITY_FLOOR, |beat| {
+            beat.downbeat_confidence
+                .clamp(DOWNBEAT_PROBABILITY_FLOOR, 1.0 - DOWNBEAT_PROBABILITY_FLOOR)
+        })
+}
+
+fn meter_pattern_evidence(
+    probabilities: &[f64],
+    pulses_per_bar: usize,
+    phase: usize,
+) -> Option<MeterPatternEvidence> {
+    let mut downbeat_log_sum = 0.0;
+    let mut downbeat_count = 0_u32;
+    let mut ordinary_log_sum = 0.0;
+    let mut ordinary_count = 0_u32;
+    for (index, &probability) in probabilities.iter().enumerate() {
+        if index % pulses_per_bar == phase {
+            downbeat_log_sum += probability.ln();
+            downbeat_count += 1;
+        } else {
+            ordinary_log_sum += (1.0 - probability).ln();
+            ordinary_count += 1;
+        }
+    }
+    if downbeat_count == 0 || ordinary_count == 0 {
+        return None;
+    }
+    Some(MeterPatternEvidence {
+        pulses_per_bar,
+        phase,
+        log_likelihood: 0.5 * downbeat_log_sum / f64::from(downbeat_count)
+            + 0.5 * ordinary_log_sum / f64::from(ordinary_count),
+    })
 }
 
 fn validate_inputs(
@@ -326,9 +571,15 @@ fn material_support_reversals(margins: &[f64]) -> usize {
 
 #[cfg(test)]
 mod tests {
+    use rhythm_map_core::ObservedBeat;
+
     use crate::{BeatMetrics, PulseEvidenceBreakdown, PulseHypothesisEvaluation};
 
-    use super::{material_support_reversals, most_agreeing_hypothesis, window_agreement_margins};
+    use super::{
+        MeterPatternEvidence, ScoredConsensusCandidate, best_meter_evidence,
+        material_support_reversals, meter_gate_eligible, most_agreeing_hypothesis,
+        window_agreement_margins,
+    };
 
     fn hypothesis(id: &str, rank: usize, times: &[f64]) -> PulseHypothesisEvaluation {
         PulseHypothesisEvaluation {
@@ -348,6 +599,64 @@ mod tests {
                 p95_absolute_error_ms: None,
             },
         }
+    }
+
+    fn agreement(f1: f64) -> BeatMetrics {
+        BeatMetrics {
+            matched: 0,
+            precision: f1,
+            recall: f1,
+            f1,
+            median_absolute_error_ms: None,
+            p95_absolute_error_ms: None,
+        }
+    }
+
+    #[test]
+    fn meter_evidence_recovers_four_pulse_downbeat_phase() {
+        let times = [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5];
+        let secondary = times
+            .iter()
+            .enumerate()
+            .map(|(index, &time_s)| ObservedBeat {
+                time_s,
+                confidence: 0.9,
+                downbeat_confidence: if index.is_multiple_of(4) { 0.9 } else { 0.1 },
+            })
+            .collect::<Vec<_>>();
+
+        let evidence = best_meter_evidence(&times, &secondary, 0.01).unwrap();
+
+        assert_eq!(evidence.pulses_per_bar, 4);
+        assert_eq!(evidence.phase, 0);
+    }
+
+    #[test]
+    fn meter_gate_requires_both_scores_to_improve() {
+        let primary_hypothesis = hypothesis("primary", 1, &[0.0, 1.0]);
+        let candidate_hypothesis = hypothesis("candidate", 2, &[0.0, 0.5, 1.0]);
+        let primary = ScoredConsensusCandidate {
+            hypothesis: &primary_hypothesis,
+            agreement: agreement(0.8),
+            meter_evidence: Some(MeterPatternEvidence {
+                pulses_per_bar: 4,
+                phase: 0,
+                log_likelihood: -0.5,
+            }),
+        };
+        let mut candidate = ScoredConsensusCandidate {
+            hypothesis: &candidate_hypothesis,
+            agreement: agreement(0.9),
+            meter_evidence: Some(MeterPatternEvidence {
+                pulses_per_bar: 4,
+                phase: 0,
+                log_likelihood: -0.6,
+            }),
+        };
+
+        assert!(!meter_gate_eligible(&candidate, &primary));
+        candidate.meter_evidence.as_mut().unwrap().log_likelihood = -0.4;
+        assert!(meter_gate_eligible(&candidate, &primary));
     }
 
     #[test]

@@ -289,15 +289,19 @@ rerunning inference, compare two reports for the same calibration suite:
 cargo xtask consensus-diagnose \
   --primary D:/rhythm-map-eval/reports/artbeat-cache-default-v9-final.json \
   --secondary D:/rhythm-map-eval/reports/artbeat-beatnet-local-metrical-path-v4.json \
-  --report D:/rhythm-map-eval/reports/artbeat-beatthis-beatnet-consensus-v1.json
+  --report D:/rhythm-map-eval/reports/artbeat-beatthis-beatnet-consensus-v2.json
 ```
 
 `consensus-diagnose` ranks the primary report's existing hypotheses only by
 one-to-one agreement with the secondary report's top-ranked sequence. It then
 uses the embedded calibration scores to attribute gains and regressions. Four
 equal-duration window margins expose cases where the two backends' metrical
-relationship changes inside the track. This command accepts calibration
-reports only, requires distinct model packs and backend IDs plus identical audio
+relationship changes inside the track. Schema 2 additionally reports a
+meter-gated candidate: an alternative is eligible only when its beat agreement
+and its class-balanced BeatNet downbeat periodicity both strictly improve over
+the primary. The meter score tries every phase of fixed 2/3/4-pulse bars and
+uses no fitted weight or BPM band. This command accepts calibration reports
+only, requires distinct model packs and backend IDs plus identical audio
 identities, and does not change either backend or add a product strategy. A
 passing calibration gate would still require one separately precommitted
 holdout run before any shipping selector could be considered.
