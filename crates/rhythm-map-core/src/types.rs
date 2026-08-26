@@ -30,8 +30,9 @@ pub struct ObservedBeat {
 /// Uncommitted beat evidence exposed by an observation backend.
 ///
 /// Candidates must correspond to timestamps supported by the backend. They are
-/// not accepted beats and the timing estimator deliberately ignores them until
-/// a separately validated hypothesis algorithm promotes a subset.
+/// not accepted beats: they may support confidence-aware tempo regularization
+/// or an explicit alternative hypothesis, but cannot silently become selected
+/// beat timestamps.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct BeatCandidate {
     /// Time from the beginning of the decoded audio.

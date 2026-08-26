@@ -389,3 +389,22 @@ a learned component to the default distribution.
   to 25/25, lowers mean tempo median/P95 error from 2.6407/16.1781 percent to
   0.1548/4.5714 percent, and improves or preserves every case. Keep this in the
   unified shipping algorithm; do not expose a slow-tempo strategy switch.
+- 2026-08-26: raw-interval diagnostics then showed that all 25 remaining RUBATO
+  points above 25 percent error were isolated unconditional metrical repairs,
+  not unresolved whole-track tempo levels. Local repair now requires real
+  observation support: slower intervals need backend candidates at every
+  implied missing pulse, while faster-interval repair is limited to declared
+  fixed-frame model output. RUBATO stays 25/25, mean tempo median/P95 error
+  improves again to 0.1544/4.4053 percent, and high-error points fall from 25
+  of 6,694 to zero. ARTBeaT ideal metrics remain byte-for-byte unchanged and
+  the end-to-end beat F1 remains 0.80516. Keep one shipping algorithm.
+- 2026-08-26: estimator A/B work still repeats expensive ONNX inference because
+  backend observations are not persisted. Add a content-addressed observation
+  cache keyed by audio SHA-256, model-manifest SHA-256, backend contract, and
+  decoder policy so deterministic estimator changes can replay exact beats,
+  candidates, confidence, and audio metadata without rerunning the model. The
+  cache is evaluation infrastructure, not a new runtime strategy.
+- 2026-08-26: promoting the adjacent short/long fixed-frame jitter repair from
+  `sequence-phase-v1` changed one ARTBeaT warning but changed no beat or tempo
+  metric. Keep it evaluation-only: a shipping behavior without measured gain
+  would add another hidden branch rather than improve the unified algorithm.

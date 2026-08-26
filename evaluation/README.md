@@ -88,9 +88,11 @@ cargo xtask eval-backend \
 RUBATO is calibration data, not a replacement holdout. Its structure labels
 remain separate metadata and do not become tempo-change truth. `tempo-diagnose`
 is deliberately calibration-only: it pairs every estimated point with truth,
-reports its BPM ratio and nearest power-of-two metrical shift, and groups
-contiguous points above the requested error threshold. It rejects regression
-and holdout suites so timestamp-level truth cannot leak into policy selection.
+reports the BPM implied directly by accepted beat timestamps, the regularized
+BPM, their ratio to each other and to truth, and the nearest power-of-two
+metrical shift. It also groups contiguous points above the requested error
+threshold. It rejects regression and holdout suites so timestamp-level truth
+cannot leak into policy selection.
 
 Fetch the precommitted, case-disjoint ARTBeaT holdout and retain its auditable
 SVG annotation sources:

@@ -235,22 +235,31 @@ BPM bounds apply only to which half/double-time alternatives are published;
 they never rewrite an observed 28 BPM interval as 40 BPM or a 360 BPM interval
 as 320 BPM. Within the configured seven-interval window, the estimator compares
 the median context on the left and right of each interval. A center value is
-repaired only when both contexts agree within the 12 percent jump threshold and
-the center is approximately an integer metrical octave away. Each three-point
-neighborhood is then averaged in log-tempo space only when its range also stays
-below that threshold; otherwise the center value is retained so smoothing does
-not blur a real step. This repairs an isolated half- or double-length interval
-from a missed event while retaining a sustained step, ramp, or rubato gesture.
+eligible for repair only when both contexts agree within the 12 percent jump
+threshold and the center is approximately an integer metrical octave away. A
+slower center is rewritten only when every implied missing pulse has a real
+backend candidate near its expected subdivision. A faster center may be
+regularized only for a backend that declares a fixed frame rate; exact
+annotations and caller-supplied timestamps retain the faster interval. A
+repair never promotes
+the supporting candidate into the selected beat list, and its tempo-point
+confidence is reduced by the distance from the observed interval. Each
+three-point neighborhood is then averaged in log-tempo space only when its
+range also stays below the jump threshold; otherwise the center value is
+retained. This preserves strong rubato and stops a local power-of-two pattern
+from serving as proof of a missed beat by itself.
 
 The evaluation-only `metrical-consistency-v1` candidate extends that repair to
 runs of at most three consecutive intervals. A run is rewritten only when it
 is bounded on both sides, the two surrounding tempo medians agree within the
 jump threshold, and every interval in the run is approximately an integer
-metrical octave from that shared context. Replacement values interpolate in
-log-tempo space between the two boundaries. An edge run, a longer run, or a
-sustained 75 to 150 BPM transition is therefore preserved. Applied repairs are
-reported as `short_metrical_outlier_run_repaired`. The shipping default remains
-the one-interval rule until this candidate passes an independent timestamped
+metrical octave from that shared context. The same observation-support rule
+must hold for every interval. Replacement values interpolate in log-tempo
+space between the two boundaries. An edge run, a longer run, or a sustained 75
+to 150 BPM transition is therefore preserved. Applied repairs, including a
+supported one-interval shipping repair, are reported as
+`short_metrical_outlier_run_repaired`. The shipping default remains the
+one-interval rule until this candidate passes an independent timestamped
 holdout.
 
 The evaluation-only `sequence-phase-v1` candidate includes that bounded-run

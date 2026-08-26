@@ -26,8 +26,8 @@ cargo xtask eval \
 | Passing cases | 25/25 |
 | Mean beat F1 | 1.0000 |
 | Mean downbeat F1 | 1.0000 |
-| Mean tempo median error | 0.1548% |
-| Mean tempo P95 error | 4.5714% |
+| Mean tempo median error | 0.1544% |
+| Mean tempo P95 error | 4.4053% |
 
 All beat and downbeat timestamps survive the ideal-observation path exactly.
 Every case now passes its locked tempo-error budgets.
@@ -71,9 +71,19 @@ observation therefore remains 28 or 360 BPM. No threshold was weakened, no
 timestamp was changed or invented, and no new user-selectable strategy was
 added.
 
-The updated suite passes 25/25 and improves or preserves every case. Only 25 of
-6,694 scored points remain above 25 percent error; every one is an isolated
-robust-smoothing outlier, so no contiguous high-error region remains.
+The first unified correction passed 25/25, but timestamp-level diagnostics
+still found 25 isolated points above 25 percent error. Every point had
+near-zero output confidence because unconditional metrical smoothing had
+rewritten a real expressive interval by approximately one octave.
+
+Local metrical repair now also requires observation support. A slower interval
+needs a real backend candidate at every implied missing pulse; a faster
+interval may be regularized only for a backend that declares a fixed frame
+rate. RUBATO's exact annotations therefore keep the original interval instead
+of having strong rubato mistaken for a missed or duplicate beat. The suite
+remains 25/25, mean tempo median/P95 error improves to 0.1544/4.4053 percent,
+and none of 6,694 scored points remains above 25 percent error. No public
+strategy or caller parameter was added.
 
 A full Beat This run was not made part of this integration gate: on the
 development VDI the first 128-second track remained in inference after more

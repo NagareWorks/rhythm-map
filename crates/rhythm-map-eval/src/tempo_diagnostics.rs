@@ -14,10 +14,14 @@ use crate::{
 pub struct TempoDiagnosticPoint {
     /// Midpoint timestamp of the estimated inter-beat interval.
     pub time_s: f64,
+    /// Tempo directly implied by the two accepted beat timestamps.
+    pub observed_interval_bpm: f64,
     /// Exact local tempo from the independent annotation.
     pub truth_bpm: f64,
     /// Regularized tempo emitted by the estimator.
     pub estimated_bpm: f64,
+    /// Regularized tempo divided by the accepted-timestamp interval tempo.
+    pub regularized_to_observed_ratio: f64,
     /// Estimated tempo divided by truth tempo.
     pub estimated_to_truth_ratio: f64,
     /// Base-two logarithm of `estimated_to_truth_ratio`.
@@ -131,7 +135,7 @@ pub fn diagnose_core_tempo_suite(
     }
 
     Ok(TempoDiagnosticEvaluation {
-        schema_version: 1,
+        schema_version: 2,
         suite_id: suite.id,
         suite_purpose: suite.purpose,
         estimator_policy: estimator_policy.unwrap_or("shipping-default").to_string(),
@@ -147,16 +151,25 @@ fn diagnose_analysis(
     minimum_error_percent: f64,
 ) -> Result<TempoDiagnosticCase> {
     let mut points = Vec::new();
-    for point in &analysis.tempo_curve {
+    for (index, point) in analysis.tempo_curve.iter().enumerate() {
         let Some(truth_bpm) = truth.tempo_at(point.time_s) else {
             continue;
         };
+        let Some(pair) = analysis.beats.get(index..=index + 1) else {
+            bail!("tempo diagnostic curve does not align with accepted beat intervals");
+        };
+        let observed_interval_bpm = 60.0 / (pair[1].time_s - pair[0].time_s);
+        if !observed_interval_bpm.is_finite() || observed_interval_bpm <= 0.0 {
+            bail!("tempo diagnostic encountered an invalid accepted beat interval");
+        }
         let ratio = point.bpm / truth_bpm;
         let (nearest_octave_shift, normalized_ratio) = normalize_octave_ratio(ratio)?;
         points.push(TempoDiagnosticPoint {
             time_s: point.time_s,
+            observed_interval_bpm,
             truth_bpm,
             estimated_bpm: point.bpm,
+            regularized_to_observed_ratio: point.bpm / observed_interval_bpm,
             estimated_to_truth_ratio: ratio,
             log2_ratio: ratio.log2(),
             nearest_octave_shift,
@@ -274,7 +287,7 @@ fn median(mut values: Vec<f64>) -> f64 {
 mod tests {
     use std::path::Path;
 
-    use rhythm_map_core::{Analysis, ModelInfo, TempoPoint, TempoSegmentKind};
+    use rhythm_map_core::{Analysis, BeatEvent, ModelInfo, TempoPoint, TempoSegmentKind};
 
     use super::{diagnose_analysis, diagnose_core_tempo_suite};
     use crate::{GeneratedTruth, TruthBeat, TruthTempoSegment};
@@ -317,7 +330,32 @@ mod tests {
                 version: None,
                 frame_rate_hz: None,
             },
-            beats: Vec::new(),
+            beats: vec![
+                BeatEvent {
+                    time_s: 0.0,
+                    confidence: 1.0,
+                    downbeat: true,
+                    downbeat_confidence: 1.0,
+                },
+                BeatEvent {
+                    time_s: 1.0,
+                    confidence: 1.0,
+                    downbeat: false,
+                    downbeat_confidence: 0.0,
+                },
+                BeatEvent {
+                    time_s: 2.0,
+                    confidence: 1.0,
+                    downbeat: false,
+                    downbeat_confidence: 0.0,
+                },
+                BeatEvent {
+                    time_s: 3.0,
+                    confidence: 1.0,
+                    downbeat: false,
+                    downbeat_confidence: 0.0,
+                },
+            ],
             beat_hypotheses: Vec::new(),
             global_bpm: Some(120.0),
             tempo_hypotheses: Vec::new(),
@@ -350,6 +388,8 @@ mod tests {
         assert_eq!(report.error_runs.len(), 1);
         assert_eq!(report.error_runs[0].dominant_octave_shift, 1);
         assert!(report.error_runs[0].median_octave_residual_percent < 2.0);
+        assert!((report.points[0].observed_interval_bpm - 60.0).abs() < 0.001);
+        assert!((report.points[0].regularized_to_observed_ratio - 2.0).abs() < 0.001);
     }
 
     #[test]
