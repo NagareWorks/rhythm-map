@@ -478,3 +478,14 @@ a learned component to the default distribution.
   A next selector needs genuinely different evidence trained or annotated for
   perceived beat/meter level; until then, publish competing supported paths and
   confidence instead of silently choosing a BPM convention.
+- 2026-08-27: promoted the frozen harmonic-aware locally varying path into the
+  single shipping estimator as alternative metadata only. Cross-corpus evidence
+  showed additional coverage without a safe truth-free selector, so the engine
+  now emits the path automatically when its real-timestamp and harmonic-evidence
+  gates pass, adds an availability warning, and leaves selected beats, BPM
+  curves, sections, and changes untouched. Cached Beat This evaluation emitted
+  it on 10/15 ARTBeaT cases with exact primary-metric parity; deterministic
+  post-processing averaged 42.51 ms per track versus 24.31 ms previously. The
+  old `local-metrical-path-v1` name is a report-compatibility alias, not a second
+  product strategy. Canonical selection remains blocked on genuinely different
+  perceived-beat or meter evidence.

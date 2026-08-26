@@ -99,8 +99,9 @@ where
     }
 
     /// Decode the backend-neutral observation layer without running the timing
-    /// estimator. Deterministic activity and spectral-flux onset envelopes are
-    /// added when the backend does not provide them.
+    /// estimator. Deterministic activity, spectral-flux onset, and supported
+    /// harmonic-change evidence are added when the backend does not provide
+    /// them.
     ///
     /// # Errors
     ///
@@ -147,10 +148,7 @@ where
         if observations.onsets.is_empty() {
             observations.onsets = extract_audio_onsets(samples, sample_rate);
         }
-        if self.estimator.requires_harmonic_changes()
-            && observations.harmonic_changes.is_empty()
-            && observations.beat_candidates.len() >= 8
-        {
+        if observations.harmonic_changes.is_empty() && observations.beat_candidates.len() >= 8 {
             let mut supported_times = observations
                 .beats
                 .iter()

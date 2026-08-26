@@ -59,9 +59,6 @@ pub struct EstimatorOptions {
     pub half_bar_downbeat_salience_ratio: f64,
     /// Longest model-smeared ramp still classified as a tempo jump.
     pub jump_transition_max_s: f64,
-    /// Include the fixed calibration candidate whose pulse level may vary locally.
-    #[cfg(any(feature = "experimental-policies", test))]
-    pub include_local_metrical_path_hypothesis: bool,
 }
 
 impl Default for EstimatorOptions {
@@ -84,8 +81,6 @@ impl Default for EstimatorOptions {
             metrical_selection_policy: MetricalSelectionPolicy::SalienceOnly,
             half_bar_downbeat_salience_ratio: 1.2,
             jump_transition_max_s: 4.0,
-            #[cfg(any(feature = "experimental-policies", test))]
-            include_local_metrical_path_hypothesis: false,
         }
     }
 }
@@ -114,15 +109,12 @@ impl EstimatorOptions {
         }
     }
 
-    /// Experimental candidate that adds one locally varying, harmonic-aware
-    /// real-timestamp path to the ambiguity result without changing primary beats.
+    /// Compatibility alias for reports recorded before the harmonic-aware,
+    /// locally varying path became part of the shipping ambiguity result.
     #[cfg(any(feature = "experimental-policies", test))]
     #[must_use]
     pub fn local_metrical_path_candidate() -> Self {
-        Self {
-            include_local_metrical_path_hypothesis: true,
-            ..Self::default()
-        }
+        Self::default()
     }
 }
 
@@ -159,10 +151,6 @@ impl TempoMapEstimator {
         Ok(Self { options })
     }
 
-    pub(crate) const fn requires_harmonic_changes(&self) -> bool {
-        local_metrical_path_enabled(&self.options)
-    }
-
     /// Analyze backend-neutral beat observations.
     ///
     /// # Errors
@@ -182,16 +170,15 @@ impl TempoMapEstimator {
 
         if prepared.beats.len() < 3 {
             warnings.push("too_few_beats_for_tempo_curve".to_string());
+            let beat_hypotheses =
+                beat_sequence_hypotheses(&prepared, &hypothesis_source, &self.options);
+            add_metrical_hypothesis_warnings(&beat_hypotheses, &mut warnings);
             return Ok(Analysis {
                 schema_version: ANALYSIS_SCHEMA_VERSION,
                 duration_s: input.duration_s,
                 source: input.source.clone(),
                 beats: beat_events(&prepared),
-                beat_hypotheses: beat_sequence_hypotheses(
-                    &prepared,
-                    &hypothesis_source,
-                    &self.options,
-                ),
+                beat_hypotheses,
                 global_bpm: None,
                 tempo_hypotheses: Vec::new(),
                 tempo_curve: Vec::new(),
@@ -237,6 +224,7 @@ impl TempoMapEstimator {
         let global_bpm = median(smoothed.clone());
         let beat_hypotheses =
             beat_sequence_hypotheses(&prepared, &hypothesis_source, &self.options);
+        add_metrical_hypothesis_warnings(&beat_hypotheses, &mut warnings);
         let tempo_hypotheses = metrical_hypotheses(global_bpm, &self.options);
         if tempo_hypotheses.len() > 1 {
             warnings.push("metrical_level_has_half_or_double_time_alternatives".to_string());
@@ -1458,9 +1446,7 @@ fn beat_sequence_hypotheses(
         doubled.dedup_by(|left, right| (left.time_s - right.time_s).abs() <= f64::EPSILON);
         scored.push((BeatSequenceHypothesisKind::DoubleTime, 1, None, doubled));
     }
-    if local_metrical_path_enabled(options)
-        && let Some(path) = locally_varying_metrical_path(hypothesis_source, options)
-    {
+    if let Some(path) = locally_varying_metrical_path(hypothesis_source, options) {
         scored.push((BeatSequenceHypothesisKind::LocallyVarying, 0, None, path));
     }
 
@@ -1501,14 +1487,16 @@ fn score_beat_sequence_hypotheses(
         .collect()
 }
 
-#[cfg(any(feature = "experimental-policies", test))]
-const fn local_metrical_path_enabled(options: &EstimatorOptions) -> bool {
-    options.include_local_metrical_path_hypothesis
-}
-
-#[cfg(not(any(feature = "experimental-policies", test)))]
-const fn local_metrical_path_enabled(_options: &EstimatorOptions) -> bool {
-    false
+fn add_metrical_hypothesis_warnings(
+    hypotheses: &[BeatSequenceHypothesis],
+    warnings: &mut Vec<String>,
+) {
+    if hypotheses
+        .iter()
+        .any(|hypothesis| hypothesis.kind == BeatSequenceHypothesisKind::LocallyVarying)
+    {
+        warnings.push("locally_varying_metrical_hypothesis_available".to_string());
+    }
 }
 
 fn locally_varying_metrical_path(
@@ -2794,11 +2782,12 @@ mod tests {
     }
 
     #[test]
-    fn only_local_metrical_candidate_requests_harmonic_changes() {
-        assert!(!TempoMapEstimator::default().requires_harmonic_changes());
+    fn local_metrical_candidate_is_a_shipping_compatibility_alias() {
+        let input = observations_from_bpms(&[120.0; 8]);
+        let shipping = TempoMapEstimator::default().estimate(&input).unwrap();
         let candidate =
             TempoMapEstimator::new(EstimatorOptions::local_metrical_path_candidate()).unwrap();
-        assert!(candidate.requires_harmonic_changes());
+        assert_eq!(candidate.estimate(&input).unwrap(), shipping);
     }
 
     #[test]
@@ -2838,10 +2827,12 @@ mod tests {
             })
             .collect();
 
-        let analysis = TempoMapEstimator::new(EstimatorOptions::local_metrical_path_candidate())
-            .unwrap()
-            .estimate(&input)
-            .unwrap();
+        let selected_times = input
+            .beats
+            .iter()
+            .map(|beat| beat.time_s)
+            .collect::<Vec<_>>();
+        let analysis = TempoMapEstimator::default().estimate(&input).unwrap();
         let path = analysis
             .beat_hypotheses
             .iter()
@@ -2868,6 +2859,19 @@ mod tests {
                 .iter()
                 .any(|candidate| (candidate.time_s - *time_s).abs() <= f64::EPSILON)
         }));
+        assert_eq!(
+            analysis
+                .beats
+                .iter()
+                .map(|beat| beat.time_s)
+                .collect::<Vec<_>>(),
+            selected_times
+        );
+        assert!(
+            analysis
+                .warnings
+                .contains(&"locally_varying_metrical_hypothesis_available".to_string())
+        );
     }
 
     #[test]

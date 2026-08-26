@@ -194,12 +194,13 @@ fuses a grid prior with beat/downbeat/non-beat evidence, but every emitted
 timestamp must still be a real BeatNet pulse maximum. This is developer
 calibration evidence, not a second end-user strategy or a selectable shipping
 backend. Analysis schema v3 exposes the selected and supported half/double-time
-beat sequences with truth-free relative scores. This command also enables the
-fixed `local-metrical-path-v1` calibration candidate, which adds deterministic
-harmonic-change observations and one real-timestamp path whose metrical level
-may vary locally. Calibration report schema v10 records those exact hypotheses
-and optional dense activations under observation diagnostics. The primary
-selected sequence remains unchanged.
+beat sequences with truth-free relative scores. The shipping estimator and this
+command both attempt the fixed harmonic-aware local path automatically.
+`local-metrical-path-v1` remains accepted by frozen evaluation workflows as a
+compatibility name for the same behavior. It adds at most one real-timestamp
+path whose metrical level may vary locally. Calibration report schema v10
+records those exact hypotheses and optional dense activations under observation
+diagnostics. The primary selected sequence remains unchanged.
 
 After freezing `local-metrical-path-v1` on calibration, open a timestamped
 holdout exactly once through the fixed-candidate command:

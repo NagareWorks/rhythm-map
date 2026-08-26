@@ -145,14 +145,15 @@ They remain diagnostics and do not change hypothesis ranking. Results are
 recorded in `evaluation/baselines/artbeat-spectral-flux-v5.md` and
 `evaluation/baselines/artbeat-band-bar-evidence-v6-v8.md`.
 
-### Experimental locally varying metrical path
+### Default locally varying metrical hypothesis
 
-The named calibration policy `local-metrical-path-v1` adds one fifth hypothesis
-whose pulse level may change within the track. It is necessary as a parallel
+The end-to-end PCM engine automatically attempts one additional hypothesis whose
+pulse level may change within the track. It is necessary as a parallel
 hypothesis because a fixed whole-track half-time phase cannot represent music
 whose annotated pulse changes from every other model peak to every model peak.
 It is not a user-selectable product strategy and never replaces the primary beat
-sequence or tempo map.
+sequence or tempo map. Observation-only callers receive it only when they supply
+the harmonic-change evidence described below.
 
 The independent evidence is a harmonic-change descriptor evaluated only at the
 union of accepted beats and real backend candidates. Around each supported time
@@ -180,7 +181,7 @@ one maximum allowed beat interval of the track edges, and have harmonic evidence
 for at least half the candidate set. It is omitted when it duplicates the
 selected sequence. No timestamp is interpolated, quantized, or extrapolated.
 
-These constants are one frozen calibration candidate, not knobs exposed to
+These constants were frozen during calibration and are not knobs exposed to
 callers. Its output is ranked with the same truth-free sequence score used by
 the other hypotheses; harmonic change guides path construction but the returned
 relative score remains comparable evidence metadata, not a probability. The
@@ -188,7 +189,9 @@ ARTBeaT result is recorded in
 `evaluation/baselines/artbeat-beatnet-local-metrical-path-v4.md`.
 Its one-shot corpus-disjoint Vienna follow-up is recorded in
 `evaluation/baselines/vienna4x22-beatnet-local-metrical-path-v1.md`; that opened
-holdout is evidence only and cannot be used to change these constants.
+holdout is evidence only and cannot be used to change these constants. The
+default-output promotion is recorded in
+`evaluation/baselines/artbeat-default-local-hypothesis-v1.md`.
 
 The estimator normally preserves backend timestamps. It can reject events
 inside sustained low-activity spans, select one phase of a strong/weak
@@ -300,10 +303,12 @@ double-time sequence when real backend candidates support enough interval
 midpoints. Every listed time must come from an accepted beat or backend
 candidate; hypothesis construction never interpolates a timestamp.
 
-When the experimental local-path policy is enabled, the same field may contain
-`locally_varying`. Its `metrical_level` is zero because it is not one global
-power-of-two transform; its changing level is represented by the intervals in
-the returned path. Default analysis does not emit this kind.
+The same field may contain `locally_varying` whenever the fixed evidence gates
+produce a distinct supported path. Its `metrical_level` is zero because it is
+not one global power-of-two transform; its changing level is represented by the
+intervals in the returned path. The warning
+`locally_varying_metrical_hypothesis_available` makes its presence easy to
+detect without implying that it was selected.
 
 Sequence scores are truth-free and relative, not calibrated probabilities. For
 each sequence the estimator combines mean event evidence (45 percent),
