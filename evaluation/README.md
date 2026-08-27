@@ -95,9 +95,21 @@ threshold. It rejects regression and holdout suites so timestamp-level truth
 cannot leak into policy selection.
 
 The work-disjoint `rubato-holdout-v1` selection is frozen separately from this
-calibration suite. Do not inspect its audio with a model until its completed
-asset lock, truth, suite, selector identity, and acceptance thresholds have
-been committed.
+calibration suite. Acquire its exact ZIP members and create the replayable lock
+without running a model:
+
+```bash
+cargo xtask rubato-lock \
+  --selection evaluation/datasets/rubato-holdout-v1-selection.json \
+  --output D:/rhythm-map-eval/rubato-holdout-v1 \
+  --lock evaluation/datasets/rubato-holdout-v1.json
+```
+
+If local DNS blocks Zenodo, `--resolve-host zenodo.org=IP` may route the TCP
+connection to an operator-supplied address while retaining the canonical URL,
+SNI, and certificate checks. The override never enters the asset lock. Do not
+inspect holdout audio with a model until its completed asset lock, truth, suite,
+selector identity, and acceptance thresholds have been committed.
 
 Fetch the precommitted, case-disjoint ARTBeaT holdout and retain its auditable
 SVG annotation sources:

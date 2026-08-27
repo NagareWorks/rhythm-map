@@ -1,13 +1,66 @@
-use std::{fs, path::Path};
+use std::{
+    collections::{BTreeSet, HashSet},
+    fs,
+    path::{Component, Path},
+};
 
 use anyhow::{Context, Result, bail};
 use rhythm_map_core::TempoSegmentKind;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
-use crate::{GeneratedTruth, TruthBeat, TruthTempoSegment, inspect_audio_asset};
+use crate::{
+    GeneratedTruth, PublicDatasetAsset, PublicDatasetAssetRole, PublicDatasetHostResolution,
+    PublicDatasetLock, PublicDatasetZipAssetSelection, PublicDatasetZipMember, TruthBeat,
+    TruthTempoSegment, acquire_public_zip_assets_with_resolution, inspect_audio_asset,
+};
 
 const TIMESTAMP_EPSILON_S: f64 = 0.000_001;
+
+#[derive(Debug, Deserialize)]
+struct RubatoDatasetSelection {
+    schema_version: u32,
+    id: String,
+    status: String,
+    purpose: String,
+    source: RubatoDatasetSource,
+    expected: RubatoDatasetExpected,
+    tracks: Vec<RubatoDatasetTrack>,
+}
+
+#[derive(Debug, Deserialize)]
+struct RubatoDatasetExpected {
+    tracks: usize,
+}
+
+#[derive(Debug, Deserialize)]
+struct RubatoDatasetSource {
+    version: String,
+    record_doi: String,
+    dataset_license: String,
+    archive: RubatoArchiveSource,
+    metadata_versions: RubatoDirectSource,
+    metadata_works: RubatoDirectSource,
+}
+
+#[derive(Debug, Deserialize)]
+struct RubatoArchiveSource {
+    url: String,
+    size_bytes: u64,
+}
+
+#[derive(Debug, Deserialize)]
+struct RubatoDirectSource {
+    url: String,
+    size_bytes: u64,
+    sha256: String,
+}
+
+#[derive(Debug, Deserialize)]
+struct RubatoDatasetTrack {
+    filename: String,
+    audio_license: String,
+}
 
 /// One form segment recovered from a RUBATO physical-time annotation.
 #[derive(Debug, Clone, Serialize, PartialEq)]
@@ -47,6 +100,178 @@ pub struct RubatoTruthImport {
     pub measure_annotation_sha256: String,
     /// SHA-256 identity of the structure annotation.
     pub structure_annotation_sha256: String,
+}
+
+/// Acquire the exact RUBATO members named by a precommitted selection and
+/// return their completed content-addressed dataset lock.
+///
+/// This command reads only selection metadata and immutable upstream archive
+/// members. It never loads a rhythm model or consults annotation truth when
+/// choosing recordings, so it is safe to use while preparing a holdout.
+///
+/// # Errors
+///
+/// Returns an error for an invalid selection, duplicate or unsafe track name,
+/// missing rights metadata, failed ZIP acquisition, or malformed source URL.
+pub fn acquire_rubato_dataset(
+    selection_path: &Path,
+    output_directory: &Path,
+) -> Result<PublicDatasetLock> {
+    acquire_rubato_dataset_with_resolution(selection_path, output_directory, &[])
+}
+
+/// Acquire a frozen RUBATO selection with optional TLS-preserving host routing.
+///
+/// # Errors
+///
+/// Returns an error for an invalid selection, unsafe or unavailable assets, or
+/// invalid host routing overrides.
+pub fn acquire_rubato_dataset_with_resolution(
+    selection_path: &Path,
+    output_directory: &Path,
+    resolutions: &[PublicDatasetHostResolution],
+) -> Result<PublicDatasetLock> {
+    let bytes = fs::read(selection_path)
+        .with_context(|| format!("reading RUBATO selection {}", selection_path.display()))?;
+    let selection: RubatoDatasetSelection = serde_json::from_slice(&bytes)
+        .with_context(|| format!("parsing RUBATO selection {}", selection_path.display()))?;
+    validate_rubato_selection(&selection)?;
+
+    let archive = &selection.source.archive;
+    let mut members = Vec::with_capacity(selection.tracks.len() * 4);
+    for track in &selection.tracks {
+        let filename = &track.filename;
+        members.push(rubato_member(
+            format!("audio/{filename}.wav"),
+            format!("rubato/01_RawData/wav_22050_mono/{filename}.wav"),
+            PublicDatasetAssetRole::Audio,
+            archive,
+        ));
+        for (kind, source_directory) in [
+            ("beat", "ann_audio_beat"),
+            ("measure", "ann_audio_measure"),
+            ("structure", "ann_audio_structure"),
+        ] {
+            members.push(rubato_member(
+                format!("annotations/{kind}/{filename}.csv"),
+                format!("rubato/02_Annotations/{source_directory}/{filename}.csv"),
+                PublicDatasetAssetRole::AnnotationSource,
+                archive,
+            ));
+        }
+    }
+    let mut assets =
+        acquire_public_zip_assets_with_resolution(&members, output_directory, resolutions)?;
+    assets.push(rubato_direct_asset(
+        "metadata/metadata_versions.csv",
+        &selection.source.metadata_versions,
+    ));
+    assets.push(rubato_direct_asset(
+        "metadata/metadata_works.csv",
+        &selection.source.metadata_works,
+    ));
+
+    let mut licenses = BTreeSet::from([selection.source.dataset_license.clone()]);
+    licenses.extend(
+        selection
+            .tracks
+            .iter()
+            .map(|track| track.audio_license.clone()),
+    );
+    Ok(PublicDatasetLock {
+        schema_version: 1,
+        id: selection.id,
+        version: selection.source.version,
+        homepage_url: format!("https://doi.org/{}", selection.source.record_doi),
+        license: licenses.into_iter().collect::<Vec<_>>().join(" AND "),
+        attribution: "RUBATO v0.3; track identifiers and recording-level licenses are preserved in the evaluation suite.".to_string(),
+        assets,
+    })
+}
+
+fn validate_rubato_selection(selection: &RubatoDatasetSelection) -> Result<()> {
+    if selection.schema_version != 1 {
+        bail!(
+            "unsupported RUBATO selection schema {}",
+            selection.schema_version
+        );
+    }
+    if selection.id.trim().is_empty()
+        || selection.status != "selection-locked"
+        || !matches!(selection.purpose.as_str(), "calibration" | "holdout")
+        || selection.tracks.is_empty()
+        || selection.expected.tracks != selection.tracks.len()
+        || selection.source.version.trim().is_empty()
+        || selection.source.record_doi.trim().is_empty()
+        || selection.source.dataset_license.trim().is_empty()
+        || !selection.source.archive.url.starts_with("https://")
+        || selection.source.archive.size_bytes == 0
+    {
+        bail!(
+            "RUBATO selection must be locked and have valid identity, purpose, rights, archive, and expected track count"
+        );
+    }
+    let mut filenames = HashSet::new();
+    for track in &selection.tracks {
+        let path = Path::new(&track.filename);
+        if track.filename.trim().is_empty()
+            || track.audio_license.trim().is_empty()
+            || path.components().count() != 1
+            || !path
+                .components()
+                .all(|component| matches!(component, Component::Normal(_)))
+            || !filenames.insert(track.filename.as_str())
+        {
+            bail!(
+                "RUBATO track names must be unique safe path components with a license: {}",
+                track.filename
+            );
+        }
+    }
+    for source in [
+        &selection.source.metadata_versions,
+        &selection.source.metadata_works,
+    ] {
+        if !source.url.starts_with("https://")
+            || source.size_bytes == 0
+            || source.sha256.len() != 64
+            || !source
+                .sha256
+                .bytes()
+                .all(|byte| byte.is_ascii_digit() || (b'a'..=b'f').contains(&byte))
+        {
+            bail!("RUBATO metadata source has an invalid URL, size, or SHA-256");
+        }
+    }
+    Ok(())
+}
+
+fn rubato_member(
+    path: String,
+    member_path: String,
+    role: PublicDatasetAssetRole,
+    archive: &RubatoArchiveSource,
+) -> PublicDatasetZipAssetSelection {
+    PublicDatasetZipAssetSelection {
+        path,
+        url: archive.url.clone(),
+        role,
+        zip_member: PublicDatasetZipMember {
+            archive_size_bytes: archive.size_bytes,
+            member_path,
+        },
+    }
+}
+
+fn rubato_direct_asset(path: &str, source: &RubatoDirectSource) -> PublicDatasetAsset {
+    PublicDatasetAsset {
+        path: path.to_string(),
+        url: source.url.clone(),
+        sha256: source.sha256.clone(),
+        size_bytes: source.size_bytes,
+        role: PublicDatasetAssetRole::AnnotationSource,
+        zip_member: None,
+    }
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -316,10 +541,21 @@ fn round_six(value: f64) -> f64 {
 mod tests {
     use std::{fs, path::PathBuf};
 
-    use super::import_rubato_truth;
+    use super::{RubatoDatasetSelection, import_rubato_truth, validate_rubato_selection};
 
     fn fixture_root(name: &str) -> PathBuf {
         std::env::temp_dir().join(format!("rhythm-map-rubato-{name}-{}", std::process::id()))
+    }
+
+    #[test]
+    fn pinned_holdout_selection_is_valid_before_acquisition() {
+        let path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("../../evaluation/datasets/rubato-holdout-v1-selection.json");
+        let selection: RubatoDatasetSelection =
+            serde_json::from_slice(&fs::read(path).unwrap()).unwrap();
+        validate_rubato_selection(&selection).unwrap();
+        assert_eq!(selection.purpose, "holdout");
+        assert_eq!(selection.tracks.len(), 4);
     }
 
     fn wav_bytes(duration_samples: u32) -> Vec<u8> {

@@ -273,15 +273,47 @@ about 39.7 minutes.
 
 All four recordings are from 2000 or later and carry CC BY-SA licenses. Those
 licenses allow commercial use; their attribution and share-alike obligations
-will be preserved in the completed acquisition lock and suite. The holdout has
+are preserved in the completed acquisition lock and will also be repeated in
+the suite. The holdout has
 no NC, ND, ambiguous-license, synthetic, reproduction-piano, or structurally
 deviating material.
 
-The selection file is intentionally not yet an acquisition manifest. The
-byte-addressed asset lock, checked-in truth, and suite must be derived without
-model output before this holdout is opened. Calibration may inform one frozen
-selector, but the four holdout recordings must not be used for threshold
-selection, diagnostics, or per-case policy changes.
+The selection file is intentionally not a fetch manifest: it freezes legal and
+musical scope before the exact extracted-byte identities exist. Materialize
+only those selected ZIP members and write the completed content-addressed lock
+with:
+
+```bash
+cargo xtask rubato-lock \
+  --selection evaluation/datasets/rubato-holdout-v1-selection.json \
+  --output D:/rhythm-map-eval/rubato-holdout-v1 \
+  --lock evaluation/datasets/rubato-holdout-v1.json
+```
+
+`rubato-lock` reads the ZIP64 directory by HTTP Range, transfers each selected
+WAV and beat/measure/structure CSV in bounded parallel ranges, extracts it
+atomically, and records the exact size and SHA-256. It validates the whole
+selection before its first request and never loads a rhythm model. The
+completed lock can subsequently be replayed with the ordinary `dataset-fetch`
+command.
+
+[`rubato-holdout-v1.json`](rubato-holdout-v1.json) is that completed lock: four
+WAVs, twelve physical-time annotation CSVs, and two upstream metadata tables,
+for 18 individually content-addressed assets. The checked-in truth was derived
+from those official annotations before any holdout model inference.
+
+On a machine whose local DNS incorrectly blocks the canonical Zenodo host, an
+operator may repeat `--resolve-host zenodo.org=IP`. This changes only the TCP
+destination: the URL, HTTP Host, TLS SNI, and certificate verification remain
+`zenodo.org`. The override is deliberately absent from both the frozen
+selection and completed lock; it is not reproducibility or provenance data.
+
+The byte-addressed asset lock, checked-in truth, and suite must all be derived
+without model output before this holdout is opened. Then commit one selector ID
+and its aggregate acceptance thresholds, and only then run the four recordings
+through the model once. Calibration may inform that frozen selector, but the
+holdout recordings must not be used for threshold selection, diagnostics, or
+per-case policy changes.
 
 ## Candidates intentionally not imported
 

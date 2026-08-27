@@ -34,9 +34,14 @@ pub use metrics::{
 };
 pub use public_dataset::{
     DatasetFetchAsset, DatasetFetchReport, DatasetFetchStatus, PublicDatasetAsset,
-    PublicDatasetAssetRole, PublicDatasetLock, fetch_public_dataset,
+    PublicDatasetAssetRole, PublicDatasetHostResolution, PublicDatasetLock,
+    PublicDatasetZipAssetSelection, PublicDatasetZipMember, acquire_public_zip_assets,
+    acquire_public_zip_assets_with_resolution, fetch_public_dataset,
 };
-pub use rubato::{RubatoStructureSegment, RubatoTruthImport, import_rubato_truth};
+pub use rubato::{
+    RubatoStructureSegment, RubatoTruthImport, acquire_rubato_dataset,
+    acquire_rubato_dataset_with_resolution, import_rubato_truth,
+};
 pub use runner::{
     AttributionCase, AttributionDecision, BackendEvaluationOptions, BeatErrorLocation,
     BeatHypothesisAggregate, BeatHypothesisHoldoutCase, BeatHypothesisHoldoutEvaluation,

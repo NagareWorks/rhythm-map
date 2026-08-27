@@ -2,15 +2,17 @@
 
 use std::{
     fs,
+    net::IpAddr,
     path::{Path, PathBuf},
 };
 
 use anyhow::{Context, Result, bail};
 use clap::{Parser, Subcommand};
 use rhythm_map_eval::{
-    BackendEvaluationOptions, diagnose_backend_consensus, diagnose_core_tempo_suite,
-    diagnose_local_metrical_consensus, evaluate_backend_suite_with_options,
-    evaluate_beatnet_calibration_suite, evaluate_beatnet_hypothesis_holdout, evaluate_core_suite,
+    BackendEvaluationOptions, PublicDatasetHostResolution, acquire_rubato_dataset_with_resolution,
+    diagnose_backend_consensus, diagnose_core_tempo_suite, diagnose_local_metrical_consensus,
+    evaluate_backend_suite_with_options, evaluate_beatnet_calibration_suite,
+    evaluate_beatnet_hypothesis_holdout, evaluate_core_suite,
     evaluate_decoder_recoverability_with_audio_directory,
     evaluate_decoder_sweep_with_audio_directory,
     evaluate_named_decoder_policy_with_audio_directory, fetch_public_dataset, import_artbeat_truth,
@@ -199,6 +201,21 @@ enum Command {
         /// Generated truth JSON destination.
         #[arg(long)]
         output: PathBuf,
+    },
+    /// Acquire a precommitted RUBATO selection and write its immutable lock.
+    RubatoLock {
+        /// Selection frozen before any holdout model inference.
+        #[arg(long)]
+        selection: PathBuf,
+        /// External directory that receives the selected audio and annotations.
+        #[arg(long)]
+        output: PathBuf,
+        /// Completed content-addressed public-dataset lock destination.
+        #[arg(long)]
+        lock: PathBuf,
+        /// Route HOST to IP while preserving the HTTPS URL, SNI, and certificate checks.
+        #[arg(long = "resolve-host", value_name = "HOST=IP")]
+        resolve_hosts: Vec<String>,
     },
     /// Fetch and verify a public evaluation dataset outside the Git checkout.
     DatasetFetch {
@@ -431,6 +448,21 @@ fn main() -> Result<()> {
             audio,
             output,
         } => run_rubato_truth(id, &beat, &measure, &structure, &audio, &output),
+        Command::RubatoLock {
+            selection,
+            output,
+            lock,
+            resolve_hosts,
+        } => {
+            let resolutions = resolve_hosts
+                .iter()
+                .map(|value| parse_host_resolution(value))
+                .collect::<Result<Vec<_>>>()?;
+            emit_json_report(
+                &acquire_rubato_dataset_with_resolution(&selection, &output, &resolutions)?,
+                Some(lock),
+            )
+        }
         Command::DatasetFetch {
             manifest,
             output,
@@ -673,6 +705,22 @@ fn run_decoder_recoverability(
         )?,
         report,
     )
+}
+
+fn parse_host_resolution(value: &str) -> Result<PublicDatasetHostResolution> {
+    let (host, address) = value
+        .split_once('=')
+        .with_context(|| format!("host resolution must use HOST=IP: {value}"))?;
+    if host.trim().is_empty() {
+        bail!("host resolution hostname is empty: {value}");
+    }
+    let address = address
+        .parse::<IpAddr>()
+        .with_context(|| format!("host resolution has an invalid IP address: {value}"))?;
+    Ok(PublicDatasetHostResolution {
+        host: host.trim().to_owned(),
+        address,
+    })
 }
 
 fn emit_report<T>(report: &T, destination: Option<PathBuf>, no_fail: bool) -> Result<()>

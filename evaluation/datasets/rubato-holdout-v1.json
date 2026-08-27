@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "id": "rubato-holdout-v1",
+  "version": "0.3",
+  "homepage_url": "https://doi.org/10.5281/zenodo.21159596",
+  "license": "CC-BY-3.0 AND CC-BY-SA-2.0 AND CC-BY-SA-4.0",
+  "attribution": "RUBATO v0.3; track identifiers and recording-level licenses are preserved in the evaluation suite.",
+  "assets": [
+    {
+      "path": "audio/Beethoven_Op047-01_OV-Anghelescu2010.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "8bab530036eadd7dadf6b367d235e2727dba3344dc7a56b4048cf1d2111df82b",
+      "size_bytes": 29023532,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Beethoven_Op047-01_OV-Anghelescu2010.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Beethoven_Op047-01_OV-Anghelescu2010.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "67323edb900c0b5443100bc1492aabada6a8541218e3b5d2238ee9a1472843c5",
+      "size_bytes": 49140,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Beethoven_Op047-01_OV-Anghelescu2010.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Beethoven_Op047-01_OV-Anghelescu2010.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "376566eb79df85e6d9019dc660cf7549f2ede37291ef1c6f49e20b86366b9cc4",
+      "size_bytes": 24245,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Beethoven_Op047-01_OV-Anghelescu2010.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Beethoven_Op047-01_OV-Anghelescu2010.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "798a26fabf2cfc7f5d9ee6fa450f5a258c38580ccec730dd0ce5396fb2e698fb",
+      "size_bytes": 205,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Beethoven_Op047-01_OV-Anghelescu2010.csv"
+      }
+    },
+    {
+      "path": "audio/Beethoven_Op047-01_OV-Croitoru2010.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "acdf1d543536f8d9aa24b8bf64d3027882799ca08dadd192d7c4b2c19a09c89b",
+      "size_bytes": 32984492,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Beethoven_Op047-01_OV-Croitoru2010.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Beethoven_Op047-01_OV-Croitoru2010.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "d81d1b616fbb23b6daf7173d72c85321b6145370e5c7c73d211ccad5bab39e29",
+      "size_bytes": 49190,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Beethoven_Op047-01_OV-Croitoru2010.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Beethoven_Op047-01_OV-Croitoru2010.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "7abc304f9917483d3a6e44221e43baa661b9e6c140c4724a07fdee02817f3970",
+      "size_bytes": 24258,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Beethoven_Op047-01_OV-Croitoru2010.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Beethoven_Op047-01_OV-Croitoru2010.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "6378ee2999a8480e7c81bdd02d435cda0aea8605498d14331c933728e8c0e85d",
+      "size_bytes": 209,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Beethoven_Op047-01_OV-Croitoru2010.csv"
+      }
+    },
+    {
+      "path": "audio/Beethoven_Op047-01_OV-Poochikian2024.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "2a6f6b668ec02e23e1d696d5bfdbac89fe127d78ff44b0802b6cce5905a250c4",
+      "size_bytes": 33359404,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Beethoven_Op047-01_OV-Poochikian2024.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Beethoven_Op047-01_OV-Poochikian2024.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "d07d9ede9da58827f3b7b9c839c2e6394fa0877ae54f05d0beea57bb8962b2ae",
+      "size_bytes": 49161,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Beethoven_Op047-01_OV-Poochikian2024.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Beethoven_Op047-01_OV-Poochikian2024.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "cca1d6effe17bdd2edec79e7fe10dfefc67f285c9714a7dace95183ba3aa206c",
+      "size_bytes": 24248,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Beethoven_Op047-01_OV-Poochikian2024.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Beethoven_Op047-01_OV-Poochikian2024.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "8091bfd42841c57142c5d84046344e196999a9a506e4958207f808b488e63289",
+      "size_bytes": 208,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Beethoven_Op047-01_OV-Poochikian2024.csv"
+      }
+    },
+    {
+      "path": "audio/Handel_HWV056-2-44_OV-Cutter2003.wav",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "7912036d543fc70f1337c6d3b261d021634dfbfed91828793516406eb140c252",
+      "size_bytes": 9750444,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/01_RawData/wav_22050_mono/Handel_HWV056-2-44_OV-Cutter2003.wav"
+      }
+    },
+    {
+      "path": "annotations/beat/Handel_HWV056-2-44_OV-Cutter2003.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "46856d755b8132e5997fc7ac7977693b0049f3e88ccc9f9e4fce855288872e5b",
+      "size_bytes": 14532,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_beat/Handel_HWV056-2-44_OV-Cutter2003.csv"
+      }
+    },
+    {
+      "path": "annotations/measure/Handel_HWV056-2-44_OV-Cutter2003.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "ff9c86f13f9c9030244629834dc7d6a0f1f71fd82ab1c1df6bc12bba51bdf12e",
+      "size_bytes": 3638,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_measure/Handel_HWV056-2-44_OV-Cutter2003.csv"
+      }
+    },
+    {
+      "path": "annotations/structure/Handel_HWV056-2-44_OV-Cutter2003.csv",
+      "url": "https://zenodo.org/records/21159596/files/rubato.zip?download=1",
+      "sha256": "08cceaa6e186408d7f859fe5522f1641c19482a6267d71f0f2c89ea02a038e23",
+      "size_bytes": 51,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 6258528269,
+        "member_path": "rubato/02_Annotations/ann_audio_structure/Handel_HWV056-2-44_OV-Cutter2003.csv"
+      }
+    },
+    {
+      "path": "metadata/metadata_versions.csv",
+      "url": "https://zenodo.org/records/21159596/files/metadata_versions.csv?download=1",
+      "sha256": "1e702f7b886bf4ac565641ada5035927318b03a708679ec236fe1b7dd38df323",
+      "size_bytes": 83095,
+      "role": "annotation_source"
+    },
+    {
+      "path": "metadata/metadata_works.csv",
+      "url": "https://zenodo.org/records/21159596/files/metadata_works.csv?download=1",
+      "sha256": "ae70c6b1be00e37e2c77fdc91cb75804b9c1f2af0424927a4978d329ae400f06",
+      "size_bytes": 1920,
+      "role": "annotation_source"
+    }
+  ]
+}
