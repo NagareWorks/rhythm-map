@@ -69,7 +69,7 @@ jobs:
           python examples/03-c-ffi/python/analyze_wav.py --library "${library}" --abi-only
           if [[ "${TARGET}" == *windows* ]]; then
             archive="${RUNNER_TEMP}/${name}.zip"
-            tar -a -cf "${archive}" -C "${RUNNER_TEMP}" "${name}"
+            (cd "${RUNNER_TEMP}" && tar -a -cf "${name}.zip" "${name}")
           else
             archive="${RUNNER_TEMP}/${name}.tar.gz"
             tar -czf "${archive}" -C "${RUNNER_TEMP}" "${name}"
