@@ -697,7 +697,11 @@ dependencies = [
 name = "rhythm-map-examples"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
+ "clap",
+ "rhythm-map-beat-this",
  "rhythm-map-core",
+ "rhythm-map-models",
  "serde_json",
 ]
 

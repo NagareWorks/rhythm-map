@@ -14,8 +14,16 @@ autobins = false
 name = "01-observations"
 path = "01-observations.rs"
 
+[[example]]
+name = "02-audio-file"
+path = "02-audio-file/main.rs"
+
 [dependencies]
+anyhow.workspace = true
+clap.workspace = true
+rhythm-map-beat-this = { path = "../crates/rhythm-map-beat-this" }
 rhythm-map-core = { path = "../crates/rhythm-map-core" }
+rhythm-map-models = { path = "../crates/rhythm-map-models" }
 serde_json.workspace = true
 
 [lints]

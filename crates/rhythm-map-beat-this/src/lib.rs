@@ -184,6 +184,7 @@ pub struct DecodedAudio {
 pub struct BeatThisBackend {
     tracker: BeatThis<DefaultModel>,
     model_name: String,
+    model_version: Option<String>,
     #[cfg(feature = "experimental-policies")]
     decoder_policy: BeatThisDecoderPolicy,
 }
@@ -199,18 +200,52 @@ impl BeatThisBackend {
         beat_model_path: impl AsRef<Path>,
     ) -> Result<Self, BackendError> {
         let beat_model_path = beat_model_path.as_ref();
-        let tracker = BeatThis::new(&RtenRuntime, mel_model_path.as_ref(), beat_model_path)
-            .map_err(|error| {
-                BackendError::new(format!("failed to load Beat This models: {error}"))
-            })?;
         let model_name = beat_model_path
             .file_name()
             .and_then(|name| name.to_str())
             .unwrap_or("beat_this")
             .to_string();
+        Self::load_with_model_identity(mel_model_path, beat_model_path, model_name, None)
+    }
+
+    /// Load verified graphs and retain their caller-supplied immutable identity.
+    ///
+    /// This constructor is intended for model-pack hosts that verify artifact
+    /// bytes before loading. The identity is copied into every analysis result;
+    /// it does not affect inference or select a different musical strategy.
+    ///
+    /// # Errors
+    ///
+    /// Returns [`BackendError`] when either model cannot be loaded or the model
+    /// identity is empty.
+    pub fn load_with_model_identity(
+        mel_model_path: impl AsRef<Path>,
+        beat_model_path: impl AsRef<Path>,
+        model_name: impl Into<String>,
+        model_version: Option<String>,
+    ) -> Result<Self, BackendError> {
+        let model_name = model_name.into();
+        if model_name.trim().is_empty() {
+            return Err(BackendError::new("model name must not be empty"));
+        }
+        if model_version
+            .as_deref()
+            .is_some_and(|version| version.trim().is_empty())
+        {
+            return Err(BackendError::new(
+                "model version must not be empty when present",
+            ));
+        }
+        let tracker = BeatThis::new(
+            &RtenRuntime,
+            mel_model_path.as_ref(),
+            beat_model_path.as_ref(),
+        )
+        .map_err(|error| BackendError::new(format!("failed to load Beat This models: {error}")))?;
         Ok(Self {
             tracker,
             model_name,
+            model_version,
             #[cfg(feature = "experimental-policies")]
             decoder_policy: BeatThisDecoderPolicy::default(),
         })
@@ -420,7 +455,7 @@ impl BeatThisBackend {
             source: ModelInfo {
                 backend: "beat-this-rten".to_string(),
                 model: self.model_name.clone(),
-                version: None,
+                version: self.model_version.clone(),
                 frame_rate_hz: Some(FRAME_RATE_HZ),
             },
         }
@@ -1002,6 +1037,34 @@ fn usize_to_f64(value: usize) -> f64 {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn identified_loader_rejects_empty_identity_before_model_io() {
+        let missing = Path::new("model-file-that-does-not-exist.onnx");
+        let empty_name = BeatThisBackend::load_with_model_identity(
+            missing,
+            missing,
+            " ",
+            Some("sha256:abc".to_owned()),
+        );
+        let empty_version = BeatThisBackend::load_with_model_identity(
+            missing,
+            missing,
+            "beat-this",
+            Some(String::new()),
+        );
+
+        assert!(
+            empty_name
+                .err()
+                .is_some_and(|error| error.to_string().contains("model name"))
+        );
+        assert!(
+            empty_version
+                .err()
+                .is_some_and(|error| error.to_string().contains("model version"))
+        );
+    }
 
     #[test]
     fn default_peak_picker_matches_upstream_rules() {

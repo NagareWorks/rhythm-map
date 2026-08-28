@@ -24,11 +24,17 @@ Run it from the repository root:
 cargo run -p rhythm-map-examples --example 01-observations
 ```
 
+## 02 - Analyze an audio file
+
+[`02-audio-file/`](02-audio-file/) is the first complete native integration.
+It verifies the external Beat This model pack, decodes a real audio file, and
+runs the normal analysis path. The directory contains its own runtime and model
+preparation instructions.
+
 The next examples should follow this sequence:
 
-1. `02-audio-file/`: end-to-end Beat This analysis with verified model packs.
-2. `03-c-ffi/`: native C ABI ownership and error handling.
-3. `04-browser-wasm/`: browser-hosted observations and JSON output.
+1. `03-c-ffi/`: native C ABI ownership and error handling.
+2. `04-browser-wasm/`: browser-hosted observations and JSON output.
 
 Complex examples should remain independently runnable and explain their exact
 runtime/model requirements in their own README.
