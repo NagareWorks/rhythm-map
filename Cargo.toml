@@ -1,5 +1,6 @@
 [workspace]
 members = [
+    "examples",
     "crates/rhythm-map-core",
     "crates/rhythm-map-beat-this",
     "crates/rhythm-map-beatnet",

@@ -104,6 +104,10 @@ The core accepts interleaved `f32` PCM. File decoding belongs to CLI/GUI
 adapters, keeping the library usable from engines and browser hosts that already
 own decoded audio.
 
+Runnable integrations live in [`examples/`](examples/). They use a stable
+numbered learning path: simple examples are single files, while examples that
+need assets or multiple languages use their own directories.
+
 ## Design principles
 
 - Beat tracking is an interchangeable observation backend, not the public API.

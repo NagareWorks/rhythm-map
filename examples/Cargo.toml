@@ -1,0 +1,22 @@
+[package]
+name = "rhythm-map-examples"
+description = "Runnable examples for the Rhythm Map public APIs"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+publish = false
+autobins = false
+
+[[example]]
+name = "01-observations"
+path = "01-observations.rs"
+
+[dependencies]
+rhythm-map-core = { path = "../crates/rhythm-map-core" }
+serde_json.workspace = true
+
+[lints]
+workspace = true

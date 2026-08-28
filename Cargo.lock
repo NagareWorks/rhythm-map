@@ -694,6 +694,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "rhythm-map-examples"
+version = "0.1.0"
+dependencies = [
+ "rhythm-map-core",
+ "serde_json",
+]
+
+[[package]]
 name = "rhythm-map-ffi"
 version = "0.1.0"
 dependencies = [
