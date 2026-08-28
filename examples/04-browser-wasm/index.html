@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rhythm Map · Browser WASM</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">04 · Browser WASM</p>
+        <h1>Turn beat observations into a musical time map.</h1>
+        <p class="lede">
+          This page runs the shipping Rust estimator locally in WebAssembly.
+          Edit the backend-neutral observations, then inspect the same JSON
+          schema returned by native integrations.
+        </p>
+        <div class="status-row">
+          <span id="status" data-state="loading">Loading WebAssembly…</span>
+          <span id="wasm-schema">Schema —</span>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <article class="panel input-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="label">Input</p>
+              <h2>RhythmObservations</h2>
+            </div>
+            <div class="actions">
+              <button id="reset" class="secondary" type="button">Reset</button>
+              <button id="analyze" type="button" disabled>Analyze</button>
+            </div>
+          </div>
+          <textarea id="observations" spellcheck="false" aria-label="Rhythm observations JSON"></textarea>
+        </article>
+
+        <article class="panel output-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="label">Output</p>
+              <h2>Analysis summary</h2>
+            </div>
+          </div>
+          <div class="metrics" aria-live="polite">
+            <div><span>Global BPM</span><strong id="global-bpm">—</strong></div>
+            <div><span>Beats</span><strong id="beat-count">—</strong></div>
+            <div><span>Segments</span><strong id="segment-count">—</strong></div>
+            <div><span>Changes</span><strong id="change-count">—</strong></div>
+          </div>
+          <svg id="tempo-chart" viewBox="0 0 720 220" role="img" aria-label="Regularized BPM curve"></svg>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Start</th><th>End</th><th>Shape</th><th>BPM</th><th>Confidence</th></tr>
+              </thead>
+              <tbody id="segments"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel json-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="label">Complete result</p>
+            <h2>Schema-versioned JSON</h2>
+          </div>
+        </div>
+        <pre id="result">Run the example to populate the result.</pre>
+      </section>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

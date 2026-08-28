@@ -38,8 +38,13 @@ uses the same ABI from C, Python `ctypes`, standalone C#, and a Unity
 `AudioClip`. It documents analyzer/JSON/error ownership, verified model-pack
 loading, and platform library placement.
 
-The next example should be `04-browser-wasm/`: browser-hosted observations and
-JSON output.
+## 04 - Run the timing engine in a browser
+
+[`04-browser-wasm/`](04-browser-wasm/) packages the shared estimator as a web
+module, accepts complete backend-neutral observations, and renders the tempo
+curve, segments, changes, and full JSON in a static browser page. It also
+documents the optional decoded-PCM enrichment call without pretending that the
+current WASM package already contains an audio-to-beat model.
 
 Complex examples should remain independently runnable and explain their exact
 runtime/model requirements in their own README.

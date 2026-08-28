@@ -1,0 +1,75 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #0a0d13;
+  color: #edf3ff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(42, 109, 255, 0.19), transparent 30rem),
+    radial-gradient(circle at 90% 30%, rgba(0, 218, 166, 0.10), transparent 28rem),
+    #0a0d13;
+}
+
+main {
+  width: min(1440px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 56px 0 80px;
+}
+
+header { max-width: 900px; margin-bottom: 34px; }
+h1 { margin: 6px 0 14px; font-size: clamp(2.2rem, 5vw, 4.7rem); line-height: 0.98; letter-spacing: -0.055em; }
+h2 { margin: 3px 0 0; font-size: 1.12rem; }
+.eyebrow, .label { margin: 0; color: #55e6bd; font-size: 0.76rem; font-weight: 750; letter-spacing: 0.14em; text-transform: uppercase; }
+.lede { max-width: 760px; color: #aab6ca; font-size: 1.08rem; line-height: 1.65; }
+
+.status-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+.status-row span { padding: 7px 11px; border: 1px solid #263044; border-radius: 999px; background: rgba(17, 23, 34, 0.8); color: #aab6ca; font-size: 0.78rem; }
+#status[data-state="ready"] { border-color: rgba(85, 230, 189, 0.5); color: #78f2ce; }
+#status[data-state="error"] { border-color: rgba(255, 107, 122, 0.55); color: #ff9aa5; }
+
+.workspace { display: grid; grid-template-columns: minmax(360px, 0.86fr) minmax(480px, 1.14fr); gap: 18px; }
+.panel { border: 1px solid #232c3c; border-radius: 18px; background: rgba(14, 19, 28, 0.9); box-shadow: 0 22px 70px rgba(0, 0, 0, 0.24); overflow: hidden; }
+.panel-heading { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 18px 20px; border-bottom: 1px solid #232c3c; }
+.actions { display: flex; gap: 8px; }
+
+button { border: 0; border-radius: 9px; padding: 10px 15px; background: #55e6bd; color: #07110e; font: inherit; font-weight: 750; cursor: pointer; }
+button.secondary { background: #222b3b; color: #dce5f4; }
+button:disabled { cursor: wait; opacity: 0.45; }
+
+textarea { display: block; width: 100%; min-height: 610px; resize: vertical; border: 0; padding: 20px; outline: none; background: #0b0f16; color: #c8d8ef; font: 0.78rem/1.55 "Cascadia Code", "SFMono-Regular", Consolas, monospace; tab-size: 2; }
+.metrics { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid #232c3c; }
+.metrics div { padding: 18px 20px; border-right: 1px solid #232c3c; }
+.metrics div:last-child { border-right: 0; }
+.metrics span { display: block; margin-bottom: 7px; color: #7f8da4; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.metrics strong { font-size: 1.55rem; font-variant-numeric: tabular-nums; }
+
+#tempo-chart { display: block; width: calc(100% - 28px); margin: 18px 14px 4px; border-radius: 12px; background: #0a0e15; }
+#tempo-chart text { fill: #718097; font-size: 11px; }
+.grid-line { stroke: #202a3a; stroke-width: 1; }
+.tempo-line { fill: none; stroke: #55e6bd; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.table-wrap { max-height: 300px; overflow: auto; border-top: 1px solid #232c3c; }
+table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+th, td { padding: 10px 13px; border-bottom: 1px solid #202838; text-align: left; font-variant-numeric: tabular-nums; }
+th { position: sticky; top: 0; background: #111722; color: #7f8da4; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+.json-panel { margin-top: 18px; }
+pre { max-height: 560px; margin: 0; overflow: auto; padding: 20px; background: #0b0f16; color: #c8d8ef; font: 0.78rem/1.55 "Cascadia Code", "SFMono-Regular", Consolas, monospace; }
+
+@media (max-width: 920px) {
+  main { width: min(100% - 24px, 720px); padding-top: 34px; }
+  .workspace { grid-template-columns: 1fr; }
+  textarea { min-height: 430px; }
+}
+
+@media (max-width: 560px) {
+  .panel-heading { align-items: flex-start; flex-direction: column; }
+  .metrics { grid-template-columns: repeat(2, 1fr); }
+  .metrics div:nth-child(2) { border-right: 0; }
+  .metrics div:nth-child(-n + 2) { border-bottom: 1px solid #232c3c; }
+}

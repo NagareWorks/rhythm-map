@@ -29,8 +29,9 @@ the first long-term package boundaries:
 - `rhythm-map-cli`: end-to-end audio-file analysis to JSON.
 - `rhythm-map-models`: versioned provenance and SHA-256 model-pack verification.
 - `rhythm-map-ffi`: versioned C ABI for `.dll`, `.so`, and static libraries.
-- `rhythm-map-wasm`: WASM timing-analysis API from beat observations. End-to-end
-  browser audio inference is the next WASM milestone.
+- `rhythm-map-wasm`: WASM timing-analysis API from complete host observations,
+  with optional decoded-PCM evidence enrichment. End-to-end browser beat-model
+  inference remains a later WASM packaging milestone.
 
 The current rhythm sections are tempo/rhythm-homogeneous regions, not semantic
 labels such as verse, chorus, or drop. Semantic structure and section style
