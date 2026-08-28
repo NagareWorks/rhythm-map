@@ -14,6 +14,7 @@ crate-type = ["cdylib", "staticlib", "rlib"]
 [dependencies]
 rhythm-map-beat-this = { path = "../rhythm-map-beat-this" }
 rhythm-map-core = { path = "../rhythm-map-core" }
+rhythm-map-models = { path = "../rhythm-map-models" }
 serde_json.workspace = true
 
 [lints]

@@ -711,6 +711,7 @@ version = "0.1.0"
 dependencies = [
  "rhythm-map-beat-this",
  "rhythm-map-core",
+ "rhythm-map-models",
  "serde_json",
 ]
 

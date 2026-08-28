@@ -31,10 +31,15 @@ It verifies the external Beat This model pack, decodes a real audio file, and
 runs the normal analysis path. The directory contains its own runtime and model
 preparation instructions.
 
-The next examples should follow this sequence:
+## 03 - Call the C ABI from C, Python, C#, and Unity
 
-1. `03-c-ffi/`: native C ABI ownership and error handling.
-2. `04-browser-wasm/`: browser-hosted observations and JSON output.
+[`03-c-ffi/`](03-c-ffi/) builds the native `.dll`, `.so`, or `.dylib` once and
+uses the same ABI from C, Python `ctypes`, standalone C#, and a Unity
+`AudioClip`. It documents analyzer/JSON/error ownership, verified model-pack
+loading, and platform library placement.
+
+The next example should be `04-browser-wasm/`: browser-hosted observations and
+JSON output.
 
 Complex examples should remain independently runnable and explain their exact
 runtime/model requirements in their own README.

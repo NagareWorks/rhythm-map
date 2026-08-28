@@ -15,6 +15,11 @@ RhythmMapAnalyzer *rhythm_map_analyzer_new(
     const char *mel_model_path,
     const char *beat_model_path);
 
+/* Preferred constructor: verifies every artifact and records pack provenance. */
+RhythmMapAnalyzer *rhythm_map_analyzer_new_from_model_pack(
+    const char *manifest_path,
+    const char *artifact_root);
+
 char *rhythm_map_analyze_pcm_json(
     RhythmMapAnalyzer *analyzer,
     const float *samples,

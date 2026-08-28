@@ -10,6 +10,7 @@ use std::sync::Mutex;
 
 use rhythm_map_beat_this::BeatThisBackend;
 use rhythm_map_core::Engine;
+use rhythm_map_models::{ModelArtifactRole, verify_model_pack};
 
 thread_local! {
     static LAST_ERROR: RefCell<CString> = RefCell::new(CString::default());
@@ -38,12 +39,49 @@ pub unsafe extern "C" fn rhythm_map_analyzer_new(
     beat_model_path: *const c_char,
 ) -> *mut RhythmMapAnalyzer {
     ffi_ptr(|| {
-        let mel = c_path(mel_model_path)?;
-        let beat = c_path(beat_model_path)?;
+        let mel = c_path(mel_model_path, "mel model path")?;
+        let beat = c_path(beat_model_path, "beat model path")?;
         let backend = BeatThisBackend::load(&mel, &beat).map_err(|error| error.to_string())?;
-        Ok(Box::into_raw(Box::new(RhythmMapAnalyzer {
-            engine: Mutex::new(Engine::new(backend)),
-        })))
+        Ok(new_analyzer(backend))
+    })
+}
+
+/// Create an analyzer from a verified model-pack manifest and artifact root.
+///
+/// This is the preferred constructor for new integrations. Every artifact is
+/// checked against the manifest before model loading, and the pack identity is
+/// retained in the returned analysis metadata.
+///
+/// # Safety
+///
+/// Both pointers must be non-null and point to valid null-terminated UTF-8
+/// strings for the duration of this call.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn rhythm_map_analyzer_new_from_model_pack(
+    manifest_path: *const c_char,
+    artifact_root: *const c_char,
+) -> *mut RhythmMapAnalyzer {
+    ffi_ptr(|| {
+        let manifest_path = c_path(manifest_path, "model-pack manifest path")?;
+        let artifact_root = c_path(artifact_root, "model artifact root")?;
+        let pack =
+            verify_model_pack(&manifest_path, &artifact_root).map_err(|error| error.to_string())?;
+        let mel_model = pack
+            .path_for(ModelArtifactRole::MelFrontend)
+            .ok_or_else(|| "verified model pack has no mel_frontend artifact".to_string())?;
+        let beat_model = pack
+            .path_for(ModelArtifactRole::BeatModel)
+            .ok_or_else(|| "verified model pack has no beat_model artifact".to_string())?;
+        let model_name = pack.manifest().id.clone();
+        let model_version = Some(format!("manifest-sha256:{}", pack.manifest_sha256()));
+        let backend = BeatThisBackend::load_with_model_identity(
+            mel_model,
+            beat_model,
+            model_name,
+            model_version,
+        )
+        .map_err(|error| error.to_string())?;
+        Ok(new_analyzer(backend))
     })
 }
 
@@ -139,13 +177,19 @@ fn ffi_ptr<T>(operation: impl FnOnce() -> Result<*mut T, String>) -> *mut T {
     }
 }
 
-fn c_path(value: *const c_char) -> Result<PathBuf, String> {
+fn new_analyzer(backend: BeatThisBackend) -> *mut RhythmMapAnalyzer {
+    Box::into_raw(Box::new(RhythmMapAnalyzer {
+        engine: Mutex::new(Engine::new(backend)),
+    }))
+}
+
+fn c_path(value: *const c_char, name: &str) -> Result<PathBuf, String> {
     if value.is_null() {
-        return Err("model path is null".to_string());
+        return Err(format!("{name} is null"));
     }
     let text = unsafe { CStr::from_ptr(value) }
         .to_str()
-        .map_err(|error| format!("model path is not UTF-8: {error}"))?;
+        .map_err(|error| format!("{name} is not UTF-8: {error}"))?;
     Ok(PathBuf::from(text))
 }
 
@@ -158,4 +202,34 @@ fn set_error(message: &str) {
     LAST_ERROR.with(|slot| {
         *slot.borrow_mut() = CString::new(sanitized).unwrap_or_default();
     });
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn abi_version_is_stable() {
+        assert_eq!(rhythm_map_abi_version(), 1);
+    }
+
+    #[test]
+    fn model_pack_constructor_reports_null_manifest() {
+        let analyzer =
+            unsafe { rhythm_map_analyzer_new_from_model_pack(ptr::null(), c"models".as_ptr()) };
+
+        assert!(analyzer.is_null());
+        let error = unsafe { CStr::from_ptr(rhythm_map_last_error()) };
+        assert_eq!(error.to_str().unwrap(), "model-pack manifest path is null");
+    }
+
+    #[test]
+    fn analyze_reports_null_analyzer() {
+        let json =
+            unsafe { rhythm_map_analyze_pcm_json(ptr::null_mut(), ptr::null(), 0, 44_100, 1) };
+
+        assert!(json.is_null());
+        let error = unsafe { CStr::from_ptr(rhythm_map_last_error()) };
+        assert_eq!(error.to_str().unwrap(), "analyzer pointer is null");
+    }
 }
