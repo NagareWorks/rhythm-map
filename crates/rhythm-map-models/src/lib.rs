@@ -483,4 +483,11 @@ mod tests {
             serde_json::from_str(include_str!("../../../models/beatnet-v1.json")).unwrap();
         manifest.validate().unwrap();
     }
+
+    #[test]
+    fn checked_in_small_pack_is_schema_valid() {
+        let manifest: ModelPackManifest =
+            serde_json::from_str(include_str!("../../../models/beat-this-small-v1.json")).unwrap();
+        manifest.validate().unwrap();
+    }
 }

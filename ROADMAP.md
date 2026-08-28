@@ -72,7 +72,10 @@ for that distribution.
 - Async analysis with progress and cancellation across native API, C ABI, and
   GUI surfaces.
 - A measured fast/accurate model-pack policy; do not make the full model the
-  default merely because it is more accurate in isolation.
+  default merely because it is more accurate in isolation. The first paired
+  measurement against the verified `small1` pack keeps the full model as the
+  only shipping default and is recorded in
+  [`evaluation/baselines/beat-this-small-v1.md`](evaluation/baselines/beat-this-small-v1.md).
 - Separate short model smoke tests from scheduled/release full-suite baselines,
   with per-case progress visible to developers.
 - End-to-end browser inference with a measured WASM backend.
@@ -543,3 +546,17 @@ a learned component to the default distribution.
   current no-training constraint there is no audited complete selector;
   preserve the single estimator and explicit metrical ambiguity until a
   licensed matching checkpoint supplies genuinely independent meter evidence.
+- 2026-08-28: measured the Phase 2 fast/accurate question with a pinned
+  `beat-this-small-v1` pack over the `small1` checkpoint, verified to be
+  byte-identical to the upstream `danigb/beat-this-rs` commit `089b509` asset.
+  Against the full model through the identical shipping estimator, the small
+  model is 1.48--1.67x faster with a 7.9x smaller beat model, but fails 4 of 5
+  required generated-v1 regression gates (losing the step-120-160 tempo jump
+  entirely), drops ARTBeaT gate passes from 1/15 to 0/15 and FSLD from 6/15 to
+  5/15, and worsens mean tempo P95 error from 66.48 to 88.01 percent on
+  ARTBeaT and 52.11 to 118.08 percent on FSLD. Its near-identical ARTBeaT mean
+  beat F1 (0.8052 versus 0.8043) hides opposite-direction per-case metrical
+  flips. Keep the full model as the only shipping default; keep the small pack
+  as a verified option for size-constrained evaluation, and do not add a
+  runtime fast/accurate selector on this evidence. The complete paired tables
+  are recorded in `evaluation/baselines/beat-this-small-v1.md`.
