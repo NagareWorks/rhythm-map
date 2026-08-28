@@ -32,6 +32,8 @@ the first long-term package boundaries:
 - `rhythm-map-wasm`: WASM timing-analysis API from complete host observations,
   with optional decoded-PCM evidence enrichment. End-to-end browser beat-model
   inference remains a later WASM packaging milestone.
+- `rhythm-map-dist`: release tooling that assembles native and browser payloads
+  with immutable source identity and a complete SHA-256 inventory.
 
 The current rhythm sections are tempo/rhythm-homogeneous regions, not semantic
 labels such as verse, chorus, or drop. Semantic structure and section style

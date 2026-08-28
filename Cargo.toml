@@ -9,6 +9,7 @@ members = [
     "crates/rhythm-map-ffi",
     "crates/rhythm-map-models",
     "crates/rhythm-map-wasm",
+    "tools/rhythm-map-dist",
 ]
 resolver = "2"
 

@@ -676,6 +676,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "rhythm-map-dist"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "clap",
+ "serde",
+ "serde_json",
+ "sha2",
+]
+
+[[package]]
 name = "rhythm-map-eval"
 version = "0.1.0"
 dependencies = [

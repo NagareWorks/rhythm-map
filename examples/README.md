@@ -46,5 +46,12 @@ curve, segments, changes, and full JSON in a static browser page. It also
 documents the optional decoded-PCM enrichment call without pretending that the
 current WASM package already contains an audio-to-beat model.
 
+## 05 - Consume verified distribution packages
+
+[`05-distribution/`](05-distribution/) documents the binary hand-off after a
+source build. Native and browser packages carry an immutable Git identity,
+typed entry points, complete SHA-256 inventory, license notices, and a
+cross-platform verifier. Model weights remain explicit external artifacts.
+
 Complex examples should remain independently runnable and explain their exact
 runtime/model requirements in their own README.
