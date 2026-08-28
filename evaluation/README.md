@@ -85,6 +85,15 @@ cargo xtask eval-backend \
   --no-fail
 ```
 
+The completed Beat This observation-path result and the decision to keep the
+work-disjoint holdout sealed are recorded in
+[`baselines/rubato-beat-this-observation-v1.md`](baselines/rubato-beat-this-observation-v1.md).
+The paired BeatNet and frozen cross-backend consensus results are recorded in
+[`baselines/rubato-beatnet-observation-v1.md`](baselines/rubato-beatnet-observation-v1.md).
+The follow-up license and packaging review of pretrained perceived-beat
+candidates is recorded in
+[`baselines/pretrained-meter-candidate-audit-v1.md`](baselines/pretrained-meter-candidate-audit-v1.md).
+
 RUBATO is calibration data, not a replacement holdout. Its structure labels
 remain separate metadata and do not become tempo-change truth. `tempo-diagnose`
 is deliberately calibration-only: it pairs every estimated point with truth,

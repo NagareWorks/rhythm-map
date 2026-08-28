@@ -509,3 +509,37 @@ a learned component to the default distribution.
   deviating material. Complete the byte-addressed lock, truth, suite, selector
   identity, and thresholds before opening it; never use these recordings for
   selector diagnostics or tuning.
+- 2026-08-28: the completed 25-case RUBATO Beat This calibration attributes the
+  remaining failure to the observation path. Official observations still pass
+  25/25 with exact beat/downbeat F1 and 0.1544/4.4053 percent mean tempo
+  median/P95 error, while the audio path passes 1/25 with 0.5213 mean beat F1.
+  Real local maxima cover 82.11 percent of truth beats but only 52.07 percent
+  of beats missed by the selected sequence. The current truth-free hypothesis
+  rank improves one case and regresses none on RUBATO, yet its known ARTBeaT
+  regressions prevent promotion; even the truth-assisted top-K ceiling reaches
+  only 0.5232 mean F1. Keep the holdout sealed, retain explicit ambiguity, and
+  compare one existing alternate observation backend on the same calibration
+  suite before considering a single internal selector or any model work.
+- 2026-08-28: BeatNet is complementary evidence but not a replacement or safe
+  selector. Its real peaks cover 95.30 percent of RUBATO truth and uniquely
+  support 1,040 of Beat This's 2,510 missed beats, raising two-backend candidate
+  coverage to 93.51 percent. Its decoded path nevertheless emits 17,051 events
+  for 6,726 truth beats, reaches only 0.3865 mean F1, and regresses 22/25 cases
+  relative to Beat This. The frozen local decoded-event/dense-pulse Pareto rule
+  changes 51 regions, improves two cases, regresses one, and lowers mean F1 by
+  0.0010; the existing dense-downbeat meter gate improves none and regresses
+  three. Reject a mandatory second backend and keep the holdout sealed. Search
+  for commercially usable pretrained perceived-beat or meter evidence; absent
+  that, preserve ambiguity rather than training on or tuning against holdout.
+- 2026-08-28: audited the available pretrained perceived-beat candidates before
+  adding another backend. Madmom's model assets remain non-commercial, while
+  BeatNet+ and BEAST do not publish sufficiently explicit source/weight terms.
+  Beat Transformer is MIT-licensed, but its released checkpoints all target a
+  five-stem Spleeter input and total roughly 284 MB across eight
+  cross-validation folds; its lighter non-demixed architecture has no released
+  matching weights. Its example DBN also forces a 55--215 BPM band and 3/4
+  meter, which cannot define Rhythm Map's semantics. Do not integrate it, pick
+  an arbitrary fold, add a Spleeter runtime, or open the holdout. Under the
+  current no-training constraint there is no audited complete selector;
+  preserve the single estimator and explicit metrical ambiguity until a
+  licensed matching checkpoint supplies genuinely independent meter evidence.
