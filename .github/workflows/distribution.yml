@@ -63,6 +63,8 @@ jobs:
             --git-commit "${GITHUB_SHA}"
           python "${directory}/verify_package.py" "${directory}"
           "${directory}/bin/rhythm-map$(if [[ "${TARGET}" == *windows* ]]; then printf '.exe'; fi)" --version
+          "${directory}/bin/rhythm-map$(if [[ "${TARGET}" == *windows* ]]; then printf '.exe'; fi)" models fetch --help
+          "${directory}/bin/rhythm-map$(if [[ "${TARGET}" == *windows* ]]; then printf '.exe'; fi)" models verify --help
           library="${directory}/lib/librhythm_map_ffi.so"
           if [[ "${TARGET}" == *windows* ]]; then library="${directory}/lib/rhythm_map_ffi.dll"; fi
           if [[ "${TARGET}" == *apple* ]]; then library="${directory}/lib/librhythm_map_ffi.dylib"; fi

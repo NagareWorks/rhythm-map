@@ -19,14 +19,79 @@ the files.
 - the upstream MIT license and documented `final0` conversion command; and
 - the 22,050 Hz, 128-band, 50 Hz activation feature contract.
 
-Download both artifact URLs from the manifest into an external directory. Do
-not place them in Git. Verify them before inference:
+Use the packaged CLI (or `cargo run -p rhythm-map-cli --release --`):
+
+```bash
+rhythm-map models fetch
+rhythm-map models verify
+rhythm-map song.mp3 --output timing.json
+```
+
+The CLI embeds the exact default manifest bytes, not the model weights. Only
+`models fetch` accesses the network. Acquisition follows HTTPS-only redirects,
+streams at most the expected size plus one byte, and checks exact length and
+SHA-256. It downloads to a private staging directory, then publishes the whole
+verified pack by renaming that directory. A failed request or hash check never
+becomes an installed pack; retrying starts a fresh stage, not a byte-range resume.
+Ordinary failures remove their staging directory. After a hard process kill,
+an abandoned `.download-*` directory may remain; remove only that directory
+after confirming no acquisition is using it. It is never considered a cache hit.
+
+Cache selection is `--cache-dir`, then `RHYTHM_MAP_CACHE_DIR`, then the platform
+user cache: `%LOCALAPPDATA%/rhythm-map/cache` on Windows,
+`~/Library/Caches/rhythm-map` on macOS, and
+`$XDG_CACHE_HOME/rhythm-map` (or `~/.cache/rhythm-map`) on Linux. For another disk:
+
+```bash
+rhythm-map models fetch --cache-dir /path/on/data-disk/rhythm-map
+rhythm-map song.mp3 --cache-dir /path/on/data-disk/rhythm-map
+```
+
+Each entry is `<cache>/model-packs/<manifest-sha256>/`, containing the original
+`manifest.json` and an `artifacts/` directory. `fetch` and `verify` print JSON
+including the verified `model_dir`, manifest digest, identity, and declared
+license. Pass that manifest and artifact directory to the existing C ABI,
+Python, C#, or Unity examples; those consumers do not acquire models themselves.
+
+Cache reuse rechecks the trusted manifest bytes and all artifact sizes/hashes.
+A changed manifest gets a different entry. A corrupt existing entry causes an
+error without overwriting files or contacting the network. Inspect or move aside
+that exact digest directory before fetching again. Do not share a writable
+cache with untrusted processes: hashes do not prevent a local writer from
+changing model files after verification.
+
+`--model-pack` accepts a trusted local manifest and uses its download URLs; it
+does not fetch manifests remotely or establish trust in their author. SHA-256
+proves byte identity against that manifest, not a signature, model safety, or a
+new license grant. Review the manifest and upstream notices before acquisition
+or redistribution. The provenance cautions below still apply.
+
+Already downloaded both artifact URLs into an external directory? Keep using
+them without copying them into the cache:
+
+```bash
+rhythm-map models verify --model-dir /path/to/beat-this-full-v1
+rhythm-map song.mp3 --model-dir /path/to/beat-this-full-v1
+```
+
+The legacy `--mel-model` / `--beat-model` pair is still accepted but now verifies
+both files against the selected manifest (the built-in one unless overridden).
+Arbitrary converted weights therefore need their own trusted manifest rather
+than silently bypassing provenance checks.
+
+Evaluation and foreign-language integrations retain their explicit paths:
 
 ```bash
 cargo xtask model-verify \
   --model-pack models/beat-this-full-v1.json \
   --model-dir /path/to/beat-this-full-v1
 ```
+
+Rust hosts may use `ModelPackCache::verify` without any network dependency.
+Enable `rhythm-map-models`' optional `download` feature to call
+`ModelPackCache::fetch` during an explicit setup step. Neither the timing core,
+C ABI, nor WASM enables acquisition. Applications retain control over consent,
+cache location, and which optional packs they ship.
 
 Then run the paired bottleneck evaluation:
 

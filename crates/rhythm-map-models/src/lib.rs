@@ -4,12 +4,18 @@ use std::{
     collections::HashSet,
     fs::File,
     io::{self, Read},
-    path::{Component, Path, PathBuf},
+    path::{Path, PathBuf},
 };
 
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use thiserror::Error;
+
+mod cache;
+pub use cache::ModelPackCache;
+
+/// Built-in, byte-pinned default pack. Weights are never embedded.
+pub const BEAT_THIS_FULL_MANIFEST: &[u8] = include_bytes!("../../../models/beat-this-full-v1.json");
 
 /// Current serialized model-pack manifest version.
 pub const MODEL_PACK_SCHEMA_VERSION: u32 = 1;
@@ -123,6 +129,12 @@ pub struct VerifiedModelPack {
 }
 
 impl VerifiedModelPack {
+    /// Directory containing the verified files.
+    #[must_use]
+    pub fn root(&self) -> &Path {
+        &self.root
+    }
+
     /// Verified manifest.
     #[must_use]
     pub const fn manifest(&self) -> &ModelPackManifest {
@@ -149,6 +161,9 @@ impl VerifiedModelPack {
 /// Model manifest or artifact verification failure.
 #[derive(Debug, Error)]
 pub enum ModelPackError {
+    /// Cache publication or acquisition failed without changing an installed pack.
+    #[error("model cache: {0}")]
+    Cache(String),
     /// Manifest JSON could not be decoded.
     #[error("invalid model-pack manifest {path}: {source}")]
     InvalidJson {
@@ -288,6 +303,7 @@ impl ModelPackManifest {
             ));
         }
         let mut roles = HashSet::new();
+        let mut files = HashSet::new();
         for artifact in &self.artifacts {
             if !roles.insert(artifact.role) {
                 return Err(ModelPackError::InvalidManifest(format!(
@@ -296,9 +312,15 @@ impl ModelPackManifest {
                 )));
             }
             validate_relative_file(&artifact.file)?;
-            if artifact.size_bytes == 0 {
+            if !files.insert(artifact.file.to_ascii_lowercase()) {
                 return Err(ModelPackError::InvalidManifest(format!(
-                    "artifact {} has zero size",
+                    "duplicate artifact path {}",
+                    artifact.file
+                )));
+            }
+            if artifact.size_bytes == 0 || artifact.size_bytes == u64::MAX {
+                return Err(ModelPackError::InvalidManifest(format!(
+                    "artifact {} has an invalid size",
                     artifact.file
                 )));
             }
@@ -312,6 +334,16 @@ impl ModelPackManifest {
                 return Err(ModelPackError::InvalidManifest(format!(
                     "artifact {} download URL must use HTTPS",
                     artifact.file
+                )));
+            }
+        }
+        for file in &files {
+            if files
+                .iter()
+                .any(|other| other.starts_with(&format!("{file}/")))
+            {
+                return Err(ModelPackError::InvalidManifest(format!(
+                    "artifact path {file} is also a directory"
                 )));
             }
         }
@@ -349,9 +381,20 @@ pub fn verify_model_pack(
         path: manifest_path.to_path_buf(),
         source,
     })?;
+    verify_model_pack_bytes(&bytes, artifact_root)
+}
+
+/// Verify a trusted embedded or caller-supplied manifest and its local artifacts.
+///
+/// # Errors
+/// Returns the same validation and integrity errors as [`verify_model_pack`].
+pub fn verify_model_pack_bytes(
+    bytes: &[u8],
+    artifact_root: &Path,
+) -> Result<VerifiedModelPack, ModelPackError> {
     let manifest: ModelPackManifest =
-        serde_json::from_slice(&bytes).map_err(|source| ModelPackError::InvalidJson {
-            path: manifest_path.to_path_buf(),
+        serde_json::from_slice(bytes).map_err(|source| ModelPackError::InvalidJson {
+            path: PathBuf::from("<manifest bytes>"),
             source,
         })?;
     manifest.validate()?;
@@ -372,44 +415,73 @@ pub fn verify_model_pack(
                 root: canonical_root,
             });
         }
-        let metadata = std::fs::metadata(&path).map_err(|source| ModelPackError::Io {
-            path: path.clone(),
-            source,
-        })?;
-        if metadata.len() != artifact.size_bytes {
-            return Err(ModelPackError::SizeMismatch {
-                path,
-                expected: artifact.size_bytes,
-                actual: metadata.len(),
-            });
-        }
-        let actual = sha256_file(&path)?;
-        if actual != artifact.sha256 {
-            return Err(ModelPackError::DigestMismatch {
-                path,
-                expected: artifact.sha256.clone(),
-                actual,
-            });
-        }
+        artifact.verify_file(&path)?;
     }
     Ok(VerifiedModelPack {
         manifest,
-        manifest_sha256: sha256_bytes(&bytes),
+        manifest_sha256: sha256_bytes(bytes),
         root: canonical_root,
     })
 }
 
+impl ModelArtifact {
+    /// Check exact size and SHA-256 at a caller-owned path.
+    ///
+    /// Unlike pack verification, this method does not constrain the file to a root.
+    ///
+    /// # Errors
+    /// Returns an IO, size, or digest error; directories are rejected.
+    pub fn verify_file(&self, path: &Path) -> Result<(), ModelPackError> {
+        let path = path.to_path_buf();
+        let metadata = std::fs::metadata(&path).map_err(|source| ModelPackError::Io {
+            path: path.clone(),
+            source,
+        })?;
+        if !metadata.is_file() {
+            return Err(ModelPackError::Cache(format!(
+                "{} is not a regular file",
+                path.display()
+            )));
+        }
+        if metadata.len() != self.size_bytes {
+            return Err(ModelPackError::SizeMismatch {
+                path,
+                expected: self.size_bytes,
+                actual: metadata.len(),
+            });
+        }
+        let actual = sha256_file(&path)?;
+        if actual != self.sha256 {
+            return Err(ModelPackError::DigestMismatch {
+                path,
+                expected: self.sha256.clone(),
+                actual,
+            });
+        }
+        Ok(())
+    }
+}
+
 fn validate_relative_file(value: &str) -> Result<(), ModelPackError> {
-    let path = Path::new(value);
-    if value.trim().is_empty()
-        || path.is_absolute()
-        || path.components().any(|component| {
-            matches!(
-                component,
-                Component::ParentDir | Component::RootDir | Component::Prefix(_)
-            )
-        })
-    {
+    // Use one portable spelling on every host, including Windows drive/ADS and
+    // device names. Never let the host's path parser define manifest safety.
+    if value.split('/').any(|part| {
+        let stem = part
+            .split('.')
+            .next()
+            .unwrap_or_default()
+            .to_ascii_uppercase();
+        part.is_empty()
+            || part == "."
+            || part.ends_with('.')
+            || !part
+                .bytes()
+                .all(|b| b.is_ascii_alphanumeric() || b"._-".contains(&b))
+            || matches!(stem.as_str(), "CON" | "PRN" | "AUX" | "NUL")
+            || (stem.len() == 4
+                && (stem.starts_with("COM") || stem.starts_with("LPT"))
+                && matches!(stem.as_bytes()[3], b'1'..=b'9'))
+    }) {
         return Err(ModelPackError::InvalidManifest(format!(
             "artifact path {value:?} must stay below the model root"
         )));
@@ -468,6 +540,35 @@ mod tests {
             validate_relative_file("../model.onnx"),
             Err(ModelPackError::InvalidManifest(_))
         ));
+    }
+
+    #[test]
+    fn artifact_paths_are_portable_and_cannot_alias_directories() {
+        for path in [
+            "",
+            ".",
+            "..",
+            "a/../b",
+            "/model",
+            "a//b",
+            "a\\b",
+            "C:model",
+            "model:stream",
+            "CON.onnx",
+            "lpt1",
+            "model.",
+            "model ",
+        ] {
+            assert!(validate_relative_file(path).is_err(), "accepted {path:?}");
+        }
+        assert!(validate_relative_file("sub-dir/model_v1.onnx").is_ok());
+        let mut manifest: ModelPackManifest =
+            serde_json::from_slice(BEAT_THIS_FULL_MANIFEST).unwrap();
+        manifest.artifacts[0].file = "model.onnx".into();
+        manifest.artifacts[1].file = "MODEL.onnx".into();
+        assert!(manifest.validate().is_err());
+        manifest.artifacts[1].file = "model.onnx/nested.onnx".into();
+        assert!(manifest.validate().is_err());
     }
 
     #[test]

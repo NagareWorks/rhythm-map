@@ -10,9 +10,12 @@ returned as metadata in the same result.
 
 ## Prepare the model pack
 
-Download the two files named in
+Run `cargo run -p rhythm-map-cli --release -- models fetch` (or the packaged
+`rhythm-map models fetch`) and use the returned `model_dir` below. Set
+`RHYTHM_MAP_CACHE_DIR` or pass `--cache-dir` to choose the cache disk. You can
+also download the two files named in
 [`models/beat-this-full-v1.json`](../../models/beat-this-full-v1.json) into an
-external directory. Model binaries must not be added to this repository.
+existing external directory. Model binaries must not be added to this repository.
 
 The example verifies the manifest, expected file sizes, SHA-256 digests, safe
 paths, and required artifact roles before constructing the backend. A corrupt,

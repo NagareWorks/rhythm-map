@@ -67,6 +67,12 @@ for that distribution.
 
 ## Phase 2: product surfaces
 
+- Implemented: explicit model acquisition, manifest-addressed cache, offline
+  revalidation, and a default CLI path requiring no individual weight paths.
+  Download support is opt-in for Rust hosts and excluded from the C ABI/core.
+- Remaining acquisition work: progress/cancellation and optional byte-range
+  resume. Ordinary interrupted downloads are discarded, not installed; corrupt
+  existing entries fail closed rather than silently replacing user files.
 - Signed model-pack authenticity layered over the existing provenance and
   SHA-256 integrity manifest.
 - Async analysis with progress and cancellation across native API, C ABI, and

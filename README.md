@@ -27,7 +27,8 @@ the first long-term package boundaries:
 - `rhythm-map-beatnet`: calibration-only BeatNet adapter with a native Rust
   feature frontend and evidence-preserving variable-tempo path decoder.
 - `rhythm-map-cli`: end-to-end audio-file analysis to JSON.
-- `rhythm-map-models`: versioned provenance and SHA-256 model-pack verification.
+- `rhythm-map-models`: versioned provenance, SHA-256 verification, offline model
+  cache, and opt-in HTTPS acquisition (`download` feature).
 - `rhythm-map-ffi`: versioned C ABI for `.dll`, `.so`, and static libraries.
 - `rhythm-map-wasm`: WASM timing-analysis API from complete host observations,
   with optional decoded-PCM evidence enrichment. End-to-end browser beat-model
@@ -42,15 +43,20 @@ without changing their meaning.
 
 ## Quick start
 
-Download or convert the two Beat This! ONNX files described in
-[`models/README.md`](models/README.md), then run:
+Acquire the built-in pinned model pack once, then analyze offline:
 
 ```bash
-cargo run -p rhythm-map-cli --release -- \
-  song.mp3 \
-  --mel-model models/mel_spectrogram.onnx \
-  --beat-model models/beat_this.onnx
+cargo run -p rhythm-map-cli --release -- models fetch
+cargo run -p rhythm-map-cli --release -- song.mp3 --output timing.json
 ```
+
+With a binary distribution, use `rhythm-map` instead of the `cargo run` prefix.
+Use `--cache-dir /path/to/cache` on both calls, or set `RHYTHM_MAP_CACHE_DIR`, to
+choose a different disk. Acquisition verifies the roughly 83 MB pack before
+publishing it; analysis never downloads or repairs a missing/corrupt cache.
+`rhythm-map models verify` checks the cache without loading a neural model.
+Existing files work with `--model-dir /path/to/models`; a custom trusted pack
+uses `--model-pack manifest.json`. See [`models/README.md`](models/README.md).
 
 The command emits schema-versioned JSON containing selected beats, supported
 metrical beat alternatives, their time-localized ambiguity regions, a BPM

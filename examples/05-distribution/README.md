@@ -48,6 +48,21 @@ Git identities.
 After verification, continue with [`03-c-ffi`](../03-c-ffi/) for native hosts
 or [`04-browser-wasm`](../04-browser-wasm/) for browsers.
 
+For the native CLI, acquire the default model pack once, then work offline:
+
+```bash
+bin/rhythm-map models fetch --cache-dir /path/to/model-cache
+bin/rhythm-map models verify --cache-dir /path/to/model-cache
+bin/rhythm-map song.mp3 --cache-dir /path/to/model-cache --output timing.json
+```
+
+Use `.exe` on Windows. `RHYTHM_MAP_CACHE_DIR` can replace the repeated cache
+argument. Fetch/verify returns JSON with `model_dir`; foreign-language callers
+pass that directory and `models/beat-this-full-v1.json` to the verified C ABI
+constructor shown in example `03`. The CLI never downloads during analysis,
+and the C ABI and WASM contain no acquisition code. See
+[`models/README.md`](../../models/README.md) for cache layout and recovery.
+
 ## Build packages from a checkout
 
 Build native binaries first, then assemble them into a fresh output directory:

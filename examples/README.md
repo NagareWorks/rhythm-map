@@ -53,5 +53,20 @@ source build. Native and browser packages carry an immutable Git identity,
 typed entry points, complete SHA-256 inventory, license notices, and a
 cross-platform verifier. Model weights remain explicit external artifacts.
 
+## 06 - Acquire and reuse a model cache
+
+[`06-model-cache.rs`](06-model-cache.rs) shows explicit HTTPS acquisition and
+offline verification through the Rust API. Run it with a caller-owned cache:
+
+```bash
+cargo run -p rhythm-map-examples --features model-download \
+  --example 06-model-cache -- /path/to/model-cache
+```
+
+The `model-download` feature is opt-in. Normal analysis calls do not fetch
+models; the CLI equivalent is `rhythm-map models fetch`, followed by
+`rhythm-map song.mp3`. See [`models/README.md`](../models/README.md) for disk
+selection, integrity checks, and reuse from foreign languages.
+
 Complex examples should remain independently runnable and explain their exact
 runtime/model requirements in their own README.

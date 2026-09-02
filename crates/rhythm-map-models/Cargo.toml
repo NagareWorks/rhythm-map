@@ -8,11 +8,20 @@ license.workspace = true
 repository.workspace = true
 authors.workspace = true
 
+[features]
+default = []
+download = ["dep:ureq", "dep:tempfile"]
+
 [dependencies]
 serde.workspace = true
 serde_json.workspace = true
 sha2.workspace = true
 thiserror.workspace = true
+ureq = { workspace = true, optional = true }
+tempfile = { version = "3.20", optional = true }
+
+[dev-dependencies]
+tempfile = "3.20"
 
 [lints]
 workspace = true
