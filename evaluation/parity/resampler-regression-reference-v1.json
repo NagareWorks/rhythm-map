@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "purpose": "numerical_parity_not_accuracy",
+  "comparator_sha256": "b21a8b4f2d31adb7e79e3e4ccc760205bf85c9d04142fd9cc0610eb967eaa513",
+  "reference_lock_sha256": "10465e598444a39f76a5ec170cce3b1db0af04dd90d30e5028164c3230bc5555",
+  "reference_revision": "b95c8ab0c58c2d9fcfd40508ae8dffbc05ac4f5c",
+  "checkpoint_sha256": "8c328b45f59d8dd3dff219253ff6a8d6482be57d0133a29140e2febbf8eb8331",
+  "model_manifest_sha256": "ccedbfeb35b4f584834df3aca1ea41899ed39fbaf2efad9e2cc71426aed9e23d",
+  "reference_complete": true,
+  "budgets": {
+    "mel_atol": 0.001,
+    "logit_atol": 0.002,
+    "rtol": 0.0001,
+    "event_atol_s": 1e-05,
+    "source_event_atol_s": 0.020001
+  },
+  "versions": {
+    "torch": "2.8.0+cpu",
+    "torchaudio": "2.8.0+cpu",
+    "numpy": "2.2.6",
+    "onnxruntime": "1.23.2",
+    "einops": "0.8.1",
+    "rotary-embedding-torch": "0.8.9",
+    "soxr": "1.0.0"
+  },
+  "cases": [
+    {
+      "case_id": "artbeat-14-240-to-96",
+      "audio_sha256": "a96686045df4adee6a0aa4127b70daeeab14d8b9f08124cc78d9af95a860c02c",
+      "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+      "trace_sha256": "53e13475d72b6fd5c8a25a182196b73c31db4f61a75f20561f1e59cf36fa0894",
+      "trace_exporter_sha256": "7d125fbb3bda2e555f6a892518e0c7b7b2ea0d0acb06ce8a62f4c6fee9792885",
+      "adapter_source_sha256": "ecd93860fdebf56905fdb12f341cfb66ad1c227f19e0d45a81b7ec2c4f59a14d",
+      "audio_preprocessing_sha256": "67b3e54b7415d16e5be15eec751ba639a7a544ee283f330b43411b56fe5f4fa2",
+      "observation_contract": "beat-this-rten-observations-v2+decode-audio-v2+phase-exact-bh2-256-v1",
+      "preprocessing_candidate": "phase-exact-bh2-256-v1",
+      "candidate_source_sha256": "3d4dc56efea7a0370b64d248971c02260618a5bf5598d15714ac71e28efcd819",
+      "sample_count": 359691,
+      "mel_frames": 816,
+      "source_waveform_diagnostic": {
+        "reference_sample_count": 359691,
+        "rust_sample_count": 359691,
+        "sample_count_delta": 0,
+        "diagnostic_prefix_samples": 44100,
+        "best_rust_delay_samples": 0,
+        "unshifted_rmse": 4.151743968471008e-06,
+        "best_shift_rmse": 4.151743968471008e-06,
+        "timestamps_shifted": false,
+        "source_sample_rate": 44100
+      },
+      "stages": {
+        "mel_onnxruntime_vs_rten_same_pcm": {
+          "left_shape": [
+            816,
+            128
+          ],
+          "right_shape": [
+            816,
+            128
+          ],
+          "passed": true,
+          "max_abs": 5.555152893066406e-05,
+          "mean_abs": 2.1220181474300083e-07,
+          "p95_abs": 7.152557373046875e-07
+        },
+        "mel_official_vs_rten_same_pcm": {
+          "left_shape": [
+            816,
+            128
+          ],
+          "right_shape": [
+            816,
+            128
+          ],
+          "passed": true,
+          "max_abs": 2.3365020751953125e-05,
+          "mean_abs": 7.520957876526975e-07,
+          "p95_abs": 3.814697265625e-06
+        },
+        "beat_onnxruntime_vs_rten_same_mel": {
+          "left_shape": [
+            816
+          ],
+          "right_shape": [
+            816
+          ],
+          "passed": true,
+          "max_abs": 3.4332275390625e-05,
+          "mean_abs": 3.5205454218621346e-06,
+          "p95_abs": 8.58306884765625e-06
+        },
+        "beat_official_vs_port_decoder_same_logits": {
+          "left_shape": [
+            32
+          ],
+          "right_shape": [
+            32
+          ],
+          "passed": true,
+          "max_abs": 4.5776367230132564e-07,
+          "mean_abs": 1.3262033449895627e-07,
+          "p95_abs": 4.5776367230132564e-07
+        },
+        "beat_port_vs_adapter_decoder_same_logits": {
+          "left_shape": [
+            32
+          ],
+          "right_shape": [
+            32
+          ],
+          "passed": true,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "p95_abs": 0.0
+        },
+        "downbeat_onnxruntime_vs_rten_same_mel": {
+          "left_shape": [
+            816
+          ],
+          "right_shape": [
+            816
+          ],
+          "passed": true,
+          "max_abs": 2.6226043701171875e-05,
+          "mean_abs": 3.641032997299643e-06,
+          "p95_abs": 9.059906005859375e-06
+        },
+        "downbeat_official_vs_port_decoder_same_logits": {
+          "left_shape": [
+            14
+          ],
+          "right_shape": [
+            14
+          ],
+          "passed": true,
+          "max_abs": 4.5776367230132564e-07,
+          "mean_abs": 1.3555799195850783e-07,
+          "p95_abs": 3.833770749750442e-07
+        },
+        "downbeat_port_vs_adapter_decoder_same_logits": {
+          "left_shape": [
+            14
+          ],
+          "right_shape": [
+            14
+          ],
+          "passed": true,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "p95_abs": 0.0
+        },
+        "beat_checkpoint_vs_onnx_same_mel": {
+          "left_shape": [
+            816
+          ],
+          "right_shape": [
+            816
+          ],
+          "passed": true,
+          "max_abs": 2.6226043701171875e-05,
+          "mean_abs": 4.838932962978588e-06,
+          "p95_abs": 1.2040138244628906e-05
+        },
+        "beat_official_vs_rten_same_pcm": {
+          "left_shape": [
+            816
+          ],
+          "right_shape": [
+            816
+          ],
+          "passed": true,
+          "max_abs": 2.4318695068359375e-05,
+          "mean_abs": 4.423490049792271e-06,
+          "p95_abs": 1.1444091796875e-05
+        },
+        "beat_pipeline_event_agreement_same_pcm": {
+          "left_shape": [
+            32
+          ],
+          "right_shape": [
+            32
+          ],
+          "passed": true,
+          "max_abs": 4.5776367230132564e-07,
+          "mean_abs": 1.3262033449895627e-07,
+          "p95_abs": 4.5776367230132564e-07
+        },
+        "downbeat_checkpoint_vs_onnx_same_mel": {
+          "left_shape": [
+            816
+          ],
+          "right_shape": [
+            816
+          ],
+          "passed": true,
+          "max_abs": 2.2411346435546875e-05,
+          "mean_abs": 4.718043640548108e-06,
+          "p95_abs": 1.1920928955078125e-05
+        },
+        "downbeat_official_vs_rten_same_pcm": {
+          "left_shape": [
+            816
+          ],
+          "right_shape": [
+            816
+          ],
+          "passed": true,
+          "max_abs": 2.7418136596679688e-05,
+          "mean_abs": 4.754200869915532e-06,
+          "p95_abs": 1.33514404296875e-05
+        },
+        "downbeat_pipeline_event_agreement_same_pcm": {
+          "left_shape": [
+            14
+          ],
+          "right_shape": [
+            14
+          ],
+          "passed": true,
+          "max_abs": 4.5776367230132564e-07,
+          "mean_abs": 1.3555799195850783e-07,
+          "p95_abs": 3.833770749750442e-07
+        },
+        "beat_source_audio_event_agreement": {
+          "left_shape": [
+            32
+          ],
+          "right_shape": [
+            32
+          ],
+          "passed": true,
+          "max_abs": 4.5776367230132564e-07,
+          "mean_abs": 1.3262033449895627e-07,
+          "p95_abs": 4.5776367230132564e-07
+        },
+        "downbeat_source_audio_event_agreement": {
+          "left_shape": [
+            14
+          ],
+          "right_shape": [
+            14
+          ],
+          "passed": true,
+          "max_abs": 4.5776367230132564e-07,
+          "mean_abs": 1.3555799195850783e-07,
+          "p95_abs": 3.833770749750442e-07
+        }
+      }
+    }
+  ],
+  "passed": true,
+  "not_checked": [
+    "full_track_accuracy",
+    "holdout"
+  ]
+}

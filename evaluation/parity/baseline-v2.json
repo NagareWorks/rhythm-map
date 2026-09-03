@@ -1,0 +1,475 @@
+{
+  "schema_version": 1,
+  "purpose": "numerical_parity_not_accuracy",
+  "comparator_sha256": "742c9890e9ef6eec7979c163bbbb8efb098c662b47301daf07e16252d66bb803",
+  "reference_lock_sha256": "10465e598444a39f76a5ec170cce3b1db0af04dd90d30e5028164c3230bc5555",
+  "reference_revision": "b95c8ab0c58c2d9fcfd40508ae8dffbc05ac4f5c",
+  "checkpoint_sha256": "8c328b45f59d8dd3dff219253ff6a8d6482be57d0133a29140e2febbf8eb8331",
+  "model_manifest_sha256": "ccedbfeb35b4f584834df3aca1ea41899ed39fbaf2efad9e2cc71426aed9e23d",
+  "reference_complete": true,
+  "budgets": {
+    "mel_atol": 0.001,
+    "logit_atol": 0.002,
+    "rtol": 0.0001,
+    "event_atol_s": 1e-05,
+    "source_event_atol_s": 0.020001
+  },
+  "versions": {
+    "torch": "2.8.0+cpu",
+    "torchaudio": "2.8.0+cpu",
+    "numpy": "2.2.6",
+    "onnxruntime": "1.23.2",
+    "einops": "0.8.1",
+    "rotary-embedding-torch": "0.8.9",
+    "soxr": "1.0.0"
+  },
+  "cases": [
+    {
+      "case_id": "artbeat-05-75-to-150",
+      "audio_sha256": "ddff1eadde814bc13896b64ad81b7ba55626be4f7b64dae417d00a2210a0c517",
+      "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+      "trace_sha256": "91ecd367f30f28140f16afeac302a2fe6c82d96b5b5ab8774260c77f4e00c4d4",
+      "trace_exporter_sha256": "ad98ff8bcf45e523b8a736fac435a29290cb1852231d214ef24802db3d913e7e",
+      "adapter_source_sha256": "39674ee47a8d9ae3e5b98db6aede808a3a6af6585b56e05c89bec2d738c6bf75",
+      "audio_preprocessing_sha256": "84e48c03576df9a8eedb9703da277e16a501a04061f1c9fc9e314a9ac8355316",
+      "observation_contract": "beat-this-rten-observations-v2+decode-audio-v2",
+      "sample_count": 299880,
+      "mel_frames": 681,
+      "source_waveform_diagnostic": {
+        "reference_sample_count": 299880,
+        "rust_sample_count": 299880,
+        "sample_count_delta": 0,
+        "diagnostic_prefix_samples": 44100,
+        "best_rust_delay_samples": 0,
+        "unshifted_rmse": 0.00010964415083215176,
+        "best_shift_rmse": 0.00010964415083215176,
+        "timestamps_shifted": false,
+        "source_sample_rate": 44100
+      },
+      "stages": {
+        "mel_onnxruntime_vs_rten_same_pcm": {
+          "left_shape": [
+            681,
+            128
+          ],
+          "right_shape": [
+            681,
+            128
+          ],
+          "passed": true,
+          "max_abs": 4.273653030395508e-05,
+          "mean_abs": 2.3820488924801996e-07,
+          "p95_abs": 8.344650268554688e-07
+        },
+        "mel_official_vs_rten_same_pcm": {
+          "left_shape": [
+            681,
+            128
+          ],
+          "right_shape": [
+            681,
+            128
+          ],
+          "passed": true,
+          "max_abs": 2.2411346435546875e-05,
+          "mean_abs": 8.158584079568763e-07,
+          "p95_abs": 4.231929779052734e-06
+        },
+        "beat_onnxruntime_vs_rten_same_mel": {
+          "left_shape": [
+            681
+          ],
+          "right_shape": [
+            681
+          ],
+          "passed": true,
+          "max_abs": 4.100799560546875e-05,
+          "mean_abs": 2.922290572335892e-06,
+          "p95_abs": 8.106231689453125e-06
+        },
+        "beat_official_vs_port_decoder_same_logits": {
+          "left_shape": [
+            17
+          ],
+          "right_shape": [
+            17
+          ],
+          "passed": true,
+          "max_abs": 4.5776367230132564e-07,
+          "mean_abs": 1.6063451763968537e-07,
+          "p95_abs": 4.5776367230132564e-07
+        },
+        "beat_port_vs_adapter_decoder_same_logits": {
+          "left_shape": [
+            17
+          ],
+          "right_shape": [
+            17
+          ],
+          "passed": true,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "p95_abs": 0.0
+        },
+        "downbeat_onnxruntime_vs_rten_same_mel": {
+          "left_shape": [
+            681
+          ],
+          "right_shape": [
+            681
+          ],
+          "passed": true,
+          "max_abs": 2.193450927734375e-05,
+          "mean_abs": 2.8296889362531264e-06,
+          "p95_abs": 7.62939453125e-06
+        },
+        "downbeat_official_vs_port_decoder_same_logits": {
+          "left_shape": [
+            5
+          ],
+          "right_shape": [
+            5
+          ],
+          "passed": true,
+          "max_abs": 3.051757815342171e-07,
+          "mean_abs": 1.1271238306437281e-07,
+          "p95_abs": 2.6702880866480423e-07
+        },
+        "downbeat_port_vs_adapter_decoder_same_logits": {
+          "left_shape": [
+            5
+          ],
+          "right_shape": [
+            5
+          ],
+          "passed": true,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "p95_abs": 0.0
+        },
+        "beat_checkpoint_vs_onnx_same_mel": {
+          "left_shape": [
+            681
+          ],
+          "right_shape": [
+            681
+          ],
+          "passed": true,
+          "max_abs": 4.100799560546875e-05,
+          "mean_abs": 3.587306858684523e-06,
+          "p95_abs": 8.58306884765625e-06
+        },
+        "beat_official_vs_rten_same_pcm": {
+          "left_shape": [
+            681
+          ],
+          "right_shape": [
+            681
+          ],
+          "passed": true,
+          "max_abs": 4.100799560546875e-05,
+          "mean_abs": 2.667592310520346e-06,
+          "p95_abs": 6.67572021484375e-06
+        },
+        "beat_pipeline_event_agreement_same_pcm": {
+          "left_shape": [
+            17
+          ],
+          "right_shape": [
+            17
+          ],
+          "passed": true,
+          "max_abs": 4.5776367230132564e-07,
+          "mean_abs": 1.6063451763968537e-07,
+          "p95_abs": 4.5776367230132564e-07
+        },
+        "downbeat_checkpoint_vs_onnx_same_mel": {
+          "left_shape": [
+            681
+          ],
+          "right_shape": [
+            681
+          ],
+          "passed": true,
+          "max_abs": 3.62396240234375e-05,
+          "mean_abs": 3.3887122346091026e-06,
+          "p95_abs": 8.58306884765625e-06
+        },
+        "downbeat_official_vs_rten_same_pcm": {
+          "left_shape": [
+            681
+          ],
+          "right_shape": [
+            681
+          ],
+          "passed": true,
+          "max_abs": 2.193450927734375e-05,
+          "mean_abs": 2.3760021870706927e-06,
+          "p95_abs": 5.7220458984375e-06
+        },
+        "downbeat_pipeline_event_agreement_same_pcm": {
+          "left_shape": [
+            5
+          ],
+          "right_shape": [
+            5
+          ],
+          "passed": true,
+          "max_abs": 3.051757815342171e-07,
+          "mean_abs": 1.1271238306437281e-07,
+          "p95_abs": 2.6702880866480423e-07
+        },
+        "beat_source_audio_event_agreement": {
+          "left_shape": [
+            17
+          ],
+          "right_shape": [
+            17
+          ],
+          "passed": true,
+          "max_abs": 4.5776367230132564e-07,
+          "mean_abs": 1.6063451763968537e-07,
+          "p95_abs": 4.5776367230132564e-07
+        },
+        "downbeat_source_audio_event_agreement": {
+          "left_shape": [
+            5
+          ],
+          "right_shape": [
+            5
+          ],
+          "passed": true,
+          "max_abs": 3.051757815342171e-07,
+          "mean_abs": 1.1271238306437281e-07,
+          "p95_abs": 2.6702880866480423e-07
+        }
+      }
+    },
+    {
+      "case_id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "audio_sha256": "3b4e219d54a698d5de7a3622ee46e1652ce44e06782691a53a0163bc10bae736",
+      "suite_sha256": "45994397adfe4cb343769b8f05effcf76cd8577c0b87bda086099ecc70534f3b",
+      "trace_sha256": "503e016ad9fb1888ae7a0175ae66a0401c39cd2114272549ad8b15b0a9119380",
+      "trace_exporter_sha256": "ad98ff8bcf45e523b8a736fac435a29290cb1852231d214ef24802db3d913e7e",
+      "adapter_source_sha256": "39674ee47a8d9ae3e5b98db6aede808a3a6af6585b56e05c89bec2d738c6bf75",
+      "audio_preprocessing_sha256": "84e48c03576df9a8eedb9703da277e16a501a04061f1c9fc9e314a9ac8355316",
+      "observation_contract": "beat-this-rten-observations-v2+decode-audio-v2",
+      "sample_count": 771750,
+      "mel_frames": 1751,
+      "source_waveform_diagnostic": {
+        "reference_sample_count": 771750,
+        "rust_sample_count": 771750,
+        "sample_count_delta": 0,
+        "diagnostic_prefix_samples": 44100,
+        "best_rust_delay_samples": 0,
+        "unshifted_rmse": 0.0,
+        "best_shift_rmse": 0.0,
+        "timestamps_shifted": false,
+        "source_sample_rate": 22050
+      },
+      "stages": {
+        "mel_onnxruntime_vs_rten_same_pcm": {
+          "left_shape": [
+            1751,
+            128
+          ],
+          "right_shape": [
+            1751,
+            128
+          ],
+          "passed": true,
+          "max_abs": 0.00011348724365234375,
+          "mean_abs": 8.534037544703731e-07,
+          "p95_abs": 3.2186508178710938e-06
+        },
+        "mel_official_vs_rten_same_pcm": {
+          "left_shape": [
+            1751,
+            128
+          ],
+          "right_shape": [
+            1751,
+            128
+          ],
+          "passed": true,
+          "max_abs": 0.00011157989501953125,
+          "mean_abs": 1.6722646846104137e-06,
+          "p95_abs": 7.62939453125e-06
+        },
+        "beat_onnxruntime_vs_rten_same_mel": {
+          "left_shape": [
+            1751
+          ],
+          "right_shape": [
+            1751
+          ],
+          "passed": true,
+          "max_abs": 3.0040740966796875e-05,
+          "mean_abs": 7.525401276087911e-06,
+          "p95_abs": 1.71661376953125e-05
+        },
+        "beat_official_vs_port_decoder_same_logits": {
+          "left_shape": [
+            50
+          ],
+          "right_shape": [
+            50
+          ],
+          "passed": true,
+          "max_abs": 1.8310546892053026e-06,
+          "mean_abs": 3.931134935860475e-07,
+          "p95_abs": 1.4038085915046833e-06
+        },
+        "beat_port_vs_adapter_decoder_same_logits": {
+          "left_shape": [
+            50
+          ],
+          "right_shape": [
+            50
+          ],
+          "passed": true,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "p95_abs": 0.0
+        },
+        "downbeat_onnxruntime_vs_rten_same_mel": {
+          "left_shape": [
+            1751
+          ],
+          "right_shape": [
+            1751
+          ],
+          "passed": true,
+          "max_abs": 2.956390380859375e-05,
+          "mean_abs": 7.954650031437811e-06,
+          "p95_abs": 1.7523765563964844e-05
+        },
+        "downbeat_official_vs_port_decoder_same_logits": {
+          "left_shape": [
+            24
+          ],
+          "right_shape": [
+            24
+          ],
+          "passed": true,
+          "max_abs": 1.8310546892053026e-06,
+          "mean_abs": 4.468547799926029e-07,
+          "p95_abs": 1.682281495440916e-06
+        },
+        "downbeat_port_vs_adapter_decoder_same_logits": {
+          "left_shape": [
+            24
+          ],
+          "right_shape": [
+            24
+          ],
+          "passed": true,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "p95_abs": 0.0
+        },
+        "beat_checkpoint_vs_onnx_same_mel": {
+          "left_shape": [
+            1751
+          ],
+          "right_shape": [
+            1751
+          ],
+          "passed": true,
+          "max_abs": 2.956390380859375e-05,
+          "mean_abs": 5.661849802660983e-06,
+          "p95_abs": 1.430511474609375e-05
+        },
+        "beat_official_vs_rten_same_pcm": {
+          "left_shape": [
+            1751
+          ],
+          "right_shape": [
+            1751
+          ],
+          "passed": true,
+          "max_abs": 5.14984130859375e-05,
+          "mean_abs": 8.702741936912951e-06,
+          "p95_abs": 2.193450927734375e-05
+        },
+        "beat_pipeline_event_agreement_same_pcm": {
+          "left_shape": [
+            50
+          ],
+          "right_shape": [
+            50
+          ],
+          "passed": true,
+          "max_abs": 1.8310546892053026e-06,
+          "mean_abs": 3.931134935860475e-07,
+          "p95_abs": 1.4038085915046833e-06
+        },
+        "downbeat_checkpoint_vs_onnx_same_mel": {
+          "left_shape": [
+            1751
+          ],
+          "right_shape": [
+            1751
+          ],
+          "passed": true,
+          "max_abs": 2.288818359375e-05,
+          "mean_abs": 5.5713960948771985e-06,
+          "p95_abs": 1.33514404296875e-05
+        },
+        "downbeat_official_vs_rten_same_pcm": {
+          "left_shape": [
+            1751
+          ],
+          "right_shape": [
+            1751
+          ],
+          "passed": true,
+          "max_abs": 4.9591064453125e-05,
+          "mean_abs": 9.987267135280259e-06,
+          "p95_abs": 2.372264862060547e-05
+        },
+        "downbeat_pipeline_event_agreement_same_pcm": {
+          "left_shape": [
+            24
+          ],
+          "right_shape": [
+            24
+          ],
+          "passed": true,
+          "max_abs": 1.8310546892053026e-06,
+          "mean_abs": 4.468547799926029e-07,
+          "p95_abs": 1.682281495440916e-06
+        },
+        "beat_source_audio_event_agreement": {
+          "left_shape": [
+            50
+          ],
+          "right_shape": [
+            50
+          ],
+          "passed": true,
+          "max_abs": 1.8310546892053026e-06,
+          "mean_abs": 3.931134935860475e-07,
+          "p95_abs": 1.4038085915046833e-06
+        },
+        "downbeat_source_audio_event_agreement": {
+          "left_shape": [
+            24
+          ],
+          "right_shape": [
+            24
+          ],
+          "passed": true,
+          "max_abs": 1.8310546892053026e-06,
+          "mean_abs": 4.468547799926029e-07,
+          "p95_abs": 1.682281495440916e-06
+        }
+      }
+    }
+  ],
+  "passed": true,
+  "not_checked": [
+    "full_track_accuracy",
+    "holdout"
+  ]
+}

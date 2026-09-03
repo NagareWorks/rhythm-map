@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "purpose": "calibration_resampler_event_loss_diagnosis",
+  "selection": "the sole ARTBeaT beat-F1 regression in the completed paired calibration; no parameter search",
+  "calibration_report_sha256": "235e1c68dac27db50c0b1762d3978226c562cb3d99bd5f810a7ec1ab714dff45",
+  "suite_id": "artbeat-v1",
+  "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+  "case_id": "artbeat-14-240-to-96",
+  "audio_sha256": "a96686045df4adee6a0aa4127b70daeeab14d8b9f08124cc78d9af95a860c02c",
+  "model_manifest_sha256": "ccedbfeb35b4f584834df3aca1ea41899ed39fbaf2efad9e2cc71426aed9e23d",
+  "model_sample_count": 359691,
+  "current_pcm_sha256": "ef3021480e97b88011ab6ea046ce766f6e844dff6243c3c758b5b3a05e58b605",
+  "candidate_pcm_sha256": "a967150416b5af60b58e9a6b991ed270416a5e0c219c07b0bc7fb6446166dc83",
+  "candidate_source_sha256": "3d4dc56efea7a0370b64d248971c02260618a5bf5598d15714ac71e28efcd819",
+  "decoder_logit_threshold": 0.0,
+  "decoder_local_max_radius_frames": 3,
+  "frame_rate_hz": 50,
+  "diagnostic_window_radius_frames": 3,
+  "not_authorized": ["threshold_tuning", "filter_tuning", "holdout", "product_promotion"]
+}

@@ -1,0 +1,10 @@
+# Reference tools only; never a product dependency.
+# Install the CPU builds of torch/torchaudio from the official PyTorch index.
+torch==2.8.0
+torchaudio==2.8.0
+numpy==2.2.6
+onnxruntime==1.23.2
+einops==0.8.1
+rotary-embedding-torch==0.8.9
+soxr==1.0.0
+soundfile==0.13.1

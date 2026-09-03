@@ -7,6 +7,108 @@ neural backend does not directly classify tempo changes or emit a tempo map.
 
 ## Observation boundary
 
+### Audio time origin and resampling
+
+The Beat This adapter owns a shared preprocessing boundary for decoded files
+and caller-supplied mono PCM. Symphonia decodes files at their original rate;
+channels are averaged per frame. Both paths then use the same sinc resampler
+to produce the model's 22,050 Hz input. Native-rate PCM is borrowed unchanged.
+The core estimator and observation-driven WASM API do not depend on this
+decoder or resampler.
+
+Resampling is not just a sample-rate conversion: its filter delays events and
+retains part of the signal in internal state. The adapter processes bounded
+4,096-input-frame chunks, discards the initial filter delay, and flushes the
+state with zero-padded final chunks. It returns exactly
+`round(input_frames * 22050 / input_rate)` frames (half-sample ties upward),
+not the padding or an incomplete tail. Inputs too short to produce one output
+sample are rejected. File duration is therefore quantized by at most half an
+output sample; direct PCM inference retains the original input duration.
+
+For the current rubato 3.0 sinc implementation, the first output is evaluated
+after advancing one output period. Consequently, its nominal `output_delay()`
+alone is not the correct trim count. With filter length `L = 256` and ratio
+`r = 22050 / input_rate`, the adapter trims `round(L / 2 * r) - 1` frames,
+clamped at zero. Integer trimming leaves sub-sample phase error; this is not
+bit-exact equivalence to a different filter such as soxr. Generated impulses
+at the beginning, middle, and tail, multiple input rates, very short buffers,
+and multiple chunk sizes guard this dependency-specific convention.
+
+No offset is subtracted from beat or downbeat timestamps. Model frames remain
+on their ordinary 50 Hz axis, now referenced to the corrected input origin.
+Corrupt decoded packets and changes in rate/channel count fail explicitly
+instead of silently deleting time or joining incompatible audio. Invalid or
+non-finite PCM also fails before model execution.
+
+The preprocessing revision is part of `OBSERVATION_CONTRACT`; v2 invalidates
+all v1 raw-observation caches without deleting them. Numerical parity and
+calibration accuracy are separate checks: fixing the waveform origin does
+not resolve musical half/double-time ambiguity or guarantee better beat F1.
+
+Equal sample rate, duration, and waveform origin do not imply equal model
+input: resampling filters can preserve those invariants while changing the
+spectrum enough to move weak peaks across the fixed decoder threshold. A
+locked native-PCM 2x2 experiment holds each decoder and resampler constant in
+turn. On ARTBeaT 15, switching only the decoder changes no selected timestamps;
+switching only the resampling path reproduces all three original-file event
+differences. A separate float64/float32 control excludes native precision
+normalization as the cause on this recording. This is preprocessing parity
+evidence, not beat truth or a reason to lower the threshold. See the
+[native PCM audit](../evaluation/baselines/beat-this-native-pcm-v2.md).
+
+The separate evaluation-only reference-bandwidth candidate uses an exact
+rational clock and rate-scaled sinc support. Its coefficient table is tiled by
+rational phase, capped at 8 MiB, while preserving each kernel and dot-product
+order; 99 generated probes are bit-identical before and after this memory
+change. That cap excludes audio and model memory. Neither reference agreement
+nor bounded allocation proves better musical accuracy: the full paired
+calibration scores the candidate through the unchanged engine, including PCM
+evidence and the single estimator, against an exact shipping-baseline replay.
+It is not a public resampling mode. See the
+[candidate experiment](../evaluation/parity/README.md#bounded-coefficients-and-full-paired-calibration)
+for the frozen inputs and evidence boundaries.
+
+A frozen regression probe illustrates why these checks remain separate. At
+1.50 s in ARTBeaT `240-to-96`, both preprocessors yield the same radius-three
+local maximum, but its logit changes from 0.195108 to -0.053524. Strict-zero
+peak picking therefore omits it, although its real timestamp remains in
+`beat_candidates`. The official source pipeline makes the same omission;
+runtime/conversion parity passes. A candidate peak is evidence, not an
+automatically selected beat, and its sigmoid score is not a calibrated
+probability of musical correctness. Recovering it safely requires evidence
+that also rejects subdivision false positives, not merely lowering the
+threshold on this one song. See the
+[single-event diagnosis](../evaluation/baselines/beat-this-reference-resampler-v1.md#single-event-regression-diagnosis).
+
+### Evaluating weak candidates without fitting a repair
+
+The calibration-only candidate audit asks whether a real, unselected peak
+has evidence of a missed main beat. Feature extraction sees only observations:
+model confidence, nearest measured PCM onset/activity, harmonic change at the
+candidate, its position between accepted raw beats, and local interval context.
+It cannot see annotations, expected BPM, or case identity. Truth labels are
+attached afterward, using the unchanged event tolerance and one-to-one raw
+event matches. Multiple peaks supporting one missed truth event count as one
+supported miss, not multiple recoveries.
+
+Let `g` be the enclosing accepted-beat gap and `p` the median of two raw
+intervals on each side, excluding that gap. The audit reports
+`abs(g / (2 * p) - 1)` and interval MAD divided by `p`. Missing two-sided
+context is unavailable, not zero. Midpoint error is distance to the gap
+midpoint divided by `g`; relative onset compares the candidate to the mean
+measured onset at its anchors. No feature is a selected-beat decision.
+
+Labels outside annotated main-beat windows may align with subdivision grids,
+but this is not annotation of actual subdivision notes or instruments. AUC
+measures fixed-direction ranking, not precision at a fitted threshold. The
+first shipping-v2 ARTBeaT audit finds useful but overlapping confidence,
+onset, and midpoint evidence; local regularity alone is unreliable because
+misses, metrical ambiguity, and real tempo changes also corrupt the anchors.
+The audit does not change the decoder, add a strategy, or authorize recovery.
+See [scope, counts, and limitations](../evaluation/baselines/beat-this-candidate-evidence-v1.md).
+
+### Neural observations
+
 The default backend runs Beat This! and converts its output into
 backend-neutral `RhythmObservations`:
 
@@ -17,9 +119,11 @@ backend-neutral `RhythmObservations`:
 - a deterministic short-time spectral-flux onset envelope; and
 - model identity and audio duration.
 
-An explicit calibration policy can additionally request deterministic harmonic-
-change evidence at model-supported beat candidates. The shipping estimator does
-not request or compute this extra feature.
+The PCM observation path also adds deterministic harmonic-change evidence when
+the backend has not supplied it and at least eight model-supported candidates
+are available. The single shipping estimator uses this evidence for supported
+alternative-path metadata; its presence does not authorize replacing primary
+beats with another metrical interpretation.
 
 No model tensor or Beat This-specific type crosses into `rhythm-map-core`.
 Alternative trackers and caller-supplied observations therefore use the same

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "purpose": "calibration_phase_tail_diagnosis",
+  "reference_lock_sha256": "10465e598444a39f76a5ec170cce3b1db0af04dd90d30e5028164c3230bc5555",
+  "cases": [
+    {
+      "suite_id": "artbeat-v1",
+      "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+      "case_id": "artbeat-13-180-to-120",
+      "audio_sha256": "4e14088d021e4d78fef2bd6febc3235c445cef83eef26e24e8429fce7e061fa3",
+      "prefix_seconds": 35,
+      "source_sample_rate": 44100,
+      "legacy_origin_samples": 63,
+      "probe_times_s": [0.34]
+    },
+    {
+      "suite_id": "artbeat-v1",
+      "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+      "case_id": "artbeat-15-85-to-127-5",
+      "audio_sha256": "6997c1b5760b2bb86be1fb9e70dd8e7b2c98aa7243423fd64a895b7ad36ca701",
+      "prefix_seconds": 35,
+      "source_sample_rate": 44100,
+      "legacy_origin_samples": 63,
+      "probe_times_s": [19.08, 20.12, 20.84, 21.54, 22.26]
+    },
+    {
+      "suite_id": "artbeat-v1",
+      "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+      "case_id": "artbeat-18-piano-rubato",
+      "audio_sha256": "3e01831b02777bdc3707677153589ef92645c410303b480e7ef0d1d882dcb82d",
+      "prefix_seconds": 35,
+      "source_sample_rate": 44100,
+      "legacy_origin_samples": 63,
+      "probe_times_s": [5.06, 8.34, 14.14, 15.14]
+    },
+    {
+      "suite_id": "fsld-tempo-v1",
+      "suite_sha256": "f6956821a09b06084a822ff5ab25b129b3898476950138f38be541be2fe65683",
+      "case_id": "fsld-19069-110-bpm",
+      "audio_sha256": "06c77b1f3f388f23593e4df0d05493f18e2f642bb46c74d9efa2eb84343903b1",
+      "prefix_seconds": 35,
+      "source_sample_rate": 44100,
+      "legacy_origin_samples": 63,
+      "probe_times_s": [3.56, 4.10]
+    }
+  ]
+}

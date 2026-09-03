@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "purpose": "calibration_candidate_evidence_separability_not_recovery_policy",
+  "suite_id": "artbeat-v1",
+  "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+  "calibration_report_sha256": "235e1c68dac27db50c0b1762d3978226c562cb3d99bd5f810a7ec1ab714dff45",
+  "event_audit_sha256": "df52f8c7052804bd5f3c199e7dbe3e7453ac35688326e179946b1943d0328d12",
+  "probe_case_id": "artbeat-14-240-to-96",
+  "probe_time_s": 1.5,
+  "accepted_event_exclusion_s": 0.020001,
+  "subdivision_alignment_s": 0.020001,
+  "subdivision_fractions": [0.25, 0.3333333333333333, 0.5, 0.6666666666666666, 0.75],
+  "context_intervals_each_side": 2,
+  "primary_cohort_max_confidence": 0.5,
+  "diagnostics_only": ["fixed_direction_auc", "class_quantiles", "per_track_slices", "fixed_probe_dominance"],
+  "labels_note": "Offbeat and subdivision-grid-aligned are annotation-relative geometry, not verified subdivision-note labels.",
+  "not_authorized": ["threshold_or_weight_search", "model_training", "holdout", "production_recovery", "resampler_promotion"]
+}

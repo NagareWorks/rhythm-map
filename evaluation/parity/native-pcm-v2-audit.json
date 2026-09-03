@@ -1,0 +1,715 @@
+{
+  "schema_version": 1,
+  "purpose": "native_pcm_factor_diagnosis_not_accuracy",
+  "case_id": "artbeat-15-85-to-127-5",
+  "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+  "audio_sha256": "6997c1b5760b2bb86be1fb9e70dd8e7b2c98aa7243423fd64a895b7ad36ca701",
+  "reference_revision": "b95c8ab0c58c2d9fcfd40508ae8dffbc05ac4f5c",
+  "checkpoint_sha256": "8c328b45f59d8dd3dff219253ff6a8d6482be57d0133a29140e2febbf8eb8331",
+  "reference_lock_sha256": "10465e598444a39f76a5ec170cce3b1db0af04dd90d30e5028164c3230bc5555",
+  "regression_lock_sha256": "9d0e2a6e721b479e424021d9bec74d46fa30734d60cb3e88c5274c8acc049ebd",
+  "historical_trace_sha256": "28c406c777b6d672771437c91cb816bc42dcf9563460d72d26a074f94a4b3f4b",
+  "model_manifest_sha256": "ccedbfeb35b4f584834df3aca1ea41899ed39fbaf2efad9e2cc71426aed9e23d",
+  "observation_contract": "beat-this-rten-observations-v2+decode-audio-v2",
+  "auditor_sha256": "1c3067e09817268083ab1047e6cc66d674ddafdcd29ef9a10f0c3920f43924a4",
+  "exporter_executable_sha256": "e5a244affac17e3cb6786e8beb205cd6477b739717267579262c82bcc3a37cad",
+  "comparison_helper_sha256": "e862307aa4ea5267aabf0711c3d1201a96a7743d1f9d301bdc914f63e67deb62",
+  "event_helper_sha256": "93fa880106ec64a9178cdbaef5779b8dc144e33dddb77a0bafe685e579a4a3df",
+  "rust_sources": {
+    "exporter_sha256": "be067e2b23baa6872644f7e654646cf925c48972461144bbd5282bf0ec4a15b1",
+    "support_sha256": "d965529778e40332d89d1b24acdfdccb6c8c4628388df06adc2b20aeef5c497b",
+    "adapter_source_sha256": "ecd93860fdebf56905fdb12f341cfb66ad1c227f19e0d45a81b7ec2c4f59a14d",
+    "audio_preprocessing_sha256": "67b3e54b7415d16e5be15eec751ba639a7a544ee283f330b43411b56fe5f4fa2"
+  },
+  "private_reference_native_sha256": "cd1f7a7e05e3643dd9811d1a66c913b269e980ea9f2385a7544f795195ed9873",
+  "private_rust_pcm_sha256": "28e8d7c293b683f6feb4f2431ee41f1b71262f61939988a1f85db54438df9f75",
+  "source_sample_rate": 44100,
+  "official_native_dtype": "float64",
+  "official_native_shape_before_downmix": [
+    996141,
+    2
+  ],
+  "native_pcm_comparison": {
+    "reference_sample_count": 996141,
+    "rust_sample_count": 996141,
+    "sample_count_delta": 0,
+    "diagnostic_prefix_samples": 44100,
+    "best_rust_delay_samples": 0,
+    "unshifted_rmse": 4.599330892088927e-8,
+    "best_shift_rmse": 4.599330892088927e-8,
+    "timestamps_shifted": false,
+    "full_max_abs": 9.5367431640625e-7,
+    "full_rmse": 4.607990877052466e-8,
+    "float32_bit_exact": false
+  },
+  "native_precision_control": {
+    "reference_sample_count": 996141,
+    "rust_sample_count": 996141,
+    "sample_count_delta": 0,
+    "diagnostic_prefix_samples": 44100,
+    "best_rust_delay_samples": 0,
+    "unshifted_rmse": 2.549699768613224e-9,
+    "best_shift_rmse": 2.549699768613224e-9,
+    "timestamps_shifted": false,
+    "full_max_abs": 2.9802322387695312e-8,
+    "full_rmse": 2.115503802551007e-9,
+    "float32_bit_exact": true
+  },
+  "resampling_dtype_contract": "2x2 native PCM normalized to f32; Rust consumes f32, soxr consumes its f64 promotion; original-file control retains upstream f64",
+  "soxr_quality": "HQ (unchanged upstream default)",
+  "versions": {
+    "torch": "2.8.0+cpu",
+    "torchaudio": "2.8.0+cpu",
+    "numpy": "2.2.6",
+    "soxr": "1.0.0",
+    "soundfile": "0.13.1"
+  },
+  "torchaudio_available_backends": [
+    "soundfile"
+  ],
+  "event_parity_atol_s": 0.020001,
+  "event_correspondence_window_s": 0.040001,
+  "controls": {
+    "native_stages_reconstruct_shipping_bit_exact": true,
+    "shipping_equals_frozen_v2_trace_bit_exact": true,
+    "beat_same_pcm_logit_parity": true,
+    "beat_same_pcm_event_parity": true,
+    "beat_f32_normalization_event_parity": true,
+    "downbeat_same_pcm_logit_parity": true,
+    "downbeat_same_pcm_event_parity": true,
+    "downbeat_f32_normalization_event_parity": true
+  },
+  "controls_passed": true,
+  "variants": {
+    "rust_decode_rust_resample": {
+      "sample_count": 498071,
+      "beat_count": 37,
+      "downbeat_count": 8,
+      "probes": [
+        {
+          "time_s": 19.08,
+          "nearby_peak_time_s": 19.08,
+          "nearby_peak_probability": 0.4963093474244594,
+          "selected": false
+        },
+        {
+          "time_s": 20.12,
+          "nearby_peak_time_s": 20.12,
+          "nearby_peak_probability": 0.6057140922581148,
+          "selected": true
+        },
+        {
+          "time_s": 20.84,
+          "nearby_peak_time_s": 20.84,
+          "nearby_peak_probability": 0.529600180690794,
+          "selected": true
+        },
+        {
+          "time_s": 21.54,
+          "nearby_peak_time_s": 21.54,
+          "nearby_peak_probability": 0.5847455076953195,
+          "selected": true
+        },
+        {
+          "time_s": 22.26,
+          "nearby_peak_time_s": 22.26,
+          "nearby_peak_probability": 0.5142300656606024,
+          "selected": true
+        }
+      ]
+    },
+    "reference_decode_rust_resample": {
+      "sample_count": 498071,
+      "beat_count": 37,
+      "downbeat_count": 8,
+      "probes": [
+        {
+          "time_s": 19.08,
+          "nearby_peak_time_s": 19.08,
+          "nearby_peak_probability": 0.49631435394220214,
+          "selected": false
+        },
+        {
+          "time_s": 20.12,
+          "nearby_peak_time_s": 20.12,
+          "nearby_peak_probability": 0.6057039568561084,
+          "selected": true
+        },
+        {
+          "time_s": 20.84,
+          "nearby_peak_time_s": 20.84,
+          "nearby_peak_probability": 0.5295930531948301,
+          "selected": true
+        },
+        {
+          "time_s": 21.54,
+          "nearby_peak_time_s": 21.54,
+          "nearby_peak_probability": 0.5847412236535366,
+          "selected": true
+        },
+        {
+          "time_s": 22.26,
+          "nearby_peak_time_s": 22.26,
+          "nearby_peak_probability": 0.5142277950738451,
+          "selected": true
+        }
+      ]
+    },
+    "rust_decode_soxr_resample": {
+      "sample_count": 498071,
+      "beat_count": 36,
+      "downbeat_count": 8,
+      "probes": [
+        {
+          "time_s": 19.08,
+          "nearby_peak_time_s": 19.08,
+          "nearby_peak_probability": 0.5395831701592886,
+          "selected": true
+        },
+        {
+          "time_s": 20.12,
+          "nearby_peak_time_s": 20.12,
+          "nearby_peak_probability": 0.5664929723079033,
+          "selected": true
+        },
+        {
+          "time_s": 20.84,
+          "nearby_peak_time_s": 20.84,
+          "nearby_peak_probability": 0.49656867407367883,
+          "selected": false
+        },
+        {
+          "time_s": 21.54,
+          "nearby_peak_time_s": 21.54,
+          "nearby_peak_probability": 0.5535468869142369,
+          "selected": true
+        },
+        {
+          "time_s": 22.26,
+          "nearby_peak_time_s": 22.26,
+          "nearby_peak_probability": 0.4985529075734319,
+          "selected": false
+        }
+      ]
+    },
+    "reference_decode_soxr_resample": {
+      "sample_count": 498071,
+      "beat_count": 36,
+      "downbeat_count": 8,
+      "probes": [
+        {
+          "time_s": 19.08,
+          "nearby_peak_time_s": 19.08,
+          "nearby_peak_probability": 0.5395850655534048,
+          "selected": true
+        },
+        {
+          "time_s": 20.12,
+          "nearby_peak_time_s": 20.12,
+          "nearby_peak_probability": 0.5664866488408038,
+          "selected": true
+        },
+        {
+          "time_s": 20.84,
+          "nearby_peak_time_s": 20.84,
+          "nearby_peak_probability": 0.49656485955626994,
+          "selected": false
+        },
+        {
+          "time_s": 21.54,
+          "nearby_peak_time_s": 21.54,
+          "nearby_peak_probability": 0.5535444122294589,
+          "selected": true
+        },
+        {
+          "time_s": 22.26,
+          "nearby_peak_time_s": 22.26,
+          "nearby_peak_probability": 0.4985504116498748,
+          "selected": false
+        }
+      ]
+    },
+    "official_original_file": {
+      "sample_count": 498071,
+      "beat_count": 36,
+      "downbeat_count": 8,
+      "probes": [
+        {
+          "time_s": 19.08,
+          "nearby_peak_time_s": 19.08,
+          "nearby_peak_probability": 0.5395850655534048,
+          "selected": true
+        },
+        {
+          "time_s": 20.12,
+          "nearby_peak_time_s": 20.12,
+          "nearby_peak_probability": 0.5664866488408038,
+          "selected": true
+        },
+        {
+          "time_s": 20.84,
+          "nearby_peak_time_s": 20.84,
+          "nearby_peak_probability": 0.49656485955626994,
+          "selected": false
+        },
+        {
+          "time_s": 21.54,
+          "nearby_peak_time_s": 21.54,
+          "nearby_peak_probability": 0.5535444122294589,
+          "selected": true
+        },
+        {
+          "time_s": 22.26,
+          "nearby_peak_time_s": 22.26,
+          "nearby_peak_probability": 0.4985504116498748,
+          "selected": false
+        }
+      ]
+    }
+  },
+  "effects": {
+    "decode_effect_rust_resampler": {
+      "left": "reference_decode_rust_resample",
+      "right": "rust_decode_rust_resample",
+      "waveform": {
+        "reference_sample_count": 498071,
+        "rust_sample_count": 498071,
+        "sample_count_delta": 0,
+        "diagnostic_prefix_samples": 44100,
+        "best_rust_delay_samples": 0,
+        "unshifted_rmse": 4.319548380961167e-8,
+        "best_shift_rmse": 4.319548380961167e-8,
+        "timestamps_shifted": false,
+        "full_max_abs": 9.387731552124023e-7,
+        "full_rmse": 4.595043060854239e-8,
+        "float32_bit_exact": false
+      },
+      "beat_events": {
+        "left_count": 37,
+        "right_count": 37,
+        "matched": 37,
+        "removed_source_times_s": [],
+        "added_source_times_s": [],
+        "max_matched_offset_s": 0
+      },
+      "beat_event_parity": {
+        "left_shape": [
+          37
+        ],
+        "right_shape": [
+          37
+        ],
+        "passed": true,
+        "max_abs": 0,
+        "mean_abs": 0,
+        "p95_abs": 0
+      },
+      "beat_logits": {
+        "left_frames": 1130,
+        "right_frames": 1130,
+        "common_frames": 1130,
+        "unshifted_max_abs": 0.000059604644775390625,
+        "unshifted_rmse": 0.000009352613075805774
+      },
+      "downbeat_events": {
+        "left_count": 8,
+        "right_count": 8,
+        "matched": 8,
+        "removed_source_times_s": [],
+        "added_source_times_s": [],
+        "max_matched_offset_s": 0
+      },
+      "downbeat_event_parity": {
+        "left_shape": [
+          8
+        ],
+        "right_shape": [
+          8
+        ],
+        "passed": true,
+        "max_abs": 0,
+        "mean_abs": 0,
+        "p95_abs": 0
+      },
+      "downbeat_logits": {
+        "left_frames": 1130,
+        "right_frames": 1130,
+        "common_frames": 1130,
+        "unshifted_max_abs": 0.000050067901611328125,
+        "unshifted_rmse": 0.000009042195040444964
+      }
+    },
+    "decode_effect_soxr_resampler": {
+      "left": "reference_decode_soxr_resample",
+      "right": "rust_decode_soxr_resample",
+      "waveform": {
+        "reference_sample_count": 498071,
+        "rust_sample_count": 498071,
+        "sample_count_delta": 0,
+        "diagnostic_prefix_samples": 44100,
+        "best_rust_delay_samples": 0,
+        "unshifted_rmse": 4.5751331190508205e-8,
+        "best_shift_rmse": 4.5751331190508205e-8,
+        "timestamps_shifted": false,
+        "full_max_abs": 9.834766387939453e-7,
+        "full_rmse": 4.813737390273056e-8,
+        "float32_bit_exact": false
+      },
+      "beat_events": {
+        "left_count": 36,
+        "right_count": 36,
+        "matched": 36,
+        "removed_source_times_s": [],
+        "added_source_times_s": [],
+        "max_matched_offset_s": 0
+      },
+      "beat_event_parity": {
+        "left_shape": [
+          36
+        ],
+        "right_shape": [
+          36
+        ],
+        "passed": true,
+        "max_abs": 0,
+        "mean_abs": 0,
+        "p95_abs": 0
+      },
+      "beat_logits": {
+        "left_frames": 1130,
+        "right_frames": 1130,
+        "common_frames": 1130,
+        "unshifted_max_abs": 0.000045299530029296875,
+        "unshifted_rmse": 0.000006955114139019644
+      },
+      "downbeat_events": {
+        "left_count": 8,
+        "right_count": 8,
+        "matched": 8,
+        "removed_source_times_s": [],
+        "added_source_times_s": [],
+        "max_matched_offset_s": 0
+      },
+      "downbeat_event_parity": {
+        "left_shape": [
+          8
+        ],
+        "right_shape": [
+          8
+        ],
+        "passed": true,
+        "max_abs": 0,
+        "mean_abs": 0,
+        "p95_abs": 0
+      },
+      "downbeat_logits": {
+        "left_frames": 1130,
+        "right_frames": 1130,
+        "common_frames": 1130,
+        "unshifted_max_abs": 0.00003337860107421875,
+        "unshifted_rmse": 0.000007022929739836396
+      }
+    },
+    "resampler_effect_rust_decode": {
+      "left": "rust_decode_soxr_resample",
+      "right": "rust_decode_rust_resample",
+      "waveform": {
+        "reference_sample_count": 498071,
+        "rust_sample_count": 498071,
+        "sample_count_delta": 0,
+        "diagnostic_prefix_samples": 44100,
+        "best_rust_delay_samples": 0,
+        "unshifted_rmse": 0.00035647454437899383,
+        "best_shift_rmse": 0.00035647454437899383,
+        "timestamps_shifted": false,
+        "full_max_abs": 0.006535220891237259,
+        "full_rmse": 0.00037374604685057864,
+        "float32_bit_exact": false
+      },
+      "beat_events": {
+        "left_count": 36,
+        "right_count": 37,
+        "matched": 35,
+        "removed_source_times_s": [
+          19.08
+        ],
+        "added_source_times_s": [
+          20.84,
+          22.26
+        ],
+        "max_matched_offset_s": 0
+      },
+      "beat_event_parity": {
+        "left_shape": [
+          36
+        ],
+        "right_shape": [
+          37
+        ],
+        "passed": false,
+        "reason": "shape_mismatch"
+      },
+      "beat_logits": {
+        "left_frames": 1130,
+        "right_frames": 1130,
+        "common_frames": 1130,
+        "unshifted_max_abs": 0.19301319122314453,
+        "unshifted_rmse": 0.037995068879994306
+      },
+      "downbeat_events": {
+        "left_count": 8,
+        "right_count": 8,
+        "matched": 8,
+        "removed_source_times_s": [],
+        "added_source_times_s": [],
+        "max_matched_offset_s": 0
+      },
+      "downbeat_event_parity": {
+        "left_shape": [
+          8
+        ],
+        "right_shape": [
+          8
+        ],
+        "passed": true,
+        "max_abs": 0,
+        "mean_abs": 0,
+        "p95_abs": 0
+      },
+      "downbeat_logits": {
+        "left_frames": 1130,
+        "right_frames": 1130,
+        "common_frames": 1130,
+        "unshifted_max_abs": 0.16696453094482422,
+        "unshifted_rmse": 0.027007743911020086
+      }
+    },
+    "resampler_effect_reference_decode": {
+      "left": "reference_decode_soxr_resample",
+      "right": "reference_decode_rust_resample",
+      "waveform": {
+        "reference_sample_count": 498071,
+        "rust_sample_count": 498071,
+        "sample_count_delta": 0,
+        "diagnostic_prefix_samples": 44100,
+        "best_rust_delay_samples": 0,
+        "unshifted_rmse": 0.00035647465720342885,
+        "best_shift_rmse": 0.00035647465720342885,
+        "timestamps_shifted": false,
+        "full_max_abs": 0.006535215303301811,
+        "full_rmse": 0.00037374601313623943,
+        "float32_bit_exact": false
+      },
+      "beat_events": {
+        "left_count": 36,
+        "right_count": 37,
+        "matched": 35,
+        "removed_source_times_s": [
+          19.08
+        ],
+        "added_source_times_s": [
+          20.84,
+          22.26
+        ],
+        "max_matched_offset_s": 0
+      },
+      "beat_event_parity": {
+        "left_shape": [
+          36
+        ],
+        "right_shape": [
+          37
+        ],
+        "passed": false,
+        "reason": "shape_mismatch"
+      },
+      "beat_logits": {
+        "left_frames": 1130,
+        "right_frames": 1130,
+        "common_frames": 1130,
+        "unshifted_max_abs": 0.19298839569091797,
+        "unshifted_rmse": 0.03799271920730139
+      },
+      "downbeat_events": {
+        "left_count": 8,
+        "right_count": 8,
+        "matched": 8,
+        "removed_source_times_s": [],
+        "added_source_times_s": [],
+        "max_matched_offset_s": 0
+      },
+      "downbeat_event_parity": {
+        "left_shape": [
+          8
+        ],
+        "right_shape": [
+          8
+        ],
+        "passed": true,
+        "max_abs": 0,
+        "mean_abs": 0,
+        "p95_abs": 0
+      },
+      "downbeat_logits": {
+        "left_frames": 1130,
+        "right_frames": 1130,
+        "common_frames": 1130,
+        "unshifted_max_abs": 0.16697263717651367,
+        "unshifted_rmse": 0.027006409969137255
+      }
+    },
+    "native_f32_normalization_control": {
+      "left": "official_original_file",
+      "right": "reference_decode_soxr_resample",
+      "waveform": {
+        "reference_sample_count": 498071,
+        "rust_sample_count": 498071,
+        "sample_count_delta": 0,
+        "diagnostic_prefix_samples": 44100,
+        "best_rust_delay_samples": 0,
+        "unshifted_rmse": 0,
+        "best_shift_rmse": 0,
+        "timestamps_shifted": false,
+        "full_max_abs": 0,
+        "full_rmse": 0,
+        "float32_bit_exact": true
+      },
+      "beat_events": {
+        "left_count": 36,
+        "right_count": 36,
+        "matched": 36,
+        "removed_source_times_s": [],
+        "added_source_times_s": [],
+        "max_matched_offset_s": 0
+      },
+      "beat_event_parity": {
+        "left_shape": [
+          36
+        ],
+        "right_shape": [
+          36
+        ],
+        "passed": true,
+        "max_abs": 0,
+        "mean_abs": 0,
+        "p95_abs": 0
+      },
+      "beat_logits": {
+        "left_frames": 1130,
+        "right_frames": 1130,
+        "common_frames": 1130,
+        "unshifted_max_abs": 0,
+        "unshifted_rmse": 0
+      },
+      "downbeat_events": {
+        "left_count": 8,
+        "right_count": 8,
+        "matched": 8,
+        "removed_source_times_s": [],
+        "added_source_times_s": [],
+        "max_matched_offset_s": 0
+      },
+      "downbeat_event_parity": {
+        "left_shape": [
+          8
+        ],
+        "right_shape": [
+          8
+        ],
+        "passed": true,
+        "max_abs": 0,
+        "mean_abs": 0,
+        "p95_abs": 0
+      },
+      "downbeat_logits": {
+        "left_frames": 1130,
+        "right_frames": 1130,
+        "common_frames": 1130,
+        "unshifted_max_abs": 0,
+        "unshifted_rmse": 0
+      }
+    },
+    "original_file_to_shipping": {
+      "left": "official_original_file",
+      "right": "rust_decode_rust_resample",
+      "waveform": {
+        "reference_sample_count": 498071,
+        "rust_sample_count": 498071,
+        "sample_count_delta": 0,
+        "diagnostic_prefix_samples": 44100,
+        "best_rust_delay_samples": 0,
+        "unshifted_rmse": 0.0003564747099503596,
+        "best_shift_rmse": 0.0003564747099503596,
+        "timestamps_shifted": false,
+        "full_max_abs": 0.006535198539495468,
+        "full_rmse": 0.00037374599569050117,
+        "float32_bit_exact": false
+      },
+      "beat_events": {
+        "left_count": 36,
+        "right_count": 37,
+        "matched": 35,
+        "removed_source_times_s": [
+          19.08
+        ],
+        "added_source_times_s": [
+          20.84,
+          22.26
+        ],
+        "max_matched_offset_s": 0
+      },
+      "beat_event_parity": {
+        "left_shape": [
+          36
+        ],
+        "right_shape": [
+          37
+        ],
+        "passed": false,
+        "reason": "shape_mismatch"
+      },
+      "beat_logits": {
+        "left_frames": 1130,
+        "right_frames": 1130,
+        "common_frames": 1130,
+        "unshifted_max_abs": 0.19302606582641602,
+        "unshifted_rmse": 0.03799640808963117
+      },
+      "downbeat_events": {
+        "left_count": 8,
+        "right_count": 8,
+        "matched": 8,
+        "removed_source_times_s": [],
+        "added_source_times_s": [],
+        "max_matched_offset_s": 0
+      },
+      "downbeat_event_parity": {
+        "left_shape": [
+          8
+        ],
+        "right_shape": [
+          8
+        ],
+        "passed": true,
+        "max_abs": 0,
+        "mean_abs": 0,
+        "p95_abs": 0
+      },
+      "downbeat_logits": {
+        "left_frames": 1130,
+        "right_frames": 1130,
+        "common_frames": 1130,
+        "unshifted_max_abs": 0.16696739196777344,
+        "unshifted_rmse": 0.02700791039780243
+      }
+    }
+  },
+  "source_event_parity_passed": false,
+  "not_checked": [
+    "music_accuracy",
+    "holdout",
+    "other_codecs_or_rates",
+    "resampler_replacement_candidate"
+  ],
+  "product_or_threshold_changed": false
+}

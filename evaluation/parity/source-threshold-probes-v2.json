@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "purpose": "read_only_official_model_spot_check_not_accuracy",
+  "case_id": "artbeat-15-85-to-127-5",
+  "reference_revision": "b95c8ab0c58c2d9fcfd40508ae8dffbc05ac4f5c",
+  "trace_sha256": "28c406c777b6d672771437c91cb816bc42dcf9563460d72d26a074f94a4b3f4b",
+  "audio_sha256": "6997c1b5760b2bb86be1fb9e70dd8e7b2c98aa7243423fd64a895b7ad36ca701",
+  "checkpoint_sha256": "8c328b45f59d8dd3dff219253ff6a8d6482be57d0133a29140e2febbf8eb8331",
+  "model_execution": "same official LogMelSpect, final0 checkpoint, split_predict_aggregate(1500,6,keep_first), minimal postprocessor on both inputs",
+  "input_left": "official file decode, downmix and soxr resampling",
+  "input_right": "current Rust decoded/resampled PCM from the private trace",
+  "counts": {"official_source_file": 36, "official_on_rust_pcm": 37},
+  "source_beats_absent_from_rust_pcm": [19.08],
+  "rust_pcm_beats_absent_from_source": [20.84, 22.26],
+  "probe_method": "maximum beat logit in plus/minus two frames around each fixed source-time probe; sigmoid; selected-event correspondence within 0.040001 seconds",
+  "probes": [
+    {"time_s": 19.08, "official_source_probability": 0.5395850655534048, "official_on_rust_pcm_probability": 0.4963093474244594, "source_selected": true, "rust_pcm_selected": false},
+    {"time_s": 20.12, "official_source_probability": 0.5664866488408038, "official_on_rust_pcm_probability": 0.6057140922581148, "source_selected": true, "rust_pcm_selected": true},
+    {"time_s": 20.84, "official_source_probability": 0.49656485955626994, "official_on_rust_pcm_probability": 0.529600180690794, "source_selected": false, "rust_pcm_selected": true},
+    {"time_s": 21.54, "official_source_probability": 0.5535444122294589, "official_on_rust_pcm_probability": 0.5847455076953195, "source_selected": true, "rust_pcm_selected": true},
+    {"time_s": 22.26, "official_source_probability": 0.4985504116498748, "official_on_rust_pcm_probability": 0.5142300656606024, "source_selected": false, "rust_pcm_selected": true}
+  ],
+  "not_isolated": ["codec_decode_vs_resampling_filter_contribution"],
+  "product_or_threshold_changed": false
+}

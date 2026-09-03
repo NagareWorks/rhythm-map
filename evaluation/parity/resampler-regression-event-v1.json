@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "purpose": "calibration_resampler_event_loss_diagnosis",
+  "case_id": "artbeat-14-240-to-96",
+  "controls_passed": true,
+  "controls": {
+    "frozen_pcm_reproduced": true,
+    "frozen_shipping_observations_exact": true,
+    "fixed_decoder_replayed": true,
+    "port_adapter_events_agree": true,
+    "candidate_raw_count_reproduced": true,
+    "full_recording": true
+  },
+  "decoder": {
+    "logit_threshold": 0,
+    "local_max_radius_frames": 3,
+    "deduplicate_width_frames": 1,
+    "frame_rate_hz": 50
+  },
+  "diagnostic_event_correspondence_s": 0.040001,
+  "beat_delta": {
+    "left_count": 33,
+    "right_count": 32,
+    "matched": 32,
+    "removed_source_times_s": [
+      1.5
+    ],
+    "added_source_times_s": [],
+    "max_matched_offset_s": 0.0
+  },
+  "downbeat_delta": {
+    "left_count": 14,
+    "right_count": 14,
+    "matched": 14,
+    "removed_source_times_s": [],
+    "added_source_times_s": [],
+    "max_matched_offset_s": 0.0
+  },
+  "logit_difference": {
+    "left_frames": 816,
+    "right_frames": 816,
+    "common_frames": 816,
+    "unshifted_max_abs": 0.5798401832580566,
+    "unshifted_rmse": 0.13720015946522118
+  },
+  "removed_event_probes": [
+    {
+      "event_time_s": 1.5,
+      "before": {
+        "frame": 75,
+        "time_s": 1.5,
+        "logit": 0.1951075792312622,
+        "probability": 0.5486227491944976,
+        "above_threshold": true,
+        "local_maximum": true,
+        "window_peak_frame": 75,
+        "window_peak_logit": 0.1951075792312622,
+        "strongest_neighbor_frame": 76,
+        "neighbor_margin": 1.5885299444198608
+      },
+      "after": {
+        "frame": 75,
+        "time_s": 1.5,
+        "logit": -0.053524136543273926,
+        "probability": 0.4866221594851609,
+        "above_threshold": false,
+        "local_maximum": true,
+        "window_peak_frame": 75,
+        "window_peak_logit": -0.053524136543273926,
+        "strongest_neighbor_frame": 76,
+        "neighbor_margin": 1.5023423433303833
+      },
+      "cause": "strict_zero_threshold_crossing",
+      "nearest_truth": {
+        "time_s": 1.497135,
+        "error_ms": 2.8649999999998954,
+        "within_suite_tolerance": true
+      }
+    }
+  ],
+  "before_selected_metrics": {
+    "failures": [
+      "beat F1 0.8108 is below 0.9900",
+      "p95 tempo error 108.334% exceeds 15.000%"
+    ],
+    "id": "artbeat-14-240-to-96",
+    "metrics": {
+      "beats": {
+        "f1": 0.8108108108108109,
+        "matched": 30,
+        "median_absolute_error_ms": 10.885457763672335,
+        "p95_absolute_error_ms": 22.604457763671704,
+        "precision": 0.9090909090909091,
+        "recall": 0.7317073170731707
+      },
+      "changes": {
+        "f1": 0.33333333333333337,
+        "matched": 1,
+        "precision": 0.2,
+        "recall": 1.0
+      },
+      "downbeats": {
+        "f1": 0.0,
+        "matched": 0,
+        "median_absolute_error_ms": null,
+        "p95_absolute_error_ms": null,
+        "precision": 0.0,
+        "recall": 1.0
+      },
+      "tempo": {
+        "median_absolute_error_percent": 1.4241535706909758,
+        "p95_absolute_error_percent": 108.33353201567206,
+        "sample_count": 32
+      }
+    },
+    "passed": false
+  },
+  "after_selected_metrics": {
+    "failures": [
+      "beat F1 0.7945 is below 0.9900",
+      "p95 tempo error 108.334% exceeds 15.000%"
+    ],
+    "id": "artbeat-14-240-to-96",
+    "metrics": {
+      "beats": {
+        "f1": 0.7945205479452054,
+        "matched": 29,
+        "median_absolute_error_ms": 10.885457763672335,
+        "p95_absolute_error_ms": 22.604457763671704,
+        "precision": 0.90625,
+        "recall": 0.7073170731707317
+      },
+      "changes": {
+        "f1": 0.33333333333333337,
+        "matched": 1,
+        "precision": 0.2,
+        "recall": 1.0
+      },
+      "downbeats": {
+        "f1": 0.0,
+        "matched": 0,
+        "median_absolute_error_ms": null,
+        "p95_absolute_error_ms": null,
+        "precision": 0.0,
+        "recall": 1.0
+      },
+      "tempo": {
+        "median_absolute_error_percent": 1.9142953380048233,
+        "p95_absolute_error_percent": 108.33353201567206,
+        "sample_count": 31
+      }
+    },
+    "passed": false
+  },
+  "sources": {
+    "candidate_source_sha256": "3d4dc56efea7a0370b64d248971c02260618a5bf5598d15714ac71e28efcd819",
+    "runner_source_sha256": "643d385fc1f54b3c4bd17ca485fa3569d43376df1705a91ac05edd43be3a6489",
+    "adapter_source_sha256": "ecd93860fdebf56905fdb12f341cfb66ad1c227f19e0d45a81b7ec2c4f59a14d",
+    "audio_preprocessing_sha256": "67b3e54b7415d16e5be15eec751ba639a7a544ee283f330b43411b56fe5f4fa2",
+    "core_engine_sha256": "b2aa743e5d2699e1b1bd82582dbcb223a71406d99d470b41a49041586fac6ea2",
+    "core_estimator_sha256": "3d2bc3ca875025b5d08e511dcecf38351fc8f62e27daf8d49147f9f8a68bf8f1",
+    "metrics_source_sha256": "995ea5e7ce6edb062d83f995e7fd3a0c6920dc9ecb6592009caa330cd1265d6d"
+  },
+  "audio_sha256": "a96686045df4adee6a0aa4127b70daeeab14d8b9f08124cc78d9af95a860c02c",
+  "model_manifest_sha256": "ccedbfeb35b4f584834df3aca1ea41899ed39fbaf2efad9e2cc71426aed9e23d",
+  "not_checked": [
+    "official_source_pipeline",
+    "holdout",
+    "safe_recovery_rule"
+  ],
+  "promotion": false,
+  "interpretation": "A diagnostic peak/threshold classification is not permission to lower a threshold or synthesize beats.",
+  "auditor_sha256": "b0c2c63eca9304a7aa569cd99617ef52d1bd6e3f625366fb32a12e64728ca5cf",
+  "lock_sha256": "b9184bb37a212e4ade840219d182e401d20da64ecc4f28978c4b69bc0710e3fc",
+  "calibration_report_sha256": "235e1c68dac27db50c0b1762d3978226c562cb3d99bd5f810a7ec1ab714dff45",
+  "baseline_report_sha256": "44d17c8dba13b4494d869914a8830840bccf32000adc0a08af0a4fcd07108e43",
+  "before_trace_sha256": "abd6bec2fb5eba8cdf0a85bc1b3e9c17df7b85904e3d03b98e4cbd3389fc1d1b",
+  "after_trace_sha256": "53e13475d72b6fd5c8a25a182196b73c31db4f61a75f20561f1e59cf36fa0894",
+  "truth_sha256": "6583d495985b507d2083975501e40f15ad0727f2df8761645280f4fb87c3fe96"
+}

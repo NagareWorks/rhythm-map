@@ -28,6 +28,18 @@ purpose so results cannot be detached from their development role.
 
 ## Commands
 
+For calibration-only comparison of the official Beat This checkpoint,
+converted ONNX graphs, RTen, preprocessing and decoded events, see
+[`parity/README.md`](parity/README.md). Its private traces are not redistributable
+fixtures and its numerical scores must not be reported as music accuracy.
+
+The [weak-candidate evidence audit](baselines/beat-this-candidate-evidence-v1.md)
+separately measures missed-main-beat versus offbeat ranking from verified
+cached observations and actual PCM features, without model inference or a
+recovery policy. Its grid-aligned labels are not subdivision-note annotations;
+candidate coverage and AUC are not recovered beat F1. Reproduction commands
+are in [the parity tools guide](parity/README.md#cache-only-weak-candidate-evidence).
+
 Fetch the public ARTBeaT rhythm-challenge slice outside the checkout. Audio is
 always fetched; `--with-annotations` also retains the official SVG sources used
 to audit checked-in truth:

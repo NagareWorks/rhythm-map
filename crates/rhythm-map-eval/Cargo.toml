@@ -27,5 +27,10 @@ serde_json.workspace = true
 sha2.workspace = true
 ureq.workspace = true
 
+[dev-dependencies]
+# Private diagnostic exports only: reconstruct the exact former preprocessing
+# input without adding a legacy path to a product API.
+beat-this = "=1.0.0"
+
 [lints]
 workspace = true

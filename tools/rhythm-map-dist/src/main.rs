@@ -131,6 +131,11 @@ fn package_native(args: &PackageArgs) -> Result<()> {
     copy_repository_file(args, "NOTICE", "NOTICE")?;
     copy_repository_file(
         args,
+        "licenses/beat-this-rs-MIT.txt",
+        "licenses/beat-this-rs-MIT.txt",
+    )?;
+    copy_repository_file(
+        args,
         "examples/05-distribution/verify_package.py",
         "verify_package.py",
     )?;
@@ -441,6 +446,14 @@ fn sha256_file(path: &Path) -> Result<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn adapted_source_license_is_retained_in_crate_and_native_distribution() {
+        assert_eq!(
+            include_str!("../../../licenses/beat-this-rs-MIT.txt"),
+            include_str!("../../../crates/rhythm-map-beat-this/LICENSE-MIT"),
+        );
+    }
 
     #[test]
     fn release_tag_must_match_workspace_version() {

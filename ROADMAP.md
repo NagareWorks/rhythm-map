@@ -144,6 +144,140 @@ a learned component to the default distribution.
 
 ### Measured bottlenecks
 
+- 2026-09-03: completed the cache-only weak-candidate evidence audit on the
+  shipping ARTBeaT v2 calibration cohort, with all 15 selected-score replays
+  exact and the reference-resampler 1.50 s probe kept separate. Of 1,180
+  subthreshold candidates, 144 support 119 distinct raw-sequence misses out
+  of 128; 987 are anchored offbeats, 17 covered-truth duplicates, and 32
+  outside the annotated span. These are evidence-coverage counts, not
+  recovered beats. Confidence/onset/midpoint pooled AUCs are 0.798/0.735/0.760
+  against anchored offbeats, but distributions overlap; the declared
+  lower-context-dispersion direction scores only 0.351. Regularity alone
+  cannot distinguish main beats from stable subdivisions near changing or
+  already-sparse anchors. No one of 823 complete-context negatives dominates
+  the fixed probe on all four declared coordinates, but its known-answer
+  values cannot become fitted cutoffs. Grid-aligned negatives are not
+  verified subdivision notes. Keep default recovery and preprocessing
+  unchanged; next transfer the same frozen features to already-opened RUBATO
+  calibration under the same observation contract, separately from ARTBeaT.
+  Missing matching caches require an explicitly budgeted inference run, not
+  mixing old contracts or opening holdout. See
+  `evaluation/baselines/beat-this-candidate-evidence-v1.md` and
+  `evaluation/parity/candidate-evidence-separability-v1.json`.
+
+- 2026-09-03: closed the single-event resampler regression diagnosis on
+  `240-to-96`. Exact full-PCM and shipping raw-observation replays isolate
+  one removed beat at 1.50 s (2.865 ms from truth), while all other 32 beat
+  timestamps and 14 downbeats stay unchanged. The same local maximum crosses
+  the fixed gate: logit 0.195108 → -0.053524, sigmoid 0.548623 → 0.486622;
+  it is not local-peak competition. Its real timestamp remains in candidate
+  evidence. Independent original-checkpoint/ONNX/RTen/original-file parity
+  passes 16/16 and the official source path also emits 32 beats: reference
+  compatibility reproduces an upstream miss, not a safe accuracy gain.
+  Do not promote the resampler, lower a threshold, loosen the existing
+  isolated-midpoint guard, or add per-song/dual-preprocessor modes. The next
+  bounded step is to measure missed-beat versus subdivision separability
+  using existing real candidate and PCM evidence on calibration slices;
+  require that evidence before another recovery rule. Keep holdout sealed.
+  See `evaluation/parity/resampler-regression-event-v1.json`,
+  `evaluation/parity/resampler-regression-reference-v1.json`, and
+  `evaluation/baselines/beat-this-reference-resampler-v1.md`.
+
+- 2026-09-03: bounded the evaluation-only resampler's coefficient allocation
+  to 8 MiB without changing its formula or output: 99 generated probes and
+  the full PCM of four historical neural-parity cases remain bit-identical.
+  Completed the full paired ARTBeaT/FSLD 30-case calibration with exact
+  shipping-v2 cached-score/oracle replay and fresh candidate inference.
+  ARTBeaT mean beat F1 rises 0.807961 → 0.808710 and mean tempo P95 error
+  falls 58.964548% → 55.653544%, but `240-to-96` raw events fall 33 → 32 and
+  correct matches fall 30 → 29 (F1 0.810811 → 0.794521). `90-to-80` has worse
+  median beat timing. FSLD mean median tempo error is unchanged, mean P95 worsens
+  50.187819% → 50.223669%, and its 110 BPM failure remains. Pass counts
+  stay 1/15 and 7/15. Preprocessing is roughly five times slower, adding
+  about 0.19 s/track on this VDI; model+analysis dominates at 24.84 minutes
+  across 30 tracks. Do not promote or add user/per-song strategies. The next
+  bounded check is the lost `240-to-96` event's model logits and local peaks,
+  distinguishing threshold crossing from peak competition without retuning
+  to labels. Shipping code/cache identity, holdout, and release state remain
+  unchanged. See `evaluation/baselines/beat-this-reference-resampler-v1.md`
+  and `evaluation/parity/reference-resampler-calibration-v1.json`.
+
+- 2026-09-03: the frozen evaluation-only `phase-exact-bh2-256-v1` resampler
+  approximates reference HQ bandwidth with a rate-scaled squared Blackman-Harris
+  sinc and a rational sample clock. Across 99 generated signals at seven rates,
+  waveform RMSE improves on 86, is unchanged on 13, and regresses on none;
+  all lengths agree and center-impulse fractional delay falls below 1e-8 output
+  samples. Four real calibration cases then pass 64/64 unchanged reference
+  checks, including the former ARTBeaT 15 original-file mismatch (36 beats,
+  with source-event errors below one microsecond). Keep the previous failed
+  shipping audit intact. This is reference compatibility, not a full music
+  accuracy result. Do not promote yet: bound the prototype's rational-phase
+  coefficient memory for unusual coprime rates, measure representative latency,
+  and run the full paired 30-case calibration before deciding whether to merge
+  it into the single default preprocessing path. Shipping code, v2 cache
+  identity, holdout, and release status remain unchanged. See
+  `evaluation/baselines/beat-this-reference-resampler-v1.md`.
+
+- 2026-09-03: completed the native-rate 2x2 decoder/resampler control on the
+  frozen ARTBeaT 15 mismatch. Both decoded inputs have 996,141 frames at
+  44.1 kHz and zero detected lag. Holding either resampler fixed, changing
+  decode/downmix changes no beat/downbeat timestamps; holding either decoder
+  fixed, changing the resampler reproduces all three 19.08/20.84/22.26 s event
+  differences (37 versus 36 beats). A fifth official float64 control rules out
+  native float32 normalization for this recording. Refactored native-stage
+  access reconstructs the shipping and frozen v2 PCM bit-exactly, so the
+  observation contract and default behavior are unchanged. This isolates the
+  resampler path, not a specific filter parameter or musical correctness;
+  original-file parity remains explicitly failed. Next characterize one
+  reference-compatible resampling candidate on synthetic signals/multiple
+  rates before full paired calibration. No codec replacement, threshold fit,
+  public strategy, holdout access, or release. See
+  `evaluation/baselines/beat-this-native-pcm-v2.md`.
+
+- 2026-09-03: the four-case regression origin/tail audit reconstructs v1 PCM
+  and official-model logits exactly. Removing only the recovered 64--65 tail
+  samples changes no selected beat/downbeat timestamps; restoring the 63-sample
+  old origin reproduces the prior event changes with or without the full tail.
+  This implicates origin/frontend-context sensitivity on these cases, not a
+  reason to undo tail flushing. Expanded reference parity is 63/64: same-PCM
+  execution/decoding passes everywhere, but ARTBeaT 15 has 36 official-file beats
+  versus 37 on Rust PCM. A same-official-model replay localizes crossings near
+  19.08/20.84/22.26 s across the unchanged 0.5 confidence threshold. Next compare
+  native-rate decoded PCM and run both resamplers from identical native input
+  before changing the decoder or attempting a peak-stability candidate. Retain
+  one product path, sealed holdout, and no-release status. Full methodology and
+  the deliberately failing audit are recorded in
+  `evaluation/baselines/beat-this-phase-tail-audit-v2.md`; product code and the
+  preceding 30-case accuracy baseline are unchanged.
+
+- 2026-09-03: corrected Beat This file/PCM preprocessing with phase-aligned
+  delay trimming, bounded resampling chunks, tail flushing, exact rounded
+  duration, and a v2 observation-cache contract. Seven model-free audio tests
+  pass; the repeated 32-check official audit removes the ARTBeaT sample's
+  63-sample waveform lag and one-sample length mismatch while preserving native
+  22.05 kHz parity. Thirty fresh calibration inferences give ARTBeaT mean beat
+  F1 0.805161 -> 0.807961 (five improved, three regressed; still 1/15 passes),
+  and FSLD tempo gates 6/15 -> 7/15 with no lost pass. This is not a safe accuracy
+  promotion: ARTBeaT 13/15/18 regress in beat F1, ARTBeaT 14 and FSLD 110 BPM
+  regress in tempo P95. Raw-cache evidence shows real peaks crossing the fixed
+  0.5 confidence threshold before the estimator, including leading misses,
+  interior misses, and additional tail-region events. Next extend official-file
+  parity to these failures and isolate phase/tail sensitivity; do not hide them
+  with an average, tune a global threshold, restore the known delay, or add a
+  second public resampling strategy. See
+  `evaluation/baselines/beat-this-resampling-v2.md`. Keep holdout sealed and the
+  change in development; no release/package publication or push in this step.
+
+- 2026-09-03: a two-case calibration parity audit matched the official `final0`
+  checkpoint, ONNX Runtime, RTen, frontend, chunk stitching and default decode
+  within fixed numerical budgets, including a 35-second chunk-crossing prefix.
+  It found a separate 44.1-to-22.05 kHz waveform delay of about 63 samples and
+  a one-sample duration difference; native-22.05 kHz PCM matched exactly. Audit
+  and repair the resampler's delay/tail contract next, without shifting final
+  beat timestamps or mistaking numerical parity for musical accuracy. See
+  `evaluation/baselines/beat-this-reference-parity-v1.md`. Holdout stays sealed;
+  no model, strategy, or release change was made by the audit.
+
 - 2026-08-21: the first ARTBeaT oracle run failed 13 of 15 cases even with exact
   upstream beat timestamps. Global preferred-band folding erased sustained
   octave-related changes and ordinary smoothing blurred jump edges, proving the

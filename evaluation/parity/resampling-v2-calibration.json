@@ -1,0 +1,1156 @@
+{
+  "schema_version": 1,
+  "purpose": "calibration_preprocessing_regression_not_release_acceptance",
+  "old_evaluator_sha256": "9ba1fd0b2981895b782aae1015f863749ef0187ec4e53c5c750909b2647323b5",
+  "new_evaluator_sha256": "3e29ffd4cae94dee4effa91e968f8e04a21280d530afd0b686c5444380352691",
+  "suites": [
+    {
+      "suite_id": "artbeat-v1",
+      "purpose": "calibration",
+      "model_manifest_sha256": "ccedbfeb35b4f584834df3aca1ea41899ed39fbaf2efad9e2cc71426aed9e23d",
+      "before_report_sha256": "843723e18055f714965a162e82d8eb6f0b95b69d61ecc62253656a02e7951646",
+      "after_report_sha256": "44d17c8dba13b4494d869914a8830840bccf32000adc0a08af0a4fcd07108e43",
+      "before_contract": "beat-this-rten-observations-v1+decode-audio-v1",
+      "after_contract": "beat-this-rten-observations-v2+decode-audio-v2",
+      "before_cache_hits": 15,
+      "after_cache_hits": 0,
+      "before_passed": 1,
+      "after_passed": 1,
+      "before_mean_median_tempo_error_percent": 18.51281182898192,
+      "after_mean_median_tempo_error_percent": 19.050469398475666,
+      "before_mean_p95_tempo_error_percent": 66.4807555471153,
+      "after_mean_p95_tempo_error_percent": 58.964548067797594,
+      "cases": [
+        {
+          "id": "artbeat-05-75-to-150",
+          "audio_sha256": "ddff1eadde814bc13896b64ad81b7ba55626be4f7b64dae417d00a2210a0c517",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 16,
+              "median_absolute_error_percent": 49.98959069686006,
+              "p95_absolute_error_percent": 50.40985574916493
+            },
+            "beats": {
+              "matched": 17,
+              "precision": 1,
+              "recall": 0.6538461538461539,
+              "f1": 0.7906976744186047,
+              "median_absolute_error_ms": 7.50009536743157,
+              "p95_absolute_error_ms": 27.500171661376527
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 1,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 17,
+            "analyzed_event_count": 17
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 16,
+              "median_absolute_error_percent": 49.99998211859128,
+              "p95_absolute_error_percent": 50.409865601846846
+            },
+            "beats": {
+              "matched": 17,
+              "precision": 1,
+              "recall": 0.6538461538461539,
+              "f1": 0.7906976744186047,
+              "median_absolute_error_ms": 3.333190734863045,
+              "p95_absolute_error_ms": 18.332992847442608
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 1,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 17,
+            "analyzed_event_count": 17
+          }
+        },
+        {
+          "id": "artbeat-06-150-to-75",
+          "audio_sha256": "196e3f9d0a12b12b7b0936d4de0beb36412f217d55114feac810aad0d303f2e5",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 17,
+              "median_absolute_error_percent": 48.701083210446086,
+              "p95_absolute_error_percent": 50.00000198682092
+            },
+            "beats": {
+              "matched": 17,
+              "precision": 0.9444444444444444,
+              "recall": 0.6538461538461539,
+              "f1": 0.7727272727272727,
+              "median_absolute_error_ms": 5.832809265136518,
+              "p95_absolute_error_ms": 22.50007629394446
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 1,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 18,
+            "analyzed_event_count": 18
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 18,
+              "median_absolute_error_percent": 49.13776364477011,
+              "p95_absolute_error_percent": 50.00000198682092
+            },
+            "beats": {
+              "matched": 18,
+              "precision": 0.9473684210526315,
+              "recall": 0.6923076923076923,
+              "f1": 0.7999999999999999,
+              "median_absolute_error_ms": 5.000095367432067,
+              "p95_absolute_error_ms": 16.66699910593033
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 1,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 19,
+            "analyzed_event_count": 19
+          }
+        },
+        {
+          "id": "artbeat-07-75-to-112-5",
+          "audio_sha256": "458693d0911bc8543b5bb819db01391bbaa2b49fd693faf779f00ff266d7641e",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 24,
+              "median_absolute_error_percent": 1.281921730259708,
+              "p95_absolute_error_percent": 185.71407162429347
+            },
+            "beats": {
+              "matched": 20,
+              "precision": 0.8,
+              "recall": 0.9523809523809523,
+              "f1": 0.8695652173913043,
+              "median_absolute_error_ms": 8.60630517578187,
+              "p95_absolute_error_ms": 24.44301907348656
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 25,
+            "analyzed_event_count": 25
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 22,
+              "median_absolute_error_percent": 1.2819217302314252,
+              "p95_absolute_error_percent": 53.84615948919734
+            },
+            "beats": {
+              "matched": 20,
+              "precision": 0.8695652173913043,
+              "recall": 0.9523809523809523,
+              "f1": 0.909090909090909,
+              "median_absolute_error_ms": 7.916999552965164,
+              "p95_absolute_error_ms": 20.833004768371577
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 23,
+            "analyzed_event_count": 23
+          }
+        },
+        {
+          "id": "artbeat-08-112-5-to-75",
+          "audio_sha256": "04180b492147efd020d63e79dd444a7a3969b677be1e15c6f1b67256d4b3544b",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 23,
+              "median_absolute_error_percent": 1.1893594238366632,
+              "p95_absolute_error_percent": 90.47615587576804
+            },
+            "beats": {
+              "matched": 20,
+              "precision": 0.8333333333333334,
+              "recall": 0.9090909090909091,
+              "f1": 0.8695652173913043,
+              "median_absolute_error_ms": 10.27090463256819,
+              "p95_absolute_error_ms": 25.82479019164996
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 24,
+            "analyzed_event_count": 24
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 23,
+              "median_absolute_error_percent": 1.2345609241928945,
+              "p95_absolute_error_percent": 90.47615587576804
+            },
+            "beats": {
+              "matched": 20,
+              "precision": 0.8333333333333334,
+              "recall": 0.9090909090909091,
+              "f1": 0.8695652173913043,
+              "median_absolute_error_ms": 7.073694824219601,
+              "p95_absolute_error_ms": 25.82479019164996
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 24,
+            "analyzed_event_count": 24
+          }
+        },
+        {
+          "id": "artbeat-09-90-to-80",
+          "audio_sha256": "f3bf9837094765fd2ceca45427b16f721ed1b14c31921f829ba26898535d4bdf",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 24,
+              "median_absolute_error_percent": 0.9803216135481957,
+              "p95_absolute_error_percent": 3.783267816346915
+            },
+            "beats": {
+              "matched": 24,
+              "precision": 0.96,
+              "recall": 0.96,
+              "f1": 0.96,
+              "median_absolute_error_ms": 18.823885559081432,
+              "p95_absolute_error_ms": 35.07411444091879
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 25,
+            "analyzed_event_count": 25
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 24,
+              "median_absolute_error_percent": 0.9803259642371149,
+              "p95_absolute_error_percent": 3.783267816346915
+            },
+            "beats": {
+              "matched": 24,
+              "precision": 0.96,
+              "recall": 0.96,
+              "f1": 0.96,
+              "median_absolute_error_ms": 17.26188555908159,
+              "p95_absolute_error_ms": 35.07411444091879
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 25,
+            "analyzed_event_count": 25
+          }
+        },
+        {
+          "id": "artbeat-10-90-to-120",
+          "audio_sha256": "adde95301f560b88e35075ed2a866989b0ff27a34e62c2fb7e81a68a1584fd24",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": true,
+            "tempo": {
+              "sample_count": 28,
+              "median_absolute_error_percent": 1.0100964261815193,
+              "p95_absolute_error_percent": 1.4241897395057042
+            },
+            "beats": {
+              "matched": 29,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "median_absolute_error_ms": 12.131343322753452,
+              "p95_absolute_error_ms": 26.249997317790985
+            },
+            "changes": {
+              "matched": 1,
+              "precision": 0.5,
+              "recall": 1,
+              "f1": 0.6666666666666666
+            },
+            "raw_event_count": 29,
+            "analyzed_event_count": 29
+          },
+          "after": {
+            "passed": true,
+            "tempo": {
+              "sample_count": 28,
+              "median_absolute_error_percent": 1.0100964261815193,
+              "p95_absolute_error_percent": 1.4241897395057042
+            },
+            "beats": {
+              "matched": 29,
+              "precision": 1,
+              "recall": 1,
+              "f1": 1,
+              "median_absolute_error_ms": 11.267057220458954,
+              "p95_absolute_error_ms": 26.249997317790985
+            },
+            "changes": {
+              "matched": 1,
+              "precision": 0.5,
+              "recall": 1,
+              "f1": 0.6666666666666666
+            },
+            "raw_event_count": 29,
+            "analyzed_event_count": 29
+          }
+        },
+        {
+          "id": "artbeat-11-60-to-80",
+          "audio_sha256": "e9c28da6be8a12ac772df218bd4fdbb3651ec73e0ec9caa745dccba205566fcf",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 19,
+              "median_absolute_error_percent": 0.45440032654456175,
+              "p95_absolute_error_percent": 39.51611786801453
+            },
+            "beats": {
+              "matched": 19,
+              "precision": 0.95,
+              "recall": 0.9047619047619048,
+              "f1": 0.9268292682926829,
+              "median_absolute_error_ms": 17.18819073486344,
+              "p95_absolute_error_ms": 45.93746594238368
+            },
+            "changes": {
+              "matched": 1,
+              "precision": 0.3333333333333333,
+              "recall": 1,
+              "f1": 0.5
+            },
+            "raw_event_count": 20,
+            "analyzed_event_count": 20
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 19,
+              "median_absolute_error_percent": 0.45440032654456175,
+              "p95_absolute_error_percent": 39.51611786801453
+            },
+            "beats": {
+              "matched": 19,
+              "precision": 0.95,
+              "recall": 0.9047619047619048,
+              "f1": 0.9268292682926829,
+              "median_absolute_error_ms": 15.728942779540844,
+              "p95_absolute_error_ms": 33.82841961669847
+            },
+            "changes": {
+              "matched": 1,
+              "precision": 0.3333333333333333,
+              "recall": 1,
+              "f1": 0.5
+            },
+            "raw_event_count": 20,
+            "analyzed_event_count": 20
+          }
+        },
+        {
+          "id": "artbeat-12-80-to-150",
+          "audio_sha256": "33caad5980c9e743365721d6aa321b5ba2959653c5858f4038e32c7ebcffd11a",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 21,
+              "median_absolute_error_percent": 1.292987130378478,
+              "p95_absolute_error_percent": 50.40985622979439
+            },
+            "beats": {
+              "matched": 22,
+              "precision": 1,
+              "recall": 0.6666666666666666,
+              "f1": 0.8,
+              "median_absolute_error_ms": 10.00011444091875,
+              "p95_absolute_error_ms": 32.03095231628428
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 1,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 22,
+            "analyzed_event_count": 22
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 21,
+              "median_absolute_error_percent": 1.292987130378478,
+              "p95_absolute_error_percent": 50.40985622979439
+            },
+            "beats": {
+              "matched": 22,
+              "precision": 1,
+              "recall": 0.6666666666666666,
+              "f1": 0.8,
+              "median_absolute_error_ms": 12.499923706053906,
+              "p95_absolute_error_ms": 26.718961853027245
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 1,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 22,
+            "analyzed_event_count": 22
+          }
+        },
+        {
+          "id": "artbeat-13-180-to-120",
+          "audio_sha256": "4e14088d021e4d78fef2bd6febc3235c445cef83eef26e24e8429fce7e061fa3",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 30,
+              "median_absolute_error_percent": 1.4241174019842617,
+              "p95_absolute_error_percent": 177.77776673988106
+            },
+            "beats": {
+              "matched": 24,
+              "precision": 0.7741935483870968,
+              "recall": 0.7272727272727273,
+              "f1": 0.7500000000000001,
+              "median_absolute_error_ms": 4.994828338623414,
+              "p95_absolute_error_ms": 19.90065667724572
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 31,
+            "analyzed_event_count": 31
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 29,
+              "median_absolute_error_percent": 1.2988471057925228,
+              "p95_absolute_error_percent": 177.77776673988106
+            },
+            "beats": {
+              "matched": 23,
+              "precision": 0.7666666666666667,
+              "recall": 0.696969696969697,
+              "f1": 0.7301587301587302,
+              "median_absolute_error_ms": 4.264847412109418,
+              "p95_absolute_error_ms": 18.05598807907105
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 30,
+            "analyzed_event_count": 30
+          }
+        },
+        {
+          "id": "artbeat-14-240-to-96",
+          "audio_sha256": "a96686045df4adee6a0aa4127b70daeeab14d8b9f08124cc78d9af95a860c02c",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 30,
+              "median_absolute_error_percent": 2.472763723357237,
+              "p95_absolute_error_percent": 78.57159887057605
+            },
+            "beats": {
+              "matched": 28,
+              "precision": 0.9032258064516129,
+              "recall": 0.6829268292682927,
+              "f1": 0.7777777777777778,
+              "median_absolute_error_ms": 13.228980926514033,
+              "p95_absolute_error_ms": 22.604457763671704
+            },
+            "changes": {
+              "matched": 1,
+              "precision": 0.25,
+              "recall": 1,
+              "f1": 0.4
+            },
+            "raw_event_count": 31,
+            "analyzed_event_count": 31
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 32,
+              "median_absolute_error_percent": 1.4241535706909758,
+              "p95_absolute_error_percent": 108.33353201567206
+            },
+            "beats": {
+              "matched": 30,
+              "precision": 0.9090909090909091,
+              "recall": 0.7317073170731707,
+              "f1": 0.8108108108108109,
+              "median_absolute_error_ms": 10.885457763672335,
+              "p95_absolute_error_ms": 22.604457763671704
+            },
+            "changes": {
+              "matched": 1,
+              "precision": 0.2,
+              "recall": 1,
+              "f1": 0.33333333333333337
+            },
+            "raw_event_count": 33,
+            "analyzed_event_count": 33
+          }
+        },
+        {
+          "id": "artbeat-15-85-to-127-5",
+          "audio_sha256": "6997c1b5760b2bb86be1fb9e70dd8e7b2c98aa7243423fd64a895b7ad36ca701",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 33,
+              "median_absolute_error_percent": 31.791602413992788,
+              "p95_absolute_error_percent": 34.02386880868978
+            },
+            "beats": {
+              "matched": 24,
+              "precision": 0.7058823529411765,
+              "recall": 0.6,
+              "f1": 0.6486486486486486,
+              "median_absolute_error_ms": 10.595961853027802,
+              "p95_absolute_error_ms": 21.179923706054815
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 1,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 34,
+            "analyzed_event_count": 34
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 36,
+              "median_absolute_error_percent": 32.75478882578541,
+              "p95_absolute_error_percent": 47.05896377576851
+            },
+            "beats": {
+              "matched": 24,
+              "precision": 0.6486486486486487,
+              "recall": 0.6,
+              "f1": 0.6233766233766234,
+              "median_absolute_error_ms": 8.235957084655743,
+              "p95_absolute_error_ms": 16.471914169311486
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 37,
+            "analyzed_event_count": 37
+          }
+        },
+        {
+          "id": "artbeat-18-piano-rubato",
+          "audio_sha256": "3e01831b02777bdc3707677153589ef92645c410303b480e7ef0d1d882dcb82d",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 29,
+              "median_absolute_error_percent": 35.87481931073143,
+              "p95_absolute_error_percent": 57.619255961724946
+            },
+            "beats": {
+              "matched": 28,
+              "precision": 0.9333333333333333,
+              "recall": 0.6363636363636364,
+              "f1": 0.7567567567567568,
+              "median_absolute_error_ms": 7.925771118164171,
+              "p95_absolute_error_ms": 37.18468664550656
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 0,
+              "recall": 1,
+              "f1": 0
+            },
+            "raw_event_count": 30,
+            "analyzed_event_count": 30
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 27,
+              "median_absolute_error_percent": 43.84095284635479,
+              "p95_absolute_error_percent": 57.619255961724946
+            },
+            "beats": {
+              "matched": 26,
+              "precision": 0.9285714285714286,
+              "recall": 0.5909090909090909,
+              "f1": 0.7222222222222223,
+              "median_absolute_error_ms": 5.8830095367432556,
+              "p95_absolute_error_ms": 37.18468664550656
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 0,
+              "recall": 1,
+              "f1": 0
+            },
+            "raw_event_count": 28,
+            "analyzed_event_count": 28
+          }
+        },
+        {
+          "id": "artbeat-19-ramp-80-to-200",
+          "audio_sha256": "2a581d2079fc21cc5f3657bf5915903552097c39d68c8ddd045ca8e492113e2e",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 22,
+              "median_absolute_error_percent": 50.10860321104401,
+              "p95_absolute_error_percent": 75.45054505317611
+            },
+            "beats": {
+              "matched": 21,
+              "precision": 0.9130434782608695,
+              "recall": 0.525,
+              "f1": 0.6666666666666667,
+              "median_absolute_error_ms": 10.941942779541414,
+              "p95_absolute_error_ms": 27.80804768371592
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 23,
+            "analyzed_event_count": 23
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 21,
+              "median_absolute_error_percent": 49.98150049638553,
+              "p95_absolute_error_percent": 51.228920818143685
+            },
+            "beats": {
+              "matched": 21,
+              "precision": 0.9545454545454546,
+              "recall": 0.525,
+              "f1": 0.6774193548387099,
+              "median_absolute_error_ms": 10.624847412110228,
+              "p95_absolute_error_ms": 29.999971389770508
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 22,
+            "analyzed_event_count": 22
+          }
+        },
+        {
+          "id": "artbeat-20-ramp-200-to-80",
+          "audio_sha256": "891601d372c08edc760162584f0e2d37b3efacba972b3a8ac6178abdf051fcf6",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 24,
+              "median_absolute_error_percent": 50.26634053779389,
+              "p95_absolute_error_percent": 50.75348252791816
+            },
+            "beats": {
+              "matched": 23,
+              "precision": 0.92,
+              "recall": 0.575,
+              "f1": 0.7076923076923077,
+              "median_absolute_error_ms": 9.995190734862547,
+              "p95_absolute_error_ms": 38.572419616698994
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 25,
+            "analyzed_event_count": 25
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 23,
+              "median_absolute_error_percent": 50.21056096360458,
+              "p95_absolute_error_percent": 51.302868743424824
+            },
+            "beats": {
+              "matched": 23,
+              "precision": 0.9583333333333334,
+              "recall": 0.575,
+              "f1": 0.71875,
+              "median_absolute_error_ms": 8.571732971191182,
+              "p95_absolute_error_ms": 30.908381469727075
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 0,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 24,
+            "analyzed_event_count": 24
+          }
+        },
+        {
+          "id": "artbeat-21-polyrhythm-70-to-105",
+          "audio_sha256": "c6bf4a4268cdf757b971fcc3f2de6c8a63020b09dc12f33cdea083b4e78622c0",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 21,
+              "median_absolute_error_percent": 0.8541702777699405,
+              "p95_absolute_error_percent": 51.281298355054226
+            },
+            "beats": {
+              "matched": 16,
+              "precision": 0.7272727272727273,
+              "recall": 0.8421052631578947,
+              "f1": 0.7804878048780488,
+              "median_absolute_error_ms": 11.426057220459196,
+              "p95_absolute_error_ms": 25.70977111816397
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 1,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 22,
+            "analyzed_event_count": 22
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 21,
+              "median_absolute_error_percent": 0.8541989033938215,
+              "p95_absolute_error_percent": 51.281298355054226
+            },
+            "beats": {
+              "matched": 16,
+              "precision": 0.7272727272727273,
+              "recall": 0.8421052631578947,
+              "f1": 0.7804878048780488,
+              "median_absolute_error_ms": 5.718790191650669,
+              "p95_absolute_error_ms": 19.999999552965164
+            },
+            "changes": {
+              "matched": 0,
+              "precision": 1,
+              "recall": 0,
+              "f1": 0
+            },
+            "raw_event_count": 22,
+            "analyzed_event_count": 22
+          }
+        }
+      ]
+    },
+    {
+      "suite_id": "fsld-tempo-v1",
+      "purpose": "calibration",
+      "model_manifest_sha256": "ccedbfeb35b4f584834df3aca1ea41899ed39fbaf2efad9e2cc71426aed9e23d",
+      "before_report_sha256": "59e6101b586283cf2ca66ca7fe17ee72cdcba9fe12826c7a0bc8d0d00e339878",
+      "after_report_sha256": "c01a5e5472f34fc8c642e84b6f9f31c24687bccb088bdbf4dd92f393fd5761f8",
+      "before_contract": "beat-this-rten-observations-v1+decode-audio-v1",
+      "after_contract": "beat-this-rten-observations-v2+decode-audio-v2",
+      "before_cache_hits": 15,
+      "after_cache_hits": 0,
+      "before_passed": 6,
+      "after_passed": 7,
+      "before_mean_median_tempo_error_percent": 29.431193375551935,
+      "after_mean_median_tempo_error_percent": 22.348798118466863,
+      "before_mean_p95_tempo_error_percent": 52.1130523337325,
+      "after_mean_p95_tempo_error_percent": 50.187819465182656,
+      "cases": [
+        {
+          "id": "fsld-476866-41-bpm",
+          "audio_sha256": "d65f3236d1b3f4baa03ea7cc23509fea8ab545624217681dcb101a53d2639b51",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 15,
+              "median_absolute_error_percent": 99.5731524887795,
+              "p95_absolute_error_percent": 101.40420112151254
+            }
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 15,
+              "median_absolute_error_percent": 99.5731524887795,
+              "p95_absolute_error_percent": 103.25209174812804
+            }
+          }
+        },
+        {
+          "id": "fsld-404840-60-bpm",
+          "audio_sha256": "2d302a6cad5280ba7301fe82f3fba3764eb6695acc2a17b823fabc09e87b6118",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 61,
+              "median_absolute_error_percent": 96.11604881627738,
+              "p95_absolute_error_percent": 102.74013096848581
+            }
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 64,
+              "median_absolute_error_percent": 97.40224544950443,
+              "p95_absolute_error_percent": 102.8483794790114
+            }
+          }
+        },
+        {
+          "id": "fsld-210835-70-bpm",
+          "audio_sha256": "9c79acadf1b7514eb9869827339aa606959c09b9b5d6dfc1d51e5586ac23781c",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": true,
+            "tempo": {
+              "sample_count": 15,
+              "median_absolute_error_percent": 0.33222296631251425,
+              "p95_absolute_error_percent": 0.47071039814020266
+            }
+          },
+          "after": {
+            "passed": true,
+            "tempo": {
+              "sample_count": 15,
+              "median_absolute_error_percent": 0.33222296631251425,
+              "p95_absolute_error_percent": 1.0752441251140965
+            }
+          }
+        },
+        {
+          "id": "fsld-131423-80-bpm",
+          "audio_sha256": "67874e011aa0a3acd9a94400ab4c0f1155aedcf1a3807ca1a1cf5eea79e8915a",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": true,
+            "tempo": {
+              "sample_count": 15,
+              "median_absolute_error_percent": 0.45438925425942855,
+              "p95_absolute_error_percent": 1.3513826993115785
+            }
+          },
+          "after": {
+            "passed": true,
+            "tempo": {
+              "sample_count": 16,
+              "median_absolute_error_percent": 0.45438925425942855,
+              "p95_absolute_error_percent": 1.3513826993115785
+            }
+          }
+        },
+        {
+          "id": "fsld-219021-90-bpm",
+          "audio_sha256": "850be83458a0fb65dd7193fc6b4248ad82308cf47fd9536f4bdef537f0f8aae3",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 35,
+              "median_absolute_error_percent": 0.9803028189908818,
+              "p95_absolute_error_percent": 100.08113326537405
+            }
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 35,
+              "median_absolute_error_percent": 1.0100757111311824,
+              "p95_absolute_error_percent": 108.33337679506255
+            }
+          }
+        },
+        {
+          "id": "fsld-360687-100-bpm",
+          "audio_sha256": "626595ce94447d51a2596d2fa0564f77e53c0682ed900aa3953773dc16edc6a9",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": true,
+            "tempo": {
+              "sample_count": 16,
+              "median_absolute_error_percent": 0.03702995917885232,
+              "p95_absolute_error_percent": 2.3643564721150483
+            }
+          },
+          "after": {
+            "passed": true,
+            "tempo": {
+              "sample_count": 16,
+              "median_absolute_error_percent": 1.1364557530593373,
+              "p95_absolute_error_percent": 1.8266146337332856
+            }
+          }
+        },
+        {
+          "id": "fsld-19069-110-bpm",
+          "audio_sha256": "06c77b1f3f388f23593e4df0d05493f18e2f642bb46c74d9efa2eb84343903b1",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 15,
+              "median_absolute_error_percent": 1.0100969963208426,
+              "p95_absolute_error_percent": 33.481128237313165
+            }
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 17,
+              "median_absolute_error_percent": 2.5973926448634965,
+              "p95_absolute_error_percent": 109.79002510895552
+            }
+          }
+        },
+        {
+          "id": "fsld-418991-120-bpm",
+          "audio_sha256": "08370afa22a9c782a4019e39ccb763b400f66b95588837661a9bd4fbd7ef65bf",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": true,
+            "tempo": {
+              "sample_count": 7,
+              "median_absolute_error_percent": 1.246150371576178,
+              "p95_absolute_error_percent": 1.9419306325336787
+            }
+          },
+          "after": {
+            "passed": true,
+            "tempo": {
+              "sample_count": 8,
+              "median_absolute_error_percent": 1.4241535706909758,
+              "p95_absolute_error_percent": 2.062070588174656
+            }
+          }
+        },
+        {
+          "id": "fsld-124542-128-bpm",
+          "audio_sha256": "d0d416d868597843dc59968c2b161bd088c1813f319c189f016a30bf1027a51a",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 21,
+              "median_absolute_error_percent": 95.31249223897889,
+              "p95_absolute_error_percent": 113.06792320330143
+            }
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 8,
+              "median_absolute_error_percent": 34.89583592034038,
+              "p95_absolute_error_percent": 50.13298175895071
+            }
+          }
+        },
+        {
+          "id": "fsld-486302-130-bpm",
+          "audio_sha256": "569f34339c827dcdda7bb937cc035d4b8d4af2a9bd5f97ddc3705290b7cf02e4",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 7,
+              "median_absolute_error_percent": 50.19112602766772,
+              "p95_absolute_error_percent": 50.8890493144682
+            }
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 7,
+              "median_absolute_error_percent": 50.19112602766772,
+              "p95_absolute_error_percent": 50.8890493144682
+            }
+          }
+        },
+        {
+          "id": "fsld-271070-140-bpm",
+          "audio_sha256": "c2d46e8a5629a58f80c7c1183bc7426a92a67257486eb743504946e6cd18319f",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 11,
+              "median_absolute_error_percent": 44.082263691236214,
+              "p95_absolute_error_percent": 167.85739830586408
+            }
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 11,
+              "median_absolute_error_percent": 44.082263691236214,
+              "p95_absolute_error_percent": 167.85739830586408
+            }
+          }
+        },
+        {
+          "id": "fsld-330889-150-bpm",
+          "audio_sha256": "b2db6563b99a0ad08cd184c9b0a8ef8dd24c7ff1e078994d822aa44d3b8eac54",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 50,
+              "median_absolute_error_percent": 1.613187367231395,
+              "p95_absolute_error_percent": 49.573554741164294
+            }
+          },
+          "after": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 45,
+              "median_absolute_error_percent": 1.613206914887428,
+              "p95_absolute_error_percent": 50.00007152547141
+            }
+          }
+        },
+        {
+          "id": "fsld-322315-160-bpm",
+          "audio_sha256": "4883eb8549c31956a49c58be86f54a3ff7c0ae112ffd3b40a9f160ca5baf7104",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": true,
+            "tempo": {
+              "sample_count": 64,
+              "median_absolute_error_percent": 0.4788726937078813,
+              "p95_absolute_error_percent": 2.3061176517459714
+            }
+          },
+          "after": {
+            "passed": true,
+            "tempo": {
+              "sample_count": 64,
+              "median_absolute_error_percent": 0.4788726937078813,
+              "p95_absolute_error_percent": 1.3158191934427244
+            }
+          }
+        },
+        {
+          "id": "fsld-348652-180-bpm",
+          "audio_sha256": "2e6022f3f134ef35601719d64162fe96442f3f8765108772fdc66c57a5b6f0f3",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": true,
+            "tempo": {
+              "sample_count": 31,
+              "median_absolute_error_percent": 0.040566267309177166,
+              "p95_absolute_error_percent": 4.166766007836031
+            }
+          },
+          "after": {
+            "passed": true,
+            "tempo": {
+              "sample_count": 31,
+              "median_absolute_error_percent": 0.04056809419449476,
+              "p95_absolute_error_percent": 2.0827708074455447
+            }
+          }
+        },
+        {
+          "id": "fsld-439993-200-bpm",
+          "audio_sha256": "ade68d1e50780c4c561483ce31d6622682f6040b9892963050fb5e010c0a75c1",
+          "oracle_unchanged": true,
+          "before": {
+            "passed": false,
+            "tempo": {
+              "sample_count": 7,
+              "median_absolute_error_percent": 49.999998675452105,
+              "p95_absolute_error_percent": 50.00000198682142
+            }
+          },
+          "after": {
+            "passed": true,
+            "tempo": {
+              "sample_count": 15,
+              "median_absolute_error_percent": 0.0000105963679004617,
+              "p95_absolute_error_percent": 0.00001589460603668158
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

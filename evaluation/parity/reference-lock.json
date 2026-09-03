@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "reference_repository": "https://github.com/CPJKU/beat_this",
+  "reference_revision": "b95c8ab0c58c2d9fcfd40508ae8dffbc05ac4f5c",
+  "rust_port_version": "1.0.0",
+  "rust_port_revision": "089b509247e6fdcec666511c0dcf0d5f39c21e73",
+  "checkpoint": {
+    "name": "final0",
+    "url": "https://cloud.cp.jku.at/public.php/dav/files/7ik4RrBKTS273gp/final0.ckpt",
+    "size_bytes": 81058141,
+    "sha256": "8c328b45f59d8dd3dff219253ff6a8d6482be57d0133a29140e2febbf8eb8331"
+  },
+  "model_manifest_sha256": "ccedbfeb35b4f584834df3aca1ea41899ed39fbaf2efad9e2cc71426aed9e23d",
+  "cases": [
+    {"suite": "evaluation/suites/artbeat-v1.json", "case": "artbeat-05-75-to-150", "prefix_seconds": 35},
+    {"suite": "evaluation/suites/rubato-calibration-v1.json", "case": "rubato-bach-bwv1007-01-ar-macleod2011", "prefix_seconds": 35}
+  ]
+}

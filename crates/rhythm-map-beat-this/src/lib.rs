@@ -8,13 +8,15 @@ use rhythm_map_core::{
     RhythmObservations,
 };
 
+mod audio;
+
 type DefaultModel = <RtenRuntime as Runtime>::Model;
 const FRAME_RATE_HZ: f64 = 50.0;
 
 /// Cache-invalidation identity for decoded-audio preprocessing and raw Beat
 /// This observation semantics. Bump this whenever identical audio, model, and
 /// decoder inputs could produce a differently interpreted observation payload.
-pub const OBSERVATION_CONTRACT: &str = "beat-this-rten-observations-v1+decode-audio-v1";
+pub const OBSERVATION_CONTRACT: &str = "beat-this-rten-observations-v2+decode-audio-v2";
 
 mod decoder_candidates {
     /// Configurable peak-picking candidate applied to Beat This frame logits.
@@ -157,6 +159,24 @@ pub struct BeatThisInference {
     downbeat_logits: Vec<f32>,
 }
 
+/// Evaluation-only tensors and decoded observations from one actual model run.
+/// These potentially large values must never enter a normal analysis result.
+#[cfg(feature = "experimental-policies")]
+pub struct BeatThisTrace {
+    /// Full log-mel tensor shape, normally `[1, frames, 128]`.
+    pub mel_shape: Vec<usize>,
+    /// Row-major log-mel values.
+    pub mel_values: Vec<f32>,
+    /// Frame-level outputs before decoding.
+    pub inference: BeatThisInference,
+    /// Beat times returned by the upstream Rust port.
+    pub upstream_beats: Vec<f32>,
+    /// Downbeat times returned by the upstream Rust port.
+    pub upstream_downbeats: Vec<f32>,
+    /// Rhythm Map's immutable default decoder applied to the same logits.
+    pub observations: RhythmObservations,
+}
+
 impl BeatThisInference {
     /// Per-frame beat logits at 50 frames per second.
     #[must_use]
@@ -269,12 +289,10 @@ impl BeatThisBackend {
         samples: &[f32],
         sample_rate: u32,
     ) -> Result<BeatThisInference, BackendError> {
-        if sample_rate == 0 {
-            return Err(BackendError::new("sample rate must be greater than zero"));
-        }
+        let prepared = audio::prepare_mono(samples, sample_rate)?;
         let result = self
             .tracker
-            .analyze_audio(samples, sample_rate)
+            .analyze_audio(&prepared, audio::MODEL_SAMPLE_RATE)
             .map_err(|error| BackendError::new(format!("Beat This inference failed: {error}")))?;
         Ok(BeatThisInference {
             duration_s: usize_to_f64(samples.len()) / f64::from(sample_rate),
@@ -295,6 +313,39 @@ impl BeatThisBackend {
         options: PeakPickingOptions,
     ) -> Result<RhythmObservations, BackendError> {
         self.decode_peak_picking(inference, options)
+    }
+
+    /// Capture numerical parity evidence without a second neural inference.
+    /// Always uses the product decoder, regardless of an experimental policy.
+    ///
+    /// # Errors
+    ///
+    /// Returns an error for invalid PCM or a failed model execution.
+    #[cfg(feature = "experimental-policies")]
+    pub fn trace_mono(
+        &mut self,
+        samples: &[f32],
+        sample_rate: u32,
+    ) -> Result<BeatThisTrace, BackendError> {
+        let prepared = audio::prepare_mono(samples, sample_rate)?;
+        let result = self
+            .tracker
+            .analyze_audio(&prepared, audio::MODEL_SAMPLE_RATE)
+            .map_err(|error| BackendError::new(format!("Beat This inference failed: {error}")))?;
+        let inference = BeatThisInference {
+            duration_s: usize_to_f64(samples.len()) / f64::from(sample_rate),
+            beat_logits: result.beat_logits,
+            downbeat_logits: result.downbeat_logits,
+        };
+        let observations = self.decode_peak_picking(&inference, PeakPickingOptions::default())?;
+        Ok(BeatThisTrace {
+            mel_shape: result.mel.shape,
+            mel_values: result.mel.data,
+            inference,
+            upstream_beats: result.beats,
+            upstream_downbeats: result.downbeats,
+            observations,
+        })
     }
 
     fn decode_peak_picking(
@@ -487,12 +538,30 @@ impl RhythmObservationBackend for BeatThisBackend {
 ///
 /// Returns [`BackendError`] when the file cannot be decoded or resampled.
 pub fn decode_audio(path: impl AsRef<Path>) -> Result<DecodedAudio, BackendError> {
-    let audio = beat_this::load_audio(path.as_ref(), 22_050)
-        .map_err(|error| BackendError::new(format!("failed to decode audio: {error}")))?;
-    Ok(DecodedAudio {
-        samples: audio.samples,
-        sample_rate: audio.sample_rate,
-    })
+    audio::decode(path.as_ref())
+}
+
+/// Evaluation-only access to the actual preprocessing stages, without loading a
+/// model. These are diagnostics, not selectable product processing policies.
+#[cfg(feature = "experimental-policies")]
+pub mod preprocessing_diagnostics {
+    use super::{BackendError, DecodedAudio, Path, audio};
+
+    /// Decode and downmix at the source's measured rate, before resampling.
+    ///
+    /// # Errors
+    /// Returns an error for unsupported, corrupt, empty, or nonfinite audio.
+    pub fn decode_native(path: impl AsRef<Path>) -> Result<DecodedAudio, BackendError> {
+        audio::decode_native(path.as_ref())
+    }
+
+    /// Run the shipping mono preprocessor on a controlled input.
+    ///
+    /// # Errors
+    /// Returns an error for invalid PCM/rate or resampling failure.
+    pub fn prepare_mono(samples: &[f32], rate: u32) -> Result<Vec<f32>, BackendError> {
+        audio::prepare_mono(samples, rate).map(std::borrow::Cow::into_owned)
+    }
 }
 
 fn sigmoid(value: f32) -> f64 {

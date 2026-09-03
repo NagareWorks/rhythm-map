@@ -1,0 +1,1110 @@
+{
+  "schema_version": 1,
+  "purpose": "bounded_resampler_bit_identity_not_music_accuracy",
+  "verifier_sha256": "3fb4f902ad660e2a9cc67dacaeac12d3a50d969fdcc70f18e6bdee4c032c1b23",
+  "characterization_report_sha256": "b185c61259e217bb722a189b865484120a435c2fb8e47afaffa00d4571c134ec",
+  "before_trace_sha256": "82361d83a41673eaf43b63fecd07b7a7a969dbe2cc3e01ea6da60a0babee9a9a",
+  "after_trace_sha256": "1ac9cec8736551a7da1620cc25adaf3b90ce36e9f64e2e52def32b916a7a813b",
+  "candidate": "phase-exact-bh2-256-v1",
+  "before_source_sha256": "1c85eaa187073b26669d8863346b5c2761292a71b4f7d527bbed498a6d407f2c",
+  "after_source_sha256": "3d4dc56efea7a0370b64d248971c02260618a5bf5598d15714ac71e28efcd819",
+  "coefficient_budget_bytes": 8388608,
+  "memory_scope": "coefficient allocation only; excludes input/output audio and model memory",
+  "cases": [
+    {
+      "sample_rate": 8000,
+      "signal": "impulse_start",
+      "parameter": 0.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "impulse_center",
+      "parameter": 0.24,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "impulse_fractional",
+      "parameter": 0.240125,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "impulse_tail",
+      "parameter": 0.499875,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "dc",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "step",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "linear_sweep",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "tone_0.250",
+      "parameter": 1000.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "tone_0.850",
+      "parameter": 3400.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "tone_0.913",
+      "parameter": 3652.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "tone_0.940",
+      "parameter": 3760.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "tone_0.950",
+      "parameter": 3800.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "tone_0.970",
+      "parameter": 3880.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "impulse_start",
+      "parameter": 0.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "impulse_center",
+      "parameter": 0.24,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "impulse_fractional",
+      "parameter": 0.2400625,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "impulse_tail",
+      "parameter": 0.4999375,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "dc",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "step",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "linear_sweep",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "tone_0.250",
+      "parameter": 2000.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "tone_0.850",
+      "parameter": 6800.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "tone_0.913",
+      "parameter": 7304.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "tone_0.940",
+      "parameter": 7520.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "tone_0.950",
+      "parameter": 7600.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "tone_0.970",
+      "parameter": 7760.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "impulse_start",
+      "parameter": 0.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "impulse_center",
+      "parameter": 0.24997732426303854,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "impulse_fractional",
+      "parameter": 0.25002267573696146,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "impulse_tail",
+      "parameter": 0.4999546485260771,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "dc",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "step",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "linear_sweep",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "tone_0.250",
+      "parameter": 2756.25,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "tone_0.850",
+      "parameter": 9371.25,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "tone_0.913",
+      "parameter": 10065.825,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "tone_0.940",
+      "parameter": 10363.5,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "tone_0.950",
+      "parameter": 10473.75,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "tone_0.970",
+      "parameter": 10694.25,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "impulse_start",
+      "parameter": 0.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "impulse_center",
+      "parameter": 0.24997732426303854,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "impulse_fractional",
+      "parameter": 0.25,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "impulse_tail",
+      "parameter": 0.49997732426303854,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "dc",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "step",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "linear_sweep",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "tone_0.250",
+      "parameter": 2756.25,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "tone_0.850",
+      "parameter": 9371.25,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "tone_0.913",
+      "parameter": 10065.825,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "tone_0.940",
+      "parameter": 10363.5,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "tone_0.950",
+      "parameter": 10473.75,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "tone_0.970",
+      "parameter": 10694.25,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "tone_1.020",
+      "parameter": 11245.5,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "tone_1.100",
+      "parameter": 12127.500000000002,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "impulse_start",
+      "parameter": 0.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "impulse_center",
+      "parameter": 0.24666666666666667,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "impulse_fractional",
+      "parameter": 0.2466875,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "impulse_tail",
+      "parameter": 0.49997916666666664,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "dc",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "step",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "linear_sweep",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "tone_0.250",
+      "parameter": 2756.25,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "tone_0.850",
+      "parameter": 9371.25,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "tone_0.913",
+      "parameter": 10065.825,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "tone_0.940",
+      "parameter": 10363.5,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "tone_0.950",
+      "parameter": 10473.75,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "tone_0.970",
+      "parameter": 10694.25,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "tone_1.020",
+      "parameter": 11245.5,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "tone_1.100",
+      "parameter": 12127.500000000002,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "impulse_start",
+      "parameter": 0.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "impulse_center",
+      "parameter": 0.24666666666666667,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "impulse_fractional",
+      "parameter": 0.24667708333333332,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "impulse_tail",
+      "parameter": 0.4999895833333333,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "dc",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "step",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "linear_sweep",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "tone_0.250",
+      "parameter": 2756.25,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "tone_0.850",
+      "parameter": 9371.25,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "tone_0.913",
+      "parameter": 10065.825,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "tone_0.940",
+      "parameter": 10363.5,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "tone_0.950",
+      "parameter": 10473.75,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "tone_0.970",
+      "parameter": 10694.25,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "tone_1.020",
+      "parameter": 11245.5,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "tone_1.100",
+      "parameter": 12127.500000000002,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "impulse_start",
+      "parameter": 0.0,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "impulse_center",
+      "parameter": 0.24666666666666667,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "impulse_fractional",
+      "parameter": 0.246671875,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "impulse_tail",
+      "parameter": 0.49999479166666666,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "dc",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "step",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "linear_sweep",
+      "parameter": null,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "tone_0.250",
+      "parameter": 2756.25,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "tone_0.850",
+      "parameter": 9371.25,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "tone_0.913",
+      "parameter": 10065.825,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "tone_0.940",
+      "parameter": 10363.5,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "tone_0.950",
+      "parameter": 10473.75,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "tone_0.970",
+      "parameter": 10694.25,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "tone_1.020",
+      "parameter": 11245.5,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "tone_1.100",
+      "parameter": 12127.500000000002,
+      "bitwise_equal": {
+        "input_pcm": true,
+        "current_pcm": true,
+        "candidate_pcm": true
+      },
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "not_checked": [
+    "musical_accuracy",
+    "peak_process_memory",
+    "stable_performance_benchmark"
+  ]
+}

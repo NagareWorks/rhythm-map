@@ -681,6 +681,8 @@ version = "0.1.0"
 dependencies = [
  "beat-this",
  "rhythm-map-core",
+ "rubato",
+ "symphonia",
 ]
 
 [[package]]
@@ -733,6 +735,7 @@ name = "rhythm-map-eval"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "beat-this",
  "clap",
  "flate2",
  "regex",

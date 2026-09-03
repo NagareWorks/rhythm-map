@@ -1,0 +1,3592 @@
+{
+  "schema_version": 1,
+  "purpose": "generated_resampler_characterization_not_music_accuracy",
+  "trace_sha256": "82361d83a41673eaf43b63fecd07b7a7a969dbe2cc3e01ea6da60a0babee9a9a",
+  "analyzer_sha256": "bc569c5e0e3895a2e13da802368c5d91f0557957ea1a9db6bf8557c7c9f566ff",
+  "sources": {
+    "probe_source_sha256": "884e4a801c626ea81f1994424162498d540fd9bd1ede9ff2d94c2ea5b1df94af",
+    "adapter_source_sha256": "ecd93860fdebf56905fdb12f341cfb66ad1c227f19e0d45a81b7ec2c4f59a14d",
+    "audio_preprocessing_sha256": "67b3e54b7415d16e5be15eec751ba639a7a544ee283f330b43411b56fe5f4fa2",
+    "candidate_source_sha256": "1c85eaa187073b26669d8863346b5c2761292a71b4f7d527bbed498a6d407f2c"
+  },
+  "reference": {
+    "python_soxr": "1.0.0",
+    "libsoxr": "0.1.3-14-ga66f3ee",
+    "quality": "HQ"
+  },
+  "observation_contract": "beat-this-rten-observations-v2+decode-audio-v2",
+  "candidate": "phase-exact-bh2-256-v1",
+  "cases": [
+    {
+      "sample_rate": 8000,
+      "signal": "impulse_start",
+      "parameter": 0,
+      "input_frames": 4000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.15276050567626953,
+          "rmse": 0.0017264463396111625,
+          "interior_rmse": 1.5258311733964337e-9
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0749085545539856,
+          "rmse": 0.0008641877529358898,
+          "interior_rmse": 1.5258311733964337e-9
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 14.254,
+        "candidate": 21.4011
+      },
+      "impulse_peak_errors_samples": {
+        "reference": 0,
+        "current": 0,
+        "candidate": 0
+      }
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "impulse_center",
+      "parameter": 0.24,
+      "input_frames": 4000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.09825596213340759,
+          "rmse": 0.0020839014018493975,
+          "interior_rmse": 0.002309408996384473
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00031304918229579926,
+          "rmse": 0.00002711393645664766,
+          "interior_rmse": 0.000030048047726638245
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 14.3709,
+        "candidate": 14.5095
+      },
+      "responses": {
+        "reference": {
+          "dc_gain": 2.756250546646064,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": 0.9504890441894531,
+          "minus_6_db_relative_nyquist": 0.956839656829834,
+          "minus_60_db_relative_nyquist": 0.9895179748535157,
+          "minus_100_db_relative_nyquist": 0.9972985267639161,
+          "passband_delay_output_samples": 2.9303880659222437e-9
+        },
+        "current": {
+          "dc_gain": 2.756220158632456,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": 0.9434234619140625,
+          "minus_6_db_relative_nyquist": 0.949984359741211,
+          "minus_60_db_relative_nyquist": 0.9854804992675781,
+          "minus_100_db_relative_nyquist": 0.9963732719421386,
+          "passband_delay_output_samples": -0.2107675031248938
+        },
+        "candidate": {
+          "dc_gain": 2.75624996619014,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": 0.9502787590026855,
+          "minus_6_db_relative_nyquist": 0.956839656829834,
+          "minus_60_db_relative_nyquist": 0.9922937393188477,
+          "minus_100_db_relative_nyquist": 1.0032706260681152,
+          "passband_delay_output_samples": 4.022385257147097e-13
+        }
+      },
+      "impulse_peak_errors_samples": {
+        "reference": 0,
+        "current": 0,
+        "candidate": 0
+      }
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "impulse_fractional",
+      "parameter": 0.240125,
+      "input_frames": 4000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.09447813034057617,
+          "rmse": 0.0020839072171614753,
+          "interior_rmse": 0.002309415440995536
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0003178115002810955,
+          "rmse": 0.000027113982367996407,
+          "interior_rmse": 0.000030048098606244038
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 19.5414,
+        "candidate": 12.1371
+      },
+      "impulse_peak_errors_samples": {
+        "reference": 0.2437499999996362,
+        "current": 0.2437499999996362,
+        "candidate": 0.2437499999996362
+      }
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "impulse_tail",
+      "parameter": 0.499875,
+      "input_frames": 4000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.09822258353233337,
+          "rmse": 0.001935671164717342,
+          "interior_rmse": 1.7161391529486197e-9
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0003178161568939686,
+          "rmse": 0.00001919131033052427,
+          "interior_rmse": 1.7161391529486197e-9
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 13.803899999999999,
+        "candidate": 12.8186
+      },
+      "impulse_peak_errors_samples": {
+        "reference": -0.2437499999996362,
+        "current": -0.2437499999996362,
+        "candidate": -0.2437499999996362
+      }
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "dc",
+      "parameter": null,
+      "input_frames": 4000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.02016216516494751,
+          "rmse": 0.0003990486290981292,
+          "interior_rmse": 0.000002097054588697276
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.01497429609298706,
+          "rmse": 0.00017340353944527478,
+          "interior_rmse": 5.133612397361463e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 12.3972,
+        "candidate": 15.694799999999999
+      }
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "step",
+      "parameter": null,
+      "input_frames": 4000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.020160704851150513,
+          "rmse": 0.00047077812336151955,
+          "interior_rmse": 0.00038280148995210455
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00003954768180847168,
+          "rmse": 0.0000041622375291370015,
+          "interior_rmse": 0.0000037654721462450866
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 15.1303,
+        "candidate": 14.364
+      }
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "linear_sweep",
+      "parameter": null,
+      "input_frames": 4000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.12424913048744202,
+          "rmse": 0.04728863283724045,
+          "interior_rmse": 0.04615286950962374
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.004458915442228317,
+          "rmse": 0.0005578657156899966,
+          "interior_rmse": 0.000047405654771873864
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 14.663,
+        "candidate": 15.273800000000001
+      }
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "tone_0.250",
+      "parameter": 1000,
+      "input_frames": 4000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.031967682763934135,
+          "rmse": 0.02123114262737767,
+          "interior_rmse": 0.02123333604856346
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.004099033772945404,
+          "rmse": 0.00004684068719679656,
+          "interior_rmse": 7.458173193273487e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 12.6256,
+        "candidate": 15.711699999999999
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.001133703505222767,
+        "current": -0.0012419817429996103,
+        "candidate": -0.0011321722340413866
+      }
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "tone_0.850",
+      "parameter": 3400,
+      "input_frames": 4000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.11657312512397766,
+          "rmse": 0.07204441389055287,
+          "interior_rmse": 0.0720594461692534
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.016883790493011475,
+          "rmse": 0.00023024044034492325,
+          "interior_rmse": 0.00012794437007919906
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 15.4336,
+        "candidate": 16.5899
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.0034650654025359,
+        "current": -0.0006305299914065619,
+        "candidate": -0.0003211193522117343
+      }
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "tone_0.913",
+      "parameter": 3652,
+      "input_frames": 4000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.11213299632072449,
+          "rmse": 0.07728663038651142,
+          "interior_rmse": 0.07732607832572617
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.01804906129837036,
+          "rmse": 0.0003917189800494644,
+          "interior_rmse": 0.00033323620291565064
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 13.696299999999999,
+        "candidate": 19.3106
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.008240836640768306,
+        "current": -0.004844317952327614,
+        "candidate": -0.000050179884711782785
+      }
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "tone_0.940",
+      "parameter": 3760,
+      "input_frames": 4000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.13005800545215607,
+          "rmse": 0.08289794262497054,
+          "interior_rmse": 0.08299398203076794
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.011954516172409058,
+          "rmse": 0.0030277813684844923,
+          "interior_rmse": 0.0030408699925206792
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 13.8575,
+        "candidate": 14.679499999999999
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.6373062751644499,
+        "current": -1.971434008545304,
+        "candidate": -0.7180744196876785
+      }
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "tone_0.950",
+      "parameter": 3800,
+      "input_frames": 4000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.13040700554847717,
+          "rmse": 0.09190558158816224,
+          "interior_rmse": 0.0922122827127464
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0043984949588775635,
+          "rmse": 0.0024873319951471927,
+          "interior_rmse": 0.0025025919383608063
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 13.5929,
+        "candidate": 13.7344
+      },
+      "tone_interior_gain_db": {
+        "reference": -2.8289726817201792,
+        "current": -6.02091829102942,
+        "candidate": -2.914545441441159
+      }
+    },
+    {
+      "sample_rate": 8000,
+      "signal": "tone_0.970",
+      "parameter": 3880,
+      "input_frames": 4000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.058376744389534,
+          "rmse": 0.02907856551008284,
+          "interior_rmse": 0.02898375913387334
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.005114726722240448,
+          "rmse": 0.003594995167669921,
+          "interior_rmse": 0.0036166325706318155
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 20.986,
+        "candidate": 15.3713
+      },
+      "tone_interior_gain_db": {
+        "reference": -17.95996732811295,
+        "current": -26.659164148734686,
+        "candidate": -17.284407821715725
+      }
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "impulse_start",
+      "parameter": 0,
+      "input_frames": 8000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.3660636246204376,
+          "rmse": 0.004148521985318108,
+          "interior_rmse": 3.3896686041682245e-10
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0436093807220459,
+          "rmse": 0.0004843373592128619,
+          "interior_rmse": 3.3896686041682245e-10
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.6603,
+        "candidate": 12.6087
+      },
+      "impulse_peak_errors_samples": {
+        "reference": 0,
+        "current": 0,
+        "candidate": 0
+      }
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "impulse_center",
+      "parameter": 0.24,
+      "input_frames": 8000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.3408393859863281,
+          "rmse": 0.005262547712224754,
+          "interior_rmse": 0.00583202977824605
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00031304825097322464,
+          "rmse": 0.000019172472367065648,
+          "interior_rmse": 0.000021247204943640612
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.6345,
+        "candidate": 12.2453
+      },
+      "responses": {
+        "reference": {
+          "dc_gain": 1.3781255249260544,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": 0.9504890441894531,
+          "minus_6_db_relative_nyquist": 0.9568186283111573,
+          "minus_60_db_relative_nyquist": 0.9895179748535157,
+          "minus_100_db_relative_nyquist": 0.9972985267639161,
+          "passband_delay_output_samples": -2.258169756916883e-9
+        },
+        "current": {
+          "dc_gain": 1.3781101171552415,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": 0.9434024333953858,
+          "minus_6_db_relative_nyquist": 0.949984359741211,
+          "minus_60_db_relative_nyquist": 0.9854594707489014,
+          "minus_100_db_relative_nyquist": 0.9963312149047852,
+          "passband_delay_output_samples": 0.3946164914516699
+        },
+        "candidate": {
+          "dc_gain": 1.3781250067753623,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": 0.9502577304840087,
+          "minus_6_db_relative_nyquist": 0.9568186283111573,
+          "minus_60_db_relative_nyquist": 0.9922937393188477,
+          "minus_100_db_relative_nyquist": 1.0032706260681152,
+          "passband_delay_output_samples": 4.01179732140791e-13
+        }
+      },
+      "impulse_peak_errors_samples": {
+        "reference": 0,
+        "current": 0,
+        "candidate": 0
+      }
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "impulse_fractional",
+      "parameter": 0.2400625,
+      "input_frames": 8000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.2873234748840332,
+          "rmse": 0.005262538607009274,
+          "interior_rmse": 0.005832019687717523
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0003161076456308365,
+          "rmse": 0.000019172526465299675,
+          "interior_rmse": 0.000021247264896068417
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 16.096,
+        "candidate": 12.5257
+      },
+      "impulse_peak_errors_samples": {
+        "reference": -0.3781250000001819,
+        "current": 0.6218749999998181,
+        "candidate": -0.3781250000001819
+      }
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "impulse_tail",
+      "parameter": 0.4999375,
+      "input_frames": 8000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.34070971608161926,
+          "rmse": 0.003832223555892956,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.000316109973937273,
+          "rmse": 0.000013564354133216764,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 9.8758,
+        "candidate": 18.1484
+      },
+      "impulse_peak_errors_samples": {
+        "reference": 0.3781250000010914,
+        "current": 0.3781250000010914,
+        "candidate": 0.3781250000010914
+      }
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "dc",
+      "parameter": null,
+      "input_frames": 8000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.06048828363418579,
+          "rmse": 0.000838364676084625,
+          "interior_rmse": 0.00000209391755821314
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.008885025978088379,
+          "rmse": 0.00009797537426790077,
+          "interior_rmse": 4.745845041146697e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.3598,
+        "candidate": 14.8476
+      }
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "step",
+      "parameter": null,
+      "input_frames": 8000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.06283335387706757,
+          "rmse": 0.001078538696323456,
+          "interior_rmse": 0.0009850124129075146
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00003958260640501976,
+          "rmse": 0.000002942512807739331,
+          "interior_rmse": 0.0000026625206549514616
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 9.8363,
+        "candidate": 13.4578
+      }
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "linear_sweep",
+      "parameter": null,
+      "input_frames": 8000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.398284912109375,
+          "rmse": 0.16843216875641545,
+          "interior_rmse": 0.16985730288938108
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.005000364035367966,
+          "rmse": 0.0005858564224983271,
+          "interior_rmse": 0.00004697584343107001
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 9.4663,
+        "candidate": 13.6017
+      }
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "tone_0.250",
+      "parameter": 2000,
+      "input_frames": 8000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.11758555099368095,
+          "rmse": 0.07934227485282111,
+          "interior_rmse": 0.07934973598311126
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.002248323056846857,
+          "rmse": 0.000025634995175182857,
+          "interior_rmse": 7.1132656123403e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 8.2545,
+        "candidate": 13.9322
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.0007551937270635059,
+        "current": -0.0005469689039497671,
+        "candidate": -0.0007536855334114047
+      }
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "tone_0.850",
+      "parameter": 6800,
+      "input_frames": 8000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.3995134234428406,
+          "rmse": 0.26372324495268645,
+          "interior_rmse": 0.26374527985149704
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.008286058902740479,
+          "rmse": 0.00016288872592101257,
+          "interior_rmse": 0.0001279462258355849
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 18.9422,
+        "candidate": 13.9497
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.0030513747184585495,
+        "current": 0.00009396578022981945,
+        "candidate": 0.00009246723213317955
+      }
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "tone_0.913",
+      "parameter": 7304,
+      "input_frames": 8000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.41736458241939545,
+          "rmse": 0.2819579222151318,
+          "interior_rmse": 0.2820711111198435
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.007330127060413361,
+          "rmse": 0.0003490492934846914,
+          "interior_rmse": 0.00033321413552001657
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 40.909800000000004,
+        "candidate": 13.9461
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.008675865444987885,
+        "current": -0.005566878571439424,
+        "candidate": -0.00048534082835019146
+      }
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "tone_0.940",
+      "parameter": 7520,
+      "input_frames": 8000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.3602297976613045,
+          "rmse": 0.2537680185991394,
+          "interior_rmse": 0.2540198090249762
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.007626980543136597,
+          "rmse": 0.0030338429262805884,
+          "interior_rmse": 0.003040747240989107
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 11.7436,
+        "candidate": 15.7628
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.6376522994473679,
+        "current": -1.9719985947516898,
+        "candidate": -0.7184204009200761
+      }
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "tone_0.950",
+      "parameter": 7600,
+      "input_frames": 8000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.2726245615631342,
+          "rmse": 0.19260337201593886,
+          "interior_rmse": 0.1927681609788684
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0037670210003852844,
+          "rmse": 0.002494999757155182,
+          "interior_rmse": 0.002502679098766995
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 12.1309,
+        "candidate": 17.3647
+      },
+      "tone_interior_gain_db": {
+        "reference": -2.8286692018213584,
+        "current": -6.020479892773222,
+        "candidate": -2.914241951912734
+      }
+    },
+    {
+      "sample_rate": 16000,
+      "signal": "tone_0.970",
+      "parameter": 7760,
+      "input_frames": 8000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.1136471563950181,
+          "rmse": 0.0366145627719842,
+          "interior_rmse": 0.036399381374436816
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0051146820187568665,
+          "rmse": 0.0036059339848382127,
+          "interior_rmse": 0.0036167092163113413
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 8.0787,
+        "candidate": 14.895800000000001
+      },
+      "tone_interior_gain_db": {
+        "reference": -17.959779703698718,
+        "current": -26.65905986684187,
+        "candidate": -17.28422046296187
+      }
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "impulse_start",
+      "parameter": 0,
+      "input_frames": 11025,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 0.0103,
+        "candidate": 0.0146
+      },
+      "impulse_peak_errors_samples": {
+        "reference": 0,
+        "current": 0,
+        "candidate": 0
+      }
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "impulse_center",
+      "parameter": 0.24997732426303854,
+      "input_frames": 11025,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 0.0117,
+        "candidate": 0.011899999999999999
+      },
+      "responses": {
+        "reference": {
+          "dc_gain": 1,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": null,
+          "minus_6_db_relative_nyquist": null,
+          "minus_60_db_relative_nyquist": null,
+          "minus_100_db_relative_nyquist": null,
+          "passband_delay_output_samples": 4.956340721616366e-13
+        },
+        "current": {
+          "dc_gain": 1,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": null,
+          "minus_6_db_relative_nyquist": null,
+          "minus_60_db_relative_nyquist": null,
+          "minus_100_db_relative_nyquist": null,
+          "passband_delay_output_samples": 4.956340721616366e-13
+        },
+        "candidate": {
+          "dc_gain": 1,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": null,
+          "minus_6_db_relative_nyquist": null,
+          "minus_60_db_relative_nyquist": null,
+          "minus_100_db_relative_nyquist": null,
+          "passband_delay_output_samples": 4.956340721616366e-13
+        }
+      },
+      "impulse_peak_errors_samples": {
+        "reference": 0,
+        "current": 0,
+        "candidate": 0
+      }
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "impulse_fractional",
+      "parameter": 0.25002267573696146,
+      "input_frames": 11025,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 0.0133,
+        "candidate": 0.0112
+      },
+      "impulse_peak_errors_samples": {
+        "reference": 0,
+        "current": 0,
+        "candidate": 0
+      }
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "impulse_tail",
+      "parameter": 0.4999546485260771,
+      "input_frames": 11025,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 0.0088,
+        "candidate": 0.0107
+      },
+      "impulse_peak_errors_samples": {
+        "reference": 0,
+        "current": 0,
+        "candidate": 0
+      }
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "dc",
+      "parameter": null,
+      "input_frames": 11025,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 0.0129,
+        "candidate": 0.012
+      }
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "step",
+      "parameter": null,
+      "input_frames": 11025,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 0.0133,
+        "candidate": 0.011399999999999999
+      }
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "linear_sweep",
+      "parameter": null,
+      "input_frames": 11025,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 0.011,
+        "candidate": 0.0109
+      }
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "tone_0.250",
+      "parameter": 2756.25,
+      "input_frames": 11025,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 0.0102,
+        "candidate": 0.0123
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.0004838870399226928,
+        "current": -0.0004838870399226928,
+        "candidate": -0.0004838870399226928
+      }
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "tone_0.850",
+      "parameter": 9371.25,
+      "input_frames": 11025,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 0.013600000000000001,
+        "candidate": 0.013699999999999999
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.0003251874391483901,
+        "current": -0.0003251874391483901,
+        "candidate": -0.0003251874391483901
+      }
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "tone_0.913",
+      "parameter": 10065.825,
+      "input_frames": 11025,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 0.0144,
+        "candidate": 0.0124
+      },
+      "tone_interior_gain_db": {
+        "reference": 0.000005413020290481049,
+        "current": 0.000005413020290481049,
+        "candidate": 0.000005413020290481049
+      }
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "tone_0.940",
+      "parameter": 10363.5,
+      "input_frames": 11025,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 0.0103,
+        "candidate": 0.0125
+      },
+      "tone_interior_gain_db": {
+        "reference": 0.00044980471099253085,
+        "current": 0.00044980471099253085,
+        "candidate": 0.00044980471099253085
+      }
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "tone_0.950",
+      "parameter": 10473.75,
+      "input_frames": 11025,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 0.0108,
+        "candidate": 0.0118
+      },
+      "tone_interior_gain_db": {
+        "reference": 0.0011357803961891365,
+        "current": 0.0011357803961891365,
+        "candidate": 0.0011357803961891365
+      }
+    },
+    {
+      "sample_rate": 22050,
+      "signal": "tone_0.970",
+      "parameter": 10694.25,
+      "input_frames": 11025,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0,
+          "rmse": 0,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 0.009300000000000001,
+        "candidate": 0.0122
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.0027110512568564835,
+        "current": -0.0027110512568564835,
+        "candidate": -0.0027110512568564835
+      }
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "impulse_start",
+      "parameter": 0,
+      "input_frames": 22050,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.004185468889772892,
+          "rmse": 0.00014397936457295196,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0000663483515381813,
+          "rmse": 0.0000028064878712625606,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.869,
+        "candidate": 7.1935
+      },
+      "impulse_peak_errors_samples": {
+        "reference": 0,
+        "current": 0,
+        "candidate": 0
+      }
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "impulse_center",
+      "parameter": 0.24997732426303854,
+      "input_frames": 22050,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.004308067262172699,
+          "rmse": 0.0002068532726740791,
+          "interior_rmse": 0.00022923772133419415
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00006634928286075592,
+          "rmse": 0.000003967637052231285,
+          "interior_rmse": 0.000004396991476986154
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.3185,
+        "candidate": 17.0965
+      },
+      "responses": {
+        "reference": {
+          "dc_gain": 0.4999999536755408,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": 0.9503631591796875,
+          "minus_6_db_relative_nyquist": 0.95684814453125,
+          "minus_60_db_relative_nyquist": 0.99017333984375,
+          "minus_100_db_relative_nyquist": 0.9977874755859375,
+          "passband_delay_output_samples": 4.439685512833597e-9
+        },
+        "current": {
+          "dc_gain": 0.5000021898315987,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": 0.936798095703125,
+          "minus_6_db_relative_nyquist": 0.9499359130859375,
+          "minus_60_db_relative_nyquist": null,
+          "minus_100_db_relative_nyquist": null,
+          "passband_delay_output_samples": -0.0019532116409116907
+        },
+        "candidate": {
+          "dc_gain": 0.4999999982465635,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": 0.95025634765625,
+          "minus_6_db_relative_nyquist": 0.956817626953125,
+          "minus_60_db_relative_nyquist": 0.9922943115234375,
+          "minus_100_db_relative_nyquist": null,
+          "passband_delay_output_samples": 4.956335822021069e-13
+        }
+      },
+      "impulse_peak_errors_samples": {
+        "reference": 0,
+        "current": 0,
+        "candidate": 0
+      }
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "impulse_fractional",
+      "parameter": 0.25,
+      "input_frames": 22050,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00392399076372385,
+          "rmse": 0.00020579291617431198,
+          "interior_rmse": 0.00022806261926949773
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00008101435378193855,
+          "rmse": 0.0000039675133859600215,
+          "interior_rmse": 0.000004396854428275907
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.3796,
+        "candidate": 7.132099999999999
+      },
+      "impulse_peak_errors_samples": {
+        "reference": -0.5,
+        "current": -0.5,
+        "candidate": -0.5
+      }
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "impulse_tail",
+      "parameter": 0.49997732426303854,
+      "input_frames": 22050,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0039239851757884026,
+          "rmse": 0.00014712986436867868,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00008101528510451317,
+          "rmse": 0.0000028054389266985864,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 8.0345,
+        "candidate": 8.316600000000001
+      },
+      "impulse_peak_errors_samples": {
+        "reference": -0.5,
+        "current": -0.5,
+        "candidate": -0.5
+      }
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "dc",
+      "parameter": null,
+      "input_frames": 22050,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0007539987564086914,
+          "rmse": 0.00003845143725611013,
+          "interior_rmse": 0.0000011026859283447266
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.000014260411262512207,
+          "rmse": 7.280973038266237e-7,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 11.9767,
+        "candidate": 7.5573999999999995
+      }
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "step",
+      "parameter": null,
+      "input_frames": 22050,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0007539987564086914,
+          "rmse": 0.00004788451326394533,
+          "interior_rmse": 0.000042603120360851296
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.000014260411262512207,
+          "rmse": 8.940706395617857e-7,
+          "interior_rmse": 8.068172625034948e-7
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 9.822799999999999,
+        "candidate": 12.5509
+      }
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "linear_sweep",
+      "parameter": null,
+      "input_frames": 22050,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.13149717450141907,
+          "rmse": 0.010938657216218655,
+          "interior_rmse": 0.012121999716498223
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.002324342727661133,
+          "rmse": 0.00021055727052717038,
+          "interior_rmse": 0.00023334016612517453
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.8667,
+        "candidate": 6.9792
+      }
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "tone_0.250",
+      "parameter": 2756.25,
+      "input_frames": 22050,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0016659926623106003,
+          "rmse": 0.0005437220829553249,
+          "interior_rmse": 0.000542388394061186
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00001829524990171194,
+          "rmse": 7.206528925818864e-7,
+          "interior_rmse": 4.770665351756835e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 9.6021,
+        "candidate": 6.8814
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.00048477084218345105,
+        "current": -0.0004452274971264555,
+        "candidate": -0.0004838870399226928
+      }
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "tone_0.850",
+      "parameter": 9371.25,
+      "input_frames": 22050,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.009615540504455566,
+          "rmse": 0.001877031642639872,
+          "interior_rmse": 0.0018440745310102221
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00011101365089416504,
+          "rmse": 0.0000059996118421980775,
+          "interior_rmse": 5.1048270717036155e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 12.141300000000001,
+        "candidate": 8.0058
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.00032492577783608243,
+        "current": -0.00028441866958143147,
+        "candidate": -0.0003251874391483901
+      }
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "tone_0.913",
+      "parameter": 10065.825,
+      "input_frames": 22050,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.04607880115509033,
+          "rmse": 0.021527178048247816,
+          "interior_rmse": 0.021467800470242385
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00041809678077697754,
+          "rmse": 0.000025066465222583188,
+          "interior_rmse": 0.000013107327128099535
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 17.9974,
+        "candidate": 8.4854
+      },
+      "tone_interior_gain_db": {
+        "reference": 0.000009226683319680017,
+        "current": -0.5418402261552614,
+        "candidate": -0.0003127891358861955
+      }
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "tone_0.940",
+      "parameter": 10363.5,
+      "input_frames": 22050,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.13254490494728088,
+          "rmse": 0.09349815345298197,
+          "interior_rmse": 0.09363750289931098
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.002406507730484009,
+          "rmse": 0.0016981019340520695,
+          "interior_rmse": 0.0017016484846164633
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 13.109499999999999,
+        "candidate": 7.451700000000001
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.6725972760579596,
+        "current": -3.6002011930750886,
+        "candidate": -0.7178860687328241
+      }
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "tone_0.950",
+      "parameter": 10473.75,
+      "input_frames": 22050,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.10910026729106903,
+          "rmse": 0.0770441009834319,
+          "interior_rmse": 0.07716218568838068
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0016666054725646973,
+          "rmse": 0.0011446418566736474,
+          "interior_rmse": 0.0011462424062551524
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 33.0563,
+        "candidate": 9.5759
+      },
+      "tone_interior_gain_db": {
+        "reference": -2.8740268891853504,
+        "current": -6.019411721617951,
+        "candidate": -2.9133202412504455
+      }
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "tone_0.970",
+      "parameter": 10694.25,
+      "input_frames": 22050,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.04155287891626358,
+          "rmse": 0.024797762470704077,
+          "interior_rmse": 0.0248327830819233
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0019354894757270813,
+          "rmse": 0.0013658049734301396,
+          "interior_rmse": 0.001368137962303605
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.3158,
+        "candidate": 7.7072
+      },
+      "tone_interior_gain_db": {
+        "reference": -17.536795323369912,
+        "current": -13.849251732498464,
+        "candidate": -17.287291937083555
+      }
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "tone_1.020",
+      "parameter": 11245.5,
+      "input_frames": 22050,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.010617019608616829,
+          "rmse": 0.0006183074894053526,
+          "interior_rmse": 0.00040854500810912336
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00022527482360601425,
+          "rmse": 0.00001112313494072501,
+          "interior_rmse": 3.184670102020667e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.5775,
+        "candidate": 12.252799999999999
+      },
+      "tone_interior_gain_db": {
+        "reference": -141.08801309879323,
+        "current": -58.74441789185329,
+        "candidate": -155.0026822205495
+      }
+    },
+    {
+      "sample_rate": 44100,
+      "signal": "tone_1.100",
+      "parameter": 12127.500000000002,
+      "input_frames": 22050,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.004337335005402565,
+          "rmse": 0.00021235475075008576,
+          "interior_rmse": 4.736985758181584e-8
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00009316671639680862,
+          "rmse": 0.000004481232834249152,
+          "interior_rmse": 2.2270962114702815e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 7.5445,
+        "candidate": 9.1489
+      },
+      "tone_interior_gain_db": {
+        "reference": -143.82751060084146,
+        "current": -138.3255366009489,
+        "candidate": -157.59528207167622
+      }
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "impulse_start",
+      "parameter": 0,
+      "input_frames": 24000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.06942136958241463,
+          "rmse": 0.0008460526859663661,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.020977377891540527,
+          "rmse": 0.00020123211470162957,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 8.7132,
+        "candidate": 18.7605
+      },
+      "impulse_peak_errors_samples": {
+        "reference": 0,
+        "current": 0,
+        "candidate": 0
+      }
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "impulse_center",
+      "parameter": 0.24666666666666667,
+      "input_frames": 24000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.10605983808636665,
+          "rmse": 0.0014656617273124805,
+          "interior_rmse": 0.0016242670481952425
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00012830120977014303,
+          "rmse": 0.000007231929002768814,
+          "interior_rmse": 0.000008014525968160511
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 14.2424,
+        "candidate": 15.4866
+      },
+      "responses": {
+        "reference": {
+          "dc_gain": 0.4593748576690875,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": 0.9504852294921875,
+          "minus_6_db_relative_nyquist": 0.956817626953125,
+          "minus_60_db_relative_nyquist": 0.989532470703125,
+          "minus_100_db_relative_nyquist": 0.997314453125,
+          "passband_delay_output_samples": 6.329298104143308e-9
+        },
+        "current": {
+          "dc_gain": 0.4593791814254141,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": 0.935638427734375,
+          "minus_6_db_relative_nyquist": 0.9499359130859375,
+          "minus_60_db_relative_nyquist": null,
+          "minus_100_db_relative_nyquist": null,
+          "passband_delay_output_samples": -0.20179490418510665
+        },
+        "candidate": {
+          "dc_gain": 0.4593749962207016,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": 0.95025634765625,
+          "minus_6_db_relative_nyquist": 0.956817626953125,
+          "minus_60_db_relative_nyquist": 0.99224853515625,
+          "minus_100_db_relative_nyquist": null,
+          "passband_delay_output_samples": 7.725924483590462e-14
+        }
+      },
+      "impulse_peak_errors_samples": {
+        "reference": 0,
+        "current": 0,
+        "candidate": 0
+      }
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "impulse_fractional",
+      "parameter": 0.2466875,
+      "input_frames": 24000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.11291247606277466,
+          "rmse": 0.001465630020068911,
+          "interior_rmse": 0.0016242319097796317
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00014063087292015553,
+          "rmse": 0.000007231839661176547,
+          "interior_rmse": 0.00000801442695854482
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.0371,
+        "candidate": 18.8858
+      },
+      "impulse_peak_errors_samples": {
+        "reference": -0.4593750000003638,
+        "current": -0.4593750000003638,
+        "candidate": -0.4593750000003638
+      }
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "impulse_tail",
+      "parameter": 0.49997916666666664,
+      "input_frames": 24000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.09558436274528503,
+          "rmse": 0.0010118334865518888,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00014063087292015553,
+          "rmse": 0.00000509178490049983,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 8.9505,
+        "candidate": 20.3093
+      },
+      "impulse_peak_errors_samples": {
+        "reference": -0.5406249999996362,
+        "current": -0.5406249999996362,
+        "candidate": -0.5406249999996362
+      }
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "dc",
+      "parameter": null,
+      "input_frames": 24000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.046516984701156616,
+          "rmse": 0.0005217840822750128,
+          "interior_rmse": 0.00000230319978293955
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.005649536848068237,
+          "rmse": 0.000054157147311618304,
+          "interior_rmse": 2.900271539431196e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.7768,
+        "candidate": 14.212900000000001
+      }
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "step",
+      "parameter": null,
+      "input_frames": 24000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.04087337851524353,
+          "rmse": 0.0005425788768752176,
+          "interior_rmse": 0.0005298093779662289
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.000027567148208618164,
+          "rmse": 0.0000017472322347925486,
+          "interior_rmse": 0.00000157302730969638
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 12.699399999999999,
+        "candidate": 12.633000000000001
+      }
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "linear_sweep",
+      "parameter": null,
+      "input_frames": 24000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.28142253309488297,
+          "rmse": 0.08113967862423573,
+          "interior_rmse": 0.08948644003397584
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.004573062062263489,
+          "rmse": 0.00040038075675295586,
+          "interior_rmse": 0.00044370760052849125
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 8.6535,
+        "candidate": 20.3415
+      }
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "tone_0.250",
+      "parameter": 2756.25,
+      "input_frames": 24000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.08427736163139343,
+          "rmse": 0.05597420329062652,
+          "interior_rmse": 0.055979041968351365
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0006776340305805206,
+          "rmse": 0.00000667458018092824,
+          "interior_rmse": 7.691361173819419e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 11.1084,
+        "candidate": 18.1232
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.00048316470879062836,
+        "current": -0.0003812998412664418,
+        "candidate": -0.00048386958409757814
+      }
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "tone_0.850",
+      "parameter": 9371.25,
+      "input_frames": 24000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.2815910130739212,
+          "rmse": 0.1881607009862301,
+          "interior_rmse": 0.1881752760921813
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00039198994636535645,
+          "rmse": 0.00014765867682408238,
+          "interior_rmse": 0.0001472279682322417
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.0503,
+        "candidate": 12.9935
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.003943123514368309,
+        "current": 0.000678619547937925,
+        "candidate": -0.0003252261016190649
+      }
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "tone_0.913",
+      "parameter": 10065.825,
+      "input_frames": 24000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.2922903746366501,
+          "rmse": 0.19556496183034755,
+          "interior_rmse": 0.19560048082983855
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0025728940963745117,
+          "rmse": 0.0003317738390104514,
+          "interior_rmse": 0.0003300191571694027
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 12.5684,
+        "candidate": 15.5871
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.008416160250775991,
+        "current": -0.7009420178834763,
+        "candidate": -0.00030437510399474864
+      }
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "tone_0.940",
+      "parameter": 10363.5,
+      "input_frames": 24000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.26834822073578835,
+          "rmse": 0.18915864335329488,
+          "interior_rmse": 0.1892295489276338
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.007024288177490234,
+          "rmse": 0.0029391476543869414,
+          "interior_rmse": 0.002944665121873268
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.7814,
+        "candidate": 13.5852
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.6370928884637677,
+        "current": -3.763240686646359,
+        "candidate": -0.715292280241383
+      }
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "tone_0.950",
+      "parameter": 10473.75,
+      "input_frames": 24000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.20982319582253695,
+          "rmse": 0.1484008585903885,
+          "interior_rmse": 0.14845589554256577
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.009173065423965454,
+          "rmse": 0.0024162344511102383,
+          "interior_rmse": 0.0024201472016539658
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.1112,
+        "candidate": 15.4858
+      },
+      "tone_interior_gain_db": {
+        "reference": -2.8275533498533094,
+        "current": -6.01937112843861,
+        "candidate": -2.910279968586914
+      }
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "tone_0.970",
+      "parameter": 10694.25,
+      "input_frames": 24000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.2116362266242504,
+          "rmse": 0.0495523094746459,
+          "interior_rmse": 0.04951124701828026
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.01614147424697876,
+          "rmse": 0.0034580567426240314,
+          "interior_rmse": 0.003461237402169742
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.580400000000001,
+        "candidate": 15.521
+      },
+      "tone_interior_gain_db": {
+        "reference": -17.95446498912901,
+        "current": -13.039135187716296,
+        "candidate": -17.307272216154484
+      }
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "tone_1.020",
+      "parameter": 11245.5,
+      "input_frames": 24000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.07658255100250244,
+          "rmse": 0.0016903304444346083,
+          "interior_rmse": 0.0009763138866142717
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.011912032961845398,
+          "rmse": 0.00011610280440330703,
+          "interior_rmse": 5.2310340314012576e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.887300000000002,
+        "candidate": 12.9088
+      },
+      "tone_interior_gain_db": {
+        "reference": -137.19312832801825,
+        "current": -51.17762679276743,
+        "candidate": -155.0346173712484
+      }
+    },
+    {
+      "sample_rate": 48000,
+      "signal": "tone_1.100",
+      "parameter": 12127.500000000002,
+      "input_frames": 24000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.05489189177751541,
+          "rmse": 0.0008263188210253298,
+          "interior_rmse": 4.410741726154581e-8
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.008657947182655334,
+          "rmse": 0.00008341866500939749,
+          "interior_rmse": 3.3793861119150024e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 9.4365,
+        "candidate": 16.6387
+      },
+      "tone_interior_gain_db": {
+        "reference": -140.28013901496263,
+        "current": -142.15094995830458,
+        "candidate": -157.43263829489155
+      }
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "impulse_start",
+      "parameter": 0,
+      "input_frames": 48000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.10946736484766006,
+          "rmse": 0.0011780104502890835,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.010488659143447876,
+          "rmse": 0.00010065409181767104,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.9054,
+        "candidate": 31.337600000000002
+      },
+      "impulse_peak_errors_samples": {
+        "reference": 0,
+        "current": 0,
+        "candidate": 0
+      }
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "impulse_center",
+      "parameter": 0.24666666666666667,
+      "input_frames": 48000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.10820998623967171,
+          "rmse": 0.0013867168832153625,
+          "interior_rmse": 0.0015367792558197229
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00009471661178395152,
+          "rmse": 0.000005346696165267943,
+          "interior_rmse": 0.000005925284283625869
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 8.3739,
+        "candidate": 26.9212
+      },
+      "responses": {
+        "reference": {
+          "dc_gain": 0.22968742809576326,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": 0.95062255859375,
+          "minus_6_db_relative_nyquist": 0.956817626953125,
+          "minus_60_db_relative_nyquist": 0.9890289306640625,
+          "minus_100_db_relative_nyquist": 0.9969940185546875,
+          "passband_delay_output_samples": 1.8505438668831508e-9
+        },
+        "current": {
+          "dc_gain": 0.22969203853196557,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": 0.92059326171875,
+          "minus_6_db_relative_nyquist": 0.947418212890625,
+          "minus_60_db_relative_nyquist": null,
+          "minus_100_db_relative_nyquist": null,
+          "passband_delay_output_samples": 0.3991027719274827
+        },
+        "candidate": {
+          "dc_gain": 0.2296874981103508,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": 0.95025634765625,
+          "minus_6_db_relative_nyquist": 0.956817626953125,
+          "minus_60_db_relative_nyquist": 0.99224853515625,
+          "minus_100_db_relative_nyquist": null,
+          "passband_delay_output_samples": 7.725924483590462e-14
+        }
+      },
+      "impulse_peak_errors_samples": {
+        "reference": 0,
+        "current": 0,
+        "candidate": 0
+      }
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "impulse_fractional",
+      "parameter": 0.24667708333333332,
+      "input_frames": 48000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.10613992810249329,
+          "rmse": 0.0013904895232000202,
+          "interior_rmse": 0.001540960148789494
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0001008867984637618,
+          "rmse": 0.000005346709746654558,
+          "interior_rmse": 0.000005925299334710534
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 9.5633,
+        "candidate": 27.3531
+      },
+      "impulse_peak_errors_samples": {
+        "reference": -0.2296875000001819,
+        "current": 0.7703124999998181,
+        "candidate": -0.2296875000001819
+      }
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "impulse_tail",
+      "parameter": 0.4999895833333333,
+      "input_frames": 48000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.09073903225362301,
+          "rmse": 0.001004636309839378,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00010089296847581863,
+          "rmse": 0.0000037334093336062676,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 7.1106,
+        "candidate": 28.788999999999998
+      },
+      "impulse_peak_errors_samples": {
+        "reference": -0.7703124999989086,
+        "current": -0.7703124999989086,
+        "candidate": -0.7703124999989086
+      }
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "dc",
+      "parameter": null,
+      "input_frames": 48000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0925358384847641,
+          "rmse": 0.000904023278746295,
+          "interior_rmse": 0.0000049023148238518065
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0016252398490905762,
+          "rmse": 0.000017246820272551442,
+          "interior_rmse": 3.735029636123987e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 8.1244,
+        "candidate": 26.3399
+      }
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "step",
+      "parameter": null,
+      "input_frames": 48000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.09273135662078857,
+          "rmse": 0.0009104852018150248,
+          "interior_rmse": 0.0010073940886033252
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0000375211238861084,
+          "rmse": 0.0000024243861490321645,
+          "interior_rmse": 0.0000021881588408096346
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 9.0216,
+        "candidate": 26.8731
+      }
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "linear_sweep",
+      "parameter": null,
+      "input_frames": 48000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.5010947436094284,
+          "rmse": 0.10883265582534028,
+          "interior_rmse": 0.11561140325236122
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.006343048065900803,
+          "rmse": 0.0004184913463675869,
+          "interior_rmse": 0.0004637780076847689
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 8.1938,
+        "candidate": 26.622
+      }
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "tone_0.250",
+      "parameter": 2756.25,
+      "input_frames": 48000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.16651451587677002,
+          "rmse": 0.11036904004494028,
+          "interior_rmse": 0.11037672354163726
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.001036662608385086,
+          "rmse": 0.00001021892560590494,
+          "interior_rmse": 6.862232340360859e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 9.7752,
+        "candidate": 27.282799999999998
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.0004837004261553147,
+        "current": -0.00022279781234225428,
+        "candidate": -0.0004838870399226928
+      }
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "tone_0.850",
+      "parameter": 9371.25,
+      "input_frames": 48000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.5168129801750183,
+          "rmse": 0.3544744532148561,
+          "interior_rmse": 0.3545650007661829
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.001806989312171936,
+          "rmse": 0.00014936379921771516,
+          "interior_rmse": 0.0001472149280615472
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.598700000000001,
+        "candidate": 26.3691
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.003942787872894851,
+        "current": -0.2313418803646741,
+        "candidate": -0.0003252110094149642
+      }
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "tone_0.913",
+      "parameter": 10065.825,
+      "input_frames": 48000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.5076071470975876,
+          "rmse": 0.3441474043569075,
+          "interior_rmse": 0.3442116822568978
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0010083317756652832,
+          "rmse": 0.0003327470276942167,
+          "interior_rmse": 0.00033007617849769693
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 8.7834,
+        "candidate": 37.0511
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.008417565939041348,
+        "current": -2.387404401535358,
+        "candidate": -0.00030437856859854927
+      }
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "tone_0.940",
+      "parameter": 10363.5,
+      "input_frames": 48000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.4449901580810547,
+          "rmse": 0.3143658033311164,
+          "interior_rmse": 0.31462136335199603
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.006247133016586304,
+          "rmse": 0.004337764326388729,
+          "interior_rmse": 0.004346326026331437
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 7.7486999999999995,
+        "candidate": 30.146
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.6001158415098778,
+        "current": -4.802412257320599,
+        "candidate": -0.715292273880747
+      }
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "tone_0.950",
+      "parameter": 10473.75,
+      "input_frames": 48000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.4229571670293808,
+          "rmse": 0.2519403311931357,
+          "interior_rmse": 0.25205869277073084
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.006111800670623779,
+          "rmse": 0.0038540299248238253,
+          "interior_rmse": 0.003862925605984492
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 7.4851,
+        "candidate": 31.2452
+      },
+      "tone_interior_gain_db": {
+        "reference": -2.7786078790423705,
+        "current": -6.021831711973262,
+        "candidate": -2.910279954821356
+      }
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "tone_0.970",
+      "parameter": 10694.25,
+      "input_frames": 48000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.3839179575443268,
+          "rmse": 0.11680191617287615,
+          "interior_rmse": 0.11667648121428194
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.013967305421829224,
+          "rmse": 0.005156199128557582,
+          "interior_rmse": 0.005164732456474041
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 8.9223,
+        "candidate": 30.2796
+      },
+      "tone_interior_gain_db": {
+        "reference": -18.29161636735023,
+        "current": -9.074310830631772,
+        "candidate": -17.307272210423235
+      }
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "tone_1.020",
+      "parameter": 11245.5,
+      "input_frames": 48000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.18819431215524673,
+          "rmse": 0.03181860039856642,
+          "interior_rmse": 0.031680210813406176
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00968131422996521,
+          "rmse": 0.00010009974497835291,
+          "interior_rmse": 4.07634709949287e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.1889,
+        "candidate": 34.0516
+      },
+      "tone_interior_gain_db": {
+        "reference": -139.39728222295122,
+        "current": -20.953338058307196,
+        "candidate": -156.50755598248085
+      }
+    },
+    {
+      "sample_rate": 96000,
+      "signal": "tone_1.100",
+      "parameter": 12127.500000000002,
+      "input_frames": 48000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.12275755032896996,
+          "rmse": 0.0020829064348955087,
+          "interior_rmse": 0.00048672312556827653
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.005998700857162476,
+          "rmse": 0.00006266650835627355,
+          "interior_rmse": 3.219067400114059e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 11.6044,
+        "candidate": 31.330299999999998
+      },
+      "tone_interior_gain_db": {
+        "reference": -140.7755370197202,
+        "current": -57.22326399040103,
+        "candidate": -160.5546777532784
+      }
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "impulse_start",
+      "parameter": 0,
+      "input_frames": 96000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.021640618331730366,
+          "rmse": 0.0002895434076061807,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.005244337022304535,
+          "rmse": 0.00005034337355858216,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 8.064699999999998,
+        "candidate": 65.4161
+      },
+      "impulse_peak_errors_samples": {
+        "reference": 0,
+        "current": 0,
+        "candidate": 0
+      }
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "impulse_center",
+      "parameter": 0.24666666666666667,
+      "input_frames": 96000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.03931485861539841,
+          "rmse": 0.0005137755836703746,
+          "interior_rmse": 0.0005693733657446792
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00005710768164135516,
+          "rmse": 0.0000032301898810101543,
+          "interior_rmse": 0.00000357974209557831
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 7.859,
+        "candidate": 53.9285
+      },
+      "responses": {
+        "reference": {
+          "dc_gain": 0.11484372308145463,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": 0.9506988525390625,
+          "minus_6_db_relative_nyquist": 0.956817626953125,
+          "minus_60_db_relative_nyquist": 0.9887237548828125,
+          "minus_100_db_relative_nyquist": 0.9967498779296875,
+          "passband_delay_output_samples": -1.0047807909090379e-8
+        },
+        "current": {
+          "dc_gain": 0.11484055607817464,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": 0.8875274658203125,
+          "minus_6_db_relative_nyquist": 0.9427947998046875,
+          "minus_60_db_relative_nyquist": null,
+          "minus_100_db_relative_nyquist": null,
+          "passband_delay_output_samples": -0.2996833423842952
+        },
+        "candidate": {
+          "dc_gain": 0.11484374901180705,
+          "peak_time_error_samples": 0,
+          "minus_3_db_relative_nyquist": 0.95025634765625,
+          "minus_6_db_relative_nyquist": 0.956817626953125,
+          "minus_60_db_relative_nyquist": 0.9922943115234375,
+          "minus_100_db_relative_nyquist": null,
+          "passband_delay_output_samples": 7.725961706322137e-14
+        }
+      },
+      "impulse_peak_errors_samples": {
+        "reference": 0,
+        "current": 0,
+        "candidate": 0
+      }
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "impulse_fractional",
+      "parameter": 0.246671875,
+      "input_frames": 96000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.035090121906250715,
+          "rmse": 0.0005207197317264621,
+          "interior_rmse": 0.0005770689687989896
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00005924835568293929,
+          "rmse": 0.0000032301962925967823,
+          "interior_rmse": 0.00000357974920098926
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 8.6417,
+        "candidate": 51.0571
+      },
+      "impulse_peak_errors_samples": {
+        "reference": -0.1148437500005457,
+        "current": -0.1148437500005457,
+        "candidate": -0.1148437500005457
+      }
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "impulse_tail",
+      "parameter": 0.49999479166666666,
+      "input_frames": 96000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.04136740230023861,
+          "rmse": 0.0004191642209719116,
+          "interior_rmse": 0
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00005924835568293929,
+          "rmse": 0.000002266818586519545,
+          "interior_rmse": 0
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 8.560099999999998,
+        "candidate": 51.9408
+      },
+      "impulse_peak_errors_samples": {
+        "reference": -0.8851562500003638,
+        "current": -0.8851562500003638,
+        "candidate": -0.8851562500003638
+      }
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "dc",
+      "parameter": null,
+      "input_frames": 96000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.06296807527542114,
+          "rmse": 0.0006642283678025616,
+          "interior_rmse": 0.000006956557994658081
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00303494930267334,
+          "rmse": 0.00003544929157735556,
+          "interior_rmse": 2.900271539431196e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 8.328199999999999,
+        "candidate": 50.83
+      }
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "step",
+      "parameter": null,
+      "input_frames": 96000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.06600452959537506,
+          "rmse": 0.0007416764987854177,
+          "interior_rmse": 0.0007683359885552556
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.000043898820877075195,
+          "rmse": 0.0000028818949615740983,
+          "interior_rmse": 0.0000026047034450553806
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.2848,
+        "candidate": 56.4015
+      }
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "linear_sweep",
+      "parameter": null,
+      "input_frames": 96000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.3941368358209729,
+          "rmse": 0.059130691987012964,
+          "interior_rmse": 0.041237390513337614
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.005942388437688351,
+          "rmse": 0.0003574985334355511,
+          "interior_rmse": 0.00039616519865525373
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 7.2703999999999995,
+        "candidate": 54.3258
+      }
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "tone_0.250",
+      "parameter": 2756.25,
+      "input_frames": 96000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.12408192828297615,
+          "rmse": 0.0832322717234745,
+          "interior_rmse": 0.0832385416921337
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0011220760643482208,
+          "rmse": 0.000011137605659474876,
+          "interior_rmse": 7.094314685940758e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 7.1082,
+        "candidate": 53.0539
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.000483520604649892,
+        "current": -0.000672829051737246,
+        "candidate": -0.0004838870399226928
+      }
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "tone_0.850",
+      "parameter": 9371.25,
+      "input_frames": 96000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.38913533836603165,
+          "rmse": 0.2585361203257474,
+          "interior_rmse": 0.25853317659721625
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.002108454704284668,
+          "rmse": 0.00015016254118738133,
+          "interior_rmse": 0.00014720332287133952
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 7.366700000000001,
+        "candidate": 52.8756
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.003942491396327404,
+        "current": -1.615236319582426,
+        "candidate": -0.0003251997656223383
+      }
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "tone_0.913",
+      "parameter": 10065.825,
+      "input_frames": 96000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.3943083416670561,
+          "rmse": 0.2680693725177945,
+          "interior_rmse": 0.268124308627353
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.001148134469985962,
+          "rmse": 0.0003339255944449279,
+          "interior_rmse": 0.0003298406302027048
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 7.6117,
+        "candidate": 51.99
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.008417589183643406,
+        "current": -3.9099302758590353,
+        "candidate": -0.00031018881202359683
+      }
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "tone_0.940",
+      "parameter": 10363.5,
+      "input_frames": 96000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.36487028282135725,
+          "rmse": 0.2569914430918881,
+          "interior_rmse": 0.25706997150423744
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.00755465030670166,
+          "rmse": 0.005225340211411149,
+          "interior_rmse": 0.005235519037378636
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 7.0907,
+        "candidate": 66.31869999999999
+      },
+      "tone_interior_gain_db": {
+        "reference": -0.578508779936402,
+        "current": -5.384555509508129,
+        "candidate": -0.7170900084278358
+      }
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "tone_0.950",
+      "parameter": 10473.75,
+      "input_frames": 96000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.3700575642287731,
+          "rmse": 0.2018454678548599,
+          "interior_rmse": 0.20186664816578445
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.006780147552490234,
+          "rmse": 0.004783037775834153,
+          "interior_rmse": 0.004794742730166414
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 7.6155,
+        "candidate": 53.112899999999996
+      },
+      "tone_interior_gain_db": {
+        "reference": -2.7492110919569743,
+        "current": -6.020290811616945,
+        "candidate": -2.912387810722067
+      }
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "tone_0.970",
+      "parameter": 10694.25,
+      "input_frames": 96000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.29801276326179504,
+          "rmse": 0.12880707981586764,
+          "interior_rmse": 0.12894542652021193
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.013540983200073242,
+          "rmse": 0.00624291946309721,
+          "interior_rmse": 0.00625418853694004
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 8.855500000000001,
+        "candidate": 58.052600000000005
+      },
+      "tone_interior_gain_db": {
+        "reference": -18.49838900882413,
+        "current": -7.436803040407566,
+        "candidate": -17.29341632270654
+      }
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "tone_1.020",
+      "parameter": 11245.5,
+      "input_frames": 96000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.15344060957431793,
+          "rmse": 0.089327810671598,
+          "interior_rmse": 0.08916322079764105
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.009326040744781494,
+          "rmse": 0.00009963340928534348,
+          "interior_rmse": 3.5008619663105004e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 10.056199999999999,
+        "candidate": 78.0128
+      },
+      "tone_interior_gain_db": {
+        "reference": -140.7093686104189,
+        "current": -11.965386719654415,
+        "candidate": -157.51116376125665
+      }
+    },
+    {
+      "sample_rate": 192000,
+      "signal": "tone_1.100",
+      "parameter": 12127.500000000002,
+      "input_frames": 96000,
+      "wanted_frames": 11025,
+      "comparisons": {
+        "current": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.0693863183259964,
+          "rmse": 0.026432375854653734,
+          "interior_rmse": 0.026413957525445318
+        },
+        "candidate": {
+          "reference_frames": 11025,
+          "actual_frames": 11025,
+          "equal_length": true,
+          "max_abs": 0.005579337477684021,
+          "rmse": 0.00006019137406134298,
+          "interior_rmse": 3.374049782997616e-8
+        }
+      },
+      "lengths_passed": true,
+      "elapsed_ms": {
+        "current": 9.6348,
+        "candidate": 56.291599999999995
+      },
+      "tone_interior_gain_db": {
+        "reference": -140.39673717401513,
+        "current": -22.532433030698606,
+        "candidate": -163.56313219492338
+      }
+    }
+  ],
+  "all_lengths_passed": true,
+  "not_checked": [
+    "musical_accuracy",
+    "model_parity",
+    "holdout",
+    "short_clip_lengths"
+  ],
+  "timing_note": "one sequential processing call including initialization; not a stable benchmark"
+}
