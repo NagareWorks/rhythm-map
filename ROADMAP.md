@@ -144,6 +144,19 @@ a learned component to the default distribution.
 
 ### Measured bottlenecks
 
+- 2026-09-04: completed the private active-region path and common-anchor
+  cross-corpus audit. Region-scoped candidates remove the full-file connectivity
+  limitation on RUBATO, but automatic adoption is not safe: mean Beat F1 changes
+  from 0.5212634 to 0.5322282 (11 improved / 3 regressed) on RUBATO and from
+  0.8079606 to 0.7982098 (1 improved / 4 regressed) on ARTBeaT. The latter selector
+  deletes eight unmatched events and 13 genuine beats. Keep the default unchanged;
+  do not blend the rejected adjacent-continuity variant or fit new thresholds.
+  Added synthetic default-API regressions for higher-scoring sparse alternatives,
+  padding/rest connectivity, and insufficient primary evidence. See the
+  [adoption audit](evaluation/baselines/active-region-adoption-audit-v1.md) for
+  boundaries, score-sentinel semantics, validation scope, and the remaining
+  metrical-evidence gate. Candidate generation is not automatic selection, and
+  common anchors are not verified beats.
 - 2026-09-04: the separate read-only RUBATO v1 cache bridge passed all 25
   raw-event/source/count and selected-score replays using full PCM and
   regenerated acoustic evidence. It retains 9,273 raw beats and 35,151 real
