@@ -24,14 +24,24 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- Rotation-normalized contextual pulse scoring now ranks 7/8 unchanged authored
+  paths correctly, including weak true doubling and all-weak constant tempo;
+  the remaining erased/half-speed pair has identical inputs and stays ambiguous.
+  Strong and weak bar controls prefer four over two/eight. Shared-phase
+  marginalization rejects a fixed-seed noise control that per-window maxima
+  falsely favor. These are given-path prerequisites, not a shipped decoder or
+  real-music improvement. Next freeze the joint unknown-boundary/tempo/meter
+  formulation with gap, edge, noise and search-cost gates, then evaluate it on
+  the retained dense cohorts. See the
+  [contextual phase evidence and limits](evaluation/baselines/phase-likelihood-v1.md).
 - A normalized background-copy missing-observation model is now explicitly
   tested and rejected as the next decoder emission: it softens negative-logit
   penalties but cannot reverse their evidence direction at any missing rate.
   Given-path controls preserve intact changes but still erase weak genuine
   doubling and confuse missing beats with slowing. Do not tune the missing
-  rate or run a full-cohort replay of this formulation. Next distinguish weak
-  pulse structure from background with contextual evidence and an explicit
-  null alternative before freezing a joint decoder. See the
+  rate or run a full-cohort replay of this formulation. The contextual scoring
+  prerequisite above addresses weak structure with an explicit null reference,
+  without changing this rejected model. See the
   [normalized dropout result and algebraic limit](evaluation/baselines/dropout-likelihood-v1.md).
 - Complete-frame positive/negative state scoring now passes the 27 ideal
   meter/phase cases and penalizes extra/missing bars on a shared frame domain.

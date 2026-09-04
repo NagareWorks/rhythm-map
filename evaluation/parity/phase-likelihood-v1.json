@@ -1,0 +1,585 @@
+{
+  "audit_source_sha256": "83b8df2e64b110a74d004058a6e77aa0a06b04bc9f991d657ce5047bb503c08a",
+  "cases": [
+    {
+      "authored_path": "constant_125",
+      "authored_path_unique_top": true,
+      "best_given_paths": [
+        "constant_125"
+      ],
+      "case": "constant_intact",
+      "given_path_scores": [
+        {
+          "path": "constant_125",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 150.81905346690385,
+            "neutral_flat_cells": 0,
+            "scored_cells": 48,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_half_speed",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 125.68254455575318,
+            "neutral_flat_cells": 0,
+            "scored_cells": 40,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_double_speed",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 139.72871942090725,
+            "neutral_flat_cells": 16,
+            "scored_cells": 64,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_non_octave",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 10.930391684689873,
+            "neutral_flat_cells": 0,
+            "scored_cells": 44,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        }
+      ],
+      "input_f64_le_sha256": "f8ac483b38ade541afd0bf2d5cd0ea18d27f7314485266bfb145c11f9faa928b",
+      "null_log_ratio": 0.0
+    },
+    {
+      "authored_path": "constant_125",
+      "authored_path_unique_top": true,
+      "best_given_paths": [
+        "constant_125"
+      ],
+      "case": "constant_weak_alternating",
+      "given_path_scores": [
+        {
+          "path": "constant_125",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 147.78061804570893,
+            "neutral_flat_cells": 0,
+            "scored_cells": 48,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_half_speed",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 131.22719102077158,
+            "neutral_flat_cells": 0,
+            "scored_cells": 40,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_double_speed",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 136.84884469050914,
+            "neutral_flat_cells": 16,
+            "scored_cells": 64,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_non_octave",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 52.13150695504326,
+            "neutral_flat_cells": 0,
+            "scored_cells": 44,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        }
+      ],
+      "input_f64_le_sha256": "72c28bb0825b88c06bc40ad9e1f74457e1c724fd515ec95920b6af53445fc4b0",
+      "null_log_ratio": 0.0
+    },
+    {
+      "authored_path": "constant_125",
+      "authored_path_unique_top": false,
+      "best_given_paths": [
+        "true_half_speed"
+      ],
+      "case": "constant_erased_alternating",
+      "given_path_scores": [
+        {
+          "path": "constant_125",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 125.68254455575314,
+            "neutral_flat_cells": 8,
+            "scored_cells": 48,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_half_speed",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 131.2277011573109,
+            "neutral_flat_cells": 0,
+            "scored_cells": 40,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_double_speed",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 120.13737753275487,
+            "neutral_flat_cells": 24,
+            "scored_cells": 64,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_non_octave",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 63.98399418772086,
+            "neutral_flat_cells": 4,
+            "scored_cells": 44,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        }
+      ],
+      "input_f64_le_sha256": "aa9bd0f83bcd7d520253cba144f807bfa905317a8260aefb7a4d04636805dbe9",
+      "null_log_ratio": 0.0
+    },
+    {
+      "authored_path": "true_half_speed",
+      "authored_path_unique_top": true,
+      "best_given_paths": [
+        "true_half_speed"
+      ],
+      "case": "half_speed_intact",
+      "given_path_scores": [
+        {
+          "path": "constant_125",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 125.68254455575314,
+            "neutral_flat_cells": 8,
+            "scored_cells": 48,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_half_speed",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 131.2277011573109,
+            "neutral_flat_cells": 0,
+            "scored_cells": 40,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_double_speed",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 120.13737753275487,
+            "neutral_flat_cells": 24,
+            "scored_cells": 64,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_non_octave",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 63.98399418772086,
+            "neutral_flat_cells": 4,
+            "scored_cells": 44,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        }
+      ],
+      "input_f64_le_sha256": "aa9bd0f83bcd7d520253cba144f807bfa905317a8260aefb7a4d04636805dbe9",
+      "null_log_ratio": 0.0
+    },
+    {
+      "authored_path": "true_double_speed",
+      "authored_path_unique_top": true,
+      "best_given_paths": [
+        "true_double_speed"
+      ],
+      "case": "double_speed_intact",
+      "given_path_scores": [
+        {
+          "path": "constant_125",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 139.72871942090725,
+            "neutral_flat_cells": 0,
+            "scored_cells": 48,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_half_speed",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 120.13737753275487,
+            "neutral_flat_cells": 0,
+            "scored_cells": 40,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_double_speed",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 178.91140319721208,
+            "neutral_flat_cells": 0,
+            "scored_cells": 64,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_non_octave",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 3.6926216732524715,
+            "neutral_flat_cells": 0,
+            "scored_cells": 44,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        }
+      ],
+      "input_f64_le_sha256": "d71b14a5294ebd6fc61aba1f8bf7c3d0a3690284cd227e2f54e6f6068f38ef76",
+      "null_log_ratio": 0.0
+    },
+    {
+      "authored_path": "true_double_speed",
+      "authored_path_unique_top": true,
+      "best_given_paths": [
+        "true_double_speed"
+      ],
+      "case": "double_speed_weak_alternating",
+      "given_path_scores": [
+        {
+          "path": "constant_125",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 150.8180331911672,
+            "neutral_flat_cells": 0,
+            "scored_cells": 48,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_half_speed",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 125.68203441788484,
+            "neutral_flat_cells": 0,
+            "scored_cells": 40,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_double_speed",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 173.15165373641585,
+            "neutral_flat_cells": 0,
+            "scored_cells": 64,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_non_octave",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 10.929662375053447,
+            "neutral_flat_cells": 0,
+            "scored_cells": 44,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        }
+      ],
+      "input_f64_le_sha256": "095c2094aedabd8cc925c702e0db36230e13f9fdc3781a81baa0a1fa515a9802",
+      "null_log_ratio": 0.0
+    },
+    {
+      "authored_path": "true_non_octave",
+      "authored_path_unique_top": true,
+      "best_given_paths": [
+        "true_non_octave"
+      ],
+      "case": "non_octave_intact",
+      "given_path_scores": [
+        {
+          "path": "constant_125",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 10.250799011328597,
+            "neutral_flat_cells": 4,
+            "scored_cells": 48,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_half_speed",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 64.45512285653213,
+            "neutral_flat_cells": 0,
+            "scored_cells": 40,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_double_speed",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": -6.912936060468746,
+            "neutral_flat_cells": 16,
+            "scored_cells": 64,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_non_octave",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 141.70297345927997,
+            "neutral_flat_cells": 0,
+            "scored_cells": 44,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        }
+      ],
+      "input_f64_le_sha256": "932e5f833d51843d5065abb64e9080b9b13f2f50253c8f6876a3582b6f868bdf",
+      "null_log_ratio": 0.0
+    },
+    {
+      "authored_path": "constant_125",
+      "authored_path_unique_top": true,
+      "best_given_paths": [
+        "constant_125"
+      ],
+      "case": "constant_all_weak",
+      "given_path_scores": [
+        {
+          "path": "constant_125",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 132.58844093973428,
+            "neutral_flat_cells": 0,
+            "scored_cells": 48,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_half_speed",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 110.49036744977856,
+            "neutral_flat_cells": 0,
+            "scored_cells": 40,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_double_speed",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 121.81522827533134,
+            "neutral_flat_cells": 16,
+            "scored_cells": 64,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_non_octave",
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 74.16768798256051,
+            "neutral_flat_cells": 0,
+            "scored_cells": 44,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        }
+      ],
+      "input_f64_le_sha256": "0fac599f88962081e53300a2e6ff0ceace40e5e01357df7e26a1f3dd66ed3648",
+      "null_log_ratio": 0.0
+    }
+  ],
+  "clock_decoder_implemented": false,
+  "coherence_controls": [
+    {
+      "case": "fixed_seed_nonperiodic_noise",
+      "measurement": {
+        "cells": 48,
+        "given_period_frames": 24,
+        "per_cell_max_score_not_valid_evidence": 63.140912902326036,
+        "shared_phase_marginal_log_ratio_to_null": -16.156014147505086
+      }
+    },
+    {
+      "case": "coherent_weak_pulses",
+      "measurement": {
+        "cells": 48,
+        "given_period_frames": 24,
+        "per_cell_max_score_not_valid_evidence": 132.58844093973428,
+        "shared_phase_marginal_log_ratio_to_null": 129.41038710938633
+      }
+    },
+    {
+      "case": "phase_drift_against_fixed_period",
+      "measurement": {
+        "cells": 48,
+        "given_period_frames": 24,
+        "per_cell_max_score_not_valid_evidence": 132.58844093973428,
+        "shared_phase_marginal_log_ratio_to_null": -119.41155906026573
+      }
+    }
+  ],
+  "flat_control": {
+    "available_frames_in_unscored_cells": 0,
+    "log_ratio_to_null": 0.0,
+    "neutral_flat_cells": 48,
+    "scored_cells": 48,
+    "scored_frames": 1152,
+    "unavailable_frames": 0
+  },
+  "frame_rate_hz": 50,
+  "frames": 1152,
+  "holdout_opened": false,
+  "meter_controls": [
+    {
+      "authored_meter": 4,
+      "given_meter_scores": [
+        {
+          "meter": 2,
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 46.022498269062545,
+            "neutral_flat_cells": 12,
+            "scored_cells": 24,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "meter": 4,
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 54.34020190726071,
+            "neutral_flat_cells": 0,
+            "scored_cells": 12,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "meter": 8,
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 27.17010095363041,
+            "neutral_flat_cells": 0,
+            "scored_cells": 6,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        }
+      ],
+      "weak": false
+    },
+    {
+      "authored_meter": 4,
+      "given_meter_scores": [
+        {
+          "meter": 2,
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 41.00285624914159,
+            "neutral_flat_cells": 12,
+            "scored_cells": 24,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "meter": 4,
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 48.44675006475456,
+            "neutral_flat_cells": 0,
+            "scored_cells": 12,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "meter": 8,
+          "score": {
+            "available_frames_in_unscored_cells": 0,
+            "log_ratio_to_null": 24.22337503237728,
+            "neutral_flat_cells": 0,
+            "scored_cells": 6,
+            "scored_frames": 1152,
+            "unavailable_frames": 0
+          }
+        }
+      ],
+      "weak": true
+    }
+  ],
+  "production_output_changed": false,
+  "purpose": "rotation_normalized_contextual_phase_gate",
+  "real_music_evaluated": false,
+  "schema_version": 1,
+  "scorer_source_sha256": "ea792e0e6b185de8dd998aa3e69e3be6cdc1767cf724a49398e43a97a5fea1d4",
+  "shape_weights": [
+    0.25,
+    0.5,
+    0.25
+  ],
+  "training_run": false
+}

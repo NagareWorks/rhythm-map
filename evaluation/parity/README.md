@@ -517,3 +517,13 @@ event failures, full frame denominators and identical-input witnesses. It is
 not a joint clock decoder or real-music accuracy result. The
 [derivation and decision](../baselines/dropout-likelihood-v1.md) explain why
 changing the missing rate cannot reverse negative observation evidence.
+
+## Contextual phase likelihood
+
+`cargo run --locked -p rhythm-map-eval --example phase_likelihood` emits the
+authored `phase-likelihood-v1.json` scoring audit. It reuses the eight dropout
+control inputs, adds strong/weak bar-density checks and contrasts independent
+window maximization with a normalized shared-phase model. No captures or
+audio are read. The [derivation and scope](../baselines/phase-likelihood-v1.md)
+explain the positive weak-evidence result and why it is not a joint decoder or
+real-music accuracy claim.
