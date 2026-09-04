@@ -5,6 +5,15 @@ beats and downbeats, while a deterministic Rust estimator derives the BPM
 curve, tempo segments, change points, and rhythm-homogeneous sections. The
 neural backend does not directly classify tempo changes or emit a tempo map.
 
+Detected events are not the musical clock itself: missing/weak observations can
+occur without a tempo change. The current default is still event-derived; it
+does not yet jointly infer latent beat advancement and observation availability.
+The [controlled dropout audit](../evaluation/baselines/observation-clock-v1.md)
+shows both the resulting failure and why a continuity prior alone is unsafe.
+Its missing-step state model is evaluation-only, not a shipping algorithm or
+new user strategy. See the [training decision protocol](TRAINING-DECISION.md)
+for the distinction between missing evidence and a need to train a model.
+
 ## Observation boundary
 
 ### Audio time origin and resampling

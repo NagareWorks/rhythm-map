@@ -24,6 +24,15 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- Controlled observation dropout now distinguishes missing detected events from
+  changes in musical truth. A frozen evaluation-only missing-step clock solves
+  authored constant-tempo dropouts but erases genuine octave changes and
+  regresses RUBATO; do not promote or tune another timestamp-only penalty.
+  Next: test additional observation likelihoods and real detector output while
+  separating inferred clock state from supported events and unavailable spans.
+  See the [400-variant calibration audit](evaluation/baselines/observation-clock-v1.md)
+  and [practical training decision gate](docs/TRAINING-DECISION.md). Training is
+  not yet justified; no new product strategy or user tuning parameter is added.
 - Evaluation-only Rust active-interval candidate generation now matches all 40
   frozen RUBATO/ARTBeat calibration cases (80 components, 61 proposals, 19
   fallbacks). Sparse pair-state storage preserves the existing weights and

@@ -8,6 +8,7 @@ mod dataset;
 mod local_consensus;
 mod manifest;
 mod metrics;
+mod observability;
 mod observation_cache;
 mod public_dataset;
 mod rubato;
@@ -40,6 +41,7 @@ pub use manifest::{
 pub use metrics::{
     BeatMetrics, CaseEvaluation, ChangeMetrics, EvaluationMetrics, TempoMetrics, evaluate_analysis,
 };
+pub use observability::audit_observation_dropout;
 pub use public_dataset::{
     DatasetFetchAsset, DatasetFetchReport, DatasetFetchStatus, PublicDatasetAsset,
     PublicDatasetAssetRole, PublicDatasetHostResolution, PublicDatasetLock,
