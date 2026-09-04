@@ -507,3 +507,13 @@ positive and negative evidence over identical frame domains. Its committed
 event omission diagnostics. This is not an end-to-end decoder, musical accuracy
 score or successor calibration result. See the
 [contract, result and remaining limitation](../baselines/frame-likelihood-v1.md).
+
+## Normalized missing-observation reference
+
+`cargo run --locked -p rhythm-map-eval --example dropout_likelihood` evaluates
+one normalized visible/background mixture against eight authored fixed-path
+controls. Its `dropout-likelihood-v1.json` keeps intact-case successes, weak
+event failures, full frame denominators and identical-input witnesses. It is
+not a joint clock decoder or real-music accuracy result. The
+[derivation and decision](../baselines/dropout-likelihood-v1.md) explain why
+changing the missing rate cannot reverse negative observation evidence.

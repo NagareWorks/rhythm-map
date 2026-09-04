@@ -24,14 +24,23 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- A normalized background-copy missing-observation model is now explicitly
+  tested and rejected as the next decoder emission: it softens negative-logit
+  penalties but cannot reverse their evidence direction at any missing rate.
+  Given-path controls preserve intact changes but still erase weak genuine
+  doubling and confuse missing beats with slowing. Do not tune the missing
+  rate or run a full-cohort replay of this formulation. Next distinguish weak
+  pulse structure from background with contextual evidence and an explicit
+  null alternative before freezing a joint decoder. See the
+  [normalized dropout result and algebraic limit](evaluation/baselines/dropout-likelihood-v1.md).
 - Complete-frame positive/negative state scoring now passes the 27 ideal
   meter/phase cases and penalizes extra/missing bars on a shared frame domain.
   It is only a scoring prerequisite, not a new clock decoder. Explicit omission
   alternatives expose a remaining failure: negative-logit weak events are
   cheaper to omit even when their repeated pattern favors the correct meter.
-  Next define normalized visible/missing observation states and uncertainty
-  before freezing a joint decoder; do not hide the issue by restricting meter
-  choices or tune on real music. See the
+  The normalized missing-observation check above rules out the simplest
+  background-copy formulation; do not hide the issue by restricting meter
+  choices or tuning on real music. See the
   [structural checkpoint and weak-evidence limit](evaluation/baselines/frame-likelihood-v1.md).
 - The first truth-free full-frame renewal-clock candidate is rejected: weak
   pulses and short central dropouts can recover on controls, but weak genuine

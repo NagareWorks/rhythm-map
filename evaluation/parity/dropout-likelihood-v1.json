@@ -1,0 +1,530 @@
+{
+  "audit_source_sha256": "ae798ade3a32d7161f7fa4fd684c78ac4433ed7fb4b8ff75815e3c5e68c06e81",
+  "cases": [
+    {
+      "authored_path": "constant_125",
+      "authored_path_wins": true,
+      "best_given_path": "constant_125",
+      "case": "constant_intact",
+      "given_path_scores": [
+        {
+          "path": "constant_125",
+          "score": {
+            "conditional_expected_missing_frames": 0.005367201991364137,
+            "log_density": -8433.820159372332,
+            "log_ratio_to_all_absent": 1136.833453047289,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 144,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_half_speed",
+          "score": {
+            "conditional_expected_missing_frames": 0.004472668326136775,
+            "log_density": -8623.292401546889,
+            "log_ratio_to_all_absent": 947.36121087274,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 120,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_double_speed",
+          "score": {
+            "conditional_expected_missing_frames": 47.860883566477916,
+            "log_density": -8544.199542309849,
+            "log_ratio_to_all_absent": 1026.4540701097844,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 192,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_non_octave",
+          "score": {
+            "conditional_expected_missing_frames": 23.931783583736756,
+            "log_density": -8773.218214102928,
+            "log_ratio_to_all_absent": 797.4353983167159,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 132,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "all_absent",
+          "score": {
+            "conditional_expected_missing_frames": 0.0,
+            "log_density": -9570.6536124197,
+            "log_ratio_to_all_absent": 0.0,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 0,
+            "unavailable_frames": 0
+          }
+        }
+      ],
+      "input_f64_le_sha256": "f8ac483b38ade541afd0bf2d5cd0ea18d27f7314485266bfb145c11f9faa928b"
+    },
+    {
+      "authored_path": "constant_125",
+      "authored_path_wins": false,
+      "best_given_path": "true_half_speed",
+      "case": "constant_weak_alternating",
+      "given_path_scores": [
+        {
+          "path": "constant_125",
+          "score": {
+            "conditional_expected_missing_frames": 10.824946117428965,
+            "log_density": -8332.550380090051,
+            "log_ratio_to_all_absent": 911.217899865801,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 144,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_half_speed",
+          "score": {
+            "conditional_expected_missing_frames": 0.004472668326136775,
+            "log_density": -8296.407069083118,
+            "log_ratio_to_all_absent": 947.36121087274,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 120,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_double_speed",
+          "score": {
+            "conditional_expected_missing_frames": 58.68046248191551,
+            "log_density": -8442.92976302757,
+            "log_ratio_to_all_absent": 800.8385169283001,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 192,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_non_octave",
+          "score": {
+            "conditional_expected_missing_frames": 23.931783583736756,
+            "log_density": -8446.332881639153,
+            "log_ratio_to_all_absent": 797.4353983167159,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 132,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "all_absent",
+          "score": {
+            "conditional_expected_missing_frames": 0.0,
+            "log_density": -9243.768279955922,
+            "log_ratio_to_all_absent": 0.0,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 0,
+            "unavailable_frames": 0
+          }
+        }
+      ],
+      "input_f64_le_sha256": "72c28bb0825b88c06bc40ad9e1f74457e1c724fd515ec95920b6af53445fc4b0"
+    },
+    {
+      "authored_path": "constant_125",
+      "authored_path_wins": false,
+      "best_given_path": "true_half_speed",
+      "case": "constant_erased_alternating",
+      "given_path_scores": [
+        {
+          "path": "constant_125",
+          "score": {
+            "conditional_expected_missing_frames": 23.932230850569365,
+            "log_density": -8486.482093015637,
+            "log_ratio_to_all_absent": 892.1715194039894,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 144,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_half_speed",
+          "score": {
+            "conditional_expected_missing_frames": 0.004472668326136775,
+            "log_density": -8431.292401546876,
+            "log_ratio_to_all_absent": 947.36121087274,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 120,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_double_speed",
+          "score": {
+            "conditional_expected_missing_frames": 71.78774721505638,
+            "log_density": -8596.861475953154,
+            "log_ratio_to_all_absent": 781.7921364664886,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 192,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_non_octave",
+          "score": {
+            "conditional_expected_missing_frames": 23.931783583736756,
+            "log_density": -8581.218214102912,
+            "log_ratio_to_all_absent": 797.4353983167159,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 132,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "all_absent",
+          "score": {
+            "conditional_expected_missing_frames": 0.0,
+            "log_density": -9378.653612419683,
+            "log_ratio_to_all_absent": 0.0,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 0,
+            "unavailable_frames": 0
+          }
+        }
+      ],
+      "input_f64_le_sha256": "aa9bd0f83bcd7d520253cba144f807bfa905317a8260aefb7a4d04636805dbe9"
+    },
+    {
+      "authored_path": "true_half_speed",
+      "authored_path_wins": true,
+      "best_given_path": "true_half_speed",
+      "case": "half_speed_intact",
+      "given_path_scores": [
+        {
+          "path": "constant_125",
+          "score": {
+            "conditional_expected_missing_frames": 23.932230850569365,
+            "log_density": -8486.482093015637,
+            "log_ratio_to_all_absent": 892.1715194039894,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 144,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_half_speed",
+          "score": {
+            "conditional_expected_missing_frames": 0.004472668326136775,
+            "log_density": -8431.292401546876,
+            "log_ratio_to_all_absent": 947.36121087274,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 120,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_double_speed",
+          "score": {
+            "conditional_expected_missing_frames": 71.78774721505638,
+            "log_density": -8596.861475953154,
+            "log_ratio_to_all_absent": 781.7921364664886,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 192,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_non_octave",
+          "score": {
+            "conditional_expected_missing_frames": 23.931783583736756,
+            "log_density": -8581.218214102912,
+            "log_ratio_to_all_absent": 797.4353983167159,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 132,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "all_absent",
+          "score": {
+            "conditional_expected_missing_frames": 0.0,
+            "log_density": -9378.653612419683,
+            "log_ratio_to_all_absent": 0.0,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 0,
+            "unavailable_frames": 0
+          }
+        }
+      ],
+      "input_f64_le_sha256": "aa9bd0f83bcd7d520253cba144f807bfa905317a8260aefb7a4d04636805dbe9"
+    },
+    {
+      "authored_path": "true_double_speed",
+      "authored_path_wins": true,
+      "best_given_path": "true_double_speed",
+      "case": "double_speed_intact",
+      "given_path_scores": [
+        {
+          "path": "constant_125",
+          "score": {
+            "conditional_expected_missing_frames": 0.005367201991364137,
+            "log_density": -8817.82015937236,
+            "log_ratio_to_all_absent": 1136.833453047289,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 144,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_half_speed",
+          "score": {
+            "conditional_expected_missing_frames": 0.004472668326136775,
+            "log_density": -9007.29240154692,
+            "log_ratio_to_all_absent": 947.36121087274,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 120,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_double_speed",
+          "score": {
+            "conditional_expected_missing_frames": 0.007156269321818861,
+            "log_density": -8438.875675023244,
+            "log_ratio_to_all_absent": 1515.777937396389,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 192,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_non_octave",
+          "score": {
+            "conditional_expected_missing_frames": 23.931783583736756,
+            "log_density": -9157.218214102957,
+            "log_ratio_to_all_absent": 797.4353983167159,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 132,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "all_absent",
+          "score": {
+            "conditional_expected_missing_frames": 0.0,
+            "log_density": -9954.653612419737,
+            "log_ratio_to_all_absent": 0.0,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 0,
+            "unavailable_frames": 0
+          }
+        }
+      ],
+      "input_f64_le_sha256": "d71b14a5294ebd6fc61aba1f8bf7c3d0a3690284cd227e2f54e6f6068f38ef76"
+    },
+    {
+      "authored_path": "true_double_speed",
+      "authored_path_wins": false,
+      "best_given_path": "constant_125",
+      "case": "double_speed_weak_alternating",
+      "given_path_scores": [
+        {
+          "path": "constant_125",
+          "score": {
+            "conditional_expected_missing_frames": 0.005367201991364137,
+            "log_density": -8164.049494444813,
+            "log_ratio_to_all_absent": 1136.833453047289,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 144,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_half_speed",
+          "score": {
+            "conditional_expected_missing_frames": 0.004472668326136775,
+            "log_density": -8353.521736619366,
+            "log_ratio_to_all_absent": 947.36121087274,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 120,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_double_speed",
+          "score": {
+            "conditional_expected_missing_frames": 21.64631410019691,
+            "log_density": -8236.336116458684,
+            "log_ratio_to_all_absent": 1064.5468310334097,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 192,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_non_octave",
+          "score": {
+            "conditional_expected_missing_frames": 23.931783583736756,
+            "log_density": -8503.447549175407,
+            "log_ratio_to_all_absent": 797.4353983167159,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 132,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "all_absent",
+          "score": {
+            "conditional_expected_missing_frames": 0.0,
+            "log_density": -9300.88294749218,
+            "log_ratio_to_all_absent": 0.0,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 0,
+            "unavailable_frames": 0
+          }
+        }
+      ],
+      "input_f64_le_sha256": "095c2094aedabd8cc925c702e0db36230e13f9fdc3781a81baa0a1fa515a9802"
+    },
+    {
+      "authored_path": "true_non_octave",
+      "authored_path_wins": true,
+      "best_given_path": "true_non_octave",
+      "case": "non_octave_intact",
+      "given_path_scores": [
+        {
+          "path": "constant_125",
+          "score": {
+            "conditional_expected_missing_frames": 35.895662674858414,
+            "log_density": -8704.813059837299,
+            "log_ratio_to_all_absent": 769.8405525823407,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 144,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_half_speed",
+          "score": {
+            "conditional_expected_missing_frames": 11.96790449261519,
+            "log_density": -8649.623368368542,
+            "log_ratio_to_all_absent": 825.0302440510911,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 120,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_double_speed",
+          "score": {
+            "conditional_expected_missing_frames": 83.7511790393454,
+            "log_density": -8815.192442774822,
+            "log_ratio_to_all_absent": 659.4611696448397,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 192,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_non_octave",
+          "score": {
+            "conditional_expected_missing_frames": 0.004919935158750456,
+            "log_density": -8432.556280459603,
+            "log_ratio_to_all_absent": 1042.097331960014,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 132,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "all_absent",
+          "score": {
+            "conditional_expected_missing_frames": 0.0,
+            "log_density": -9474.653612419692,
+            "log_ratio_to_all_absent": 0.0,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 0,
+            "unavailable_frames": 0
+          }
+        }
+      ],
+      "input_f64_le_sha256": "932e5f833d51843d5065abb64e9080b9b13f2f50253c8f6876a3582b6f868bdf"
+    },
+    {
+      "authored_path": "constant_125",
+      "authored_path_wins": false,
+      "best_given_path": "all_absent",
+      "case": "constant_all_weak",
+      "given_path_scores": [
+        {
+          "path": "constant_125",
+          "score": {
+            "conditional_expected_missing_frames": 64.92284069461668,
+            "log_density": -7826.201483678697,
+            "log_ratio_to_all_absent": -216.85986604163867,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 144,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_half_speed",
+          "score": {
+            "conditional_expected_missing_frames": 54.102367245513925,
+            "log_density": -7790.058172671764,
+            "log_ratio_to_all_absent": -180.71655503469873,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 120,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_double_speed",
+          "score": {
+            "conditional_expected_missing_frames": 112.77835705910371,
+            "log_density": -7936.580866616202,
+            "log_ratio_to_all_absent": -327.2392489791407,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 192,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "true_non_octave",
+          "score": {
+            "conditional_expected_missing_frames": 72.619888703206,
+            "log_density": -7827.176208637051,
+            "log_ratio_to_all_absent": -217.8345909999807,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 132,
+            "unavailable_frames": 0
+          }
+        },
+        {
+          "path": "all_absent",
+          "score": {
+            "conditional_expected_missing_frames": 0.0,
+            "log_density": -7609.34161763709,
+            "log_ratio_to_all_absent": 0.0,
+            "scored_frames": 1152,
+            "scored_hypothesized_frames": 0,
+            "unavailable_frames": 0
+          }
+        }
+      ],
+      "input_f64_le_sha256": "0fac599f88962081e53300a2e6ff0ceace40e5e01357df7e26a1f3dd66ed3648"
+    }
+  ],
+  "clock_decoder_implemented": false,
+  "fixed_missing_rate": 0.1,
+  "frame_rate_hz": 50,
+  "frames": 1152,
+  "holdout_opened": false,
+  "log_density_measure": "real_logit_axis",
+  "production_output_changed": false,
+  "purpose": "normalized_dropout_observation_limit",
+  "real_music_evaluated": false,
+  "schema_version": 1,
+  "scorer_source_sha256": "46f12dbe53431caeb787e620f2ff0edc54a094c62c92985ee2ffe9c89136cc50",
+  "single_head_only": true,
+  "training_run": false
+}
