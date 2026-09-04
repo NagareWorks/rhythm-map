@@ -48,6 +48,68 @@ In particular, ARTBeaT relative-onset deletion-protection macro AUC falls from
 outcome classes. Relative harmonic evidence improves on that small subset, but
 this is insufficient to establish transfer. Undefined AUC stays unknown.
 
+## Follow-up: isolated edits also fail the automatic-adoption gate
+
+A subsequent single predeclared experiment restricted edits to one insertion,
+deletion or relocation between common anchors, with three unchanged events on
+each side. All four surrounding intervals and the replacement had to agree with
+their median period within 8% (the existing regular-grid fit tolerance). It
+required insertion confidence at least the weakest context event, deletion
+confidence below that event, or relocation confidence at least the displaced
+event. There was no threshold sweep or corpus-specific exception. Decisions
+were frozen before reading labels; only the same 40 calibration recordings were
+used, with no model inference or holdout access.
+
+| Cohort | Baseline mean Beat F1 | Candidate mean Beat F1 | Improved / regressed recordings | Accepted edits | Change in matched beats / false positives |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| RUBATO | 0.5212634 | 0.5218809 | 11 / 1 | 30 | -2 / -28 |
+| ARTBeaT | 0.8079606 | 0.8061424 | 0 / 1 | 1 | -1 / 0 |
+
+All accepted edits were deletions; no missed beat was recovered. Even the stable
+bilateral context did not make the metrical anchors correct. The rule is rejected
+and remains a private experiment, not another Rust policy or product option.
+Do not repeatedly add guards to this failed rule until these same labels pass.
+
+In the same frozen observations, raw-model and default-selected timestamp arrays
+are exactly equal in 17/25 RUBATO and 15/15 ARTBeaT cases. Most of the measured
+beat error therefore already exists in the observation/decoding output rather
+than being introduced by the default timing estimator. This does not isolate
+the neural model from its decoder, prove downstream recovery impossible, or
+justify training a new model; it redirects the next accuracy investigation away
+from more local deletion guards and toward missed/extra observation events.
+
+The private experiment source SHA-256 is
+`3d08fc07be50de06d847ac87c2cfa05185eeec7ba6db59c1ffffcf3793ec6f1b`;
+its private report is
+`0ada1c5120814aaf87e3d3bb04875dcb83635d1bf33d0b006afa06af9669992e`.
+This aggregate summary does not distribute recordings or timestamp arrays and
+does not claim a public replay command for the private experiment.
+
+## Existing promotion comparisons now protect more than F1
+
+The existing fixed-decoder and hypothesis comparison reports now use schema 2.
+Their no-regression gate rejects any per-case decrease in matched beat count,
+precision, recall or F1, and any increase in median/P95 matched timestamp error.
+Losing a previously defined timing measurement is not zero error. Invalid numeric
+metrics fail closed. `improved_case_ids` requires higher F1 without these other
+regressions, so improvement and regression lists remain disjoint. Absolute suite
+acceptance thresholds still apply; no runtime strategy or user setting is added.
+Historical schema-1 reports retain their original meaning and are not relabeled.
+
+This conservative offline gate makes tradeoffs visible instead of automatically
+calling them safe improvements. It is **not** calibrated confidence, a new beat
+selector, a claim that every tradeoff is forbidden forever, or a substitute for
+independent evaluation. Matched-count protection cannot detect an equal-count
+exchange of truth identities; timestamp-level audits remain necessary. Timing
+quantiles also change when the matched population changes. The beat-only decoder
+reports still do not certify BPM curves, downbeats or change points; product
+promotion requires those end-to-end checks separately.
+
+Authored CI fixtures reproduce F1 rising while a genuine beat is lost, recall
+rising while precision falls, unchanged F1 with worse P95 timing, missing/invalid
+measurements, and the actual fixed-decoder/hypothesis final-gate behavior. They
+do not run models or reopen any real holdout.
+
 ## Safety and uncertainty boundaries
 
 - A higher relative hypothesis score is not calibrated correctness, and does

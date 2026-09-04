@@ -29,8 +29,11 @@ for that distribution.
   fallbacks). Sparse pair-state storage preserves the existing weights and
   timestamp tie rules; unknown spans are never bridged. Primary analysis stays
   unchanged. See [implementation and measured cost](evaluation/baselines/active-region-rust-v1.md).
-  Next: define a counterexample-driven abstention/adoption contract before any
-  automatic selection or product integration; the unsafe ranking findings stand.
+  The later single-edit/stable-context automatic rule also failed cross-corpus
+  calibration and is not retained as another policy. Stop extending this local
+  deletion rule; revisit missed/extra events in the observation/decoding path.
+  Existing comparison gates now protect coverage, precision and timestamp error
+  as well as F1. Candidate availability is not delivery of improved accuracy.
 - Beat This adapter and parity fixtures.
 - Robust BPM curve and metrical alternatives.
 - Constant, ramp, jump, and discontinuity segmentation.
@@ -151,6 +154,12 @@ a learned component to the default distribution.
 
 ### Measured bottlenecks
 
+- 2026-09-04: rejected the fixed isolated-edit adoption experiment: RUBATO mean
+  Beat F1 rose only 0.0006175 while losing two genuine beats; ARTBeaT lost one
+  genuine beat and mean F1 fell 0.0018182. No accepted insertion recovered a miss.
+  The default result remains unchanged. Tightened the existing offline comparison
+  contract rather than adding another inference strategy. See the follow-up in
+  [the adoption audit](evaluation/baselines/active-region-adoption-audit-v1.md).
 - 2026-09-04: completed the private active-region path and common-anchor
   cross-corpus audit. Region-scoped candidates remove the full-file connectivity
   limitation on RUBATO, but automatic adoption is not safe: mean Beat F1 changes

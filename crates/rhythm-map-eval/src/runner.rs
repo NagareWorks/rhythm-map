@@ -376,9 +376,9 @@ pub struct BeatHypothesisHoldoutEvaluation {
     pub local_path_emitted_case_count: usize,
     /// Mean local-path F1 over emitted cases only.
     pub emitted_local_path_mean_beat_f1: Option<f64>,
-    /// Cases improved by the truth-free choice relative to primary.
+    /// Cases with higher F1 and no coverage, precision or timing regression.
     pub truth_free_improved_case_ids: Vec<String>,
-    /// Cases regressed by the truth-free choice relative to primary.
+    /// Cases with any F1, coverage, precision or timing regression.
     pub truth_free_regressed_case_ids: Vec<String>,
     /// Cases where the local path increases the truth-assisted coverage ceiling.
     pub local_coverage_gain_case_ids: Vec<String>,
@@ -684,7 +684,8 @@ pub struct DecoderPolicyEvaluation {
     pub candidate: DecoderSweepCandidate,
     /// Candidate deltas against the upstream baseline.
     pub comparison: DecoderPolicyComparison,
-    /// True when absolute beat gates pass and no case regresses from baseline.
+    /// True when absolute beat gates pass and no case loses beat F1, coverage,
+    /// precision or timing quality. Does not certify BPM/downbeats/change points.
     pub passed: bool,
 }
 
@@ -693,9 +694,10 @@ pub struct DecoderPolicyEvaluation {
 pub struct DecoderPolicyComparison {
     /// Candidate minus baseline mean beat F1.
     pub mean_beat_f1_delta: f64,
-    /// Cases with a strictly lower candidate F1.
+    /// Cases with any F1, matched-count, precision, recall or timing regression.
+    /// Includes tradeoffs even when F1 is higher.
     pub regressed_case_ids: Vec<String>,
-    /// Cases with a strictly higher candidate F1.
+    /// Cases with higher F1 and no other beat-quality regression.
     pub improved_case_ids: Vec<String>,
     /// Candidate-minus-baseline aggregates for every capability tag.
     pub slices: Vec<DecoderSliceDelta>,
@@ -1650,7 +1652,7 @@ pub fn evaluate_named_decoder_policy_with_audio_directory(
     let comparison = compare_decoder_candidates(&baseline, &candidate)?;
     let passed = candidate.passed && comparison.regressed_case_ids.is_empty();
     Ok(DecoderPolicyEvaluation {
-        schema_version: 1,
+        schema_version: 2,
         suite_id: suite.id,
         suite_purpose: suite.purpose,
         model_pack,
@@ -1659,6 +1661,40 @@ pub fn evaluate_named_decoder_policy_with_audio_directory(
         comparison,
         passed,
     })
+}
+
+/// Conservative no-regression comparison for the same case and truth contract.
+/// F1 gains cannot pay for lost coverage, precision or timing quality. This is
+/// an offline promotion gate, not an inference policy or confidence estimate.
+fn beat_quality_regressed(baseline: &BeatMetrics, candidate: &BeatMetrics) -> bool {
+    let rates = |m: &BeatMetrics| [m.precision, m.recall, m.f1];
+    let invalid = |m: &BeatMetrics| {
+        rates(m).iter().any(|v| !(0.0..=1.0).contains(v))
+            || [m.median_absolute_error_ms, m.p95_absolute_error_ms]
+                .into_iter()
+                .flatten()
+                .any(|v| !v.is_finite() || v < 0.0)
+    };
+    let timing_regressed = |old: Option<f64>, new: Option<f64>| match (old, new) {
+        (Some(old), Some(new)) => new > old + f64::EPSILON,
+        (Some(_), None) => true, // Losing measured support is not zero error.
+        _ => false,              // An undefined baseline provides no timing comparison.
+    };
+    invalid(baseline)
+        || invalid(candidate)
+        || candidate.matched < baseline.matched
+        || rates(baseline)
+            .into_iter()
+            .zip(rates(candidate))
+            .any(|(old, new)| new + f64::EPSILON < old)
+        || timing_regressed(
+            baseline.median_absolute_error_ms,
+            candidate.median_absolute_error_ms,
+        )
+        || timing_regressed(
+            baseline.p95_absolute_error_ms,
+            candidate.p95_absolute_error_ms,
+        )
 }
 
 fn compare_decoder_candidates(
@@ -1675,7 +1711,7 @@ fn compare_decoder_candidates(
             bail!("decoder comparison case order differs");
         }
         let delta = candidate_case.beats.f1 - baseline_case.beats.f1;
-        if delta < -f64::EPSILON {
+        if beat_quality_regressed(&baseline_case.beats, &candidate_case.beats) {
             regressed_case_ids.push(candidate_case.id.clone());
         } else if delta > f64::EPSILON {
             improved_case_ids.push(candidate_case.id.clone());
@@ -2177,12 +2213,15 @@ fn finalize_beat_hypothesis_holdout(
         .then(|| local_scores.iter().sum::<f64>() / usize_to_f64(local_scores.len()));
     let truth_free_improved_case_ids = cases
         .iter()
-        .filter(|case| case.truth_free_choice_beats.f1 > case.primary.f1 + f64::EPSILON)
+        .filter(|case| {
+            case.truth_free_choice_beats.f1 > case.primary.f1 + f64::EPSILON
+                && !beat_quality_regressed(&case.primary, &case.truth_free_choice_beats)
+        })
         .map(|case| case.id.clone())
         .collect::<Vec<_>>();
     let truth_free_regressed_case_ids = cases
         .iter()
-        .filter(|case| case.truth_free_choice_beats.f1 + f64::EPSILON < case.primary.f1)
+        .filter(|case| beat_quality_regressed(&case.primary, &case.truth_free_choice_beats))
         .map(|case| case.id.clone())
         .collect::<Vec<_>>();
     let local_coverage_gain_case_ids = cases
@@ -2193,7 +2232,7 @@ fn finalize_beat_hypothesis_holdout(
     let slices = holdout_hypothesis_slices(&cases);
     let passed = truth_free_choice.passed && truth_free_regressed_case_ids.is_empty();
     BeatHypothesisHoldoutEvaluation {
-        schema_version: 1,
+        schema_version: 2,
         suite_id: suite.id,
         suite_purpose: suite.purpose,
         model_pack,
@@ -3635,6 +3674,56 @@ mod tests {
     }
 
     #[test]
+    fn higher_f1_cannot_hide_lost_genuine_beats() {
+        let truth = [0.0, 1.0, 2.0, 3.0];
+        let baseline = score_beats(&[0.0, 0.4, 1.0, 1.4, 2.0, 2.4, 3.0], &truth, 0.07);
+        let candidate = score_beats(&[0.0, 1.0, 2.0], &truth, 0.07);
+        assert!(candidate.f1 > baseline.f1);
+        assert!(candidate.precision > baseline.precision);
+        assert_eq!((baseline.matched, candidate.matched), (4, 3));
+        assert!(beat_quality_regressed(&baseline, &candidate));
+    }
+
+    #[test]
+    fn higher_recall_cannot_hide_precision_loss() {
+        let truth = [0.0, 1.0, 2.0, 3.0];
+        let baseline = score_beats(&[0.0, 1.0], &truth, 0.07);
+        let candidate = score_beats(&[0.0, 0.4, 1.0, 2.0, 3.0], &truth, 0.07);
+        assert!(candidate.f1 > baseline.f1 && candidate.matched > baseline.matched);
+        assert!(beat_quality_regressed(&baseline, &candidate));
+    }
+
+    #[test]
+    fn equal_f1_cannot_hide_worse_timing_or_disappearing_measurements() {
+        let baseline = score_beats(&[0.0, 1.0, 2.0], &[0.0, 1.0, 2.0], 0.07);
+        let candidate = score_beats(&[0.0, 1.0, 2.06], &[0.0, 1.0, 2.0], 0.07);
+        assert!((candidate.f1 - baseline.f1).abs() < f64::EPSILON);
+        assert_eq!(
+            candidate.median_absolute_error_ms,
+            baseline.median_absolute_error_ms
+        );
+        assert!(beat_quality_regressed(&baseline, &candidate));
+        let mut missing = baseline.clone();
+        missing.p95_absolute_error_ms = None;
+        assert!(beat_quality_regressed(&baseline, &missing));
+        assert!(!beat_quality_regressed(&missing, &baseline));
+    }
+
+    #[test]
+    fn net_coverage_is_not_the_only_gate_and_invalid_metrics_fail_closed() {
+        let baseline = score_beats(&[0.0, 1.0], &[0.0, 1.0, 2.0], 0.07);
+        let candidate = score_beats(&[0.0, 1.0, 2.0], &[0.0, 1.0, 2.0], 0.07);
+        assert!(!beat_quality_regressed(&baseline, &candidate));
+        assert!(!beat_quality_regressed(&baseline, &baseline));
+        let mut invalid = candidate.clone();
+        invalid.f1 = f64::NAN;
+        assert!(beat_quality_regressed(&baseline, &invalid));
+        invalid = candidate;
+        invalid.p95_absolute_error_ms = Some(f64::INFINITY);
+        assert!(beat_quality_regressed(&baseline, &invalid));
+    }
+
+    #[test]
     fn fixed_decoder_comparison_reports_improvements_and_regressions() {
         let mut candidates = vec![
             candidate("upstream-default", &[(0.4, 4), (0.8, 8)]),
@@ -3649,6 +3738,22 @@ mod tests {
         assert_eq!(comparison.regressed_case_ids, ["case-1"]);
         assert!((comparison.slices[0].mean_beat_f1_delta - 0.2).abs() < f64::EPSILON);
         assert!((comparison.slices[1].mean_beat_f1_delta + 0.3).abs() < f64::EPSILON);
+    }
+
+    #[test]
+    fn fixed_decoder_comparison_rejects_higher_f1_with_lost_coverage() {
+        let truth = [0.0, 1.0, 2.0, 3.0];
+        let mut baseline = candidate("upstream-default", &[(0.7, 7)]);
+        let mut selected = candidate("selected", &[(0.8, 3)]);
+        baseline.cases[0].beats = score_beats(&[0.0, 0.4, 1.0, 1.4, 2.0, 2.4, 3.0], &truth, 0.07);
+        selected.cases[0].beats = score_beats(&[0.0, 1.0, 2.0], &truth, 0.07);
+        let mut candidates = vec![baseline, selected];
+        finalize_decoder_candidates(&mut candidates);
+        let comparison = compare_decoder_candidates(&candidates[0], &candidates[1]).unwrap();
+        assert!(comparison.mean_beat_f1_delta > 0.0);
+        assert!(candidates[1].passed);
+        assert_eq!(comparison.regressed_case_ids, ["case-0"]);
+        assert!(comparison.improved_case_ids.is_empty());
     }
 
     #[test]
@@ -3737,6 +3842,36 @@ mod tests {
         assert!((ranked.mean_beat_f1 - 0.7).abs() < f64::EPSILON);
         assert!((ceiling.mean_beat_f1 - 0.85).abs() < f64::EPSILON);
         assert_eq!(holdout_hypothesis_slices(&cases).len(), 2);
+    }
+
+    #[test]
+    fn hypothesis_final_gate_rejects_f1_coverage_tradeoff_without_loading_holdout() {
+        // Entirely authored metrics: does not read or reopen a real holdout.
+        let truth = [0.0, 1.0, 2.0, 3.0];
+        let mut case = holdout_case("authored", "authored", 0.7, 0.8, 0.9);
+        case.primary = score_beats(&[0.0, 0.4, 1.0, 1.4, 2.0, 2.4, 3.0], &truth, 0.07);
+        case.truth_free_choice_beats = score_beats(&[0.0, 1.0, 2.0], &truth, 0.07);
+        let suite = EvaluationSuite {
+            schema_version: 1,
+            id: "authored".into(),
+            description: "No external assets".into(),
+            purpose: SuitePurpose::Holdout,
+            thresholds: crate::AcceptanceThresholds::default(),
+            cases: Vec::new(),
+        };
+        let model_pack = ModelPackIdentity {
+            id: "authored".into(),
+            version: "authored".into(),
+            backend: "authored".into(),
+            manifest_sha256: "0".repeat(64),
+        };
+        let report = finalize_beat_hypothesis_holdout(suite, model_pack, "authored", vec![case]);
+        assert_eq!(report.schema_version, 2);
+        assert!(report.truth_free_choice.mean_beat_f1 > report.primary.mean_beat_f1);
+        assert!(report.truth_free_choice.passed);
+        assert!(!report.passed);
+        assert_eq!(report.truth_free_regressed_case_ids, ["authored"]);
+        assert!(report.truth_free_improved_case_ids.is_empty());
     }
 
     fn candidate(id: &str, cases: &[(f64, usize)]) -> DecoderSweepCandidate {
