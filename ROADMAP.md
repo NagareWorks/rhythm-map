@@ -24,14 +24,23 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- Complete-frame positive/negative state scoring now passes the 27 ideal
+  meter/phase cases and penalizes extra/missing bars on a shared frame domain.
+  It is only a scoring prerequisite, not a new clock decoder. Explicit omission
+  alternatives expose a remaining failure: negative-logit weak events are
+  cheaper to omit even when their repeated pattern favors the correct meter.
+  Next define normalized visible/missing observation states and uncertainty
+  before freezing a joint decoder; do not hide the issue by restricting meter
+  choices or tune on real music. See the
+  [structural checkpoint and weak-evidence limit](evaluation/baselines/frame-likelihood-v1.md).
 - The first truth-free full-frame renewal-clock candidate is rejected: weak
   pulses and short central dropouts can recover on controls, but weak genuine
   doubling is erased and every real calibration track fails a joint regression
   check. RUBATO mean beat F1 falls from 0.52126 to 0.46166. An identified
   bar-score defect rewards unsupported extra bars; this is not evidence that
-  training is necessary. Next require full-state/off-phase likelihood
-  correctness on ideal meter controls before freezing another candidate, not
-  a weight sweep, local repair policy or user option. See the
+  training is necessary. The structural checkpoint above addresses the ideal
+  scoring defect, but is not sufficient to freeze a new full decoder. No weight
+  sweep, local repair policy or user option is introduced. See the
   [frozen sequence result and failure analysis](evaluation/baselines/dense-sequence-v1.md).
 - Complete beat/downbeat frame evidence is now retained for all 40 calibration
   recordings, with exact fresh default-observation replay and independent

@@ -497,3 +497,13 @@ truth hashes and unchanged default primary beat metrics before scoring. It runs
 42 authored controls and all 40 calibration recordings without fresh inference
 or holdout access. The committed `dense-sequence-v1.json` is the frozen failed
 run, not a report to overwrite when exploring another objective.
+
+## Complete-frame scoring correctness
+
+`cargo run --locked -p rhythm-map-eval --example frame_likelihood` runs authored
+mask checks only, without private inputs or model inference. It compares both
+positive and negative evidence over identical frame domains. Its committed
+`frame-likelihood-v1.json` records ideal meter/phase checks and explicit weak
+event omission diagnostics. This is not an end-to-end decoder, musical accuracy
+score or successor calibration result. See the
+[contract, result and remaining limitation](../baselines/frame-likelihood-v1.md).
