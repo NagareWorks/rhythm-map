@@ -539,3 +539,15 @@ run, including failed weak-change, flat-middle, noise and edge behavior.
 frozen MAP and a truth-assisted diagnostic competitor on identical edge coverage;
 its output is `joint-clock-diagnosis-v1.json`. These are evaluation artifacts,
 not new product modes. See the [graph, controls and decision](../baselines/joint-clock-v1.md).
+
+## Time-exposure duration intervention
+
+`cargo run --locked --profile evaluation -p rhythm-map-eval --example time_clock`
+repeats those same 15 controls with a time-consistent duration prior. It retains
+the original joint graph and emissions; `time-clock-v1.json` records the complete
+search results and all source identities. `python evaluation/parity/time_clock_diagnosis.py`
+independently reconstructs the prior, current MAP and the original diagnostic
+competitors; its result is `time-clock-diagnosis-v1.json`. A flat-middle false
+slowdown is removed, but weak doubling, edges and noise still fail the authored
+gate. The [derivation and full comparison](../baselines/time-clock-v1.md) explain
+why this prerequisite does not justify promotion, training or a cohort replay.

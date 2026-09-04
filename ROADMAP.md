@@ -24,6 +24,18 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- A controlled time-exposure duration prior now removes beat-count-dependent
+  survival costs at equal covered time. Exact search and independent score
+  reconstruction pass; a flat-middle control stays at 125 BPM instead of
+  inventing a slowdown to 41.67 BPM, with seven ticks labeled prior-only.
+  The full candidate still fails: weak genuine doubling and all seven main
+  timing traces are unchanged, meter/edge artifacts persist, and the noise
+  preference grows. The weak doubling's prior disadvantage falls from 17.49
+  to 10.57 but still exceeds its +4.85 beat evidence. Do not tune a jump weight
+  or promote this as another strategy. Next address partial-bar hypotheses
+  and decisions over competing clock interpretations/probability mass, with
+  explicit unsupported states. See the
+  [time-exposure intervention and retained failures](evaluation/baselines/time-clock-v1.md).
 - A truth-free joint semi-Markov reference now searches beat locations, per-beat
   durations and meter, including changes inside a bar. Exact evidence/reference
   partitions and traceback pass independent exhaustive checks. It is rejected
@@ -33,9 +45,9 @@ for that distribution.
   decomposition shows the weak doubling's beat evidence favors the authored
   timing by +4.85, but its duration prior costs an extra 17.49. This is a decoding
   objective problem, not proof that neural evidence is missing or training is
-  required. Next investigate time-indexed state/decision semantics and partial
-  bar marginalization, with explicit unsupported states; do not tune this
-  rejected reference or launch a long cohort run yet. See the
+  required. The time-exposure intervention above tests the duration-accounting
+  hypothesis while retaining this frozen failure; partial-bar and decision
+  semantics remain unresolved. No long cohort run is warranted yet. See the
   [joint search and failure decomposition](evaluation/baselines/joint-clock-v1.md).
 - Rotation-normalized contextual pulse scoring now ranks 7/8 unchanged authored
   paths correctly, including weak true doubling and all-weak constant tempo;
