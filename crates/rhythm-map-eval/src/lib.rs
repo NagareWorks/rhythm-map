@@ -1,5 +1,6 @@
 //! Reproducible evaluation contracts and deterministic rhythm fixtures.
 
+mod active_regions;
 mod artbeat;
 mod candidate_evidence;
 mod consensus;
@@ -17,6 +18,10 @@ mod tempo_diagnostics;
 mod vienna;
 mod wav;
 
+pub use active_regions::{
+    ActiveRegionCandidate, ActiveRegionCandidates, ActiveRegionDisagreement, ActiveRegionStatus,
+    ActiveRegionWork, generate_active_region_candidates,
+};
 pub use artbeat::{ArtbeatTruthImport, import_artbeat_truth};
 pub use candidate_evidence::export_cached_candidate_evidence;
 pub use consensus::{

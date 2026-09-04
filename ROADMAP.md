@@ -24,6 +24,13 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- Evaluation-only Rust active-interval candidate generation now matches all 40
+  frozen RUBATO/ARTBeat calibration cases (80 components, 61 proposals, 19
+  fallbacks). Sparse pair-state storage preserves the existing weights and
+  timestamp tie rules; unknown spans are never bridged. Primary analysis stays
+  unchanged. See [implementation and measured cost](evaluation/baselines/active-region-rust-v1.md).
+  Next: define a counterexample-driven abstention/adoption contract before any
+  automatic selection or product integration; the unsafe ranking findings stand.
 - Beat This adapter and parity fixtures.
 - Robust BPM curve and metrical alternatives.
 - Constant, ramp, jump, and discontinuity segmentation.
