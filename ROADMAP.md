@@ -154,6 +154,17 @@ a learned component to the default distribution.
 
 ### Measured bottlenecks
 
+- 2026-09-04: rejected the fixed prefer-central-window aggregation candidate.
+  It reuses exactly the upstream chunks and model calls, but a promising
+  35-second prefix gain does not safely transfer to complete recordings.
+  All 25 RUBATO raw-event baselines replay exactly using full PCM and tail-only
+  neural recomputation; mean raw beat F1 rises only 0.0005145, with eight cases
+  improved, seven F1 regressions, eight recovered truth beats and four lost
+  truth beats. One identity loss is hidden even when every aggregate metric
+  improves or stays equal; retain identity auditing alongside the metric gate.
+  ARTBeaT's 15 single-window cases are unchanged by construction. Do not expose
+  another stitching policy or fit a blend. See the
+  [window-context experiment](evaluation/baselines/beat-this-chunk-context-v1.md).
 - 2026-09-04: rejected a fixed observation-stage insertion rule using the
   existing downbeat head at real beat candidates. On all 40 frozen calibration
   cases, RUBATO recovered 62 misses but added 274 unmatched events (16 F1
