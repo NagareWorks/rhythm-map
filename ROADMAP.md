@@ -24,6 +24,14 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- The continuous-onset phase audit now covers every raw interval in all 40
+  calibration recordings. Its ARTBeaT signal does not reliably transfer to
+  RUBATO; 76.49% of RUBATO intervals also have an unmatched raw anchor. Do not
+  add an onset threshold or another anchor-based repair policy. Next capture
+  full neural beat/downbeat frame sequences via the existing inference API
+  (they are absent from all 40 retained observation exports), preserving exact
+  PCM/model/default-event identity without changing the production contract.
+  See [phase evidence and coverage limits](evaluation/baselines/clock-phase-evidence-v1.md).
 - Controlled observation dropout now distinguishes missing detected events from
   changes in musical truth. A frozen evaluation-only missing-step clock solves
   authored constant-tempo dropouts but erases genuine octave changes and
