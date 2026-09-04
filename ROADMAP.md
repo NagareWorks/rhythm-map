@@ -144,6 +144,17 @@ a learned component to the default distribution.
 
 ### Measured bottlenecks
 
+- 2026-09-04: the separate read-only RUBATO v1 cache bridge passed all 25
+  raw-event/source/count and selected-score replays using full PCM and
+  regenerated acoustic evidence. It retains 9,273 raw beats and 35,151 real
+  candidates; historical musical acceptance remains 1/25, mean beat F1
+  0.5212634. This is reproducibility, not fresh v2 accuracy. Cache payloads,
+  truth, model assets and source identities are pinned; no fallback inference,
+  relabeling, production strategy, or holdout access. Next transfer the frozen
+  candidate features to RUBATO separately, proving any indexed lookup matches
+  existing tie/missing-context behavior. See
+  `evaluation/baselines/beat-this-rubato-cache-replay-v1.md`.
+
 - 2026-09-04: the locked RUBATO input-equivalence audit compared all 25 full
   recordings (143,105,243 float32 samples, 108.17 minutes). Former and shipping
   decoding are bit-identical at native 22,050 Hz, including complete tails.

@@ -365,6 +365,12 @@ fix or permission to lower the threshold. See the
 
 ## Cache-only weak-candidate evidence
 
+The scoped `rubato_cache_replay` evaluator now completes the subsequent
+historical-cache gate: 25/25 exact replays with regenerated PCM evidence,
+while retaining v1 provenance and 1/25 historical musical acceptance. It is
+not a production cross-contract fallback or fresh v2 inference. See its
+[lock, result, and invocation](../baselines/beat-this-rubato-cache-replay-v1.md).
+
 Before attempting to transfer this audit to RUBATO, the separate
 `rubato_pcm_equivalence` example compares full former/shipping decoded PCM
 without inference or cache access. Its locked 25-case summary is 25/25

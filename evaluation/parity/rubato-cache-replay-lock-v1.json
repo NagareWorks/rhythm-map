@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "purpose": "calibration_read_only_v1_cache_replay_lock",
+  "suite_id": "rubato-calibration-v1",
+  "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+  "pcm_proof_sha256": "1b52d11f205f715ee3432b49c3d6aed3d19e2ba29ee15f72824f57b89f47fd9b",
+  "baseline_sha256": "2ecb565b59e05d8e637f0c7275c6089c69ecc302ff31dfe5848b1fedeb4350f8",
+  "model_manifest_sha256": "ccedbfeb35b4f584834df3aca1ea41899ed39fbaf2efad9e2cc71426aed9e23d",
+  "source_observation_contract": "beat-this-rten-observations-v1+decode-audio-v1",
+  "shipping_observation_contract": "beat-this-rten-observations-v2+decode-audio-v2",
+  "decoder_policy": "upstream-default",
+  "requirement": "Exact raw events, model metadata, candidate count and selected scores using actual PCM; fail closed without inference or cache writes. Original v1 provenance remains unchanged.",
+  "sources": {
+    "crates/rhythm-map-beat-this/src/lib.rs": "ecd93860fdebf56905fdb12f341cfb66ad1c227f19e0d45a81b7ec2c4f59a14d",
+    "crates/rhythm-map-beat-this/src/audio.rs": "67b3e54b7415d16e5be15eec751ba639a7a544ee283f330b43411b56fe5f4fa2",
+    "crates/rhythm-map-core/src/engine.rs": "b2aa743e5d2699e1b1bd82582dbcb223a71406d99d470b41a49041586fac6ea2",
+    "crates/rhythm-map-core/src/estimator.rs": "3d2bc3ca875025b5d08e511dcecf38351fc8f62e27daf8d49147f9f8a68bf8f1",
+    "crates/rhythm-map-eval/src/metrics.rs": "995ea5e7ce6edb062d83f995e7fd3a0c6920dc9ecb6592009caa330cd1265d6d",
+    "crates/rhythm-map-eval/src/observation_cache.rs": "772c6df5ef86a67fc2efdfed70da757b423f4449044e885dc35191a056ad9653",
+    "Cargo.lock": "246d94421a15809b0dddd9eb6cbebec6270c981c384e06ece9c8267acf75d4f7"
+  },
+  "cases": [
+    {
+      "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "audio_sha256": "3b4e219d54a698d5de7a3622ee46e1652ce44e06782691a53a0163bc10bae736",
+      "truth_sha256": "f16e419511caee1c96c786fbe5a745b9e319a5d95a8d832dcd3b337f072706a7",
+      "cache_entry_sha256": "0f401a391f09ce6cba757454ee437f525f75a250cfa56231214eefaa65dd8a5b"
+    },
+    {
+      "id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "audio_sha256": "b57525accae925ff8aaca1ee9f1048d956d1f37e75ec6b3db8f05cc8f17817da",
+      "truth_sha256": "02617c821f0b7beb6fb0578d50f18b45b1e4b96e788c33835646b716b8a584e7",
+      "cache_entry_sha256": "d0c78721cce1ecbe7078bdc410901509508ec90ee7e0f250f8dab7e0d9e2a321"
+    },
+    {
+      "id": "rubato-beethoven-op072-0-ov-henning2017",
+      "audio_sha256": "840011dbbbc7dbeee4755466a72ad2736452b7e0486091b8cb97b918044a67e9",
+      "truth_sha256": "0597675375121d0e7592d5abdae51277c166ff7611f3daf327f0ae4193ddcf8e",
+      "cache_entry_sha256": "ff02edbf74ad91c265662534919b2f26e03041f24fff33502fc1b03528e997eb"
+    },
+    {
+      "id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "audio_sha256": "e5946d1f1176b1165f9e7fac03e32c729b421bbae376db64f839f4287d245bf6",
+      "truth_sha256": "4e8b47d76b1ddce15d38da69fe3ca74892c777d2e1eb541524fc88d7a790bf34",
+      "cache_entry_sha256": "b6333990af3521990fb51798abfe76c5bee8c84114e864adf68be91eabfd7b22"
+    },
+    {
+      "id": "rubato-boccherini-g275-03-ov-krux2022",
+      "audio_sha256": "0176a58324aa4a93455ce47b205edef5b4a96912bf17bf86acd1cdd9c8acf42d",
+      "truth_sha256": "9b79c5c3cc3046c889ef9bbb34b0231dc7c393e22a088b3776b6b0862edad18b",
+      "cache_entry_sha256": "2f3f8e2b4a5213c6bb2ee935acdde07b624abf3f58a18ee0518c170e699c3a09"
+    },
+    {
+      "id": "rubato-brahms-op115-01-ov-schmitta2025",
+      "audio_sha256": "14b025da3140d4a57c3102065ba0b956a25b12496f272647c3bafba6f9f4430a",
+      "truth_sha256": "6775c1cabad7d73b7682fa37d9a6e51c5542bffa054838df22f7a94ad150136a",
+      "cache_entry_sha256": "22645a9adf4b3a150dfcf2f9dd172abd3b7a250487535bb392a131f09c6e13e5"
+    },
+    {
+      "id": "rubato-brahms-op115-01-ov-steffens2008",
+      "audio_sha256": "ede6c956f98605f468a1932424d6f33561bdb9724c84811a4019acaa74650f6c",
+      "truth_sha256": "8934b0c9f51e4a9520584c35998f7d9cf724272de99d577d1b4f95e658ce7964",
+      "cache_entry_sha256": "1b1815e821daf630c64f7f0d53b65d31ef3cdc604e370658a5fa38154398270f"
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+      "audio_sha256": "5fee1c79ff4373b61a66882fcb73dc36cb12629eadb76980e47c7dc196ef9d16",
+      "truth_sha256": "986d47aaab5598db25b2fb44d16bfbf7f9c6b2df4acf9b118fae9f7f8911932c",
+      "cache_entry_sha256": "e57f1e93fa8b1495a484281cebfa88f2af74f4ff1f945d4f527c749c1b74af7e"
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+      "audio_sha256": "7194e9fc821302c6318b32b836a074a48c05a303ca7cebc87fb2a14d5981b5d3",
+      "truth_sha256": "10b34ee45b0b11f66943f98ab75b16886fd65dd7a108127a447bfb919d146f3e",
+      "cache_entry_sha256": "acb39316ae0268a9c2099bffd3a91180fc0e3df5cb568899616f3863565a9eb1"
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+      "audio_sha256": "4a45277ac9ffed4328583cbc30df1e642339e993a63bc113d8e6e02a2425112d",
+      "truth_sha256": "ac2935ad5dcb5fc1a1dd44730eaed584241096c35bfe0508da5393dcd40a8ec7",
+      "cache_entry_sha256": "177b7b77388c436269d1309a33d0ea7b8bb5aa33110b6bc4bb1b9ef362a4baa2"
+    },
+    {
+      "id": "rubato-mozart-kv618-ar-papalin2012",
+      "audio_sha256": "896320885ec7f71145a5672d96c26db1242744633cb95ccf247a2f896f11db82",
+      "truth_sha256": "82a37995c722804ee66b57f6b3bfe39ce88cc602a4cc719b84c65c71300f5a32",
+      "cache_entry_sha256": "f2e47f8419117e941f8c4d9e1bfdf163d6ae9a4db17cdc11086d59134c78fc3d"
+    },
+    {
+      "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+      "audio_sha256": "d03c21133e025c9d12f94ad9eebf4595651c76801613261b7548e2849b858a42",
+      "truth_sha256": "5f3832fafaa133b5a3875b8964b47b493568cdd2f4be76615fd5ea6f2f0f7616",
+      "cache_entry_sha256": "623b29f2e47390902e2339be3bad12231aae9ab8f4adaddad29e97673726ca59"
+    },
+    {
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+      "audio_sha256": "ab457b00d5da373a204b3300fa574b46e117c9959470913a6032a374bf3c5bbf",
+      "truth_sha256": "996d4563a086fbe048d71da38e3d2441c789c28e2289aefa7284b3d3c10bc5c6",
+      "cache_entry_sha256": "125f03ff603c8dd8260b91da8de1795ea4d197eb6784b028dff0daa3f28d81f7"
+    },
+    {
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+      "audio_sha256": "00129b67f8fc519de34ad6d36fcad00388aa6d9da49dde1c0cc4fc990f52e2be",
+      "truth_sha256": "cc91282ff134ac42e5c051942baad56b49d19f8a56acdb09ce57c8e49e461f10",
+      "cache_entry_sha256": "85abf6870744d4e6b588bb6892615f3eda14d980e3c7d11b1535bf6202d0b560"
+    },
+    {
+      "id": "rubato-schubert-d733-01-ar-staab2012",
+      "audio_sha256": "4cee48e973fd8ff0797c1219e43b07cd2078d6b6882ebeb34e951270d0b4aa30",
+      "truth_sha256": "15a68f3c29bb4eb1f9974093ab0f23189ba183232b341233e70f09523deec922",
+      "cache_entry_sha256": "e8cff7e5cf34165f4f84bd8444f87c9a1ae844572a2a9634ae649ec1067999f6"
+    },
+    {
+      "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+      "audio_sha256": "d2e57e05adc0ffbf8020f690928a873aeff6cbe6a5570db59f13b88946cfaae8",
+      "truth_sha256": "71dc170ac875df1922db5cba6dcbfb59db11f254d6c35c45b825bdfe0d33ca8c",
+      "cache_entry_sha256": "b8372ccb6c2b55a144bb804acb7d5c38f93d1a29d1b96e43cb5872f84f7718ac"
+    },
+    {
+      "id": "rubato-schumann-op039-05-ov-buttner2025",
+      "audio_sha256": "dad5d6157139a75334ed30ee8d4cc7d35c14fde6c2bea50896aff7fcfaaa1ff5",
+      "truth_sha256": "aa36e4aec046346505801c6eb7d66db6557792129ba3395955945c7f3f315cd5",
+      "cache_entry_sha256": "7509f396ee618f7a854f38729dd10fc7d72374d2fba71f68d28480c4fb92333c"
+    },
+    {
+      "id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "audio_sha256": "26d1cae0297e96a5da7c33f50e2e4db32d6af1e897fe7be1e40f1f7a4faa44b9",
+      "truth_sha256": "d7140499d39a2769e1d8a248d2122efda0cb519ec2cc203d0bf81563ed0fc312",
+      "cache_entry_sha256": "2753bf38319152e60906f6e7209a353cb57b9f5d6346d46c25ed5b448287475c"
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+      "audio_sha256": "a8a65dde5137e28f74955df50ba61c188ae16f095b920d3d7f734a9fa70e2305",
+      "truth_sha256": "a45bd07ff0742e30ee0eca8cd53ffc0fc1c29baf8f81ee5b024554af89ef2796",
+      "cache_entry_sha256": "1146a99d929c0e6d1a7d236126c93303ba7765f1e66dbc49737f9d463bf3eca7"
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+      "audio_sha256": "58ae7ff618b4ac08179ca85568f6fa9432417fbfda5c7a4868c95eea66417b8a",
+      "truth_sha256": "49379fbe7c51dbf3d9cff11586ece6b9316d128e1f05cd2f8fdb0b281c1f4c88",
+      "cache_entry_sha256": "2a66a4643a76488f53ba1f5862f022790569509e66c8eeb98c9a2bc4f014e843"
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+      "audio_sha256": "1b213cfacc643b210b6e8f32213cb0ea7a353eb38b05cca5956f282583d04190",
+      "truth_sha256": "f0aaf80955f919bf3cd84df7f649824812ab08aed548d09e5342fb7d79e00959",
+      "cache_entry_sha256": "7c72841637c9e49d06ee161c12e006e1d6e64999a5876401c50578a69aa7868d"
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+      "audio_sha256": "9a11bb411d2ad8c99838355180a795a9401c1369c325df6f01f755e81da34f7b",
+      "truth_sha256": "ec2d36c1e4e7bfe5641dc5085e08bd4ab3cb2aa28e1d408f7faab44b584f14d1",
+      "cache_entry_sha256": "0d5ae84858d6294253727ef8ebaf970693f259dcbc727fa0c60347a9563b9eef"
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "audio_sha256": "25928e5993da83fb5df89a5d08f08e0033ef9e5787eab4ea6864b20034ade654",
+      "truth_sha256": "e892d59ecb17cc055034f3c043d49f981ad877092fb1298df3eaaeb10f4fd47e",
+      "cache_entry_sha256": "f905c83093cd5b61513a7c123833ec4cbd3ff691eec50e2fe1e019d2d72cc06f"
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "audio_sha256": "210aa600e039d44824ff31f31070490ecbfa2f92ef8f555532560fef52f66e2c",
+      "truth_sha256": "176a0359278e6ec6fcffec89b0489fbd3ca8ac4e8b93dd974c3b4423b8444cb1",
+      "cache_entry_sha256": "8877746b60efe2b669456b5c0ad6e79f4961189c218b8574f71308fc1a819ba5"
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+      "audio_sha256": "e2bde23fbc01bea0255f7e582414886b2f3dd56f573a0b654aaa8269d0390ea2",
+      "truth_sha256": "ba992b7fd03f9117cf411b06c59778f9eb65698a1e71c6907fa8520da0f46d9b",
+      "cache_entry_sha256": "751e48bba3757b36e61f6fe4c59a24a29a9a23dbee0215234c853c8d85105343"
+    }
+  ]
+}

@@ -25,6 +25,7 @@ class ArtifactIdentityTests(unittest.TestCase):
                 self.assertIsInstance(value, dict)
                 self.assertNotEqual(value.get("purpose"), "calibration_parity_private")
                 self.assertNotEqual(value.get("purpose"), "private_calibration_candidate_evidence")
+                self.assertFalse(str(value.get("purpose", "")).startswith("private_"))
                 self.assertNotIn("mono_samples", value)
                 self.assertNotIn("beat_logits", value)
 

@@ -1,0 +1,1411 @@
+{
+  "baseline_sha256": "2ecb565b59e05d8e637f0c7275c6089c69ecc302ff31dfe5848b1fedeb4350f8",
+  "cache_hits": 25,
+  "cache_relabeling": false,
+  "cache_writes": 0,
+  "case_count": 25,
+  "cases": [
+    {
+      "activity_point_count": 2580,
+      "audio_sha256": "3b4e219d54a698d5de7a3622ee46e1652ce44e06782691a53a0163bc10bae736",
+      "cache_entry_sha256": "0f401a391f09ce6cba757454ee437f525f75a250cfa56231214eefaa65dd8a5b",
+      "candidate_count": 987,
+      "harmonic_point_count": 987,
+      "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "onset_point_count": 12920,
+      "pcm_sha256": "673b9bf9aa4d734b057055aa66a517ef9707a05412ec503d44d8884e40ac276e",
+      "raw_beat_count": 235,
+      "raw_events_exact": true,
+      "sample_count": 2842334,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.3762 is below 0.8000",
+          "downbeat F1 0.1987 is below 0.6000",
+          "median tempo error 36.525% exceeds 10.000%",
+          "p95 tempo error 393.737% exceeds 25.000%"
+        ],
+        "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+        "metrics": {
+          "beats": {
+            "f1": 0.37623762376237624,
+            "matched": 76,
+            "median_absolute_error_ms": 21.76962327791898,
+            "p95_absolute_error_ms": 62.722309214464644,
+            "precision": 0.32340425531914896,
+            "recall": 0.44970414201183434
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.19867549668874174,
+            "matched": 15,
+            "median_absolute_error_ms": 16.235408519355232,
+            "p95_absolute_error_ms": 54.69509795028671,
+            "precision": 0.1388888888888889,
+            "recall": 0.3488372093023256
+          },
+          "tempo": {
+            "median_absolute_error_percent": 36.524501289229335,
+            "p95_absolute_error_percent": 393.7371678403771,
+            "sample_count": 234
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "f16e419511caee1c96c786fbe5a745b9e319a5d95a8d832dcd3b337f072706a7"
+    },
+    {
+      "activity_point_count": 2781,
+      "audio_sha256": "b57525accae925ff8aaca1ee9f1048d956d1f37e75ec6b3db8f05cc8f17817da",
+      "cache_entry_sha256": "d0c78721cce1ecbe7078bdc410901509508ec90ee7e0f250f8dab7e0d9e2a321",
+      "candidate_count": 958,
+      "harmonic_point_count": 958,
+      "id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "onset_point_count": 13929,
+      "pcm_sha256": "c44e6612181346257bf2d8c092bb54a2829775ffdde3d5d8123cb3768bd3c144",
+      "raw_beat_count": 213,
+      "raw_events_exact": true,
+      "sample_count": 3064370,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.6073 is below 0.8000",
+          "downbeat F1 0.4833 is below 0.6000",
+          "median tempo error 13.296% exceeds 10.000%",
+          "p95 tempo error 456.293% exceeds 25.000%"
+        ],
+        "id": "rubato-bach-bwv1007-01-ov-milman2022",
+        "metrics": {
+          "beats": {
+            "f1": 0.6073298429319373,
+            "matched": 116,
+            "median_absolute_error_ms": 27.073609673287535,
+            "p95_absolute_error_ms": 54.42359989370971,
+            "precision": 0.5446009389671361,
+            "recall": 0.6863905325443787
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.48333333333333334,
+            "matched": 29,
+            "median_absolute_error_ms": 30.112996766099798,
+            "p95_absolute_error_ms": 54.05903276106372,
+            "precision": 0.37662337662337664,
+            "recall": 0.6744186046511628
+          },
+          "tempo": {
+            "median_absolute_error_percent": 13.29576667017659,
+            "p95_absolute_error_percent": 456.29304591960283,
+            "sample_count": 212
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "02617c821f0b7beb6fb0578d50f18b45b1e4b96e788c33835646b716b8a584e7"
+    },
+    {
+      "activity_point_count": 8074,
+      "audio_sha256": "840011dbbbc7dbeee4755466a72ad2736452b7e0486091b8cb97b918044a67e9",
+      "cache_entry_sha256": "ff02edbf74ad91c265662534919b2f26e03041f24fff33502fc1b03528e997eb",
+      "candidate_count": 2092,
+      "harmonic_point_count": 2092,
+      "id": "rubato-beethoven-op072-0-ov-henning2017",
+      "onset_point_count": 40442,
+      "pcm_sha256": "9156c77a67d1524fe16e6049ef8c61792fe40ba7a80291f416176b67ffd27e5b",
+      "raw_beat_count": 669,
+      "raw_events_exact": true,
+      "sample_count": 8897025,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.6874 is below 0.8000",
+          "median tempo error 17.127% exceeds 10.000%",
+          "p95 tempo error 127.700% exceeds 25.000%"
+        ],
+        "id": "rubato-beethoven-op072-0-ov-henning2017",
+        "metrics": {
+          "beats": {
+            "f1": 0.6874027993779159,
+            "matched": 442,
+            "median_absolute_error_ms": 25.895729457630523,
+            "p95_absolute_error_ms": 62.76674498758439,
+            "precision": 0.6606875934230194,
+            "recall": 0.7163695299837926
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.6252285191956124,
+            "matched": 171,
+            "median_absolute_error_ms": 26.202166009738903,
+            "p95_absolute_error_ms": 61.08721483883528,
+            "precision": 0.7184873949579832,
+            "recall": 0.5533980582524272
+          },
+          "tempo": {
+            "median_absolute_error_percent": 17.1272870431567,
+            "p95_absolute_error_percent": 127.69997587061796,
+            "sample_count": 668
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "0597675375121d0e7592d5abdae51277c166ff7611f3daf327f0ae4193ddcf8e"
+    },
+    {
+      "activity_point_count": 5453,
+      "audio_sha256": "e5946d1f1176b1165f9e7fac03e32c729b421bbae376db64f839f4287d245bf6",
+      "cache_entry_sha256": "b6333990af3521990fb51798abfe76c5bee8c84114e864adf68be91eabfd7b22",
+      "candidate_count": 1393,
+      "harmonic_point_count": 1393,
+      "id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "onset_point_count": 27313,
+      "pcm_sha256": "cc68dfbb196171ac1af71877fe8e33aaad555fd9a946c804f40c3537a02941a2",
+      "raw_beat_count": 574,
+      "raw_events_exact": true,
+      "sample_count": 6008832,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.6359 is below 0.8000",
+          "median tempo error 96.724% exceeds 10.000%",
+          "p95 tempo error 122.083% exceeds 25.000%"
+        ],
+        "id": "rubato-berlioz-h048-04-ov-dennis2016",
+        "metrics": {
+          "beats": {
+            "f1": 0.635875402792696,
+            "matched": 296,
+            "median_absolute_error_ms": 22.124805427608862,
+            "p95_absolute_error_ms": 61.270451512569934,
+            "precision": 0.5156794425087108,
+            "recall": 0.8291316526610645
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.6443914081145584,
+            "matched": 135,
+            "median_absolute_error_ms": 22.13396054230543,
+            "p95_absolute_error_ms": 61.13073547801662,
+            "precision": 0.5625,
+            "recall": 0.7541899441340782
+          },
+          "tempo": {
+            "median_absolute_error_percent": 96.72428266048101,
+            "p95_absolute_error_percent": 122.08344155117811,
+            "sample_count": 573
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "4e8b47d76b1ddce15d38da69fe3ca74892c777d2e1eb541524fc88d7a790bf34"
+    },
+    {
+      "activity_point_count": 3254,
+      "audio_sha256": "0176a58324aa4a93455ce47b205edef5b4a96912bf17bf86acd1cdd9c8acf42d",
+      "cache_entry_sha256": "2f3f8e2b4a5213c6bb2ee935acdde07b624abf3f58a18ee0518c170e699c3a09",
+      "candidate_count": 867,
+      "harmonic_point_count": 867,
+      "id": "rubato-boccherini-g275-03-ov-krux2022",
+      "onset_point_count": 16300,
+      "pcm_sha256": "357901c1af9424d9cb6449cb7124fec877e66bd61a854a7d8b490a22efc1d0e1",
+      "raw_beat_count": 249,
+      "raw_events_exact": true,
+      "sample_count": 3585824,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.6939 is below 0.8000",
+          "downbeat F1 0.4717 is below 0.6000",
+          "p95 tempo error 85.545% exceeds 25.000%"
+        ],
+        "id": "rubato-boccherini-g275-03-ov-krux2022",
+        "metrics": {
+          "beats": {
+            "f1": 0.6938775510204082,
+            "matched": 170,
+            "median_absolute_error_ms": 26.169021397002723,
+            "p95_absolute_error_ms": 65.84698288044422,
+            "precision": 0.6827309236947792,
+            "recall": 0.7053941908713693
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.4716981132075472,
+            "matched": 50,
+            "median_absolute_error_ms": 31.56516275149457,
+            "p95_absolute_error_ms": 67.03054669573305,
+            "precision": 0.38461538461538464,
+            "recall": 0.6097560975609756
+          },
+          "tempo": {
+            "median_absolute_error_percent": 9.115450076025262,
+            "p95_absolute_error_percent": 85.54462980506486,
+            "sample_count": 248
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "9b79c5c3cc3046c889ef9bbb34b0231dc7c393e22a088b3776b6b0862edad18b"
+    },
+    {
+      "activity_point_count": 12410,
+      "audio_sha256": "14b025da3140d4a57c3102065ba0b956a25b12496f272647c3bafba6f9f4430a",
+      "cache_entry_sha256": "22645a9adf4b3a150dfcf2f9dd172abd3b7a250487535bb392a131f09c6e13e5",
+      "candidate_count": 2953,
+      "harmonic_point_count": 2953,
+      "id": "rubato-brahms-op115-01-ov-schmitta2025",
+      "onset_point_count": 62163,
+      "pcm_sha256": "6ecf00d2a39ed7e8c6808c1f4917db82483e293bef999ea26ae1ef992ca59a2e",
+      "raw_beat_count": 1101,
+      "raw_events_exact": true,
+      "sample_count": 13675674,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.3466 is below 0.8000",
+          "downbeat F1 0.2915 is below 0.6000",
+          "median tempo error 198.495% exceeds 10.000%",
+          "p95 tempo error 515.601% exceeds 25.000%"
+        ],
+        "id": "rubato-brahms-op115-01-ov-schmitta2025",
+        "metrics": {
+          "beats": {
+            "f1": 0.3465798045602606,
+            "matched": 266,
+            "median_absolute_error_ms": 25.409032058519188,
+            "p95_absolute_error_ms": 66.2928682569941,
+            "precision": 0.24225865209471767,
+            "recall": 0.6086956521739131
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.29154518950437314,
+            "matched": 100,
+            "median_absolute_error_ms": 21.541950208586513,
+            "p95_absolute_error_ms": 66.2928682569941,
+            "precision": 0.21413276231263384,
+            "recall": 0.45662100456621
+          },
+          "tempo": {
+            "median_absolute_error_percent": 198.49522242007174,
+            "p95_absolute_error_percent": 515.6014003189414,
+            "sample_count": 1097
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "6775c1cabad7d73b7682fa37d9a6e51c5542bffa054838df22f7a94ad150136a"
+    },
+    {
+      "activity_point_count": 12452,
+      "audio_sha256": "ede6c956f98605f468a1932424d6f33561bdb9724c84811a4019acaa74650f6c",
+      "cache_entry_sha256": "1b1815e821daf630c64f7f0d53b65d31ef3cdc604e370658a5fa38154398270f",
+      "candidate_count": 3050,
+      "harmonic_point_count": 3050,
+      "id": "rubato-brahms-op115-01-ov-steffens2008",
+      "onset_point_count": 62371,
+      "pcm_sha256": "095a305213440d4986abf09d640a2aab22446563dff62847b2a8bfec5999a169",
+      "raw_beat_count": 855,
+      "raw_events_exact": true,
+      "sample_count": 13721600,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.3829 is below 0.8000",
+          "downbeat F1 0.3338 is below 0.6000",
+          "median tempo error 188.049% exceeds 10.000%",
+          "p95 tempo error 504.354% exceeds 25.000%"
+        ],
+        "id": "rubato-brahms-op115-01-ov-steffens2008",
+        "metrics": {
+          "beats": {
+            "f1": 0.38294573643410845,
+            "matched": 247,
+            "median_absolute_error_ms": 28.61525388073005,
+            "p95_absolute_error_ms": 61.66457667376335,
+            "precision": 0.2895662368112544,
+            "recall": 0.5652173913043478
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.3338345864661655,
+            "matched": 111,
+            "median_absolute_error_ms": 27.308301606410623,
+            "p95_absolute_error_ms": 60.65973212390929,
+            "precision": 0.24887892376681614,
+            "recall": 0.5068493150684932
+          },
+          "tempo": {
+            "median_absolute_error_percent": 188.04919761261584,
+            "p95_absolute_error_percent": 504.35433348220744,
+            "sample_count": 852
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "8934b0c9f51e4a9520584c35998f7d9cf724272de99d577d1b4f95e658ce7964"
+    },
+    {
+      "activity_point_count": 3248,
+      "audio_sha256": "5fee1c79ff4373b61a66882fcb73dc36cb12629eadb76980e47c7dc196ef9d16",
+      "cache_entry_sha256": "e57f1e93fa8b1495a484281cebfa88f2af74f4ff1f945d4f527c749c1b74af7e",
+      "candidate_count": 901,
+      "harmonic_point_count": 901,
+      "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+      "onset_point_count": 16266,
+      "pcm_sha256": "8098587dd9d9c9832a2d44eb75c6e7553c8f61314ae0754fcc4213e59fcd6ce3",
+      "raw_beat_count": 154,
+      "raw_events_exact": true,
+      "sample_count": 3578395,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [],
+        "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "metrics": {
+          "beats": {
+            "f1": 0.9260450160771704,
+            "matched": 144,
+            "median_absolute_error_ms": 13.854753850737644,
+            "p95_absolute_error_ms": 38.668696096692656,
+            "precision": 0.935064935064935,
+            "recall": 0.9171974522292994
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.7328244274809161,
+            "matched": 48,
+            "median_absolute_error_ms": 13.30790530869308,
+            "p95_absolute_error_ms": 30.816919765356943,
+            "precision": 0.6153846153846154,
+            "recall": 0.9056603773584906
+          },
+          "tempo": {
+            "median_absolute_error_percent": 2.3917379173921836,
+            "p95_absolute_error_percent": 9.684568214171033,
+            "sample_count": 153
+          }
+        },
+        "passed": true
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "986d47aaab5598db25b2fb44d16bfbf7f9c6b2df4acf9b118fae9f7f8911932c"
+    },
+    {
+      "activity_point_count": 3289,
+      "audio_sha256": "7194e9fc821302c6318b32b836a074a48c05a303ca7cebc87fb2a14d5981b5d3",
+      "cache_entry_sha256": "acb39316ae0268a9c2099bffd3a91180fc0e3df5cb568899616f3863565a9eb1",
+      "candidate_count": 930,
+      "harmonic_point_count": 930,
+      "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+      "onset_point_count": 16473,
+      "pcm_sha256": "16261aedd2cc2c19f3adf21a30513728e15a5ff46ba9dbab4c207ba4215e9f23",
+      "raw_beat_count": 153,
+      "raw_events_exact": true,
+      "sample_count": 3623852,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.6194 is below 0.8000",
+          "downbeat F1 0.5280 is below 0.6000",
+          "p95 tempo error 28.924% exceeds 25.000%"
+        ],
+        "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "metrics": {
+          "beats": {
+            "f1": 0.6193548387096774,
+            "matched": 96,
+            "median_absolute_error_ms": 29.528082098892128,
+            "p95_absolute_error_ms": 65.26077129478836,
+            "precision": 0.6274509803921569,
+            "recall": 0.6114649681528662
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.5279999999999999,
+            "matched": 33,
+            "median_absolute_error_ms": 23.29569314193236,
+            "p95_absolute_error_ms": 58.00407697103083,
+            "precision": 0.4583333333333333,
+            "recall": 0.6226415094339622
+          },
+          "tempo": {
+            "median_absolute_error_percent": 7.21009454816773,
+            "p95_absolute_error_percent": 28.924471216146348,
+            "sample_count": 152
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "10b34ee45b0b11f66943f98ab75b16886fd65dd7a108127a447bfb919d146f3e"
+    },
+    {
+      "activity_point_count": 3074,
+      "audio_sha256": "4a45277ac9ffed4328583cbc30df1e642339e993a63bc113d8e6e02a2425112d",
+      "cache_entry_sha256": "177b7b77388c436269d1309a33d0ea7b8bb5aa33110b6bc4bb1b9ef362a4baa2",
+      "candidate_count": 597,
+      "harmonic_point_count": 597,
+      "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+      "onset_point_count": 15395,
+      "pcm_sha256": "647453b12a1625eede209aa2bf31e579b25c4290052b055f6177b13b6809ba1b",
+      "raw_beat_count": 153,
+      "raw_events_exact": true,
+      "sample_count": 3386880,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.6903 is below 0.8000",
+          "p95 tempo error 29.013% exceeds 25.000%"
+        ],
+        "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+        "metrics": {
+          "beats": {
+            "f1": 0.6903225806451613,
+            "matched": 107,
+            "median_absolute_error_ms": 17.31120490020821,
+            "p95_absolute_error_ms": 59.63665395145412,
+            "precision": 0.6993464052287581,
+            "recall": 0.6815286624203821
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.6440677966101696,
+            "matched": 38,
+            "median_absolute_error_ms": 13.691212376670592,
+            "p95_absolute_error_ms": 46.59893322099151,
+            "precision": 0.5846153846153846,
+            "recall": 0.7169811320754716
+          },
+          "tempo": {
+            "median_absolute_error_percent": 8.044320247329114,
+            "p95_absolute_error_percent": 29.013093621201374,
+            "sample_count": 152
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "ac2935ad5dcb5fc1a1dd44730eaed584241096c35bfe0508da5393dcd40a8ec7"
+    },
+    {
+      "activity_point_count": 3222,
+      "audio_sha256": "896320885ec7f71145a5672d96c26db1242744633cb95ccf247a2f896f11db82",
+      "cache_entry_sha256": "f2e47f8419117e941f8c4d9e1bfdf163d6ae9a4db17cdc11086d59134c78fc3d",
+      "candidate_count": 657,
+      "harmonic_point_count": 657,
+      "id": "rubato-mozart-kv618-ar-papalin2012",
+      "onset_point_count": 16137,
+      "pcm_sha256": "3897b829599f6bc2e998e26bebdda3ef787f3fa6ff7190fcfdbbbb8ffe6278ad",
+      "raw_beat_count": 182,
+      "raw_events_exact": true,
+      "sample_count": 3550050,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.2473 is below 0.8000",
+          "downbeat F1 0.3802 is below 0.6000",
+          "median tempo error 106.232% exceeds 10.000%",
+          "p95 tempo error 186.057% exceeds 25.000%"
+        ],
+        "id": "rubato-mozart-kv618-ar-papalin2012",
+        "metrics": {
+          "beats": {
+            "f1": 0.24727272727272726,
+            "matched": 34,
+            "median_absolute_error_ms": 33.55948000444897,
+            "p95_absolute_error_ms": 65.66618724336593,
+            "precision": 0.18681318681318682,
+            "recall": 0.3655913978494624
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.38016528925619836,
+            "matched": 23,
+            "median_absolute_error_ms": 33.55948000444897,
+            "p95_absolute_error_ms": 64.03628116555637,
+            "precision": 0.3108108108108108,
+            "recall": 0.48936170212765956
+          },
+          "tempo": {
+            "median_absolute_error_percent": 106.2323824186995,
+            "p95_absolute_error_percent": 186.05747457403714,
+            "sample_count": 181
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "82a37995c722804ee66b57f6b3bfe39ce88cc602a4cc719b84c65c71300f5a32"
+    },
+    {
+      "activity_point_count": 4137,
+      "audio_sha256": "d03c21133e025c9d12f94ad9eebf4595651c76801613261b7548e2849b858a42",
+      "cache_entry_sha256": "623b29f2e47390902e2339be3bad12231aae9ab8f4adaddad29e97673726ca59",
+      "candidate_count": 1035,
+      "harmonic_point_count": 1035,
+      "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+      "onset_point_count": 20719,
+      "pcm_sha256": "8cf9d0c7e230973318164a5922842f51fa330cd111506b3bfba07a0dd91f2b65",
+      "raw_beat_count": 169,
+      "raw_events_exact": true,
+      "sample_count": 4558032,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.1000 is below 0.8000",
+          "downbeat F1 0.0806 is below 0.6000",
+          "median tempo error 100.689% exceeds 10.000%",
+          "p95 tempo error 157.724% exceeds 25.000%"
+        ],
+        "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+        "metrics": {
+          "beats": {
+            "f1": 0.09999999999999999,
+            "matched": 13,
+            "median_absolute_error_ms": 37.09628472091708,
+            "p95_absolute_error_ms": 67.62026837659363,
+            "precision": 0.07738095238095238,
+            "recall": 0.14130434782608695
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.08064516129032258,
+            "matched": 5,
+            "median_absolute_error_ms": 37.09628472091708,
+            "p95_absolute_error_ms": 64.40077160058166,
+            "precision": 0.0641025641025641,
+            "recall": 0.10869565217391304
+          },
+          "tempo": {
+            "median_absolute_error_percent": 100.68924761125768,
+            "p95_absolute_error_percent": 157.72381305661543,
+            "sample_count": 167
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "5f3832fafaa133b5a3875b8964b47b493568cdd2f4be76615fd5ea6f2f0f7616"
+    },
+    {
+      "activity_point_count": 5628,
+      "audio_sha256": "ab457b00d5da373a204b3300fa574b46e117c9959470913a6032a374bf3c5bbf",
+      "cache_entry_sha256": "125f03ff603c8dd8260b91da8de1795ea4d197eb6784b028dff0daa3f28d81f7",
+      "candidate_count": 1741,
+      "harmonic_point_count": 1741,
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+      "onset_point_count": 28188,
+      "pcm_sha256": "755869762be5f8dcee9d0b9db798ec20569ff134e875989f1aaf647a77e3690a",
+      "raw_beat_count": 313,
+      "raw_events_exact": true,
+      "sample_count": 6201280,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.6599 is below 0.8000",
+          "median tempo error 20.051% exceeds 10.000%",
+          "p95 tempo error 114.702% exceeds 25.000%"
+        ],
+        "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+        "metrics": {
+          "beats": {
+            "f1": 0.6598837209302325,
+            "matched": 227,
+            "median_absolute_error_ms": 18.26931983907798,
+            "p95_absolute_error_ms": 57.22989800307232,
+            "precision": 0.7252396166134185,
+            "recall": 0.6053333333333333
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.6099706744868035,
+            "matched": 104,
+            "median_absolute_error_ms": 20.091313156541446,
+            "p95_absolute_error_ms": 58.507673392909965,
+            "precision": 0.6265060240963856,
+            "recall": 0.5942857142857143
+          },
+          "tempo": {
+            "median_absolute_error_percent": 20.050644036261865,
+            "p95_absolute_error_percent": 114.70177123086107,
+            "sample_count": 312
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "996d4563a086fbe048d71da38e3d2441c789c28e2289aefa7284b3d3c10bc5c6"
+    },
+    {
+      "activity_point_count": 6525,
+      "audio_sha256": "00129b67f8fc519de34ad6d36fcad00388aa6d9da49dde1c0cc4fc990f52e2be",
+      "cache_entry_sha256": "85abf6870744d4e6b588bb6892615f3eda14d980e3c7d11b1535bf6202d0b560",
+      "candidate_count": 1921,
+      "harmonic_point_count": 1921,
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+      "onset_point_count": 32682,
+      "pcm_sha256": "1959dfb56b4da249fe63fa1bb0031ff2ca5a2326b5728e86ca2e3c9c754f866b",
+      "raw_beat_count": 341,
+      "raw_events_exact": true,
+      "sample_count": 7190017,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.7263 is below 0.8000",
+          "p95 tempo error 107.760% exceeds 25.000%"
+        ],
+        "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+        "metrics": {
+          "beats": {
+            "f1": 0.7262569832402235,
+            "matched": 260,
+            "median_absolute_error_ms": 20.590179351557936,
+            "p95_absolute_error_ms": 47.84580500000857,
+            "precision": 0.7624633431085044,
+            "recall": 0.6933333333333334
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.6916426512968299,
+            "matched": 120,
+            "median_absolute_error_ms": 17.052840645508383,
+            "p95_absolute_error_ms": 44.89856935157377,
+            "precision": 0.6976744186046512,
+            "recall": 0.6857142857142857
+          },
+          "tempo": {
+            "median_absolute_error_percent": 8.796880351971442,
+            "p95_absolute_error_percent": 107.76022663199988,
+            "sample_count": 340
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "cc91282ff134ac42e5c051942baad56b49d19f8a56acdb09ce57c8e49e461f10"
+    },
+    {
+      "activity_point_count": 4069,
+      "audio_sha256": "4cee48e973fd8ff0797c1219e43b07cd2078d6b6882ebeb34e951270d0b4aa30",
+      "cache_entry_sha256": "e8cff7e5cf34165f4f84bd8444f87c9a1ae844572a2a9634ae649ec1067999f6",
+      "candidate_count": 1303,
+      "harmonic_point_count": 1303,
+      "id": "rubato-schubert-d733-01-ar-staab2012",
+      "onset_point_count": 20382,
+      "pcm_sha256": "3419fe40b80c1ed42a1e0fd0d9c214f70a8345bbb9a79abb12852a8b4ddc9430",
+      "raw_beat_count": 467,
+      "raw_events_exact": true,
+      "sample_count": 4483824,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.6160 is below 0.8000",
+          "downbeat F1 0.5258 is below 0.6000",
+          "median tempo error 32.290% exceeds 10.000%",
+          "p95 tempo error 315.424% exceeds 25.000%"
+        ],
+        "id": "rubato-schubert-d733-01-ar-staab2012",
+        "metrics": {
+          "beats": {
+            "f1": 0.6159600997506235,
+            "matched": 247,
+            "median_absolute_error_ms": 19.008824516063783,
+            "p95_absolute_error_ms": 43.93310911206072,
+            "precision": 0.5300429184549357,
+            "recall": 0.7351190476190477
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.5257985257985257,
+            "matched": 107,
+            "median_absolute_error_ms": 19.716340985601377,
+            "p95_absolute_error_ms": 40.48676347805724,
+            "precision": 0.4476987447698745,
+            "recall": 0.6369047619047619
+          },
+          "tempo": {
+            "median_absolute_error_percent": 32.29019510991439,
+            "p95_absolute_error_percent": 315.423856590399,
+            "sample_count": 465
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "15a68f3c29bb4eb1f9974093ab0f23189ba183232b341233e70f09523deec922"
+    },
+    {
+      "activity_point_count": 4146,
+      "audio_sha256": "d2e57e05adc0ffbf8020f690928a873aeff6cbe6a5570db59f13b88946cfaae8",
+      "cache_entry_sha256": "b8372ccb6c2b55a144bb804acb7d5c38f93d1a29d1b96e43cb5872f84f7718ac",
+      "candidate_count": 1498,
+      "harmonic_point_count": 1498,
+      "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+      "onset_point_count": 20764,
+      "pcm_sha256": "b0722ec759643c1c21e2e079d8b8be9c2f919fd91460c8fd2f8248b1a6d2653b",
+      "raw_beat_count": 380,
+      "raw_events_exact": true,
+      "sample_count": 4567882,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "p95 tempo error 268.792% exceeds 25.000%"
+        ],
+        "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+        "metrics": {
+          "beats": {
+            "f1": 0.8647140864714086,
+            "matched": 310,
+            "median_absolute_error_ms": 14.968427673863971,
+            "p95_absolute_error_ms": 47.89085102149215,
+            "precision": 0.8157894736842105,
+            "recall": 0.9198813056379822
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.6666666666666667,
+            "matched": 100,
+            "median_absolute_error_ms": 14.968427673863971,
+            "p95_absolute_error_ms": 45.39560513811125,
+            "precision": 0.7633587786259542,
+            "recall": 0.591715976331361
+          },
+          "tempo": {
+            "median_absolute_error_percent": 4.8838097235818765,
+            "p95_absolute_error_percent": 268.79231970054104,
+            "sample_count": 379
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "71dc170ac875df1922db5cba6dcbfb59db11f254d6c35c45b825bdfe0d33ca8c"
+    },
+    {
+      "activity_point_count": 4893,
+      "audio_sha256": "dad5d6157139a75334ed30ee8d4cc7d35c14fde6c2bea50896aff7fcfaaa1ff5",
+      "cache_entry_sha256": "7509f396ee618f7a854f38729dd10fc7d72374d2fba71f68d28480c4fb92333c",
+      "candidate_count": 1517,
+      "harmonic_point_count": 1517,
+      "id": "rubato-schumann-op039-05-ov-buttner2025",
+      "onset_point_count": 24507,
+      "pcm_sha256": "e854a074c4a8e4978b1607433c680abca5ce1b26cebe304ca89961d125023195",
+      "raw_beat_count": 228,
+      "raw_events_exact": true,
+      "sample_count": 5391514,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.5497 is below 0.8000",
+          "downbeat F1 0.5680 is below 0.6000",
+          "p95 tempo error 128.184% exceeds 25.000%"
+        ],
+        "id": "rubato-schumann-op039-05-ov-buttner2025",
+        "metrics": {
+          "beats": {
+            "f1": 0.5496535796766744,
+            "matched": 119,
+            "median_absolute_error_ms": 27.392137872427114,
+            "p95_absolute_error_ms": 64.3923789037899,
+            "precision": 0.5219298245614035,
+            "recall": 0.5804878048780487
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.5680473372781065,
+            "matched": 48,
+            "median_absolute_error_ms": 27.071167867944723,
+            "p95_absolute_error_ms": 59.09602260135216,
+            "precision": 0.48,
+            "recall": 0.6956521739130435
+          },
+          "tempo": {
+            "median_absolute_error_percent": 9.780220811963664,
+            "p95_absolute_error_percent": 128.18359631002266,
+            "sample_count": 227
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "aa36e4aec046346505801c6eb7d66db6557792129ba3395955945c7f3f315cd5"
+    },
+    {
+      "activity_point_count": 4505,
+      "audio_sha256": "26d1cae0297e96a5da7c33f50e2e4db32d6af1e897fe7be1e40f1f7a4faa44b9",
+      "cache_entry_sha256": "2753bf38319152e60906f6e7209a353cb57b9f5d6346d46c25ed5b448287475c",
+      "candidate_count": 1342,
+      "harmonic_point_count": 1342,
+      "id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "onset_point_count": 22566,
+      "pcm_sha256": "8c82ceef14b3f49ca9377e6d481e292e3a0075d92d730b423dfa342ed2d08988",
+      "raw_beat_count": 282,
+      "raw_events_exact": true,
+      "sample_count": 4964362,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.3860 is below 0.8000",
+          "downbeat F1 0.4286 is below 0.6000",
+          "median tempo error 85.199% exceeds 10.000%",
+          "p95 tempo error 156.395% exceeds 25.000%"
+        ],
+        "id": "rubato-schumann-op039-05-ov-pizarro2012",
+        "metrics": {
+          "beats": {
+            "f1": 0.38603696098562623,
+            "matched": 94,
+            "median_absolute_error_ms": 29.52380938776855,
+            "p95_absolute_error_ms": 63.99085329562482,
+            "precision": 0.3333333333333333,
+            "recall": 0.4585365853658537
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.4285714285714285,
+            "matched": 39,
+            "median_absolute_error_ms": 31.34030988016434,
+            "p95_absolute_error_ms": 67.02337498776956,
+            "precision": 0.34513274336283184,
+            "recall": 0.5652173913043478
+          },
+          "tempo": {
+            "median_absolute_error_percent": 85.19915195358232,
+            "p95_absolute_error_percent": 156.3949606412858,
+            "sample_count": 281
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "d7140499d39a2769e1d8a248d2122efda0cb519ec2cc203d0bf81563ed0fc312"
+    },
+    {
+      "activity_point_count": 6167,
+      "audio_sha256": "a8a65dde5137e28f74955df50ba61c188ae16f095b920d3d7f734a9fa70e2305",
+      "cache_entry_sha256": "1146a99d929c0e6d1a7d236126c93303ba7765f1e66dbc49737f9d463bf3eca7",
+      "candidate_count": 1611,
+      "harmonic_point_count": 1611,
+      "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+      "onset_point_count": 30890,
+      "pcm_sha256": "b8260eaba0dfab49a5c0364a798234a64dfe1bc198f463be201e47d0f2ce460d",
+      "raw_beat_count": 554,
+      "raw_events_exact": true,
+      "sample_count": 6795648,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.2695 is below 0.8000",
+          "downbeat F1 0.3226 is below 0.6000",
+          "median tempo error 202.045% exceeds 10.000%",
+          "p95 tempo error 351.204% exceeds 25.000%"
+        ],
+        "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "metrics": {
+          "beats": {
+            "f1": 0.26948480845442535,
+            "matched": 102,
+            "median_absolute_error_ms": 33.557038704771,
+            "p95_absolute_error_ms": 68.20190270650528,
+            "precision": 0.18478260869565216,
+            "recall": 0.4975609756097561
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.3225806451612903,
+            "matched": 40,
+            "median_absolute_error_ms": 25.079365000003406,
+            "p95_absolute_error_ms": 66.26094440625252,
+            "precision": 0.20408163265306123,
+            "recall": 0.7692307692307693
+          },
+          "tempo": {
+            "median_absolute_error_percent": 202.04535658669704,
+            "p95_absolute_error_percent": 351.2040291220024,
+            "sample_count": 549
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "a45bd07ff0742e30ee0eca8cd53ffc0fc1c29baf8f81ee5b024554af89ef2796"
+    },
+    {
+      "activity_point_count": 5923,
+      "audio_sha256": "58ae7ff618b4ac08179ca85568f6fa9432417fbfda5c7a4868c95eea66417b8a",
+      "cache_entry_sha256": "2a66a4643a76488f53ba1f5862f022790569509e66c8eeb98c9a2bc4f014e843",
+      "candidate_count": 1483,
+      "harmonic_point_count": 1483,
+      "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+      "onset_point_count": 29667,
+      "pcm_sha256": "36281d4e2e4a5003a77744b53828da6e1e5412d6ceb5dfa6b2559255f0261430",
+      "raw_beat_count": 304,
+      "raw_events_exact": true,
+      "sample_count": 6526656,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.3031 is below 0.8000",
+          "downbeat F1 0.1951 is below 0.6000",
+          "median tempo error 111.545% exceeds 10.000%",
+          "p95 tempo error 296.166% exceeds 25.000%"
+        ],
+        "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+        "metrics": {
+          "beats": {
+            "f1": 0.30314960629921267,
+            "matched": 77,
+            "median_absolute_error_ms": 36.00601854378738,
+            "p95_absolute_error_ms": 67.3536511801558,
+            "precision": 0.25412541254125415,
+            "recall": 0.375609756097561
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.1951219512195122,
+            "matched": 20,
+            "median_absolute_error_ms": 43.990624794744804,
+            "p95_absolute_error_ms": 69.7046046733476,
+            "precision": 0.13071895424836602,
+            "recall": 0.38461538461538464
+          },
+          "tempo": {
+            "median_absolute_error_percent": 111.5446740648905,
+            "p95_absolute_error_percent": 296.16564164377166,
+            "sample_count": 302
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "49379fbe7c51dbf3d9cff11586ece6b9316d128e1f05cd2f8fdb0b281c1f4c88"
+    },
+    {
+      "activity_point_count": 5563,
+      "audio_sha256": "1b213cfacc643b210b6e8f32213cb0ea7a353eb38b05cca5956f282583d04190",
+      "cache_entry_sha256": "7c72841637c9e49d06ee161c12e006e1d6e64999a5876401c50578a69aa7868d",
+      "candidate_count": 1290,
+      "harmonic_point_count": 1290,
+      "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+      "onset_point_count": 27866,
+      "pcm_sha256": "e59639801817d9319180ba58b98a635e0a82b6c7815ad8a3697b5e5dd1a6be45",
+      "raw_beat_count": 331,
+      "raw_events_exact": true,
+      "sample_count": 6130360,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.3140 is below 0.8000",
+          "downbeat F1 0.2336 is below 0.6000",
+          "median tempo error 112.977% exceeds 10.000%",
+          "p95 tempo error 241.798% exceeds 25.000%"
+        ],
+        "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "metrics": {
+          "beats": {
+            "f1": 0.314018691588785,
+            "matched": 84,
+            "median_absolute_error_ms": 32.19222207155781,
+            "p95_absolute_error_ms": 65.26000789501296,
+            "precision": 0.2545454545454545,
+            "recall": 0.4097560975609756
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.2336448598130841,
+            "matched": 25,
+            "median_absolute_error_ms": 31.612418506000495,
+            "p95_absolute_error_ms": 62.718036809059186,
+            "precision": 0.15432098765432098,
+            "recall": 0.4807692307692308
+          },
+          "tempo": {
+            "median_absolute_error_percent": 112.97729340786762,
+            "p95_absolute_error_percent": 241.7983663384209,
+            "sample_count": 329
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "f0aaf80955f919bf3cd84df7f649824812ab08aed548d09e5342fb7d79e00959"
+    },
+    {
+      "activity_point_count": 6175,
+      "audio_sha256": "9a11bb411d2ad8c99838355180a795a9401c1369c325df6f01f755e81da34f7b",
+      "cache_entry_sha256": "0d5ae84858d6294253727ef8ebaf970693f259dcbc727fa0c60347a9563b9eef",
+      "candidate_count": 1589,
+      "harmonic_point_count": 1589,
+      "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+      "onset_point_count": 30928,
+      "pcm_sha256": "fe8d57061324f3ccedb6233205c712c937b67365cf128b819f0f69f265325f41",
+      "raw_beat_count": 421,
+      "raw_events_exact": true,
+      "sample_count": 6804096,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.3067 is below 0.8000",
+          "downbeat F1 0.2490 is below 0.6000",
+          "median tempo error 191.508% exceeds 10.000%",
+          "p95 tempo error 346.689% exceeds 25.000%"
+        ],
+        "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+        "metrics": {
+          "beats": {
+            "f1": 0.30670926517571884,
+            "matched": 96,
+            "median_absolute_error_ms": 31.473006914836787,
+            "p95_absolute_error_ms": 65.16640551421915,
+            "precision": 0.22802850356294538,
+            "recall": 0.4682926829268293
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.24896265560165973,
+            "matched": 30,
+            "median_absolute_error_ms": 27.02703686131258,
+            "p95_absolute_error_ms": 65.16640551421915,
+            "precision": 0.15873015873015872,
+            "recall": 0.5769230769230769
+          },
+          "tempo": {
+            "median_absolute_error_percent": 191.50788694079176,
+            "p95_absolute_error_percent": 346.68873683640334,
+            "sample_count": 420
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "ec2d36c1e4e7bfe5641dc5085e08bd4ab3cb2aa28e1d408f7faab44b584f14d1"
+    },
+    {
+      "activity_point_count": 3821,
+      "audio_sha256": "25928e5993da83fb5df89a5d08f08e0033ef9e5787eab4ea6864b20034ade654",
+      "cache_entry_sha256": "f905c83093cd5b61513a7c123833ec4cbd3ff691eec50e2fe1e019d2d72cc06f",
+      "candidate_count": 1087,
+      "harmonic_point_count": 1087,
+      "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "onset_point_count": 19137,
+      "pcm_sha256": "d14de393000e67d5f2971eb713b9fe61f3725e65e9298a3d9795b1eea83ce295",
+      "raw_beat_count": 358,
+      "raw_events_exact": true,
+      "sample_count": 4209984,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.7656 is below 0.8000",
+          "downbeat F1 0.4267 is below 0.6000",
+          "p95 tempo error 113.753% exceeds 25.000%"
+        ],
+        "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+        "metrics": {
+          "beats": {
+            "f1": 0.7656477438136828,
+            "matched": 263,
+            "median_absolute_error_ms": 21.632653231293375,
+            "p95_absolute_error_ms": 56.50457975802681,
+            "precision": 0.7366946778711485,
+            "recall": 0.796969696969697
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.4266666666666666,
+            "matched": 48,
+            "median_absolute_error_ms": 20.36372734140457,
+            "p95_absolute_error_ms": 49.29739578307135,
+            "precision": 0.3404255319148936,
+            "recall": 0.5714285714285714
+          },
+          "tempo": {
+            "median_absolute_error_percent": 6.600723370702618,
+            "p95_absolute_error_percent": 113.75346293071497,
+            "sample_count": 356
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "e892d59ecb17cc055034f3c043d49f981ad877092fb1298df3eaaeb10f4fd47e"
+    },
+    {
+      "activity_point_count": 4280,
+      "audio_sha256": "210aa600e039d44824ff31f31070490ecbfa2f92ef8f555532560fef52f66e2c",
+      "cache_entry_sha256": "8877746b60efe2b669456b5c0ad6e79f4961189c218b8574f71308fc1a819ba5",
+      "candidate_count": 1085,
+      "harmonic_point_count": 1085,
+      "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "onset_point_count": 21438,
+      "pcm_sha256": "3ebe3c7be276d42193943c561662558c08d822ec775bafe7f3cc6dc3ee471bdf",
+      "raw_beat_count": 432,
+      "raw_events_exact": true,
+      "sample_count": 4716288,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.6640 is below 0.8000",
+          "downbeat F1 0.4865 is below 0.6000",
+          "median tempo error 31.545% exceeds 10.000%",
+          "p95 tempo error 161.931% exceeds 25.000%"
+        ],
+        "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "metrics": {
+          "beats": {
+            "f1": 0.6640419947506562,
+            "matched": 253,
+            "median_absolute_error_ms": 23.079627269169123,
+            "p95_absolute_error_ms": 62.3582763990953,
+            "precision": 0.5856481481481481,
+            "recall": 0.7666666666666667
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.4864864864864865,
+            "matched": 54,
+            "median_absolute_error_ms": 21.952554456134976,
+            "p95_absolute_error_ms": 64.85047182849257,
+            "precision": 0.391304347826087,
+            "recall": 0.6428571428571429
+          },
+          "tempo": {
+            "median_absolute_error_percent": 31.544595451788936,
+            "p95_absolute_error_percent": 161.93132021993762,
+            "sample_count": 430
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "176a0359278e6ec6fcffec89b0489fbd3ca8ac4e8b93dd974c3b4423b8444cb1"
+    },
+    {
+      "activity_point_count": 4202,
+      "audio_sha256": "e2bde23fbc01bea0255f7e582414886b2f3dd56f573a0b654aaa8269d0390ea2",
+      "cache_entry_sha256": "751e48bba3757b36e61f6fe4c59a24a29a9a23dbee0215234c853c8d85105343",
+      "candidate_count": 1264,
+      "harmonic_point_count": 1264,
+      "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+      "onset_point_count": 21048,
+      "pcm_sha256": "e7778ebd5cc1ea6647b9fb0352c8191a452461e0aedcbc875e7d9b2ff2aeccc1",
+      "raw_beat_count": 155,
+      "raw_events_exact": true,
+      "sample_count": 4630464,
+      "sample_rate": 22050,
+      "score_replay_exact": true,
+      "selected_score": {
+        "failures": [
+          "beat F1 0.2928 is below 0.8000",
+          "downbeat F1 0.2675 is below 0.6000",
+          "median tempo error 25.548% exceeds 10.000%",
+          "p95 tempo error 103.074% exceeds 25.000%"
+        ],
+        "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+        "metrics": {
+          "beats": {
+            "f1": 0.2927835051546392,
+            "matched": 71,
+            "median_absolute_error_ms": 26.574437991811806,
+            "p95_absolute_error_ms": 67.7131077136437,
+            "precision": 0.45806451612903226,
+            "recall": 0.21515151515151515
+          },
+          "changes": {
+            "f1": 0.0,
+            "matched": 0,
+            "precision": 0.0,
+            "recall": 1.0
+          },
+          "downbeats": {
+            "f1": 0.2675159235668789,
+            "matched": 21,
+            "median_absolute_error_ms": 21.728849164048825,
+            "p95_absolute_error_ms": 66.30110841797432,
+            "precision": 0.2876712328767123,
+            "recall": 0.25
+          },
+          "tempo": {
+            "median_absolute_error_percent": 25.547739660198893,
+            "p95_absolute_error_percent": 103.07352846419423,
+            "sample_count": 154
+          }
+        },
+        "passed": false
+      },
+      "source_metadata_exact": true,
+      "truth_sha256": "ba992b7fd03f9117cf411b06c59778f9eb65698a1e71c6907fa8520da0f46d9b"
+    }
+  ],
+  "compatibility_scope": "locked historical observations replayed with verified identical PCM; not fresh v2 inference",
+  "exporter_sha256": "f8f09bc5677ff3ebf8d8f094b504b6e46aa06c0cc9e94388469a4ee431584694",
+  "lock_sha256": "9f19d895cc811283089046eddfcfe1a5f4c5aa70e97f9e02fb5d86add9979ecf",
+  "model_manifest_sha256": "ccedbfeb35b4f584834df3aca1ea41899ed39fbaf2efad9e2cc71426aed9e23d",
+  "neural_inferences": 0,
+  "pcm_proof_sha256": "1b52d11f205f715ee3432b49c3d6aed3d19e2ba29ee15f72824f57b89f47fd9b",
+  "production_fallback": false,
+  "purpose": "calibration_read_only_v1_cache_replay_summary",
+  "schema_version": 1,
+  "shipping_observation_contract": "beat-this-rten-observations-v2+decode-audio-v2",
+  "source_observation_contract": "beat-this-rten-observations-v1+decode-audio-v1",
+  "sources": {
+    "Cargo.lock": "246d94421a15809b0dddd9eb6cbebec6270c981c384e06ece9c8267acf75d4f7",
+    "crates/rhythm-map-beat-this/src/audio.rs": "67b3e54b7415d16e5be15eec751ba639a7a544ee283f330b43411b56fe5f4fa2",
+    "crates/rhythm-map-beat-this/src/lib.rs": "ecd93860fdebf56905fdb12f341cfb66ad1c227f19e0d45a81b7ec2c4f59a14d",
+    "crates/rhythm-map-core/src/engine.rs": "b2aa743e5d2699e1b1bd82582dbcb223a71406d99d470b41a49041586fac6ea2",
+    "crates/rhythm-map-core/src/estimator.rs": "3d2bc3ca875025b5d08e511dcecf38351fc8f62e27daf8d49147f9f8a68bf8f1",
+    "crates/rhythm-map-eval/src/metrics.rs": "995ea5e7ce6edb062d83f995e7fd3a0c6920dc9ecb6592009caa330cd1265d6d",
+    "crates/rhythm-map-eval/src/observation_cache.rs": "772c6df5ef86a67fc2efdfed70da757b423f4449044e885dc35191a056ad9653"
+  },
+  "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653"
+}

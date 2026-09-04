@@ -10,6 +10,7 @@ mod metrics;
 mod observation_cache;
 mod public_dataset;
 mod rubato;
+mod rubato_cache_replay;
 mod runner;
 mod synthetic;
 mod tempo_diagnostics;
@@ -44,6 +45,7 @@ pub use rubato::{
     RubatoStructureSegment, RubatoTruthImport, acquire_rubato_dataset,
     acquire_rubato_dataset_with_resolution, import_rubato_truth,
 };
+pub use rubato_cache_replay::replay_rubato_cache;
 pub use runner::{
     AttributionCase, AttributionDecision, BackendEvaluationOptions, BeatErrorLocation,
     BeatHypothesisAggregate, BeatHypothesisHoldoutCase, BeatHypothesisHoldoutEvaluation,
