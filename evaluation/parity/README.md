@@ -417,3 +417,54 @@ No threshold or weight is searched. Per-feature missingness, per-track slices,
 and macro-track AUC prevent a pooled score from being mistaken for complete
 context coverage or a generalization test. See the
 [measured result](../baselines/beat-this-candidate-evidence-v1.md).
+
+## Complete dense neural evidence
+
+`dense_beat_evidence` performs fresh, full-recording inference for exactly the
+frozen 15-case ARTBeaT or 25-case RUBATO calibration cohort. It does not read or
+write production observation caches. Before retaining a case, it verifies the
+complete decoded PCM and the pinned model pack, then compares default raw beat
+and candidate timestamps, confidences, duration and source metadata exactly
+against the earlier immutable evidence. A mismatch is retained for diagnosis
+and stops the cohort; it is not relabeled as an equivalent result.
+
+The exporter keeps both unmodified 50 Hz beat/downbeat logit heads, their common
+time origin and frame count, source hashes and raw observations. It exports no
+PCM or mel tensors. Each case is written immediately to a new private directory
+outside every Git worktree. A complete summary appears only after the loop
+finishes; its `complete` field is false when replay stopped on a mismatch.
+Fatal errors can leave earlier case files without a summary. Neither state is
+an acceptable complete-cohort audit input. Existing captures are never replaced.
+
+```bash
+RTEN_NUM_THREADS=2 cargo run --locked --profile evaluation -p rhythm-map-eval \
+  --example dense_beat_evidence -- \
+  --suite evaluation/suites/artbeat-v1.json \
+  --evidence /data/parity/candidate-evidence-v1.private.json \
+  --audio-dir /data/artbeat-v1 --model-dir /data/beat-this-full-v1 \
+  --output-dir /data/parity/dense-artbeat-new
+
+RTEN_NUM_THREADS=2 cargo run --locked --profile evaluation -p rhythm-map-eval \
+  --example dense_beat_evidence -- \
+  --suite evaluation/suites/rubato-calibration-v1.json \
+  --evidence /data/parity/rubato-cache-replay-final-v1.private.json \
+  --audio-dir /data/rubato-calibration-v1 --model-dir /data/beat-this-full-v1 \
+  --output-dir /data/parity/dense-rubato-new
+
+python evaluation/parity/dense_clock_evidence.py \
+  --artbeat-evidence /data/parity/candidate-evidence-v1.private.json \
+  --artbeat-captures /data/parity/dense-artbeat-new \
+  --rubato-evidence /data/parity/rubato-cache-replay-final-v1.private.json \
+  --rubato-captures /data/parity/dense-rubato-new \
+  --output /data/reports/dense-clock-evidence-new.json
+```
+
+The Python audit checks case-file hashes, complete cohorts, source identity,
+full frame coverage, unchanged observations, and independently reconstructs
+default pulse events from the retained logits. It then compares annotated beat
+positions with following half-beat controls, including misses without reliable
+raw anchors. This comparison **uses truth to place ideal templates**: it is not
+an automatic decoder, recovered-event count, beat F1 or training decision.
+The control can itself be a meaningful musical subdivision. Only aggregate and
+per-track summaries may enter Git; dense captures and event coordinates remain
+private. See [interpretation and limits](../baselines/dense-clock-evidence-v1.md).

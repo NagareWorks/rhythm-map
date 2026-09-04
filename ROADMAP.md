@@ -24,13 +24,23 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- Complete beat/downbeat frame evidence is now retained for all 40 calibration
+  recordings, with exact fresh default-observation replay and independent
+  pulse-event reconstruction. Truth-assisted dense pulse templates favor the
+  annotated position for 62.63% of complete RUBATO missed-beat queries and
+  64.79% of candidate-absent queries; this is retained relative evidence, not
+  automatic recovery or a training verdict. Next freeze a truth-free full-frame
+  clock/tempo/dropout sequence experiment without requiring correct raw anchors,
+  preserving real tempo changes and explicit uncertainty. No new product
+  threshold, strategy or tuning option is added. See the
+  [dense evidence result and next-experiment gate](evaluation/baselines/dense-clock-evidence-v1.md).
 - The continuous-onset phase audit now covers every raw interval in all 40
   calibration recordings. Its ARTBeaT signal does not reliably transfer to
   RUBATO; 76.49% of RUBATO intervals also have an unmatched raw anchor. Do not
-  add an onset threshold or another anchor-based repair policy. Next capture
-  full neural beat/downbeat frame sequences via the existing inference API
-  (they are absent from all 40 retained observation exports), preserving exact
-  PCM/model/default-event identity without changing the production contract.
+  add an onset threshold or another anchor-based repair policy. The separate
+  dense capture above fills the neural evidence gap in the original observation
+  exports without changing their production contract or synthesizing frames
+  from sparse peaks.
   See [phase evidence and coverage limits](evaluation/baselines/clock-phase-evidence-v1.md).
 - Controlled observation dropout now distinguishes missing detected events from
   changes in musical truth. A frozen evaluation-only missing-step clock solves
