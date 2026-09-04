@@ -468,3 +468,32 @@ an automatic decoder, recovered-event count, beat F1 or training decision.
 The control can itself be a meaningful musical subdivision. Only aggregate and
 per-track summaries may enter Git; dense captures and event coordinates remain
 private. See [interpretation and limits](../baselines/dense-clock-evidence-v1.md).
+
+## Frozen full-frame clock experiment (evaluation only)
+
+`dense_sequence` decodes complete captured heads into private inferred clock
+positions. Only frame arrays and explicit availability enter the decoder;
+truth, case identity and baseline observations are confined to the evaluator.
+This candidate failed acceptance and is not a product strategy or default.
+The [specification and result](../baselines/dense-sequence-v1.md) explain the
+objective defect, control failures and metric denominators.
+
+```bash
+cargo build --locked --profile evaluation -p rhythm-map-eval --example dense_sequence
+python evaluation/parity/dense_sequence_audit.py \
+  --binary target/evaluation/examples/dense_sequence \
+  --private-output /data/parity/dense-sequence-new.private \
+  --artbeat-evidence /data/parity/candidate-evidence-v1.private.json \
+  --artbeat-captures /data/parity/dense-artbeat-new \
+  --rubato-evidence /data/parity/rubato-cache-replay-final-v1.private.json \
+  --rubato-captures /data/parity/dense-rubato-new \
+  --output /data/reports/dense-sequence-new.json
+```
+
+Use the actual binary location if `CARGO_TARGET_DIR` is set (`.exe` on Windows).
+Both output destinations must be new; private predictions must be outside Git.
+The script verifies the frozen evidence, complete capture/source identities,
+truth hashes and unchanged default primary beat metrics before scoring. It runs
+42 authored controls and all 40 calibration recordings without fresh inference
+or holdout access. The committed `dense-sequence-v1.json` is the frozen failed
+run, not a report to overwrite when exploring another objective.

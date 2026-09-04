@@ -24,16 +24,24 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- The first truth-free full-frame renewal-clock candidate is rejected: weak
+  pulses and short central dropouts can recover on controls, but weak genuine
+  doubling is erased and every real calibration track fails a joint regression
+  check. RUBATO mean beat F1 falls from 0.52126 to 0.46166. An identified
+  bar-score defect rewards unsupported extra bars; this is not evidence that
+  training is necessary. Next require full-state/off-phase likelihood
+  correctness on ideal meter controls before freezing another candidate, not
+  a weight sweep, local repair policy or user option. See the
+  [frozen sequence result and failure analysis](evaluation/baselines/dense-sequence-v1.md).
 - Complete beat/downbeat frame evidence is now retained for all 40 calibration
   recordings, with exact fresh default-observation replay and independent
   pulse-event reconstruction. Truth-assisted dense pulse templates favor the
   annotated position for 62.63% of complete RUBATO missed-beat queries and
   64.79% of candidate-absent queries; this is retained relative evidence, not
-  automatic recovery or a training verdict. Next freeze a truth-free full-frame
-  clock/tempo/dropout sequence experiment without requiring correct raw anchors,
-  preserving real tempo changes and explicit uncertainty. No new product
-  threshold, strategy or tuning option is added. See the
-  [dense evidence result and next-experiment gate](evaluation/baselines/dense-clock-evidence-v1.md).
+  automatic recovery or a training verdict. The frozen full-frame experiment
+  above uses these captures without requiring correct raw anchors. No new
+  product threshold, strategy or tuning option is added. See the
+  [dense evidence result](evaluation/baselines/dense-clock-evidence-v1.md).
 - The continuous-onset phase audit now covers every raw interval in all 40
   calibration recordings. Its ARTBeaT signal does not reliably transfer to
   RUBATO; 76.49% of RUBATO intervals also have an unmatched raw anchor. Do not
