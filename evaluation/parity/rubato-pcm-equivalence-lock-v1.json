@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "purpose": "calibration_pcm_equivalence_lock",
+  "suite_id": "rubato-calibration-v1",
+  "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+  "case_count": 25,
+  "required_native_rate_hz": 22050,
+  "legacy_decoder": "beat-this =1.0.0 load_audio(path, 22050)",
+  "shipping_contract": "beat-this-rten-observations-v2+decode-audio-v2",
+  "comparison": "complete finite nonempty float32 PCM; equal lengths and every to_bits value; SHA256 of little-endian float32 bits",
+  "scope": "input equivalence only; no model inference, cache access, cache relabeling, feature tuning, or holdout access"
+}

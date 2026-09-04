@@ -144,6 +144,17 @@ a learned component to the default distribution.
 
 ### Measured bottlenecks
 
+- 2026-09-04: the locked RUBATO input-equivalence audit compared all 25 full
+  recordings (143,105,243 float32 samples, 108.17 minutes). Former and shipping
+  decoding are bit-identical at native 22,050 Hz, including complete tails.
+  This model-free evidence does not authorize cache relabeling or count as
+  new v2 accuracy measurements. Next implement the source/model-bound,
+  read-only historical-cache bridge, requiring exact raw-event and selected-
+  score replays before transferring frozen candidate features. Missing or
+  inconsistent entries must fail without inference. Keep v1 provenance;
+  no production cross-contract fallback, policy change, or holdout access.
+  See `evaluation/baselines/beat-this-rubato-pcm-equivalence-v1.md`.
+
 - 2026-09-03: completed the cache-only weak-candidate evidence audit on the
   shipping ARTBeaT v2 calibration cohort, with all 15 selected-score replays
   exact and the reference-resampler 1.50 s probe kept separate. Of 1,180

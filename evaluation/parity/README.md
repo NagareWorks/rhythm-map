@@ -365,6 +365,13 @@ fix or permission to lower the threshold. See the
 
 ## Cache-only weak-candidate evidence
 
+Before attempting to transfer this audit to RUBATO, the separate
+`rubato_pcm_equivalence` example compares full former/shipping decoded PCM
+without inference or cache access. Its locked 25-case summary is 25/25
+bit-identical. This is input evidence only, not permission to relabel old
+caches or treat old scores as v2 results. See the
+[result and replay gate](../baselines/beat-this-rubato-pcm-equivalence-v1.md).
+
 `candidate_evidence` reuses the existing cache implementation and actual PCM
 engine enrichment; it does not load a neural model or write a cache entry.
 It rejects every suite except the exact locked 15-case ARTBeaT calibration
