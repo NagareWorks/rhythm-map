@@ -154,6 +154,15 @@ a learned component to the default distribution.
 
 ### Measured bottlenecks
 
+- 2026-09-04: rejected a fixed observation-stage insertion rule using the
+  existing downbeat head at real beat candidates. On all 40 frozen calibration
+  cases, RUBATO recovered 62 misses but added 274 unmatched events (16 F1
+  regressions); ARTBeaT recovered three misses but added two unmatched events
+  (one F1 regression, two precision regressions). Raw observation baselines are
+  not final estimator scores. Keep the default unchanged, do not retain this
+  as another fallback, and do not fit extra guards to these insertions. The
+  downbeat head is complementary but not independent metrical evidence. See
+  [the fixed-rule rejection screen](evaluation/baselines/beat-this-downbeat-insertion-v1.md).
 - 2026-09-04: rejected the fixed isolated-edit adoption experiment: RUBATO mean
   Beat F1 rose only 0.0006175 while losing two genuine beats; ARTBeaT lost one
   genuine beat and mean F1 fell 0.0018182. No accepted insertion recovered a miss.
