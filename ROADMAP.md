@@ -24,15 +24,27 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- A truth-free joint semi-Markov reference now searches beat locations, per-beat
+  durations and meter, including changes inside a bar. Exact evidence/reference
+  partitions and traceback pass independent exhaustive checks. It is rejected
+  before real-cohort replay: weak true doubling still becomes constant tempo,
+  flat spans acquire slow MAP states, a noise control weakly favors the clock,
+  and the complete-bar edge model invents a final three-beat bar. Independent
+  decomposition shows the weak doubling's beat evidence favors the authored
+  timing by +4.85, but its duration prior costs an extra 17.49. This is a decoding
+  objective problem, not proof that neural evidence is missing or training is
+  required. Next investigate time-indexed state/decision semantics and partial
+  bar marginalization, with explicit unsupported states; do not tune this
+  rejected reference or launch a long cohort run yet. See the
+  [joint search and failure decomposition](evaluation/baselines/joint-clock-v1.md).
 - Rotation-normalized contextual pulse scoring now ranks 7/8 unchanged authored
   paths correctly, including weak true doubling and all-weak constant tempo;
   the remaining erased/half-speed pair has identical inputs and stays ambiguous.
   Strong and weak bar controls prefer four over two/eight. Shared-phase
   marginalization rejects a fixed-seed noise control that per-window maxima
   falsely favor. These are given-path prerequisites, not a shipped decoder or
-  real-music improvement. Next freeze the joint unknown-boundary/tempo/meter
-  formulation with gap, edge, noise and search-cost gates, then evaluate it on
-  the retained dense cohorts. See the
+  real-music improvement. The joint search above now tests those prerequisites
+  without given paths and exposes additional objective/edge failures. See the
   [contextual phase evidence and limits](evaluation/baselines/phase-likelihood-v1.md).
 - A normalized background-copy missing-observation model is now explicitly
   tested and rejected as the next decoder emission: it softens negative-logit

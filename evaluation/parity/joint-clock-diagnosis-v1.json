@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "purpose": "truth_assisted_frozen_joint_clock_decomposition",
+  "changes_decoder": false,
+  "changes_weights": false,
+  "training_verdict": false,
+  "input_report_sha256": "4b71ef8160b752e87ee057a17c6ab6d774106d2bca030ad70d706213c2c7a7fc",
+  "diagnosis_source_sha256": "dfb6648a6743abe16e4600752794c0a56011369901e2bbf710b4debc43874c33",
+  "cases": [
+    {
+      "case": "constant_intact",
+      "common_span": [
+        4,
+        1132
+      ],
+      "map_score": {
+        "beat_evidence": 147.67698985301,
+        "bar_evidence": 53.39482646904386,
+        "duration_prior": -96.43824841089803,
+        "meter_prior": -21.501113630736658,
+        "edge_prior": -12.526796525183247,
+        "log_unnormalized_weight": 70.60565775523594
+      },
+      "authored_timing_graph_score": {
+        "beat_evidence": 147.67698985301,
+        "bar_evidence": 53.39482646904386,
+        "duration_prior": -96.43824841089803,
+        "meter_prior": -21.501113630736658,
+        "edge_prior": -12.526796525183247,
+        "log_unnormalized_weight": 70.60565775523594
+      },
+      "authored_minus_map": {
+        "beat_evidence": 0.0,
+        "bar_evidence": 0.0,
+        "duration_prior": 0.0,
+        "meter_prior": 0.0,
+        "edge_prior": 0.0,
+        "log_unnormalized_weight": 0.0
+      }
+    },
+    {
+      "case": "constant_weak_alternating",
+      "common_span": [
+        4,
+        1132
+      ],
+      "map_score": {
+        "beat_evidence": 136.0516558121025,
+        "bar_evidence": 53.39482646904386,
+        "duration_prior": -96.43824841089803,
+        "meter_prior": -21.501113630736658,
+        "edge_prior": -12.526796525183247,
+        "log_unnormalized_weight": 58.98032371432843
+      },
+      "authored_timing_graph_score": {
+        "beat_evidence": 136.0516558121025,
+        "bar_evidence": 53.39482646904386,
+        "duration_prior": -96.43824841089803,
+        "meter_prior": -21.501113630736658,
+        "edge_prior": -12.526796525183247,
+        "log_unnormalized_weight": 58.98032371432843
+      },
+      "authored_minus_map": {
+        "beat_evidence": 0.0,
+        "bar_evidence": 0.0,
+        "duration_prior": 0.0,
+        "meter_prior": 0.0,
+        "edge_prior": 0.0,
+        "log_unnormalized_weight": 0.0
+      }
+    },
+    {
+      "case": "half_speed_intact",
+      "common_span": [
+        4,
+        1132
+      ],
+      "map_score": {
+        "beat_evidence": 128.08563754341705,
+        "bar_evidence": 45.724399669609475,
+        "duration_prior": -94.75852660836648,
+        "meter_prior": -17.91759469228055,
+        "edge_prior": -12.526796525183247,
+        "log_unnormalized_weight": 48.60711938719625
+      },
+      "authored_timing_graph_score": {
+        "beat_evidence": 128.08563754341705,
+        "bar_evidence": 45.724399669609475,
+        "duration_prior": -94.75852660836648,
+        "meter_prior": -17.91759469228055,
+        "edge_prior": -12.526796525183247,
+        "log_unnormalized_weight": 48.60711938719625
+      },
+      "authored_minus_map": {
+        "beat_evidence": 0.0,
+        "bar_evidence": 0.0,
+        "duration_prior": 0.0,
+        "meter_prior": 0.0,
+        "edge_prior": 0.0,
+        "log_unnormalized_weight": 0.0
+      }
+    },
+    {
+      "case": "double_speed_intact",
+      "common_span": [
+        4,
+        1132
+      ],
+      "map_score": {
+        "beat_evidence": 175.76933958331824,
+        "bar_evidence": 65.96309134599866,
+        "duration_prior": -113.93002922003679,
+        "meter_prior": -28.668151507648876,
+        "edge_prior": -12.526796525183247,
+        "log_unnormalized_weight": 86.60745367644799
+      },
+      "authored_timing_graph_score": {
+        "beat_evidence": 175.76933958331824,
+        "bar_evidence": 65.96309134599866,
+        "duration_prior": -113.93002922003679,
+        "meter_prior": -28.668151507648876,
+        "edge_prior": -12.526796525183247,
+        "log_unnormalized_weight": 86.60745367644799
+      },
+      "authored_minus_map": {
+        "beat_evidence": 0.0,
+        "bar_evidence": 0.0,
+        "duration_prior": 0.0,
+        "meter_prior": 0.0,
+        "edge_prior": 0.0,
+        "log_unnormalized_weight": 0.0
+      }
+    },
+    {
+      "case": "double_speed_weak_alternating",
+      "common_span": [
+        4,
+        1132
+      ],
+      "map_score": {
+        "beat_evidence": 147.67596957727335,
+        "bar_evidence": 65.96309134599866,
+        "duration_prior": -96.43824841089803,
+        "meter_prior": -28.668151507648876,
+        "edge_prior": -12.526796525183247,
+        "log_unnormalized_weight": 76.00586447954186
+      },
+      "authored_timing_graph_score": {
+        "beat_evidence": 152.52925881157205,
+        "bar_evidence": 65.96309134599866,
+        "duration_prior": -113.93002922003679,
+        "meter_prior": -28.668151507648876,
+        "edge_prior": -12.526796525183247,
+        "log_unnormalized_weight": 63.3673729047018
+      },
+      "authored_minus_map": {
+        "beat_evidence": 4.8532892342987,
+        "bar_evidence": 0.0,
+        "duration_prior": -17.49178080913876,
+        "meter_prior": 0.0,
+        "edge_prior": 0.0,
+        "log_unnormalized_weight": -12.638491574840053
+      }
+    },
+    {
+      "case": "non_octave_intact",
+      "common_span": [
+        4,
+        1132
+      ],
+      "map_score": {
+        "beat_evidence": 138.56090984538613,
+        "bar_evidence": 49.72951210608587,
+        "duration_prior": -95.61900250852,
+        "meter_prior": -19.709354161508603,
+        "edge_prior": -12.526796525183247,
+        "log_unnormalized_weight": 60.43526875626016
+      },
+      "authored_timing_graph_score": {
+        "beat_evidence": 138.56090984538613,
+        "bar_evidence": 49.72951210608587,
+        "duration_prior": -95.61900250852,
+        "meter_prior": -19.709354161508603,
+        "edge_prior": -12.526796525183247,
+        "log_unnormalized_weight": 60.43526875626016
+      },
+      "authored_minus_map": {
+        "beat_evidence": 0.0,
+        "bar_evidence": 0.0,
+        "duration_prior": 0.0,
+        "meter_prior": 0.0,
+        "edge_prior": 0.0,
+        "log_unnormalized_weight": 0.0
+      }
+    },
+    {
+      "case": "constant_all_weak",
+      "common_span": [
+        4,
+        1132
+      ],
+      "map_score": {
+        "beat_evidence": 129.82618175348978,
+        "bar_evidence": 47.637120106847924,
+        "duration_prior": -96.43824841089803,
+        "meter_prior": -21.501113630736658,
+        "edge_prior": -12.526796525183247,
+        "log_unnormalized_weight": 46.99714329351977
+      },
+      "authored_timing_graph_score": {
+        "beat_evidence": 129.82618175348978,
+        "bar_evidence": 47.637120106847924,
+        "duration_prior": -96.43824841089803,
+        "meter_prior": -21.501113630736658,
+        "edge_prior": -12.526796525183247,
+        "log_unnormalized_weight": 46.99714329351977
+      },
+      "authored_minus_map": {
+        "beat_evidence": 0.0,
+        "bar_evidence": 0.0,
+        "duration_prior": 0.0,
+        "meter_prior": 0.0,
+        "edge_prior": 0.0,
+        "log_unnormalized_weight": 0.0
+      }
+    }
+  ]
+}

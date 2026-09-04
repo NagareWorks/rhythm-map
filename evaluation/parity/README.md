@@ -527,3 +527,15 @@ window maximization with a normalized shared-phase model. No captures or
 audio are read. The [derivation and scope](../baselines/phase-likelihood-v1.md)
 explain the positive weak-evidence result and why it is not a joint decoder or
 real-music accuracy claim.
+
+## Exact joint clock reference
+
+`cargo run --locked --profile evaluation -p rhythm-map-eval --example joint_clock`
+searches unknown beat locations, per-beat durations and bar lengths from authored
+dense heads. It computes exact reference/evidence partitions and a separate MAP
+trace; no truth paths enter decoding. `joint-clock-v1.json` freezes the authored
+run, including failed weak-change, flat-middle, noise and edge behavior.
+`python evaluation/parity/joint_clock_diagnosis.py` independently decomposes the
+frozen MAP and a truth-assisted diagnostic competitor on identical edge coverage;
+its output is `joint-clock-diagnosis-v1.json`. These are evaluation artifacts,
+not new product modes. See the [graph, controls and decision](../baselines/joint-clock-v1.md).
