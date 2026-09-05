@@ -8,6 +8,11 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `shared-phase-context-v1.json` and `shared_phase_context_audit.py` compare
+  shared versus independent phase alignment of five-point truth-assisted
+  templates on all 40 frozen captures. These are not complete clocks; ideal
+  half-time aliases and real-data regressions remain. No default change or new
+  strategy follows. See the [context audit](../baselines/shared-phase-context-v1.md).
 - `presence-likelihood-v1.json` and `presence_likelihood_audit.py` verify a
   normalized absent/plain/accent observation contract on a shared frame domain.
   Its analytic sensor is not audio calibration; original regressions and
@@ -682,3 +687,28 @@ trials, and modeled ticks inside flat evidence. None are detected Beat events.
 reconstructs all 80 clock inferences and 2,160 constant-meter components. Read the
 [model, ambiguity semantics and limits](../baselines/omission-clock-v1.md) before
 interpreting conditional weights as musical confidence or promoting outputs.
+
+## Shared-phase five-point context
+
+Freeze `shared-phase-context-lock-v1.json` and the extractor before the first
+cohort run. Run the authored controls first:
+
+```sh
+cd evaluation/parity
+python -m unittest test_shared_phase_context.SharedPhaseControls -v
+cd ../..
+python evaluation/parity/shared_phase_context_audit.py \
+  --artbeat-evidence /data/reports/candidate-evidence-v1.private.json \
+  --artbeat-captures /data/dense-artbeat-v1 \
+  --rubato-evidence /data/reports/rubato-cache-replay-final-v1.private.json \
+  --rubato-captures /data/dense-rubato-v1 \
+  --output /data/reports/shared-phase-context-new.json
+```
+
+The output path must not exist. The extractor checks all frozen input hashes
+and exports only aggregates. Missing context, identical grids and overlapping
+windows retain separate denominators. No model inference, decoder replay,
+holdout, fitting or training is performed. Run the complete 12-test module with
+`python -m unittest discover -s evaluation/parity -p test_shared_phase_context.py -v`.
+Read the [contract and failed promotion gate](../baselines/shared-phase-context-v1.md)
+before treating a positive pair margin as correct tempo or acoustic presence.

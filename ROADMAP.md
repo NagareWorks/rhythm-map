@@ -24,6 +24,18 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- Shared-phase five-point context is now audited on all 40 frozen calibration
+  captures. Missed annotated-versus-continuation positives rise 61 to 74 / 91
+  on ARTBeaT but fall 1855 to 1848 / 2368 on RUBATO; its candidate-absent subset
+  also regresses. These are oracle-template diagnostics, not beat accuracy.
+  Equal-count point sets still alias ideal constant and half-time pulse trains
+  and ignore density in unused frames. Do not promote, add a mode or tune these
+  features. Next define a fixed-time-span complete-clock observation contract
+  accounting for predicted pulses and unmatched responses, retaining equivalent
+  omission/change evidence as ambiguous. Validate authored controls before any
+  cohort replay; raw logits are still not calibrated absence likelihoods.
+  No production changes, holdout or training. See the
+  [locked context audit and retained regressions](evaluation/baselines/shared-phase-context-v1.md).
 - A frozen seven-frame joint-head window audit covers all 40 calibration
   recordings without inference or decoder replay. It retains missing annotation
   and overlap denominators. RUBATO has 438 missed windows whose center is
