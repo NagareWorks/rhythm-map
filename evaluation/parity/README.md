@@ -575,3 +575,14 @@ downbeat and count marginals. Run independent reconstruction with
 All 139 crop and four true-meter-change controls pass, but weak tempo doubling
 remains unresolved on the frozen wrong clock. See the
 [derivation, conditional scope and next gate](../baselines/common-meter-v1.md).
+
+## Shared-frame joint clock-family gate
+
+`cargo run --locked --profile evaluation -p rhythm-map-eval --example shared_clock`
+compares four supplied fixture clock templates on one full-frame paired-head
+reference while searching their meter paths. It is not unrestricted beat or
+tempo discovery. `shared-clock-v1.json` retains raw and fixed-context diagnostics,
+including weak-doubling improvement, true-halving regression and an identical
+two-head input ambiguity. Independent reconstruction runs with
+`python -m unittest discover -s evaluation/parity -p test_shared_clock.py -v`.
+See the [scope, mathematics and failed promotion gate](../baselines/shared-clock-v1.md).

@@ -24,6 +24,16 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- A shared-frame joint gate now compares four supplied clock templates while
+  marginalizing meter on a single paired-head reference. Weak true doubling
+  wins by +28.43 after its unchanged duration-prior cost, but true halving
+  regresses: its evidence itself favors constant tempo. Both-erased constant
+  and true-half controls have identical two-head inputs and cannot be uniquely
+  distinguished. Flat/unknown inputs also expose >99% prior-only family choices
+  despite zero signal evidence. Do not expand search or promote this scoring
+  model yet. Next retain weak structure and genuine slowing with an explicit
+  missing-pulse/ambiguity model; no jump-weight or feature-window sweep.
+  See the [shared-frame joint gate and retained regression](evaluation/baselines/shared-clock-v1.md).
 - Common-context, count-normalized meter evidence now passes all 139 unchanged
   crop controls and all four genuine meter-change controls (48/48 positions
   each). Independent path/subset enumeration and every-output reconstruction
