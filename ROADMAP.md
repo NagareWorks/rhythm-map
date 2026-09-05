@@ -24,6 +24,16 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- Common-context, count-normalized meter evidence now passes all 139 unchanged
+  crop controls and all four genuine meter-change controls (48/48 positions
+  each). Independent path/subset enumeration and every-output reconstruction
+  pass. It removes the prior model's free extra-bar-start tie without a tuned
+  penalty, but remains conditional on the same frozen beat grid. Weak doubling
+  still has only 47/64 beats and is interpreted as meter two in the middle.
+  Next compare beat/tempo hypotheses on a shared observation domain with no
+  evidence double-counting; address full-song complexity and unavailable-frame
+  semantics before cohort replay or promotion. See the
+  [common-context model and structural gate](evaluation/baselines/common-meter-v1.md).
 - A censored-bar conditional reference now integrates unknown meter persistence
   and reports per-tick marginals on the frozen inferred clock. Six main-control
   tails favor four rather than the old forced three, but support remains below

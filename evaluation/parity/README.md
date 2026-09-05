@@ -563,3 +563,15 @@ again or fix their tempo. Independent Python probability-space checks run with
 The 139 crop and four true-meter-change controls expose composite-meter failures
 despite improved tail preferences. Read the [model, limitations and gate](../baselines/censored-meter-v1.md)
 before interpreting these conditional post-selection scores as confidence.
+
+## Common-context conditional meter audit
+
+`cargo run --locked --profile evaluation -p rhythm-map-eval --example common_meter`
+keeps the previous supplied clocks, head signals, crop controls and change
+controls. A whole-observed-run, count-dependent permutation normalizer replaces
+the per-cell normalization. `common-meter-v1.json` freezes the resulting meter,
+downbeat and count marginals. Run independent reconstruction with
+`python -m unittest discover -s evaluation/parity -p test_common_meter.py -v`.
+All 139 crop and four true-meter-change controls pass, but weak tempo doubling
+remains unresolved on the frozen wrong clock. See the
+[derivation, conditional scope and next gate](../baselines/common-meter-v1.md).
