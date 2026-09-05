@@ -8,6 +8,11 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `jump-evidence-v1.json` and `jump_evidence_audit.py` separate jump occurrence
+  from destination accounting and prove the count-conditioned evidence ceiling.
+  Fixed-gain and longer-context controls retain tempo failures without fitting
+  weights or changing product output; see the
+  [jump/evidence audit](../baselines/jump-evidence-v1.md).
 - `clock-boundary-v1.json` and `clock_boundary_audit.py` isolate the initial
   window law on the frozen unknown-clock model. Unavailable-padding consistency
   improves, but tempo failures and an additional MAP accent miss remain. This

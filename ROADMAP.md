@@ -24,6 +24,19 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- Jump-factor auditing now exposes both domain-dependent occurrence rates and
+  a finite ceiling in the count-conditioned feature reference. Changing units
+  on identical period atoms is invariant; refining the domain changes the
+  physical exposure-rate parameter by 2.56 times. Gains 2 and 4 retain both
+  short tempo failures. Exact assignment combinatorics show that even the
+  extra-flat-pulse MAP is optimal within its own count class, so stronger
+  contrast has a finite limit. Four longer controls recover one slowdown but
+  retain both early/late acceleration failures, all below the fixed state cap.
+  Do not tune jump weights, select a gain, promote a strategy or infer a training
+  requirement. Next define a shared-frame observation law retaining absence
+  and count evidence, tested on matched omission/constant/change cases before
+  scalable search or cohort replay. See the
+  [jump factors, evidence ceilings and retained failures](evaluation/baselines/jump-evidence-v1.md).
 - A matched boundary-only audit now separates a fresh clock start from an
   arbitrary window in an ongoing process. Stationary first-tick/meter-phase
   initialization removes 3--5 percentage-point marginal changes caused solely
