@@ -8,6 +8,11 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `presence-likelihood-v1.json` and `presence_likelihood_audit.py` verify a
+  normalized absent/plain/accent observation contract on a shared frame domain.
+  Its analytic sensor is not audio calibration; original regressions and
+  explicit absence-evidence contrasts remain visible. See the
+  [presence-likelihood audit](../baselines/presence-likelihood-v1.md).
 - `jump-evidence-v1.json` and `jump_evidence_audit.py` separate jump occurrence
   from destination accounting and prove the count-conditioned evidence ceiling.
   Fixed-gain and longer-context controls retain tempo failures without fitting

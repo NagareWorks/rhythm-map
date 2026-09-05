@@ -24,6 +24,19 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- A common-frame presence-likelihood reference now retains absent/plain/accent
+  evidence without a count-conditioned ceiling. Independent path/observation
+  enumeration verifies normalized joint evidence, missing-frame marginalization
+  and stationary padding. The fixed analytic Gaussian sensor is not audio
+  calibration and regresses original flat-middle omissions and the longer half
+  case. An explicit strong-absence input contrast restores those two behaviors
+  but leaves short tempo and both longer acceleration failures. Keep all of
+  these results; no production integration, new user parameter or training.
+  Next inspect existing backend score/loss semantics and frozen calibration
+  evidence for a justified presence/absence likelihood adapter, including class
+  priors and accent-versus-plain evidence. No decoder cohort replay or holdout
+  access before matched adapter controls pass. See the
+  [normalized likelihood contract and retained regressions](evaluation/baselines/presence-likelihood-v1.md).
 - Jump-factor auditing now exposes both domain-dependent occurrence rates and
   a finite ceiling in the count-conditioned feature reference. Changing units
   on identical period atoms is invariant; refining the domain changes the
