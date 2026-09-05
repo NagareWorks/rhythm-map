@@ -24,6 +24,17 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- A bounded exact reference now jointly searches unknown tick positions/periods,
+  changing meter and pulse/accent omissions, without supplied paths or change
+  boundaries. Independent complete-path enumeration verifies all marginals.
+  This is a new short feature-space gate, not the old rank fixtures or real music.
+  Both missing-middle controls preserve tempo, but half/double controls fail:
+  authored feature scores win, then clock priors reverse the choice; one MAP
+  inserts a pulse at a flat pair. A 32-frame probe exceeds the fixed state budget
+  and returns no partial inference. Do not promote, tune a jump weight, or start
+  training/cohort replay. Next audit coherent clock-prior and boundary semantics
+  with matched controls before scalable search and supported-event acceptance.
+  See [unknown-clock search, exactness and retained failures](evaluation/baselines/search-omission-v1.md).
 - Exact pulse/accent omission inference now integrates both run-wide retention
   rates and a constant-meter/phase family on the same supplied clocks. All seven
   main controls and three background shifts retain their winners. A truth-free

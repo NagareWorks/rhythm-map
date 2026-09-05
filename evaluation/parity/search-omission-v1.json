@@ -1,0 +1,3323 @@
+{
+  "beam_pruning": false,
+  "calibrated_confidence": false,
+  "cases": [
+    {
+      "case": "constant",
+      "decoded": {
+        "inferred_ticks": [
+          {
+            "beat_in_bar": 1,
+            "frame": 1,
+            "inferred_label": 2,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 2,
+            "frame": 4,
+            "inferred_label": 1,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 3,
+            "frame": 7,
+            "inferred_label": 1,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 1,
+            "frame": 10,
+            "inferred_label": 2,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 2,
+            "frame": 13,
+            "inferred_label": 1,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 3,
+            "frame": 16,
+            "inferred_label": 1,
+            "meter": 3,
+            "period_frames": 3
+          }
+        ],
+        "joint_map_log_weight": 2.321152325641722,
+        "joint_map_probability": 0.19359677165262568,
+        "log_ratio": 3.9631301052684256,
+        "positions": [
+          {
+            "inferred_label_probabilities": [
+              0.002857130326225973,
+              0.0006330143105782422,
+              0.000043795933017907776
+            ],
+            "latent_tick_probability": 0.0035339405698221224,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.017692769669431826,
+              0.4013797362820769,
+              0.5657416656081726
+            ],
+            "latent_tick_probability": 0.9848141715596812,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0016862761309599243,
+              0.00007609882886927705,
+              4.278180175284894e-6
+            ],
+            "latent_tick_probability": 0.0017666531400044865,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.001995074613222455,
+              0.00017884540492966113,
+              0.00001231515651534363
+            ],
+            "latent_tick_probability": 0.0021862351746674597,
+            "meter_change_probability": 0.00008696483954641942,
+            "tempo_change_probability": 0.0001447521389119515,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0320557915562937,
+              0.9183594704558811,
+              0.03524972382503825
+            ],
+            "latent_tick_probability": 0.985664985837213,
+            "meter_change_probability": 0.10264760082596686,
+            "tempo_change_probability": 0.003441707408796641,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.001974492572575472,
+              0.00011015013639699956,
+              2.084171139119709e-6
+            ],
+            "latent_tick_probability": 0.002086726880111591,
+            "meter_change_probability": 0.00029961933239049695,
+            "tempo_change_probability": 0.0006483593165894478,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0018935939718954607,
+              0.00011581019308011512,
+              2.121878625896413e-6
+            ],
+            "latent_tick_probability": 0.002011526043601473,
+            "meter_change_probability": 0.0003368788298931042,
+            "tempo_change_probability": 0.0007021990796060802,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.03119844088967038,
+              0.9229302381835797,
+              0.0311123038012985
+            ],
+            "latent_tick_probability": 0.9852409828745485,
+            "meter_change_probability": 0.09822036548688252,
+            "tempo_change_probability": 0.004194140585739224,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0016504872195806462,
+              0.00006367680852748667,
+              4.043176515243467e-6
+            ],
+            "latent_tick_probability": 0.0017182072046233766,
+            "meter_change_probability": 0.0003984097989720777,
+            "tempo_change_probability": 0.0005272371642323006,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0016880662407242105,
+              0.000054510077511936646,
+              3.320234801292574e-6
+            ],
+            "latent_tick_probability": 0.0017458965530374368,
+            "meter_change_probability": 0.00040204643192074866,
+            "tempo_change_probability": 0.0004866633889263262,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.01758652228074679,
+              0.39440030569330803,
+              0.5752842955003127
+            ],
+            "latent_tick_probability": 0.9872711234743683,
+            "meter_change_probability": 0.30112560975174696,
+            "tempo_change_probability": 0.007757519137361,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0021044956574509466,
+              0.00011700258505467162,
+              7.892811617564046e-6
+            ],
+            "latent_tick_probability": 0.0022293910541231936,
+            "meter_change_probability": 0.0005019704842782254,
+            "tempo_change_probability": 0.0007718479005814336,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0018008779759761148,
+              0.00008915829802824164,
+              5.649580574559621e-6
+            ],
+            "latent_tick_probability": 0.0018956858545789137,
+            "meter_change_probability": 0.00041260435965632903,
+            "tempo_change_probability": 0.0006282664432695923,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.030152862745325255,
+              0.9277719441318923,
+              0.021504107252428697
+            ],
+            "latent_tick_probability": 0.9794289141296472,
+            "meter_change_probability": 0.07708808542191783,
+            "tempo_change_probability": 0.021303063590746494,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0034738093025902124,
+              0.0007096819943634367,
+              0.000013720010479368156
+            ],
+            "latent_tick_probability": 0.004197211307433017,
+            "meter_change_probability": 0.0005319255430983287,
+            "tempo_change_probability": 0.0009814298119647136,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.002397286666791478,
+              0.00026766366941219035,
+              5.827904793470715e-6
+            ],
+            "latent_tick_probability": 0.002670778240997151,
+            "meter_change_probability": 0.00040073534644574594,
+            "tempo_change_probability": 0.0007724778928826423,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.032613905622431515,
+              0.8183163571086955,
+              0.11507456340948802
+            ],
+            "latent_tick_probability": 0.9660048261406183,
+            "meter_change_probability": 0.21311897357866125,
+            "tempo_change_probability": 0.19176358650413985,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.007434876788307529,
+              0.002869787389210439,
+              0.00040203150668320517
+            ],
+            "latent_tick_probability": 0.01070669568420117,
+            "meter_change_probability": 0.002700141404424009,
+            "tempo_change_probability": 0.0027459811545953853,
+            "unavailable_tick_probability": 0.0
+          }
+        ],
+        "states": 17802,
+        "transitions": 99162
+      },
+      "feature_pairs": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "case": "half",
+      "decoded": {
+        "inferred_ticks": [
+          {
+            "beat_in_bar": 1,
+            "frame": 1,
+            "inferred_label": 2,
+            "meter": 2,
+            "period_frames": 6
+          },
+          {
+            "beat_in_bar": 2,
+            "frame": 7,
+            "inferred_label": 1,
+            "meter": 2,
+            "period_frames": 6
+          },
+          {
+            "beat_in_bar": 1,
+            "frame": 13,
+            "inferred_label": 2,
+            "meter": 2,
+            "period_frames": 6
+          }
+        ],
+        "joint_map_log_weight": -1.8440498991611651,
+        "joint_map_probability": 0.029751435712854216,
+        "log_ratio": 1.67082798973817,
+        "positions": [
+          {
+            "inferred_label_probabilities": [
+              0.013883857012479774,
+              0.0009337638745863971,
+              0.000034419343717825114
+            ],
+            "latent_tick_probability": 0.014852040230783995,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.044818091793429424,
+              0.4913368051380214,
+              0.40330374298112615
+            ],
+            "latent_tick_probability": 0.9394586399125773,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.016214706685326558,
+              0.001172217778737235,
+              0.00005230249933303333
+            ],
+            "latent_tick_probability": 0.017439226963396826,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.016803361629532533,
+              0.000876669833625369,
+              0.00003578795955523926
+            ],
+            "latent_tick_probability": 0.017715819422713136,
+            "meter_change_probability": 0.0007425000320200836,
+            "tempo_change_probability": 0.0011715371006148503,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.04272105132310148,
+              0.5658919028941247,
+              0.024874421367347688
+            ],
+            "latent_tick_probability": 0.6334873755845739,
+            "meter_change_probability": 0.09605260990701116,
+            "tempo_change_probability": 0.012768190100498436,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.01869415093965,
+              0.0013494111209430514,
+              0.00003964496110876923
+            ],
+            "latent_tick_probability": 0.02008320702170182,
+            "meter_change_probability": 0.003303673403034133,
+            "tempo_change_probability": 0.0031788479849321127,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.011518259363204303,
+              0.0003618298598960676,
+              9.096597090250754e-6
+            ],
+            "latent_tick_probability": 0.011889185820190626,
+            "meter_change_probability": 0.002358959477267191,
+            "tempo_change_probability": 0.003519834605974692,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.06335365067495168,
+              0.7799393564005929,
+              0.08724994348662174
+            ],
+            "latent_tick_probability": 0.9305429505621663,
+            "meter_change_probability": 0.13408659177727783,
+            "tempo_change_probability": 0.07188125145796209,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.020522516884637427,
+              0.002627345139961136,
+              0.00009293522597007336
+            ],
+            "latent_tick_probability": 0.023242797250568648,
+            "meter_change_probability": 0.004664862395160902,
+            "tempo_change_probability": 0.011110975494498214,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.02398195674209332,
+              0.0021466771361395914,
+              0.00006979784590734311
+            ],
+            "latent_tick_probability": 0.02619843172414025,
+            "meter_change_probability": 0.005245896873000045,
+            "tempo_change_probability": 0.00723316484749243,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.27528382666019546,
+              0.27732691324144454,
+              0.009820380189332322
+            ],
+            "latent_tick_probability": 0.5624311200909727,
+            "meter_change_probability": 0.07671284367915898,
+            "tempo_change_probability": 0.014488215585990494,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.02184266699758534,
+              0.0029341817533350767,
+              0.00014722849486099914
+            ],
+            "latent_tick_probability": 0.024924077245781415,
+            "meter_change_probability": 0.005337342665681692,
+            "tempo_change_probability": 0.006393532379767953,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.01810430838985794,
+              0.001738774801052232,
+              0.00007972589871639713
+            ],
+            "latent_tick_probability": 0.019922809089626587,
+            "meter_change_probability": 0.004262428906605808,
+            "tempo_change_probability": 0.0065684520063863374,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.04359124597267824,
+              0.48866386842462295,
+              0.3909075957390391
+            ],
+            "latent_tick_probability": 0.9231627101363377,
+            "meter_change_probability": 0.2619809677808131,
+            "tempo_change_probability": 0.24799476550153476,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.019451451183599228,
+              0.0027556414196871523,
+              0.00008069112776303383
+            ],
+            "latent_tick_probability": 0.02228778373104942,
+            "meter_change_probability": 0.0040847387027655255,
+            "tempo_change_probability": 0.005860713543466452,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.02022415679152248,
+              0.003079266097840122,
+              0.0000890113480321531
+            ],
+            "latent_tick_probability": 0.023392434237394816,
+            "meter_change_probability": 0.0041931883114604855,
+            "tempo_change_probability": 0.006365747801661045,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.21212748524045325,
+              0.21520735424549767,
+              0.006792740227347594
+            ],
+            "latent_tick_probability": 0.43412757971329613,
+            "meter_change_probability": 0.064775467672475,
+            "tempo_change_probability": 0.08696845657048478,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.06495912084145497,
+              0.045988754212057066,
+              0.0013986347405116077
+            ],
+            "latent_tick_probability": 0.11234650979402379,
+            "meter_change_probability": 0.016895460958237907,
+            "tempo_change_probability": 0.029005244710144183,
+            "unavailable_tick_probability": 0.0
+          }
+        ],
+        "states": 17802,
+        "transitions": 99162
+      },
+      "feature_pairs": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "case": "same_features_erased_constant",
+      "decoded": {
+        "inferred_ticks": [
+          {
+            "beat_in_bar": 1,
+            "frame": 1,
+            "inferred_label": 2,
+            "meter": 2,
+            "period_frames": 6
+          },
+          {
+            "beat_in_bar": 2,
+            "frame": 7,
+            "inferred_label": 1,
+            "meter": 2,
+            "period_frames": 6
+          },
+          {
+            "beat_in_bar": 1,
+            "frame": 13,
+            "inferred_label": 2,
+            "meter": 2,
+            "period_frames": 6
+          }
+        ],
+        "joint_map_log_weight": -1.8440498991611651,
+        "joint_map_probability": 0.029751435712854216,
+        "log_ratio": 1.67082798973817,
+        "positions": [
+          {
+            "inferred_label_probabilities": [
+              0.013883857012479774,
+              0.0009337638745863971,
+              0.000034419343717825114
+            ],
+            "latent_tick_probability": 0.014852040230783995,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.044818091793429424,
+              0.4913368051380214,
+              0.40330374298112615
+            ],
+            "latent_tick_probability": 0.9394586399125773,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.016214706685326558,
+              0.001172217778737235,
+              0.00005230249933303333
+            ],
+            "latent_tick_probability": 0.017439226963396826,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.016803361629532533,
+              0.000876669833625369,
+              0.00003578795955523926
+            ],
+            "latent_tick_probability": 0.017715819422713136,
+            "meter_change_probability": 0.0007425000320200836,
+            "tempo_change_probability": 0.0011715371006148503,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.04272105132310148,
+              0.5658919028941247,
+              0.024874421367347688
+            ],
+            "latent_tick_probability": 0.6334873755845739,
+            "meter_change_probability": 0.09605260990701116,
+            "tempo_change_probability": 0.012768190100498436,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.01869415093965,
+              0.0013494111209430514,
+              0.00003964496110876923
+            ],
+            "latent_tick_probability": 0.02008320702170182,
+            "meter_change_probability": 0.003303673403034133,
+            "tempo_change_probability": 0.0031788479849321127,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.011518259363204303,
+              0.0003618298598960676,
+              9.096597090250754e-6
+            ],
+            "latent_tick_probability": 0.011889185820190626,
+            "meter_change_probability": 0.002358959477267191,
+            "tempo_change_probability": 0.003519834605974692,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.06335365067495168,
+              0.7799393564005929,
+              0.08724994348662174
+            ],
+            "latent_tick_probability": 0.9305429505621663,
+            "meter_change_probability": 0.13408659177727783,
+            "tempo_change_probability": 0.07188125145796209,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.020522516884637427,
+              0.002627345139961136,
+              0.00009293522597007336
+            ],
+            "latent_tick_probability": 0.023242797250568648,
+            "meter_change_probability": 0.004664862395160902,
+            "tempo_change_probability": 0.011110975494498214,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.02398195674209332,
+              0.0021466771361395914,
+              0.00006979784590734311
+            ],
+            "latent_tick_probability": 0.02619843172414025,
+            "meter_change_probability": 0.005245896873000045,
+            "tempo_change_probability": 0.00723316484749243,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.27528382666019546,
+              0.27732691324144454,
+              0.009820380189332322
+            ],
+            "latent_tick_probability": 0.5624311200909727,
+            "meter_change_probability": 0.07671284367915898,
+            "tempo_change_probability": 0.014488215585990494,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.02184266699758534,
+              0.0029341817533350767,
+              0.00014722849486099914
+            ],
+            "latent_tick_probability": 0.024924077245781415,
+            "meter_change_probability": 0.005337342665681692,
+            "tempo_change_probability": 0.006393532379767953,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.01810430838985794,
+              0.001738774801052232,
+              0.00007972589871639713
+            ],
+            "latent_tick_probability": 0.019922809089626587,
+            "meter_change_probability": 0.004262428906605808,
+            "tempo_change_probability": 0.0065684520063863374,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.04359124597267824,
+              0.48866386842462295,
+              0.3909075957390391
+            ],
+            "latent_tick_probability": 0.9231627101363377,
+            "meter_change_probability": 0.2619809677808131,
+            "tempo_change_probability": 0.24799476550153476,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.019451451183599228,
+              0.0027556414196871523,
+              0.00008069112776303383
+            ],
+            "latent_tick_probability": 0.02228778373104942,
+            "meter_change_probability": 0.0040847387027655255,
+            "tempo_change_probability": 0.005860713543466452,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.02022415679152248,
+              0.003079266097840122,
+              0.0000890113480321531
+            ],
+            "latent_tick_probability": 0.023392434237394816,
+            "meter_change_probability": 0.0041931883114604855,
+            "tempo_change_probability": 0.006365747801661045,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.21212748524045325,
+              0.21520735424549767,
+              0.006792740227347594
+            ],
+            "latent_tick_probability": 0.43412757971329613,
+            "meter_change_probability": 0.064775467672475,
+            "tempo_change_probability": 0.08696845657048478,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.06495912084145497,
+              0.045988754212057066,
+              0.0013986347405116077
+            ],
+            "latent_tick_probability": 0.11234650979402379,
+            "meter_change_probability": 0.016895460958237907,
+            "tempo_change_probability": 0.029005244710144183,
+            "unavailable_tick_probability": 0.0
+          }
+        ],
+        "states": 17802,
+        "transitions": 99162
+      },
+      "feature_pairs": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "case": "double",
+      "decoded": {
+        "inferred_ticks": [
+          {
+            "beat_in_bar": 1,
+            "frame": 1,
+            "inferred_label": 2,
+            "meter": 2,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 2,
+            "frame": 4,
+            "inferred_label": 1,
+            "meter": 2,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 1,
+            "frame": 7,
+            "inferred_label": 2,
+            "meter": 2,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 2,
+            "frame": 10,
+            "inferred_label": 1,
+            "meter": 2,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 1,
+            "frame": 13,
+            "inferred_label": 2,
+            "meter": 2,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 2,
+            "frame": 16,
+            "inferred_label": 1,
+            "meter": 2,
+            "period_frames": 3
+          }
+        ],
+        "joint_map_log_weight": -0.9882542634131699,
+        "joint_map_probability": 0.03381858679600358,
+        "log_ratio": 2.398490459015249,
+        "positions": [
+          {
+            "inferred_label_probabilities": [
+              0.008544861661664184,
+              0.0010646131058402513,
+              0.000035471752162285086
+            ],
+            "latent_tick_probability": 0.009644946519666723,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.03426381506113054,
+              0.536990555945863,
+              0.3873718763243245
+            ],
+            "latent_tick_probability": 0.9586262473313178,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.009703375256352103,
+              0.0008692682279514257,
+              0.00004812506251732683
+            ],
+            "latent_tick_probability": 0.010620768546820857,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.013347413843821062,
+              0.002579687718194576,
+              0.00016216063744145385
+            ],
+            "latent_tick_probability": 0.0160892621994571,
+            "meter_change_probability": 0.0005822914717677037,
+            "tempo_change_probability": 0.0011476499709599393,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.40529461329692257,
+              0.4188967746270031,
+              0.022426834151777333
+            ],
+            "latent_tick_probability": 0.8466182220757034,
+            "meter_change_probability": 0.1634201427942582,
+            "tempo_change_probability": 0.004335441865719282,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.011160733497751579,
+              0.0009204099030582801,
+              0.000030625500805726545
+            ],
+            "latent_tick_probability": 0.012111768901615588,
+            "meter_change_probability": 0.002000727144019449,
+            "tempo_change_probability": 0.003158970375912588,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.010056788899580277,
+              0.0010817102862341926,
+              0.00003854965448371554
+            ],
+            "latent_tick_probability": 0.011177048840298194,
+            "meter_change_probability": 0.0021284770125793587,
+            "tempo_change_probability": 0.004196964616513571,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.05293161028350095,
+              0.7694748890794635,
+              0.14014776893115574
+            ],
+            "latent_tick_probability": 0.96255426829412,
+            "meter_change_probability": 0.1447022538179019,
+            "tempo_change_probability": 0.03674736307058363,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.007130898645806272,
+              0.0002453236119757495,
+              7.4682936615787775e-6
+            ],
+            "latent_tick_probability": 0.007383690551443599,
+            "meter_change_probability": 0.001448026866597997,
+            "tempo_change_probability": 0.002276601684564678,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.008899132371412717,
+              0.000508572456562129,
+              0.00001694479114341028
+            ],
+            "latent_tick_probability": 0.009424649619118252,
+            "meter_change_probability": 0.0017637637891147926,
+            "tempo_change_probability": 0.001978936908768543,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.04142315848638471,
+              0.8107971242052339,
+              0.027078725024610072
+            ],
+            "latent_tick_probability": 0.87929900771623,
+            "meter_change_probability": 0.08744732705634169,
+            "tempo_change_probability": 0.009925473160580622,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.00963384340025818,
+              0.00044641211833096735,
+              0.000025700982622354403
+            ],
+            "latent_tick_probability": 0.010105956501211513,
+            "meter_change_probability": 0.0023091579482406644,
+            "tempo_change_probability": 0.0030933964784940603,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.007845443739643599,
+              0.0004266733018197601,
+              0.000026119957542891584
+            ],
+            "latent_tick_probability": 0.008298236999006262,
+            "meter_change_probability": 0.0018776581746145272,
+            "tempo_change_probability": 0.003168052231928031,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.031954684505304004,
+              0.4538734926645398,
+              0.4781225965296562
+            ],
+            "latent_tick_probability": 0.9639507736994973,
+            "meter_change_probability": 0.29831942494256697,
+            "tempo_change_probability": 0.05031580942300831,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.00742364495649345,
+              0.00038929459356498123,
+              0.000015330015823801546
+            ],
+            "latent_tick_probability": 0.007828269565882229,
+            "meter_change_probability": 0.0015927319489868956,
+            "tempo_change_probability": 0.002033481007454297,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.007169662452364197,
+              0.0002777241314336665,
+              0.000010283032268209693
+            ],
+            "latent_tick_probability": 0.00745766961606605,
+            "meter_change_probability": 0.0014697837558316153,
+            "tempo_change_probability": 0.002091287335863635,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.03951199624843905,
+              0.8075160768815463,
+              0.023112712347838776
+            ],
+            "latent_tick_probability": 0.8701407854778233,
+            "meter_change_probability": 0.09519107984260332,
+            "tempo_change_probability": 0.172911078371798,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.01580789899425826,
+              0.0035051573898617137,
+              0.00009704167205526
+            ],
+            "latent_tick_probability": 0.019410098056175294,
+            "meter_change_probability": 0.0029519588929207735,
+            "tempo_change_probability": 0.005110914996685919,
+            "unavailable_tick_probability": 0.0
+          }
+        ],
+        "states": 17802,
+        "transitions": 99162
+      },
+      "feature_pairs": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "case": "meter_change",
+      "decoded": {
+        "inferred_ticks": [
+          {
+            "beat_in_bar": 1,
+            "frame": 1,
+            "inferred_label": 2,
+            "meter": 2,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 2,
+            "frame": 4,
+            "inferred_label": 1,
+            "meter": 2,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 1,
+            "frame": 7,
+            "inferred_label": 2,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 2,
+            "frame": 10,
+            "inferred_label": 1,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 3,
+            "frame": 13,
+            "inferred_label": 1,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 1,
+            "frame": 16,
+            "inferred_label": 2,
+            "meter": 2,
+            "period_frames": 3
+          }
+        ],
+        "joint_map_log_weight": 2.4196468148257466,
+        "joint_map_probability": 0.16397590695022976,
+        "log_ratio": 4.227682585615908,
+        "positions": [
+          {
+            "inferred_label_probabilities": [
+              0.002545243200505274,
+              0.0006540745282898613,
+              0.000040474760577145514
+            ],
+            "latent_tick_probability": 0.0032397924893722797,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.018446094641268722,
+              0.42736160555279723,
+              0.5431907769212823
+            ],
+            "latent_tick_probability": 0.9889984771153479,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0013571023944284903,
+              0.0000777820476073294,
+              1.3371228938219593e-6
+            ],
+            "latent_tick_probability": 0.001436221564929642,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0017100739183849155,
+              0.00020051822393663433,
+              2.7781642484666036e-6
+            ],
+            "latent_tick_probability": 0.0019133703065700174,
+            "meter_change_probability": 0.0000624201612464335,
+            "tempo_change_probability": 0.0001319693980165874,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.027968910782155885,
+              0.9528894808623084,
+              0.007196940751464614
+            ],
+            "latent_tick_probability": 0.9880553323959285,
+            "meter_change_probability": 0.050279598438106504,
+            "tempo_change_probability": 0.0028495025247104954,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0013738809586466283,
+              0.00005823667988139661,
+              1.6605771208606012e-6
+            ],
+            "latent_tick_probability": 0.0014337782156488863,
+            "meter_change_probability": 0.00024948365830272,
+            "tempo_change_probability": 0.000370318220255951,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.00134985690640737,
+              0.00006234260922847135,
+              1.9101620621034542e-6
+            ],
+            "latent_tick_probability": 0.001414109677697943,
+            "meter_change_probability": 0.0002920368758453862,
+            "tempo_change_probability": 0.00042356287032508576,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.017725361893824898,
+              0.3688057443318695,
+              0.6042369746239449
+            ],
+            "latent_tick_probability": 0.9907680808496395,
+            "meter_change_probability": 0.5317465573575196,
+            "tempo_change_probability": 0.0038001384241342154,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.001323117581249705,
+              0.00005039978854148137,
+              2.441720596121195e-6
+            ],
+            "latent_tick_probability": 0.0013759590903873078,
+            "meter_change_probability": 0.0003151159320308867,
+            "tempo_change_probability": 0.00040417134256183414,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0012881428133373883,
+              0.00004246866908322573,
+              1.8311543922347845e-6
+            ],
+            "latent_tick_probability": 0.001332442636812848,
+            "meter_change_probability": 0.0003017840387726262,
+            "tempo_change_probability": 0.00037549620585941926,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.029732099104203158,
+              0.9353452448212467,
+              0.02310914115946181
+            ],
+            "latent_tick_probability": 0.9881864850849115,
+            "meter_change_probability": 0.09043894871838347,
+            "tempo_change_probability": 0.005429862096131498,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.001992085807075406,
+              0.00018658425435225215,
+              3.106083331584391e-6
+            ],
+            "latent_tick_probability": 0.002181776144759246,
+            "meter_change_probability": 0.00035881479648347623,
+            "tempo_change_probability": 0.0009001947853429553,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.001619689197134979,
+              0.00011329572337603735,
+              2.2693727783891697e-6
+            ],
+            "latent_tick_probability": 0.0017352542932894078,
+            "meter_change_probability": 0.00029743611566069363,
+            "tempo_change_probability": 0.000645168047351701,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.030262226431711406,
+              0.9267635194526772,
+              0.02861680907800589
+            ],
+            "latent_tick_probability": 0.985642554962396,
+            "meter_change_probability": 0.08689063882661356,
+            "tempo_change_probability": 0.012002061693699368,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0022557625400701493,
+              0.0003521325050905298,
+              0.00001635158683857001
+            ],
+            "latent_tick_probability": 0.0026242466319992487,
+            "meter_change_probability": 0.0005154396422006351,
+            "tempo_change_probability": 0.000625560377037116,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0016480478418193355,
+              0.00014007684424665058,
+              5.76142411647233e-6
+            ],
+            "latent_tick_probability": 0.0017938861101824619,
+            "meter_change_probability": 0.0003537813078447584,
+            "tempo_change_probability": 0.0005095311748819463,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.017425191873626872,
+              0.3906037814105944,
+              0.5704033071088327
+            ],
+            "latent_tick_probability": 0.9784322803930529,
+            "meter_change_probability": 0.42617883149236824,
+            "tempo_change_probability": 0.193634705757126,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.004359327825866861,
+              0.0013944083959382286,
+              0.00009995472628507438
+            ],
+            "latent_tick_probability": 0.00585369094809017,
+            "meter_change_probability": 0.0015703922498389207,
+            "tempo_change_probability": 0.0015130540227825324,
+            "unavailable_tick_probability": 0.0
+          }
+        ],
+        "states": 17802,
+        "transitions": 99162
+      },
+      "feature_pairs": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "case": "phase_shift",
+      "decoded": {
+        "inferred_ticks": [
+          {
+            "beat_in_bar": 1,
+            "frame": 2,
+            "inferred_label": 2,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 2,
+            "frame": 5,
+            "inferred_label": 1,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 3,
+            "frame": 8,
+            "inferred_label": 1,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 1,
+            "frame": 11,
+            "inferred_label": 2,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 2,
+            "frame": 14,
+            "inferred_label": 1,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 3,
+            "frame": 17,
+            "inferred_label": 1,
+            "meter": 3,
+            "period_frames": 3
+          }
+        ],
+        "joint_map_log_weight": 2.321152325641722,
+        "joint_map_probability": 0.18884593076812692,
+        "log_ratio": 3.987976103126047,
+        "positions": [
+          {
+            "inferred_label_probabilities": [
+              0.0020258915285603233,
+              0.00021139827219405255,
+              0.000013990348729964171
+            ],
+            "latent_tick_probability": 0.00225128014948434,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0028788011690592057,
+              0.0006331677953252123,
+              0.000043801824376689494
+            ],
+            "latent_tick_probability": 0.003555770788761108,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.017891334610927012,
+              0.4011845891261389,
+              0.5658467974205578
+            ],
+            "latent_tick_probability": 0.9849227211576237,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.001743182344453918,
+              0.00008081860431968405,
+              4.521501877218448e-6
+            ],
+            "latent_tick_probability": 0.0018285224506508209,
+            "meter_change_probability": 0.00007022271680184084,
+            "tempo_change_probability": 0.00010670273211204226,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.001488918310864995,
+              0.000060268434262877705,
+              3.5237000248901646e-6
+            ],
+            "latent_tick_probability": 0.0015527104451527642,
+            "meter_change_probability": 0.0002108568445699788,
+            "tempo_change_probability": 0.00022289562775714333,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.032373900864727814,
+              0.9181714992770851,
+              0.03524206692922261
+            ],
+            "latent_tick_probability": 0.9857874670710354,
+            "meter_change_probability": 0.10254255771916293,
+            "tempo_change_probability": 0.004297028734862581,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0020407528564744446,
+              0.00012377992936420936,
+              2.4124209128523193e-6
+            ],
+            "latent_tick_probability": 0.002166945206751507,
+            "meter_change_probability": 0.0003593561293934272,
+            "tempo_change_probability": 0.000758675005124006,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0020112798058914507,
+              0.00012025345206425158,
+              2.244526982789795e-6
+            ],
+            "latent_tick_probability": 0.0021337777849384917,
+            "meter_change_probability": 0.00035918612085292294,
+            "tempo_change_probability": 0.0007312596989825633,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.03141769007465631,
+              0.9222767985699603,
+              0.031189440537941624
+            ],
+            "latent_tick_probability": 0.984883929182558,
+            "meter_change_probability": 0.09858383778942463,
+            "tempo_change_probability": 0.003864878761857384,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0017001684610330084,
+              0.00006724800848655176,
+              4.268636332001161e-6
+            ],
+            "latent_tick_probability": 0.0017716851058515622,
+            "meter_change_probability": 0.00040761184216658804,
+            "tempo_change_probability": 0.0005428008776713952,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0016290706547168973,
+              0.00005651916358900036,
+              3.884993457021854e-6
+            ],
+            "latent_tick_probability": 0.001689474811762919,
+            "meter_change_probability": 0.00039002917255051914,
+            "tempo_change_probability": 0.0004183967640277732,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.01784618382130807,
+              0.39418474720280317,
+              0.5751398885512984
+            ],
+            "latent_tick_probability": 0.9871708195754071,
+            "meter_change_probability": 0.30260727804900295,
+            "tempo_change_probability": 0.007870951177581369,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0018524589789692038,
+              0.00011235882422859885,
+              7.679485475733533e-6
+            ],
+            "latent_tick_probability": 0.0019724972886735366,
+            "meter_change_probability": 0.0004409427787925165,
+            "tempo_change_probability": 0.0006863650063084631,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0020430085027082438,
+              0.00012021717694964587,
+              7.638523418953354e-6
+            ],
+            "latent_tick_probability": 0.00217086420307684,
+            "meter_change_probability": 0.0004738763676228658,
+            "tempo_change_probability": 0.0006467924279962203,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.030425394678703685,
+              0.9274091681051734,
+              0.021390861311842837
+            ],
+            "latent_tick_probability": 0.9792254240957227,
+            "meter_change_probability": 0.07679421435598789,
+            "tempo_change_probability": 0.04453783330525407,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.003416245448232413,
+              0.0007330135329786695,
+              0.00001405290362120062
+            ],
+            "latent_tick_probability": 0.0041633118848322815,
+            "meter_change_probability": 0.0005101485804128084,
+            "tempo_change_probability": 0.0010806967632511883,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0023200301832008293,
+              0.0002606669514847408,
+              5.6441491332523744e-6
+            ],
+            "latent_tick_probability": 0.002586341283818807,
+            "meter_change_probability": 0.0003869894759880719,
+            "tempo_change_probability": 0.0007508084495157198,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.03186499174305474,
+              0.7983985164269991,
+              0.11224847979592802
+            ],
+            "latent_tick_probability": 0.9425119879659796,
+            "meter_change_probability": 0.20789786394123388,
+            "tempo_change_probability": 0.18715902678885118,
+            "unavailable_tick_probability": 0.0
+          }
+        ],
+        "states": 17802,
+        "transitions": 99162
+      },
+      "feature_pairs": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "case": "flat_middle",
+      "decoded": {
+        "inferred_ticks": [
+          {
+            "beat_in_bar": 1,
+            "frame": 1,
+            "inferred_label": 2,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 2,
+            "frame": 4,
+            "inferred_label": 1,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 3,
+            "frame": 7,
+            "inferred_label": 0,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 1,
+            "frame": 10,
+            "inferred_label": 0,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 2,
+            "frame": 13,
+            "inferred_label": 1,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 3,
+            "frame": 16,
+            "inferred_label": 1,
+            "meter": 3,
+            "period_frames": 3
+          }
+        ],
+        "joint_map_log_weight": -2.7928514339672263,
+        "joint_map_probability": 0.01939903391857635,
+        "log_ratio": 1.1496805781971187,
+        "positions": [
+          {
+            "inferred_label_probabilities": [
+              0.026778299144368786,
+              0.0017519877978716674,
+              0.00011148319387494743
+            ],
+            "latent_tick_probability": 0.028641770136115404,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.044720811183451836,
+              0.3525940288624696,
+              0.49280420863285457
+            ],
+            "latent_tick_probability": 0.8901190486787758,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.020173301926808447,
+              0.0006541685050203837,
+              0.00003349307232981763
+            ],
+            "latent_tick_probability": 0.02086096350415865,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.02193665764466569,
+              0.0008156272130400395,
+              0.00004147919344862967
+            ],
+            "latent_tick_probability": 0.022793764051154353,
+            "meter_change_probability": 0.00112201269143048,
+            "tempo_change_probability": 0.001287288115532838,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.06266920884912809,
+              0.761329665291809,
+              0.026065050804651737
+            ],
+            "latent_tick_probability": 0.8500639249455885,
+            "meter_change_probability": 0.07961601203089316,
+            "tempo_change_probability": 0.043062855798846174,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.03850856848566975,
+              0.004776830318040653,
+              0.00015415640242133448
+            ],
+            "latent_tick_probability": 0.04343955520613174,
+            "meter_change_probability": 0.005989362032610123,
+            "tempo_change_probability": 0.00731014482404861,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.03340220901525104,
+              0.003257752876359954,
+              0.00010776362837544578
+            ],
+            "latent_tick_probability": 0.036767725519986444,
+            "meter_change_probability": 0.006109943872582725,
+            "tempo_change_probability": 0.00888223248261251,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.4211103378251952,
+              0.3171294417211085,
+              0.07502252489342744
+            ],
+            "latent_tick_probability": 0.8132623044397305,
+            "meter_change_probability": 0.1975657297767749,
+            "tempo_change_probability": 0.02215832457847076,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.049063474423574345,
+              0.008847180943844015,
+              0.0018027066250502369
+            ],
+            "latent_tick_probability": 0.05971336199246857,
+            "meter_change_probability": 0.014925773846843937,
+            "tempo_change_probability": 0.01970635232574301,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.045483118572728305,
+              0.005663744350388461,
+              0.0010474735391688918
+            ],
+            "latent_tick_probability": 0.05219433646228561,
+            "meter_change_probability": 0.01287077713310124,
+            "tempo_change_probability": 0.01451458518067731,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.4037910852916017,
+              0.32932176578537736,
+              0.059045267399114795
+            ],
+            "latent_tick_probability": 0.792158118476095,
+            "meter_change_probability": 0.15097777518356703,
+            "tempo_change_probability": 0.016098773477681183,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.03984310287200806,
+              0.0036478030887191278,
+              0.0006311903570337756
+            ],
+            "latent_tick_probability": 0.044122096317760894,
+            "meter_change_probability": 0.009997171704389069,
+            "tempo_change_probability": 0.012740360369290826,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.03950198830416535,
+              0.006286181354619575,
+              0.0009391405175416273
+            ],
+            "latent_tick_probability": 0.046727310176326524,
+            "meter_change_probability": 0.009545952596460806,
+            "tempo_change_probability": 0.009213319414541957,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0633202081830337,
+              0.6932454057326471,
+              0.08863458057774488
+            ],
+            "latent_tick_probability": 0.8452001944934231,
+            "meter_change_probability": 0.12762060945813458,
+            "tempo_change_probability": 0.05424753179304533,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.025551751196242097,
+              0.0012968905351775034,
+              0.00010399399916863355
+            ],
+            "latent_tick_probability": 0.026952635730588204,
+            "meter_change_probability": 0.00513758982671418,
+            "tempo_change_probability": 0.0075135159105841915,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.022650900745329185,
+              0.0010391134437759922,
+              0.00008394594148725919
+            ],
+            "latent_tick_probability": 0.023773960130592433,
+            "meter_change_probability": 0.004456813363852757,
+            "tempo_change_probability": 0.006665295415277418,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.06246402983237959,
+              0.6523498186331704,
+              0.12048319369046126
+            ],
+            "latent_tick_probability": 0.8352970421560109,
+            "meter_change_probability": 0.2023021406944344,
+            "tempo_change_probability": 0.17355930392637017,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.03802228249312187,
+              0.004271631098888819,
+              0.0006208419033203834
+            ],
+            "latent_tick_probability": 0.04291475549533106,
+            "meter_change_probability": 0.009062209468954228,
+            "tempo_change_probability": 0.011473095658968068,
+            "unavailable_tick_probability": 0.0
+          }
+        ],
+        "states": 17802,
+        "transitions": 99162
+      },
+      "feature_pairs": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "case": "unavailable_middle",
+      "decoded": {
+        "inferred_ticks": [
+          {
+            "beat_in_bar": 1,
+            "frame": 1,
+            "inferred_label": 2,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 2,
+            "frame": 4,
+            "inferred_label": 1,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 3,
+            "frame": 7,
+            "inferred_label": null,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 1,
+            "frame": 10,
+            "inferred_label": null,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 2,
+            "frame": 13,
+            "inferred_label": 1,
+            "meter": 3,
+            "period_frames": 3
+          },
+          {
+            "beat_in_bar": 3,
+            "frame": 16,
+            "inferred_label": 1,
+            "meter": 3,
+            "period_frames": 3
+          }
+        ],
+        "joint_map_log_weight": -1.6797609444028447,
+        "joint_map_probability": 0.061460666229880445,
+        "log_ratio": 1.109596937879077,
+        "positions": [
+          {
+            "inferred_label_probabilities": [
+              0.038582881984456016,
+              0.0022593060619866567,
+              0.00013211274428313462
+            ],
+            "latent_tick_probability": 0.0409743007907258,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.05870486077954607,
+              0.35517899717718404,
+              0.4355526380414429
+            ],
+            "latent_tick_probability": 0.8494364959981733,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.030357352774025785,
+              0.001052183559386874,
+              0.000050373184451155596
+            ],
+            "latent_tick_probability": 0.031459909517863816,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.032260367924471324,
+              0.001201488460712917,
+              0.000056722838126848
+            ],
+            "latent_tick_probability": 0.03351857922331109,
+            "meter_change_probability": 0.0017781923342032292,
+            "tempo_change_probability": 0.0017756940271117818,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.07744959127582093,
+              0.6846171587478369,
+              0.02114197051138569
+            ],
+            "latent_tick_probability": 0.7832087205350434,
+            "meter_change_probability": 0.07430732079090266,
+            "tempo_change_probability": 0.0534290071123574,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.040378116752835175,
+              0.0028634934770613582,
+              0.00008799083291496434
+            ],
+            "latent_tick_probability": 0.04332960106281146,
+            "meter_change_probability": 0.006170245921746406,
+            "tempo_change_probability": 0.008068891846575056,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.07897537771533175,
+            "meter_change_probability": 0.012792581664596448,
+            "tempo_change_probability": 0.01801923807849487,
+            "unavailable_tick_probability": 0.07897537771533175
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.742540995132799,
+            "meter_change_probability": 0.17826490048648405,
+            "tempo_change_probability": 0.034447090996951604,
+            "unavailable_tick_probability": 0.742540995132799
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.08266126961803412,
+            "meter_change_probability": 0.02073954840514061,
+            "tempo_change_probability": 0.019742065902530786,
+            "unavailable_tick_probability": 0.08266126961803412
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.05301154819353278,
+            "meter_change_probability": 0.012733169817177033,
+            "tempo_change_probability": 0.015452536210507024,
+            "unavailable_tick_probability": 0.05301154819353278
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.7095229306301684,
+            "meter_change_probability": 0.1376671936444434,
+            "tempo_change_probability": 0.022313069214838898,
+            "unavailable_tick_probability": 0.7095229306301684
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.08438905242290828,
+            "meter_change_probability": 0.019909558040843576,
+            "tempo_change_probability": 0.020393917490705998,
+            "unavailable_tick_probability": 0.08438905242290828
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.0843360527778037,
+            "meter_change_probability": 0.01751513900901886,
+            "tempo_change_probability": 0.01829724530284619,
+            "unavailable_tick_probability": 0.0843360527778037
+          },
+          {
+            "inferred_label_probabilities": [
+              0.07419224735586545,
+              0.605074285073272,
+              0.06968240153512753
+            ],
+            "latent_tick_probability": 0.7489489339642662,
+            "meter_change_probability": 0.11275434828978058,
+            "tempo_change_probability": 0.05533208071712641,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.035066416943652506,
+              0.001726541267598947,
+              0.00012609939764608193
+            ],
+            "latent_tick_probability": 0.036919057608897535,
+            "meter_change_probability": 0.006975373327570754,
+            "tempo_change_probability": 0.010153739500578398,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.033555001792405725,
+              0.0016318880035488413,
+              0.00012505352732110746
+            ],
+            "latent_tick_probability": 0.035311943323275606,
+            "meter_change_probability": 0.00656508253983018,
+            "tempo_change_probability": 0.009688927888502672,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.08011239668532244,
+              0.6108644466704297,
+              0.09847067260139056
+            ],
+            "latent_tick_probability": 0.78944751595714,
+            "meter_change_probability": 0.18064293256212674,
+            "tempo_change_probability": 0.17025591041493873,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.04579759273432167,
+              0.0036609958361319976,
+              0.00048434620654355263
+            ],
+            "latent_tick_probability": 0.04994293477699718,
+            "meter_change_probability": 0.010480739442126073,
+            "tempo_change_probability": 0.013651760185160166,
+            "unavailable_tick_probability": 0.0
+          }
+        ],
+        "states": 9094,
+        "transitions": 37438
+      },
+      "feature_pairs": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          3.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          4.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "case": "flat",
+      "decoded": {
+        "inferred_ticks": [
+          {
+            "beat_in_bar": 1,
+            "frame": 3,
+            "inferred_label": 0,
+            "meter": 3,
+            "period_frames": 5
+          },
+          {
+            "beat_in_bar": 2,
+            "frame": 8,
+            "inferred_label": 0,
+            "meter": 3,
+            "period_frames": 5
+          },
+          {
+            "beat_in_bar": 3,
+            "frame": 13,
+            "inferred_label": 0,
+            "meter": 3,
+            "period_frames": 5
+          }
+        ],
+        "joint_map_log_weight": -6.903449089721963,
+        "joint_map_probability": 0.0010043154742159586,
+        "log_ratio": -4.271705737616052e-15,
+        "positions": [
+          {
+            "inferred_label_probabilities": [
+              0.11875000000000022,
+              0.09401041666666665,
+              0.024739583333333315
+            ],
+            "latent_tick_probability": 0.2375000000000001,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.11875000000000022,
+              0.09401041666666667,
+              0.02473958333333331
+            ],
+            "latent_tick_probability": 0.23750000000000013,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.11875000000000022,
+              0.09401041666666668,
+              0.024739583333333315
+            ],
+            "latent_tick_probability": 0.23750000000000018,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.11875000000000017,
+              0.09401041666666662,
+              0.024739583333333322
+            ],
+            "latent_tick_probability": 0.23749999999999993,
+            "meter_change_probability": 0.017361111111111115,
+            "tempo_change_probability": 0.016383088208116695,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.11875000000000023,
+              0.09401041666666665,
+              0.024739583333333322
+            ],
+            "latent_tick_probability": 0.2375,
+            "meter_change_probability": 0.030381944444444458,
+            "tempo_change_probability": 0.03220376249603386,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.11875000000000026,
+              0.0940104166666667,
+              0.024739583333333325
+            ],
+            "latent_tick_probability": 0.23750000000000027,
+            "meter_change_probability": 0.04079861111111115,
+            "tempo_change_probability": 0.04748808060644478,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.11055845589594164,
+              0.08752544425095367,
+              0.023033011644987837
+            ],
+            "latent_tick_probability": 0.22111691179188245,
+            "meter_change_probability": 0.04606602328997574,
+            "tempo_change_probability": 0.059039868388332695,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.11952879503443087,
+              0.094626962735591,
+              0.024901832298839705
+            ],
+            "latent_tick_probability": 0.23905759006886176,
+            "meter_change_probability": 0.04980366459767952,
+            "tempo_change_probability": 0.06328233894276769,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.11351461330061101,
+              0.08986573552965027,
+              0.023648877770960596
+            ],
+            "latent_tick_probability": 0.22702922660122124,
+            "meter_change_probability": 0.04729775554192126,
+            "tempo_change_probability": 0.060336639470884454,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.11472380420426928,
+              0.0913833035770039,
+              0.023340500627265198
+            ],
+            "latent_tick_probability": 0.22944760840853684,
+            "meter_change_probability": 0.046307473311003294,
+            "tempo_change_probability": 0.06218403452907246,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.11103556214238766,
+              0.08862473630637692,
+              0.02241082583601086
+            ],
+            "latent_tick_probability": 0.22207112428477474,
+            "meter_change_probability": 0.04434059637625293,
+            "tempo_change_probability": 0.059458061652888305,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.12554104429165328,
+              0.10028846869204672,
+              0.025252575599606284
+            ],
+            "latent_tick_probability": 0.2510820885833066,
+            "meter_change_probability": 0.049903945447331614,
+            "tempo_change_probability": 0.06824532254251459,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.10853604136349995,
+              0.08667080169581218,
+              0.021865239667687483
+            ],
+            "latent_tick_probability": 0.21707208272699818,
+            "meter_change_probability": 0.04323285559112516,
+            "tempo_change_probability": 0.058758433129033144,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.11269123622649328,
+              0.09000248265598032,
+              0.02268875357051286
+            ],
+            "latent_tick_probability": 0.22538247245298335,
+            "meter_change_probability": 0.044851782267687726,
+            "tempo_change_probability": 0.06068795905986197,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.11569637189979927,
+              0.09237810655889418,
+              0.02331826534090498
+            ],
+            "latent_tick_probability": 0.23139274379959526,
+            "meter_change_probability": 0.04611310036744149,
+            "tempo_change_probability": 0.06248373200566344,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.1121874739617624,
+              0.08995028359219782,
+              0.022237190369563963
+            ],
+            "latent_tick_probability": 0.2243749479235228,
+            "meter_change_probability": 0.043797946032804166,
+            "tempo_change_probability": 0.060892528182915455,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.11388929214711847,
+              0.09113909861639283,
+              0.02275019353072529
+            ],
+            "latent_tick_probability": 0.22777858429423278,
+            "meter_change_probability": 0.04495592399106892,
+            "tempo_change_probability": 0.06206107026317387,
+            "unavailable_tick_probability": 0.0
+          },
+          {
+            "inferred_label_probabilities": [
+              0.11729257740494003,
+              0.0939428850321938,
+              0.02334969237274536
+            ],
+            "latent_tick_probability": 0.2345851548098824,
+            "meter_change_probability": 0.04611177977245285,
+            "tempo_change_probability": 0.0642579677519918,
+            "unavailable_tick_probability": 0.0
+          }
+        ],
+        "states": 17802,
+        "transitions": 99162
+      },
+      "feature_pairs": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    {
+      "case": "unavailable",
+      "decoded": {
+        "inferred_ticks": [
+          {
+            "beat_in_bar": 1,
+            "frame": 3,
+            "inferred_label": null,
+            "meter": 3,
+            "period_frames": 5
+          },
+          {
+            "beat_in_bar": 2,
+            "frame": 8,
+            "inferred_label": null,
+            "meter": 3,
+            "period_frames": 5
+          },
+          {
+            "beat_in_bar": 3,
+            "frame": 13,
+            "inferred_label": null,
+            "meter": 3,
+            "period_frames": 5
+          }
+        ],
+        "joint_map_log_weight": -5.5171547286020735,
+        "joint_map_probability": 0.004017261896863814,
+        "log_ratio": -2.5356778309004735e-16,
+        "positions": [
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.2375,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.2375
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.2375,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.2375
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.2375,
+            "meter_change_probability": 0.0,
+            "tempo_change_probability": 0.0,
+            "unavailable_tick_probability": 0.2375
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.23750000000000004,
+            "meter_change_probability": 0.017361111111111112,
+            "tempo_change_probability": 0.01638308820811668,
+            "unavailable_tick_probability": 0.23750000000000004
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.23750000000000002,
+            "meter_change_probability": 0.030381944444444444,
+            "tempo_change_probability": 0.03220376249603383,
+            "unavailable_tick_probability": 0.23750000000000002
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.23750000000000013,
+            "meter_change_probability": 0.04079861111111111,
+            "tempo_change_probability": 0.04748808060644473,
+            "unavailable_tick_probability": 0.23750000000000013
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.2211169117918833,
+            "meter_change_probability": 0.04606602328997568,
+            "tempo_change_probability": 0.05903986838833266,
+            "unavailable_tick_probability": 0.2211169117918833
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.23905759006886143,
+            "meter_change_probability": 0.04980366459767947,
+            "tempo_change_probability": 0.06328233894276758,
+            "unavailable_tick_probability": 0.23905759006886143
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.2270292266012218,
+            "meter_change_probability": 0.04729775554192124,
+            "tempo_change_probability": 0.0603366394708845,
+            "unavailable_tick_probability": 0.2270292266012218
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.22944760840853806,
+            "meter_change_probability": 0.04630747331100324,
+            "tempo_change_probability": 0.06218403452907241,
+            "unavailable_tick_probability": 0.22944760840853806
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.22207112428477518,
+            "meter_change_probability": 0.04434059637625291,
+            "tempo_change_probability": 0.05945806165288824,
+            "unavailable_tick_probability": 0.22207112428477518
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.25108208858330555,
+            "meter_change_probability": 0.04990394544733171,
+            "tempo_change_probability": 0.068245322542515,
+            "unavailable_tick_probability": 0.25108208858330555
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.21707208272699904,
+            "meter_change_probability": 0.043232855591125136,
+            "tempo_change_probability": 0.05875843312903305,
+            "unavailable_tick_probability": 0.21707208272699904
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.22538247245298623,
+            "meter_change_probability": 0.04485178226768792,
+            "tempo_change_probability": 0.060687959059862476,
+            "unavailable_tick_probability": 0.22538247245298623
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.23139274379959746,
+            "meter_change_probability": 0.046113100367441366,
+            "tempo_change_probability": 0.062483732005662915,
+            "unavailable_tick_probability": 0.23139274379959746
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.22437494792352491,
+            "meter_change_probability": 0.043797946032804104,
+            "tempo_change_probability": 0.06089252818291507,
+            "unavailable_tick_probability": 0.22437494792352491
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.22777858429423647,
+            "meter_change_probability": 0.0449559239910691,
+            "tempo_change_probability": 0.0620610702631739,
+            "unavailable_tick_probability": 0.22777858429423647
+          },
+          {
+            "inferred_label_probabilities": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "latent_tick_probability": 0.23458515480987835,
+            "meter_change_probability": 0.04611177977245255,
+            "tempo_change_probability": 0.06425796775199136,
+            "unavailable_tick_probability": 0.23458515480987835
+          }
+        ],
+        "states": 1092,
+        "transitions": 3786
+      },
+      "feature_pairs": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "domain": {
+    "max_meter": 3,
+    "max_period": 6,
+    "max_states": 250000,
+    "min_meter": 2,
+    "min_period": 3
+  },
+  "exhaustive_control": {
+    "decoded": {
+      "inferred_ticks": [
+        {
+          "beat_in_bar": 1,
+          "frame": 2,
+          "inferred_label": 0,
+          "meter": 2,
+          "period_frames": 3
+        },
+        {
+          "beat_in_bar": 2,
+          "frame": 5,
+          "inferred_label": 0,
+          "meter": 2,
+          "period_frames": 3
+        }
+      ],
+      "joint_map_log_weight": -4.358455928389226,
+      "joint_map_probability": 0.013731553507055697,
+      "log_ratio": -0.07039700969498551,
+      "positions": [
+        {
+          "inferred_label_probabilities": [
+            0.20777672597934227,
+            0.10902465722232728,
+            0.03762738016920683
+          ],
+          "latent_tick_probability": 0.35442876337087625,
+          "meter_change_probability": 0.0,
+          "tempo_change_probability": 0.0,
+          "unavailable_tick_probability": 0.0
+        },
+        {
+          "inferred_label_probabilities": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "latent_tick_probability": 0.43813113230678485,
+          "meter_change_probability": 0.0,
+          "tempo_change_probability": 0.0,
+          "unavailable_tick_probability": 0.43813113230678485
+        },
+        {
+          "inferred_label_probabilities": [
+            0.16513811749262397,
+            0.21771708401813414,
+            0.02300120538302706
+          ],
+          "latent_tick_probability": 0.40585640689378516,
+          "meter_change_probability": 0.035416659967092604,
+          "tempo_change_probability": 0.014981286722090509,
+          "unavailable_tick_probability": 0.0
+        },
+        {
+          "inferred_label_probabilities": [
+            0.20944117490711225,
+            0.14702811696971543,
+            0.10530693560046728
+          ],
+          "latent_tick_probability": 0.46177622747729474,
+          "meter_change_probability": 0.1178201044871838,
+          "tempo_change_probability": 0.028365094477522113,
+          "unavailable_tick_probability": 0.0
+        },
+        {
+          "inferred_label_probabilities": [
+            0.25073011016255914,
+            0.04860692846780297,
+            0.016465342847913567
+          ],
+          "latent_tick_probability": 0.3158023814782757,
+          "meter_change_probability": 0.07091320650861609,
+          "tempo_change_probability": 0.021426662032547634,
+          "unavailable_tick_probability": 0.0
+        },
+        {
+          "inferred_label_probabilities": [
+            0.3033724331978075,
+            0.20448638567864505,
+            0.02142729027207632
+          ],
+          "latent_tick_probability": 0.5292861091485282,
+          "meter_change_probability": 0.09574589272645079,
+          "tempo_change_probability": 0.03565662871756087,
+          "unavailable_tick_probability": 0.0
+        },
+        {
+          "inferred_label_probabilities": [
+            0.19874833707788125,
+            0.1256975638705017,
+            0.007568771130130035
+          ],
+          "latent_tick_probability": 0.33201467207851354,
+          "meter_change_probability": 0.05425038092833054,
+          "tempo_change_probability": 0.021564145780675493,
+          "unavailable_tick_probability": 0.0
+        },
+        {
+          "inferred_label_probabilities": [
+            0.18969184131243563,
+            0.1940898979806293,
+            0.07314224337148098
+          ],
+          "latent_tick_probability": 0.4569239826645459,
+          "meter_change_probability": 0.09662354032773031,
+          "tempo_change_probability": 0.027779770382663556,
+          "unavailable_tick_probability": 0.0
+        }
+      ],
+      "states": 1173,
+      "transitions": 3934
+    },
+    "domain": {
+      "max_meter": 3,
+      "max_period": 3,
+      "max_states": 100000,
+      "min_meter": 2,
+      "min_period": 2
+    },
+    "feature_pairs": [
+      [
+        0.2,
+        1.0
+      ],
+      null,
+      [
+        1.4,
+        -0.3
+      ],
+      [
+        0.5,
+        1.5
+      ],
+      [
+        -1.0,
+        0.7
+      ],
+      [
+        0.1,
+        -0.2
+      ],
+      [
+        0.4,
+        -0.7
+      ],
+      [
+        1.0,
+        0.9
+      ]
+    ]
+  },
+  "feature_source_sha256": "be002c873b7840091fe064e49a642273744386dc8d96072ebe24c1767a84978e",
+  "feature_space_inputs": true,
+  "full_song_search": false,
+  "holdout_opened": false,
+  "labels_are_detected_events": false,
+  "meter_changes_searched": true,
+  "omission_and_meter_rates": "independent run-wide Beta(1,1)",
+  "production_output_changed": false,
+  "purpose": "bounded_unknown_clock_omission_semantics",
+  "rank_pipeline_accuracy_evaluated": false,
+  "real_music_evaluated": false,
+  "resource_probe": {
+    "domain": {
+      "max_meter": 3,
+      "max_period": 6,
+      "max_states": 250000,
+      "min_meter": 2,
+      "min_period": 3
+    },
+    "frames": 32,
+    "result": {
+      "completed": false,
+      "error": "exact search state budget exceeded; no partial inference returned",
+      "partial_inference_returned": false
+    }
+  },
+  "schema_version": 1,
+  "search_source_sha256": "4dc67dbe6a5f622ff2e3ee5ed92d113618b7d46590bc22a9ec7d459354cf1ede",
+  "source_sha256": "ce9e075d52581268ef356ec3c9348572b5fb3df9b1cb76356862a1eca9437099",
+  "supplied_clock_templates": false,
+  "tempo_changes_searched": true,
+  "terminal_semantics": "next tick outside recording: marginalize future, no extra transition",
+  "time_prior_source_sha256": "2ea3b3ba5a364fd54fed80251299a6e250948eee9735a80cdefb6eaf817176ed",
+  "training_run": false,
+  "truth_used_in_search": false,
+  "user_parameters_added": false
+}

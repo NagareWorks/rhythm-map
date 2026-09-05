@@ -8,6 +8,11 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `search-omission-v1.json` is a bounded exact unknown-clock/changing-meter
+  omission reference on authored feature arrays, independently checked by
+  `test_search_omission.py`. It is not a model-accuracy report or production
+  decoder; its tempo failures and resource-limit rejection are retained. See
+  [the search gate](../baselines/search-omission-v1.md).
 - Aggregate JSON artifacts are byte-addressed evidence. Git preserves their
   original line endings (`-text diff`) so a checkout on another OS does not
   break historical hash links. New reports use UTF-8/LF; do not normalize or
