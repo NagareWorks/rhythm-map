@@ -24,6 +24,17 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- Background-centered empirical ranks now pass all seven unchanged main
+  supplied-clock controls, retaining weak doubling (+11.44 over constant) and
+  genuine halving (+5.28) under the unchanged prior. Three fixed middle-background
+  shifts pass too; raw rank's two shift failures remain frozen. This is one
+  evaluation-only feature intervention, not an unrestricted decoder. Exact
+  both-erased/half input equivalence and 1/4096 contrast invariance expose why
+  >99% family preference is not musical-clock or signal confidence. Next freeze
+  explicit latent-clock/observed-pulse omission semantics and evidence-strength
+  gates, not another feature/prior sweep. No default, user knob, training,
+  holdout, cohort replay or release changes. See the
+  [rank intervention, retained failures and ambiguity](evaluation/baselines/rank-clock-v1.md).
 - A shared-frame joint gate now compares four supplied clock templates while
   marginalizing meter on a single paired-head reference. Weak true doubling
   wins by +28.43 after its unchanged duration-prior cost, but true halving

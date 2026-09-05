@@ -586,3 +586,15 @@ including weak-doubling improvement, true-halving regression and an identical
 two-head input ambiguity. Independent reconstruction runs with
 `python -m unittest discover -s evaluation/parity -p test_shared_clock.py -v`.
 See the [scope, mathematics and failed promotion gate](../baselines/shared-clock-v1.md).
+
+## Background-centered rank clock-family gate
+
+`cargo run --locked --profile evaluation -p rhythm-map-eval --example rank_clock`
+compares one fixed median-background/midrank observation transform and its raw-rank
+ablation on the unchanged supplied family. `rank-clock-v1.json` freezes twenty
+authored inputs, including all fourteen preceding controls, background-shift
+failures, tiny-contrast invariance and identical-head ambiguity. It does not
+search unknown clocks, marginalize omitted pulses or calibrate confidence.
+`python -m unittest discover -s evaluation/parity -p test_rank_clock.py -v`
+independently reconstructs all 160 template/variant combinations. See the
+[joint improvement and remaining gates](../baselines/rank-clock-v1.md).
