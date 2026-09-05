@@ -516,6 +516,30 @@ Without these flags the report references the frozen source record, not a fresh
 upstream verification. Regular CI needs no checkpoint, audio, network or torch.
 Both paths emit the same report; existing outputs are never overwritten.
 
+## Temporally tolerant metrical windows
+
+`metrical_window_audit.py` uses the frozen radius-three training neighborhood
+for paired-head evidence, with truth-assisted centers and explicit coverage,
+metre-label and overlap exclusions. It is not a decoder or likelihood adapter.
+The [contract and measured result](../baselines/metrical-window-v1.md) preserve
+all 40 tracks, raw-miss strata, annotated tempo regimes and downbeat ranking.
+
+```bash
+python evaluation/parity/metrical_window_audit.py \
+  --artbeat-evidence /data/parity/candidate-evidence-v1.private.json \
+  --artbeat-captures /data/parity/dense-artbeat-v1 \
+  --rubato-evidence /data/parity/rubato-cache-replay-final-v1.private.json \
+  --rubato-captures /data/parity/dense-rubato-v1 \
+  --output /data/reports/metrical-window-new.json
+python -m unittest discover -s evaluation/parity -p test_metrical_window.py -v
+```
+
+The script verifies all input hashes and complete default-event replays before
+writing an aggregate-only result to a new destination. It needs no checkpoint,
+fresh audio inference, network, fitted mapping or private row export. ARTBeaT
+downbeat placeholders remain unknown; all acoustic-presence labels remain
+unknown. Do not describe positive windows, midpoint wins or AUC as beat recovery.
+
 ## Frozen full-frame clock experiment (evaluation only)
 
 `dense_sequence` decodes complete captured heads into private inferred clock

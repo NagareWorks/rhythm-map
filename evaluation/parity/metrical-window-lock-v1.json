@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "purpose": "frozen_truth_assisted_metrical_window_inventory",
+  "frame_rate_hz": 50,
+  "radius_frames": 3,
+  "center_quantization": "nearest integer; ties to even, as upstream annotation rounding",
+  "peak_ties": "nearest query center, then earliest frame",
+  "head_features": ["beat_peak", "downbeat_at_beat_peak", "downbeat_peak", "peak_separation_frames", "beat_peak_gain"],
+  "feature_quantiles": [0.1, 0.5, 0.9],
+  "control": "following annotated interval midpoint, same seven-frame window",
+  "pair_exclusion": "unavailable windows; canonical overlaps another annotated beat window; control overlaps any annotated beat window",
+  "change_neighborhood_beats_each_side": 2,
+  "change_anchor": "nearest annotated beat to each existing change point; ties earliest",
+  "artbeat_downbeat_labels": "unavailable, including false placeholders",
+  "rubato_downbeat_labels": "official measure-aligned annotation booleans",
+  "rubato_constant_segments": "interval representation, not constant-performance labels",
+  "acoustic_presence_labels": "unknown for every calibration query",
+  "ranking_direction": "higher beat peak favors canonical over midpoint; higher downbeat head favors downbeat over non-downbeat",
+  "controls_are_silence_labels": false,
+  "fit_mapping": false,
+  "decoder_replay": false,
+  "holdout_access": false
+}

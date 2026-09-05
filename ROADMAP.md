@@ -24,6 +24,17 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- A frozen seven-frame joint-head window audit covers all 40 calibration
+  recordings without inference or decoder replay. It retains missing annotation
+  and overlap denominators. RUBATO has 438 missed windows whose center is
+  nonpositive but a nearby frame is positive; all 65 full ARTBeaT constant-region
+  missed windows remain nonpositive. This is not automatic beat recovery.
+  Constant-interior and change-neighborhood score ranges overlap; metre ranking
+  is useful but uncalibrated. Next test shared-phase multi-beat context over the
+  same observations for constant-with-omissions versus tempo-change hypotheses,
+  without fitted gates, independent-window likelihood claims or new user modes.
+  No default changes, holdout access or training. See the
+  [window contract, full denominators and retained failures](evaluation/baselines/metrical-window-v1.md).
 - Pinned Beat This source/checkpoint auditing rules out direct conversion of
   frame logits into absent/plain/accent likelihoods. `final0` uses weighted,
   shift-tolerant BCE (19/86); displaced peaks can leave an annotated frame low
