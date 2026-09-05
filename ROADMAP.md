@@ -24,6 +24,17 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- Exact pulse/accent omission inference now integrates both run-wide retention
+  rates and a constant-meter/phase family on the same supplied clocks. All seven
+  main controls and three background shifts retain their winners. A truth-free
+  selected-assignment check finds three emission-equivalent clocks for the
+  half/both-erased witness; its extreme conditional preference is prior-only.
+  This does not resolve all assignments or unknown clocks. Eight modeled ticks
+  still appear inside flat audio and must not become detected events. Next
+  integrate temporal meter/clock search with explicit supported-event provenance
+  and structured-missing-span gates, not a rate/feature sweep. No default/API,
+  user parameter, training, cohort replay, holdout or release change. See the
+  [omission semantics, exact inference and retained limits](evaluation/baselines/omission-clock-v1.md).
 - Background-centered empirical ranks now pass all seven unchanged main
   supplied-clock controls, retaining weak doubling (+11.44 over constant) and
   genuine halving (+5.28) under the unchanged prior. Three fixed middle-background

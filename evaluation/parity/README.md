@@ -598,3 +598,16 @@ search unknown clocks, marginalize omitted pulses or calibrate confidence.
 `python -m unittest discover -s evaluation/parity -p test_rank_clock.py -v`
 independently reconstructs all 160 template/variant combinations. See the
 [joint improvement and remaining gates](../baselines/rank-clock-v1.md).
+
+## Explicit pulse/accent omission semantics
+
+`cargo run --locked --profile evaluation -p rhythm-map-eval --example omission_clock`
+integrates pulse and accent omissions on the unchanged twenty authored inputs.
+The bounded model marginalizes constant meters/phases, not meter changes, and
+exports a matched no-omission baseline. `omission-clock-v1.json` also records
+automatic same-emission explanations of the selected MAP assignment, unavailable
+trials, and modeled ticks inside flat evidence. None are detected Beat events.
+`python -m unittest discover -s evaluation/parity -p test_omission_clock.py -v`
+reconstructs all 80 clock inferences and 2,160 constant-meter components. Read the
+[model, ambiguity semantics and limits](../baselines/omission-clock-v1.md) before
+interpreting conditional weights as musical confidence or promoting outputs.
