@@ -24,6 +24,17 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- Pinned Beat This source/checkpoint auditing rules out direct conversion of
+  frame logits into absent/plain/accent likelihoods. `final0` uses weighted,
+  shift-tolerant BCE (19/86); displaced peaks can leave an annotated frame low
+  with unchanged loss. SumHead does not enforce nested probabilities, confirmed
+  on all 40 frozen calibration captures even after hypothetical weight offsets.
+  Next define a temporally tolerant metrical-event observation contract and
+  inventory joint-head window evidence with explicit annotation/coverage gaps;
+  do not equate missing sound, missing annotations and missing detector peaks.
+  No fitted mapping, new user parameter, default change, decoder replay,
+  holdout access or training. See the
+  [source semantics, counterexamples and next gate](evaluation/baselines/beat-this-semantics-v1.md).
 - A common-frame presence-likelihood reference now retains absent/plain/accent
   evidence without a count-conditioned ceiling. Independent path/observation
   enumeration verifies normalized joint evidence, missing-frame marginalization

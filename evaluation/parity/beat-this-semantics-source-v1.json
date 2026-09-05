@@ -1,0 +1,23 @@
+{
+  "reference_revision": "b95c8ab0c58c2d9fcfd40508ae8dffbc05ac4f5c",
+  "checkpoint_sha256": "8c328b45f59d8dd3dff219253ff6a8d6482be57d0133a29140e2febbf8eb8331",
+  "source_sha256": {
+    "beat_this/model/loss.py": "28ab2d045e61ab2fd1cfa0901650ba31c1cfb550240adc41bbf88fc03cc5ce71",
+    "beat_this/model/pl_module.py": "db751cea6e2501e0a6f2ff5f9d443df07911bd5c879446ecd060b3e4deae41ec",
+    "beat_this/model/beat_tracker.py": "bfa2fd212b4d6bf00b007eb0e606a6b11f1f7fc44c95bd1121ef5d2a934a923f",
+    "beat_this/dataset/dataset.py": "a62e9d18d6c5b996dae10ce7f9158bced355b52a7dcdc2b78844cfb893cbc87a",
+    "beat_this/inference.py": "ccccff4665399b931ebf181b73d264a6ad64fc1fe8acb4d3b950df825c47ce2d",
+    "launch_scripts/train.py": "6ffe1778c505342145242f6285a53681a6a6d3481ea529d4439c398cde3e4407"
+  },
+  "checkpoint_hyperparameters": {
+    "fps": 50,
+    "loss_type": "shift_tolerant_weighted_bce",
+    "pos_weights": {"beat": 19, "downbeat": 86}
+  },
+  "checkpoint_sum_head_present": false,
+  "effective_sum_head_from_pinned_loader_default": true,
+  "loss_tolerance_frames": 3,
+  "torch_weights_only": true,
+  "scalar_loss_parity_passed": true,
+  "displaced_annotation_gradient": 0.0
+}

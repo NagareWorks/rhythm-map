@@ -1,0 +1,590 @@
+{
+  "schema_version": 1,
+  "purpose": "backend_score_semantics_not_likelihood_calibration",
+  "script_sha256": "55d753f77cf55e562c7bf5d60a3fce7279f1727f9313f72bd3037631293cab19",
+  "source_record_sha256": "b535d2de56b2d2b8dbd69e2ae03d44024b1e8b6e486f089991a7e3cfd030c68a",
+  "dense_report_sha256": "e4826ec6996b58e404a9773f49fe21c46126b960ee1ca83aa719cce6fe18fd12",
+  "helper_sha256": {
+    "dense_clock_evidence.py": "d003864034e2f7262c891bb3862bb9de978c2286f0bad463e6581b693d4ed584",
+    "clock_phase_evidence.py": "6302fef2747292142d10901475acd4e934aa711d8742a9ba781fb8140d915117",
+    "resampler_event_audit.py": "b0c2c63eca9304a7aa569cd99617ef52d1bd6e3f625366fb32a12e64728ca5cf"
+  },
+  "upstream": {
+    "reference_revision": "b95c8ab0c58c2d9fcfd40508ae8dffbc05ac4f5c",
+    "checkpoint_sha256": "8c328b45f59d8dd3dff219253ff6a8d6482be57d0133a29140e2febbf8eb8331",
+    "source_sha256": {
+      "beat_this/model/loss.py": "28ab2d045e61ab2fd1cfa0901650ba31c1cfb550240adc41bbf88fc03cc5ce71",
+      "beat_this/model/pl_module.py": "db751cea6e2501e0a6f2ff5f9d443df07911bd5c879446ecd060b3e4deae41ec",
+      "beat_this/model/beat_tracker.py": "bfa2fd212b4d6bf00b007eb0e606a6b11f1f7fc44c95bd1121ef5d2a934a923f",
+      "beat_this/dataset/dataset.py": "a62e9d18d6c5b996dae10ce7f9158bced355b52a7dcdc2b78844cfb893cbc87a",
+      "beat_this/inference.py": "ccccff4665399b931ebf181b73d264a6ad64fc1fe8acb4d3b950df825c47ce2d",
+      "launch_scripts/train.py": "6ffe1778c505342145242f6285a53681a6a6d3481ea529d4439c398cde3e4407"
+    },
+    "checkpoint_hyperparameters": {
+      "fps": 50,
+      "loss_type": "shift_tolerant_weighted_bce",
+      "pos_weights": {
+        "beat": 19,
+        "downbeat": 86
+      }
+    },
+    "checkpoint_sum_head_present": false,
+    "effective_sum_head_from_pinned_loader_default": true,
+    "loss_tolerance_frames": 3,
+    "torch_weights_only": true,
+    "scalar_loss_parity_passed": true,
+    "displaced_annotation_gradient": 0.0
+  },
+  "controls": {
+    "shifted_pulse": [
+      {
+        "offset_frames": -3,
+        "exact_annotation_logit": -4.0,
+        "loss": 0.021905085418046234,
+        "positive_pooled_logit": 4.0
+      },
+      {
+        "offset_frames": -2,
+        "exact_annotation_logit": -4.0,
+        "loss": 0.021905085418046234,
+        "positive_pooled_logit": 4.0
+      },
+      {
+        "offset_frames": -1,
+        "exact_annotation_logit": -4.0,
+        "loss": 0.021905085418046234,
+        "positive_pooled_logit": 4.0
+      },
+      {
+        "offset_frames": 0,
+        "exact_annotation_logit": 4.0,
+        "loss": 0.021905085418046234,
+        "positive_pooled_logit": 4.0
+      },
+      {
+        "offset_frames": 1,
+        "exact_annotation_logit": -4.0,
+        "loss": 0.021905085418046234,
+        "positive_pooled_logit": 4.0
+      },
+      {
+        "offset_frames": 2,
+        "exact_annotation_logit": -4.0,
+        "loss": 0.021905085418046234,
+        "positive_pooled_logit": 4.0
+      },
+      {
+        "offset_frames": 3,
+        "exact_annotation_logit": -4.0,
+        "loss": 0.021905085418046234,
+        "positive_pooled_logit": 4.0
+      }
+    ],
+    "sum_head_counterexample": {
+      "internal_u": -4.0,
+      "internal_v": 2.0,
+      "beat": -2.0,
+      "downbeat": 2.0,
+      "naive_plain_mass": -0.7615941559557647,
+      "weight_offset_plain_mass": -0.07204868785659156
+    },
+    "ordinary_weighted_bce_only": {
+      "zero_logit_implied_posterior": {
+        "beat": 0.05,
+        "downbeat": 0.011494252873563218
+      },
+      "applicable_to_shift_tolerant_final0": false
+    }
+  },
+  "cohorts": [
+    {
+      "cohort": "artbeat",
+      "complete": true,
+      "frozen_evidence_sha256": "3f1ba43fd4f373579727a48668d8de8e00166523d2d1141e072bc3471a71ab3e",
+      "capture_summary_sha256": "85e8480f3bf4094ace598fdd7dd72ba176f85a0c13b3174bd506cae9d2f2644e",
+      "source_hashes": {
+        "exporter_source_sha256": "141115143c742e440e6a51a39073318f6dbdd20c0925b836e9979716b6c4a909",
+        "adapter_source_sha256": "ecd93860fdebf56905fdb12f341cfb66ad1c227f19e0d45a81b7ec2c4f59a14d",
+        "audio_source_sha256": "67b3e54b7415d16e5be15eec751ba639a7a544ee283f330b43411b56fe5f4fa2",
+        "cargo_lock_sha256": "246d94421a15809b0dddd9eb6cbebec6270c981c384e06ece9c8267acf75d4f7"
+      },
+      "pooled": {
+        "frames": 12328,
+        "downbeat_gt_beat": 1435,
+        "after_weight_offset_downbeat_gt_beat": 56,
+        "beat_nonpositive": 11630,
+        "downbeat_nonpositive": 12070
+      },
+      "cases": [
+        {
+          "id": "artbeat-05-75-to-150",
+          "capture_sha256": "973337d4aa0bd1bac738888fe415755185d4a2a2eea933d11fd21541ce3764a7",
+          "counts": {
+            "frames": 681,
+            "downbeat_gt_beat": 110,
+            "after_weight_offset_downbeat_gt_beat": 0,
+            "beat_nonpositive": 651,
+            "downbeat_nonpositive": 675
+          }
+        },
+        {
+          "id": "artbeat-06-150-to-75",
+          "capture_sha256": "c96fe9dff55dc0334c956f453cb9e0640af4ce9b52abdccd82eaeb4b022b9ff3",
+          "counts": {
+            "frames": 681,
+            "downbeat_gt_beat": 124,
+            "after_weight_offset_downbeat_gt_beat": 0,
+            "beat_nonpositive": 657,
+            "downbeat_nonpositive": 672
+          }
+        },
+        {
+          "id": "artbeat-07-75-to-112-5",
+          "capture_sha256": "bd4e756badf480190d1b3e216677aa8ead7a1032d8f66ef1bcefdc18e7b00e69",
+          "counts": {
+            "frames": 667,
+            "downbeat_gt_beat": 75,
+            "after_weight_offset_downbeat_gt_beat": 0,
+            "beat_nonpositive": 633,
+            "downbeat_nonpositive": 656
+          }
+        },
+        {
+          "id": "artbeat-08-112-5-to-75",
+          "capture_sha256": "f727928b068097ab0ac2d58cf838f95265fb9a74a7c2fb990dba7fc5fee07edf",
+          "counts": {
+            "frames": 701,
+            "downbeat_gt_beat": 79,
+            "after_weight_offset_downbeat_gt_beat": 2,
+            "beat_nonpositive": 662,
+            "downbeat_nonpositive": 687
+          }
+        },
+        {
+          "id": "artbeat-09-90-to-80",
+          "capture_sha256": "cc3464f42f5c32135d39832563f146ef2d80d284c817626c23627ee986fe244e",
+          "counts": {
+            "frames": 881,
+            "downbeat_gt_beat": 158,
+            "after_weight_offset_downbeat_gt_beat": 25,
+            "beat_nonpositive": 825,
+            "downbeat_nonpositive": 858
+          }
+        },
+        {
+          "id": "artbeat-10-90-to-120",
+          "capture_sha256": "d9f11d3c740c80d0e5d12c650b07bdd1268d007491740e0c5ca3b388cf5de9a4",
+          "counts": {
+            "frames": 831,
+            "downbeat_gt_beat": 61,
+            "after_weight_offset_downbeat_gt_beat": 3,
+            "beat_nonpositive": 785,
+            "downbeat_nonpositive": 817
+          }
+        },
+        {
+          "id": "artbeat-11-60-to-80",
+          "capture_sha256": "862b06aafd290e8a039978b135f34ea35da797bbf9074157847c0c07d7ed27f3",
+          "counts": {
+            "frames": 871,
+            "downbeat_gt_beat": 46,
+            "after_weight_offset_downbeat_gt_beat": 1,
+            "beat_nonpositive": 838,
+            "downbeat_nonpositive": 862
+          }
+        },
+        {
+          "id": "artbeat-12-80-to-150",
+          "capture_sha256": "00f0ed56f9eabcd37c80ea2f463cdbfd7ba5416a1e019979f24093bc5a7f1b30",
+          "counts": {
+            "frames": 872,
+            "downbeat_gt_beat": 149,
+            "after_weight_offset_downbeat_gt_beat": 0,
+            "beat_nonpositive": 834,
+            "downbeat_nonpositive": 860
+          }
+        },
+        {
+          "id": "artbeat-13-180-to-120",
+          "capture_sha256": "88a5824f541d2dd782a01644c73fd546e52090769e145807b50767ebfbdb23dc",
+          "counts": {
+            "frames": 692,
+            "downbeat_gt_beat": 119,
+            "after_weight_offset_downbeat_gt_beat": 9,
+            "beat_nonpositive": 617,
+            "downbeat_nonpositive": 653
+          }
+        },
+        {
+          "id": "artbeat-14-240-to-96",
+          "capture_sha256": "53ea2508c3487f5fba57ff2c03246dae6b267c0ff9886a22baa496cff7ce19f0",
+          "counts": {
+            "frames": 816,
+            "downbeat_gt_beat": 53,
+            "after_weight_offset_downbeat_gt_beat": 1,
+            "beat_nonpositive": 751,
+            "downbeat_nonpositive": 796
+          }
+        },
+        {
+          "id": "artbeat-15-85-to-127-5",
+          "capture_sha256": "5a66d6c4abfc1416ff34fca4c74dd2c0a937e95f3654ea4145b76045125aa350",
+          "counts": {
+            "frames": 1130,
+            "downbeat_gt_beat": 77,
+            "after_weight_offset_downbeat_gt_beat": 4,
+            "beat_nonpositive": 1061,
+            "downbeat_nonpositive": 1111
+          }
+        },
+        {
+          "id": "artbeat-18-piano-rubato",
+          "capture_sha256": "4e6c241ec2705094b5809e8f8d7a48fc668ad2eef2721d54d31a98dff3e3495e",
+          "counts": {
+            "frames": 1163,
+            "downbeat_gt_beat": 133,
+            "after_weight_offset_downbeat_gt_beat": 6,
+            "beat_nonpositive": 1114,
+            "downbeat_nonpositive": 1136
+          }
+        },
+        {
+          "id": "artbeat-19-ramp-80-to-200",
+          "capture_sha256": "cf9e6d10e25ebfbb93e50ad70be70186e7ed229577e2b1fbd5f90c5459af215b",
+          "counts": {
+            "frames": 863,
+            "downbeat_gt_beat": 85,
+            "after_weight_offset_downbeat_gt_beat": 0,
+            "beat_nonpositive": 821,
+            "downbeat_nonpositive": 849
+          }
+        },
+        {
+          "id": "artbeat-20-ramp-200-to-80",
+          "capture_sha256": "9aae8a403e1b95a3532d8bd2670febb21d3e9aab4034f05b6009cdd8f08c8c1c",
+          "counts": {
+            "frames": 864,
+            "downbeat_gt_beat": 80,
+            "after_weight_offset_downbeat_gt_beat": 1,
+            "beat_nonpositive": 822,
+            "downbeat_nonpositive": 847
+          }
+        },
+        {
+          "id": "artbeat-21-polyrhythm-70-to-105",
+          "capture_sha256": "2e3ba7557faad626d3f92bf6d6e0a705536a81119c8cf33603a5b6bd91fabc22",
+          "counts": {
+            "frames": 615,
+            "downbeat_gt_beat": 86,
+            "after_weight_offset_downbeat_gt_beat": 4,
+            "beat_nonpositive": 559,
+            "downbeat_nonpositive": 591
+          }
+        }
+      ]
+    },
+    {
+      "cohort": "rubato",
+      "complete": true,
+      "frozen_evidence_sha256": "ce5e678276888a0e430c004444dce4b27f0cfac0761767736abee2ec3fc05937",
+      "capture_summary_sha256": "2589e7eae131e5ee7603954430d7a6f910c7a17593e14453709447b30223cac1",
+      "source_hashes": {
+        "exporter_source_sha256": "141115143c742e440e6a51a39073318f6dbdd20c0925b836e9979716b6c4a909",
+        "adapter_source_sha256": "ecd93860fdebf56905fdb12f341cfb66ad1c227f19e0d45a81b7ec2c4f59a14d",
+        "audio_source_sha256": "67b3e54b7415d16e5be15eec751ba639a7a544ee283f330b43411b56fe5f4fa2",
+        "cargo_lock_sha256": "246d94421a15809b0dddd9eb6cbebec6270c981c384e06ece9c8267acf75d4f7"
+      },
+      "pooled": {
+        "frames": 324515,
+        "downbeat_gt_beat": 60040,
+        "after_weight_offset_downbeat_gt_beat": 2758,
+        "beat_nonpositive": 288388,
+        "downbeat_nonpositive": 304278
+      },
+      "cases": [
+        {
+          "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+          "capture_sha256": "76b295f5021e99204b2fde688f1b85f364d6f999866fc7fad7d60f1a6ab7e0a3",
+          "counts": {
+            "frames": 6446,
+            "downbeat_gt_beat": 1250,
+            "after_weight_offset_downbeat_gt_beat": 143,
+            "beat_nonpositive": 5934,
+            "downbeat_nonpositive": 6175
+          }
+        },
+        {
+          "id": "rubato-bach-bwv1007-01-ov-milman2022",
+          "capture_sha256": "eaac53c4f18d0fbc9da29c315ce6d58385e9c4bbe74b17ff191d1c092981647b",
+          "counts": {
+            "frames": 6949,
+            "downbeat_gt_beat": 1203,
+            "after_weight_offset_downbeat_gt_beat": 73,
+            "beat_nonpositive": 6007,
+            "downbeat_nonpositive": 6505
+          }
+        },
+        {
+          "id": "rubato-beethoven-op072-0-ov-henning2017",
+          "capture_sha256": "fb774b4cfc44a241719fa344c81c4db0ecd6d1365bbf1f8c9490cfd31c07f325",
+          "counts": {
+            "frames": 20175,
+            "downbeat_gt_beat": 2249,
+            "after_weight_offset_downbeat_gt_beat": 103,
+            "beat_nonpositive": 17900,
+            "downbeat_nonpositive": 19224
+          }
+        },
+        {
+          "id": "rubato-berlioz-h048-04-ov-dennis2016",
+          "capture_sha256": "fa46e89ee43b9e689b9efa8f66bd76f480abd4eface90a49fe934ffb455968d5",
+          "counts": {
+            "frames": 13626,
+            "downbeat_gt_beat": 1403,
+            "after_weight_offset_downbeat_gt_beat": 2,
+            "beat_nonpositive": 12124,
+            "downbeat_nonpositive": 12991
+          }
+        },
+        {
+          "id": "rubato-boccherini-g275-03-ov-krux2022",
+          "capture_sha256": "4a3c2d66e432d3a8c0fae5f4559f0dde4a47d6b3f42e1f74ff23763c76830a49",
+          "counts": {
+            "frames": 8132,
+            "downbeat_gt_beat": 951,
+            "after_weight_offset_downbeat_gt_beat": 54,
+            "beat_nonpositive": 6995,
+            "downbeat_nonpositive": 7575
+          }
+        },
+        {
+          "id": "rubato-brahms-op115-01-ov-schmitta2025",
+          "capture_sha256": "9415d3b198b48e7ab0e046a9a0b6a06cef1b880132a2a46c280e7e7f246bc77f",
+          "counts": {
+            "frames": 31011,
+            "downbeat_gt_beat": 8607,
+            "after_weight_offset_downbeat_gt_beat": 405,
+            "beat_nonpositive": 25020,
+            "downbeat_nonpositive": 27464
+          }
+        },
+        {
+          "id": "rubato-brahms-op115-01-ov-steffens2008",
+          "capture_sha256": "dd3b6bedb679b6dfea6bc1567a38c52d469f4b277ca64d9436b63b60d51279b9",
+          "counts": {
+            "frames": 31115,
+            "downbeat_gt_beat": 8774,
+            "after_weight_offset_downbeat_gt_beat": 322,
+            "beat_nonpositive": 26843,
+            "downbeat_nonpositive": 27913
+          }
+        },
+        {
+          "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+          "capture_sha256": "639f95573ffda23e4eef605c10be3ed564c27a8c1512ed9ffb75d0fd10fe6e17",
+          "counts": {
+            "frames": 8115,
+            "downbeat_gt_beat": 1253,
+            "after_weight_offset_downbeat_gt_beat": 0,
+            "beat_nonpositive": 7645,
+            "downbeat_nonpositive": 7895
+          }
+        },
+        {
+          "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+          "capture_sha256": "5f04d4fcdd5c4324a92b7add6ab17d5f6f78dd83370cd4c7f62814fa04e0fb94",
+          "counts": {
+            "frames": 8218,
+            "downbeat_gt_beat": 1126,
+            "after_weight_offset_downbeat_gt_beat": 3,
+            "beat_nonpositive": 7639,
+            "downbeat_nonpositive": 7966
+          }
+        },
+        {
+          "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+          "capture_sha256": "8a5a3539ec7ed49803592f880d420cd86662a00eaec73d692ec77916cd87e28b",
+          "counts": {
+            "frames": 7681,
+            "downbeat_gt_beat": 1543,
+            "after_weight_offset_downbeat_gt_beat": 3,
+            "beat_nonpositive": 7252,
+            "downbeat_nonpositive": 7491
+          }
+        },
+        {
+          "id": "rubato-mozart-kv618-ar-papalin2012",
+          "capture_sha256": "83bf46fd1128010eebcea578d7f9df697152b1d388920bd3b42d2d4df4f58620",
+          "counts": {
+            "frames": 8051,
+            "downbeat_gt_beat": 1180,
+            "after_weight_offset_downbeat_gt_beat": 97,
+            "beat_nonpositive": 6960,
+            "downbeat_nonpositive": 7503
+          }
+        },
+        {
+          "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+          "capture_sha256": "c70c8a500375325ccc85c81dc24c70a3f296a58f6c2a4d39f3e92cda673d329c",
+          "counts": {
+            "frames": 10336,
+            "downbeat_gt_beat": 1515,
+            "after_weight_offset_downbeat_gt_beat": 77,
+            "beat_nonpositive": 9184,
+            "downbeat_nonpositive": 9687
+          }
+        },
+        {
+          "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+          "capture_sha256": "39965f14ea58cac4e0a1766bfbf97f752e383bafa8625e49b4d21dbfee006ba9",
+          "counts": {
+            "frames": 14062,
+            "downbeat_gt_beat": 1497,
+            "after_weight_offset_downbeat_gt_beat": 1,
+            "beat_nonpositive": 13514,
+            "downbeat_nonpositive": 13760
+          }
+        },
+        {
+          "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+          "capture_sha256": "7ccaa90f6f1e904b8ce2038a50b8780ff29c6068d99d7b535a5d4ce1050a82fc",
+          "counts": {
+            "frames": 16304,
+            "downbeat_gt_beat": 1842,
+            "after_weight_offset_downbeat_gt_beat": 51,
+            "beat_nonpositive": 15336,
+            "downbeat_nonpositive": 15765
+          }
+        },
+        {
+          "id": "rubato-schubert-d733-01-ar-staab2012",
+          "capture_sha256": "c83d96b22dd1f77113203f6306ca15799da52a37c9d5ae491821150c889ae85c",
+          "counts": {
+            "frames": 10168,
+            "downbeat_gt_beat": 2569,
+            "after_weight_offset_downbeat_gt_beat": 212,
+            "beat_nonpositive": 8869,
+            "downbeat_nonpositive": 9400
+          }
+        },
+        {
+          "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+          "capture_sha256": "61a4b73d8ebd98e5f81d6fbcab7195bb5c81875f183741eca435ae7077f478dd",
+          "counts": {
+            "frames": 10359,
+            "downbeat_gt_beat": 1731,
+            "after_weight_offset_downbeat_gt_beat": 3,
+            "beat_nonpositive": 9221,
+            "downbeat_nonpositive": 9804
+          }
+        },
+        {
+          "id": "rubato-schumann-op039-05-ov-buttner2025",
+          "capture_sha256": "3089b5afac496979c1ef49f64e52efae5671543a531aa6ac93ff34a613da8bdf",
+          "counts": {
+            "frames": 12226,
+            "downbeat_gt_beat": 1827,
+            "after_weight_offset_downbeat_gt_beat": 20,
+            "beat_nonpositive": 11482,
+            "downbeat_nonpositive": 11839
+          }
+        },
+        {
+          "id": "rubato-schumann-op039-05-ov-pizarro2012",
+          "capture_sha256": "f00c6df8b74aca7395079db30244d15819ae0d4d2ef62c9578d11b3671d22f9e",
+          "counts": {
+            "frames": 11258,
+            "downbeat_gt_beat": 2247,
+            "after_weight_offset_downbeat_gt_beat": 61,
+            "beat_nonpositive": 10121,
+            "downbeat_nonpositive": 10642
+          }
+        },
+        {
+          "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+          "capture_sha256": "09896ffb8511eb529ad81d60add089a0317aa5f40a4e352c28d45d46ea142ad3",
+          "counts": {
+            "frames": 15410,
+            "downbeat_gt_beat": 3433,
+            "after_weight_offset_downbeat_gt_beat": 423,
+            "beat_nonpositive": 13662,
+            "downbeat_nonpositive": 14563
+          }
+        },
+        {
+          "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+          "capture_sha256": "7e08129bf8748f959536d857bc9999a4088186a6be46903f48da8f8d1afb436d",
+          "counts": {
+            "frames": 14800,
+            "downbeat_gt_beat": 3309,
+            "after_weight_offset_downbeat_gt_beat": 222,
+            "beat_nonpositive": 13620,
+            "downbeat_nonpositive": 13836
+          }
+        },
+        {
+          "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+          "capture_sha256": "8f781ccc08798cf349ba841bb5bb89ed66f104068ebc1fcecced2a1f354c72d7",
+          "counts": {
+            "frames": 13902,
+            "downbeat_gt_beat": 2541,
+            "after_weight_offset_downbeat_gt_beat": 34,
+            "beat_nonpositive": 12540,
+            "downbeat_nonpositive": 13003
+          }
+        },
+        {
+          "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+          "capture_sha256": "c5522a4af335b3045c3cc5d4baade4809307d994b277152d0b7112a10c5c5dda",
+          "counts": {
+            "frames": 15429,
+            "downbeat_gt_beat": 3563,
+            "after_weight_offset_downbeat_gt_beat": 279,
+            "beat_nonpositive": 13911,
+            "downbeat_nonpositive": 14349
+          }
+        },
+        {
+          "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+          "capture_sha256": "3e0626fec9fe95fc1a07b48eab7983a38ab3d951b65cd8f8c9137e2d7e53338f",
+          "counts": {
+            "frames": 9547,
+            "downbeat_gt_beat": 1717,
+            "after_weight_offset_downbeat_gt_beat": 77,
+            "beat_nonpositive": 8248,
+            "downbeat_nonpositive": 8936
+          }
+        },
+        {
+          "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+          "capture_sha256": "8cc504bfe807c64cc1aa721b842de44b350ffc5d6724d0b30277e71cade824bb",
+          "counts": {
+            "frames": 10695,
+            "downbeat_gt_beat": 1501,
+            "after_weight_offset_downbeat_gt_beat": 81,
+            "beat_nonpositive": 8452,
+            "downbeat_nonpositive": 9831
+          }
+        },
+        {
+          "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+          "capture_sha256": "ccedd36d8c0bef9060f0d32d687a586a44c66ecbf43d20b340405412c8373bea",
+          "counts": {
+            "frames": 10500,
+            "downbeat_gt_beat": 1209,
+            "after_weight_offset_downbeat_gt_beat": 12,
+            "beat_nonpositive": 9909,
+            "downbeat_nonpositive": 10161
+          }
+        }
+      ]
+    }
+  ],
+  "holdout_opened": false,
+  "training_run": false,
+  "decoder_replayed": false,
+  "fitted_parameters": false,
+  "production_observations_changed": false,
+  "accuracy_improvement_claimed": false,
+  "adapter_accepted": false
+}

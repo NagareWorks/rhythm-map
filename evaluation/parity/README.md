@@ -489,6 +489,33 @@ The control can itself be a meaningful musical subdivision. Only aggregate and
 per-track summaries may enter Git; dense captures and event coordinates remain
 private. See [interpretation and limits](../baselines/dense-clock-evidence-v1.md).
 
+## Backend score semantics
+
+`beat_this_semantics_audit.py` checks all existing dense calibration captures
+without model inference or experimental decoder replay. It reports raw-head
+nesting violations and a diagnostic weight-offset contrast, not calibrated
+probabilities or acoustic absence. See the
+[source interpretation and counterexamples](../baselines/beat-this-semantics-v1.md).
+
+```bash
+python evaluation/parity/beat_this_semantics_audit.py \
+  --artbeat-evidence /data/parity/candidate-evidence-v1.private.json \
+  --artbeat-captures /data/parity/dense-artbeat-v1 \
+  --rubato-evidence /data/parity/rubato-cache-replay-final-v1.private.json \
+  --rubato-captures /data/parity/dense-rubato-v1 \
+  --output /data/reports/beat-this-semantics-new.json
+python -m unittest discover -s evaluation/parity -p test_beat_this_semantics.py -v
+```
+
+To independently recheck the source record, add `--upstream /data/beat_this`
+and `--checkpoint /data/final0.complete.ckpt` together. This optional check needs
+PyTorch: it verifies the pinned clean checkout and checkpoint hash before
+weights-only loading of selected metadata, and tests scalar loss/gradient
+counterexamples against upstream. It does not instantiate or train the model.
+Without these flags the report references the frozen source record, not a fresh
+upstream verification. Regular CI needs no checkpoint, audio, network or torch.
+Both paths emit the same report; existing outputs are never overwritten.
+
 ## Frozen full-frame clock experiment (evaluation only)
 
 `dense_sequence` decodes complete captured heads into private inferred clock
