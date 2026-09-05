@@ -8,6 +8,11 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `clock-boundary-v1.json` and `clock_boundary_audit.py` isolate the initial
+  window law on the frozen unknown-clock model. Unavailable-padding consistency
+  improves, but tempo failures and an additional MAP accent miss remain. This
+  Python evaluation tool does not add a product dependency or user strategy;
+  see [the matched boundary audit](../baselines/clock-boundary-v1.md).
 - `search-omission-v1.json` is a bounded exact unknown-clock/changing-meter
   omission reference on authored feature arrays, independently checked by
   `test_search_omission.py`. It is not a model-accuracy report or production

@@ -24,6 +24,17 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- A matched boundary-only audit now separates a fresh clock start from an
+  arbitrary window in an ongoing process. Stationary first-tick/meter-phase
+  initialization removes 3--5 percentage-point marginal changes caused solely
+  by three unavailable prefix frames; suffix marginalization was already sound.
+  Interior transitions, features, omissions and terminal law remain unchanged.
+  Half/double failures persist, and the half MAP additionally misses an accent.
+  Fixed-path decomposition puts the main debit in jump occurrence/destination,
+  not a missing terminal charge. Keep this as a verified evaluation prerequisite,
+  not a product mode or training verdict. Next audit jump-law/feature compatibility
+  without tuning on the two short controls. See the
+  [matched boundary audit and retained regressions](evaluation/baselines/clock-boundary-v1.md).
 - A bounded exact reference now jointly searches unknown tick positions/periods,
   changing meter and pulse/accent omissions, without supplied paths or change
   boundaries. Independent complete-path enumeration verifies all marginals.
