@@ -24,6 +24,16 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- A censored-bar conditional reference now integrates unknown meter persistence
+  and reports per-tick marginals on the frozen inferred clock. Six main-control
+  tails favor four rather than the old forced three, but support remains below
+  50%; no beat or BPM is corrected. The authored crop gate passes only 87/139,
+  and both 2<->4 change controls fail. An exact emission tie explains why:
+  per-beat normalization makes unsupported extra bar starts in flat cells free.
+  Do not promote this model or tune its prior. Next restore common-context
+  support/absence evidence with explicit unobserved-edge marginalization; pass
+  composite-meter and genuine-change gates before joint clock integration.
+  See the [censored meter result and retained counterexamples](evaluation/baselines/censored-meter-v1.md).
 - A controlled time-exposure duration prior now removes beat-count-dependent
   survival costs at equal covered time. Exact search and independent score
   reconstruction pass; a flat-middle control stays at 125 BPM instead of

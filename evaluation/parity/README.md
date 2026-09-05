@@ -551,3 +551,15 @@ competitors; its result is `time-clock-diagnosis-v1.json`. A flat-middle false
 slowdown is removed, but weak doubling, edges and noise still fail the authored
 gate. The [derivation and full comparison](../baselines/time-clock-v1.md) explain
 why this prerequisite does not justify promotion, training or a cohort replay.
+
+## Censored conditional meter audit
+
+`cargo run --locked --profile evaluation -p rhythm-map-eval --example censored_meter`
+conditions on the unchanged inferred ticks in `time-clock-v1.json`. It allows
+partial first/last bars, integrates unknown run-wide meter persistence and
+exports per-tick marginals in `censored-meter-v1.json`. It does not search beats
+again or fix their tempo. Independent Python probability-space checks run with
+`python -m unittest discover -s evaluation/parity -p test_censored_meter.py -v`.
+The 139 crop and four true-meter-change controls expose composite-meter failures
+despite improved tail preferences. Read the [model, limitations and gate](../baselines/censored-meter-v1.md)
+before interpreting these conditional post-selection scores as confidence.
