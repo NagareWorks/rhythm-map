@@ -24,6 +24,18 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- A bounded full-span clock/response ledger now owns every predicted tick and
+  supplied response through exact one-to-one assignment. Fourteen authored
+  controls retain all 70 clock ledgers; independent enumeration checks every
+  optimal assignment count rather than treating a traceback as unique. Full
+  constant responses expose six unexplained packets under a half clock, but
+  omission/change interpretations still coincide and weak subdivisions can
+  favor double-clock completeness. No tempo is selected and no likelihood or
+  default change is claimed. Next adapt the unchanged backend's raw-event and
+  candidate identities/coverage as diagnostic sources, validate packet
+  uniqueness and provenance, then inventory real residual causes. Do not fit
+  omission penalties, add user strategies, open holdout or start training.
+  See the [full-span contract and retained ambiguities](evaluation/baselines/clock-response-ledger-v1.md).
 - Shared-phase five-point context is now audited on all 40 frozen calibration
   captures. Missed annotated-versus-continuation positives rise 61 to 74 / 91
   on ARTBeaT but fall 1855 to 1848 / 2368 on RUBATO; its candidate-absent subset

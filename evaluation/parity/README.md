@@ -8,6 +8,12 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `clock-response-ledger-v1.json` and `clock_response_ledger_audit.py` provide
+  bounded full-span one-to-one accounting of supplied clocks/responses, including
+  exact assignment ambiguity and unmatched observations. Fourteen authored
+  controls expose density, omission and weak-subdivision limitations; this is
+  not a tempo selector or likelihood adapter. See the
+  [ledger contract and next adapter gate](../baselines/clock-response-ledger-v1.md).
 - `shared-phase-context-v1.json` and `shared_phase_context_audit.py` compare
   shared versus independent phase alignment of five-point truth-assisted
   templates on all 40 frozen captures. These are not complete clocks; ideal
@@ -712,3 +718,17 @@ holdout, fitting or training is performed. Run the complete 12-test module with
 `python -m unittest discover -s evaluation/parity -p test_shared_phase_context.py -v`.
 Read the [contract and failed promotion gate](../baselines/shared-phase-context-v1.md)
 before treating a positive pair margin as correct tempo or acoustic presence.
+
+## Full-span clock/response ledger
+
+```sh
+python evaluation/parity/clock_response_ledger_audit.py --output /data/reports/clock-response-ledger-new.json
+python -m unittest discover -s evaluation/parity -p test_clock_response_ledger.py -v
+```
+
+The output path must not exist. The 14 authored packet cases need no audio,
+model or external capture. Twelve tests reproduce every result and independently
+verify exact one-to-one matching counts. Complete response coverage is not a
+tempo decision, and an unmatched tick is not an acoustic-absence label. The
+[contract](../baselines/clock-response-ledger-v1.md) records those boundaries
+before a backend response adapter or real-cohort replay is attempted.
