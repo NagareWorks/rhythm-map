@@ -1,0 +1,1082 @@
+{
+  "schema_version": 1,
+  "purpose": "frozen_backend_response_identity_and_rational_ledger_adapter",
+  "contract": {
+    "schema_version": 1,
+    "purpose": "frozen_backend_response_identity_and_rational_ledger_adapter",
+    "frame_rate_hz": 50,
+    "raw_peak_threshold": 0,
+    "raw_peak_radius_frames": 3,
+    "raw_merge_width_frames": 1,
+    "candidate_peak_radius_frames": 1,
+    "candidate_threshold": null,
+    "candidate_plateau_representative": "lower middle actual frame",
+    "time_publication": "float32 seconds widened to float64; preserved alongside exact nominal rational frame",
+    "raw_score_frame": "round published seconds times 50 away from zero, then clamp to final frame",
+    "head_marks": "paired original logits at the actual score frame; not published downbeat confidence",
+    "confidence_check_max_ulps": 8,
+    "lineage": "raw peak members contained in candidate plateau, never nearest timestamp",
+    "missing_frames": "backend replay requires complete finite heads; rational ledger handles explicit unavailable frames separately",
+    "matching_radius_frames": 3,
+    "cohort_scope": "all 15 ARTBeaT and 25 RUBATO frozen calibration captures; identity inventory only",
+    "integer_ledger_reference_changed": false,
+    "real_clock_search_or_recovery": false,
+    "fit_mapping": false,
+    "holdout_access": false,
+    "training": false
+  },
+  "script_sha256": "9199761302ec2eb8e05b753c0a4e3b0b6a3d401633d8afbc766357323d89d26f",
+  "lock_sha256": "d33f75ed79983a8792bfc2651891680b634766d72abd578c540886fc86d67c3f",
+  "helper_sha256": {
+    "rational_response_ledger.py": "e92962a920d32e80130f684944a815a64184f02c48c094ca2c610a1d66f26f04",
+    "dense_clock_evidence.py": "d003864034e2f7262c891bb3862bb9de978c2286f0bad463e6581b693d4ed584",
+    "resampler_event_audit.py": "b0c2c63eca9304a7aa569cd99617ef52d1bd6e3f625366fb32a12e64728ca5cf",
+    "clock_phase_evidence.py": "6302fef2747292142d10901475acd4e934aa711d8742a9ba781fb8140d915117",
+    "compare_reference.py": "b21a8b4f2d31adb7e79e3e4ccc760205bf85c9d04142fd9cc0610eb967eaa513",
+    "phase_tail_audit.py": "93fa880106ec64a9178cdbaef5779b8dc144e33dddb77a0bafe685e579a4a3df",
+    "verify_bounded_resampler.py": "3fb4f902ad660e2a9cc67dacaeac12d3a50d969fdcc70f18e6bdee4c032c1b23"
+  },
+  "predecessor_sha256": {
+    "clock-response-ledger-v1.json": "c082d0f4b14b397866659492d2a96b7aed2317ec13ab7ef9652152aa8948e9c2",
+    "backend-response-packets-lock-v1.json": "d33f75ed79983a8792bfc2651891680b634766d72abd578c540886fc86d67c3f"
+  },
+  "neural_inference": false,
+  "production_output_changed": false,
+  "new_user_parameters": false,
+  "holdout_opened": false,
+  "training_run": false,
+  "fitted_mapping": false,
+  "truth_labels_used_for_inventory": false,
+  "real_clock_ledger_replayed": false,
+  "accuracy_improvement_claimed": false,
+  "cohorts": [
+    {
+      "cohort": "artbeat",
+      "complete": true,
+      "frozen_evidence_sha256": "3f1ba43fd4f373579727a48668d8de8e00166523d2d1141e072bc3471a71ab3e",
+      "capture_summary_sha256": "85e8480f3bf4094ace598fdd7dd72ba176f85a0c13b3174bd506cae9d2f2644e",
+      "source_hashes": {
+        "exporter_source_sha256": "141115143c742e440e6a51a39073318f6dbdd20c0925b836e9979716b6c4a909",
+        "adapter_source_sha256": "ecd93860fdebf56905fdb12f341cfb66ad1c227f19e0d45a81b7ec2c4f59a14d",
+        "audio_source_sha256": "67b3e54b7415d16e5be15eec751ba639a7a544ee283f330b43411b56fe5f4fa2",
+        "cargo_lock_sha256": "246d94421a15809b0dddd9eb6cbebec6270c981c384e06ece9c8267acf75d4f7"
+      },
+      "total_frames_per_head": 12328,
+      "cases": [
+        {
+          "id": "artbeat-05-75-to-150",
+          "capture_sha256": "973337d4aa0bd1bac738888fe415755185d4a2a2eea933d11fd21541ce3764a7",
+          "frame_count": 681,
+          "source_inventory": {
+            "raw_events": 17,
+            "candidates": 61,
+            "source_plateaus": 62,
+            "excluded_candidate_plateaus": 1,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 12,
+            "raw_downbeat_clamped_from_below_half": 0,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 17,
+              "nonpositive_default_threshold": 44,
+              "radius_three_competition": 0
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "artbeat-06-150-to-75",
+          "capture_sha256": "c96fe9dff55dc0334c956f453cb9e0640af4ce9b52abdccd82eaeb4b022b9ff3",
+          "frame_count": 681,
+          "source_inventory": {
+            "raw_events": 19,
+            "candidates": 60,
+            "source_plateaus": 60,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 11,
+            "raw_downbeat_clamped_from_below_half": 0,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 19,
+              "nonpositive_default_threshold": 41,
+              "radius_three_competition": 0
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "artbeat-07-75-to-112-5",
+          "capture_sha256": "bd4e756badf480190d1b3e216677aa8ead7a1032d8f66ef1bcefdc18e7b00e69",
+          "frame_count": 667,
+          "source_inventory": {
+            "raw_events": 23,
+            "candidates": 77,
+            "source_plateaus": 77,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 16,
+            "raw_downbeat_clamped_from_below_half": 0,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 23,
+              "nonpositive_default_threshold": 54,
+              "radius_three_competition": 0
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "artbeat-08-112-5-to-75",
+          "capture_sha256": "f727928b068097ab0ac2d58cf838f95265fb9a74a7c2fb990dba7fc5fee07edf",
+          "frame_count": 701,
+          "source_inventory": {
+            "raw_events": 24,
+            "candidates": 99,
+            "source_plateaus": 99,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 14,
+            "raw_downbeat_clamped_from_below_half": 0,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 24,
+              "nonpositive_default_threshold": 75,
+              "radius_three_competition": 0
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "artbeat-09-90-to-80",
+          "capture_sha256": "cc3464f42f5c32135d39832563f146ef2d80d284c817626c23627ee986fe244e",
+          "frame_count": 881,
+          "source_inventory": {
+            "raw_events": 25,
+            "candidates": 100,
+            "source_plateaus": 100,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 18,
+            "raw_downbeat_clamped_from_below_half": 0,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 25,
+              "nonpositive_default_threshold": 74,
+              "radius_three_competition": 1
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "artbeat-10-90-to-120",
+          "capture_sha256": "d9f11d3c740c80d0e5d12c650b07bdd1268d007491740e0c5ca3b388cf5de9a4",
+          "frame_count": 831,
+          "source_inventory": {
+            "raw_events": 29,
+            "candidates": 127,
+            "source_plateaus": 127,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 21,
+            "raw_downbeat_clamped_from_below_half": 0,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 29,
+              "nonpositive_default_threshold": 98,
+              "radius_three_competition": 0
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "artbeat-11-60-to-80",
+          "capture_sha256": "862b06aafd290e8a039978b135f34ea35da797bbf9074157847c0c07d7ed27f3",
+          "frame_count": 871,
+          "source_inventory": {
+            "raw_events": 20,
+            "candidates": 116,
+            "source_plateaus": 116,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 14,
+            "raw_downbeat_clamped_from_below_half": 0,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 20,
+              "nonpositive_default_threshold": 96,
+              "radius_three_competition": 0
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "artbeat-12-80-to-150",
+          "capture_sha256": "00f0ed56f9eabcd37c80ea2f463cdbfd7ba5416a1e019979f24093bc5a7f1b30",
+          "frame_count": 872,
+          "source_inventory": {
+            "raw_events": 22,
+            "candidates": 99,
+            "source_plateaus": 99,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 15,
+            "raw_downbeat_clamped_from_below_half": 1,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 22,
+              "nonpositive_default_threshold": 77,
+              "radius_three_competition": 0
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "artbeat-13-180-to-120",
+          "capture_sha256": "88a5824f541d2dd782a01644c73fd546e52090769e145807b50767ebfbdb23dc",
+          "frame_count": 692,
+          "source_inventory": {
+            "raw_events": 30,
+            "candidates": 91,
+            "source_plateaus": 91,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 15,
+            "raw_downbeat_clamped_from_below_half": 1,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 30,
+              "nonpositive_default_threshold": 59,
+              "radius_three_competition": 2
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "artbeat-14-240-to-96",
+          "capture_sha256": "53ea2508c3487f5fba57ff2c03246dae6b267c0ff9886a22baa496cff7ce19f0",
+          "frame_count": 816,
+          "source_inventory": {
+            "raw_events": 33,
+            "candidates": 118,
+            "source_plateaus": 118,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 19,
+            "raw_downbeat_clamped_from_below_half": 0,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 33,
+              "nonpositive_default_threshold": 85,
+              "radius_three_competition": 0
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "artbeat-15-85-to-127-5",
+          "capture_sha256": "5a66d6c4abfc1416ff34fca4c74dd2c0a937e95f3654ea4145b76045125aa350",
+          "frame_count": 1130,
+          "source_inventory": {
+            "raw_events": 37,
+            "candidates": 94,
+            "source_plateaus": 94,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 29,
+            "raw_downbeat_clamped_from_below_half": 0,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 37,
+              "nonpositive_default_threshold": 57,
+              "radius_three_competition": 0
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "artbeat-18-piano-rubato",
+          "capture_sha256": "4e6c241ec2705094b5809e8f8d7a48fc668ad2eef2721d54d31a98dff3e3495e",
+          "frame_count": 1163,
+          "source_inventory": {
+            "raw_events": 28,
+            "candidates": 184,
+            "source_plateaus": 184,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 18,
+            "raw_downbeat_clamped_from_below_half": 1,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 28,
+              "nonpositive_default_threshold": 156,
+              "radius_three_competition": 0
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "artbeat-19-ramp-80-to-200",
+          "capture_sha256": "cf9e6d10e25ebfbb93e50ad70be70186e7ed229577e2b1fbd5f90c5459af215b",
+          "frame_count": 863,
+          "source_inventory": {
+            "raw_events": 22,
+            "candidates": 127,
+            "source_plateaus": 127,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 14,
+            "raw_downbeat_clamped_from_below_half": 1,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 22,
+              "nonpositive_default_threshold": 104,
+              "radius_three_competition": 1
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "artbeat-20-ramp-200-to-80",
+          "capture_sha256": "9aae8a403e1b95a3532d8bd2670febb21d3e9aab4034f05b6009cdd8f08c8c1c",
+          "frame_count": 864,
+          "source_inventory": {
+            "raw_events": 24,
+            "candidates": 121,
+            "source_plateaus": 121,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 13,
+            "raw_downbeat_clamped_from_below_half": 0,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 24,
+              "nonpositive_default_threshold": 97,
+              "radius_three_competition": 0
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "artbeat-21-polyrhythm-70-to-105",
+          "capture_sha256": "2e3ba7557faad626d3f92bf6d6e0a705536a81119c8cf33603a5b6bd91fabc22",
+          "frame_count": 615,
+          "source_inventory": {
+            "raw_events": 22,
+            "candidates": 85,
+            "source_plateaus": 85,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 11,
+            "raw_downbeat_clamped_from_below_half": 0,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 22,
+              "nonpositive_default_threshold": 63,
+              "radius_three_competition": 0
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        }
+      ],
+      "totals": {
+        "raw_events": 375,
+        "candidates": 1559,
+        "source_plateaus": 1560,
+        "excluded_candidate_plateaus": 1,
+        "fractional_raw_centers": 0,
+        "raw_score_frame_differs_from_nominal_round": 0,
+        "raw_downbeat_published_not_direct_frame_sigmoid": 240,
+        "raw_downbeat_clamped_from_below_half": 4,
+        "many_raw_to_one_plateau": 0,
+        "raw_without_included_candidate_lineage": 0,
+        "raw_center_more_than_three_frames_from_its_candidate": 0,
+        "candidate_reasons": {
+          "has_raw_lineage": 375,
+          "nonpositive_default_threshold": 1180,
+          "radius_three_competition": 4
+        },
+        "max_confidence_formula_ulps": 0
+      }
+    },
+    {
+      "cohort": "rubato",
+      "complete": true,
+      "frozen_evidence_sha256": "ce5e678276888a0e430c004444dce4b27f0cfac0761767736abee2ec3fc05937",
+      "capture_summary_sha256": "2589e7eae131e5ee7603954430d7a6f910c7a17593e14453709447b30223cac1",
+      "source_hashes": {
+        "exporter_source_sha256": "141115143c742e440e6a51a39073318f6dbdd20c0925b836e9979716b6c4a909",
+        "adapter_source_sha256": "ecd93860fdebf56905fdb12f341cfb66ad1c227f19e0d45a81b7ec2c4f59a14d",
+        "audio_source_sha256": "67b3e54b7415d16e5be15eec751ba639a7a544ee283f330b43411b56fe5f4fa2",
+        "cargo_lock_sha256": "246d94421a15809b0dddd9eb6cbebec6270c981c384e06ece9c8267acf75d4f7"
+      },
+      "total_frames_per_head": 324515,
+      "cases": [
+        {
+          "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+          "capture_sha256": "76b295f5021e99204b2fde688f1b85f364d6f999866fc7fad7d60f1a6ab7e0a3",
+          "frame_count": 6446,
+          "source_inventory": {
+            "raw_events": 235,
+            "candidates": 987,
+            "source_plateaus": 987,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 129,
+            "raw_downbeat_clamped_from_below_half": 2,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 235,
+              "nonpositive_default_threshold": 745,
+              "radius_three_competition": 7
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-bach-bwv1007-01-ov-milman2022",
+          "capture_sha256": "eaac53c4f18d0fbc9da29c315ce6d58385e9c4bbe74b17ff191d1c092981647b",
+          "frame_count": 6949,
+          "source_inventory": {
+            "raw_events": 213,
+            "candidates": 958,
+            "source_plateaus": 958,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 137,
+            "raw_downbeat_clamped_from_below_half": 1,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 213,
+              "nonpositive_default_threshold": 686,
+              "radius_three_competition": 59
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-beethoven-op072-0-ov-henning2017",
+          "capture_sha256": "fb774b4cfc44a241719fa344c81c4db0ecd6d1365bbf1f8c9490cfd31c07f325",
+          "frame_count": 20175,
+          "source_inventory": {
+            "raw_events": 669,
+            "candidates": 2092,
+            "source_plateaus": 2092,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 419,
+            "raw_downbeat_clamped_from_below_half": 0,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 669,
+              "nonpositive_default_threshold": 1406,
+              "radius_three_competition": 17
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-berlioz-h048-04-ov-dennis2016",
+          "capture_sha256": "fa46e89ee43b9e689b9efa8f66bd76f480abd4eface90a49fe934ffb455968d5",
+          "frame_count": 13626,
+          "source_inventory": {
+            "raw_events": 574,
+            "candidates": 1393,
+            "source_plateaus": 1393,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 315,
+            "raw_downbeat_clamped_from_below_half": 2,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 574,
+              "nonpositive_default_threshold": 812,
+              "radius_three_competition": 7
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-boccherini-g275-03-ov-krux2022",
+          "capture_sha256": "4a3c2d66e432d3a8c0fae5f4559f0dde4a47d6b3f42e1f74ff23763c76830a49",
+          "frame_count": 8132,
+          "source_inventory": {
+            "raw_events": 249,
+            "candidates": 867,
+            "source_plateaus": 867,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 122,
+            "raw_downbeat_clamped_from_below_half": 3,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 249,
+              "nonpositive_default_threshold": 547,
+              "radius_three_competition": 71
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-brahms-op115-01-ov-schmitta2025",
+          "capture_sha256": "9415d3b198b48e7ab0e046a9a0b6a06cef1b880132a2a46c280e7e7f246bc77f",
+          "frame_count": 31011,
+          "source_inventory": {
+            "raw_events": 1101,
+            "candidates": 2953,
+            "source_plateaus": 2953,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 642,
+            "raw_downbeat_clamped_from_below_half": 13,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 1101,
+              "nonpositive_default_threshold": 1525,
+              "radius_three_competition": 327
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-brahms-op115-01-ov-steffens2008",
+          "capture_sha256": "dd3b6bedb679b6dfea6bc1567a38c52d469f4b277ca64d9436b63b60d51279b9",
+          "frame_count": 31115,
+          "source_inventory": {
+            "raw_events": 855,
+            "candidates": 3050,
+            "source_plateaus": 3050,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 425,
+            "raw_downbeat_clamped_from_below_half": 17,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 855,
+              "nonpositive_default_threshold": 2033,
+              "radius_three_competition": 162
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+          "capture_sha256": "639f95573ffda23e4eef605c10be3ed564c27a8c1512ed9ffb75d0fd10fe6e17",
+          "frame_count": 8115,
+          "source_inventory": {
+            "raw_events": 154,
+            "candidates": 901,
+            "source_plateaus": 901,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 76,
+            "raw_downbeat_clamped_from_below_half": 0,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 154,
+              "nonpositive_default_threshold": 745,
+              "radius_three_competition": 2
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+          "capture_sha256": "5f04d4fcdd5c4324a92b7add6ab17d5f6f78dd83370cd4c7f62814fa04e0fb94",
+          "frame_count": 8218,
+          "source_inventory": {
+            "raw_events": 153,
+            "candidates": 930,
+            "source_plateaus": 930,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 78,
+            "raw_downbeat_clamped_from_below_half": 0,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 153,
+              "nonpositive_default_threshold": 749,
+              "radius_three_competition": 28
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+          "capture_sha256": "8a5a3539ec7ed49803592f880d420cd86662a00eaec73d692ec77916cd87e28b",
+          "frame_count": 7681,
+          "source_inventory": {
+            "raw_events": 153,
+            "candidates": 597,
+            "source_plateaus": 597,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 81,
+            "raw_downbeat_clamped_from_below_half": 0,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 153,
+              "nonpositive_default_threshold": 444,
+              "radius_three_competition": 0
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-mozart-kv618-ar-papalin2012",
+          "capture_sha256": "83bf46fd1128010eebcea578d7f9df697152b1d388920bd3b42d2d4df4f58620",
+          "frame_count": 8051,
+          "source_inventory": {
+            "raw_events": 182,
+            "candidates": 657,
+            "source_plateaus": 657,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 108,
+            "raw_downbeat_clamped_from_below_half": 0,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 182,
+              "nonpositive_default_threshold": 465,
+              "radius_three_competition": 10
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+          "capture_sha256": "c70c8a500375325ccc85c81dc24c70a3f296a58f6c2a4d39f3e92cda673d329c",
+          "frame_count": 10336,
+          "source_inventory": {
+            "raw_events": 169,
+            "candidates": 1035,
+            "source_plateaus": 1035,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 91,
+            "raw_downbeat_clamped_from_below_half": 1,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 169,
+              "nonpositive_default_threshold": 852,
+              "radius_three_competition": 14
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+          "capture_sha256": "39965f14ea58cac4e0a1766bfbf97f752e383bafa8625e49b4d21dbfee006ba9",
+          "frame_count": 14062,
+          "source_inventory": {
+            "raw_events": 313,
+            "candidates": 1741,
+            "source_plateaus": 1741,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 140,
+            "raw_downbeat_clamped_from_below_half": 0,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 313,
+              "nonpositive_default_threshold": 1418,
+              "radius_three_competition": 10
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+          "capture_sha256": "7ccaa90f6f1e904b8ce2038a50b8780ff29c6068d99d7b535a5d4ce1050a82fc",
+          "frame_count": 16304,
+          "source_inventory": {
+            "raw_events": 341,
+            "candidates": 1921,
+            "source_plateaus": 1921,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 160,
+            "raw_downbeat_clamped_from_below_half": 2,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 341,
+              "nonpositive_default_threshold": 1507,
+              "radius_three_competition": 73
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-schubert-d733-01-ar-staab2012",
+          "capture_sha256": "c83d96b22dd1f77113203f6306ca15799da52a37c9d5ae491821150c889ae85c",
+          "frame_count": 10168,
+          "source_inventory": {
+            "raw_events": 467,
+            "candidates": 1303,
+            "source_plateaus": 1303,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 228,
+            "raw_downbeat_clamped_from_below_half": 11,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 467,
+              "nonpositive_default_threshold": 828,
+              "radius_three_competition": 8
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+          "capture_sha256": "61a4b73d8ebd98e5f81d6fbcab7195bb5c81875f183741eca435ae7077f478dd",
+          "frame_count": 10359,
+          "source_inventory": {
+            "raw_events": 380,
+            "candidates": 1498,
+            "source_plateaus": 1498,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 196,
+            "raw_downbeat_clamped_from_below_half": 1,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 380,
+              "nonpositive_default_threshold": 1082,
+              "radius_three_competition": 36
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-schumann-op039-05-ov-buttner2025",
+          "capture_sha256": "3089b5afac496979c1ef49f64e52efae5671543a531aa6ac93ff34a613da8bdf",
+          "frame_count": 12226,
+          "source_inventory": {
+            "raw_events": 228,
+            "candidates": 1517,
+            "source_plateaus": 1517,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 129,
+            "raw_downbeat_clamped_from_below_half": 1,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 228,
+              "nonpositive_default_threshold": 1232,
+              "radius_three_competition": 57
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-schumann-op039-05-ov-pizarro2012",
+          "capture_sha256": "f00c6df8b74aca7395079db30244d15819ae0d4d2ef62c9578d11b3671d22f9e",
+          "frame_count": 11258,
+          "source_inventory": {
+            "raw_events": 282,
+            "candidates": 1342,
+            "source_plateaus": 1342,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 171,
+            "raw_downbeat_clamped_from_below_half": 2,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 282,
+              "nonpositive_default_threshold": 992,
+              "radius_three_competition": 68
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+          "capture_sha256": "09896ffb8511eb529ad81d60add089a0317aa5f40a4e352c28d45d46ea142ad3",
+          "frame_count": 15410,
+          "source_inventory": {
+            "raw_events": 554,
+            "candidates": 1611,
+            "source_plateaus": 1611,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 360,
+            "raw_downbeat_clamped_from_below_half": 3,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 554,
+              "nonpositive_default_threshold": 1053,
+              "radius_three_competition": 4
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+          "capture_sha256": "7e08129bf8748f959536d857bc9999a4088186a6be46903f48da8f8d1afb436d",
+          "frame_count": 14800,
+          "source_inventory": {
+            "raw_events": 304,
+            "candidates": 1483,
+            "source_plateaus": 1483,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 154,
+            "raw_downbeat_clamped_from_below_half": 7,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 304,
+              "nonpositive_default_threshold": 1165,
+              "radius_three_competition": 14
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+          "capture_sha256": "8f781ccc08798cf349ba841bb5bb89ed66f104068ebc1fcecced2a1f354c72d7",
+          "frame_count": 13902,
+          "source_inventory": {
+            "raw_events": 331,
+            "candidates": 1290,
+            "source_plateaus": 1290,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 168,
+            "raw_downbeat_clamped_from_below_half": 3,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 331,
+              "nonpositive_default_threshold": 951,
+              "radius_three_competition": 8
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+          "capture_sha256": "c5522a4af335b3045c3cc5d4baade4809307d994b277152d0b7112a10c5c5dda",
+          "frame_count": 15429,
+          "source_inventory": {
+            "raw_events": 421,
+            "candidates": 1589,
+            "source_plateaus": 1589,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 235,
+            "raw_downbeat_clamped_from_below_half": 3,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 421,
+              "nonpositive_default_threshold": 1154,
+              "radius_three_competition": 14
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+          "capture_sha256": "3e0626fec9fe95fc1a07b48eab7983a38ab3d951b65cd8f8c9137e2d7e53338f",
+          "frame_count": 9547,
+          "source_inventory": {
+            "raw_events": 358,
+            "candidates": 1087,
+            "source_plateaus": 1087,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 201,
+            "raw_downbeat_clamped_from_below_half": 4,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 358,
+              "nonpositive_default_threshold": 694,
+              "radius_three_competition": 35
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+          "capture_sha256": "8cc504bfe807c64cc1aa721b842de44b350ffc5d6724d0b30277e71cade824bb",
+          "frame_count": 10695,
+          "source_inventory": {
+            "raw_events": 432,
+            "candidates": 1085,
+            "source_plateaus": 1085,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 289,
+            "raw_downbeat_clamped_from_below_half": 2,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 432,
+              "nonpositive_default_threshold": 568,
+              "radius_three_competition": 85
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        },
+        {
+          "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+          "capture_sha256": "ccedd36d8c0bef9060f0d32d687a586a44c66ecbf43d20b340405412c8373bea",
+          "frame_count": 10500,
+          "source_inventory": {
+            "raw_events": 155,
+            "candidates": 1264,
+            "source_plateaus": 1264,
+            "excluded_candidate_plateaus": 0,
+            "fractional_raw_centers": 0,
+            "raw_score_frame_differs_from_nominal_round": 0,
+            "raw_downbeat_published_not_direct_frame_sigmoid": 87,
+            "raw_downbeat_clamped_from_below_half": 5,
+            "many_raw_to_one_plateau": 0,
+            "raw_without_included_candidate_lineage": 0,
+            "raw_center_more_than_three_frames_from_its_candidate": 0,
+            "candidate_reasons": {
+              "has_raw_lineage": 155,
+              "nonpositive_default_threshold": 1105,
+              "radius_three_competition": 4
+            },
+            "max_confidence_formula_ulps": 0
+          }
+        }
+      ],
+      "totals": {
+        "raw_events": 9273,
+        "candidates": 35151,
+        "source_plateaus": 35151,
+        "excluded_candidate_plateaus": 0,
+        "fractional_raw_centers": 0,
+        "raw_score_frame_differs_from_nominal_round": 0,
+        "raw_downbeat_published_not_direct_frame_sigmoid": 5141,
+        "raw_downbeat_clamped_from_below_half": 83,
+        "many_raw_to_one_plateau": 0,
+        "raw_without_included_candidate_lineage": 0,
+        "raw_center_more_than_three_frames_from_its_candidate": 0,
+        "candidate_reasons": {
+          "has_raw_lineage": 9273,
+          "nonpositive_default_threshold": 24758,
+          "radius_three_competition": 1120
+        },
+        "max_confidence_formula_ulps": 0
+      }
+    }
+  ]
+}

@@ -24,6 +24,17 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- Backend response identities are now checked on all 40 frozen calibration
+  captures: 9,648 default events and 36,710 candidates reproduce their original
+  published times and confidences. Exact nominal centers, score frames, paired
+  logits and plateau lineage stay distinct; 5,381 raw downbeat fields are not
+  direct frame sigmoids. A rational-coordinate bridge preserves all 70 previous
+  integer ledgers and passes fractional/plateau/endpoint controls. This is source
+  accounting, not accuracy improvement or a new product strategy. Next freeze
+  matched bounded windows and supplied-clock hypotheses, then inventory actual
+  unmatched ticks/responses separately by source. Do not pool sources, tune
+  omission penalties, open holdout or train. See the
+  [packet contract and complete inventory](evaluation/baselines/backend-response-packets-v1.md).
 - A bounded full-span clock/response ledger now owns every predicted tick and
   supplied response through exact one-to-one assignment. Fourteen authored
   controls retain all 70 clock ledgers; independent enumeration checks every

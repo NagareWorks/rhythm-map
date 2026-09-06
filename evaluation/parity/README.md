@@ -8,6 +8,12 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `backend-response-packets-v1.json` and `backend_response_packet_audit.py`
+  validate unchanged default/candidate provenance on all 40 frozen captures.
+  Published events, exact nominal centers, score frames and paired logits remain
+  distinct. `rational_response_ledger.py` preserves fractional matching and the
+  old integer controls without pooling sources. No real clock search or accuracy
+  gain is claimed. See the [packet contract](../baselines/backend-response-packets-v1.md).
 - `clock-response-ledger-v1.json` and `clock_response_ledger_audit.py` provide
   bounded full-span one-to-one accounting of supplied clocks/responses, including
   exact assignment ambiguity and unmatched observations. Fourteen authored
