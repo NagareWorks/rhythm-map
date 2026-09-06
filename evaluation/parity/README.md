@@ -8,6 +8,12 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `paired-response-replay-v1.json` and `paired_response_replay_audit.py` replay
+  all seven annotation-frozen constant/step pairs through unchanged packet and
+  rational-ledger helpers, with shared pair eligibility and no reselection.
+  Candidate-supported misses coexist with background/density ambiguity; clock
+  dominance also occurs in constant windows. This is not a tempo selector.
+  See the [paired residual report and next clock audit](../baselines/paired-response-replay-v1.md).
 - `annotation-exposure-v1.json` and `annotation_exposure_audit.py` use public
   annotations and allowlisted identity/duration metadata only to freeze seven
   matched four-second constant/step pairs. All 40 inputs and registered duration

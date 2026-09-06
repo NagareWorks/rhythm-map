@@ -1,0 +1,5165 @@
+{
+  "schema_version": 1,
+  "purpose": "frozen_annotation_selected_paired_response_residual_replay",
+  "contract": {
+    "schema_version": 1,
+    "purpose": "frozen_annotation_selected_paired_response_residual_replay",
+    "plan_report_sha256": "e9bb2086e906bda366e0b8d2d4dd87b9ff9d7c44441696d223a75a96471b1346",
+    "selected_plan_sha256": "5c15e677d0277dcac111aaebfb2be0b788996cbd44019a315c171fcf39bfe4f2",
+    "window_frames": 200,
+    "selected_pairs": 7,
+    "selection": "regenerate and verify the prior annotation-only plan before reading private captures; no reselection",
+    "input_denominator": "all 15 ARTBeaT and 25 RUBATO cases; private captures read only for seven selected ARTBeaT tracks",
+    "clock_families": [
+      "annotated",
+      "continuation",
+      "half_phase_zero",
+      "half_phase_one",
+      "double"
+    ],
+    "sources": [
+      "raw",
+      "candidate"
+    ],
+    "reuse": "unchanged whole-capture packet provenance, prefix clocks, half-open crop and rational one-to-one ledger; no window-local re-extraction",
+    "pair_eligibility": "both windows, both sources and every clock must satisfy prefix, annotation coverage, response/tick budgets and packet support; any rejection excludes the entire pair from ledger comparisons, never replaces it",
+    "budgets": {
+      "ticks_per_clock": 128,
+      "responses_per_source": 128,
+      "states_per_ledger": 16641
+    },
+    "matching_radius_frames": 3,
+    "boundary": "retain incomplete query labels and never count boundary-censored ticks as interior misses",
+    "metrics": "per source/context/clock matched responses, unmatched ticks and responses, all-optimal assignment ambiguity, annotated miss causes, candidate sign strata and off-annotation response strata",
+    "contrasts": "annotated and both half phases and double each versus continuation: matched delta and unmatched-tick delta separately; per-track constant/change relation cross-tab, never a weighted score",
+    "relations": "left_dominates if matched>= and unmatched_ticks<= with one strict; right_dominates conversely; equal if both equal; otherwise tradeoff; descriptive accounting, not a selected tempo",
+    "truth_assisted": true,
+    "source_pooling": false,
+    "phase_search": false,
+    "neural_inference": false,
+    "decoder_replayed": false,
+    "fitted_mapping": false,
+    "holdout_opened": false,
+    "training_run": false,
+    "new_user_parameters": false,
+    "accuracy_improvement_claimed": false
+  },
+  "script_sha256": "e750e5df4f2ff1769419875269e086e632e43c8cf1b87118e66c9d4562509617",
+  "lock_sha256": "d40ba206367c0b4cf970e15f0f3790a063a704e71d59b6da59a44df776fc7aeb",
+  "helper_sha256": {
+    "backend_response_packet_audit.py": "9199761302ec2eb8e05b753c0a4e3b0b6a3d401633d8afbc766357323d89d26f",
+    "rational_response_ledger.py": "e92962a920d32e80130f684944a815a64184f02c48c094ca2c610a1d66f26f04",
+    "metrical_window_audit.py": "493c9b01e6333c7041aec4c463816cab7366b0162a013246b06d56b34ef9c2aa",
+    "dense_clock_evidence.py": "d003864034e2f7262c891bb3862bb9de978c2286f0bad463e6581b693d4ed584",
+    "resampler_event_audit.py": "b0c2c63eca9304a7aa569cd99617ef52d1bd6e3f625366fb32a12e64728ca5cf",
+    "clock_phase_evidence.py": "6302fef2747292142d10901475acd4e934aa711d8742a9ba781fb8140d915117",
+    "compare_reference.py": "b21a8b4f2d31adb7e79e3e4ccc760205bf85c9d04142fd9cc0610eb967eaa513",
+    "phase_tail_audit.py": "93fa880106ec64a9178cdbaef5779b8dc144e33dddb77a0bafe685e579a4a3df",
+    "verify_bounded_resampler.py": "3fb4f902ad660e2a9cc67dacaeac12d3a50d969fdcc70f18e6bdee4c032c1b23",
+    "candidate_evidence_audit.py": "044ed072889e272f98b631af0f14ff87e493f55c82e664d08fee7eab5e5c9c9f",
+    "window_response_residual_audit.py": "4b8d675e7c371519258ed2015d4b5f45ff7efb6462901c556319413b6396e410",
+    "window-response-residuals-lock-v1.json": "36155e528b2e1998c4c02b00aa79041516f4ed52bda045889d4841729ea4289e",
+    "backend-response-packets-lock-v1.json": "d33f75ed79983a8792bfc2651891680b634766d72abd578c540886fc86d67c3f",
+    "annotation_exposure_audit.py": "824832bb891637a8eafb40bd05c05e4fb5c5000577c7f08a81a10bdc2892c681",
+    "annotation-exposure-lock-v1.json": "2f9fcbc4a75ac6c30acad4d927d681d686a6a2e9d93531831f8e8e9f934c1271"
+  },
+  "source_hashes": {
+    "exporter_source_sha256": "141115143c742e440e6a51a39073318f6dbdd20c0925b836e9979716b6c4a909",
+    "adapter_source_sha256": "ecd93860fdebf56905fdb12f341cfb66ad1c227f19e0d45a81b7ec2c4f59a14d",
+    "audio_source_sha256": "67b3e54b7415d16e5be15eec751ba639a7a544ee283f330b43411b56fe5f4fa2",
+    "cargo_lock_sha256": "246d94421a15809b0dddd9eb6cbebec6270c981c384e06ece9c8267acf75d4f7"
+  },
+  "predecessor_sha256": {
+    "annotation-exposure-v1.json": "e9bb2086e906bda366e0b8d2d4dd87b9ff9d7c44441696d223a75a96471b1346",
+    "window-response-residuals-v1.json": "35eb07cfc8c96471710ecf0a40d3fae6da836638845090cc21583ba337769a8a",
+    "backend-response-packets-v1.json": "6bf7aa6b88aae92b7b91767b1e63a7fe78b4b4275080dba42edd4c39ceef23e0"
+  },
+  "selected_plan_sha256": "5c15e677d0277dcac111aaebfb2be0b788996cbd44019a315c171fcf39bfe4f2",
+  "frozen_evidence_sha256": "3f1ba43fd4f373579727a48668d8de8e00166523d2d1141e072bc3471a71ab3e",
+  "capture_summary_sha256": "85e8480f3bf4094ace598fdd7dd72ba176f85a0c13b3174bd506cae9d2f2644e",
+  "metadata_projection_sha256": "b93984c19e761873ea3c79144e35add6474cc0dd85677a67cbca90a4bfe8e13d",
+  "input_cases": [
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-05-75-to-150",
+      "frame_count": 681,
+      "truth_sha256": "5d6c395345fb6155893bc3aad4e0def3518bdecedb82f08d3514adfaeea0d456",
+      "capture_sha256": "973337d4aa0bd1bac738888fe415755185d4a2a2eea933d11fd21541ce3764a7",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-06-150-to-75",
+      "frame_count": 681,
+      "truth_sha256": "fcda5614cb07639a66edb58f7b658214e1f54ec1db1de35e84367d47be77849f",
+      "capture_sha256": "c96fe9dff55dc0334c956f453cb9e0640af4ce9b52abdccd82eaeb4b022b9ff3",
+      "status": "selected_pair",
+      "private_capture_read": true
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-07-75-to-112-5",
+      "frame_count": 667,
+      "truth_sha256": "063beee7c5428adedeecab21d0f8678a69c049f4ca2ea8ebfb7827b1ec79057f",
+      "capture_sha256": "bd4e756badf480190d1b3e216677aa8ead7a1032d8f66ef1bcefdc18e7b00e69",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-08-112-5-to-75",
+      "frame_count": 701,
+      "truth_sha256": "64de869a6b3e15d8e07601d67cb1508842de558761f5d00f4d25ded8077b92e6",
+      "capture_sha256": "f727928b068097ab0ac2d58cf838f95265fb9a74a7c2fb990dba7fc5fee07edf",
+      "status": "selected_pair",
+      "private_capture_read": true
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-09-90-to-80",
+      "frame_count": 881,
+      "truth_sha256": "a9802ae028c9631323354a5826f50e2c78b14e54c66581a817f8d07b633a5409",
+      "capture_sha256": "cc3464f42f5c32135d39832563f146ef2d80d284c817626c23627ee986fe244e",
+      "status": "selected_pair",
+      "private_capture_read": true
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-10-90-to-120",
+      "frame_count": 831,
+      "truth_sha256": "2165ea70a5f4224461552a28567cb45ad2b2cfe66cf4a99661ff49a02b24f10f",
+      "capture_sha256": "d9f11d3c740c80d0e5d12c650b07bdd1268d007491740e0c5ca3b388cf5de9a4",
+      "status": "selected_pair",
+      "private_capture_read": true
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-11-60-to-80",
+      "frame_count": 871,
+      "truth_sha256": "7332a12f293d6bf843b4833054722c492c551d9e82b978aa11e6a90e145f1901",
+      "capture_sha256": "862b06aafd290e8a039978b135f34ea35da797bbf9074157847c0c07d7ed27f3",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-12-80-to-150",
+      "frame_count": 872,
+      "truth_sha256": "84dc7d0b5ae7f297bdef100b6f67dc64d1475655ef9a36cdd442578368301a87",
+      "capture_sha256": "00f0ed56f9eabcd37c80ea2f463cdbfd7ba5416a1e019979f24093bc5a7f1b30",
+      "status": "selected_pair",
+      "private_capture_read": true
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-13-180-to-120",
+      "frame_count": 692,
+      "truth_sha256": "61513c63f05ff332d265d6d785ca50342cdad10b23f664a40f1b55d2487349bf",
+      "capture_sha256": "88a5824f541d2dd782a01644c73fd546e52090769e145807b50767ebfbdb23dc",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-14-240-to-96",
+      "frame_count": 816,
+      "truth_sha256": "6583d495985b507d2083975501e40f15ad0727f2df8761645280f4fb87c3fe96",
+      "capture_sha256": "53ea2508c3487f5fba57ff2c03246dae6b267c0ff9886a22baa496cff7ce19f0",
+      "status": "selected_pair",
+      "private_capture_read": true
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-15-85-to-127-5",
+      "frame_count": 1130,
+      "truth_sha256": "e819ded9652413d5fd923066047b8cc1a27a2c0d24f3fdb3b80b40148fc9c39e",
+      "capture_sha256": "5a66d6c4abfc1416ff34fca4c74dd2c0a937e95f3654ea4145b76045125aa350",
+      "status": "selected_pair",
+      "private_capture_read": true
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-18-piano-rubato",
+      "frame_count": 1163,
+      "truth_sha256": "ddf1a5ff2a4d5649497bb54a60084abed6a21b1a062c874a492820245afd11a2",
+      "capture_sha256": "4e6c241ec2705094b5809e8f8d7a48fc668ad2eef2721d54d31a98dff3e3495e",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-19-ramp-80-to-200",
+      "frame_count": 863,
+      "truth_sha256": "407ec564b847ebf779e2f740c8c5d156211e69e18dc62b6a8fd37c17d01c4457",
+      "capture_sha256": "cf9e6d10e25ebfbb93e50ad70be70186e7ed229577e2b1fbd5f90c5459af215b",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-20-ramp-200-to-80",
+      "frame_count": 864,
+      "truth_sha256": "b2e8e3aa1a131b9335914f974d5cfff7618703dd8d9c87fe38723545f6ec5980",
+      "capture_sha256": "9aae8a403e1b95a3532d8bd2670febb21d3e9aab4034f05b6009cdd8f08c8c1c",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-21-polyrhythm-70-to-105",
+      "frame_count": 615,
+      "truth_sha256": "7016cc892dcec5a95ea18cf778d9890f1d754158168f29c3ce5e895d32578638",
+      "capture_sha256": "2e3ba7557faad626d3f92bf6d6e0a705536a81119c8cf33603a5b6bd91fabc22",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "frame_count": 6446,
+      "truth_sha256": "f16e419511caee1c96c786fbe5a745b9e319a5d95a8d832dcd3b337f072706a7",
+      "capture_sha256": "76b295f5021e99204b2fde688f1b85f364d6f999866fc7fad7d60f1a6ab7e0a3",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "frame_count": 6949,
+      "truth_sha256": "02617c821f0b7beb6fb0578d50f18b45b1e4b96e788c33835646b716b8a584e7",
+      "capture_sha256": "eaac53c4f18d0fbc9da29c315ce6d58385e9c4bbe74b17ff191d1c092981647b",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-beethoven-op072-0-ov-henning2017",
+      "frame_count": 20175,
+      "truth_sha256": "0597675375121d0e7592d5abdae51277c166ff7611f3daf327f0ae4193ddcf8e",
+      "capture_sha256": "fb774b4cfc44a241719fa344c81c4db0ecd6d1365bbf1f8c9490cfd31c07f325",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "frame_count": 13626,
+      "truth_sha256": "4e8b47d76b1ddce15d38da69fe3ca74892c777d2e1eb541524fc88d7a790bf34",
+      "capture_sha256": "fa46e89ee43b9e689b9efa8f66bd76f480abd4eface90a49fe934ffb455968d5",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-boccherini-g275-03-ov-krux2022",
+      "frame_count": 8132,
+      "truth_sha256": "9b79c5c3cc3046c889ef9bbb34b0231dc7c393e22a088b3776b6b0862edad18b",
+      "capture_sha256": "4a3c2d66e432d3a8c0fae5f4559f0dde4a47d6b3f42e1f74ff23763c76830a49",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-brahms-op115-01-ov-schmitta2025",
+      "frame_count": 31011,
+      "truth_sha256": "6775c1cabad7d73b7682fa37d9a6e51c5542bffa054838df22f7a94ad150136a",
+      "capture_sha256": "9415d3b198b48e7ab0e046a9a0b6a06cef1b880132a2a46c280e7e7f246bc77f",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-brahms-op115-01-ov-steffens2008",
+      "frame_count": 31115,
+      "truth_sha256": "8934b0c9f51e4a9520584c35998f7d9cf724272de99d577d1b4f95e658ce7964",
+      "capture_sha256": "dd3b6bedb679b6dfea6bc1567a38c52d469f4b277ca64d9436b63b60d51279b9",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+      "frame_count": 8115,
+      "truth_sha256": "986d47aaab5598db25b2fb44d16bfbf7f9c6b2df4acf9b118fae9f7f8911932c",
+      "capture_sha256": "639f95573ffda23e4eef605c10be3ed564c27a8c1512ed9ffb75d0fd10fe6e17",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+      "frame_count": 8218,
+      "truth_sha256": "10b34ee45b0b11f66943f98ab75b16886fd65dd7a108127a447bfb919d146f3e",
+      "capture_sha256": "5f04d4fcdd5c4324a92b7add6ab17d5f6f78dd83370cd4c7f62814fa04e0fb94",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+      "frame_count": 7681,
+      "truth_sha256": "ac2935ad5dcb5fc1a1dd44730eaed584241096c35bfe0508da5393dcd40a8ec7",
+      "capture_sha256": "8a5a3539ec7ed49803592f880d420cd86662a00eaec73d692ec77916cd87e28b",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-mozart-kv618-ar-papalin2012",
+      "frame_count": 8051,
+      "truth_sha256": "82a37995c722804ee66b57f6b3bfe39ce88cc602a4cc719b84c65c71300f5a32",
+      "capture_sha256": "83bf46fd1128010eebcea578d7f9df697152b1d388920bd3b42d2d4df4f58620",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+      "frame_count": 10336,
+      "truth_sha256": "5f3832fafaa133b5a3875b8964b47b493568cdd2f4be76615fd5ea6f2f0f7616",
+      "capture_sha256": "c70c8a500375325ccc85c81dc24c70a3f296a58f6c2a4d39f3e92cda673d329c",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+      "frame_count": 14062,
+      "truth_sha256": "996d4563a086fbe048d71da38e3d2441c789c28e2289aefa7284b3d3c10bc5c6",
+      "capture_sha256": "39965f14ea58cac4e0a1766bfbf97f752e383bafa8625e49b4d21dbfee006ba9",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+      "frame_count": 16304,
+      "truth_sha256": "cc91282ff134ac42e5c051942baad56b49d19f8a56acdb09ce57c8e49e461f10",
+      "capture_sha256": "7ccaa90f6f1e904b8ce2038a50b8780ff29c6068d99d7b535a5d4ce1050a82fc",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-schubert-d733-01-ar-staab2012",
+      "frame_count": 10168,
+      "truth_sha256": "15a68f3c29bb4eb1f9974093ab0f23189ba183232b341233e70f09523deec922",
+      "capture_sha256": "c83d96b22dd1f77113203f6306ca15799da52a37c9d5ae491821150c889ae85c",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+      "frame_count": 10359,
+      "truth_sha256": "71dc170ac875df1922db5cba6dcbfb59db11f254d6c35c45b825bdfe0d33ca8c",
+      "capture_sha256": "61a4b73d8ebd98e5f81d6fbcab7195bb5c81875f183741eca435ae7077f478dd",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-schumann-op039-05-ov-buttner2025",
+      "frame_count": 12226,
+      "truth_sha256": "aa36e4aec046346505801c6eb7d66db6557792129ba3395955945c7f3f315cd5",
+      "capture_sha256": "3089b5afac496979c1ef49f64e52efae5671543a531aa6ac93ff34a613da8bdf",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "frame_count": 11258,
+      "truth_sha256": "d7140499d39a2769e1d8a248d2122efda0cb519ec2cc203d0bf81563ed0fc312",
+      "capture_sha256": "f00c6df8b74aca7395079db30244d15819ae0d4d2ef62c9578d11b3671d22f9e",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+      "frame_count": 15410,
+      "truth_sha256": "a45bd07ff0742e30ee0eca8cd53ffc0fc1c29baf8f81ee5b024554af89ef2796",
+      "capture_sha256": "09896ffb8511eb529ad81d60add089a0317aa5f40a4e352c28d45d46ea142ad3",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+      "frame_count": 14800,
+      "truth_sha256": "49379fbe7c51dbf3d9cff11586ece6b9316d128e1f05cd2f8fdb0b281c1f4c88",
+      "capture_sha256": "7e08129bf8748f959536d857bc9999a4088186a6be46903f48da8f8d1afb436d",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+      "frame_count": 13902,
+      "truth_sha256": "f0aaf80955f919bf3cd84df7f649824812ab08aed548d09e5342fb7d79e00959",
+      "capture_sha256": "8f781ccc08798cf349ba841bb5bb89ed66f104068ebc1fcecced2a1f354c72d7",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+      "frame_count": 15429,
+      "truth_sha256": "ec2d36c1e4e7bfe5641dc5085e08bd4ab3cb2aa28e1d408f7faab44b584f14d1",
+      "capture_sha256": "c5522a4af335b3045c3cc5d4baade4809307d994b277152d0b7112a10c5c5dda",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "frame_count": 9547,
+      "truth_sha256": "e892d59ecb17cc055034f3c043d49f981ad877092fb1298df3eaaeb10f4fd47e",
+      "capture_sha256": "3e0626fec9fe95fc1a07b48eab7983a38ab3d951b65cd8f8c9137e2d7e53338f",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "frame_count": 10695,
+      "truth_sha256": "176a0359278e6ec6fcffec89b0489fbd3ca8ac4e8b93dd974c3b4423b8444cb1",
+      "capture_sha256": "8cc504bfe807c64cc1aa721b842de44b350ffc5d6724d0b30277e71cade824bb",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+      "frame_count": 10500,
+      "truth_sha256": "ba992b7fd03f9117cf411b06c59778f9eb65698a1e71c6907fa8520da0f46d9b",
+      "capture_sha256": "ccedd36d8c0bef9060f0d32d687a586a44c66ecbf43d20b340405412c8373bea",
+      "status": "not_selected_by_frozen_annotation_plan",
+      "private_capture_read": false
+    }
+  ],
+  "private_capture_count": 7,
+  "complete": true,
+  "truth_assisted": true,
+  "observation_ledger_replayed": true,
+  "selected_tempo": null,
+  "source_pooling": false,
+  "phase_search": false,
+  "neural_inference": false,
+  "decoder_replayed": false,
+  "fitted_mapping": false,
+  "holdout_opened": false,
+  "training_run": false,
+  "production_output_changed": false,
+  "new_user_parameters": false,
+  "accuracy_improvement_claimed": false,
+  "pairs": [
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-06-150-to-75",
+      "frame_count": 681,
+      "truth_sha256": "fcda5614cb07639a66edb58f7b658214e1f54ec1db1de35e84367d47be77849f",
+      "capture_sha256": "c96fe9dff55dc0334c956f453cb9e0640af4ce9b52abdccd82eaeb4b022b9ff3",
+      "pair_sha256": "ac8c90865ccbcdf239ee677e4f2815f91f886b4e4eb480fc4b8b7658852d5bf9",
+      "whole_capture_responses": {
+        "raw": 19,
+        "candidate": 60
+      },
+      "outside_selected_windows": {
+        "raw": 8,
+        "candidate": 21
+      },
+      "status": "eligible",
+      "windows": {
+        "constant": {
+          "frames": 200,
+          "owned_responses": {
+            "raw": 5,
+            "candidate": 19
+          },
+          "status": "eligible",
+          "inventories": {
+            "raw": {
+              "annotated": {
+                "ticks": 9,
+                "responses": 5,
+                "matched": 5,
+                "unmatched_ticks": 4,
+                "unmatched_responses": 0,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5,
+                  "never/interior": 4
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 60
+              },
+              "continuation": {
+                "ticks": 10,
+                "responses": 5,
+                "matched": 3,
+                "unmatched_ticks": 7,
+                "unmatched_responses": 2,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3,
+                  "never/interior": 7
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 66
+              },
+              "half_phase_zero": {
+                "ticks": 5,
+                "responses": 5,
+                "matched": 0,
+                "unmatched_ticks": 5,
+                "unmatched_responses": 5,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "never/interior": 5
+                },
+                "response_strata": {
+                  "never/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 36
+              },
+              "half_phase_one": {
+                "ticks": 5,
+                "responses": 5,
+                "matched": 3,
+                "unmatched_ticks": 2,
+                "unmatched_responses": 2,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3,
+                  "never/interior": 2
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 36
+              },
+              "double": {
+                "ticks": 20,
+                "responses": 5,
+                "matched": 3,
+                "unmatched_ticks": 17,
+                "unmatched_responses": 2,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "never/interior": 17,
+                  "always/interior": 3
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 126
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "ticks": 9,
+                "responses": 19,
+                "matched": 9,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 10,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 9
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 1,
+                  "never/interior/off_annotation/nonpositive": 9,
+                  "always/interior/near_annotation/positive": 5,
+                  "always/interior/near_annotation/nonpositive": 4
+                },
+                "assignment_count": 1,
+                "states": 200
+              },
+              "continuation": {
+                "ticks": 10,
+                "responses": 19,
+                "matched": 5,
+                "unmatched_ticks": 5,
+                "unmatched_responses": 14,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5,
+                  "never/interior": 5
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 1,
+                  "never/interior/off_annotation/nonpositive": 9,
+                  "always/interior/near_annotation/positive": 3,
+                  "always/interior/near_annotation/nonpositive": 2,
+                  "never/interior/near_annotation/nonpositive": 2,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 220
+              },
+              "half_phase_zero": {
+                "ticks": 5,
+                "responses": 19,
+                "matched": 2,
+                "unmatched_ticks": 3,
+                "unmatched_responses": 17,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 2,
+                  "never/interior": 3
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 1,
+                  "never/interior/off_annotation/nonpositive": 9,
+                  "never/interior/near_annotation/positive": 5,
+                  "always/interior/near_annotation/nonpositive": 2,
+                  "never/interior/near_annotation/nonpositive": 2
+                },
+                "assignment_count": 1,
+                "states": 120
+              },
+              "half_phase_one": {
+                "ticks": 5,
+                "responses": 19,
+                "matched": 3,
+                "unmatched_ticks": 2,
+                "unmatched_responses": 16,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3,
+                  "never/interior": 2
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 1,
+                  "never/interior/off_annotation/nonpositive": 9,
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/nonpositive": 4,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 120
+              },
+              "double": {
+                "ticks": 20,
+                "responses": 19,
+                "matched": 10,
+                "unmatched_ticks": 10,
+                "unmatched_responses": 9,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 10,
+                  "never/interior": 10
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 1,
+                  "always/interior/off_annotation/nonpositive": 5,
+                  "always/interior/near_annotation/positive": 3,
+                  "always/interior/near_annotation/nonpositive": 2,
+                  "never/interior/off_annotation/nonpositive": 4,
+                  "never/interior/near_annotation/nonpositive": 2,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 420
+              }
+            }
+          },
+          "comparisons": {
+            "raw": {
+              "annotated": "fewer/more",
+              "half_phase_zero": "more/more",
+              "half_phase_one": "equal/more",
+              "double": "equal/fewer"
+            },
+            "candidate": {
+              "annotated": "fewer/more",
+              "half_phase_zero": "more/more",
+              "half_phase_one": "more/more",
+              "double": "fewer/fewer"
+            }
+          },
+          "annotated_tick_causes": {
+            "raw_always": 5,
+            "raw_never_candidate_always": 4
+          },
+          "annotated_miss_candidate_marks": {
+            "always/nonpositive_only": 4
+          },
+          "identical_annotated_continuation": false,
+          "versus_continuation": {
+            "raw": {
+              "annotated": {
+                "matched_delta": 2,
+                "unmatched_ticks_delta": -3,
+                "relation": "left_dominates"
+              },
+              "half_phase_zero": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": -2,
+                "relation": "tradeoff"
+              },
+              "half_phase_one": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": -5,
+                "relation": "left_dominates"
+              },
+              "double": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 10,
+                "relation": "right_dominates"
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "matched_delta": 4,
+                "unmatched_ticks_delta": -5,
+                "relation": "left_dominates"
+              },
+              "half_phase_zero": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": -2,
+                "relation": "tradeoff"
+              },
+              "half_phase_one": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": -3,
+                "relation": "tradeoff"
+              },
+              "double": {
+                "matched_delta": 5,
+                "unmatched_ticks_delta": 5,
+                "relation": "tradeoff"
+              }
+            }
+          }
+        },
+        "change": {
+          "frames": 200,
+          "owned_responses": {
+            "raw": 6,
+            "candidate": 20
+          },
+          "status": "eligible",
+          "inventories": {
+            "raw": {
+              "annotated": {
+                "ticks": 8,
+                "responses": 6,
+                "matched": 6,
+                "unmatched_ticks": 2,
+                "unmatched_responses": 0,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "never/boundary": 1,
+                  "always/interior": 6,
+                  "never/interior": 1
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 6
+                },
+                "assignment_count": 1,
+                "states": 63
+              },
+              "continuation": {
+                "ticks": 10,
+                "responses": 6,
+                "matched": 6,
+                "unmatched_ticks": 4,
+                "unmatched_responses": 0,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "never/boundary": 1,
+                  "always/interior": 6,
+                  "never/interior": 3
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 6
+                },
+                "assignment_count": 1,
+                "states": 77
+              },
+              "half_phase_zero": {
+                "ticks": 5,
+                "responses": 6,
+                "matched": 5,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 1,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 5,
+                  "never/interior/near_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 42
+              },
+              "half_phase_one": {
+                "ticks": 5,
+                "responses": 6,
+                "matched": 1,
+                "unmatched_ticks": 4,
+                "unmatched_responses": 5,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "never/boundary": 1,
+                  "always/interior": 1,
+                  "never/interior": 3
+                },
+                "response_strata": {
+                  "never/interior/near_annotation/positive": 5,
+                  "always/interior/near_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 42
+              },
+              "double": {
+                "ticks": 20,
+                "responses": 6,
+                "matched": 6,
+                "unmatched_ticks": 14,
+                "unmatched_responses": 0,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "never/boundary": 1,
+                  "never/interior": 13,
+                  "always/interior": 6
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 6
+                },
+                "assignment_count": 1,
+                "states": 147
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "ticks": 8,
+                "responses": 20,
+                "matched": 8,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 12,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/boundary": 1,
+                  "always/interior": 7
+                },
+                "response_strata": {
+                  "always/boundary/near_annotation/nonpositive": 1,
+                  "never/interior/off_annotation/nonpositive": 12,
+                  "always/interior/near_annotation/positive": 6,
+                  "always/interior/near_annotation/nonpositive": 1
+                },
+                "assignment_count": 1,
+                "states": 189
+              },
+              "continuation": {
+                "ticks": 10,
+                "responses": 20,
+                "matched": 10,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 10,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/boundary": 1,
+                  "always/interior": 9
+                },
+                "response_strata": {
+                  "always/boundary/near_annotation/nonpositive": 1,
+                  "never/interior/off_annotation/nonpositive": 10,
+                  "always/interior/near_annotation/positive": 6,
+                  "always/interior/near_annotation/nonpositive": 1,
+                  "always/interior/off_annotation/nonpositive": 2
+                },
+                "assignment_count": 1,
+                "states": 231
+              },
+              "half_phase_zero": {
+                "ticks": 5,
+                "responses": 20,
+                "matched": 5,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 15,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5
+                },
+                "response_strata": {
+                  "never/boundary/near_annotation/nonpositive": 1,
+                  "never/interior/off_annotation/nonpositive": 12,
+                  "always/interior/near_annotation/positive": 5,
+                  "never/interior/near_annotation/positive": 1,
+                  "never/interior/near_annotation/nonpositive": 1
+                },
+                "assignment_count": 1,
+                "states": 126
+              },
+              "half_phase_one": {
+                "ticks": 5,
+                "responses": 20,
+                "matched": 5,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 15,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/boundary": 1,
+                  "always/interior": 4
+                },
+                "response_strata": {
+                  "always/boundary/near_annotation/nonpositive": 1,
+                  "never/interior/off_annotation/nonpositive": 10,
+                  "never/interior/near_annotation/positive": 5,
+                  "always/interior/near_annotation/positive": 1,
+                  "always/interior/near_annotation/nonpositive": 1,
+                  "always/interior/off_annotation/nonpositive": 2
+                },
+                "assignment_count": 1,
+                "states": 126
+              },
+              "double": {
+                "ticks": 20,
+                "responses": 20,
+                "matched": 17,
+                "unmatched_ticks": 3,
+                "unmatched_responses": 3,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/boundary": 1,
+                  "always/interior": 16,
+                  "never/interior": 3
+                },
+                "response_strata": {
+                  "always/boundary/near_annotation/nonpositive": 1,
+                  "always/interior/off_annotation/nonpositive": 9,
+                  "never/interior/off_annotation/nonpositive": 3,
+                  "always/interior/near_annotation/positive": 6,
+                  "always/interior/near_annotation/nonpositive": 1
+                },
+                "assignment_count": 1,
+                "states": 441
+              }
+            }
+          },
+          "comparisons": {
+            "raw": {
+              "annotated": "equal/more",
+              "half_phase_zero": "more/more",
+              "half_phase_one": "more/equal",
+              "double": "equal/fewer"
+            },
+            "candidate": {
+              "annotated": "more/equal",
+              "half_phase_zero": "more/equal",
+              "half_phase_one": "more/equal",
+              "double": "fewer/fewer"
+            }
+          },
+          "annotated_tick_causes": {
+            "raw_never_boundary_censored": 1,
+            "raw_always": 6,
+            "raw_never_candidate_always": 1
+          },
+          "annotated_miss_candidate_marks": {
+            "always/nonpositive_only": 1
+          },
+          "identical_annotated_continuation": false,
+          "versus_continuation": {
+            "raw": {
+              "annotated": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": -2,
+                "relation": "left_dominates"
+              },
+              "half_phase_zero": {
+                "matched_delta": -1,
+                "unmatched_ticks_delta": -4,
+                "relation": "tradeoff"
+              },
+              "half_phase_one": {
+                "matched_delta": -5,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "double": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 10,
+                "relation": "right_dominates"
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "half_phase_zero": {
+                "matched_delta": -5,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "half_phase_one": {
+                "matched_delta": -5,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "double": {
+                "matched_delta": 7,
+                "unmatched_ticks_delta": 3,
+                "relation": "tradeoff"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-08-112-5-to-75",
+      "frame_count": 701,
+      "truth_sha256": "64de869a6b3e15d8e07601d67cb1508842de558761f5d00f4d25ded8077b92e6",
+      "capture_sha256": "f727928b068097ab0ac2d58cf838f95265fb9a74a7c2fb990dba7fc5fee07edf",
+      "pair_sha256": "4247cbfbfbf2ce737064978e19eae11433df1a01e10560c39b9b4b42748ae1d0",
+      "whole_capture_responses": {
+        "raw": 24,
+        "candidate": 99
+      },
+      "outside_selected_windows": {
+        "raw": 9,
+        "candidate": 43
+      },
+      "status": "eligible",
+      "windows": {
+        "constant": {
+          "frames": 200,
+          "owned_responses": {
+            "raw": 8,
+            "candidate": 27
+          },
+          "status": "eligible",
+          "inventories": {
+            "raw": {
+              "annotated": {
+                "ticks": 7,
+                "responses": 8,
+                "matched": 7,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 1,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 7
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 7
+                },
+                "assignment_count": 1,
+                "states": 72
+              },
+              "continuation": {
+                "ticks": 7,
+                "responses": 8,
+                "matched": 5,
+                "unmatched_ticks": 2,
+                "unmatched_responses": 3,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5,
+                  "never/interior": 2
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 5,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 72
+              },
+              "half_phase_zero": {
+                "ticks": 3,
+                "responses": 8,
+                "matched": 2,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 6,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 2,
+                  "never/interior": 1
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/near_annotation/positive": 5,
+                  "always/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 36
+              },
+              "half_phase_one": {
+                "ticks": 4,
+                "responses": 8,
+                "matched": 3,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 5,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3,
+                  "never/interior": 1
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/positive": 4
+                },
+                "assignment_count": 1,
+                "states": 45
+              },
+              "double": {
+                "ticks": 14,
+                "responses": 8,
+                "matched": 5,
+                "unmatched_ticks": 9,
+                "unmatched_responses": 3,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "never/interior": 9,
+                  "always/interior": 5
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 5,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 135
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "ticks": 7,
+                "responses": 27,
+                "matched": 7,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 20,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 7
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 19,
+                  "always/interior/near_annotation/positive": 7
+                },
+                "assignment_count": 1,
+                "states": 224
+              },
+              "continuation": {
+                "ticks": 7,
+                "responses": 27,
+                "matched": 7,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 20,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 7
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 17,
+                  "always/interior/near_annotation/positive": 5,
+                  "never/interior/near_annotation/positive": 2,
+                  "always/interior/off_annotation/nonpositive": 2
+                },
+                "assignment_count": 1,
+                "states": 224
+              },
+              "half_phase_zero": {
+                "ticks": 3,
+                "responses": 27,
+                "matched": 3,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 24,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 18,
+                  "never/interior/near_annotation/positive": 5,
+                  "always/interior/near_annotation/positive": 2,
+                  "always/interior/off_annotation/nonpositive": 1
+                },
+                "assignment_count": 1,
+                "states": 112
+              },
+              "half_phase_one": {
+                "ticks": 4,
+                "responses": 27,
+                "matched": 4,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 23,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 4
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 18,
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/positive": 4,
+                  "always/interior/off_annotation/nonpositive": 1
+                },
+                "assignment_count": 1,
+                "states": 140
+              },
+              "double": {
+                "ticks": 14,
+                "responses": 27,
+                "matched": 14,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 13,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 14
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/off_annotation/nonpositive": 9,
+                  "always/interior/near_annotation/positive": 5,
+                  "never/interior/off_annotation/nonpositive": 10,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 420
+              }
+            }
+          },
+          "comparisons": {
+            "raw": {
+              "annotated": "fewer/more",
+              "half_phase_zero": "more/more",
+              "half_phase_one": "more/more",
+              "double": "equal/fewer"
+            },
+            "candidate": {
+              "annotated": "equal/equal",
+              "half_phase_zero": "more/equal",
+              "half_phase_one": "more/equal",
+              "double": "fewer/equal"
+            }
+          },
+          "annotated_tick_causes": {
+            "raw_always": 7
+          },
+          "annotated_miss_candidate_marks": {},
+          "identical_annotated_continuation": false,
+          "versus_continuation": {
+            "raw": {
+              "annotated": {
+                "matched_delta": 2,
+                "unmatched_ticks_delta": -2,
+                "relation": "left_dominates"
+              },
+              "half_phase_zero": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": -1,
+                "relation": "tradeoff"
+              },
+              "half_phase_one": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": -1,
+                "relation": "tradeoff"
+              },
+              "double": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 7,
+                "relation": "right_dominates"
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 0,
+                "relation": "equal"
+              },
+              "half_phase_zero": {
+                "matched_delta": -4,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "half_phase_one": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "double": {
+                "matched_delta": 7,
+                "unmatched_ticks_delta": 0,
+                "relation": "left_dominates"
+              }
+            }
+          }
+        },
+        "change": {
+          "frames": 200,
+          "owned_responses": {
+            "raw": 7,
+            "candidate": 29
+          },
+          "status": "eligible",
+          "inventories": {
+            "raw": {
+              "annotated": {
+                "ticks": 6,
+                "responses": 7,
+                "matched": 4,
+                "unmatched_ticks": 2,
+                "unmatched_responses": 3,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 4,
+                  "never/interior": 2
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 4,
+                  "never/interior/off_annotation/positive": 3
+                },
+                "assignment_count": 1,
+                "states": 56
+              },
+              "continuation": {
+                "ticks": 7,
+                "responses": 7,
+                "matched": 5,
+                "unmatched_ticks": 2,
+                "unmatched_responses": 2,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5,
+                  "never/interior": 2
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 3,
+                  "always/interior/off_annotation/positive": 2,
+                  "never/interior/near_annotation/positive": 1,
+                  "never/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 64
+              },
+              "half_phase_zero": {
+                "ticks": 3,
+                "responses": 7,
+                "matched": 2,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 5,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 2,
+                  "never/interior": 1
+                },
+                "response_strata": {
+                  "never/interior/near_annotation/positive": 3,
+                  "always/interior/near_annotation/positive": 1,
+                  "always/interior/off_annotation/positive": 1,
+                  "never/interior/off_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 32
+              },
+              "half_phase_one": {
+                "ticks": 4,
+                "responses": 7,
+                "matched": 3,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 4,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3,
+                  "never/interior": 1
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 2,
+                  "never/interior/near_annotation/positive": 2,
+                  "never/interior/off_annotation/positive": 2,
+                  "always/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 40
+              },
+              "double": {
+                "ticks": 14,
+                "responses": 7,
+                "matched": 5,
+                "unmatched_ticks": 9,
+                "unmatched_responses": 2,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5,
+                  "never/interior": 9
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 3,
+                  "always/interior/off_annotation/positive": 2,
+                  "never/interior/near_annotation/positive": 1,
+                  "never/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 120
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "ticks": 6,
+                "responses": 29,
+                "matched": 6,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 23,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 6
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 2,
+                  "never/interior/off_annotation/nonpositive": 18,
+                  "always/interior/near_annotation/positive": 4,
+                  "never/interior/off_annotation/positive": 3,
+                  "always/interior/near_annotation/nonpositive": 2
+                },
+                "assignment_count": 1,
+                "states": 210
+              },
+              "continuation": {
+                "ticks": 7,
+                "responses": 29,
+                "matched": 6,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 23,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 6,
+                  "never/interior": 1
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 2,
+                  "never/interior/off_annotation/nonpositive": 17,
+                  "always/interior/near_annotation/positive": 3,
+                  "always/interior/off_annotation/positive": 2,
+                  "never/interior/near_annotation/nonpositive": 2,
+                  "never/interior/near_annotation/positive": 1,
+                  "always/interior/off_annotation/nonpositive": 1,
+                  "never/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 240
+              },
+              "half_phase_zero": {
+                "ticks": 3,
+                "responses": 29,
+                "matched": 3,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 26,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 2,
+                  "never/interior/off_annotation/nonpositive": 17,
+                  "never/interior/near_annotation/positive": 3,
+                  "always/interior/near_annotation/positive": 1,
+                  "always/interior/off_annotation/positive": 1,
+                  "never/interior/near_annotation/nonpositive": 2,
+                  "never/interior/off_annotation/positive": 2,
+                  "always/interior/off_annotation/nonpositive": 1
+                },
+                "assignment_count": 1,
+                "states": 120
+              },
+              "half_phase_one": {
+                "ticks": 4,
+                "responses": 29,
+                "matched": 3,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 26,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3,
+                  "never/interior": 1
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 2,
+                  "never/interior/off_annotation/nonpositive": 18,
+                  "always/interior/near_annotation/positive": 2,
+                  "never/interior/near_annotation/positive": 2,
+                  "never/interior/off_annotation/positive": 2,
+                  "never/interior/near_annotation/nonpositive": 2,
+                  "always/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 150
+              },
+              "double": {
+                "ticks": 14,
+                "responses": 29,
+                "matched": 10,
+                "unmatched_ticks": 4,
+                "unmatched_responses": 19,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 10,
+                  "never/interior": 4
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 2,
+                  "never/interior/off_annotation/nonpositive": 14,
+                  "always/interior/near_annotation/positive": 3,
+                  "always/interior/off_annotation/nonpositive": 4,
+                  "always/interior/off_annotation/positive": 2,
+                  "always/interior/near_annotation/nonpositive": 1,
+                  "never/interior/near_annotation/positive": 1,
+                  "never/interior/off_annotation/positive": 1,
+                  "never/interior/near_annotation/nonpositive": 1
+                },
+                "assignment_count": 1,
+                "states": 450
+              }
+            }
+          },
+          "comparisons": {
+            "raw": {
+              "annotated": "more/equal",
+              "half_phase_zero": "more/more",
+              "half_phase_one": "more/more",
+              "double": "equal/fewer"
+            },
+            "candidate": {
+              "annotated": "equal/more",
+              "half_phase_zero": "more/more",
+              "half_phase_one": "more/equal",
+              "double": "fewer/fewer"
+            }
+          },
+          "annotated_tick_causes": {
+            "raw_always": 4,
+            "raw_never_candidate_always": 2
+          },
+          "annotated_miss_candidate_marks": {
+            "always/nonpositive_only": 2
+          },
+          "identical_annotated_continuation": false,
+          "versus_continuation": {
+            "raw": {
+              "annotated": {
+                "matched_delta": -1,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "half_phase_zero": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": -1,
+                "relation": "tradeoff"
+              },
+              "half_phase_one": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": -1,
+                "relation": "tradeoff"
+              },
+              "double": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 7,
+                "relation": "right_dominates"
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": -1,
+                "relation": "left_dominates"
+              },
+              "half_phase_zero": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": -1,
+                "relation": "tradeoff"
+              },
+              "half_phase_one": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "double": {
+                "matched_delta": 4,
+                "unmatched_ticks_delta": 3,
+                "relation": "tradeoff"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-09-90-to-80",
+      "frame_count": 881,
+      "truth_sha256": "a9802ae028c9631323354a5826f50e2c78b14e54c66581a817f8d07b633a5409",
+      "capture_sha256": "cc3464f42f5c32135d39832563f146ef2d80d284c817626c23627ee986fe244e",
+      "pair_sha256": "d86ce525657bb1cb7ad8ce1d446e7d5a0d2736d284902c25594a4884c67c9269",
+      "whole_capture_responses": {
+        "raw": 25,
+        "candidate": 100
+      },
+      "outside_selected_windows": {
+        "raw": 13,
+        "candidate": 58
+      },
+      "status": "eligible",
+      "windows": {
+        "constant": {
+          "frames": 200,
+          "owned_responses": {
+            "raw": 6,
+            "candidate": 23
+          },
+          "status": "eligible",
+          "inventories": {
+            "raw": {
+              "annotated": {
+                "ticks": 5,
+                "responses": 6,
+                "matched": 5,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 1,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 42
+              },
+              "continuation": {
+                "ticks": 5,
+                "responses": 6,
+                "matched": 5,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 1,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 42
+              },
+              "half_phase_zero": {
+                "ticks": 2,
+                "responses": 6,
+                "matched": 2,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 4,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 2
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/near_annotation/positive": 3,
+                  "always/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 21
+              },
+              "half_phase_one": {
+                "ticks": 3,
+                "responses": 6,
+                "matched": 3,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 3,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 28
+              },
+              "double": {
+                "ticks": 11,
+                "responses": 6,
+                "matched": 5,
+                "unmatched_ticks": 6,
+                "unmatched_responses": 1,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "never/interior": 6,
+                  "always/interior": 5
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 84
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "ticks": 5,
+                "responses": 23,
+                "matched": 5,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 18,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 17,
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 144
+              },
+              "continuation": {
+                "ticks": 5,
+                "responses": 23,
+                "matched": 5,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 18,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 17,
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 144
+              },
+              "half_phase_zero": {
+                "ticks": 2,
+                "responses": 23,
+                "matched": 2,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 21,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 2
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 17,
+                  "never/interior/near_annotation/positive": 3,
+                  "always/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 72
+              },
+              "half_phase_one": {
+                "ticks": 3,
+                "responses": 23,
+                "matched": 3,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 20,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 17,
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 96
+              },
+              "double": {
+                "ticks": 11,
+                "responses": 23,
+                "matched": 9,
+                "unmatched_ticks": 2,
+                "unmatched_responses": 14,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 9,
+                  "never/interior": 2
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/off_annotation/nonpositive": 4,
+                  "never/interior/off_annotation/nonpositive": 13,
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 288
+              }
+            }
+          },
+          "comparisons": {
+            "raw": {
+              "annotated": "equal/equal",
+              "half_phase_zero": "more/equal",
+              "half_phase_one": "more/equal",
+              "double": "equal/fewer"
+            },
+            "candidate": {
+              "annotated": "equal/equal",
+              "half_phase_zero": "more/equal",
+              "half_phase_one": "more/equal",
+              "double": "fewer/fewer"
+            }
+          },
+          "annotated_tick_causes": {
+            "raw_always": 5
+          },
+          "annotated_miss_candidate_marks": {},
+          "identical_annotated_continuation": false,
+          "versus_continuation": {
+            "raw": {
+              "annotated": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 0,
+                "relation": "equal"
+              },
+              "half_phase_zero": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "half_phase_one": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "double": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 6,
+                "relation": "right_dominates"
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 0,
+                "relation": "equal"
+              },
+              "half_phase_zero": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "half_phase_one": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "double": {
+                "matched_delta": 4,
+                "unmatched_ticks_delta": 2,
+                "relation": "tradeoff"
+              }
+            }
+          }
+        },
+        "change": {
+          "frames": 200,
+          "owned_responses": {
+            "raw": 6,
+            "candidate": 19
+          },
+          "status": "eligible",
+          "inventories": {
+            "raw": {
+              "annotated": {
+                "ticks": 6,
+                "responses": 6,
+                "matched": 5,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 1,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/boundary": 1,
+                  "always/interior": 4,
+                  "never/interior": 1
+                },
+                "response_strata": {
+                  "always/boundary/near_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 4,
+                  "never/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 49
+              },
+              "continuation": {
+                "ticks": 6,
+                "responses": 6,
+                "matched": 3,
+                "unmatched_ticks": 3,
+                "unmatched_responses": 3,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/boundary": 1,
+                  "always/interior": 2,
+                  "never/interior": 3
+                },
+                "response_strata": {
+                  "always/boundary/near_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 2,
+                  "never/interior/off_annotation/positive": 1,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 49
+              },
+              "half_phase_zero": {
+                "ticks": 3,
+                "responses": 6,
+                "matched": 1,
+                "unmatched_ticks": 2,
+                "unmatched_responses": 5,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 1,
+                  "never/interior": 2
+                },
+                "response_strata": {
+                  "never/boundary/near_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 1,
+                  "never/interior/near_annotation/positive": 3,
+                  "never/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 28
+              },
+              "half_phase_one": {
+                "ticks": 3,
+                "responses": 6,
+                "matched": 2,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 4,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/boundary": 1,
+                  "always/interior": 1,
+                  "never/interior": 1
+                },
+                "response_strata": {
+                  "always/boundary/near_annotation/positive": 1,
+                  "never/interior/near_annotation/positive": 3,
+                  "always/interior/near_annotation/positive": 1,
+                  "never/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 28
+              },
+              "double": {
+                "ticks": 12,
+                "responses": 6,
+                "matched": 3,
+                "unmatched_ticks": 9,
+                "unmatched_responses": 3,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/boundary": 1,
+                  "never/interior": 9,
+                  "always/interior": 2
+                },
+                "response_strata": {
+                  "always/boundary/near_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 2,
+                  "never/interior/off_annotation/positive": 1,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 91
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "ticks": 6,
+                "responses": 19,
+                "matched": 5,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 14,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/boundary": 1,
+                  "always/interior": 4,
+                  "never/interior": 1
+                },
+                "response_strata": {
+                  "always/boundary/near_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 12,
+                  "always/interior/near_annotation/positive": 4,
+                  "never/interior/off_annotation/positive": 1,
+                  "never/boundary/off_annotation/nonpositive": 1
+                },
+                "assignment_count": 1,
+                "states": 140
+              },
+              "continuation": {
+                "ticks": 6,
+                "responses": 19,
+                "matched": 3,
+                "unmatched_ticks": 3,
+                "unmatched_responses": 16,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/boundary": 1,
+                  "always/interior": 2,
+                  "never/interior": 3
+                },
+                "response_strata": {
+                  "always/boundary/near_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 12,
+                  "always/interior/near_annotation/positive": 2,
+                  "never/interior/off_annotation/positive": 1,
+                  "never/interior/near_annotation/positive": 2,
+                  "never/boundary/off_annotation/nonpositive": 1
+                },
+                "assignment_count": 1,
+                "states": 140
+              },
+              "half_phase_zero": {
+                "ticks": 3,
+                "responses": 19,
+                "matched": 1,
+                "unmatched_ticks": 2,
+                "unmatched_responses": 18,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 1,
+                  "never/interior": 2
+                },
+                "response_strata": {
+                  "never/boundary/near_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 12,
+                  "always/interior/near_annotation/positive": 1,
+                  "never/interior/near_annotation/positive": 3,
+                  "never/interior/off_annotation/positive": 1,
+                  "never/boundary/off_annotation/nonpositive": 1
+                },
+                "assignment_count": 1,
+                "states": 80
+              },
+              "half_phase_one": {
+                "ticks": 3,
+                "responses": 19,
+                "matched": 2,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 17,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/boundary": 1,
+                  "always/interior": 1,
+                  "never/interior": 1
+                },
+                "response_strata": {
+                  "always/boundary/near_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 12,
+                  "never/interior/near_annotation/positive": 3,
+                  "always/interior/near_annotation/positive": 1,
+                  "never/interior/off_annotation/positive": 1,
+                  "never/boundary/off_annotation/nonpositive": 1
+                },
+                "assignment_count": 1,
+                "states": 80
+              },
+              "double": {
+                "ticks": 12,
+                "responses": 19,
+                "matched": 5,
+                "unmatched_ticks": 7,
+                "unmatched_responses": 14,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/boundary": 1,
+                  "always/interior": 4,
+                  "never/interior": 7
+                },
+                "response_strata": {
+                  "always/boundary/near_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 10,
+                  "always/interior/off_annotation/nonpositive": 2,
+                  "always/interior/near_annotation/positive": 2,
+                  "never/interior/off_annotation/positive": 1,
+                  "never/interior/near_annotation/positive": 2,
+                  "never/boundary/off_annotation/nonpositive": 1
+                },
+                "assignment_count": 1,
+                "states": 260
+              }
+            }
+          },
+          "comparisons": {
+            "raw": {
+              "annotated": "fewer/more",
+              "half_phase_zero": "more/more",
+              "half_phase_one": "more/more",
+              "double": "equal/fewer"
+            },
+            "candidate": {
+              "annotated": "fewer/more",
+              "half_phase_zero": "more/more",
+              "half_phase_one": "more/more",
+              "double": "fewer/fewer"
+            }
+          },
+          "annotated_tick_causes": {
+            "raw_always": 5,
+            "raw_never_no_candidate_in_radius": 1
+          },
+          "annotated_miss_candidate_marks": {},
+          "identical_annotated_continuation": false,
+          "versus_continuation": {
+            "raw": {
+              "annotated": {
+                "matched_delta": 2,
+                "unmatched_ticks_delta": -2,
+                "relation": "left_dominates"
+              },
+              "half_phase_zero": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": -1,
+                "relation": "tradeoff"
+              },
+              "half_phase_one": {
+                "matched_delta": -1,
+                "unmatched_ticks_delta": -2,
+                "relation": "tradeoff"
+              },
+              "double": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 6,
+                "relation": "right_dominates"
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "matched_delta": 2,
+                "unmatched_ticks_delta": -2,
+                "relation": "left_dominates"
+              },
+              "half_phase_zero": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": -1,
+                "relation": "tradeoff"
+              },
+              "half_phase_one": {
+                "matched_delta": -1,
+                "unmatched_ticks_delta": -2,
+                "relation": "tradeoff"
+              },
+              "double": {
+                "matched_delta": 2,
+                "unmatched_ticks_delta": 4,
+                "relation": "tradeoff"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-10-90-to-120",
+      "frame_count": 831,
+      "truth_sha256": "2165ea70a5f4224461552a28567cb45ad2b2cfe66cf4a99661ff49a02b24f10f",
+      "capture_sha256": "d9f11d3c740c80d0e5d12c650b07bdd1268d007491740e0c5ca3b388cf5de9a4",
+      "pair_sha256": "30f62bd8ff1a8194d03d2d611f89041be2af415bf7b59bae02623c9b3f64f0d2",
+      "whole_capture_responses": {
+        "raw": 29,
+        "candidate": 127
+      },
+      "outside_selected_windows": {
+        "raw": 16,
+        "candidate": 60
+      },
+      "status": "eligible",
+      "windows": {
+        "constant": {
+          "frames": 200,
+          "owned_responses": {
+            "raw": 6,
+            "candidate": 31
+          },
+          "status": "eligible",
+          "inventories": {
+            "raw": {
+              "annotated": {
+                "ticks": 6,
+                "responses": 6,
+                "matched": 5,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 1,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5,
+                  "never/boundary": 1
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 49
+              },
+              "continuation": {
+                "ticks": 6,
+                "responses": 6,
+                "matched": 5,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 1,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5,
+                  "never/boundary": 1
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 49
+              },
+              "half_phase_zero": {
+                "ticks": 3,
+                "responses": 6,
+                "matched": 2,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 4,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 2,
+                  "never/boundary": 1
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/near_annotation/positive": 3,
+                  "always/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 28
+              },
+              "half_phase_one": {
+                "ticks": 3,
+                "responses": 6,
+                "matched": 3,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 3,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 28
+              },
+              "double": {
+                "ticks": 12,
+                "responses": 6,
+                "matched": 5,
+                "unmatched_ticks": 7,
+                "unmatched_responses": 1,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "never/interior": 6,
+                  "always/interior": 5,
+                  "never/boundary": 1
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 91
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "ticks": 6,
+                "responses": 31,
+                "matched": 5,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 26,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5,
+                  "never/boundary": 1
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 25,
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 224
+              },
+              "continuation": {
+                "ticks": 6,
+                "responses": 31,
+                "matched": 5,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 26,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5,
+                  "never/boundary": 1
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 25,
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 224
+              },
+              "half_phase_zero": {
+                "ticks": 3,
+                "responses": 31,
+                "matched": 2,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 29,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 2,
+                  "never/boundary": 1
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 25,
+                  "never/interior/near_annotation/positive": 3,
+                  "always/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 128
+              },
+              "half_phase_one": {
+                "ticks": 3,
+                "responses": 31,
+                "matched": 3,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 28,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 25,
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 128
+              },
+              "double": {
+                "ticks": 12,
+                "responses": 31,
+                "matched": 11,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 20,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 11,
+                  "never/boundary": 1
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 19,
+                  "always/interior/off_annotation/nonpositive": 6,
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 416
+              }
+            }
+          },
+          "comparisons": {
+            "raw": {
+              "annotated": "equal/equal",
+              "half_phase_zero": "more/equal",
+              "half_phase_one": "more/more",
+              "double": "equal/fewer"
+            },
+            "candidate": {
+              "annotated": "equal/equal",
+              "half_phase_zero": "more/equal",
+              "half_phase_one": "more/more",
+              "double": "fewer/equal"
+            }
+          },
+          "annotated_tick_causes": {
+            "raw_always": 5,
+            "raw_never_boundary_censored": 1
+          },
+          "annotated_miss_candidate_marks": {},
+          "identical_annotated_continuation": false,
+          "versus_continuation": {
+            "raw": {
+              "annotated": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 0,
+                "relation": "equal"
+              },
+              "half_phase_zero": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "half_phase_one": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": -1,
+                "relation": "tradeoff"
+              },
+              "double": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 6,
+                "relation": "right_dominates"
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 0,
+                "relation": "equal"
+              },
+              "half_phase_zero": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "half_phase_one": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": -1,
+                "relation": "tradeoff"
+              },
+              "double": {
+                "matched_delta": 6,
+                "unmatched_ticks_delta": 0,
+                "relation": "left_dominates"
+              }
+            }
+          }
+        },
+        "change": {
+          "frames": 200,
+          "owned_responses": {
+            "raw": 7,
+            "candidate": 36
+          },
+          "status": "eligible",
+          "inventories": {
+            "raw": {
+              "annotated": {
+                "ticks": 6,
+                "responses": 7,
+                "matched": 6,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 1,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 6
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 6
+                },
+                "assignment_count": 1,
+                "states": 56
+              },
+              "continuation": {
+                "ticks": 5,
+                "responses": 7,
+                "matched": 3,
+                "unmatched_ticks": 2,
+                "unmatched_responses": 4,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3,
+                  "never/interior": 2
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/positive": 3
+                },
+                "assignment_count": 1,
+                "states": 48
+              },
+              "half_phase_zero": {
+                "ticks": 2,
+                "responses": 7,
+                "matched": 1,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 6,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 1,
+                  "never/interior": 1
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/near_annotation/positive": 5,
+                  "always/interior/near_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 24
+              },
+              "half_phase_one": {
+                "ticks": 3,
+                "responses": 7,
+                "matched": 2,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 5,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 2,
+                  "never/interior": 1
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 2,
+                  "never/interior/near_annotation/positive": 4
+                },
+                "assignment_count": 1,
+                "states": 32
+              },
+              "double": {
+                "ticks": 11,
+                "responses": 7,
+                "matched": 4,
+                "unmatched_ticks": 7,
+                "unmatched_responses": 3,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "never/interior": 7,
+                  "always/interior": 4
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 4,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 96
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "ticks": 6,
+                "responses": 36,
+                "matched": 6,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 30,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 6
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 29,
+                  "always/interior/near_annotation/positive": 6
+                },
+                "assignment_count": 1,
+                "states": 259
+              },
+              "continuation": {
+                "ticks": 5,
+                "responses": 36,
+                "matched": 5,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 31,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 27,
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/positive": 3,
+                  "always/interior/off_annotation/nonpositive": 2
+                },
+                "assignment_count": 1,
+                "states": 222
+              },
+              "half_phase_zero": {
+                "ticks": 2,
+                "responses": 36,
+                "matched": 2,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 34,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 2
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 28,
+                  "never/interior/near_annotation/positive": 5,
+                  "always/interior/near_annotation/positive": 1,
+                  "always/interior/off_annotation/nonpositive": 1
+                },
+                "assignment_count": 1,
+                "states": 111
+              },
+              "half_phase_one": {
+                "ticks": 3,
+                "responses": 36,
+                "matched": 3,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 33,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 28,
+                  "always/interior/near_annotation/positive": 2,
+                  "never/interior/near_annotation/positive": 4,
+                  "always/interior/off_annotation/nonpositive": 1
+                },
+                "assignment_count": 1,
+                "states": 148
+              },
+              "double": {
+                "ticks": 11,
+                "responses": 36,
+                "matched": 11,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 25,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 11
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 22,
+                  "always/interior/off_annotation/nonpositive": 7,
+                  "always/interior/near_annotation/positive": 4,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 444
+              }
+            }
+          },
+          "comparisons": {
+            "raw": {
+              "annotated": "fewer/more",
+              "half_phase_zero": "more/more",
+              "half_phase_one": "more/more",
+              "double": "fewer/fewer"
+            },
+            "candidate": {
+              "annotated": "fewer/equal",
+              "half_phase_zero": "more/equal",
+              "half_phase_one": "more/equal",
+              "double": "fewer/equal"
+            }
+          },
+          "annotated_tick_causes": {
+            "raw_always": 6
+          },
+          "annotated_miss_candidate_marks": {},
+          "identical_annotated_continuation": false,
+          "versus_continuation": {
+            "raw": {
+              "annotated": {
+                "matched_delta": 3,
+                "unmatched_ticks_delta": -2,
+                "relation": "left_dominates"
+              },
+              "half_phase_zero": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": -1,
+                "relation": "tradeoff"
+              },
+              "half_phase_one": {
+                "matched_delta": -1,
+                "unmatched_ticks_delta": -1,
+                "relation": "tradeoff"
+              },
+              "double": {
+                "matched_delta": 1,
+                "unmatched_ticks_delta": 5,
+                "relation": "tradeoff"
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "matched_delta": 1,
+                "unmatched_ticks_delta": 0,
+                "relation": "left_dominates"
+              },
+              "half_phase_zero": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "half_phase_one": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "double": {
+                "matched_delta": 6,
+                "unmatched_ticks_delta": 0,
+                "relation": "left_dominates"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-12-80-to-150",
+      "frame_count": 872,
+      "truth_sha256": "84dc7d0b5ae7f297bdef100b6f67dc64d1475655ef9a36cdd442578368301a87",
+      "capture_sha256": "00f0ed56f9eabcd37c80ea2f463cdbfd7ba5416a1e019979f24093bc5a7f1b30",
+      "pair_sha256": "4636045e9ed5d0a0cbb95d8f95a03e4a443a7da5deb18513e4a11ac12ee32739",
+      "whole_capture_responses": {
+        "raw": 22,
+        "candidate": 99
+      },
+      "outside_selected_windows": {
+        "raw": 11,
+        "candidate": 52
+      },
+      "status": "eligible",
+      "windows": {
+        "constant": {
+          "frames": 200,
+          "owned_responses": {
+            "raw": 6,
+            "candidate": 30
+          },
+          "status": "eligible",
+          "inventories": {
+            "raw": {
+              "annotated": {
+                "ticks": 5,
+                "responses": 6,
+                "matched": 5,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 1,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 42
+              },
+              "continuation": {
+                "ticks": 5,
+                "responses": 6,
+                "matched": 5,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 1,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 42
+              },
+              "half_phase_zero": {
+                "ticks": 2,
+                "responses": 6,
+                "matched": 2,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 4,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 2
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/near_annotation/positive": 3,
+                  "always/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 21
+              },
+              "half_phase_one": {
+                "ticks": 3,
+                "responses": 6,
+                "matched": 3,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 3,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 28
+              },
+              "double": {
+                "ticks": 10,
+                "responses": 6,
+                "matched": 5,
+                "unmatched_ticks": 5,
+                "unmatched_responses": 1,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "never/interior": 5,
+                  "always/interior": 5
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 77
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "ticks": 5,
+                "responses": 30,
+                "matched": 5,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 25,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 24,
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 186
+              },
+              "continuation": {
+                "ticks": 5,
+                "responses": 30,
+                "matched": 5,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 25,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 24,
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 186
+              },
+              "half_phase_zero": {
+                "ticks": 2,
+                "responses": 30,
+                "matched": 2,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 28,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 2
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 24,
+                  "never/interior/near_annotation/positive": 3,
+                  "always/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 93
+              },
+              "half_phase_one": {
+                "ticks": 3,
+                "responses": 30,
+                "matched": 3,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 27,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 24,
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 124
+              },
+              "double": {
+                "ticks": 10,
+                "responses": 30,
+                "matched": 10,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 20,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 10
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/positive": 1,
+                  "never/interior/off_annotation/nonpositive": 19,
+                  "always/interior/off_annotation/nonpositive": 5,
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 341
+              }
+            }
+          },
+          "comparisons": {
+            "raw": {
+              "annotated": "equal/equal",
+              "half_phase_zero": "more/equal",
+              "half_phase_one": "more/equal",
+              "double": "equal/fewer"
+            },
+            "candidate": {
+              "annotated": "equal/equal",
+              "half_phase_zero": "more/equal",
+              "half_phase_one": "more/equal",
+              "double": "fewer/equal"
+            }
+          },
+          "annotated_tick_causes": {
+            "raw_always": 5
+          },
+          "annotated_miss_candidate_marks": {},
+          "identical_annotated_continuation": false,
+          "versus_continuation": {
+            "raw": {
+              "annotated": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 0,
+                "relation": "equal"
+              },
+              "half_phase_zero": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "half_phase_one": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "double": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 5,
+                "relation": "right_dominates"
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 0,
+                "relation": "equal"
+              },
+              "half_phase_zero": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "half_phase_one": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "double": {
+                "matched_delta": 5,
+                "unmatched_ticks_delta": 0,
+                "relation": "left_dominates"
+              }
+            }
+          }
+        },
+        "change": {
+          "frames": 200,
+          "owned_responses": {
+            "raw": 5,
+            "candidate": 17
+          },
+          "status": "eligible",
+          "inventories": {
+            "raw": {
+              "annotated": {
+                "ticks": 7,
+                "responses": 5,
+                "matched": 5,
+                "unmatched_ticks": 2,
+                "unmatched_responses": 0,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5,
+                  "never/interior": 2
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 5
+                },
+                "assignment_count": 1,
+                "states": 48
+              },
+              "continuation": {
+                "ticks": 5,
+                "responses": 5,
+                "matched": 4,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 1,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 4,
+                  "never/interior": 1
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 4,
+                  "never/interior/near_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 36
+              },
+              "half_phase_zero": {
+                "ticks": 2,
+                "responses": 5,
+                "matched": 2,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 3,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 2
+                },
+                "response_strata": {
+                  "never/interior/near_annotation/positive": 3,
+                  "always/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 18
+              },
+              "half_phase_one": {
+                "ticks": 3,
+                "responses": 5,
+                "matched": 2,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 3,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 2,
+                  "never/interior": 1
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 2,
+                  "never/interior/near_annotation/positive": 3
+                },
+                "assignment_count": 1,
+                "states": 24
+              },
+              "double": {
+                "ticks": 11,
+                "responses": 5,
+                "matched": 4,
+                "unmatched_ticks": 7,
+                "unmatched_responses": 1,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "never/interior": 7,
+                  "always/interior": 4
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 4,
+                  "never/interior/near_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 72
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "ticks": 7,
+                "responses": 17,
+                "matched": 7,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 10,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 7
+                },
+                "response_strata": {
+                  "never/interior/off_annotation/nonpositive": 10,
+                  "always/interior/near_annotation/positive": 5,
+                  "always/interior/near_annotation/nonpositive": 2
+                },
+                "assignment_count": 1,
+                "states": 144
+              },
+              "continuation": {
+                "ticks": 5,
+                "responses": 17,
+                "matched": 4,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 13,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 4,
+                  "never/interior": 1
+                },
+                "response_strata": {
+                  "never/interior/off_annotation/nonpositive": 10,
+                  "always/interior/near_annotation/positive": 4,
+                  "never/interior/near_annotation/nonpositive": 2,
+                  "never/interior/near_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 108
+              },
+              "half_phase_zero": {
+                "ticks": 2,
+                "responses": 17,
+                "matched": 2,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 15,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 2
+                },
+                "response_strata": {
+                  "never/interior/off_annotation/nonpositive": 10,
+                  "never/interior/near_annotation/positive": 3,
+                  "always/interior/near_annotation/positive": 2,
+                  "never/interior/near_annotation/nonpositive": 2
+                },
+                "assignment_count": 1,
+                "states": 54
+              },
+              "half_phase_one": {
+                "ticks": 3,
+                "responses": 17,
+                "matched": 2,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 15,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 2,
+                  "never/interior": 1
+                },
+                "response_strata": {
+                  "never/interior/off_annotation/nonpositive": 10,
+                  "always/interior/near_annotation/positive": 2,
+                  "never/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/nonpositive": 2
+                },
+                "assignment_count": 1,
+                "states": 72
+              },
+              "double": {
+                "ticks": 11,
+                "responses": 17,
+                "matched": 8,
+                "unmatched_ticks": 3,
+                "unmatched_responses": 9,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 8,
+                  "never/interior": 3
+                },
+                "response_strata": {
+                  "always/interior/off_annotation/nonpositive": 3,
+                  "always/interior/near_annotation/positive": 4,
+                  "never/interior/off_annotation/nonpositive": 7,
+                  "always/interior/near_annotation/nonpositive": 1,
+                  "never/interior/near_annotation/nonpositive": 1,
+                  "never/interior/near_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 216
+              }
+            }
+          },
+          "comparisons": {
+            "raw": {
+              "annotated": "fewer/fewer",
+              "half_phase_zero": "more/more",
+              "half_phase_one": "more/equal",
+              "double": "equal/fewer"
+            },
+            "candidate": {
+              "annotated": "fewer/more",
+              "half_phase_zero": "more/more",
+              "half_phase_one": "more/equal",
+              "double": "fewer/fewer"
+            }
+          },
+          "annotated_tick_causes": {
+            "raw_always": 5,
+            "raw_never_candidate_always": 2
+          },
+          "annotated_miss_candidate_marks": {
+            "always/nonpositive_only": 2
+          },
+          "identical_annotated_continuation": false,
+          "versus_continuation": {
+            "raw": {
+              "annotated": {
+                "matched_delta": 1,
+                "unmatched_ticks_delta": 1,
+                "relation": "tradeoff"
+              },
+              "half_phase_zero": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": -1,
+                "relation": "tradeoff"
+              },
+              "half_phase_one": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "double": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 6,
+                "relation": "right_dominates"
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "matched_delta": 3,
+                "unmatched_ticks_delta": -1,
+                "relation": "left_dominates"
+              },
+              "half_phase_zero": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": -1,
+                "relation": "tradeoff"
+              },
+              "half_phase_one": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "double": {
+                "matched_delta": 4,
+                "unmatched_ticks_delta": 2,
+                "relation": "tradeoff"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-14-240-to-96",
+      "frame_count": 816,
+      "truth_sha256": "6583d495985b507d2083975501e40f15ad0727f2df8761645280f4fb87c3fe96",
+      "capture_sha256": "53ea2508c3487f5fba57ff2c03246dae6b267c0ff9886a22baa496cff7ce19f0",
+      "pair_sha256": "3557152b80ee63fd31b4b9985ca531d001df7cd1384750d400c9c3bd0444417f",
+      "whole_capture_responses": {
+        "raw": 33,
+        "candidate": 118
+      },
+      "outside_selected_windows": {
+        "raw": 15,
+        "candidate": 60
+      },
+      "status": "eligible",
+      "windows": {
+        "constant": {
+          "frames": 200,
+          "owned_responses": {
+            "raw": 10,
+            "candidate": 32
+          },
+          "status": "eligible",
+          "inventories": {
+            "raw": {
+              "annotated": {
+                "ticks": 16,
+                "responses": 10,
+                "matched": 9,
+                "unmatched_ticks": 7,
+                "unmatched_responses": 1,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 9,
+                  "never/interior": 6,
+                  "never/boundary": 1
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 9,
+                  "never/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 187
+              },
+              "continuation": {
+                "ticks": 16,
+                "responses": 10,
+                "matched": 7,
+                "unmatched_ticks": 9,
+                "unmatched_responses": 3,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 7,
+                  "never/interior": 9
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 6,
+                  "never/interior/near_annotation/positive": 3,
+                  "always/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 187
+              },
+              "half_phase_zero": {
+                "ticks": 8,
+                "responses": 10,
+                "matched": 2,
+                "unmatched_ticks": 6,
+                "unmatched_responses": 8,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 2,
+                  "never/interior": 6
+                },
+                "response_strata": {
+                  "never/interior/near_annotation/positive": 7,
+                  "always/interior/near_annotation/positive": 2,
+                  "never/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 99
+              },
+              "half_phase_one": {
+                "ticks": 8,
+                "responses": 10,
+                "matched": 5,
+                "unmatched_ticks": 3,
+                "unmatched_responses": 5,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5,
+                  "never/interior": 3
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 4,
+                  "never/interior/near_annotation/positive": 5,
+                  "always/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 99
+              },
+              "double": {
+                "ticks": 32,
+                "responses": 10,
+                "matched": 10,
+                "unmatched_ticks": 22,
+                "unmatched_responses": 0,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "never/interior": 22,
+                  "always/interior": 10
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 9,
+                  "always/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 363
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "ticks": 16,
+                "responses": 32,
+                "matched": 15,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 17,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 15,
+                  "never/boundary": 1
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 1,
+                  "never/interior/off_annotation/nonpositive": 15,
+                  "always/interior/near_annotation/positive": 9,
+                  "always/interior/near_annotation/nonpositive": 6,
+                  "never/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 561
+              },
+              "continuation": {
+                "ticks": 16,
+                "responses": 32,
+                "matched": 14,
+                "unmatched_ticks": 2,
+                "unmatched_responses": 18,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 14,
+                  "never/interior": 2
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 1,
+                  "never/interior/off_annotation/nonpositive": 10,
+                  "always/interior/near_annotation/positive": 6,
+                  "always/interior/near_annotation/nonpositive": 2,
+                  "always/interior/off_annotation/nonpositive": 5,
+                  "never/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/nonpositive": 4,
+                  "always/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 561
+              },
+              "half_phase_zero": {
+                "ticks": 8,
+                "responses": 32,
+                "matched": 6,
+                "unmatched_ticks": 2,
+                "unmatched_responses": 26,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 6,
+                  "never/interior": 2
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 1,
+                  "never/interior/off_annotation/nonpositive": 13,
+                  "never/interior/near_annotation/positive": 7,
+                  "always/interior/near_annotation/positive": 2,
+                  "always/interior/near_annotation/nonpositive": 2,
+                  "never/interior/near_annotation/nonpositive": 4,
+                  "always/interior/off_annotation/nonpositive": 2,
+                  "never/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 297
+              },
+              "half_phase_one": {
+                "ticks": 8,
+                "responses": 32,
+                "matched": 8,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 24,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 8
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 1,
+                  "never/interior/off_annotation/nonpositive": 12,
+                  "always/interior/near_annotation/positive": 4,
+                  "never/interior/near_annotation/positive": 5,
+                  "never/interior/near_annotation/nonpositive": 6,
+                  "always/interior/off_annotation/nonpositive": 3,
+                  "always/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 297
+              },
+              "double": {
+                "ticks": 32,
+                "responses": 32,
+                "matched": 27,
+                "unmatched_ticks": 5,
+                "unmatched_responses": 5,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 27,
+                  "never/interior": 5
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 1,
+                  "always/interior/off_annotation/nonpositive": 13,
+                  "always/interior/near_annotation/positive": 8,
+                  "always/interior/near_annotation/nonpositive": 5,
+                  "never/interior/near_annotation/positive": 1,
+                  "never/interior/near_annotation/nonpositive": 1,
+                  "never/interior/off_annotation/nonpositive": 2,
+                  "always/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 1089
+              }
+            }
+          },
+          "comparisons": {
+            "raw": {
+              "annotated": "fewer/more",
+              "half_phase_zero": "more/more",
+              "half_phase_one": "more/more",
+              "double": "fewer/fewer"
+            },
+            "candidate": {
+              "annotated": "fewer/more",
+              "half_phase_zero": "more/equal",
+              "half_phase_one": "more/more",
+              "double": "fewer/fewer"
+            }
+          },
+          "annotated_tick_causes": {
+            "raw_always": 9,
+            "raw_never_candidate_always": 6,
+            "raw_never_boundary_censored": 1
+          },
+          "annotated_miss_candidate_marks": {
+            "always/nonpositive_only": 6
+          },
+          "identical_annotated_continuation": false,
+          "versus_continuation": {
+            "raw": {
+              "annotated": {
+                "matched_delta": 2,
+                "unmatched_ticks_delta": -2,
+                "relation": "left_dominates"
+              },
+              "half_phase_zero": {
+                "matched_delta": -5,
+                "unmatched_ticks_delta": -3,
+                "relation": "tradeoff"
+              },
+              "half_phase_one": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": -6,
+                "relation": "tradeoff"
+              },
+              "double": {
+                "matched_delta": 3,
+                "unmatched_ticks_delta": 13,
+                "relation": "tradeoff"
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "matched_delta": 1,
+                "unmatched_ticks_delta": -1,
+                "relation": "left_dominates"
+              },
+              "half_phase_zero": {
+                "matched_delta": -8,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "half_phase_one": {
+                "matched_delta": -6,
+                "unmatched_ticks_delta": -2,
+                "relation": "tradeoff"
+              },
+              "double": {
+                "matched_delta": 13,
+                "unmatched_ticks_delta": 3,
+                "relation": "tradeoff"
+              }
+            }
+          }
+        },
+        "change": {
+          "frames": 200,
+          "owned_responses": {
+            "raw": 8,
+            "candidate": 26
+          },
+          "status": "eligible",
+          "inventories": {
+            "raw": {
+              "annotated": {
+                "ticks": 9,
+                "responses": 8,
+                "matched": 6,
+                "unmatched_ticks": 3,
+                "unmatched_responses": 2,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "never/interior": 3,
+                  "always/interior": 6
+                },
+                "response_strata": {
+                  "never/interior/off_annotation/positive": 2,
+                  "always/interior/near_annotation/positive": 6
+                },
+                "assignment_count": 1,
+                "states": 90
+              },
+              "continuation": {
+                "ticks": 16,
+                "responses": 8,
+                "matched": 4,
+                "unmatched_ticks": 12,
+                "unmatched_responses": 4,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "never/interior": 11,
+                  "always/interior": 4,
+                  "never/boundary": 1
+                },
+                "response_strata": {
+                  "never/interior/off_annotation/positive": 2,
+                  "always/interior/near_annotation/positive": 4,
+                  "never/interior/near_annotation/positive": 2
+                },
+                "assignment_count": 1,
+                "states": 153
+              },
+              "half_phase_zero": {
+                "ticks": 8,
+                "responses": 8,
+                "matched": 1,
+                "unmatched_ticks": 7,
+                "unmatched_responses": 7,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "never/interior": 6,
+                  "always/interior": 1,
+                  "never/boundary": 1
+                },
+                "response_strata": {
+                  "never/interior/off_annotation/positive": 2,
+                  "never/interior/near_annotation/positive": 5,
+                  "always/interior/near_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 81
+              },
+              "half_phase_one": {
+                "ticks": 8,
+                "responses": 8,
+                "matched": 3,
+                "unmatched_ticks": 5,
+                "unmatched_responses": 5,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "never/interior": 5,
+                  "always/interior": 3
+                },
+                "response_strata": {
+                  "never/interior/off_annotation/positive": 2,
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/positive": 3
+                },
+                "assignment_count": 1,
+                "states": 81
+              },
+              "double": {
+                "ticks": 32,
+                "responses": 8,
+                "matched": 8,
+                "unmatched_ticks": 24,
+                "unmatched_responses": 0,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 8,
+                  "never/interior": 23,
+                  "never/boundary": 1
+                },
+                "response_strata": {
+                  "always/interior/off_annotation/positive": 2,
+                  "always/interior/near_annotation/positive": 6
+                },
+                "assignment_count": 1,
+                "states": 297
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "ticks": 9,
+                "responses": 26,
+                "matched": 9,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 17,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 9
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 2,
+                  "never/interior/off_annotation/positive": 2,
+                  "always/interior/near_annotation/nonpositive": 3,
+                  "never/interior/near_annotation/nonpositive": 1,
+                  "always/interior/near_annotation/positive": 6,
+                  "never/interior/off_annotation/nonpositive": 12
+                },
+                "assignment_count": 1,
+                "states": 270
+              },
+              "continuation": {
+                "ticks": 16,
+                "responses": 26,
+                "matched": 12,
+                "unmatched_ticks": 4,
+                "unmatched_responses": 14,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 11,
+                  "never/interior": 4,
+                  "always/boundary": 1
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 1,
+                  "never/interior/off_annotation/positive": 2,
+                  "always/interior/near_annotation/nonpositive": 3,
+                  "never/interior/near_annotation/nonpositive": 1,
+                  "always/interior/near_annotation/positive": 4,
+                  "never/interior/off_annotation/nonpositive": 8,
+                  "always/interior/off_annotation/nonpositive": 4,
+                  "never/interior/near_annotation/positive": 2,
+                  "always/boundary/off_annotation/nonpositive": 1
+                },
+                "assignment_count": 1,
+                "states": 459
+              },
+              "half_phase_zero": {
+                "ticks": 8,
+                "responses": 26,
+                "matched": 6,
+                "unmatched_ticks": 2,
+                "unmatched_responses": 20,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5,
+                  "never/interior": 2,
+                  "always/boundary": 1
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 1,
+                  "never/interior/off_annotation/positive": 2,
+                  "never/interior/near_annotation/nonpositive": 2,
+                  "always/interior/near_annotation/nonpositive": 2,
+                  "never/interior/near_annotation/positive": 5,
+                  "never/interior/off_annotation/nonpositive": 10,
+                  "always/interior/near_annotation/positive": 1,
+                  "always/interior/off_annotation/nonpositive": 2,
+                  "always/boundary/off_annotation/nonpositive": 1
+                },
+                "assignment_count": 1,
+                "states": 243
+              },
+              "half_phase_one": {
+                "ticks": 8,
+                "responses": 26,
+                "matched": 6,
+                "unmatched_ticks": 2,
+                "unmatched_responses": 20,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 6,
+                  "never/interior": 2
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 2,
+                  "never/interior/off_annotation/positive": 2,
+                  "always/interior/near_annotation/nonpositive": 1,
+                  "never/interior/near_annotation/nonpositive": 3,
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/off_annotation/nonpositive": 10,
+                  "always/interior/off_annotation/nonpositive": 2,
+                  "never/interior/near_annotation/positive": 3
+                },
+                "assignment_count": 1,
+                "states": 243
+              },
+              "double": {
+                "ticks": 32,
+                "responses": 26,
+                "matched": 24,
+                "unmatched_ticks": 8,
+                "unmatched_responses": 2,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 23,
+                  "never/interior": 8,
+                  "always/boundary": 1
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 1,
+                  "always/interior/off_annotation/positive": 2,
+                  "always/interior/near_annotation/nonpositive": 3,
+                  "never/interior/near_annotation/nonpositive": 1,
+                  "always/interior/near_annotation/positive": 6,
+                  "always/interior/off_annotation/nonpositive": 12,
+                  "always/boundary/off_annotation/nonpositive": 1
+                },
+                "assignment_count": 1,
+                "states": 891
+              }
+            }
+          },
+          "comparisons": {
+            "raw": {
+              "annotated": "fewer/more",
+              "half_phase_zero": "more/more",
+              "half_phase_one": "more/more",
+              "double": "fewer/fewer"
+            },
+            "candidate": {
+              "annotated": "more/more",
+              "half_phase_zero": "more/more",
+              "half_phase_one": "more/more",
+              "double": "fewer/fewer"
+            }
+          },
+          "annotated_tick_causes": {
+            "raw_never_candidate_always": 3,
+            "raw_always": 6
+          },
+          "annotated_miss_candidate_marks": {
+            "always/nonpositive_only": 3
+          },
+          "identical_annotated_continuation": false,
+          "versus_continuation": {
+            "raw": {
+              "annotated": {
+                "matched_delta": 2,
+                "unmatched_ticks_delta": -9,
+                "relation": "left_dominates"
+              },
+              "half_phase_zero": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": -5,
+                "relation": "tradeoff"
+              },
+              "half_phase_one": {
+                "matched_delta": -1,
+                "unmatched_ticks_delta": -7,
+                "relation": "tradeoff"
+              },
+              "double": {
+                "matched_delta": 4,
+                "unmatched_ticks_delta": 12,
+                "relation": "tradeoff"
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": -4,
+                "relation": "tradeoff"
+              },
+              "half_phase_zero": {
+                "matched_delta": -6,
+                "unmatched_ticks_delta": -2,
+                "relation": "tradeoff"
+              },
+              "half_phase_one": {
+                "matched_delta": -6,
+                "unmatched_ticks_delta": -2,
+                "relation": "tradeoff"
+              },
+              "double": {
+                "matched_delta": 12,
+                "unmatched_ticks_delta": 4,
+                "relation": "tradeoff"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-15-85-to-127-5",
+      "frame_count": 1130,
+      "truth_sha256": "e819ded9652413d5fd923066047b8cc1a27a2c0d24f3fdb3b80b40148fc9c39e",
+      "capture_sha256": "5a66d6c4abfc1416ff34fca4c74dd2c0a937e95f3654ea4145b76045125aa350",
+      "pair_sha256": "94dd7042084d8fe043ed11bcf38d6450618db4f4c50b5a17cf1f47449aaea003",
+      "whole_capture_responses": {
+        "raw": 37,
+        "candidate": 94
+      },
+      "outside_selected_windows": {
+        "raw": 26,
+        "candidate": 63
+      },
+      "status": "eligible",
+      "windows": {
+        "constant": {
+          "frames": 200,
+          "owned_responses": {
+            "raw": 6,
+            "candidate": 15
+          },
+          "status": "eligible",
+          "inventories": {
+            "raw": {
+              "annotated": {
+                "ticks": 6,
+                "responses": 6,
+                "matched": 6,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 0,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 6
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 6
+                },
+                "assignment_count": 1,
+                "states": 49
+              },
+              "continuation": {
+                "ticks": 6,
+                "responses": 6,
+                "matched": 6,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 0,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 6
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 6
+                },
+                "assignment_count": 1,
+                "states": 49
+              },
+              "half_phase_zero": {
+                "ticks": 3,
+                "responses": 6,
+                "matched": 3,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 3,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3
+                },
+                "response_strata": {
+                  "never/interior/near_annotation/positive": 3,
+                  "always/interior/near_annotation/positive": 3
+                },
+                "assignment_count": 1,
+                "states": 28
+              },
+              "half_phase_one": {
+                "ticks": 3,
+                "responses": 6,
+                "matched": 3,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 3,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/positive": 3
+                },
+                "assignment_count": 1,
+                "states": 28
+              },
+              "double": {
+                "ticks": 11,
+                "responses": 6,
+                "matched": 6,
+                "unmatched_ticks": 5,
+                "unmatched_responses": 0,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 6,
+                  "never/interior": 5
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 6
+                },
+                "assignment_count": 1,
+                "states": 84
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "ticks": 6,
+                "responses": 15,
+                "matched": 6,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 9,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 6
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 1,
+                  "always/interior/near_annotation/positive": 6,
+                  "never/interior/off_annotation/nonpositive": 8
+                },
+                "assignment_count": 1,
+                "states": 112
+              },
+              "continuation": {
+                "ticks": 6,
+                "responses": 15,
+                "matched": 6,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 9,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 6
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 1,
+                  "always/interior/near_annotation/positive": 6,
+                  "never/interior/off_annotation/nonpositive": 8
+                },
+                "assignment_count": 1,
+                "states": 112
+              },
+              "half_phase_zero": {
+                "ticks": 3,
+                "responses": 15,
+                "matched": 3,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 12,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 1,
+                  "never/interior/near_annotation/positive": 3,
+                  "never/interior/off_annotation/nonpositive": 8,
+                  "always/interior/near_annotation/positive": 3
+                },
+                "assignment_count": 1,
+                "states": 64
+              },
+              "half_phase_one": {
+                "ticks": 3,
+                "responses": 15,
+                "matched": 3,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 12,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 1,
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/off_annotation/nonpositive": 8,
+                  "never/interior/near_annotation/positive": 3
+                },
+                "assignment_count": 1,
+                "states": 64
+              },
+              "double": {
+                "ticks": 11,
+                "responses": 15,
+                "matched": 11,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 4,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 11
+                },
+                "response_strata": {
+                  "never/boundary/off_annotation/nonpositive": 1,
+                  "always/interior/near_annotation/positive": 6,
+                  "never/interior/off_annotation/nonpositive": 3,
+                  "always/interior/off_annotation/nonpositive": 5
+                },
+                "assignment_count": 1,
+                "states": 192
+              }
+            }
+          },
+          "comparisons": {
+            "raw": {
+              "annotated": "equal/equal",
+              "half_phase_zero": "more/equal",
+              "half_phase_one": "more/equal",
+              "double": "equal/fewer"
+            },
+            "candidate": {
+              "annotated": "equal/equal",
+              "half_phase_zero": "more/equal",
+              "half_phase_one": "more/equal",
+              "double": "fewer/equal"
+            }
+          },
+          "annotated_tick_causes": {
+            "raw_always": 6
+          },
+          "annotated_miss_candidate_marks": {},
+          "identical_annotated_continuation": true,
+          "versus_continuation": {
+            "raw": {
+              "annotated": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 0,
+                "relation": "equal"
+              },
+              "half_phase_zero": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "half_phase_one": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "double": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 5,
+                "relation": "right_dominates"
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 0,
+                "relation": "equal"
+              },
+              "half_phase_zero": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "half_phase_one": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "double": {
+                "matched_delta": 5,
+                "unmatched_ticks_delta": 0,
+                "relation": "left_dominates"
+              }
+            }
+          }
+        },
+        "change": {
+          "frames": 200,
+          "owned_responses": {
+            "raw": 5,
+            "candidate": 16
+          },
+          "status": "eligible",
+          "inventories": {
+            "raw": {
+              "annotated": {
+                "ticks": 7,
+                "responses": 5,
+                "matched": 4,
+                "unmatched_ticks": 3,
+                "unmatched_responses": 1,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 4,
+                  "never/interior": 3
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 4,
+                  "never/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 48
+              },
+              "continuation": {
+                "ticks": 5,
+                "responses": 5,
+                "matched": 5,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 0,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 4,
+                  "always/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 36
+              },
+              "half_phase_zero": {
+                "ticks": 2,
+                "responses": 5,
+                "matched": 2,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 3,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 2
+                },
+                "response_strata": {
+                  "never/interior/near_annotation/positive": 3,
+                  "always/interior/near_annotation/positive": 1,
+                  "always/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 18
+              },
+              "half_phase_one": {
+                "ticks": 3,
+                "responses": 5,
+                "matched": 3,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 2,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/positive": 1,
+                  "never/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 24
+              },
+              "double": {
+                "ticks": 11,
+                "responses": 5,
+                "matched": 5,
+                "unmatched_ticks": 6,
+                "unmatched_responses": 0,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "never/interior": 6,
+                  "always/interior": 5
+                },
+                "response_strata": {
+                  "always/interior/near_annotation/positive": 4,
+                  "always/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 72
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "ticks": 7,
+                "responses": 16,
+                "matched": 6,
+                "unmatched_ticks": 1,
+                "unmatched_responses": 10,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 6,
+                  "never/interior": 1
+                },
+                "response_strata": {
+                  "never/interior/off_annotation/nonpositive": 9,
+                  "always/interior/near_annotation/positive": 4,
+                  "always/interior/near_annotation/nonpositive": 2,
+                  "never/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 136
+              },
+              "continuation": {
+                "ticks": 5,
+                "responses": 16,
+                "matched": 5,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 11,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 5
+                },
+                "response_strata": {
+                  "never/interior/off_annotation/nonpositive": 9,
+                  "always/interior/near_annotation/positive": 4,
+                  "never/interior/near_annotation/nonpositive": 2,
+                  "always/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 102
+              },
+              "half_phase_zero": {
+                "ticks": 2,
+                "responses": 16,
+                "matched": 2,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 14,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 2
+                },
+                "response_strata": {
+                  "never/interior/off_annotation/nonpositive": 9,
+                  "never/interior/near_annotation/positive": 3,
+                  "always/interior/near_annotation/positive": 1,
+                  "never/interior/near_annotation/nonpositive": 2,
+                  "always/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 51
+              },
+              "half_phase_one": {
+                "ticks": 3,
+                "responses": 16,
+                "matched": 3,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 13,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 3
+                },
+                "response_strata": {
+                  "never/interior/off_annotation/nonpositive": 9,
+                  "always/interior/near_annotation/positive": 3,
+                  "never/interior/near_annotation/positive": 1,
+                  "never/interior/near_annotation/nonpositive": 2,
+                  "never/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 68
+              },
+              "double": {
+                "ticks": 11,
+                "responses": 16,
+                "matched": 11,
+                "unmatched_ticks": 0,
+                "unmatched_responses": 5,
+                "ambiguous_assignment_windows": 0,
+                "tick_strata": {
+                  "always/interior": 11
+                },
+                "response_strata": {
+                  "never/interior/off_annotation/nonpositive": 3,
+                  "always/interior/off_annotation/nonpositive": 6,
+                  "always/interior/near_annotation/positive": 4,
+                  "never/interior/near_annotation/nonpositive": 2,
+                  "always/interior/off_annotation/positive": 1
+                },
+                "assignment_count": 1,
+                "states": 204
+              }
+            }
+          },
+          "comparisons": {
+            "raw": {
+              "annotated": "more/fewer",
+              "half_phase_zero": "more/equal",
+              "half_phase_one": "more/equal",
+              "double": "equal/fewer"
+            },
+            "candidate": {
+              "annotated": "fewer/fewer",
+              "half_phase_zero": "more/equal",
+              "half_phase_one": "more/equal",
+              "double": "fewer/equal"
+            }
+          },
+          "annotated_tick_causes": {
+            "raw_always": 4,
+            "raw_never_candidate_always": 2,
+            "raw_never_no_candidate_in_radius": 1
+          },
+          "annotated_miss_candidate_marks": {
+            "always/nonpositive_only": 2
+          },
+          "identical_annotated_continuation": false,
+          "versus_continuation": {
+            "raw": {
+              "annotated": {
+                "matched_delta": -1,
+                "unmatched_ticks_delta": 3,
+                "relation": "right_dominates"
+              },
+              "half_phase_zero": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "half_phase_one": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "double": {
+                "matched_delta": 0,
+                "unmatched_ticks_delta": 6,
+                "relation": "right_dominates"
+              }
+            },
+            "candidate": {
+              "annotated": {
+                "matched_delta": 1,
+                "unmatched_ticks_delta": 1,
+                "relation": "tradeoff"
+              },
+              "half_phase_zero": {
+                "matched_delta": -3,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "half_phase_one": {
+                "matched_delta": -2,
+                "unmatched_ticks_delta": 0,
+                "relation": "right_dominates"
+              },
+              "double": {
+                "matched_delta": 6,
+                "unmatched_ticks_delta": 0,
+                "relation": "left_dominates"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "summary": {
+    "selected_pairs": 7,
+    "eligible_pairs": 7,
+    "rejected_pairs": 0,
+    "selected_windows": 14,
+    "compared_windows": 14,
+    "status": {
+      "eligible": 7
+    },
+    "window_status": {
+      "constant": {
+        "eligible": 7
+      },
+      "change": {
+        "eligible": 7
+      }
+    },
+    "all_selected_owned_responses": {
+      "raw": 91,
+      "candidate": 340
+    },
+    "by_context": {
+      "constant": {
+        "windows": 7,
+        "frames": 1400,
+        "status": {
+          "eligible": 7
+        },
+        "eligible_windows": 7,
+        "owned_responses": {
+          "raw": 47,
+          "candidate": 177
+        },
+        "eligible_responses": {
+          "raw": 47,
+          "candidate": 177
+        },
+        "identical_annotated_continuation_windows": 1,
+        "annotated_tick_causes": {
+          "raw_always": 42,
+          "raw_never_boundary_censored": 2,
+          "raw_never_candidate_always": 10
+        },
+        "annotated_miss_candidate_marks": {
+          "always/nonpositive_only": 10
+        },
+        "ledgers": {
+          "raw": {
+            "annotated": {
+              "ticks": 54,
+              "responses": 47,
+              "matched": 42,
+              "unmatched_ticks": 12,
+              "unmatched_responses": 5,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 187,
+              "tick_strata": {
+                "always/interior": 42,
+                "never/boundary": 2,
+                "never/interior": 10
+              },
+              "response_strata": {
+                "always/interior/near_annotation/positive": 42,
+                "never/boundary/off_annotation/positive": 4,
+                "never/interior/off_annotation/positive": 1
+              }
+            },
+            "continuation": {
+              "ticks": 55,
+              "responses": 47,
+              "matched": 36,
+              "unmatched_ticks": 19,
+              "unmatched_responses": 11,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 187,
+              "tick_strata": {
+                "always/interior": 36,
+                "never/boundary": 1,
+                "never/interior": 18
+              },
+              "response_strata": {
+                "always/interior/near_annotation/positive": 35,
+                "always/interior/off_annotation/positive": 1,
+                "never/boundary/off_annotation/positive": 4,
+                "never/interior/near_annotation/positive": 7
+              }
+            },
+            "half_phase_zero": {
+              "ticks": 26,
+              "responses": 47,
+              "matched": 13,
+              "unmatched_ticks": 13,
+              "unmatched_responses": 34,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 99,
+              "tick_strata": {
+                "always/interior": 13,
+                "never/boundary": 1,
+                "never/interior": 12
+              },
+              "response_strata": {
+                "always/interior/near_annotation/positive": 13,
+                "never/boundary/off_annotation/positive": 4,
+                "never/interior/near_annotation/positive": 29,
+                "never/interior/off_annotation/positive": 1
+              }
+            },
+            "half_phase_one": {
+              "ticks": 29,
+              "responses": 47,
+              "matched": 23,
+              "unmatched_ticks": 6,
+              "unmatched_responses": 24,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 99,
+              "tick_strata": {
+                "always/interior": 23,
+                "never/interior": 6
+              },
+              "response_strata": {
+                "always/interior/near_annotation/positive": 22,
+                "always/interior/off_annotation/positive": 1,
+                "never/boundary/off_annotation/positive": 4,
+                "never/interior/near_annotation/positive": 20
+              }
+            },
+            "double": {
+              "ticks": 110,
+              "responses": 47,
+              "matched": 39,
+              "unmatched_ticks": 71,
+              "unmatched_responses": 8,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 363,
+              "tick_strata": {
+                "always/interior": 39,
+                "never/boundary": 1,
+                "never/interior": 70
+              },
+              "response_strata": {
+                "always/interior/near_annotation/positive": 38,
+                "always/interior/off_annotation/positive": 1,
+                "never/boundary/off_annotation/positive": 4,
+                "never/interior/near_annotation/positive": 4
+              }
+            }
+          },
+          "candidate": {
+            "annotated": {
+              "ticks": 54,
+              "responses": 177,
+              "matched": 52,
+              "unmatched_ticks": 2,
+              "unmatched_responses": 125,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 561,
+              "tick_strata": {
+                "always/interior": 52,
+                "never/boundary": 2
+              },
+              "response_strata": {
+                "always/interior/near_annotation/nonpositive": 10,
+                "always/interior/near_annotation/positive": 42,
+                "never/boundary/off_annotation/nonpositive": 3,
+                "never/boundary/off_annotation/positive": 4,
+                "never/interior/off_annotation/nonpositive": 117,
+                "never/interior/off_annotation/positive": 1
+              }
+            },
+            "continuation": {
+              "ticks": 55,
+              "responses": 177,
+              "matched": 47,
+              "unmatched_ticks": 8,
+              "unmatched_responses": 130,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 561,
+              "tick_strata": {
+                "always/interior": 47,
+                "never/boundary": 1,
+                "never/interior": 7
+              },
+              "response_strata": {
+                "always/interior/near_annotation/nonpositive": 4,
+                "always/interior/near_annotation/positive": 35,
+                "always/interior/off_annotation/nonpositive": 7,
+                "always/interior/off_annotation/positive": 1,
+                "never/boundary/off_annotation/nonpositive": 3,
+                "never/boundary/off_annotation/positive": 4,
+                "never/interior/near_annotation/nonpositive": 6,
+                "never/interior/near_annotation/positive": 7,
+                "never/interior/off_annotation/nonpositive": 110
+              }
+            },
+            "half_phase_zero": {
+              "ticks": 26,
+              "responses": 177,
+              "matched": 20,
+              "unmatched_ticks": 6,
+              "unmatched_responses": 157,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 297,
+              "tick_strata": {
+                "always/interior": 20,
+                "never/boundary": 1,
+                "never/interior": 5
+              },
+              "response_strata": {
+                "always/interior/near_annotation/nonpositive": 4,
+                "always/interior/near_annotation/positive": 13,
+                "always/interior/off_annotation/nonpositive": 3,
+                "never/boundary/off_annotation/nonpositive": 3,
+                "never/boundary/off_annotation/positive": 4,
+                "never/interior/near_annotation/nonpositive": 6,
+                "never/interior/near_annotation/positive": 29,
+                "never/interior/off_annotation/nonpositive": 114,
+                "never/interior/off_annotation/positive": 1
+              }
+            },
+            "half_phase_one": {
+              "ticks": 29,
+              "responses": 177,
+              "matched": 27,
+              "unmatched_ticks": 2,
+              "unmatched_responses": 150,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 297,
+              "tick_strata": {
+                "always/interior": 27,
+                "never/interior": 2
+              },
+              "response_strata": {
+                "always/interior/near_annotation/positive": 22,
+                "always/interior/off_annotation/nonpositive": 4,
+                "always/interior/off_annotation/positive": 1,
+                "never/boundary/off_annotation/nonpositive": 3,
+                "never/boundary/off_annotation/positive": 4,
+                "never/interior/near_annotation/nonpositive": 10,
+                "never/interior/near_annotation/positive": 20,
+                "never/interior/off_annotation/nonpositive": 113
+              }
+            },
+            "double": {
+              "ticks": 110,
+              "responses": 177,
+              "matched": 92,
+              "unmatched_ticks": 18,
+              "unmatched_responses": 85,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 1089,
+              "tick_strata": {
+                "always/interior": 92,
+                "never/boundary": 1,
+                "never/interior": 17
+              },
+              "response_strata": {
+                "always/interior/near_annotation/nonpositive": 7,
+                "always/interior/near_annotation/positive": 37,
+                "always/interior/off_annotation/nonpositive": 47,
+                "always/interior/off_annotation/positive": 1,
+                "never/boundary/off_annotation/nonpositive": 3,
+                "never/boundary/off_annotation/positive": 4,
+                "never/interior/near_annotation/nonpositive": 3,
+                "never/interior/near_annotation/positive": 5,
+                "never/interior/off_annotation/nonpositive": 70
+              }
+            }
+          }
+        },
+        "continuation_comparisons": {
+          "raw": {
+            "annotated": {
+              "equal/equal": 4,
+              "fewer/more": 3
+            },
+            "half_phase_zero": {
+              "more/equal": 4,
+              "more/more": 3
+            },
+            "half_phase_one": {
+              "equal/more": 1,
+              "more/equal": 3,
+              "more/more": 3
+            },
+            "double": {
+              "equal/fewer": 6,
+              "fewer/fewer": 1
+            }
+          },
+          "candidate": {
+            "annotated": {
+              "equal/equal": 5,
+              "fewer/more": 2
+            },
+            "half_phase_zero": {
+              "more/equal": 6,
+              "more/more": 1
+            },
+            "half_phase_one": {
+              "more/equal": 4,
+              "more/more": 3
+            },
+            "double": {
+              "fewer/equal": 4,
+              "fewer/fewer": 3
+            }
+          }
+        }
+      },
+      "change": {
+        "windows": 7,
+        "frames": 1400,
+        "status": {
+          "eligible": 7
+        },
+        "eligible_windows": 7,
+        "owned_responses": {
+          "raw": 44,
+          "candidate": 163
+        },
+        "eligible_responses": {
+          "raw": 44,
+          "candidate": 163
+        },
+        "identical_annotated_continuation_windows": 0,
+        "annotated_tick_causes": {
+          "raw_always": 36,
+          "raw_never_boundary_censored": 1,
+          "raw_never_candidate_always": 10,
+          "raw_never_no_candidate_in_radius": 2
+        },
+        "annotated_miss_candidate_marks": {
+          "always/nonpositive_only": 10
+        },
+        "ledgers": {
+          "raw": {
+            "annotated": {
+              "ticks": 49,
+              "responses": 44,
+              "matched": 36,
+              "unmatched_ticks": 13,
+              "unmatched_responses": 8,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 90,
+              "tick_strata": {
+                "always/boundary": 1,
+                "always/interior": 35,
+                "never/boundary": 1,
+                "never/interior": 12
+              },
+              "response_strata": {
+                "always/boundary/near_annotation/positive": 1,
+                "always/interior/near_annotation/positive": 35,
+                "never/boundary/off_annotation/positive": 1,
+                "never/interior/off_annotation/positive": 7
+              }
+            },
+            "continuation": {
+              "ticks": 54,
+              "responses": 44,
+              "matched": 30,
+              "unmatched_ticks": 24,
+              "unmatched_responses": 14,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 153,
+              "tick_strata": {
+                "always/boundary": 1,
+                "always/interior": 29,
+                "never/boundary": 2,
+                "never/interior": 22
+              },
+              "response_strata": {
+                "always/boundary/near_annotation/positive": 1,
+                "always/interior/near_annotation/positive": 26,
+                "always/interior/off_annotation/positive": 3,
+                "never/boundary/off_annotation/positive": 1,
+                "never/interior/near_annotation/positive": 9,
+                "never/interior/off_annotation/positive": 4
+              }
+            },
+            "half_phase_zero": {
+              "ticks": 25,
+              "responses": 44,
+              "matched": 14,
+              "unmatched_ticks": 11,
+              "unmatched_responses": 30,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 81,
+              "tick_strata": {
+                "always/interior": 14,
+                "never/boundary": 1,
+                "never/interior": 10
+              },
+              "response_strata": {
+                "always/interior/near_annotation/positive": 12,
+                "always/interior/off_annotation/positive": 2,
+                "never/boundary/near_annotation/positive": 1,
+                "never/boundary/off_annotation/positive": 1,
+                "never/interior/near_annotation/positive": 23,
+                "never/interior/off_annotation/positive": 5
+              }
+            },
+            "half_phase_one": {
+              "ticks": 29,
+              "responses": 44,
+              "matched": 16,
+              "unmatched_ticks": 13,
+              "unmatched_responses": 28,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 81,
+              "tick_strata": {
+                "always/boundary": 1,
+                "always/interior": 15,
+                "never/boundary": 1,
+                "never/interior": 12
+              },
+              "response_strata": {
+                "always/boundary/near_annotation/positive": 1,
+                "always/interior/near_annotation/positive": 14,
+                "always/interior/off_annotation/positive": 1,
+                "never/boundary/off_annotation/positive": 1,
+                "never/interior/near_annotation/positive": 21,
+                "never/interior/off_annotation/positive": 6
+              }
+            },
+            "double": {
+              "ticks": 111,
+              "responses": 44,
+              "matched": 35,
+              "unmatched_ticks": 76,
+              "unmatched_responses": 9,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 297,
+              "tick_strata": {
+                "always/boundary": 1,
+                "always/interior": 34,
+                "never/boundary": 2,
+                "never/interior": 74
+              },
+              "response_strata": {
+                "always/boundary/near_annotation/positive": 1,
+                "always/interior/near_annotation/positive": 29,
+                "always/interior/off_annotation/positive": 5,
+                "never/boundary/off_annotation/positive": 1,
+                "never/interior/near_annotation/positive": 6,
+                "never/interior/off_annotation/positive": 2
+              }
+            }
+          },
+          "candidate": {
+            "annotated": {
+              "ticks": 49,
+              "responses": 163,
+              "matched": 47,
+              "unmatched_ticks": 2,
+              "unmatched_responses": 116,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 270,
+              "tick_strata": {
+                "always/boundary": 2,
+                "always/interior": 45,
+                "never/interior": 2
+              },
+              "response_strata": {
+                "always/boundary/near_annotation/nonpositive": 1,
+                "always/boundary/near_annotation/positive": 1,
+                "always/interior/near_annotation/nonpositive": 10,
+                "always/interior/near_annotation/positive": 35,
+                "never/boundary/off_annotation/nonpositive": 5,
+                "never/boundary/off_annotation/positive": 1,
+                "never/interior/near_annotation/nonpositive": 1,
+                "never/interior/off_annotation/nonpositive": 102,
+                "never/interior/off_annotation/positive": 7
+              }
+            },
+            "continuation": {
+              "ticks": 54,
+              "responses": 163,
+              "matched": 45,
+              "unmatched_ticks": 9,
+              "unmatched_responses": 118,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 459,
+              "tick_strata": {
+                "always/boundary": 3,
+                "always/interior": 42,
+                "never/interior": 9
+              },
+              "response_strata": {
+                "always/boundary/near_annotation/nonpositive": 1,
+                "always/boundary/near_annotation/positive": 1,
+                "always/boundary/off_annotation/nonpositive": 1,
+                "always/interior/near_annotation/nonpositive": 4,
+                "always/interior/near_annotation/positive": 26,
+                "always/interior/off_annotation/nonpositive": 9,
+                "always/interior/off_annotation/positive": 3,
+                "never/boundary/off_annotation/nonpositive": 4,
+                "never/boundary/off_annotation/positive": 1,
+                "never/interior/near_annotation/nonpositive": 7,
+                "never/interior/near_annotation/positive": 9,
+                "never/interior/off_annotation/nonpositive": 93,
+                "never/interior/off_annotation/positive": 4
+              }
+            },
+            "half_phase_zero": {
+              "ticks": 25,
+              "responses": 163,
+              "matched": 21,
+              "unmatched_ticks": 4,
+              "unmatched_responses": 142,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 243,
+              "tick_strata": {
+                "always/boundary": 1,
+                "always/interior": 20,
+                "never/interior": 4
+              },
+              "response_strata": {
+                "always/boundary/off_annotation/nonpositive": 1,
+                "always/interior/near_annotation/nonpositive": 2,
+                "always/interior/near_annotation/positive": 12,
+                "always/interior/off_annotation/nonpositive": 4,
+                "always/interior/off_annotation/positive": 2,
+                "never/boundary/near_annotation/nonpositive": 1,
+                "never/boundary/near_annotation/positive": 1,
+                "never/boundary/off_annotation/nonpositive": 4,
+                "never/boundary/off_annotation/positive": 1,
+                "never/interior/near_annotation/nonpositive": 9,
+                "never/interior/near_annotation/positive": 23,
+                "never/interior/off_annotation/nonpositive": 98,
+                "never/interior/off_annotation/positive": 5
+              }
+            },
+            "half_phase_one": {
+              "ticks": 29,
+              "responses": 163,
+              "matched": 24,
+              "unmatched_ticks": 5,
+              "unmatched_responses": 139,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 243,
+              "tick_strata": {
+                "always/boundary": 2,
+                "always/interior": 22,
+                "never/interior": 5
+              },
+              "response_strata": {
+                "always/boundary/near_annotation/nonpositive": 1,
+                "always/boundary/near_annotation/positive": 1,
+                "always/interior/near_annotation/nonpositive": 2,
+                "always/interior/near_annotation/positive": 14,
+                "always/interior/off_annotation/nonpositive": 5,
+                "always/interior/off_annotation/positive": 1,
+                "never/boundary/off_annotation/nonpositive": 5,
+                "never/boundary/off_annotation/positive": 1,
+                "never/interior/near_annotation/nonpositive": 9,
+                "never/interior/near_annotation/positive": 21,
+                "never/interior/off_annotation/nonpositive": 97,
+                "never/interior/off_annotation/positive": 6
+              }
+            },
+            "double": {
+              "ticks": 111,
+              "responses": 163,
+              "matched": 86,
+              "unmatched_ticks": 25,
+              "unmatched_responses": 77,
+              "ambiguous_assignment_windows": 0,
+              "max_assignment_count": 1,
+              "max_states": 891,
+              "tick_strata": {
+                "always/boundary": 3,
+                "always/interior": 83,
+                "never/interior": 25
+              },
+              "response_strata": {
+                "always/boundary/near_annotation/nonpositive": 1,
+                "always/boundary/near_annotation/positive": 1,
+                "always/boundary/off_annotation/nonpositive": 1,
+                "always/interior/near_annotation/nonpositive": 6,
+                "always/interior/near_annotation/positive": 29,
+                "always/interior/off_annotation/nonpositive": 43,
+                "always/interior/off_annotation/positive": 5,
+                "never/boundary/off_annotation/nonpositive": 4,
+                "never/boundary/off_annotation/positive": 1,
+                "never/interior/near_annotation/nonpositive": 5,
+                "never/interior/near_annotation/positive": 6,
+                "never/interior/off_annotation/nonpositive": 59,
+                "never/interior/off_annotation/positive": 2
+              }
+            }
+          }
+        },
+        "continuation_comparisons": {
+          "raw": {
+            "annotated": {
+              "equal/more": 1,
+              "fewer/fewer": 1,
+              "fewer/more": 3,
+              "more/equal": 1,
+              "more/fewer": 1
+            },
+            "half_phase_zero": {
+              "more/equal": 1,
+              "more/more": 6
+            },
+            "half_phase_one": {
+              "more/equal": 3,
+              "more/more": 4
+            },
+            "double": {
+              "equal/fewer": 5,
+              "fewer/fewer": 2
+            }
+          },
+          "candidate": {
+            "annotated": {
+              "equal/more": 1,
+              "fewer/equal": 1,
+              "fewer/fewer": 1,
+              "fewer/more": 2,
+              "more/equal": 1,
+              "more/more": 1
+            },
+            "half_phase_zero": {
+              "more/equal": 3,
+              "more/more": 4
+            },
+            "half_phase_one": {
+              "more/equal": 5,
+              "more/more": 2
+            },
+            "double": {
+              "fewer/equal": 2,
+              "fewer/fewer": 5
+            }
+          }
+        }
+      }
+    },
+    "paired_relations": {
+      "raw": {
+        "annotated": {
+          "equal/left_dominates": 2,
+          "equal/right_dominates": 1,
+          "equal/tradeoff": 1,
+          "left_dominates/left_dominates": 2,
+          "left_dominates/right_dominates": 1
+        },
+        "half_phase_zero": {
+          "right_dominates/right_dominates": 1,
+          "right_dominates/tradeoff": 3,
+          "tradeoff/tradeoff": 3
+        },
+        "half_phase_one": {
+          "left_dominates/right_dominates": 1,
+          "right_dominates/right_dominates": 2,
+          "right_dominates/tradeoff": 1,
+          "tradeoff/tradeoff": 3
+        },
+        "double": {
+          "right_dominates/right_dominates": 5,
+          "right_dominates/tradeoff": 1,
+          "tradeoff/tradeoff": 1
+        }
+      },
+      "candidate": {
+        "annotated": {
+          "equal/left_dominates": 4,
+          "equal/tradeoff": 1,
+          "left_dominates/right_dominates": 1,
+          "left_dominates/tradeoff": 1
+        },
+        "half_phase_zero": {
+          "right_dominates/right_dominates": 2,
+          "right_dominates/tradeoff": 4,
+          "tradeoff/right_dominates": 1
+        },
+        "half_phase_one": {
+          "right_dominates/right_dominates": 3,
+          "right_dominates/tradeoff": 1,
+          "tradeoff/right_dominates": 2,
+          "tradeoff/tradeoff": 1
+        },
+        "double": {
+          "left_dominates/left_dominates": 2,
+          "left_dominates/tradeoff": 2,
+          "tradeoff/tradeoff": 3
+        }
+      }
+    }
+  }
+}

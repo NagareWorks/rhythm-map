@@ -24,6 +24,17 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- All seven frozen four-second constant/step pairs now pass unchanged packet and
+  rational-ledger replay: 91 raw events, 340 candidates, no rejected/replaced
+  pair. Constant/step interior misses are 10/12, with ten nonpositive-supported
+  misses on each side but 117/102 competing off-annotation nonpositive candidates.
+  Annotation-clock count dominance also occurs in 3/7 constant windows (raw),
+  and doubled candidates dominate continuation in 4/7 constant windows. Counts
+  are not change-specific. Next freeze a prefix phase/period extrapolation audit
+  on these same constant windows, separating annotation/prefix/boundary effects
+  before judging joint-head/context discrimination. Do not widen radius, refit
+  against responses, replace pairs, add modes or declare training necessary.
+  See the [paired replay and retained counterexamples](evaluation/baselines/paired-response-replay-v1.md).
 - Annotation-only matched constant/step availability now retains all 40 inputs
   and pre-registers a global 2/4/8-second comparison. Pairable track counts are
   4/7/0; the coverage rule freezes seven four-second pairs within the same track
