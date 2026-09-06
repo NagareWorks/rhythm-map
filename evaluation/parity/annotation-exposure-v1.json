@@ -1,0 +1,2146 @@
+{
+  "schema_version": 1,
+  "purpose": "annotation_only_matched_constant_step_exposure_availability",
+  "contract": {
+    "schema_version": 1,
+    "purpose": "annotation_only_matched_constant_step_exposure_availability",
+    "durations_frames": [
+      100,
+      200,
+      400
+    ],
+    "frame_rate_hz": 50,
+    "start_grid_frames": 1,
+    "annotation_quantization": "nearest microsecond, positive half ties upward",
+    "prefix": "four annotated beats strictly before each window, all in the same constant segment that contains the window start",
+    "constant_min_full_query_beats": 4,
+    "change_min_full_query_beats_each_side": 2,
+    "query_radius_frames": 3,
+    "change": "exactly one annotated tempo_jump between adjacent constant segments with different BPM; before and after both inside window",
+    "pair": "same track, same prechange constant segment, same duration; constant window ends no later than change window starts",
+    "per_track_choice": "earliest pairable change point; most time-balanced change window; earlier change start; latest nonoverlapping constant window",
+    "global_duration_choice": "maximum pairable track count; ties choose longer; no pairs means null",
+    "rubato": "untyped for discrete constant-versus-step roles; do not infer labels from interval variation",
+    "periodic_clock_limit": 128,
+    "response_budgets_checked": false,
+    "private_captures_read": false,
+    "response_fields_used": false,
+    "phase_fit": false,
+    "decoder_replayed": false,
+    "holdout_opened": false,
+    "training_run": false
+  },
+  "script_sha256": "824832bb891637a8eafb40bd05c05e4fb5c5000577c7f08a81a10bdc2892c681",
+  "lock_sha256": "2f9fcbc4a75ac6c30acad4d927d681d686a6a2e9d93531831f8e8e9f934c1271",
+  "source_report_sha256": "35eb07cfc8c96471710ecf0a40d3fae6da836638845090cc21583ba337769a8a",
+  "metadata_projection_sha256": "b93984c19e761873ea3c79144e35add6474cc0dd85677a67cbca90a4bfe8e13d",
+  "private_captures_read": false,
+  "response_fields_used": false,
+  "neural_inference": false,
+  "decoder_replayed": false,
+  "fitted_mapping": false,
+  "holdout_opened": false,
+  "training_run": false,
+  "production_output_changed": false,
+  "new_user_parameters": false,
+  "accuracy_improvement_claimed": false,
+  "profiles": {
+    "100": {
+      "cohorts": {
+        "artbeat": {
+          "tracks": 15,
+          "pairable_tracks": 4,
+          "candidate_starts": 10843,
+          "roles": {
+            "annotation_tail_uncovered": 343,
+            "change": 95,
+            "constant": 1858,
+            "constant_too_few_interior_beats": 2647,
+            "insufficient_prefix": 1357,
+            "no_stable_prefix_segment": 2274,
+            "not_adjacent_constant_step": 100,
+            "step_too_few_interior_beats": 1105,
+            "untyped_rubato": 1064
+          },
+          "pair_combinations": 9129,
+          "pairable_change_starts": 92
+        },
+        "rubato": {
+          "tracks": 25,
+          "pairable_tracks": 0,
+          "candidate_starts": 322040,
+          "roles": {
+            "untyped_rubato": 322040
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0
+        }
+      },
+      "cases": [
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-05-75-to-150",
+          "frame_count": 681,
+          "truth_sha256": "5d6c395345fb6155893bc3aad4e0def3518bdecedb82f08d3514adfaeea0d456",
+          "capture_sha256": "973337d4aa0bd1bac738888fe415755185d4a2a2eea933d11fd21541ce3764a7",
+          "candidate_starts": 582,
+          "roles": {
+            "annotation_tail_uncovered": 21,
+            "constant": 180,
+            "constant_too_few_interior_beats": 100,
+            "insufficient_prefix": 120,
+            "no_stable_prefix_segment": 61,
+            "step_too_few_interior_beats": 100
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-06-150-to-75",
+          "frame_count": 681,
+          "truth_sha256": "fcda5614cb07639a66edb58f7b658214e1f54ec1db1de35e84367d47be77849f",
+          "capture_sha256": "c96fe9dff55dc0334c956f453cb9e0640af4ce9b52abdccd82eaeb4b022b9ff3",
+          "candidate_starts": 582,
+          "roles": {
+            "annotation_tail_uncovered": 42,
+            "change": 14,
+            "constant": 200,
+            "constant_too_few_interior_beats": 60,
+            "insufficient_prefix": 60,
+            "no_stable_prefix_segment": 120,
+            "step_too_few_interior_beats": 86
+          },
+          "pair_combinations": 2121,
+          "pairable_change_starts": 14,
+          "pair_available": true,
+          "pair_sha256": "c457220dbe9537d1df2ebd212c9482e653facd873539aadbdedeae253a3b487d"
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-07-75-to-112-5",
+          "frame_count": 667,
+          "truth_sha256": "063beee7c5428adedeecab21d0f8678a69c049f4ca2ea8ebfb7827b1ec79057f",
+          "capture_sha256": "bd4e756badf480190d1b3e216677aa8ead7a1032d8f66ef1bcefdc18e7b00e69",
+          "candidate_starts": 568,
+          "roles": {
+            "annotation_tail_uncovered": 28,
+            "constant": 78,
+            "constant_too_few_interior_beats": 160,
+            "insufficient_prefix": 122,
+            "no_stable_prefix_segment": 80,
+            "step_too_few_interior_beats": 100
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-08-112-5-to-75",
+          "frame_count": 701,
+          "truth_sha256": "64de869a6b3e15d8e07601d67cb1508842de558761f5d00f4d25ded8077b92e6",
+          "capture_sha256": "f727928b068097ab0ac2d58cf838f95265fb9a74a7c2fb990dba7fc5fee07edf",
+          "candidate_starts": 602,
+          "roles": {
+            "annotation_tail_uncovered": 21,
+            "change": 2,
+            "constant": 87,
+            "constant_too_few_interior_beats": 182,
+            "insufficient_prefix": 95,
+            "no_stable_prefix_segment": 117,
+            "step_too_few_interior_beats": 98
+          },
+          "pair_combinations": 114,
+          "pairable_change_starts": 2,
+          "pair_available": true,
+          "pair_sha256": "d47c854949cbe66004d6bf924d0879d51bdcd85aa211e3405b348b22053e215a"
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-09-90-to-80",
+          "frame_count": 881,
+          "truth_sha256": "a9802ae028c9631323354a5826f50e2c78b14e54c66581a817f8d07b633a5409",
+          "capture_sha256": "cc3464f42f5c32135d39832563f146ef2d80d284c817626c23627ee986fe244e",
+          "candidate_starts": 782,
+          "roles": {
+            "annotation_tail_uncovered": 27,
+            "constant_too_few_interior_beats": 437,
+            "insufficient_prefix": 105,
+            "no_stable_prefix_segment": 113,
+            "step_too_few_interior_beats": 100
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-10-90-to-120",
+          "frame_count": 831,
+          "truth_sha256": "2165ea70a5f4224461552a28567cb45ad2b2cfe66cf4a99661ff49a02b24f10f",
+          "capture_sha256": "d9f11d3c740c80d0e5d12c650b07bdd1268d007491740e0c5ca3b388cf5de9a4",
+          "candidate_starts": 732,
+          "roles": {
+            "annotation_tail_uncovered": 25,
+            "change": 2,
+            "constant": 180,
+            "constant_too_few_interior_beats": 246,
+            "insufficient_prefix": 105,
+            "no_stable_prefix_segment": 76,
+            "step_too_few_interior_beats": 98
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-11-60-to-80",
+          "frame_count": 871,
+          "truth_sha256": "7332a12f293d6bf843b4833054722c492c551d9e82b978aa11e6a90e145f1901",
+          "capture_sha256": "862b06aafd290e8a039978b135f34ea35da797bbf9074157847c0c07d7ed27f3",
+          "candidate_starts": 772,
+          "roles": {
+            "annotation_tail_uncovered": 21,
+            "constant_too_few_interior_beats": 386,
+            "insufficient_prefix": 153,
+            "no_stable_prefix_segment": 112,
+            "step_too_few_interior_beats": 100
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-12-80-to-150",
+          "frame_count": 872,
+          "truth_sha256": "84dc7d0b5ae7f297bdef100b6f67dc64d1475655ef9a36cdd442578368301a87",
+          "capture_sha256": "00f0ed56f9eabcd37c80ea2f463cdbfd7ba5416a1e019979f24093bc5a7f1b30",
+          "candidate_starts": 773,
+          "roles": {
+            "annotation_tail_uncovered": 22,
+            "constant": 240,
+            "constant_too_few_interior_beats": 238,
+            "insufficient_prefix": 114,
+            "no_stable_prefix_segment": 59,
+            "step_too_few_interior_beats": 100
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-13-180-to-120",
+          "frame_count": 692,
+          "truth_sha256": "61513c63f05ff332d265d6d785ca50342cdad10b23f664a40f1b55d2487349bf",
+          "capture_sha256": "88a5824f541d2dd782a01644c73fd546e52090769e145807b50767ebfbdb23dc",
+          "candidate_starts": 593,
+          "roles": {
+            "annotation_tail_uncovered": 26,
+            "change": 37,
+            "constant": 296,
+            "constant_too_few_interior_beats": 45,
+            "insufficient_prefix": 51,
+            "no_stable_prefix_segment": 75,
+            "step_too_few_interior_beats": 63
+          },
+          "pair_combinations": 2331,
+          "pairable_change_starts": 37,
+          "pair_available": true,
+          "pair_sha256": "8271497dcbf7bee2aa5b99018c05c818539dbcca9644a94976e9edabe6a21531"
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-14-240-to-96",
+          "frame_count": 816,
+          "truth_sha256": "6583d495985b507d2083975501e40f15ad0727f2df8761645280f4fb87c3fe96",
+          "capture_sha256": "53ea2508c3487f5fba57ff2c03246dae6b267c0ff9886a22baa496cff7ce19f0",
+          "candidate_starts": 717,
+          "roles": {
+            "annotation_tail_uncovered": 16,
+            "change": 39,
+            "constant": 175,
+            "constant_too_few_interior_beats": 294,
+            "insufficient_prefix": 38,
+            "no_stable_prefix_segment": 94,
+            "step_too_few_interior_beats": 61
+          },
+          "pair_combinations": 4563,
+          "pairable_change_starts": 39,
+          "pair_available": true,
+          "pair_sha256": "50d5de82bb76f95bf64bf6f3705444988352b76316df883c8b37f49b8999409d"
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-15-85-to-127-5",
+          "frame_count": 1130,
+          "truth_sha256": "e819ded9652413d5fd923066047b8cc1a27a2c0d24f3fdb3b80b40148fc9c39e",
+          "capture_sha256": "5a66d6c4abfc1416ff34fca4c74dd2c0a937e95f3654ea4145b76045125aa350",
+          "candidate_starts": 1031,
+          "roles": {
+            "annotation_tail_uncovered": 25,
+            "change": 1,
+            "constant": 370,
+            "constant_too_few_interior_beats": 359,
+            "insufficient_prefix": 106,
+            "no_stable_prefix_segment": 71,
+            "step_too_few_interior_beats": 99
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-18-piano-rubato",
+          "frame_count": 1163,
+          "truth_sha256": "ddf1a5ff2a4d5649497bb54a60084abed6a21b1a062c874a492820245afd11a2",
+          "capture_sha256": "4e6c241ec2705094b5809e8f8d7a48fc668ad2eef2721d54d31a98dff3e3495e",
+          "candidate_starts": 1064,
+          "roles": {
+            "untyped_rubato": 1064
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-19-ramp-80-to-200",
+          "frame_count": 863,
+          "truth_sha256": "407ec564b847ebf779e2f740c8c5d156211e69e18dc62b6a8fd37c17d01c4457",
+          "capture_sha256": "cf9e6d10e25ebfbb93e50ad70be70186e7ed229577e2b1fbd5f90c5459af215b",
+          "candidate_starts": 764,
+          "roles": {
+            "annotation_tail_uncovered": 16,
+            "insufficient_prefix": 113,
+            "no_stable_prefix_segment": 635
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-20-ramp-200-to-80",
+          "frame_count": 864,
+          "truth_sha256": "b2e8e3aa1a131b9335914f974d5cfff7618703dd8d9c87fe38723545f6ec5980",
+          "capture_sha256": "9aae8a403e1b95a3532d8bd2670febb21d3e9aab4034f05b6009cdd8f08c8c1c",
+          "candidate_starts": 765,
+          "roles": {
+            "annotation_tail_uncovered": 38,
+            "constant": 5,
+            "insufficient_prefix": 46,
+            "no_stable_prefix_segment": 576,
+            "not_adjacent_constant_step": 100
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-21-polyrhythm-70-to-105",
+          "frame_count": 615,
+          "truth_sha256": "7016cc892dcec5a95ea18cf778d9890f1d754158168f29c3ce5e895d32578638",
+          "capture_sha256": "2e3ba7557faad626d3f92bf6d6e0a705536a81119c8cf33603a5b6bd91fabc22",
+          "candidate_starts": 516,
+          "roles": {
+            "annotation_tail_uncovered": 15,
+            "constant": 47,
+            "constant_too_few_interior_beats": 140,
+            "insufficient_prefix": 129,
+            "no_stable_prefix_segment": 85,
+            "step_too_few_interior_beats": 100
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+          "frame_count": 6446,
+          "truth_sha256": "f16e419511caee1c96c786fbe5a745b9e319a5d95a8d832dcd3b337f072706a7",
+          "capture_sha256": "76b295f5021e99204b2fde688f1b85f364d6f999866fc7fad7d60f1a6ab7e0a3",
+          "candidate_starts": 6347,
+          "roles": {
+            "untyped_rubato": 6347
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-bach-bwv1007-01-ov-milman2022",
+          "frame_count": 6949,
+          "truth_sha256": "02617c821f0b7beb6fb0578d50f18b45b1e4b96e788c33835646b716b8a584e7",
+          "capture_sha256": "eaac53c4f18d0fbc9da29c315ce6d58385e9c4bbe74b17ff191d1c092981647b",
+          "candidate_starts": 6850,
+          "roles": {
+            "untyped_rubato": 6850
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-beethoven-op072-0-ov-henning2017",
+          "frame_count": 20175,
+          "truth_sha256": "0597675375121d0e7592d5abdae51277c166ff7611f3daf327f0ae4193ddcf8e",
+          "capture_sha256": "fb774b4cfc44a241719fa344c81c4db0ecd6d1365bbf1f8c9490cfd31c07f325",
+          "candidate_starts": 20076,
+          "roles": {
+            "untyped_rubato": 20076
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-berlioz-h048-04-ov-dennis2016",
+          "frame_count": 13626,
+          "truth_sha256": "4e8b47d76b1ddce15d38da69fe3ca74892c777d2e1eb541524fc88d7a790bf34",
+          "capture_sha256": "fa46e89ee43b9e689b9efa8f66bd76f480abd4eface90a49fe934ffb455968d5",
+          "candidate_starts": 13527,
+          "roles": {
+            "untyped_rubato": 13527
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-boccherini-g275-03-ov-krux2022",
+          "frame_count": 8132,
+          "truth_sha256": "9b79c5c3cc3046c889ef9bbb34b0231dc7c393e22a088b3776b6b0862edad18b",
+          "capture_sha256": "4a3c2d66e432d3a8c0fae5f4559f0dde4a47d6b3f42e1f74ff23763c76830a49",
+          "candidate_starts": 8033,
+          "roles": {
+            "untyped_rubato": 8033
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-brahms-op115-01-ov-schmitta2025",
+          "frame_count": 31011,
+          "truth_sha256": "6775c1cabad7d73b7682fa37d9a6e51c5542bffa054838df22f7a94ad150136a",
+          "capture_sha256": "9415d3b198b48e7ab0e046a9a0b6a06cef1b880132a2a46c280e7e7f246bc77f",
+          "candidate_starts": 30912,
+          "roles": {
+            "untyped_rubato": 30912
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-brahms-op115-01-ov-steffens2008",
+          "frame_count": 31115,
+          "truth_sha256": "8934b0c9f51e4a9520584c35998f7d9cf724272de99d577d1b4f95e658ce7964",
+          "capture_sha256": "dd3b6bedb679b6dfea6bc1567a38c52d469f4b277ca64d9436b63b60d51279b9",
+          "candidate_starts": 31016,
+          "roles": {
+            "untyped_rubato": 31016
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+          "frame_count": 8115,
+          "truth_sha256": "986d47aaab5598db25b2fb44d16bfbf7f9c6b2df4acf9b118fae9f7f8911932c",
+          "capture_sha256": "639f95573ffda23e4eef605c10be3ed564c27a8c1512ed9ffb75d0fd10fe6e17",
+          "candidate_starts": 8016,
+          "roles": {
+            "untyped_rubato": 8016
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+          "frame_count": 8218,
+          "truth_sha256": "10b34ee45b0b11f66943f98ab75b16886fd65dd7a108127a447bfb919d146f3e",
+          "capture_sha256": "5f04d4fcdd5c4324a92b7add6ab17d5f6f78dd83370cd4c7f62814fa04e0fb94",
+          "candidate_starts": 8119,
+          "roles": {
+            "untyped_rubato": 8119
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+          "frame_count": 7681,
+          "truth_sha256": "ac2935ad5dcb5fc1a1dd44730eaed584241096c35bfe0508da5393dcd40a8ec7",
+          "capture_sha256": "8a5a3539ec7ed49803592f880d420cd86662a00eaec73d692ec77916cd87e28b",
+          "candidate_starts": 7582,
+          "roles": {
+            "untyped_rubato": 7582
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-mozart-kv618-ar-papalin2012",
+          "frame_count": 8051,
+          "truth_sha256": "82a37995c722804ee66b57f6b3bfe39ce88cc602a4cc719b84c65c71300f5a32",
+          "capture_sha256": "83bf46fd1128010eebcea578d7f9df697152b1d388920bd3b42d2d4df4f58620",
+          "candidate_starts": 7952,
+          "roles": {
+            "untyped_rubato": 7952
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+          "frame_count": 10336,
+          "truth_sha256": "5f3832fafaa133b5a3875b8964b47b493568cdd2f4be76615fd5ea6f2f0f7616",
+          "capture_sha256": "c70c8a500375325ccc85c81dc24c70a3f296a58f6c2a4d39f3e92cda673d329c",
+          "candidate_starts": 10237,
+          "roles": {
+            "untyped_rubato": 10237
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+          "frame_count": 14062,
+          "truth_sha256": "996d4563a086fbe048d71da38e3d2441c789c28e2289aefa7284b3d3c10bc5c6",
+          "capture_sha256": "39965f14ea58cac4e0a1766bfbf97f752e383bafa8625e49b4d21dbfee006ba9",
+          "candidate_starts": 13963,
+          "roles": {
+            "untyped_rubato": 13963
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+          "frame_count": 16304,
+          "truth_sha256": "cc91282ff134ac42e5c051942baad56b49d19f8a56acdb09ce57c8e49e461f10",
+          "capture_sha256": "7ccaa90f6f1e904b8ce2038a50b8780ff29c6068d99d7b535a5d4ce1050a82fc",
+          "candidate_starts": 16205,
+          "roles": {
+            "untyped_rubato": 16205
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-schubert-d733-01-ar-staab2012",
+          "frame_count": 10168,
+          "truth_sha256": "15a68f3c29bb4eb1f9974093ab0f23189ba183232b341233e70f09523deec922",
+          "capture_sha256": "c83d96b22dd1f77113203f6306ca15799da52a37c9d5ae491821150c889ae85c",
+          "candidate_starts": 10069,
+          "roles": {
+            "untyped_rubato": 10069
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+          "frame_count": 10359,
+          "truth_sha256": "71dc170ac875df1922db5cba6dcbfb59db11f254d6c35c45b825bdfe0d33ca8c",
+          "capture_sha256": "61a4b73d8ebd98e5f81d6fbcab7195bb5c81875f183741eca435ae7077f478dd",
+          "candidate_starts": 10260,
+          "roles": {
+            "untyped_rubato": 10260
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-schumann-op039-05-ov-buttner2025",
+          "frame_count": 12226,
+          "truth_sha256": "aa36e4aec046346505801c6eb7d66db6557792129ba3395955945c7f3f315cd5",
+          "capture_sha256": "3089b5afac496979c1ef49f64e52efae5671543a531aa6ac93ff34a613da8bdf",
+          "candidate_starts": 12127,
+          "roles": {
+            "untyped_rubato": 12127
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-schumann-op039-05-ov-pizarro2012",
+          "frame_count": 11258,
+          "truth_sha256": "d7140499d39a2769e1d8a248d2122efda0cb519ec2cc203d0bf81563ed0fc312",
+          "capture_sha256": "f00c6df8b74aca7395079db30244d15819ae0d4d2ef62c9578d11b3671d22f9e",
+          "candidate_starts": 11159,
+          "roles": {
+            "untyped_rubato": 11159
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+          "frame_count": 15410,
+          "truth_sha256": "a45bd07ff0742e30ee0eca8cd53ffc0fc1c29baf8f81ee5b024554af89ef2796",
+          "capture_sha256": "09896ffb8511eb529ad81d60add089a0317aa5f40a4e352c28d45d46ea142ad3",
+          "candidate_starts": 15311,
+          "roles": {
+            "untyped_rubato": 15311
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+          "frame_count": 14800,
+          "truth_sha256": "49379fbe7c51dbf3d9cff11586ece6b9316d128e1f05cd2f8fdb0b281c1f4c88",
+          "capture_sha256": "7e08129bf8748f959536d857bc9999a4088186a6be46903f48da8f8d1afb436d",
+          "candidate_starts": 14701,
+          "roles": {
+            "untyped_rubato": 14701
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+          "frame_count": 13902,
+          "truth_sha256": "f0aaf80955f919bf3cd84df7f649824812ab08aed548d09e5342fb7d79e00959",
+          "capture_sha256": "8f781ccc08798cf349ba841bb5bb89ed66f104068ebc1fcecced2a1f354c72d7",
+          "candidate_starts": 13803,
+          "roles": {
+            "untyped_rubato": 13803
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+          "frame_count": 15429,
+          "truth_sha256": "ec2d36c1e4e7bfe5641dc5085e08bd4ab3cb2aa28e1d408f7faab44b584f14d1",
+          "capture_sha256": "c5522a4af335b3045c3cc5d4baade4809307d994b277152d0b7112a10c5c5dda",
+          "candidate_starts": 15330,
+          "roles": {
+            "untyped_rubato": 15330
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+          "frame_count": 9547,
+          "truth_sha256": "e892d59ecb17cc055034f3c043d49f981ad877092fb1298df3eaaeb10f4fd47e",
+          "capture_sha256": "3e0626fec9fe95fc1a07b48eab7983a38ab3d951b65cd8f8c9137e2d7e53338f",
+          "candidate_starts": 9448,
+          "roles": {
+            "untyped_rubato": 9448
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+          "frame_count": 10695,
+          "truth_sha256": "176a0359278e6ec6fcffec89b0489fbd3ca8ac4e8b93dd974c3b4423b8444cb1",
+          "capture_sha256": "8cc504bfe807c64cc1aa721b842de44b350ffc5d6724d0b30277e71cade824bb",
+          "candidate_starts": 10596,
+          "roles": {
+            "untyped_rubato": 10596
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+          "frame_count": 10500,
+          "truth_sha256": "ba992b7fd03f9117cf411b06c59778f9eb65698a1e71c6907fa8520da0f46d9b",
+          "capture_sha256": "ccedd36d8c0bef9060f0d32d687a586a44c66ecbf43d20b340405412c8373bea",
+          "candidate_starts": 10401,
+          "roles": {
+            "untyped_rubato": 10401
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        }
+      ]
+    },
+    "200": {
+      "cohorts": {
+        "artbeat": {
+          "tracks": 15,
+          "pairable_tracks": 7,
+          "candidate_starts": 9343,
+          "roles": {
+            "annotation_tail_uncovered": 343,
+            "change": 1165,
+            "constant": 2206,
+            "constant_too_few_interior_beats": 6,
+            "insufficient_prefix": 1357,
+            "no_stable_prefix_segment": 2034,
+            "not_adjacent_constant_step": 105,
+            "step_too_few_interior_beats": 1163,
+            "untyped_rubato": 964
+          },
+          "pair_combinations": 19102,
+          "pairable_change_starts": 328
+        },
+        "rubato": {
+          "tracks": 25,
+          "pairable_tracks": 0,
+          "candidate_starts": 319540,
+          "roles": {
+            "untyped_rubato": 319540
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0
+        }
+      },
+      "cases": [
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-05-75-to-150",
+          "frame_count": 681,
+          "truth_sha256": "5d6c395345fb6155893bc3aad4e0def3518bdecedb82f08d3514adfaeea0d456",
+          "capture_sha256": "973337d4aa0bd1bac738888fe415755185d4a2a2eea933d11fd21541ce3764a7",
+          "candidate_starts": 482,
+          "roles": {
+            "annotation_tail_uncovered": 21,
+            "change": 95,
+            "constant": 80,
+            "insufficient_prefix": 120,
+            "no_stable_prefix_segment": 61,
+            "step_too_few_interior_beats": 105
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-06-150-to-75",
+          "frame_count": 681,
+          "truth_sha256": "fcda5614cb07639a66edb58f7b658214e1f54ec1db1de35e84367d47be77849f",
+          "capture_sha256": "c96fe9dff55dc0334c956f453cb9e0640af4ce9b52abdccd82eaeb4b022b9ff3",
+          "candidate_starts": 482,
+          "roles": {
+            "annotation_tail_uncovered": 42,
+            "change": 114,
+            "constant": 100,
+            "insufficient_prefix": 60,
+            "no_stable_prefix_segment": 80,
+            "step_too_few_interior_beats": 86
+          },
+          "pair_combinations": 1711,
+          "pairable_change_starts": 58,
+          "pair_available": true,
+          "pair_sha256": "ac8c90865ccbcdf239ee677e4f2815f91f886b4e4eb480fc4b8b7658852d5bf9"
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-07-75-to-112-5",
+          "frame_count": 667,
+          "truth_sha256": "063beee7c5428adedeecab21d0f8678a69c049f4ca2ea8ebfb7827b1ec79057f",
+          "capture_sha256": "bd4e756badf480190d1b3e216677aa8ead7a1032d8f66ef1bcefdc18e7b00e69",
+          "candidate_starts": 468,
+          "roles": {
+            "annotation_tail_uncovered": 28,
+            "change": 88,
+            "constant": 39,
+            "insufficient_prefix": 122,
+            "no_stable_prefix_segment": 80,
+            "step_too_few_interior_beats": 111
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-08-112-5-to-75",
+          "frame_count": 701,
+          "truth_sha256": "64de869a6b3e15d8e07601d67cb1508842de558761f5d00f4d25ded8077b92e6",
+          "capture_sha256": "f727928b068097ab0ac2d58cf838f95265fb9a74a7c2fb990dba7fc5fee07edf",
+          "candidate_starts": 502,
+          "roles": {
+            "annotation_tail_uncovered": 21,
+            "change": 102,
+            "constant": 69,
+            "insufficient_prefix": 95,
+            "no_stable_prefix_segment": 117,
+            "step_too_few_interior_beats": 98
+          },
+          "pair_combinations": 66,
+          "pairable_change_starts": 11,
+          "pair_available": true,
+          "pair_sha256": "4247cbfbfbf2ce737064978e19eae11433df1a01e10560c39b9b4b42748ae1d0"
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-09-90-to-80",
+          "frame_count": 881,
+          "truth_sha256": "a9802ae028c9631323354a5826f50e2c78b14e54c66581a817f8d07b633a5409",
+          "capture_sha256": "cc3464f42f5c32135d39832563f146ef2d80d284c817626c23627ee986fe244e",
+          "candidate_starts": 682,
+          "roles": {
+            "annotation_tail_uncovered": 27,
+            "change": 90,
+            "constant": 237,
+            "insufficient_prefix": 105,
+            "no_stable_prefix_segment": 113,
+            "step_too_few_interior_beats": 110
+          },
+          "pair_combinations": 496,
+          "pairable_change_starts": 31,
+          "pair_available": true,
+          "pair_sha256": "d86ce525657bb1cb7ad8ce1d446e7d5a0d2736d284902c25594a4884c67c9269"
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-10-90-to-120",
+          "frame_count": 831,
+          "truth_sha256": "2165ea70a5f4224461552a28567cb45ad2b2cfe66cf4a99661ff49a02b24f10f",
+          "capture_sha256": "d9f11d3c740c80d0e5d12c650b07bdd1268d007491740e0c5ca3b388cf5de9a4",
+          "candidate_starts": 632,
+          "roles": {
+            "annotation_tail_uncovered": 25,
+            "change": 102,
+            "constant": 226,
+            "insufficient_prefix": 105,
+            "no_stable_prefix_segment": 76,
+            "step_too_few_interior_beats": 98
+          },
+          "pair_combinations": 496,
+          "pairable_change_starts": 31,
+          "pair_available": true,
+          "pair_sha256": "30f62bd8ff1a8194d03d2d611f89041be2af415bf7b59bae02623c9b3f64f0d2"
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-11-60-to-80",
+          "frame_count": 871,
+          "truth_sha256": "7332a12f293d6bf843b4833054722c492c551d9e82b978aa11e6a90e145f1901",
+          "capture_sha256": "862b06aafd290e8a039978b135f34ea35da797bbf9074157847c0c07d7ed27f3",
+          "candidate_starts": 672,
+          "roles": {
+            "annotation_tail_uncovered": 21,
+            "change": 57,
+            "constant": 180,
+            "constant_too_few_interior_beats": 6,
+            "insufficient_prefix": 153,
+            "no_stable_prefix_segment": 112,
+            "step_too_few_interior_beats": 143
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-12-80-to-150",
+          "frame_count": 872,
+          "truth_sha256": "84dc7d0b5ae7f297bdef100b6f67dc64d1475655ef9a36cdd442578368301a87",
+          "capture_sha256": "00f0ed56f9eabcd37c80ea2f463cdbfd7ba5416a1e019979f24093bc5a7f1b30",
+          "candidate_starts": 673,
+          "roles": {
+            "annotation_tail_uncovered": 22,
+            "change": 99,
+            "constant": 278,
+            "insufficient_prefix": 114,
+            "no_stable_prefix_segment": 59,
+            "step_too_few_interior_beats": 101
+          },
+          "pair_combinations": 1830,
+          "pairable_change_starts": 60,
+          "pair_available": true,
+          "pair_sha256": "4636045e9ed5d0a0cbb95d8f95a03e4a443a7da5deb18513e4a11ac12ee32739"
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-13-180-to-120",
+          "frame_count": 692,
+          "truth_sha256": "61513c63f05ff332d265d6d785ca50342cdad10b23f664a40f1b55d2487349bf",
+          "capture_sha256": "88a5824f541d2dd782a01644c73fd546e52090769e145807b50767ebfbdb23dc",
+          "candidate_starts": 493,
+          "roles": {
+            "annotation_tail_uncovered": 26,
+            "change": 137,
+            "constant": 141,
+            "insufficient_prefix": 51,
+            "no_stable_prefix_segment": 75,
+            "step_too_few_interior_beats": 63
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-14-240-to-96",
+          "frame_count": 816,
+          "truth_sha256": "6583d495985b507d2083975501e40f15ad0727f2df8761645280f4fb87c3fe96",
+          "capture_sha256": "53ea2508c3487f5fba57ff2c03246dae6b267c0ff9886a22baa496cff7ce19f0",
+          "candidate_starts": 617,
+          "roles": {
+            "annotation_tail_uncovered": 16,
+            "change": 139,
+            "constant": 269,
+            "insufficient_prefix": 38,
+            "no_stable_prefix_segment": 94,
+            "step_too_few_interior_beats": 61
+          },
+          "pair_combinations": 666,
+          "pairable_change_starts": 36,
+          "pair_available": true,
+          "pair_sha256": "3557152b80ee63fd31b4b9985ca531d001df7cd1384750d400c9c3bd0444417f"
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-15-85-to-127-5",
+          "frame_count": 1130,
+          "truth_sha256": "e819ded9652413d5fd923066047b8cc1a27a2c0d24f3fdb3b80b40148fc9c39e",
+          "capture_sha256": "5a66d6c4abfc1416ff34fca4c74dd2c0a937e95f3654ea4145b76045125aa350",
+          "candidate_starts": 931,
+          "roles": {
+            "annotation_tail_uncovered": 25,
+            "change": 101,
+            "constant": 529,
+            "insufficient_prefix": 106,
+            "no_stable_prefix_segment": 71,
+            "step_too_few_interior_beats": 99
+          },
+          "pair_combinations": 13837,
+          "pairable_change_starts": 101,
+          "pair_available": true,
+          "pair_sha256": "94dd7042084d8fe043ed11bcf38d6450618db4f4c50b5a17cf1f47449aaea003"
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-18-piano-rubato",
+          "frame_count": 1163,
+          "truth_sha256": "ddf1a5ff2a4d5649497bb54a60084abed6a21b1a062c874a492820245afd11a2",
+          "capture_sha256": "4e6c241ec2705094b5809e8f8d7a48fc668ad2eef2721d54d31a98dff3e3495e",
+          "candidate_starts": 964,
+          "roles": {
+            "untyped_rubato": 964
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-19-ramp-80-to-200",
+          "frame_count": 863,
+          "truth_sha256": "407ec564b847ebf779e2f740c8c5d156211e69e18dc62b6a8fd37c17d01c4457",
+          "capture_sha256": "cf9e6d10e25ebfbb93e50ad70be70186e7ed229577e2b1fbd5f90c5459af215b",
+          "candidate_starts": 664,
+          "roles": {
+            "annotation_tail_uncovered": 16,
+            "insufficient_prefix": 113,
+            "no_stable_prefix_segment": 535
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-20-ramp-200-to-80",
+          "frame_count": 864,
+          "truth_sha256": "b2e8e3aa1a131b9335914f974d5cfff7618703dd8d9c87fe38723545f6ec5980",
+          "capture_sha256": "9aae8a403e1b95a3532d8bd2670febb21d3e9aab4034f05b6009cdd8f08c8c1c",
+          "candidate_starts": 665,
+          "roles": {
+            "annotation_tail_uncovered": 38,
+            "insufficient_prefix": 46,
+            "no_stable_prefix_segment": 476,
+            "not_adjacent_constant_step": 105
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-21-polyrhythm-70-to-105",
+          "frame_count": 615,
+          "truth_sha256": "7016cc892dcec5a95ea18cf778d9890f1d754158168f29c3ce5e895d32578638",
+          "capture_sha256": "2e3ba7557faad626d3f92bf6d6e0a705536a81119c8cf33603a5b6bd91fabc22",
+          "candidate_starts": 416,
+          "roles": {
+            "annotation_tail_uncovered": 15,
+            "change": 41,
+            "constant": 58,
+            "insufficient_prefix": 129,
+            "no_stable_prefix_segment": 85,
+            "step_too_few_interior_beats": 88
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+          "frame_count": 6446,
+          "truth_sha256": "f16e419511caee1c96c786fbe5a745b9e319a5d95a8d832dcd3b337f072706a7",
+          "capture_sha256": "76b295f5021e99204b2fde688f1b85f364d6f999866fc7fad7d60f1a6ab7e0a3",
+          "candidate_starts": 6247,
+          "roles": {
+            "untyped_rubato": 6247
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-bach-bwv1007-01-ov-milman2022",
+          "frame_count": 6949,
+          "truth_sha256": "02617c821f0b7beb6fb0578d50f18b45b1e4b96e788c33835646b716b8a584e7",
+          "capture_sha256": "eaac53c4f18d0fbc9da29c315ce6d58385e9c4bbe74b17ff191d1c092981647b",
+          "candidate_starts": 6750,
+          "roles": {
+            "untyped_rubato": 6750
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-beethoven-op072-0-ov-henning2017",
+          "frame_count": 20175,
+          "truth_sha256": "0597675375121d0e7592d5abdae51277c166ff7611f3daf327f0ae4193ddcf8e",
+          "capture_sha256": "fb774b4cfc44a241719fa344c81c4db0ecd6d1365bbf1f8c9490cfd31c07f325",
+          "candidate_starts": 19976,
+          "roles": {
+            "untyped_rubato": 19976
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-berlioz-h048-04-ov-dennis2016",
+          "frame_count": 13626,
+          "truth_sha256": "4e8b47d76b1ddce15d38da69fe3ca74892c777d2e1eb541524fc88d7a790bf34",
+          "capture_sha256": "fa46e89ee43b9e689b9efa8f66bd76f480abd4eface90a49fe934ffb455968d5",
+          "candidate_starts": 13427,
+          "roles": {
+            "untyped_rubato": 13427
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-boccherini-g275-03-ov-krux2022",
+          "frame_count": 8132,
+          "truth_sha256": "9b79c5c3cc3046c889ef9bbb34b0231dc7c393e22a088b3776b6b0862edad18b",
+          "capture_sha256": "4a3c2d66e432d3a8c0fae5f4559f0dde4a47d6b3f42e1f74ff23763c76830a49",
+          "candidate_starts": 7933,
+          "roles": {
+            "untyped_rubato": 7933
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-brahms-op115-01-ov-schmitta2025",
+          "frame_count": 31011,
+          "truth_sha256": "6775c1cabad7d73b7682fa37d9a6e51c5542bffa054838df22f7a94ad150136a",
+          "capture_sha256": "9415d3b198b48e7ab0e046a9a0b6a06cef1b880132a2a46c280e7e7f246bc77f",
+          "candidate_starts": 30812,
+          "roles": {
+            "untyped_rubato": 30812
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-brahms-op115-01-ov-steffens2008",
+          "frame_count": 31115,
+          "truth_sha256": "8934b0c9f51e4a9520584c35998f7d9cf724272de99d577d1b4f95e658ce7964",
+          "capture_sha256": "dd3b6bedb679b6dfea6bc1567a38c52d469f4b277ca64d9436b63b60d51279b9",
+          "candidate_starts": 30916,
+          "roles": {
+            "untyped_rubato": 30916
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+          "frame_count": 8115,
+          "truth_sha256": "986d47aaab5598db25b2fb44d16bfbf7f9c6b2df4acf9b118fae9f7f8911932c",
+          "capture_sha256": "639f95573ffda23e4eef605c10be3ed564c27a8c1512ed9ffb75d0fd10fe6e17",
+          "candidate_starts": 7916,
+          "roles": {
+            "untyped_rubato": 7916
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+          "frame_count": 8218,
+          "truth_sha256": "10b34ee45b0b11f66943f98ab75b16886fd65dd7a108127a447bfb919d146f3e",
+          "capture_sha256": "5f04d4fcdd5c4324a92b7add6ab17d5f6f78dd83370cd4c7f62814fa04e0fb94",
+          "candidate_starts": 8019,
+          "roles": {
+            "untyped_rubato": 8019
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+          "frame_count": 7681,
+          "truth_sha256": "ac2935ad5dcb5fc1a1dd44730eaed584241096c35bfe0508da5393dcd40a8ec7",
+          "capture_sha256": "8a5a3539ec7ed49803592f880d420cd86662a00eaec73d692ec77916cd87e28b",
+          "candidate_starts": 7482,
+          "roles": {
+            "untyped_rubato": 7482
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-mozart-kv618-ar-papalin2012",
+          "frame_count": 8051,
+          "truth_sha256": "82a37995c722804ee66b57f6b3bfe39ce88cc602a4cc719b84c65c71300f5a32",
+          "capture_sha256": "83bf46fd1128010eebcea578d7f9df697152b1d388920bd3b42d2d4df4f58620",
+          "candidate_starts": 7852,
+          "roles": {
+            "untyped_rubato": 7852
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+          "frame_count": 10336,
+          "truth_sha256": "5f3832fafaa133b5a3875b8964b47b493568cdd2f4be76615fd5ea6f2f0f7616",
+          "capture_sha256": "c70c8a500375325ccc85c81dc24c70a3f296a58f6c2a4d39f3e92cda673d329c",
+          "candidate_starts": 10137,
+          "roles": {
+            "untyped_rubato": 10137
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+          "frame_count": 14062,
+          "truth_sha256": "996d4563a086fbe048d71da38e3d2441c789c28e2289aefa7284b3d3c10bc5c6",
+          "capture_sha256": "39965f14ea58cac4e0a1766bfbf97f752e383bafa8625e49b4d21dbfee006ba9",
+          "candidate_starts": 13863,
+          "roles": {
+            "untyped_rubato": 13863
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+          "frame_count": 16304,
+          "truth_sha256": "cc91282ff134ac42e5c051942baad56b49d19f8a56acdb09ce57c8e49e461f10",
+          "capture_sha256": "7ccaa90f6f1e904b8ce2038a50b8780ff29c6068d99d7b535a5d4ce1050a82fc",
+          "candidate_starts": 16105,
+          "roles": {
+            "untyped_rubato": 16105
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-schubert-d733-01-ar-staab2012",
+          "frame_count": 10168,
+          "truth_sha256": "15a68f3c29bb4eb1f9974093ab0f23189ba183232b341233e70f09523deec922",
+          "capture_sha256": "c83d96b22dd1f77113203f6306ca15799da52a37c9d5ae491821150c889ae85c",
+          "candidate_starts": 9969,
+          "roles": {
+            "untyped_rubato": 9969
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+          "frame_count": 10359,
+          "truth_sha256": "71dc170ac875df1922db5cba6dcbfb59db11f254d6c35c45b825bdfe0d33ca8c",
+          "capture_sha256": "61a4b73d8ebd98e5f81d6fbcab7195bb5c81875f183741eca435ae7077f478dd",
+          "candidate_starts": 10160,
+          "roles": {
+            "untyped_rubato": 10160
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-schumann-op039-05-ov-buttner2025",
+          "frame_count": 12226,
+          "truth_sha256": "aa36e4aec046346505801c6eb7d66db6557792129ba3395955945c7f3f315cd5",
+          "capture_sha256": "3089b5afac496979c1ef49f64e52efae5671543a531aa6ac93ff34a613da8bdf",
+          "candidate_starts": 12027,
+          "roles": {
+            "untyped_rubato": 12027
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-schumann-op039-05-ov-pizarro2012",
+          "frame_count": 11258,
+          "truth_sha256": "d7140499d39a2769e1d8a248d2122efda0cb519ec2cc203d0bf81563ed0fc312",
+          "capture_sha256": "f00c6df8b74aca7395079db30244d15819ae0d4d2ef62c9578d11b3671d22f9e",
+          "candidate_starts": 11059,
+          "roles": {
+            "untyped_rubato": 11059
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+          "frame_count": 15410,
+          "truth_sha256": "a45bd07ff0742e30ee0eca8cd53ffc0fc1c29baf8f81ee5b024554af89ef2796",
+          "capture_sha256": "09896ffb8511eb529ad81d60add089a0317aa5f40a4e352c28d45d46ea142ad3",
+          "candidate_starts": 15211,
+          "roles": {
+            "untyped_rubato": 15211
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+          "frame_count": 14800,
+          "truth_sha256": "49379fbe7c51dbf3d9cff11586ece6b9316d128e1f05cd2f8fdb0b281c1f4c88",
+          "capture_sha256": "7e08129bf8748f959536d857bc9999a4088186a6be46903f48da8f8d1afb436d",
+          "candidate_starts": 14601,
+          "roles": {
+            "untyped_rubato": 14601
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+          "frame_count": 13902,
+          "truth_sha256": "f0aaf80955f919bf3cd84df7f649824812ab08aed548d09e5342fb7d79e00959",
+          "capture_sha256": "8f781ccc08798cf349ba841bb5bb89ed66f104068ebc1fcecced2a1f354c72d7",
+          "candidate_starts": 13703,
+          "roles": {
+            "untyped_rubato": 13703
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+          "frame_count": 15429,
+          "truth_sha256": "ec2d36c1e4e7bfe5641dc5085e08bd4ab3cb2aa28e1d408f7faab44b584f14d1",
+          "capture_sha256": "c5522a4af335b3045c3cc5d4baade4809307d994b277152d0b7112a10c5c5dda",
+          "candidate_starts": 15230,
+          "roles": {
+            "untyped_rubato": 15230
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+          "frame_count": 9547,
+          "truth_sha256": "e892d59ecb17cc055034f3c043d49f981ad877092fb1298df3eaaeb10f4fd47e",
+          "capture_sha256": "3e0626fec9fe95fc1a07b48eab7983a38ab3d951b65cd8f8c9137e2d7e53338f",
+          "candidate_starts": 9348,
+          "roles": {
+            "untyped_rubato": 9348
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+          "frame_count": 10695,
+          "truth_sha256": "176a0359278e6ec6fcffec89b0489fbd3ca8ac4e8b93dd974c3b4423b8444cb1",
+          "capture_sha256": "8cc504bfe807c64cc1aa721b842de44b350ffc5d6724d0b30277e71cade824bb",
+          "candidate_starts": 10496,
+          "roles": {
+            "untyped_rubato": 10496
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+          "frame_count": 10500,
+          "truth_sha256": "ba992b7fd03f9117cf411b06c59778f9eb65698a1e71c6907fa8520da0f46d9b",
+          "capture_sha256": "ccedd36d8c0bef9060f0d32d687a586a44c66ecbf43d20b340405412c8373bea",
+          "candidate_starts": 10301,
+          "roles": {
+            "untyped_rubato": 10301
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        }
+      ]
+    },
+    "400": {
+      "cohorts": {
+        "artbeat": {
+          "tracks": 15,
+          "pairable_tracks": 0,
+          "candidate_starts": 6343,
+          "roles": {
+            "annotation_tail_uncovered": 343,
+            "change": 2228,
+            "constant": 136,
+            "insufficient_prefix": 1357,
+            "no_stable_prefix_segment": 876,
+            "not_adjacent_constant_step": 105,
+            "step_too_few_interior_beats": 534,
+            "untyped_rubato": 764
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0
+        },
+        "rubato": {
+          "tracks": 25,
+          "pairable_tracks": 0,
+          "candidate_starts": 314540,
+          "roles": {
+            "untyped_rubato": 314540
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0
+        }
+      },
+      "cases": [
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-05-75-to-150",
+          "frame_count": 681,
+          "truth_sha256": "5d6c395345fb6155893bc3aad4e0def3518bdecedb82f08d3514adfaeea0d456",
+          "capture_sha256": "973337d4aa0bd1bac738888fe415755185d4a2a2eea933d11fd21541ce3764a7",
+          "candidate_starts": 282,
+          "roles": {
+            "annotation_tail_uncovered": 21,
+            "change": 118,
+            "insufficient_prefix": 120,
+            "step_too_few_interior_beats": 23
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-06-150-to-75",
+          "frame_count": 681,
+          "truth_sha256": "fcda5614cb07639a66edb58f7b658214e1f54ec1db1de35e84367d47be77849f",
+          "capture_sha256": "c96fe9dff55dc0334c956f453cb9e0640af4ce9b52abdccd82eaeb4b022b9ff3",
+          "candidate_starts": 282,
+          "roles": {
+            "annotation_tail_uncovered": 42,
+            "change": 180,
+            "insufficient_prefix": 60
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-07-75-to-112-5",
+          "frame_count": 667,
+          "truth_sha256": "063beee7c5428adedeecab21d0f8678a69c049f4ca2ea8ebfb7827b1ec79057f",
+          "capture_sha256": "bd4e756badf480190d1b3e216677aa8ead7a1032d8f66ef1bcefdc18e7b00e69",
+          "candidate_starts": 268,
+          "roles": {
+            "annotation_tail_uncovered": 28,
+            "change": 116,
+            "insufficient_prefix": 122,
+            "step_too_few_interior_beats": 2
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-08-112-5-to-75",
+          "frame_count": 701,
+          "truth_sha256": "64de869a6b3e15d8e07601d67cb1508842de558761f5d00f4d25ded8077b92e6",
+          "capture_sha256": "f727928b068097ab0ac2d58cf838f95265fb9a74a7c2fb990dba7fc5fee07edf",
+          "candidate_starts": 302,
+          "roles": {
+            "annotation_tail_uncovered": 21,
+            "change": 186,
+            "insufficient_prefix": 95
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-09-90-to-80",
+          "frame_count": 881,
+          "truth_sha256": "a9802ae028c9631323354a5826f50e2c78b14e54c66581a817f8d07b633a5409",
+          "capture_sha256": "cc3464f42f5c32135d39832563f146ef2d80d284c817626c23627ee986fe244e",
+          "candidate_starts": 482,
+          "roles": {
+            "annotation_tail_uncovered": 27,
+            "change": 231,
+            "insufficient_prefix": 105,
+            "no_stable_prefix_segment": 50,
+            "step_too_few_interior_beats": 69
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-10-90-to-120",
+          "frame_count": 831,
+          "truth_sha256": "2165ea70a5f4224461552a28567cb45ad2b2cfe66cf4a99661ff49a02b24f10f",
+          "capture_sha256": "d9f11d3c740c80d0e5d12c650b07bdd1268d007491740e0c5ca3b388cf5de9a4",
+          "candidate_starts": 432,
+          "roles": {
+            "annotation_tail_uncovered": 25,
+            "change": 231,
+            "insufficient_prefix": 105,
+            "no_stable_prefix_segment": 1,
+            "step_too_few_interior_beats": 70
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-11-60-to-80",
+          "frame_count": 871,
+          "truth_sha256": "7332a12f293d6bf843b4833054722c492c551d9e82b978aa11e6a90e145f1901",
+          "capture_sha256": "862b06aafd290e8a039978b135f34ea35da797bbf9074157847c0c07d7ed27f3",
+          "candidate_starts": 472,
+          "roles": {
+            "annotation_tail_uncovered": 21,
+            "change": 147,
+            "insufficient_prefix": 153,
+            "no_stable_prefix_segment": 49,
+            "step_too_few_interior_beats": 102
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-12-80-to-150",
+          "frame_count": 872,
+          "truth_sha256": "84dc7d0b5ae7f297bdef100b6f67dc64d1475655ef9a36cdd442578368301a87",
+          "capture_sha256": "00f0ed56f9eabcd37c80ea2f463cdbfd7ba5416a1e019979f24093bc5a7f1b30",
+          "candidate_starts": 473,
+          "roles": {
+            "annotation_tail_uncovered": 22,
+            "change": 260,
+            "insufficient_prefix": 114,
+            "step_too_few_interior_beats": 77
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-13-180-to-120",
+          "frame_count": 692,
+          "truth_sha256": "61513c63f05ff332d265d6d785ca50342cdad10b23f664a40f1b55d2487349bf",
+          "capture_sha256": "88a5824f541d2dd782a01644c73fd546e52090769e145807b50767ebfbdb23dc",
+          "candidate_starts": 293,
+          "roles": {
+            "annotation_tail_uncovered": 26,
+            "change": 181,
+            "insufficient_prefix": 51,
+            "step_too_few_interior_beats": 35
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-14-240-to-96",
+          "frame_count": 816,
+          "truth_sha256": "6583d495985b507d2083975501e40f15ad0727f2df8761645280f4fb87c3fe96",
+          "capture_sha256": "53ea2508c3487f5fba57ff2c03246dae6b267c0ff9886a22baa496cff7ce19f0",
+          "candidate_starts": 417,
+          "roles": {
+            "annotation_tail_uncovered": 16,
+            "change": 236,
+            "constant": 7,
+            "insufficient_prefix": 38,
+            "no_stable_prefix_segment": 94,
+            "step_too_few_interior_beats": 26
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-15-85-to-127-5",
+          "frame_count": 1130,
+          "truth_sha256": "e819ded9652413d5fd923066047b8cc1a27a2c0d24f3fdb3b80b40148fc9c39e",
+          "capture_sha256": "5a66d6c4abfc1416ff34fca4c74dd2c0a937e95f3654ea4145b76045125aa350",
+          "candidate_starts": 731,
+          "roles": {
+            "annotation_tail_uncovered": 25,
+            "change": 301,
+            "constant": 129,
+            "insufficient_prefix": 106,
+            "no_stable_prefix_segment": 71,
+            "step_too_few_interior_beats": 99
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-18-piano-rubato",
+          "frame_count": 1163,
+          "truth_sha256": "ddf1a5ff2a4d5649497bb54a60084abed6a21b1a062c874a492820245afd11a2",
+          "capture_sha256": "4e6c241ec2705094b5809e8f8d7a48fc668ad2eef2721d54d31a98dff3e3495e",
+          "candidate_starts": 764,
+          "roles": {
+            "untyped_rubato": 764
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-19-ramp-80-to-200",
+          "frame_count": 863,
+          "truth_sha256": "407ec564b847ebf779e2f740c8c5d156211e69e18dc62b6a8fd37c17d01c4457",
+          "capture_sha256": "cf9e6d10e25ebfbb93e50ad70be70186e7ed229577e2b1fbd5f90c5459af215b",
+          "candidate_starts": 464,
+          "roles": {
+            "annotation_tail_uncovered": 16,
+            "insufficient_prefix": 113,
+            "no_stable_prefix_segment": 335
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-20-ramp-200-to-80",
+          "frame_count": 864,
+          "truth_sha256": "b2e8e3aa1a131b9335914f974d5cfff7618703dd8d9c87fe38723545f6ec5980",
+          "capture_sha256": "9aae8a403e1b95a3532d8bd2670febb21d3e9aab4034f05b6009cdd8f08c8c1c",
+          "candidate_starts": 465,
+          "roles": {
+            "annotation_tail_uncovered": 38,
+            "insufficient_prefix": 46,
+            "no_stable_prefix_segment": 276,
+            "not_adjacent_constant_step": 105
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "artbeat",
+          "id": "artbeat-21-polyrhythm-70-to-105",
+          "frame_count": 615,
+          "truth_sha256": "7016cc892dcec5a95ea18cf778d9890f1d754158168f29c3ce5e895d32578638",
+          "capture_sha256": "2e3ba7557faad626d3f92bf6d6e0a705536a81119c8cf33603a5b6bd91fabc22",
+          "candidate_starts": 216,
+          "roles": {
+            "annotation_tail_uncovered": 15,
+            "change": 41,
+            "insufficient_prefix": 129,
+            "step_too_few_interior_beats": 31
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+          "frame_count": 6446,
+          "truth_sha256": "f16e419511caee1c96c786fbe5a745b9e319a5d95a8d832dcd3b337f072706a7",
+          "capture_sha256": "76b295f5021e99204b2fde688f1b85f364d6f999866fc7fad7d60f1a6ab7e0a3",
+          "candidate_starts": 6047,
+          "roles": {
+            "untyped_rubato": 6047
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-bach-bwv1007-01-ov-milman2022",
+          "frame_count": 6949,
+          "truth_sha256": "02617c821f0b7beb6fb0578d50f18b45b1e4b96e788c33835646b716b8a584e7",
+          "capture_sha256": "eaac53c4f18d0fbc9da29c315ce6d58385e9c4bbe74b17ff191d1c092981647b",
+          "candidate_starts": 6550,
+          "roles": {
+            "untyped_rubato": 6550
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-beethoven-op072-0-ov-henning2017",
+          "frame_count": 20175,
+          "truth_sha256": "0597675375121d0e7592d5abdae51277c166ff7611f3daf327f0ae4193ddcf8e",
+          "capture_sha256": "fb774b4cfc44a241719fa344c81c4db0ecd6d1365bbf1f8c9490cfd31c07f325",
+          "candidate_starts": 19776,
+          "roles": {
+            "untyped_rubato": 19776
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-berlioz-h048-04-ov-dennis2016",
+          "frame_count": 13626,
+          "truth_sha256": "4e8b47d76b1ddce15d38da69fe3ca74892c777d2e1eb541524fc88d7a790bf34",
+          "capture_sha256": "fa46e89ee43b9e689b9efa8f66bd76f480abd4eface90a49fe934ffb455968d5",
+          "candidate_starts": 13227,
+          "roles": {
+            "untyped_rubato": 13227
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-boccherini-g275-03-ov-krux2022",
+          "frame_count": 8132,
+          "truth_sha256": "9b79c5c3cc3046c889ef9bbb34b0231dc7c393e22a088b3776b6b0862edad18b",
+          "capture_sha256": "4a3c2d66e432d3a8c0fae5f4559f0dde4a47d6b3f42e1f74ff23763c76830a49",
+          "candidate_starts": 7733,
+          "roles": {
+            "untyped_rubato": 7733
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-brahms-op115-01-ov-schmitta2025",
+          "frame_count": 31011,
+          "truth_sha256": "6775c1cabad7d73b7682fa37d9a6e51c5542bffa054838df22f7a94ad150136a",
+          "capture_sha256": "9415d3b198b48e7ab0e046a9a0b6a06cef1b880132a2a46c280e7e7f246bc77f",
+          "candidate_starts": 30612,
+          "roles": {
+            "untyped_rubato": 30612
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-brahms-op115-01-ov-steffens2008",
+          "frame_count": 31115,
+          "truth_sha256": "8934b0c9f51e4a9520584c35998f7d9cf724272de99d577d1b4f95e658ce7964",
+          "capture_sha256": "dd3b6bedb679b6dfea6bc1567a38c52d469f4b277ca64d9436b63b60d51279b9",
+          "candidate_starts": 30716,
+          "roles": {
+            "untyped_rubato": 30716
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+          "frame_count": 8115,
+          "truth_sha256": "986d47aaab5598db25b2fb44d16bfbf7f9c6b2df4acf9b118fae9f7f8911932c",
+          "capture_sha256": "639f95573ffda23e4eef605c10be3ed564c27a8c1512ed9ffb75d0fd10fe6e17",
+          "candidate_starts": 7716,
+          "roles": {
+            "untyped_rubato": 7716
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+          "frame_count": 8218,
+          "truth_sha256": "10b34ee45b0b11f66943f98ab75b16886fd65dd7a108127a447bfb919d146f3e",
+          "capture_sha256": "5f04d4fcdd5c4324a92b7add6ab17d5f6f78dd83370cd4c7f62814fa04e0fb94",
+          "candidate_starts": 7819,
+          "roles": {
+            "untyped_rubato": 7819
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+          "frame_count": 7681,
+          "truth_sha256": "ac2935ad5dcb5fc1a1dd44730eaed584241096c35bfe0508da5393dcd40a8ec7",
+          "capture_sha256": "8a5a3539ec7ed49803592f880d420cd86662a00eaec73d692ec77916cd87e28b",
+          "candidate_starts": 7282,
+          "roles": {
+            "untyped_rubato": 7282
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-mozart-kv618-ar-papalin2012",
+          "frame_count": 8051,
+          "truth_sha256": "82a37995c722804ee66b57f6b3bfe39ce88cc602a4cc719b84c65c71300f5a32",
+          "capture_sha256": "83bf46fd1128010eebcea578d7f9df697152b1d388920bd3b42d2d4df4f58620",
+          "candidate_starts": 7652,
+          "roles": {
+            "untyped_rubato": 7652
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+          "frame_count": 10336,
+          "truth_sha256": "5f3832fafaa133b5a3875b8964b47b493568cdd2f4be76615fd5ea6f2f0f7616",
+          "capture_sha256": "c70c8a500375325ccc85c81dc24c70a3f296a58f6c2a4d39f3e92cda673d329c",
+          "candidate_starts": 9937,
+          "roles": {
+            "untyped_rubato": 9937
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+          "frame_count": 14062,
+          "truth_sha256": "996d4563a086fbe048d71da38e3d2441c789c28e2289aefa7284b3d3c10bc5c6",
+          "capture_sha256": "39965f14ea58cac4e0a1766bfbf97f752e383bafa8625e49b4d21dbfee006ba9",
+          "candidate_starts": 13663,
+          "roles": {
+            "untyped_rubato": 13663
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+          "frame_count": 16304,
+          "truth_sha256": "cc91282ff134ac42e5c051942baad56b49d19f8a56acdb09ce57c8e49e461f10",
+          "capture_sha256": "7ccaa90f6f1e904b8ce2038a50b8780ff29c6068d99d7b535a5d4ce1050a82fc",
+          "candidate_starts": 15905,
+          "roles": {
+            "untyped_rubato": 15905
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-schubert-d733-01-ar-staab2012",
+          "frame_count": 10168,
+          "truth_sha256": "15a68f3c29bb4eb1f9974093ab0f23189ba183232b341233e70f09523deec922",
+          "capture_sha256": "c83d96b22dd1f77113203f6306ca15799da52a37c9d5ae491821150c889ae85c",
+          "candidate_starts": 9769,
+          "roles": {
+            "untyped_rubato": 9769
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+          "frame_count": 10359,
+          "truth_sha256": "71dc170ac875df1922db5cba6dcbfb59db11f254d6c35c45b825bdfe0d33ca8c",
+          "capture_sha256": "61a4b73d8ebd98e5f81d6fbcab7195bb5c81875f183741eca435ae7077f478dd",
+          "candidate_starts": 9960,
+          "roles": {
+            "untyped_rubato": 9960
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-schumann-op039-05-ov-buttner2025",
+          "frame_count": 12226,
+          "truth_sha256": "aa36e4aec046346505801c6eb7d66db6557792129ba3395955945c7f3f315cd5",
+          "capture_sha256": "3089b5afac496979c1ef49f64e52efae5671543a531aa6ac93ff34a613da8bdf",
+          "candidate_starts": 11827,
+          "roles": {
+            "untyped_rubato": 11827
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-schumann-op039-05-ov-pizarro2012",
+          "frame_count": 11258,
+          "truth_sha256": "d7140499d39a2769e1d8a248d2122efda0cb519ec2cc203d0bf81563ed0fc312",
+          "capture_sha256": "f00c6df8b74aca7395079db30244d15819ae0d4d2ef62c9578d11b3671d22f9e",
+          "candidate_starts": 10859,
+          "roles": {
+            "untyped_rubato": 10859
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+          "frame_count": 15410,
+          "truth_sha256": "a45bd07ff0742e30ee0eca8cd53ffc0fc1c29baf8f81ee5b024554af89ef2796",
+          "capture_sha256": "09896ffb8511eb529ad81d60add089a0317aa5f40a4e352c28d45d46ea142ad3",
+          "candidate_starts": 15011,
+          "roles": {
+            "untyped_rubato": 15011
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+          "frame_count": 14800,
+          "truth_sha256": "49379fbe7c51dbf3d9cff11586ece6b9316d128e1f05cd2f8fdb0b281c1f4c88",
+          "capture_sha256": "7e08129bf8748f959536d857bc9999a4088186a6be46903f48da8f8d1afb436d",
+          "candidate_starts": 14401,
+          "roles": {
+            "untyped_rubato": 14401
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+          "frame_count": 13902,
+          "truth_sha256": "f0aaf80955f919bf3cd84df7f649824812ab08aed548d09e5342fb7d79e00959",
+          "capture_sha256": "8f781ccc08798cf349ba841bb5bb89ed66f104068ebc1fcecced2a1f354c72d7",
+          "candidate_starts": 13503,
+          "roles": {
+            "untyped_rubato": 13503
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+          "frame_count": 15429,
+          "truth_sha256": "ec2d36c1e4e7bfe5641dc5085e08bd4ab3cb2aa28e1d408f7faab44b584f14d1",
+          "capture_sha256": "c5522a4af335b3045c3cc5d4baade4809307d994b277152d0b7112a10c5c5dda",
+          "candidate_starts": 15030,
+          "roles": {
+            "untyped_rubato": 15030
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+          "frame_count": 9547,
+          "truth_sha256": "e892d59ecb17cc055034f3c043d49f981ad877092fb1298df3eaaeb10f4fd47e",
+          "capture_sha256": "3e0626fec9fe95fc1a07b48eab7983a38ab3d951b65cd8f8c9137e2d7e53338f",
+          "candidate_starts": 9148,
+          "roles": {
+            "untyped_rubato": 9148
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+          "frame_count": 10695,
+          "truth_sha256": "176a0359278e6ec6fcffec89b0489fbd3ca8ac4e8b93dd974c3b4423b8444cb1",
+          "capture_sha256": "8cc504bfe807c64cc1aa721b842de44b350ffc5d6724d0b30277e71cade824bb",
+          "candidate_starts": 10296,
+          "roles": {
+            "untyped_rubato": 10296
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        },
+        {
+          "cohort": "rubato",
+          "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+          "frame_count": 10500,
+          "truth_sha256": "ba992b7fd03f9117cf411b06c59778f9eb65698a1e71c6907fa8520da0f46d9b",
+          "capture_sha256": "ccedd36d8c0bef9060f0d32d687a586a44c66ecbf43d20b340405412c8373bea",
+          "candidate_starts": 10101,
+          "roles": {
+            "untyped_rubato": 10101
+          },
+          "pair_combinations": 0,
+          "pairable_change_starts": 0,
+          "pair_available": false,
+          "pair_sha256": null
+        }
+      ]
+    }
+  },
+  "selected_window_frames": 200,
+  "selected_pair_count": 7,
+  "selected_case_ids": [
+    "artbeat-06-150-to-75",
+    "artbeat-08-112-5-to-75",
+    "artbeat-09-90-to-80",
+    "artbeat-10-90-to-120",
+    "artbeat-12-80-to-150",
+    "artbeat-14-240-to-96",
+    "artbeat-15-85-to-127-5"
+  ],
+  "plan_sha256": "5c15e677d0277dcac111aaebfb2be0b788996cbd44019a315c171fcf39bfe4f2",
+  "response_budget_verification": "not_run",
+  "selected_tempo": null
+}

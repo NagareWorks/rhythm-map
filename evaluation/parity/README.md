@@ -8,6 +8,12 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `annotation-exposure-v1.json` and `annotation_exposure_audit.py` use public
+  annotations and allowlisted identity/duration metadata only to freeze seven
+  matched four-second constant/step pairs. All 40 inputs and registered duration
+  profiles remain visible; no detector score selects windows. Response budget
+  verification and actual replay are still pending. See the
+  [annotation-only availability contract](../baselines/annotation-exposure-v1.md).
 - `window-response-residuals-v1.json` and `window_response_residual_audit.py`
   apply the exact packet bridge to 775 eligible fixed eight-second windows,
   separating assignment contention, candidate support and absent candidates.

@@ -24,6 +24,16 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- Annotation-only matched constant/step availability now retains all 40 inputs
+  and pre-registers a global 2/4/8-second comparison. Pairable track counts are
+  4/7/0; the coverage rule freezes seven four-second pairs within the same track
+  and prechange segment, with nonoverlapping audio windows. RUBATO stays untyped,
+  not relabeled from interval variation. No detector outcome chose these spans;
+  response budgets/support remain unchecked. Next freeze paired replay metrics,
+  verify the plan hash and replay exactly these fourteen windows through the
+  existing adapters, retaining rejected pairs rather than replacing them. Seven
+  tracks are not general accuracy evidence. No production knobs, holdout or
+  training. See the [availability contract and plan](evaluation/baselines/annotation-exposure-v1.md).
 - Fixed eight-second supplied-clock ledgers now inventory all 40 frozen captures,
   with 775 eligible windows and complete excluded-window/source denominators.
   RUBATO has 2,601 interior raw misses: 1,143 candidate-supported (1,064 only
