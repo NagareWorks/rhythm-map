@@ -24,6 +24,17 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- Fixed eight-second supplied-clock ledgers now inventory all 40 frozen captures,
+  with 775 eligible windows and complete excluded-window/source denominators.
+  RUBATO has 2,601 interior raw misses: 1,143 candidate-supported (1,064 only
+  nonpositive), three assignment-contention cases and 1,455 without a nearby
+  candidate. Background candidates and double-clock density tradeoffs remain.
+  Crucially, the eligible sample has no constant/ramp context, so it cannot
+  validate omission-versus-change discrimination. Next inventory annotation-only
+  availability for matched constant/change exposure and freeze that protocol
+  before replay; retain this coverage failure, not a tuned window replacement.
+  No default change, user strategy, holdout or training. See the
+  [residual inventory and coverage limits](evaluation/baselines/window-response-residuals-v1.md).
 - Backend response identities are now checked on all 40 frozen calibration
   captures: 9,648 default events and 36,710 candidates reproduce their original
   published times and confidences. Exact nominal centers, score frames, paired

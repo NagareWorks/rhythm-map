@@ -8,6 +8,12 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `window-response-residuals-v1.json` and `window_response_residual_audit.py`
+  apply the exact packet bridge to 775 eligible fixed eight-second windows,
+  separating assignment contention, candidate support and absent candidates.
+  All 40 inputs and excluded exposure are retained. The eligible sample lacks
+  constant/ramp context; this is not omission/change accuracy or a tuned decoder.
+  See the [complete residual and coverage report](../baselines/window-response-residuals-v1.md).
 - `backend-response-packets-v1.json` and `backend_response_packet_audit.py`
   validate unchanged default/candidate provenance on all 40 frozen captures.
   Published events, exact nominal centers, score frames and paired logits remain
