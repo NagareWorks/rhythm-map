@@ -24,6 +24,19 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- Decision gate 1 is now closed with a concrete clock confound, not an accuracy
+  gain: six of seven frozen constant windows exceed microsecond normalization,
+  and three exceed the unchanged 60ms radius on interior corresponding ticks.
+  Combined alignment and drift errors reach approximately 85-100ms in those cases;
+  only one window changes half-open ownership. Do not interpret raw annotated
+  clock dominance as tempo-change evidence or optimize that criterion further.
+  Gate 2 must control shared phase/period nuisance before testing joint-head and
+  context discrimination, preserve density/omission ambiguity, and validate any
+  positive rule on new independent examples. Stop this postprocessing-only line
+  if it still requires track exceptions or trades recovered beats for false
+  changes; assess richer pretrained evidence before concluding training is the
+  only option. No radius change, reselection, user mode, holdout or training.
+  See the [frozen geometry and decision](evaluation/baselines/prefix-clock-drift-v1.md).
 - All seven frozen four-second constant/step pairs now pass unchanged packet and
   rational-ledger replay: 91 raw events, 340 candidates, no rejected/replaced
   pair. Constant/step interior misses are 10/12, with ten nonpositive-supported

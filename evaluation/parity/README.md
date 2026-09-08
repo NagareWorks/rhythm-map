@@ -8,6 +8,12 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `prefix-clock-drift-v1.json` and `prefix_clock_drift_audit.py` audit the same
+  seven frozen pairs using only annotation geometry. Same-ordinal offset, period
+  drift, annotation departure, normalization and edge ownership remain separate.
+  Three constant windows exceed the unchanged radius even on complete interior
+  queries: annotation-clock dominance cannot be treated as change evidence.
+  See the [closed first gate and bounded next experiment](../baselines/prefix-clock-drift-v1.md).
 - `paired-response-replay-v1.json` and `paired_response_replay_audit.py` replay
   all seven annotation-frozen constant/step pairs through unchanged packet and
   rational-ledger helpers, with shared pair eligibility and no reselection.

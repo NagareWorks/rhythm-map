@@ -1,0 +1,2019 @@
+{
+  "schema_version": 1,
+  "purpose": "annotation_only_frozen_pair_prefix_clock_geometry",
+  "contract": {
+    "schema_version": 1,
+    "purpose": "annotation_only_frozen_pair_prefix_clock_geometry",
+    "selection": "unchanged annotation-exposure-v1 plan; all seven pairs and fourteen 200-frame windows; retain all forty input identities",
+    "roles": "constant windows are the decision population; change windows and their pre/post strata are descriptive contrasts only",
+    "prefix": "last four annotated beats strictly before start; anchor is the last; period is their endpoint span divided by three",
+    "nominal_period": "60000000 / pre-segment BPM in microseconds, interpreted as an exact decimal rational; not fitted",
+    "correspondence": "same annotation ordinal since prefix anchor, never nearest tick or phase wrapping; virtual predictions need not lie in the window",
+    "decomposition": "actual - prefix prediction = first selected beat error + (ordinal - first ordinal) * (nominal period - prefix period) + actual - first actual - (ordinal - first ordinal) * nominal period",
+    "phase_term": "first selected beat error is an observed alignment offset including accumulated pre-window drift, not an identified physical phase or fitted correction",
+    "normalization_bound_us": "1 + ordinal/3 for annotation-minus-prefix error; bounds only independent nearest-microsecond normalization of three distinct timestamps, not upstream annotation precision",
+    "ownership": "half-open window; compare ordinal sets, preserving annotation-only, continuation-only and uncovered continuation ordinals",
+    "query_support": "unchanged ceil(center_frames-3)>=0 and floor(center_frames+3)<200, with window membership required",
+    "radius": "60000 microseconds inclusive, unchanged descriptive geometric threshold, not a response match or accuracy score",
+    "decision": "any constant-window ordinal error beyond its normalization bound requires clock-nuisance control before model-discrimination claims; otherwise only no beyond-normalization drift observed, not validation",
+    "serialization": "exact rational microsecond quantities as strings; counts and identity hashes only, no event arrays or absolute coordinates",
+    "private_captures_read": false,
+    "response_fields_used": false,
+    "phase_fit": false,
+    "new_window_selection": false,
+    "decoder_replayed": false,
+    "holdout_opened": false,
+    "training_run": false
+  },
+  "script_sha256": "9a1eb612285cf5fd3449d2fa989a4acb4a0833e4b31d45733ebf25893cefd331",
+  "lock_sha256": "3261542bcd0add7f0b4bd91d506b4f1007fe5cc85b81aba787d969fde1d1f3cc",
+  "exposure_dependencies": {
+    "annotation_exposure_audit.py": "824832bb891637a8eafb40bd05c05e4fb5c5000577c7f08a81a10bdc2892c681",
+    "annotation-exposure-lock-v1.json": "2f9fcbc4a75ac6c30acad4d927d681d686a6a2e9d93531831f8e8e9f934c1271",
+    "annotation-exposure-v1.json": "e9bb2086e906bda366e0b8d2d4dd87b9ff9d7c44441696d223a75a96471b1346"
+  },
+  "plan_sha256": "5c15e677d0277dcac111aaebfb2be0b788996cbd44019a315c171fcf39bfe4f2",
+  "metadata_projection_sha256": "b93984c19e761873ea3c79144e35add6474cc0dd85677a67cbca90a4bfe8e13d",
+  "selected_pair_count": 7,
+  "window_count": 14,
+  "cases": [
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-05-75-to-150",
+      "frame_count": 681,
+      "truth_sha256": "5d6c395345fb6155893bc3aad4e0def3518bdecedb82f08d3514adfaeea0d456",
+      "capture_sha256": "973337d4aa0bd1bac738888fe415755185d4a2a2eea933d11fd21541ce3764a7",
+      "selected": false
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-06-150-to-75",
+      "frame_count": 681,
+      "truth_sha256": "fcda5614cb07639a66edb58f7b658214e1f54ec1db1de35e84367d47be77849f",
+      "capture_sha256": "c96fe9dff55dc0334c956f453cb9e0640af4ce9b52abdccd82eaeb4b022b9ff3",
+      "selected": true,
+      "pair_sha256": "63201d9b0e3f694cb5c846a768f4e892f376d10eb71623fa85f001e2c57c4735",
+      "windows": [
+        {
+          "role": "constant",
+          "prefix_period_us": "1171667/3",
+          "nominal_period_us": "400000",
+          "prefix_minus_nominal_period_us": "-28333/3",
+          "prefix_interval_minus_nominal": {
+            "count": 3,
+            "min_us": "-15833",
+            "max_us": "-5000",
+            "max_abs_us": "15833"
+          },
+          "first_selected_beat_error_us": "10834/3",
+          "prefix_nominal_first_error_us": "-5833",
+          "identical_grids": false,
+          "ownership": {
+            "annotation_ticks": 9,
+            "continuation_ticks": 10,
+            "shared_ordinals": 9,
+            "annotation_only": 0,
+            "continuation_only": 1,
+            "annotation_only_prediction_before_window": 0,
+            "annotation_only_prediction_after_window": 0,
+            "continuation_only_annotation_location": {
+              "annotation_before_window": 0,
+              "annotation_after_window": 1,
+              "annotation_uncovered": 0
+            },
+            "annotation_full_query": 9,
+            "continuation_full_query": 10
+          },
+          "all_ticks": {
+            "ticks": 9,
+            "full_query_annotation_ticks": 9,
+            "both_full_query_ticks": 9,
+            "beyond_normalization_bound": 9,
+            "beyond_radius": 4,
+            "full_query_annotation_beyond_radius": 4,
+            "both_full_query_beyond_radius": 4,
+            "error": {
+              "count": 9,
+              "min_us": "10834/3",
+              "max_us": "95832",
+              "max_abs_us": "95832"
+            },
+            "relative_prefix_period_drift": {
+              "count": 9,
+              "min_us": "0",
+              "max_us": "226664/3",
+              "max_abs_us": "226664/3"
+            },
+            "relative_annotation_departure": {
+              "count": 9,
+              "min_us": "0",
+              "max_us": "16666",
+              "max_abs_us": "16666"
+            },
+            "normalization_bound": {
+              "count": 9,
+              "min_us": "4/3",
+              "max_us": "4",
+              "max_abs_us": "4"
+            }
+          },
+          "strata": {
+            "constant": {
+              "ticks": 9,
+              "full_query_annotation_ticks": 9,
+              "both_full_query_ticks": 9,
+              "beyond_normalization_bound": 9,
+              "beyond_radius": 4,
+              "full_query_annotation_beyond_radius": 4,
+              "both_full_query_beyond_radius": 4,
+              "error": {
+                "count": 9,
+                "min_us": "10834/3",
+                "max_us": "95832",
+                "max_abs_us": "95832"
+              },
+              "relative_prefix_period_drift": {
+                "count": 9,
+                "min_us": "0",
+                "max_us": "226664/3",
+                "max_abs_us": "226664/3"
+              },
+              "relative_annotation_departure": {
+                "count": 9,
+                "min_us": "0",
+                "max_us": "16666",
+                "max_abs_us": "16666"
+              },
+              "normalization_bound": {
+                "count": 9,
+                "min_us": "4/3",
+                "max_us": "4",
+                "max_abs_us": "4"
+              }
+            }
+          }
+        },
+        {
+          "role": "change",
+          "prefix_period_us": "1205833/3",
+          "nominal_period_us": "400000",
+          "prefix_minus_nominal_period_us": "5833/3",
+          "prefix_interval_minus_nominal": {
+            "count": 3,
+            "min_us": "-4167",
+            "max_us": "13333",
+            "max_abs_us": "13333"
+          },
+          "first_selected_beat_error_us": "-23332/3",
+          "prefix_nominal_first_error_us": "-5833",
+          "identical_grids": false,
+          "ownership": {
+            "annotation_ticks": 8,
+            "continuation_ticks": 10,
+            "shared_ordinals": 8,
+            "annotation_only": 0,
+            "continuation_only": 2,
+            "annotation_only_prediction_before_window": 0,
+            "annotation_only_prediction_after_window": 0,
+            "continuation_only_annotation_location": {
+              "annotation_before_window": 0,
+              "annotation_after_window": 2,
+              "annotation_uncovered": 0
+            },
+            "annotation_full_query": 7,
+            "continuation_full_query": 9
+          },
+          "all_ticks": {
+            "ticks": 8,
+            "full_query_annotation_ticks": 7,
+            "both_full_query_ticks": 7,
+            "beyond_normalization_bound": 8,
+            "beyond_radius": 2,
+            "full_query_annotation_beyond_radius": 2,
+            "both_full_query_beyond_radius": 2,
+            "error": {
+              "count": 8,
+              "min_us": "-24999",
+              "max_us": "2328337/3",
+              "max_abs_us": "2328337/3"
+            },
+            "relative_prefix_period_drift": {
+              "count": 8,
+              "min_us": "-40831/3",
+              "max_us": "0",
+              "max_abs_us": "40831/3"
+            },
+            "relative_annotation_departure": {
+              "count": 8,
+              "min_us": "-7500",
+              "max_us": "797500",
+              "max_abs_us": "797500"
+            },
+            "normalization_bound": {
+              "count": 8,
+              "min_us": "4/3",
+              "max_us": "11/3",
+              "max_abs_us": "11/3"
+            }
+          },
+          "strata": {
+            "pre_step": {
+              "ticks": 5,
+              "full_query_annotation_ticks": 4,
+              "both_full_query_ticks": 4,
+              "beyond_normalization_bound": 5,
+              "beyond_radius": 0,
+              "full_query_annotation_beyond_radius": 0,
+              "both_full_query_beyond_radius": 0,
+              "error": {
+                "count": 5,
+                "min_us": "-45832/3",
+                "max_us": "-14165/3",
+                "max_abs_us": "45832/3"
+              },
+              "relative_prefix_period_drift": {
+                "count": 5,
+                "min_us": "-23332/3",
+                "max_us": "0",
+                "max_abs_us": "23332/3"
+              },
+              "relative_annotation_departure": {
+                "count": 5,
+                "min_us": "-1667",
+                "max_us": "9167",
+                "max_abs_us": "9167"
+              },
+              "normalization_bound": {
+                "count": 5,
+                "min_us": "4/3",
+                "max_us": "8/3",
+                "max_abs_us": "8/3"
+              }
+            },
+            "post_step": {
+              "ticks": 3,
+              "full_query_annotation_ticks": 3,
+              "both_full_query_ticks": 3,
+              "beyond_normalization_bound": 3,
+              "beyond_radius": 2,
+              "full_query_annotation_beyond_radius": 2,
+              "both_full_query_beyond_radius": 2,
+              "error": {
+                "count": 3,
+                "min_us": "-24999",
+                "max_us": "2328337/3",
+                "max_abs_us": "2328337/3"
+              },
+              "relative_prefix_period_drift": {
+                "count": 3,
+                "min_us": "-40831/3",
+                "max_us": "-29165/3",
+                "max_abs_us": "40831/3"
+              },
+              "relative_annotation_departure": {
+                "count": 3,
+                "min_us": "-7500",
+                "max_us": "797500",
+                "max_abs_us": "797500"
+              },
+              "normalization_bound": {
+                "count": 3,
+                "min_us": "3",
+                "max_us": "11/3",
+                "max_abs_us": "11/3"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-07-75-to-112-5",
+      "frame_count": 667,
+      "truth_sha256": "063beee7c5428adedeecab21d0f8678a69c049f4ca2ea8ebfb7827b1ec79057f",
+      "capture_sha256": "bd4e756badf480190d1b3e216677aa8ead7a1032d8f66ef1bcefdc18e7b00e69",
+      "selected": false
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-08-112-5-to-75",
+      "frame_count": 701,
+      "truth_sha256": "64de869a6b3e15d8e07601d67cb1508842de558761f5d00f4d25ded8077b92e6",
+      "capture_sha256": "f727928b068097ab0ac2d58cf838f95265fb9a74a7c2fb990dba7fc5fee07edf",
+      "selected": true,
+      "pair_sha256": "34a2a0b0c4ff5003996ee2827539d5408b39b6a0451536c4f33f83a4f12b2dcb",
+      "windows": [
+        {
+          "role": "constant",
+          "prefix_period_us": "544908",
+          "nominal_period_us": "1600000/3",
+          "prefix_minus_nominal_period_us": "34724/3",
+          "prefix_interval_minus_nominal": {
+            "count": 3,
+            "min_us": "19169/3",
+            "max_us": "47501/3",
+            "max_abs_us": "47501/3"
+          },
+          "first_selected_beat_error_us": "-21296",
+          "prefix_nominal_first_error_us": "-29164/3",
+          "identical_grids": false,
+          "ownership": {
+            "annotation_ticks": 7,
+            "continuation_ticks": 7,
+            "shared_ordinals": 7,
+            "annotation_only": 0,
+            "continuation_only": 0,
+            "annotation_only_prediction_before_window": 0,
+            "annotation_only_prediction_after_window": 0,
+            "continuation_only_annotation_location": {
+              "annotation_before_window": 0,
+              "annotation_after_window": 0,
+              "annotation_uncovered": 0
+            },
+            "annotation_full_query": 7,
+            "continuation_full_query": 7
+          },
+          "all_ticks": {
+            "ticks": 7,
+            "full_query_annotation_ticks": 7,
+            "both_full_query_ticks": 7,
+            "beyond_normalization_bound": 7,
+            "beyond_radius": 4,
+            "full_query_annotation_beyond_radius": 4,
+            "both_full_query_beyond_radius": 4,
+            "error": {
+              "count": 7,
+              "min_us": "-84629",
+              "max_us": "-21296",
+              "max_abs_us": "84629"
+            },
+            "relative_prefix_period_drift": {
+              "count": 7,
+              "min_us": "-69448",
+              "max_us": "0",
+              "max_abs_us": "69448"
+            },
+            "relative_annotation_departure": {
+              "count": 7,
+              "min_us": "-37498/3",
+              "max_us": "6115",
+              "max_abs_us": "37498/3"
+            },
+            "normalization_bound": {
+              "count": 7,
+              "min_us": "4/3",
+              "max_us": "10/3",
+              "max_abs_us": "10/3"
+            }
+          },
+          "strata": {
+            "constant": {
+              "ticks": 7,
+              "full_query_annotation_ticks": 7,
+              "both_full_query_ticks": 7,
+              "beyond_normalization_bound": 7,
+              "beyond_radius": 4,
+              "full_query_annotation_beyond_radius": 4,
+              "both_full_query_beyond_radius": 4,
+              "error": {
+                "count": 7,
+                "min_us": "-84629",
+                "max_us": "-21296",
+                "max_abs_us": "84629"
+              },
+              "relative_prefix_period_drift": {
+                "count": 7,
+                "min_us": "-69448",
+                "max_us": "0",
+                "max_abs_us": "69448"
+              },
+              "relative_annotation_departure": {
+                "count": 7,
+                "min_us": "-37498/3",
+                "max_us": "6115",
+                "max_abs_us": "37498/3"
+              },
+              "normalization_bound": {
+                "count": 7,
+                "min_us": "4/3",
+                "max_us": "10/3",
+                "max_abs_us": "10/3"
+              }
+            }
+          }
+        },
+        {
+          "role": "change",
+          "prefix_period_us": "1618613/3",
+          "nominal_period_us": "1600000/3",
+          "prefix_minus_nominal_period_us": "18613/3",
+          "prefix_interval_minus_nominal": {
+            "count": 3,
+            "min_us": "2501/3",
+            "max_us": "29168/3",
+            "max_abs_us": "29168/3"
+          },
+          "first_selected_beat_error_us": "-55277/3",
+          "prefix_nominal_first_error_us": "-36664/3",
+          "identical_grids": false,
+          "ownership": {
+            "annotation_ticks": 6,
+            "continuation_ticks": 7,
+            "shared_ordinals": 6,
+            "annotation_only": 0,
+            "continuation_only": 1,
+            "annotation_only_prediction_before_window": 0,
+            "annotation_only_prediction_after_window": 0,
+            "continuation_only_annotation_location": {
+              "annotation_before_window": 0,
+              "annotation_after_window": 1,
+              "annotation_uncovered": 0
+            },
+            "annotation_full_query": 6,
+            "continuation_full_query": 7
+          },
+          "all_ticks": {
+            "ticks": 6,
+            "full_query_annotation_ticks": 6,
+            "both_full_query_ticks": 6,
+            "beyond_normalization_bound": 6,
+            "beyond_radius": 3,
+            "full_query_annotation_beyond_radius": 3,
+            "both_full_query_beyond_radius": 3,
+            "error": {
+              "count": 6,
+              "min_us": "-55277/3",
+              "max_us": "715554",
+              "max_abs_us": "715554"
+            },
+            "relative_prefix_period_drift": {
+              "count": 6,
+              "min_us": "-93065/3",
+              "max_us": "0",
+              "max_abs_us": "93065/3"
+            },
+            "relative_annotation_departure": {
+              "count": 6,
+              "min_us": "0",
+              "max_us": "2295004/3",
+              "max_abs_us": "2295004/3"
+            },
+            "normalization_bound": {
+              "count": 6,
+              "min_us": "4/3",
+              "max_us": "3",
+              "max_abs_us": "3"
+            }
+          },
+          "strata": {
+            "pre_step": {
+              "ticks": 2,
+              "full_query_annotation_ticks": 2,
+              "both_full_query_ticks": 2,
+              "beyond_normalization_bound": 2,
+              "beyond_radius": 0,
+              "full_query_annotation_beyond_radius": 0,
+              "both_full_query_beyond_radius": 0,
+              "error": {
+                "count": 2,
+                "min_us": "-55277/3",
+                "max_us": "-26389/3",
+                "max_abs_us": "55277/3"
+              },
+              "relative_prefix_period_drift": {
+                "count": 2,
+                "min_us": "-18613/3",
+                "max_us": "0",
+                "max_abs_us": "18613/3"
+              },
+              "relative_annotation_departure": {
+                "count": 2,
+                "min_us": "0",
+                "max_us": "47501/3",
+                "max_abs_us": "47501/3"
+              },
+              "normalization_bound": {
+                "count": 2,
+                "min_us": "4/3",
+                "max_us": "5/3",
+                "max_abs_us": "5/3"
+              }
+            },
+            "post_step": {
+              "ticks": 4,
+              "full_query_annotation_ticks": 4,
+              "both_full_query_ticks": 4,
+              "beyond_normalization_bound": 4,
+              "beyond_radius": 3,
+              "full_query_annotation_beyond_radius": 3,
+              "both_full_query_beyond_radius": 3,
+              "error": {
+                "count": 4,
+                "min_us": "-8333",
+                "max_us": "715554",
+                "max_abs_us": "715554"
+              },
+              "relative_prefix_period_drift": {
+                "count": 4,
+                "min_us": "-93065/3",
+                "max_us": "-37226/3",
+                "max_abs_us": "93065/3"
+              },
+              "relative_annotation_departure": {
+                "count": 4,
+                "min_us": "67504/3",
+                "max_us": "2295004/3",
+                "max_abs_us": "2295004/3"
+              },
+              "normalization_bound": {
+                "count": 4,
+                "min_us": "2",
+                "max_us": "3",
+                "max_abs_us": "3"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-09-90-to-80",
+      "frame_count": 881,
+      "truth_sha256": "a9802ae028c9631323354a5826f50e2c78b14e54c66581a817f8d07b633a5409",
+      "capture_sha256": "cc3464f42f5c32135d39832563f146ef2d80d284c817626c23627ee986fe244e",
+      "selected": true,
+      "pair_sha256": "e2959c4c7375164051d9e0bcbafc498bb5ff990a5c4ff605b80f72d6852afba2",
+      "windows": [
+        {
+          "role": "constant",
+          "prefix_period_us": "2005556/3",
+          "nominal_period_us": "2000000/3",
+          "prefix_minus_nominal_period_us": "1852",
+          "prefix_interval_minus_nominal": {
+            "count": 3,
+            "min_us": "-20831/3",
+            "max_us": "20833/3",
+            "max_abs_us": "20833/3"
+          },
+          "first_selected_beat_error_us": "-22220/3",
+          "prefix_nominal_first_error_us": "-16664/3",
+          "identical_grids": false,
+          "ownership": {
+            "annotation_ticks": 5,
+            "continuation_ticks": 5,
+            "shared_ordinals": 5,
+            "annotation_only": 0,
+            "continuation_only": 0,
+            "annotation_only_prediction_before_window": 0,
+            "annotation_only_prediction_after_window": 0,
+            "continuation_only_annotation_location": {
+              "annotation_before_window": 0,
+              "annotation_after_window": 0,
+              "annotation_uncovered": 0
+            },
+            "annotation_full_query": 5,
+            "continuation_full_query": 5
+          },
+          "all_ticks": {
+            "ticks": 5,
+            "full_query_annotation_ticks": 5,
+            "both_full_query_ticks": 5,
+            "beyond_normalization_bound": 5,
+            "beyond_radius": 0,
+            "full_query_annotation_beyond_radius": 0,
+            "both_full_query_beyond_radius": 0,
+            "error": {
+              "count": 5,
+              "min_us": "-8332",
+              "max_us": "15977/3",
+              "max_abs_us": "8332"
+            },
+            "relative_prefix_period_drift": {
+              "count": 5,
+              "min_us": "-7408",
+              "max_us": "0",
+              "max_abs_us": "7408"
+            },
+            "relative_annotation_departure": {
+              "count": 5,
+              "min_us": "0",
+              "max_us": "60421/3",
+              "max_abs_us": "60421/3"
+            },
+            "normalization_bound": {
+              "count": 5,
+              "min_us": "4/3",
+              "max_us": "8/3",
+              "max_abs_us": "8/3"
+            }
+          },
+          "strata": {
+            "constant": {
+              "ticks": 5,
+              "full_query_annotation_ticks": 5,
+              "both_full_query_ticks": 5,
+              "beyond_normalization_bound": 5,
+              "beyond_radius": 0,
+              "full_query_annotation_beyond_radius": 0,
+              "both_full_query_beyond_radius": 0,
+              "error": {
+                "count": 5,
+                "min_us": "-8332",
+                "max_us": "15977/3",
+                "max_abs_us": "8332"
+              },
+              "relative_prefix_period_drift": {
+                "count": 5,
+                "min_us": "-7408",
+                "max_us": "0",
+                "max_abs_us": "7408"
+              },
+              "relative_annotation_departure": {
+                "count": 5,
+                "min_us": "0",
+                "max_us": "60421/3",
+                "max_abs_us": "60421/3"
+              },
+              "normalization_bound": {
+                "count": 5,
+                "min_us": "4/3",
+                "max_us": "8/3",
+                "max_abs_us": "8/3"
+              }
+            }
+          }
+        },
+        {
+          "role": "change",
+          "prefix_period_us": "668519",
+          "nominal_period_us": "2000000/3",
+          "prefix_minus_nominal_period_us": "5557/3",
+          "prefix_interval_minus_nominal": {
+            "count": 3,
+            "min_us": "-35414/3",
+            "max_us": "41668/3",
+            "max_abs_us": "41668/3"
+          },
+          "first_selected_beat_error_us": "3009",
+          "prefix_nominal_first_error_us": "14584/3",
+          "identical_grids": false,
+          "ownership": {
+            "annotation_ticks": 6,
+            "continuation_ticks": 6,
+            "shared_ordinals": 6,
+            "annotation_only": 0,
+            "continuation_only": 0,
+            "annotation_only_prediction_before_window": 0,
+            "annotation_only_prediction_after_window": 0,
+            "continuation_only_annotation_location": {
+              "annotation_before_window": 0,
+              "annotation_after_window": 0,
+              "annotation_uncovered": 0
+            },
+            "annotation_full_query": 5,
+            "continuation_full_query": 5
+          },
+          "all_ticks": {
+            "ticks": 6,
+            "full_query_annotation_ticks": 5,
+            "both_full_query_ticks": 5,
+            "beyond_normalization_bound": 6,
+            "beyond_radius": 1,
+            "full_query_annotation_beyond_radius": 1,
+            "both_full_query_beyond_radius": 1,
+            "error": {
+              "count": 6,
+              "min_us": "-29399",
+              "max_us": "138540",
+              "max_abs_us": "138540"
+            },
+            "relative_prefix_period_drift": {
+              "count": 6,
+              "min_us": "-27785/3",
+              "max_us": "0",
+              "max_abs_us": "27785/3"
+            },
+            "relative_annotation_departure": {
+              "count": 6,
+              "min_us": "-91667/3",
+              "max_us": "434378/3",
+              "max_abs_us": "434378/3"
+            },
+            "normalization_bound": {
+              "count": 6,
+              "min_us": "4/3",
+              "max_us": "3",
+              "max_abs_us": "3"
+            }
+          },
+          "strata": {
+            "pre_step": {
+              "ticks": 3,
+              "full_query_annotation_ticks": 2,
+              "both_full_query_ticks": 2,
+              "beyond_normalization_bound": 3,
+              "beyond_radius": 0,
+              "full_query_annotation_beyond_radius": 0,
+              "both_full_query_beyond_radius": 0,
+              "error": {
+                "count": 3,
+                "min_us": "-29399",
+                "max_us": "3009",
+                "max_abs_us": "29399"
+              },
+              "relative_prefix_period_drift": {
+                "count": 3,
+                "min_us": "-11114/3",
+                "max_us": "0",
+                "max_abs_us": "11114/3"
+              },
+              "relative_annotation_departure": {
+                "count": 3,
+                "min_us": "-91667/3",
+                "max_us": "0",
+                "max_abs_us": "91667/3"
+              },
+              "normalization_bound": {
+                "count": 3,
+                "min_us": "4/3",
+                "max_us": "2",
+                "max_abs_us": "2"
+              }
+            },
+            "post_step": {
+              "ticks": 3,
+              "full_query_annotation_ticks": 3,
+              "both_full_query_ticks": 3,
+              "beyond_normalization_bound": 3,
+              "beyond_radius": 1,
+              "full_query_annotation_beyond_radius": 1,
+              "both_full_query_beyond_radius": 1,
+              "error": {
+                "count": 3,
+                "min_us": "-27547",
+                "max_us": "138540",
+                "max_abs_us": "138540"
+              },
+              "relative_prefix_period_drift": {
+                "count": 3,
+                "min_us": "-27785/3",
+                "max_us": "-5557",
+                "max_abs_us": "27785/3"
+              },
+              "relative_annotation_departure": {
+                "count": 3,
+                "min_us": "-24999",
+                "max_us": "434378/3",
+                "max_abs_us": "434378/3"
+              },
+              "normalization_bound": {
+                "count": 3,
+                "min_us": "7/3",
+                "max_us": "3",
+                "max_abs_us": "3"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-10-90-to-120",
+      "frame_count": 831,
+      "truth_sha256": "2165ea70a5f4224461552a28567cb45ad2b2cfe66cf4a99661ff49a02b24f10f",
+      "capture_sha256": "d9f11d3c740c80d0e5d12c650b07bdd1268d007491740e0c5ca3b388cf5de9a4",
+      "selected": true,
+      "pair_sha256": "3748e9e3ba00340ee98457c32431c5c297e9c49b21f7fc58e0f8ca2ab576c52d",
+      "windows": [
+        {
+          "role": "constant",
+          "prefix_period_us": "2004428/3",
+          "nominal_period_us": "2000000/3",
+          "prefix_minus_nominal_period_us": "1476",
+          "prefix_interval_minus_nominal": {
+            "count": 3,
+            "min_us": "-14582/3",
+            "max_us": "19531/3",
+            "max_abs_us": "19531/3"
+          },
+          "first_selected_beat_error_us": "-19010/3",
+          "prefix_nominal_first_error_us": "-14582/3",
+          "identical_grids": false,
+          "ownership": {
+            "annotation_ticks": 6,
+            "continuation_ticks": 6,
+            "shared_ordinals": 6,
+            "annotation_only": 0,
+            "continuation_only": 0,
+            "annotation_only_prediction_before_window": 0,
+            "annotation_only_prediction_after_window": 0,
+            "continuation_only_annotation_location": {
+              "annotation_before_window": 0,
+              "annotation_after_window": 0,
+              "annotation_uncovered": 0
+            },
+            "annotation_full_query": 5,
+            "continuation_full_query": 5
+          },
+          "all_ticks": {
+            "ticks": 6,
+            "full_query_annotation_ticks": 5,
+            "both_full_query_ticks": 5,
+            "beyond_normalization_bound": 6,
+            "beyond_radius": 0,
+            "full_query_annotation_beyond_radius": 0,
+            "both_full_query_beyond_radius": 0,
+            "error": {
+              "count": 6,
+              "min_us": "-6510",
+              "max_us": "9896",
+              "max_abs_us": "9896"
+            },
+            "relative_prefix_period_drift": {
+              "count": 6,
+              "min_us": "-7380",
+              "max_us": "0",
+              "max_abs_us": "7380"
+            },
+            "relative_annotation_departure": {
+              "count": 6,
+              "min_us": "0",
+              "max_us": "70838/3",
+              "max_abs_us": "70838/3"
+            },
+            "normalization_bound": {
+              "count": 6,
+              "min_us": "4/3",
+              "max_us": "3",
+              "max_abs_us": "3"
+            }
+          },
+          "strata": {
+            "constant": {
+              "ticks": 6,
+              "full_query_annotation_ticks": 5,
+              "both_full_query_ticks": 5,
+              "beyond_normalization_bound": 6,
+              "beyond_radius": 0,
+              "full_query_annotation_beyond_radius": 0,
+              "both_full_query_beyond_radius": 0,
+              "error": {
+                "count": 6,
+                "min_us": "-6510",
+                "max_us": "9896",
+                "max_abs_us": "9896"
+              },
+              "relative_prefix_period_drift": {
+                "count": 6,
+                "min_us": "-7380",
+                "max_us": "0",
+                "max_abs_us": "7380"
+              },
+              "relative_annotation_departure": {
+                "count": 6,
+                "min_us": "0",
+                "max_us": "70838/3",
+                "max_abs_us": "70838/3"
+              },
+              "normalization_bound": {
+                "count": 6,
+                "min_us": "4/3",
+                "max_us": "3",
+                "max_abs_us": "3"
+              }
+            }
+          }
+        },
+        {
+          "role": "change",
+          "prefix_period_us": "2020834/3",
+          "nominal_period_us": "2000000/3",
+          "prefix_minus_nominal_period_us": "20834/3",
+          "prefix_interval_minus_nominal": {
+            "count": 3,
+            "min_us": "8335/3",
+            "max_us": "39583/3",
+            "max_abs_us": "39583/3"
+          },
+          "first_selected_beat_error_us": "-110416/3",
+          "prefix_nominal_first_error_us": "-89582/3",
+          "identical_grids": false,
+          "ownership": {
+            "annotation_ticks": 6,
+            "continuation_ticks": 5,
+            "shared_ordinals": 5,
+            "annotation_only": 1,
+            "continuation_only": 0,
+            "annotation_only_prediction_before_window": 0,
+            "annotation_only_prediction_after_window": 1,
+            "continuation_only_annotation_location": {
+              "annotation_before_window": 0,
+              "annotation_after_window": 0,
+              "annotation_uncovered": 0
+            },
+            "annotation_full_query": 6,
+            "continuation_full_query": 5
+          },
+          "all_ticks": {
+            "ticks": 6,
+            "full_query_annotation_ticks": 6,
+            "both_full_query_ticks": 5,
+            "beyond_normalization_bound": 6,
+            "beyond_radius": 3,
+            "full_query_annotation_beyond_radius": 3,
+            "both_full_query_beyond_radius": 2,
+            "error": {
+              "count": 6,
+              "min_us": "-535938",
+              "max_us": "-25520",
+              "max_abs_us": "535938"
+            },
+            "relative_prefix_period_drift": {
+              "count": 6,
+              "min_us": "-104170/3",
+              "max_us": "0",
+              "max_abs_us": "104170/3"
+            },
+            "relative_annotation_departure": {
+              "count": 6,
+              "min_us": "-1393228/3",
+              "max_us": "75524/3",
+              "max_abs_us": "1393228/3"
+            },
+            "normalization_bound": {
+              "count": 6,
+              "min_us": "4/3",
+              "max_us": "3",
+              "max_abs_us": "3"
+            }
+          },
+          "strata": {
+            "pre_step": {
+              "ticks": 2,
+              "full_query_annotation_ticks": 2,
+              "both_full_query_ticks": 2,
+              "beyond_normalization_bound": 2,
+              "beyond_radius": 0,
+              "full_query_annotation_beyond_radius": 0,
+              "both_full_query_beyond_radius": 0,
+              "error": {
+                "count": 2,
+                "min_us": "-110416/3",
+                "max_us": "-79166/3",
+                "max_abs_us": "110416/3"
+              },
+              "relative_prefix_period_drift": {
+                "count": 2,
+                "min_us": "-20834/3",
+                "max_us": "0",
+                "max_abs_us": "20834/3"
+              },
+              "relative_annotation_departure": {
+                "count": 2,
+                "min_us": "0",
+                "max_us": "52084/3",
+                "max_abs_us": "52084/3"
+              },
+              "normalization_bound": {
+                "count": 2,
+                "min_us": "4/3",
+                "max_us": "5/3",
+                "max_abs_us": "5/3"
+              }
+            },
+            "post_step": {
+              "ticks": 4,
+              "full_query_annotation_ticks": 4,
+              "both_full_query_ticks": 3,
+              "beyond_normalization_bound": 4,
+              "beyond_radius": 3,
+              "full_query_annotation_beyond_radius": 3,
+              "both_full_query_beyond_radius": 2,
+              "error": {
+                "count": 4,
+                "min_us": "-535938",
+                "max_us": "-25520",
+                "max_abs_us": "535938"
+              },
+              "relative_prefix_period_drift": {
+                "count": 4,
+                "min_us": "-104170/3",
+                "max_us": "-41668/3",
+                "max_abs_us": "104170/3"
+              },
+              "relative_annotation_departure": {
+                "count": 4,
+                "min_us": "-1393228/3",
+                "max_us": "75524/3",
+                "max_abs_us": "1393228/3"
+              },
+              "normalization_bound": {
+                "count": 4,
+                "min_us": "2",
+                "max_us": "3",
+                "max_abs_us": "3"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-11-60-to-80",
+      "frame_count": 871,
+      "truth_sha256": "7332a12f293d6bf843b4833054722c492c551d9e82b978aa11e6a90e145f1901",
+      "capture_sha256": "862b06aafd290e8a039978b135f34ea35da797bbf9074157847c0c07d7ed27f3",
+      "selected": false
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-12-80-to-150",
+      "frame_count": 872,
+      "truth_sha256": "84dc7d0b5ae7f297bdef100b6f67dc64d1475655ef9a36cdd442578368301a87",
+      "capture_sha256": "00f0ed56f9eabcd37c80ea2f463cdbfd7ba5416a1e019979f24093bc5a7f1b30",
+      "selected": true,
+      "pair_sha256": "684d23110c260b5b1da5da6493210fbafe1cfea946a656cba3449e2935ad7753",
+      "windows": [
+        {
+          "role": "constant",
+          "prefix_period_us": "747656",
+          "nominal_period_us": "750000",
+          "prefix_minus_nominal_period_us": "-2344",
+          "prefix_interval_minus_nominal": {
+            "count": 3,
+            "min_us": "-11718",
+            "max_us": "4687",
+            "max_abs_us": "11718"
+          },
+          "first_selected_beat_error_us": "6251",
+          "prefix_nominal_first_error_us": "3907",
+          "identical_grids": false,
+          "ownership": {
+            "annotation_ticks": 5,
+            "continuation_ticks": 5,
+            "shared_ordinals": 5,
+            "annotation_only": 0,
+            "continuation_only": 0,
+            "annotation_only_prediction_before_window": 0,
+            "annotation_only_prediction_after_window": 0,
+            "continuation_only_annotation_location": {
+              "annotation_before_window": 0,
+              "annotation_after_window": 0,
+              "annotation_uncovered": 0
+            },
+            "annotation_full_query": 5,
+            "continuation_full_query": 5
+          },
+          "all_ticks": {
+            "ticks": 5,
+            "full_query_annotation_ticks": 5,
+            "both_full_query_ticks": 5,
+            "beyond_normalization_bound": 5,
+            "beyond_radius": 0,
+            "full_query_annotation_beyond_radius": 0,
+            "both_full_query_beyond_radius": 0,
+            "error": {
+              "count": 5,
+              "min_us": "6251",
+              "max_us": "14845",
+              "max_abs_us": "14845"
+            },
+            "relative_prefix_period_drift": {
+              "count": 5,
+              "min_us": "0",
+              "max_us": "9376",
+              "max_abs_us": "9376"
+            },
+            "relative_annotation_departure": {
+              "count": 5,
+              "min_us": "-4688",
+              "max_us": "3125",
+              "max_abs_us": "4688"
+            },
+            "normalization_bound": {
+              "count": 5,
+              "min_us": "4/3",
+              "max_us": "8/3",
+              "max_abs_us": "8/3"
+            }
+          },
+          "strata": {
+            "constant": {
+              "ticks": 5,
+              "full_query_annotation_ticks": 5,
+              "both_full_query_ticks": 5,
+              "beyond_normalization_bound": 5,
+              "beyond_radius": 0,
+              "full_query_annotation_beyond_radius": 0,
+              "both_full_query_beyond_radius": 0,
+              "error": {
+                "count": 5,
+                "min_us": "6251",
+                "max_us": "14845",
+                "max_abs_us": "14845"
+              },
+              "relative_prefix_period_drift": {
+                "count": 5,
+                "min_us": "0",
+                "max_us": "9376",
+                "max_abs_us": "9376"
+              },
+              "relative_annotation_departure": {
+                "count": 5,
+                "min_us": "-4688",
+                "max_us": "3125",
+                "max_abs_us": "4688"
+              },
+              "normalization_bound": {
+                "count": 5,
+                "min_us": "4/3",
+                "max_us": "8/3",
+                "max_abs_us": "8/3"
+              }
+            }
+          }
+        },
+        {
+          "role": "change",
+          "prefix_period_us": "2250781/3",
+          "nominal_period_us": "750000",
+          "prefix_minus_nominal_period_us": "781/3",
+          "prefix_interval_minus_nominal": {
+            "count": 3,
+            "min_us": "-7813",
+            "max_us": "4688",
+            "max_abs_us": "7813"
+          },
+          "first_selected_beat_error_us": "1565/3",
+          "prefix_nominal_first_error_us": "782",
+          "identical_grids": false,
+          "ownership": {
+            "annotation_ticks": 7,
+            "continuation_ticks": 5,
+            "shared_ordinals": 5,
+            "annotation_only": 2,
+            "continuation_only": 0,
+            "annotation_only_prediction_before_window": 0,
+            "annotation_only_prediction_after_window": 2,
+            "continuation_only_annotation_location": {
+              "annotation_before_window": 0,
+              "annotation_after_window": 0,
+              "annotation_uncovered": 0
+            },
+            "annotation_full_query": 7,
+            "continuation_full_query": 5
+          },
+          "all_ticks": {
+            "ticks": 7,
+            "full_query_annotation_ticks": 7,
+            "both_full_query_ticks": 5,
+            "beyond_normalization_bound": 7,
+            "beyond_radius": 4,
+            "full_query_annotation_beyond_radius": 4,
+            "both_full_query_beyond_radius": 2,
+            "error": {
+              "count": 7,
+              "min_us": "-4167028/3",
+              "max_us": "2865",
+              "max_abs_us": "4167028/3"
+            },
+            "relative_prefix_period_drift": {
+              "count": 7,
+              "min_us": "-1562",
+              "max_us": "0",
+              "max_abs_us": "1562"
+            },
+            "relative_annotation_departure": {
+              "count": 7,
+              "min_us": "-1387969",
+              "max_us": "2864",
+              "max_abs_us": "1387969"
+            },
+            "normalization_bound": {
+              "count": 7,
+              "min_us": "4/3",
+              "max_us": "10/3",
+              "max_abs_us": "10/3"
+            }
+          },
+          "strata": {
+            "pre_step": {
+              "ticks": 2,
+              "full_query_annotation_ticks": 2,
+              "both_full_query_ticks": 2,
+              "beyond_normalization_bound": 2,
+              "beyond_radius": 0,
+              "full_query_annotation_beyond_radius": 0,
+              "both_full_query_beyond_radius": 0,
+              "error": {
+                "count": 2,
+                "min_us": "1565/3",
+                "max_us": "7813/3",
+                "max_abs_us": "7813/3"
+              },
+              "relative_prefix_period_drift": {
+                "count": 2,
+                "min_us": "-781/3",
+                "max_us": "0",
+                "max_abs_us": "781/3"
+              },
+              "relative_annotation_departure": {
+                "count": 2,
+                "min_us": "0",
+                "max_us": "2343",
+                "max_abs_us": "2343"
+              },
+              "normalization_bound": {
+                "count": 2,
+                "min_us": "4/3",
+                "max_us": "5/3",
+                "max_abs_us": "5/3"
+              }
+            },
+            "post_step": {
+              "ticks": 5,
+              "full_query_annotation_ticks": 5,
+              "both_full_query_ticks": 3,
+              "beyond_normalization_bound": 5,
+              "beyond_radius": 4,
+              "full_query_annotation_beyond_radius": 4,
+              "both_full_query_beyond_radius": 2,
+              "error": {
+                "count": 5,
+                "min_us": "-4167028/3",
+                "max_us": "2865",
+                "max_abs_us": "4167028/3"
+              },
+              "relative_prefix_period_drift": {
+                "count": 5,
+                "min_us": "-1562",
+                "max_us": "-1562/3",
+                "max_abs_us": "1562"
+              },
+              "relative_annotation_departure": {
+                "count": 5,
+                "min_us": "-1387969",
+                "max_us": "2864",
+                "max_abs_us": "1387969"
+              },
+              "normalization_bound": {
+                "count": 5,
+                "min_us": "2",
+                "max_us": "10/3",
+                "max_abs_us": "10/3"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-13-180-to-120",
+      "frame_count": 692,
+      "truth_sha256": "61513c63f05ff332d265d6d785ca50342cdad10b23f664a40f1b55d2487349bf",
+      "capture_sha256": "88a5824f541d2dd782a01644c73fd546e52090769e145807b50767ebfbdb23dc",
+      "selected": false
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-14-240-to-96",
+      "frame_count": 816,
+      "truth_sha256": "6583d495985b507d2083975501e40f15ad0727f2df8761645280f4fb87c3fe96",
+      "capture_sha256": "53ea2508c3487f5fba57ff2c03246dae6b267c0ff9886a22baa496cff7ce19f0",
+      "selected": true,
+      "pair_sha256": "74238965c0d330c784151a685c0e69f4de593d20dcbdee81886c7ce12714ea0f",
+      "windows": [
+        {
+          "role": "constant",
+          "prefix_period_us": "243837",
+          "nominal_period_us": "250000",
+          "prefix_minus_nominal_period_us": "-6163",
+          "prefix_interval_minus_nominal": {
+            "count": 3,
+            "min_us": "-23177",
+            "max_us": "15886",
+            "max_abs_us": "23177"
+          },
+          "first_selected_beat_error_us": "6944",
+          "prefix_nominal_first_error_us": "781",
+          "identical_grids": false,
+          "ownership": {
+            "annotation_ticks": 16,
+            "continuation_ticks": 16,
+            "shared_ordinals": 16,
+            "annotation_only": 0,
+            "continuation_only": 0,
+            "annotation_only_prediction_before_window": 0,
+            "annotation_only_prediction_after_window": 0,
+            "continuation_only_annotation_location": {
+              "annotation_before_window": 0,
+              "annotation_after_window": 0,
+              "annotation_uncovered": 0
+            },
+            "annotation_full_query": 15,
+            "continuation_full_query": 16
+          },
+          "all_ticks": {
+            "ticks": 16,
+            "full_query_annotation_ticks": 15,
+            "both_full_query_ticks": 15,
+            "beyond_normalization_bound": 16,
+            "beyond_radius": 8,
+            "full_query_annotation_beyond_radius": 7,
+            "both_full_query_beyond_radius": 7,
+            "error": {
+              "count": 16,
+              "min_us": "6944",
+              "max_us": "99997",
+              "max_abs_us": "99997"
+            },
+            "relative_prefix_period_drift": {
+              "count": 16,
+              "min_us": "0",
+              "max_us": "92445",
+              "max_abs_us": "92445"
+            },
+            "relative_annotation_departure": {
+              "count": 16,
+              "min_us": "-3646",
+              "max_us": "13021",
+              "max_abs_us": "13021"
+            },
+            "normalization_bound": {
+              "count": 16,
+              "min_us": "4/3",
+              "max_us": "19/3",
+              "max_abs_us": "19/3"
+            }
+          },
+          "strata": {
+            "constant": {
+              "ticks": 16,
+              "full_query_annotation_ticks": 15,
+              "both_full_query_ticks": 15,
+              "beyond_normalization_bound": 16,
+              "beyond_radius": 8,
+              "full_query_annotation_beyond_radius": 7,
+              "both_full_query_beyond_radius": 7,
+              "error": {
+                "count": 16,
+                "min_us": "6944",
+                "max_us": "99997",
+                "max_abs_us": "99997"
+              },
+              "relative_prefix_period_drift": {
+                "count": 16,
+                "min_us": "0",
+                "max_us": "92445",
+                "max_abs_us": "92445"
+              },
+              "relative_annotation_departure": {
+                "count": 16,
+                "min_us": "-3646",
+                "max_us": "13021",
+                "max_abs_us": "13021"
+              },
+              "normalization_bound": {
+                "count": 16,
+                "min_us": "4/3",
+                "max_us": "19/3",
+                "max_abs_us": "19/3"
+              }
+            }
+          }
+        },
+        {
+          "role": "change",
+          "prefix_period_us": "248264",
+          "nominal_period_us": "250000",
+          "prefix_minus_nominal_period_us": "-1736",
+          "prefix_interval_minus_nominal": {
+            "count": 3,
+            "min_us": "-7031",
+            "max_us": "8594",
+            "max_abs_us": "8594"
+          },
+          "first_selected_beat_error_us": "12673",
+          "prefix_nominal_first_error_us": "10937",
+          "identical_grids": false,
+          "ownership": {
+            "annotation_ticks": 9,
+            "continuation_ticks": 16,
+            "shared_ordinals": 9,
+            "annotation_only": 0,
+            "continuation_only": 7,
+            "annotation_only_prediction_before_window": 0,
+            "annotation_only_prediction_after_window": 0,
+            "continuation_only_annotation_location": {
+              "annotation_before_window": 0,
+              "annotation_after_window": 7,
+              "annotation_uncovered": 0
+            },
+            "annotation_full_query": 9,
+            "continuation_full_query": 15
+          },
+          "all_ticks": {
+            "ticks": 9,
+            "full_query_annotation_ticks": 9,
+            "both_full_query_ticks": 9,
+            "beyond_normalization_bound": 9,
+            "beyond_radius": 4,
+            "full_query_annotation_beyond_radius": 4,
+            "both_full_query_beyond_radius": 4,
+            "error": {
+              "count": 9,
+              "min_us": "-955",
+              "max_us": "1534504",
+              "max_abs_us": "1534504"
+            },
+            "relative_prefix_period_drift": {
+              "count": 9,
+              "min_us": "0",
+              "max_us": "13888",
+              "max_abs_us": "13888"
+            },
+            "relative_annotation_departure": {
+              "count": 9,
+              "min_us": "-19791",
+              "max_us": "1507943",
+              "max_abs_us": "1507943"
+            },
+            "normalization_bound": {
+              "count": 9,
+              "min_us": "4/3",
+              "max_us": "4",
+              "max_abs_us": "4"
+            }
+          },
+          "strata": {
+            "pre_step": {
+              "ticks": 4,
+              "full_query_annotation_ticks": 4,
+              "both_full_query_ticks": 4,
+              "beyond_normalization_bound": 4,
+              "beyond_radius": 0,
+              "full_query_annotation_beyond_radius": 0,
+              "both_full_query_beyond_radius": 0,
+              "error": {
+                "count": 4,
+                "min_us": "-955",
+                "max_us": "12673",
+                "max_abs_us": "12673"
+              },
+              "relative_prefix_period_drift": {
+                "count": 4,
+                "min_us": "0",
+                "max_us": "5208",
+                "max_abs_us": "5208"
+              },
+              "relative_annotation_departure": {
+                "count": 4,
+                "min_us": "-15364",
+                "max_us": "0",
+                "max_abs_us": "15364"
+              },
+              "normalization_bound": {
+                "count": 4,
+                "min_us": "4/3",
+                "max_us": "7/3",
+                "max_abs_us": "7/3"
+              }
+            },
+            "post_step": {
+              "ticks": 5,
+              "full_query_annotation_ticks": 5,
+              "both_full_query_ticks": 5,
+              "beyond_normalization_bound": 5,
+              "beyond_radius": 4,
+              "full_query_annotation_beyond_radius": 4,
+              "both_full_query_beyond_radius": 4,
+              "error": {
+                "count": 5,
+                "min_us": "-174",
+                "max_us": "1534504",
+                "max_abs_us": "1534504"
+              },
+              "relative_prefix_period_drift": {
+                "count": 5,
+                "min_us": "6944",
+                "max_us": "13888",
+                "max_abs_us": "13888"
+              },
+              "relative_annotation_departure": {
+                "count": 5,
+                "min_us": "-19791",
+                "max_us": "1507943",
+                "max_abs_us": "1507943"
+              },
+              "normalization_bound": {
+                "count": 5,
+                "min_us": "8/3",
+                "max_us": "4",
+                "max_abs_us": "4"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-15-85-to-127-5",
+      "frame_count": 1130,
+      "truth_sha256": "e819ded9652413d5fd923066047b8cc1a27a2c0d24f3fdb3b80b40148fc9c39e",
+      "capture_sha256": "5a66d6c4abfc1416ff34fca4c74dd2c0a937e95f3654ea4145b76045125aa350",
+      "selected": true,
+      "pair_sha256": "1942d87eb1dcb877c8b570668ebf858bdc9e5df70400fa93113cb5d3ed33a2d8",
+      "windows": [
+        {
+          "role": "constant",
+          "prefix_period_us": "705882",
+          "nominal_period_us": "12000000/17",
+          "prefix_minus_nominal_period_us": "-6/17",
+          "prefix_interval_minus_nominal": {
+            "count": 3,
+            "min_us": "-6/17",
+            "max_us": "-6/17",
+            "max_abs_us": "6/17"
+          },
+          "first_selected_beat_error_us": "0",
+          "prefix_nominal_first_error_us": "-6/17",
+          "identical_grids": true,
+          "ownership": {
+            "annotation_ticks": 6,
+            "continuation_ticks": 6,
+            "shared_ordinals": 6,
+            "annotation_only": 0,
+            "continuation_only": 0,
+            "annotation_only_prediction_before_window": 0,
+            "annotation_only_prediction_after_window": 0,
+            "continuation_only_annotation_location": {
+              "annotation_before_window": 0,
+              "annotation_after_window": 0,
+              "annotation_uncovered": 0
+            },
+            "annotation_full_query": 6,
+            "continuation_full_query": 6
+          },
+          "all_ticks": {
+            "ticks": 6,
+            "full_query_annotation_ticks": 6,
+            "both_full_query_ticks": 6,
+            "beyond_normalization_bound": 0,
+            "beyond_radius": 0,
+            "full_query_annotation_beyond_radius": 0,
+            "both_full_query_beyond_radius": 0,
+            "error": {
+              "count": 6,
+              "min_us": "0",
+              "max_us": "0",
+              "max_abs_us": "0"
+            },
+            "relative_prefix_period_drift": {
+              "count": 6,
+              "min_us": "0",
+              "max_us": "30/17",
+              "max_abs_us": "30/17"
+            },
+            "relative_annotation_departure": {
+              "count": 6,
+              "min_us": "-30/17",
+              "max_us": "0",
+              "max_abs_us": "30/17"
+            },
+            "normalization_bound": {
+              "count": 6,
+              "min_us": "4/3",
+              "max_us": "3",
+              "max_abs_us": "3"
+            }
+          },
+          "strata": {
+            "constant": {
+              "ticks": 6,
+              "full_query_annotation_ticks": 6,
+              "both_full_query_ticks": 6,
+              "beyond_normalization_bound": 0,
+              "beyond_radius": 0,
+              "full_query_annotation_beyond_radius": 0,
+              "both_full_query_beyond_radius": 0,
+              "error": {
+                "count": 6,
+                "min_us": "0",
+                "max_us": "0",
+                "max_abs_us": "0"
+              },
+              "relative_prefix_period_drift": {
+                "count": 6,
+                "min_us": "0",
+                "max_us": "30/17",
+                "max_abs_us": "30/17"
+              },
+              "relative_annotation_departure": {
+                "count": 6,
+                "min_us": "-30/17",
+                "max_us": "0",
+                "max_abs_us": "30/17"
+              },
+              "normalization_bound": {
+                "count": 6,
+                "min_us": "4/3",
+                "max_us": "3",
+                "max_abs_us": "3"
+              }
+            }
+          }
+        },
+        {
+          "role": "change",
+          "prefix_period_us": "705882",
+          "nominal_period_us": "12000000/17",
+          "prefix_minus_nominal_period_us": "-6/17",
+          "prefix_interval_minus_nominal": {
+            "count": 3,
+            "min_us": "-6/17",
+            "max_us": "-6/17",
+            "max_abs_us": "6/17"
+          },
+          "first_selected_beat_error_us": "0",
+          "prefix_nominal_first_error_us": "-6/17",
+          "identical_grids": false,
+          "ownership": {
+            "annotation_ticks": 7,
+            "continuation_ticks": 5,
+            "shared_ordinals": 5,
+            "annotation_only": 2,
+            "continuation_only": 0,
+            "annotation_only_prediction_before_window": 0,
+            "annotation_only_prediction_after_window": 2,
+            "continuation_only_annotation_location": {
+              "annotation_before_window": 0,
+              "annotation_after_window": 0,
+              "annotation_uncovered": 0
+            },
+            "annotation_full_query": 7,
+            "continuation_full_query": 5
+          },
+          "all_ticks": {
+            "ticks": 7,
+            "full_query_annotation_ticks": 7,
+            "both_full_query_ticks": 5,
+            "beyond_normalization_bound": 4,
+            "beyond_radius": 4,
+            "full_query_annotation_beyond_radius": 4,
+            "both_full_query_beyond_radius": 2,
+            "error": {
+              "count": 7,
+              "min_us": "-941176",
+              "max_us": "0",
+              "max_abs_us": "941176"
+            },
+            "relative_prefix_period_drift": {
+              "count": 7,
+              "min_us": "0",
+              "max_us": "36/17",
+              "max_abs_us": "36/17"
+            },
+            "relative_annotation_departure": {
+              "count": 7,
+              "min_us": "-16000028/17",
+              "max_us": "0",
+              "max_abs_us": "16000028/17"
+            },
+            "normalization_bound": {
+              "count": 7,
+              "min_us": "4/3",
+              "max_us": "10/3",
+              "max_abs_us": "10/3"
+            }
+          },
+          "strata": {
+            "pre_step": {
+              "ticks": 2,
+              "full_query_annotation_ticks": 2,
+              "both_full_query_ticks": 2,
+              "beyond_normalization_bound": 0,
+              "beyond_radius": 0,
+              "full_query_annotation_beyond_radius": 0,
+              "both_full_query_beyond_radius": 0,
+              "error": {
+                "count": 2,
+                "min_us": "0",
+                "max_us": "0",
+                "max_abs_us": "0"
+              },
+              "relative_prefix_period_drift": {
+                "count": 2,
+                "min_us": "0",
+                "max_us": "6/17",
+                "max_abs_us": "6/17"
+              },
+              "relative_annotation_departure": {
+                "count": 2,
+                "min_us": "-6/17",
+                "max_us": "0",
+                "max_abs_us": "6/17"
+              },
+              "normalization_bound": {
+                "count": 2,
+                "min_us": "4/3",
+                "max_us": "5/3",
+                "max_abs_us": "5/3"
+              }
+            },
+            "post_step": {
+              "ticks": 5,
+              "full_query_annotation_ticks": 5,
+              "both_full_query_ticks": 3,
+              "beyond_normalization_bound": 4,
+              "beyond_radius": 4,
+              "full_query_annotation_beyond_radius": 4,
+              "both_full_query_beyond_radius": 2,
+              "error": {
+                "count": 5,
+                "min_us": "-941176",
+                "max_us": "0",
+                "max_abs_us": "941176"
+              },
+              "relative_prefix_period_drift": {
+                "count": 5,
+                "min_us": "12/17",
+                "max_us": "36/17",
+                "max_abs_us": "36/17"
+              },
+              "relative_annotation_departure": {
+                "count": 5,
+                "min_us": "-16000028/17",
+                "max_us": "-12/17",
+                "max_abs_us": "16000028/17"
+              },
+              "normalization_bound": {
+                "count": 5,
+                "min_us": "2",
+                "max_us": "10/3",
+                "max_abs_us": "10/3"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-18-piano-rubato",
+      "frame_count": 1163,
+      "truth_sha256": "ddf1a5ff2a4d5649497bb54a60084abed6a21b1a062c874a492820245afd11a2",
+      "capture_sha256": "4e6c241ec2705094b5809e8f8d7a48fc668ad2eef2721d54d31a98dff3e3495e",
+      "selected": false
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-19-ramp-80-to-200",
+      "frame_count": 863,
+      "truth_sha256": "407ec564b847ebf779e2f740c8c5d156211e69e18dc62b6a8fd37c17d01c4457",
+      "capture_sha256": "cf9e6d10e25ebfbb93e50ad70be70186e7ed229577e2b1fbd5f90c5459af215b",
+      "selected": false
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-20-ramp-200-to-80",
+      "frame_count": 864,
+      "truth_sha256": "b2e8e3aa1a131b9335914f974d5cfff7618703dd8d9c87fe38723545f6ec5980",
+      "capture_sha256": "9aae8a403e1b95a3532d8bd2670febb21d3e9aab4034f05b6009cdd8f08c8c1c",
+      "selected": false
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-21-polyrhythm-70-to-105",
+      "frame_count": 615,
+      "truth_sha256": "7016cc892dcec5a95ea18cf778d9890f1d754158168f29c3ce5e895d32578638",
+      "capture_sha256": "2e3ba7557faad626d3f92bf6d6e0a705536a81119c8cf33603a5b6bd91fabc22",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "frame_count": 6446,
+      "truth_sha256": "f16e419511caee1c96c786fbe5a745b9e319a5d95a8d832dcd3b337f072706a7",
+      "capture_sha256": "76b295f5021e99204b2fde688f1b85f364d6f999866fc7fad7d60f1a6ab7e0a3",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "frame_count": 6949,
+      "truth_sha256": "02617c821f0b7beb6fb0578d50f18b45b1e4b96e788c33835646b716b8a584e7",
+      "capture_sha256": "eaac53c4f18d0fbc9da29c315ce6d58385e9c4bbe74b17ff191d1c092981647b",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-beethoven-op072-0-ov-henning2017",
+      "frame_count": 20175,
+      "truth_sha256": "0597675375121d0e7592d5abdae51277c166ff7611f3daf327f0ae4193ddcf8e",
+      "capture_sha256": "fb774b4cfc44a241719fa344c81c4db0ecd6d1365bbf1f8c9490cfd31c07f325",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "frame_count": 13626,
+      "truth_sha256": "4e8b47d76b1ddce15d38da69fe3ca74892c777d2e1eb541524fc88d7a790bf34",
+      "capture_sha256": "fa46e89ee43b9e689b9efa8f66bd76f480abd4eface90a49fe934ffb455968d5",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-boccherini-g275-03-ov-krux2022",
+      "frame_count": 8132,
+      "truth_sha256": "9b79c5c3cc3046c889ef9bbb34b0231dc7c393e22a088b3776b6b0862edad18b",
+      "capture_sha256": "4a3c2d66e432d3a8c0fae5f4559f0dde4a47d6b3f42e1f74ff23763c76830a49",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-brahms-op115-01-ov-schmitta2025",
+      "frame_count": 31011,
+      "truth_sha256": "6775c1cabad7d73b7682fa37d9a6e51c5542bffa054838df22f7a94ad150136a",
+      "capture_sha256": "9415d3b198b48e7ab0e046a9a0b6a06cef1b880132a2a46c280e7e7f246bc77f",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-brahms-op115-01-ov-steffens2008",
+      "frame_count": 31115,
+      "truth_sha256": "8934b0c9f51e4a9520584c35998f7d9cf724272de99d577d1b4f95e658ce7964",
+      "capture_sha256": "dd3b6bedb679b6dfea6bc1567a38c52d469f4b277ca64d9436b63b60d51279b9",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+      "frame_count": 8115,
+      "truth_sha256": "986d47aaab5598db25b2fb44d16bfbf7f9c6b2df4acf9b118fae9f7f8911932c",
+      "capture_sha256": "639f95573ffda23e4eef605c10be3ed564c27a8c1512ed9ffb75d0fd10fe6e17",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+      "frame_count": 8218,
+      "truth_sha256": "10b34ee45b0b11f66943f98ab75b16886fd65dd7a108127a447bfb919d146f3e",
+      "capture_sha256": "5f04d4fcdd5c4324a92b7add6ab17d5f6f78dd83370cd4c7f62814fa04e0fb94",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+      "frame_count": 7681,
+      "truth_sha256": "ac2935ad5dcb5fc1a1dd44730eaed584241096c35bfe0508da5393dcd40a8ec7",
+      "capture_sha256": "8a5a3539ec7ed49803592f880d420cd86662a00eaec73d692ec77916cd87e28b",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-mozart-kv618-ar-papalin2012",
+      "frame_count": 8051,
+      "truth_sha256": "82a37995c722804ee66b57f6b3bfe39ce88cc602a4cc719b84c65c71300f5a32",
+      "capture_sha256": "83bf46fd1128010eebcea578d7f9df697152b1d388920bd3b42d2d4df4f58620",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+      "frame_count": 10336,
+      "truth_sha256": "5f3832fafaa133b5a3875b8964b47b493568cdd2f4be76615fd5ea6f2f0f7616",
+      "capture_sha256": "c70c8a500375325ccc85c81dc24c70a3f296a58f6c2a4d39f3e92cda673d329c",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+      "frame_count": 14062,
+      "truth_sha256": "996d4563a086fbe048d71da38e3d2441c789c28e2289aefa7284b3d3c10bc5c6",
+      "capture_sha256": "39965f14ea58cac4e0a1766bfbf97f752e383bafa8625e49b4d21dbfee006ba9",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+      "frame_count": 16304,
+      "truth_sha256": "cc91282ff134ac42e5c051942baad56b49d19f8a56acdb09ce57c8e49e461f10",
+      "capture_sha256": "7ccaa90f6f1e904b8ce2038a50b8780ff29c6068d99d7b535a5d4ce1050a82fc",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-schubert-d733-01-ar-staab2012",
+      "frame_count": 10168,
+      "truth_sha256": "15a68f3c29bb4eb1f9974093ab0f23189ba183232b341233e70f09523deec922",
+      "capture_sha256": "c83d96b22dd1f77113203f6306ca15799da52a37c9d5ae491821150c889ae85c",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+      "frame_count": 10359,
+      "truth_sha256": "71dc170ac875df1922db5cba6dcbfb59db11f254d6c35c45b825bdfe0d33ca8c",
+      "capture_sha256": "61a4b73d8ebd98e5f81d6fbcab7195bb5c81875f183741eca435ae7077f478dd",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-schumann-op039-05-ov-buttner2025",
+      "frame_count": 12226,
+      "truth_sha256": "aa36e4aec046346505801c6eb7d66db6557792129ba3395955945c7f3f315cd5",
+      "capture_sha256": "3089b5afac496979c1ef49f64e52efae5671543a531aa6ac93ff34a613da8bdf",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "frame_count": 11258,
+      "truth_sha256": "d7140499d39a2769e1d8a248d2122efda0cb519ec2cc203d0bf81563ed0fc312",
+      "capture_sha256": "f00c6df8b74aca7395079db30244d15819ae0d4d2ef62c9578d11b3671d22f9e",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+      "frame_count": 15410,
+      "truth_sha256": "a45bd07ff0742e30ee0eca8cd53ffc0fc1c29baf8f81ee5b024554af89ef2796",
+      "capture_sha256": "09896ffb8511eb529ad81d60add089a0317aa5f40a4e352c28d45d46ea142ad3",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+      "frame_count": 14800,
+      "truth_sha256": "49379fbe7c51dbf3d9cff11586ece6b9316d128e1f05cd2f8fdb0b281c1f4c88",
+      "capture_sha256": "7e08129bf8748f959536d857bc9999a4088186a6be46903f48da8f8d1afb436d",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+      "frame_count": 13902,
+      "truth_sha256": "f0aaf80955f919bf3cd84df7f649824812ab08aed548d09e5342fb7d79e00959",
+      "capture_sha256": "8f781ccc08798cf349ba841bb5bb89ed66f104068ebc1fcecced2a1f354c72d7",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+      "frame_count": 15429,
+      "truth_sha256": "ec2d36c1e4e7bfe5641dc5085e08bd4ab3cb2aa28e1d408f7faab44b584f14d1",
+      "capture_sha256": "c5522a4af335b3045c3cc5d4baade4809307d994b277152d0b7112a10c5c5dda",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "frame_count": 9547,
+      "truth_sha256": "e892d59ecb17cc055034f3c043d49f981ad877092fb1298df3eaaeb10f4fd47e",
+      "capture_sha256": "3e0626fec9fe95fc1a07b48eab7983a38ab3d951b65cd8f8c9137e2d7e53338f",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "frame_count": 10695,
+      "truth_sha256": "176a0359278e6ec6fcffec89b0489fbd3ca8ac4e8b93dd974c3b4423b8444cb1",
+      "capture_sha256": "8cc504bfe807c64cc1aa721b842de44b350ffc5d6724d0b30277e71cade824bb",
+      "selected": false
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+      "frame_count": 10500,
+      "truth_sha256": "ba992b7fd03f9117cf411b06c59778f9eb65698a1e71c6907fa8520da0f46d9b",
+      "capture_sha256": "ccedd36d8c0bef9060f0d32d687a586a44c66ecbf43d20b340405412c8373bea",
+      "selected": false
+    }
+  ],
+  "gate": {
+    "constant_windows": 7,
+    "constant_windows_beyond_normalization": 6,
+    "constant_windows_with_ownership_difference": 1,
+    "constant_windows_with_full_query_error_beyond_radius": 3,
+    "constant_windows_with_both_full_query_error_beyond_radius": 3,
+    "decision": "require_clock_nuisance_control_before_model_discrimination"
+  },
+  "private_captures_read": false,
+  "response_fields_used": false,
+  "neural_inference": false,
+  "fitted_mapping": false,
+  "decoder_replayed": false,
+  "holdout_opened": false,
+  "training_run": false,
+  "production_output_changed": false,
+  "new_user_parameters": false,
+  "accuracy_improvement_claimed": false,
+  "upstream_annotation_precision": "unknown; normalization bounds are not annotation uncertainty",
+  "selected_tempo": null
+}
