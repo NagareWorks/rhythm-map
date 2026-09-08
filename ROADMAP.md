@@ -24,6 +24,19 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- Decision gate 2 closes the count/sign tuning branch: with oracle nominal
+  periods, all seven original pairs pass the geometry guard at four shared
+  prefix phases. Only 2/7 raw and 1/7 candidate pairs support both correct native
+  shapes at every phase; neither source resolves all registered density rivals
+  in any pair. Retain the constant false-step and true-step-as-constant cases;
+  do not add weights, per-track source switches or favorable phase selection.
+  This is not automatic accuracy or a proof against all training-free methods.
+  Next assess a genuinely richer observation representation (continuous head
+  trajectories or reusable pretrained features), explicitly showing what these
+  count/sign summaries discarded. Require new independent evidence for any
+  positive rule; do not reopen this rejected selector under another name.
+  Defaults, zero-tuning use, optional metadata packs and no-release scope remain.
+  See the [controlled experiment and stopping decision](evaluation/baselines/oracle-period-paired-v1.md).
 - Decision gate 1 is now closed with a concrete clock confound, not an accuracy
   gain: six of seven frozen constant windows exceed microsecond normalization,
   and three exceed the unchanged 60ms radius on interior corresponding ticks.

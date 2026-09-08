@@ -8,6 +8,12 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `oracle-period-paired-v1.json` and `oracle_period_paired_audit.py` close the
+  count/sign tuning branch after all seven pairs pass an oracle-period geometry
+  guard under four shared prefix phases. Robust shape support remains 2/7 raw,
+  1/7 candidates, with no density-resolved pair. Keep every phase, source and
+  counterexample; these are not accuracy rates or a theorem requiring training.
+  See the [bounded second gate](../baselines/oracle-period-paired-v1.md).
 - `prefix-clock-drift-v1.json` and `prefix_clock_drift_audit.py` audit the same
   seven frozen pairs using only annotation geometry. Same-ordinal offset, period
   drift, annotation departure, normalization and edge ownership remain separate.
