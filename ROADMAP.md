@@ -24,6 +24,17 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- MusicFM's source/metadata feasibility screen now pins both published artifact
+  pointers, normalization files and the otherwise online speech-model config.
+  Retain only FMA/non-Flash/float32/layer-7 as a conditional research candidate;
+  no weight payload was acquired, loaded or evaluated. MIT model-card metadata
+  is not a completed training-provenance or commercial-distribution audit.
+  Its separate 24 kHz frontend, 25 Hz grid, unpinned dependencies and roughly
+  1.32 GB payload rule out treating it as a ready native/WASM drop-in. Next pin
+  one private runtime and implement fail-closed offline loading/authored capture
+  checks before acquisition or music discrimination. No layer/version search,
+  public knob, default change, training or release. See the
+  [artifact identities, rights boundaries and finite next gate](evaluation/baselines/musicfm-feasibility-v1.md).
 - The fixed pre-head recurrence test is closed for promotion: all seven original
   pairs pass unchanged complete-input and geometry checks, but only 3/7 support
   both correct native shapes and 2/7 resolve every density rival. Cases 06/08/15

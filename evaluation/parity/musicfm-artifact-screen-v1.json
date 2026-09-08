@@ -1,0 +1,93 @@
+{
+  "schema": "rhythm-map.musicfm-artifact-screen.v1",
+  "reviewed_on": "2026-09-08",
+  "scope": "source-and-small-metadata-only",
+  "decision": "retain-one-conditional-research-candidate",
+  "production_pack_approved": false,
+  "model_payload_downloaded": false,
+  "checkpoint_loaded": false,
+  "inference_run": false,
+  "training_run": false,
+  "runtime_lock_complete": false,
+  "training_overlap_verified": false,
+  "source": {
+    "repository": "https://github.com/minzwon/musicfm",
+    "revision": "b83ebedb401bcef639b26b05c0c8bee1dc2dfe71",
+    "license": "MIT except modules/flash_conformer.py under Apache-2.0"
+  },
+  "model_repository": {
+    "repository": "https://huggingface.co/minzwon/MusicFM",
+    "revision": "4513b38bc25ad1d227b1980819b9691ba97f4d87",
+    "license_metadata": "mit",
+    "license_evidence": {
+      "path": "README.md",
+      "size_bytes": 21,
+      "sha256": "3e0e15fa0c5cc81675bd69af8eb469d128a725c1a7bfc71f03b7877b7b650567",
+      "bytes_verified": true,
+      "scope": "repository model-card front matter only; no separate weight license text or training manifest"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "pretrained_fma.pt",
+      "role": "selected-research-checkpoint",
+      "size_bytes": 1316802154,
+      "sha256": "68392eee13d34c2941b3761934abb6b1e67b2e9df498695bda2ea5c1087d4b96",
+      "identity_evidence": "revision-pinned raw LFS pointer corroborated by Hub blob metadata",
+      "bytes_verified": false
+    },
+    {
+      "path": "fma_stats.json",
+      "role": "selected-checkpoint-normalization",
+      "size_bytes": 2281,
+      "sha256": "5416e468018bae68c6231d4cbb2b11f0d11c04e6437881505ae427a3f8344904",
+      "bytes_verified": true,
+      "melspec_2048_mean": 3.0710578151459664,
+      "melspec_2048_std": 20.999089814337626
+    },
+    {
+      "path": "pretrained_msd.pt",
+      "role": "inventoried-not-selected",
+      "size_bytes": 1316802088,
+      "sha256": "218b483a0256ddef736267425fabb166fd97008983696bb9270def464b47bded",
+      "identity_evidence": "revision-pinned raw LFS pointer corroborated by Hub blob metadata",
+      "bytes_verified": false
+    },
+    {
+      "path": "msd_stats.json",
+      "role": "inventoried-not-selected",
+      "size_bytes": 2277,
+      "sha256": "c36c61ab10ca4d2e7fdfefc3fcc15205316bec276a06a47baa3641a62c546f22",
+      "bytes_verified": true
+    }
+  ],
+  "configuration_dependency": {
+    "repository": "https://huggingface.co/facebook/wav2vec2-conformer-rope-large-960h-ft",
+    "revision": "6b36ef01c6443c67ae7ed0822876d091ab50e4aa",
+    "path": "config.json",
+    "size_bytes": 2239,
+    "sha256": "7a63cb5706c9a37483f1973a3c226d54eb504ce15cf62cb52637019540c8a75d",
+    "bytes_verified": true,
+    "repository_license_metadata": "apache-2.0",
+    "source_overrides": {"num_hidden_layers": 12, "hidden_size": 1024},
+    "speech_weights_required": false,
+    "upstream_runtime_request_is_revision_pinned": false
+  },
+  "reserved_probe": {
+    "checkpoint": "pretrained_fma.pt",
+    "statistics": "fma_stats.json",
+    "is_flash": false,
+    "dtype": "float32",
+    "batch_size": 1,
+    "eval_mode": true,
+    "inference_mode": true,
+    "entrypoint": "get_latent",
+    "layer_ix": 7,
+    "input_sample_rate_hz": 24000,
+    "input_channels": 1,
+    "nominal_feature_rate_hz": 25,
+    "feature_channels": 1024,
+    "configuration_status": "source-derived proposal; not instantiated or checkpoint-shape-verified"
+  },
+  "next_gate": "pin compatible dependency artifacts; implement offline fail-closed loading and authored capture fidelity before musical discrimination"
+}

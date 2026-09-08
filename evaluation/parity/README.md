@@ -8,6 +8,11 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `musicfm-artifact-screen-v1.json` records immutable publisher pointers and
+  byte-verified small sidecars for the single conditional independent-feature
+  candidate. It is not a completed download/runtime lock or an accuracy report;
+  no MusicFM weights or features were acquired. See the
+  [rights, input/runtime screen and next offline-fidelity gate](../baselines/musicfm-feasibility-v1.md).
 - `prehead_recurrence_audit.py` applies one frozen cycle-versus-half-cycle
   comparison to the original seven pairs. `prehead-recurrence-v1.json` retains
   3/7 shape and 2/7 density passes with every failure; no default strategy is
