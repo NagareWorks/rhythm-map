@@ -24,6 +24,17 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- The fixed pre-head recurrence test is closed for promotion: all seven original
+  pairs pass unchanged complete-input and geometry checks, but only 3/7 support
+  both correct native shapes and 2/7 resolve every density rival. Cases 06/08/15
+  erase real steps, 12 falsely favors a step in its constant control, and 14
+  retains half-time ambiguity. No per-track blend or phase selection follows.
+  This is richer-representation calibration, not automatic accuracy or proof
+  that training is necessary. Next assess the one reserved independent-feature
+  fallback (MusicFM) for exact artifact/license/runtime/input compatibility,
+  before acquisition or inference; do not search more layers/distances on these
+  seven labels. Defaults and the one-call, zero-tuning contract remain unchanged.
+  See the [frozen rule, all outcomes and limits](evaluation/baselines/prehead-recurrence-v1.md).
 - The normalized pre-head capture gate now passes: four authored spectrograms
   and the two original reference traces retain bit-exact hooked/unhooked logits
   and bit-exact head reconstruction across ten chunks. Shared ownership, cached

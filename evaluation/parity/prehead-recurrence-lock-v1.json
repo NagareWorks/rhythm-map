@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "purpose": "supplied_clock_prehead_recurrence_discrimination_gate",
+  "representation": "same normalized 512-channel pre-head feature; no alternative layer, projection, PCA, head blending or fitted transform",
+  "population": "same seven annotation-exposure-v1 pairs; both 200-frame windows and all four phases; all forty calibration identities accounted; RUBATO remains expressive/untyped",
+  "clock": "reuse oracle_period_paired_audit phase-continuous clocks and geometry guard, nominal pre/post periods and transferred boundary; not an automatic locator",
+  "comparison": "mean over common target frames of cosine(h(t), h(previous full candidate cycle)) minus cosine(h(t), h(previous half candidate cycle)); float64 interpolation then unit normalization",
+  "support": "intersection for all eight clocks inside the same half-open 200-frame window; integer target frames 0..199; both interpolation endpoints must be owned; no wrap, padding, extrapolation, or neighboring-window features",
+  "boundary": "report pre/post target counts and owner-crossing target counts per clock; zero norm at any required sample invalidates the whole window; any rejected member rejects the pair, without replacement",
+  "phase": "lag differences analytically cancel absolute phase and half-phase offsets; retain all four conditions and both half phases but do not count them as independent evidence",
+  "budgets": {"window_frames": 200, "width": 512, "numerical_tie": 0.000001, "zero_norm": 1e-12},
+  "decision": "correct native constant/step must beat the other native shape in both windows at all four phases; density resolution additionally requires beating all seven rivals; any eligible failure forbids promotion of this fixed rule",
+  "authored": "25-frame pre-period; post-periods 12.5 and 40; boundary 100; clean, alternating pulse omissions and 1/8 weak pulses with a persistent phase cue; flat/zero, half/double identical-observation ambiguity, edge support and owner seams",
+  "interpretation": "authored hidden trajectories are algebra controls, not model outputs or synthesized music; no information-free observation can certify a latent clock; no training necessity claim from a failed metric",
+  "real_features_opened_for_discrimination": false,
+  "training": false,
+  "holdout_access": false,
+  "production_changed": false,
+  "new_user_parameters": false
+}

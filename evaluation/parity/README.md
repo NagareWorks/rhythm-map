@@ -8,6 +8,10 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `prehead_recurrence_audit.py` applies one frozen cycle-versus-half-cycle
+  comparison to the original seven pairs. `prehead-recurrence-v1.json` retains
+  3/7 shape and 2/7 density passes with every failure; no default strategy is
+  enabled. See the [protocol, capture checks and reproduction](../baselines/prehead-recurrence-v1.md).
 - `prehead_capture.py` and `prehead_capture_audit.py` capture the existing
   checkpoint's normalized 512-channel task-head input without changing heads,
   chunk ownership or events. Four authored spectrograms and two original
