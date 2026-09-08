@@ -24,6 +24,20 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- MusicFM's complete-input authored gate now passes all 54 extraction forwards
+  across six inputs and eighteen contexts with unchanged model/PCM bytes and
+  exact private archive round trips. All six non-silent constant/change pairs
+  resolve native shape and density, including weak/omitted pulses, but silence
+  produces non-tied clock preferences. Close this unconditioned recurrence rule
+  before music as preregistered; retain the useful conditional cue and failed
+  abstention separately. Context overlaps differ even for silence; reproducible
+  ownership is not context invariance. Next inspect whether the existing audio-
+  evidence availability contract can be reused unchanged in a separately frozen
+  composition, without reopening this report, fitting silence thresholds or
+  accessing music under a revised rule. This is not accuracy or proof that
+  training is necessary. All forty calibration identities, untyped RUBATO,
+  sealed holdout, default/API behavior and no-release boundary remain intact.
+  See the [fixed context, six paired passes and silence counterexample](evaluation/baselines/musicfm-temporal-v1.md).
 - Real MusicFM-FMA bytes are now verified, and the separate serialization-
   compatibility plus authored extraction gate passes all seven cases with exact
   reference/hook/repeat features and unchanged full parameter/buffer state. Keep

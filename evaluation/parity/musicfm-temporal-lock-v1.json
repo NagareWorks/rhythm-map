@@ -1,0 +1,63 @@
+{
+  "schema": "rhythm-map.musicfm-temporal-lock.v1",
+  "scope": "authored complete PCM before any music feature inspection",
+  "base_fidelity_sha256": "e7ad8b06df669a709fd2da330fe230d05551f5405f4591dad865c288db4fde01",
+  "compatibility_sha256": "1936f0360cb58fc84bd1497835097b25f077a4f778436b3361c6ba93bda15222",
+  "helpers": {
+    "musicfm_fidelity.py": "39aa237e978622787f1ecbafd130d259bca80689cb4661e3cdfe09a70bee0758",
+    "musicfm_fidelity_compat.py": "679a164c8fc2bd2a7593a0cf16c561c8d2decb4f84ed43cf14766e87be072baf"
+  },
+  "context": {
+    "sample_rate": 24000,
+    "nominal_stride_samples": 960,
+    "chunk_samples": 192000,
+    "hop_samples": 96000,
+    "ownership": "fixed overlap midpoint; later context owns the exact seam; no blend or context chosen by scores",
+    "tail": "unpadded, 4..8 seconds except single-context short input; stop once last context covers the complete input",
+    "min_samples": 1025,
+    "max_samples": 43200000,
+    "tokens": "ceil(floor(samples/240)/4)",
+    "padding": false,
+    "whole_forward_equivalence_claim": false,
+    "nominal_grid_is_latency_claim": false
+  },
+  "rule": {
+    "formula": "mean cosine full previous candidate cycle minus cosine previous half cycle",
+    "comparison_to_prehead": "same formula, direction and numerical budgets; different fixed representation, grid and context, not a layer or metric sweep",
+    "window_native_frames": 100,
+    "width": 1024,
+    "interpolation": "both raw endpoints in float64, then unit normalize; no 50 Hz feature reconstruction",
+    "common_support": "all eight clocks share integer target frames and both endpoints entirely inside the four-second window",
+    "zero_norm": 1e-12,
+    "numerical_tie": 0.000001,
+    "phase": "absolute and half-density phase cancel analytically; keep both half names, never count duplicate phases as votes",
+    "unavailable": "no common support or any required zero norm rejects the whole window and both paired verdicts",
+    "meaning": "oracle-supplied clocks; labels absent from scoring does not mean automatic tempo/change discovery"
+  },
+  "authored": {
+    "cases": ["constant-clean", "constant-omitted", "constant-weak", "step-fast", "step-slow", "silence"],
+    "samples_per_case": 288240,
+    "boundary_seconds": 6,
+    "pre_period_seconds": "1/2",
+    "post_period_seconds": ["1/4", "4/5"],
+    "window_seconds": [4, 8],
+    "synthesis": "float64 at 24 kHz then float32 PCM; phase continuous at 6s; cue 0.04*(1+cos(2*pi*phase))*sin(2*pi*220*t); pulse 0.3*amplitude*exp(-age/0.015)*(age<0.08)*sin(2*pi*880*age); age is fractional phase times local period; alternate pulse amplitude 0 or 1/8 in omission/weak cases; silence all zero",
+    "hidden_controls": "separate authored phase-circle vectors with third-channel weak/omitted pulses, flat/zero and density counterexamples; never reported as neural features",
+    "paired_denominator": 6,
+    "pairing": "each of three constant conditions against both fast and slow changes, all retained; shared changes are not independent songs",
+    "seam": "true change deliberately on fixed 6s ownership seam; second seam at 10s; all samples processed",
+    "passes_per_context": 3,
+    "atol": 0,
+    "rtol": 0
+  },
+  "future_calibration": "retain seven original ARTBeaT pairs, four original phase conditions and old geometry guards; all forty IDs accounted; RUBATO expressive/untyped; map each old physical four-second interval to its 100 native 25 Hz centers, with explicit 0/20ms initial offset; resampling/PCM provenance gate still required before any music inference",
+  "decision": "any authored paired shape/density failure or silence clock spread above numerical tie closes this fixed rule before music; extraction fidelity is reported independently; no threshold/layer/context/recipe changes after feature inspection",
+  "resources": "reuse 4 GiB Windows CPU job, two threads and minimum free resource gates; bounded parent timeout 900 seconds for 54 forwards, not a latency target",
+  "timeout_seconds": 900,
+  "music_access": false,
+  "holdout_access": false,
+  "training": false,
+  "production_change": false,
+  "new_user_parameters": false,
+  "commercial_distribution_approved": false
+}

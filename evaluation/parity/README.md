@@ -8,6 +8,12 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `musicfm_temporal_probe.py` freezes complete-input 25 Hz ownership and one
+  unchanged recurrence formula before new temporal features. All 54 authored
+  forwards retain exact extraction, and all six non-silent pairs pass shape
+  and density checks, but silence has non-tied clock preferences. The fixed
+  unconditioned rule is closed before music; no default is enabled. See the
+  [complete protocol, successful controls and retained abstention failure](../baselines/musicfm-temporal-v1.md).
 - `musicfm-artifact-screen-v1.json` records immutable publisher pointers and
   byte-verified small sidecars for the single conditional independent-feature
   candidate. It is not a completed download/runtime lock or an accuracy report;
