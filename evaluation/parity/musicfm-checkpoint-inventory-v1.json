@@ -1,0 +1,268 @@
+{
+  "schema": "rhythm-map.musicfm-checkpoint-inventory.v1",
+  "complete": true,
+  "scope": "metadata-only-after-strict-load-refusal",
+  "protocol_sha256": "e7ad8b06df669a709fd2da330fe230d05551f5405f4591dad865c288db4fde01",
+  "source_sha256": "6769b7e5dff62afdebdac73fd381d98171c0f43c3e25ea8c3af7e89893659884",
+  "checkpoint_identity": {
+    "url": "https://huggingface.co/minzwon/MusicFM/resolve/4513b38bc25ad1d227b1980819b9691ba97f4d87/pretrained_fma.pt",
+    "size_bytes": 1316802154,
+    "sha256": "68392eee13d34c2941b3761934abb6b1e67b2e9df498695bda2ea5c1087d4b96"
+  },
+  "resources": {
+    "available_physical_bytes": 3588235264,
+    "available_commit_bytes": 15168438272,
+    "free_disk_bytes": 26841362432
+  },
+  "runtime_versions": {
+    "certifi": "2026.7.22",
+    "charset-normalizer": "3.5.1",
+    "colorama": "0.4.6",
+    "einops": "0.8.1",
+    "filelock": "3.32.5",
+    "fsspec": "2026.7.0",
+    "hf-xet": "1.6.0",
+    "huggingface-hub": "0.36.2",
+    "idna": "3.19",
+    "jinja2": "3.1.6",
+    "markupsafe": "3.0.3",
+    "mpmath": "1.3.0",
+    "networkx": "3.6.1",
+    "numpy": "2.2.6",
+    "packaging": "26.3",
+    "pyyaml": "6.0.3",
+    "regex": "2026.9.3",
+    "requests": "2.34.2",
+    "safetensors": "0.8.0",
+    "setuptools": "84.0.0",
+    "sympy": "1.14.0",
+    "tokenizers": "0.20.3",
+    "torch": "2.8.0+cpu",
+    "torchaudio": "2.8.0+cpu",
+    "tqdm": "4.70.0",
+    "transformers": "4.46.3",
+    "typing-extensions": "4.16.0",
+    "urllib3": "2.7.0"
+  },
+  "all_state_tensors_finite": true,
+  "unexpected_prefixes": [],
+  "comparison": {
+    "missing": [
+      "conformer.pos_conv_embed.conv.parametrizations.weight.original0",
+      "conformer.pos_conv_embed.conv.parametrizations.weight.original1"
+    ],
+    "unexpected": [
+      "conformer.pos_conv_embed.conv.weight_g",
+      "conformer.pos_conv_embed.conv.weight_v"
+    ],
+    "mismatches": [
+      {
+        "key": "conformer.layers.0.conv_module.batch_norm.num_batches_tracked",
+        "actual": {
+          "shape": [],
+          "dtype": "torch.float32"
+        },
+        "expected": {
+          "shape": [],
+          "dtype": "torch.int64"
+        }
+      },
+      {
+        "key": "conformer.layers.1.conv_module.batch_norm.num_batches_tracked",
+        "actual": {
+          "shape": [],
+          "dtype": "torch.float32"
+        },
+        "expected": {
+          "shape": [],
+          "dtype": "torch.int64"
+        }
+      },
+      {
+        "key": "conformer.layers.10.conv_module.batch_norm.num_batches_tracked",
+        "actual": {
+          "shape": [],
+          "dtype": "torch.float32"
+        },
+        "expected": {
+          "shape": [],
+          "dtype": "torch.int64"
+        }
+      },
+      {
+        "key": "conformer.layers.11.conv_module.batch_norm.num_batches_tracked",
+        "actual": {
+          "shape": [],
+          "dtype": "torch.float32"
+        },
+        "expected": {
+          "shape": [],
+          "dtype": "torch.int64"
+        }
+      },
+      {
+        "key": "conformer.layers.2.conv_module.batch_norm.num_batches_tracked",
+        "actual": {
+          "shape": [],
+          "dtype": "torch.float32"
+        },
+        "expected": {
+          "shape": [],
+          "dtype": "torch.int64"
+        }
+      },
+      {
+        "key": "conformer.layers.3.conv_module.batch_norm.num_batches_tracked",
+        "actual": {
+          "shape": [],
+          "dtype": "torch.float32"
+        },
+        "expected": {
+          "shape": [],
+          "dtype": "torch.int64"
+        }
+      },
+      {
+        "key": "conformer.layers.4.conv_module.batch_norm.num_batches_tracked",
+        "actual": {
+          "shape": [],
+          "dtype": "torch.float32"
+        },
+        "expected": {
+          "shape": [],
+          "dtype": "torch.int64"
+        }
+      },
+      {
+        "key": "conformer.layers.5.conv_module.batch_norm.num_batches_tracked",
+        "actual": {
+          "shape": [],
+          "dtype": "torch.float32"
+        },
+        "expected": {
+          "shape": [],
+          "dtype": "torch.int64"
+        }
+      },
+      {
+        "key": "conformer.layers.6.conv_module.batch_norm.num_batches_tracked",
+        "actual": {
+          "shape": [],
+          "dtype": "torch.float32"
+        },
+        "expected": {
+          "shape": [],
+          "dtype": "torch.int64"
+        }
+      },
+      {
+        "key": "conformer.layers.7.conv_module.batch_norm.num_batches_tracked",
+        "actual": {
+          "shape": [],
+          "dtype": "torch.float32"
+        },
+        "expected": {
+          "shape": [],
+          "dtype": "torch.int64"
+        }
+      },
+      {
+        "key": "conformer.layers.8.conv_module.batch_norm.num_batches_tracked",
+        "actual": {
+          "shape": [],
+          "dtype": "torch.float32"
+        },
+        "expected": {
+          "shape": [],
+          "dtype": "torch.int64"
+        }
+      },
+      {
+        "key": "conformer.layers.9.conv_module.batch_norm.num_batches_tracked",
+        "actual": {
+          "shape": [],
+          "dtype": "torch.float32"
+        },
+        "expected": {
+          "shape": [],
+          "dtype": "torch.int64"
+        }
+      },
+      {
+        "key": "conv.conv.0.bn1.num_batches_tracked",
+        "actual": {
+          "shape": [],
+          "dtype": "torch.float32"
+        },
+        "expected": {
+          "shape": [],
+          "dtype": "torch.int64"
+        }
+      },
+      {
+        "key": "conv.conv.0.bn2.num_batches_tracked",
+        "actual": {
+          "shape": [],
+          "dtype": "torch.float32"
+        },
+        "expected": {
+          "shape": [],
+          "dtype": "torch.int64"
+        }
+      },
+      {
+        "key": "conv.conv.0.bn3.num_batches_tracked",
+        "actual": {
+          "shape": [],
+          "dtype": "torch.float32"
+        },
+        "expected": {
+          "shape": [],
+          "dtype": "torch.int64"
+        }
+      },
+      {
+        "key": "conv.conv.1.bn1.num_batches_tracked",
+        "actual": {
+          "shape": [],
+          "dtype": "torch.float32"
+        },
+        "expected": {
+          "shape": [],
+          "dtype": "torch.int64"
+        }
+      },
+      {
+        "key": "conv.conv.1.bn2.num_batches_tracked",
+        "actual": {
+          "shape": [],
+          "dtype": "torch.float32"
+        },
+        "expected": {
+          "shape": [],
+          "dtype": "torch.int64"
+        }
+      },
+      {
+        "key": "conv.conv.1.bn3.num_batches_tracked",
+        "actual": {
+          "shape": [],
+          "dtype": "torch.float32"
+        },
+        "expected": {
+          "shape": [],
+          "dtype": "torch.int64"
+        }
+      }
+    ],
+    "exact_entries": 445,
+    "actual_count": 465,
+    "expected_count": 465
+  },
+  "state_assigned": false,
+  "pretrained_inference": false,
+  "music_access": false,
+  "training": false,
+  "production_change": false,
+  "peak_rss_bytes": 1762103296
+}

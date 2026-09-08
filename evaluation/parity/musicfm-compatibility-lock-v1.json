@@ -1,0 +1,44 @@
+{
+  "schema": "rhythm-map.musicfm-compatibility-lock.v1",
+  "reason": "explicit separate gate after retained strict schema refusal; no feature outputs inspected",
+  "base_protocol_sha256": "e7ad8b06df669a709fd2da330fe230d05551f5405f4591dad865c288db4fde01",
+  "fidelity_source_sha256": "39aa237e978622787f1ecbafd130d259bca80689cb4661e3cdfe09a70bee0758",
+  "aliases": {
+    "conformer.pos_conv_embed.conv.weight_g": "conformer.pos_conv_embed.conv.parametrizations.weight.original0",
+    "conformer.pos_conv_embed.conv.weight_v": "conformer.pos_conv_embed.conv.parametrizations.weight.original1"
+  },
+  "counter_keys": [
+    "conformer.layers.0.conv_module.batch_norm.num_batches_tracked",
+    "conformer.layers.1.conv_module.batch_norm.num_batches_tracked",
+    "conformer.layers.10.conv_module.batch_norm.num_batches_tracked",
+    "conformer.layers.11.conv_module.batch_norm.num_batches_tracked",
+    "conformer.layers.2.conv_module.batch_norm.num_batches_tracked",
+    "conformer.layers.3.conv_module.batch_norm.num_batches_tracked",
+    "conformer.layers.4.conv_module.batch_norm.num_batches_tracked",
+    "conformer.layers.5.conv_module.batch_norm.num_batches_tracked",
+    "conformer.layers.6.conv_module.batch_norm.num_batches_tracked",
+    "conformer.layers.7.conv_module.batch_norm.num_batches_tracked",
+    "conformer.layers.8.conv_module.batch_norm.num_batches_tracked",
+    "conformer.layers.9.conv_module.batch_norm.num_batches_tracked",
+    "conv.conv.0.bn1.num_batches_tracked",
+    "conv.conv.0.bn2.num_batches_tracked",
+    "conv.conv.0.bn3.num_batches_tracked",
+    "conv.conv.1.bn1.num_batches_tracked",
+    "conv.conv.1.bn2.num_batches_tracked",
+    "conv.conv.1.bn3.num_batches_tracked"
+  ],
+  "counter_rule": "exact scalar CPU float32, finite nonnegative integer below 2^63; cast to int64 and require exact float32 roundtrip; eval-only, do not infer training history accuracy",
+  "unchanged_non_counter_tensors": 447,
+  "learned_tensor_casts": false,
+  "learned_tensor_reshapes": false,
+  "fidelity_comparison_unchanged": true,
+  "numerical_tolerance_unchanged": true,
+  "model_or_layer_or_runtime_search": false,
+  "stop_on_other_difference": true,
+  "authored_equivalence_before_pretrained_inference": [
+    "legacy weight_norm dim=2 versus modern parametrization outputs and reconstructed weights bit-exact",
+    "BatchNorm eval output independent of counter after exact restoration",
+    "reject fractional/nonfinite/negative/overflow counters",
+    "reject alias collision and incomplete explicit inventory"
+  ]
+}

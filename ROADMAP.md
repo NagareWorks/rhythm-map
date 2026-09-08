@@ -24,6 +24,18 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- Real MusicFM-FMA bytes are now verified, and the separate serialization-
+  compatibility plus authored extraction gate passes all seven cases with exact
+  reference/hook/repeat features and unchanged full parameter/buffer state. Keep
+  the original strict refusal: 18 float32 BatchNorm counters and two legacy
+  weight-norm names required a named, independently tested compatibility contract,
+  not a relaxed generic loader. No music, holdout or trained task head was used.
+  Next freeze one temporal-discrimination rule and complete-input context/grid
+  ownership before music-feature inspection; preserve omissions, false changes,
+  real changes and density rivals. This is extraction feasibility, not accuracy,
+  shipping/native readiness or evidence that training is necessary. No new user
+  strategy, default change or release. See the [retained failure, compatibility
+  proof and measured fidelity result](evaluation/baselines/musicfm-fidelity-v1.md).
 - MusicFM offline loader prerequisites now pass in one separately pinned Windows
   CPU runtime: the full meta architecture, strict authored state round-trip and
   seven authored frontend/geometry controls. No FMA payload was acquired or

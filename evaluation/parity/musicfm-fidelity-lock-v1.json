@@ -1,0 +1,100 @@
+{
+  "schema": "rhythm-map.musicfm-fidelity-lock.v1",
+  "scope": "authored-pcm-only-before-musical-discrimination",
+  "frozen_before_checkpoint_acquisition": true,
+  "checkpoint": {
+    "url": "https://huggingface.co/minzwon/MusicFM/resolve/4513b38bc25ad1d227b1980819b9691ba97f4d87/pretrained_fma.pt",
+    "size_bytes": 1316802154,
+    "sha256": "68392eee13d34c2941b3761934abb6b1e67b2e9df498695bda2ea5c1087d4b96"
+  },
+  "helpers": {
+    "musicfm_loader.py": "91af01491b2a06b00c0838f3c845d34fbf8b7cac4c82e722c50e18f4c5927e75",
+    "musicfm_loader_probe.py": "0e84de5525780f667693add59cc4b7cc8660449af73a765570915e76ff0c29f6",
+    "prehead_capture.py": "b11224ca2cc99934e30e67144a83ad890e38b3c0bedbba38d4b09d082db2c233"
+  },
+  "expected_state_schema_sha256": "173475120b65e82454cd1ef5f3c328e71faa22f40db2881accd242a090433ed3",
+  "expected_effective_config_sha256": "d8fcd47d852964c22fc830a076ece4ccf127125d4d18d41af1f01f33e0e2de60",
+  "sample_rate": 24000,
+  "batch_size": 1,
+  "dtype": "float32",
+  "is_flash": false,
+  "layer_ix": 7,
+  "num_hidden_states": 13,
+  "hidden_width": 1024,
+  "num_executed_blocks": 12,
+  "cases": [
+    {
+      "id": "authored-01",
+      "samples": 1025,
+      "kind": "silence"
+    },
+    {
+      "id": "authored-02",
+      "samples": 1199,
+      "kind": "impulse"
+    },
+    {
+      "id": "authored-03",
+      "samples": 1200,
+      "kind": "tone"
+    },
+    {
+      "id": "authored-04",
+      "samples": 1919,
+      "kind": "tone"
+    },
+    {
+      "id": "authored-05",
+      "samples": 1920,
+      "kind": "impulse"
+    },
+    {
+      "id": "authored-06",
+      "samples": 24001,
+      "kind": "tone"
+    },
+    {
+      "id": "authored-07",
+      "samples": 48000,
+      "kind": "silence"
+    }
+  ],
+  "pcm_recipe": {
+    "silence": 0,
+    "impulse_amplitude": 0.5,
+    "impulse_index": "floor(samples/2)",
+    "tone_amplitude": 0.2,
+    "tone_hz": 440,
+    "tone_formula": "float32 torch.sin(float32 arange(N) * (2*pi*440/24000))"
+  },
+  "comparison": {
+    "atol": 0,
+    "rtol": 0,
+    "finite_required": true,
+    "passes_per_case": 3,
+    "pass_order": [
+      "unhooked-reference",
+      "hooked-same-entrypoint",
+      "unhooked-repeat"
+    ],
+    "tap": "conformer.layers[6] output[0] equals hidden_states[7] and get_latent(...,layer_ix=7)",
+    "all_layers_and_projection_must_execute": true
+  },
+  "state_contract": "All named parameter and buffer bytes (including nonpersistent buffers), model config/statistics and eval modes unchanged. Rotary position cache and CPU/Python RNG restored around each pass; no claim upstream never mutates transient caches.",
+  "resources": {
+    "torch_threads": 2,
+    "process_memory_limit_bytes": 4294967296,
+    "timeout_seconds": 300,
+    "min_available_physical_bytes": 2684354560,
+    "min_available_commit_bytes": 6442450944,
+    "min_free_disk_bytes": 5368709120,
+    "max_tensor_hash_chunk_bytes": 1048576
+  },
+  "stop_on_failure": true,
+  "unsafe_pickle_fallback": false,
+  "checkpoint_or_layer_or_precision_fallback": false,
+  "music_access": false,
+  "holdout_access": false,
+  "training": false,
+  "production_change": false
+}

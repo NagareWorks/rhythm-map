@@ -780,6 +780,13 @@ without neural dependencies. Read the [reproduction steps, measured scope and
 remaining fidelity gate](../baselines/musicfm-loader-prerequisite-v1.md) before
 using these results; no pretrained feature or accuracy claim is established.
 
+The follow-on [FMA authored fidelity gate](../baselines/musicfm-fidelity-v1.md)
+retains the original strict-loader refusal and full metadata inventory, then
+tests a separate explicit serialization compatibility contract on the same fixed
+seven authored PCM cases. `musicfm_fidelity_compat.py` has passed bit-exact
+extraction checks; it is not musical discrimination or a native backend. Normal
+CI runs `test_musicfm_fidelity.py` without Torch or private model files.
+
 ## Full-span clock/response ledger
 
 ```sh
