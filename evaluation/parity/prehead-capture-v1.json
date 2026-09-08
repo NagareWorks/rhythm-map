@@ -1,0 +1,700 @@
+{
+  "schema_version": 1,
+  "purpose": "capture_fidelity_not_discrimination",
+  "complete": true,
+  "lock_sha256": "2cabd27eb97c2f67acce5e174c545869f5b1eac237a641481f5d152497fc1643",
+  "reference_lock_sha256": "10465e598444a39f76a5ec170cce3b1db0af04dd90d30e5028164c3230bc5555",
+  "reference_report_sha256": "9d405b677fafa957f3cb2f01a5c2de24af06e24427be2e8545b0c6e005ec40a2",
+  "source_sha256": {
+    "prehead_capture.py": "b11224ca2cc99934e30e67144a83ad890e38b3c0bedbba38d4b09d082db2c233",
+    "prehead_capture_audit.py": "7f48559c4098796a2b61ddab3916d1c61bae43455d46f04ff1551517265a1724"
+  },
+  "reference_revision": "b95c8ab0c58c2d9fcfd40508ae8dffbc05ac4f5c",
+  "checkpoint_sha256": "8c328b45f59d8dd3dff219253ff6a8d6482be57d0133a29140e2febbf8eb8331",
+  "upstream_source_sha256": {
+    "beat_this/inference.py": "ccccff4665399b931ebf181b73d264a6ad64fc1fe8acb4d3b950df825c47ce2d",
+    "beat_this/model/beat_tracker.py": "bfa2fd212b4d6bf00b007eb0e606a6b11f1f7fc44c95bd1121ef5d2a934a923f",
+    "beat_this/model/roformer.py": "c83fa0047fe726bbfdb33658f40a0f9e721c5796067bfda560092e5969d50722",
+    "beat_this/model/postprocessor.py": "431d6aeef41a8e9e9e63ee2577e895a5e214e0dbbcd2d505458cdfec02a611ee",
+    "beat_this/preprocessing.py": "5aaeefa811c2fd1340c8a45233af4c2e814720b65c2124e59e78538fed03b3bc",
+    "beat_this/utils.py": "779d6102ea28bdf94c8227157790191f5abbbb4564d0c36ce5ce0859e067cfab"
+  },
+  "versions": {
+    "torch": "2.8.0+cpu",
+    "torchaudio": "2.8.0+cpu",
+    "numpy": "2.2.6",
+    "einops": "0.8.1",
+    "rotary-embedding-torch": "0.8.9",
+    "soxr": "1.0.0"
+  },
+  "threads": 2,
+  "interop_threads": 1,
+  "budgets": {
+    "tap_vs_untapped": "bit_exact",
+    "head_reconstruction_atol": 2e-05,
+    "head_reconstruction_rtol": 1e-06,
+    "mel_atol": 0.001,
+    "reference_logit_atol": 0.002,
+    "reference_rtol": 0.0001,
+    "reference_event_atol_s": 1e-05,
+    "event_identity": "same_ordered_half_frame_indices"
+  },
+  "hook_failure_control": {
+    "injected_exception_observed": true,
+    "hook_removed": true
+  },
+  "model_state_unchanged": true,
+  "authored": [
+    {
+      "case_id": "short_flat",
+      "frames": 17,
+      "hidden_shape": [
+        17,
+        512
+      ],
+      "mel_sha256": "e8b31e302d11fbf7da124b537ba2d44f88e165da03c6557e2b0f6dc486e025bb",
+      "chunk_count": 1,
+      "owner_frame_counts": [
+        17
+      ],
+      "array_sha256": {
+        "hidden": "0503e961474dadacbe29287c2704ec5bdedcf87da9a6a2e006a68a5841bec830",
+        "beat": "abfae3f17b9d46320b67e5050a47061bb99f263661ab47d994d9396e0452f30c",
+        "downbeat": "1e8c43d0c4e187a915afe5930a5a902e8cf7c362fd50780870d599ecaeda244b",
+        "owner": "1751ac12e70e15b4f76c16775cd329ae55973b612521dab2de828a5cdb6c8ab3"
+      },
+      "chunk_checks": [
+        {
+          "checks": {
+            "beat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "beat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            }
+          },
+          "untapped_s": 0.5956326997838914,
+          "tapped_s": 0.14488849975168705
+        }
+      ],
+      "checks": {
+        "beat_aggregate_vs_upstream": {
+          "passed": true,
+          "bit_exact": true,
+          "max_abs": 0.0
+        },
+        "downbeat_aggregate_vs_upstream": {
+          "passed": true,
+          "bit_exact": true,
+          "max_abs": 0.0
+        },
+        "beat_events_vs_untapped": {
+          "passed": true,
+          "count": 0,
+          "max_abs": 0.0
+        },
+        "downbeat_events_vs_untapped": {
+          "passed": true,
+          "count": 0,
+          "max_abs": 0.0
+        }
+      },
+      "private_archive": {
+        "size_bytes": 36016,
+        "sha256": "5491f2df534911111d82461c6dfcfedaec31443207acbbabeeef763b558974ef",
+        "serialization_s": 0.0037457002326846123,
+        "roundtrip_bit_exact": true
+      },
+      "process_lifetime_peak_rss_bytes": 503640064,
+      "pcm_sha256": null
+    },
+    {
+      "case_id": "single_full",
+      "frames": 1488,
+      "hidden_shape": [
+        1488,
+        512
+      ],
+      "mel_sha256": "b0b811d24f27bae9ae70e1c82b99ccf524845691dce593c18c03f1b6e4c52062",
+      "chunk_count": 1,
+      "owner_frame_counts": [
+        1488
+      ],
+      "array_sha256": {
+        "hidden": "d62bf802c72e3db2ea7cc6bca06848e09402df5ac58291d88fff375995647bbc",
+        "beat": "840c116456829293559f4f2ded92d160809f9e70ee8d90748c0e9aad8559e0dd",
+        "downbeat": "369687a57243aaef6118ccf15aadb244b320b2e0f2759995c43c8cb3b954d9da",
+        "owner": "d8dc67a3a7619375277dd8eb1f7993e3dba6ed1f4e1979d2cbd715a47ee7f83f"
+      },
+      "chunk_checks": [
+        {
+          "checks": {
+            "beat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "beat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            }
+          },
+          "untapped_s": 11.327804500237107,
+          "tapped_s": 12.677587099839002
+        }
+      ],
+      "checks": {
+        "beat_aggregate_vs_upstream": {
+          "passed": true,
+          "bit_exact": true,
+          "max_abs": 0.0
+        },
+        "downbeat_aggregate_vs_upstream": {
+          "passed": true,
+          "bit_exact": true,
+          "max_abs": 0.0
+        },
+        "beat_events_vs_untapped": {
+          "passed": true,
+          "count": 0,
+          "max_abs": 0.0
+        },
+        "downbeat_events_vs_untapped": {
+          "passed": true,
+          "count": 1,
+          "max_abs": 0.0
+        }
+      },
+      "private_archive": {
+        "size_bytes": 3066276,
+        "sha256": "6cb96d25b5baa83c0fbd7d8feb098454f57633b709a89f4f6311d109f4a89ae3",
+        "serialization_s": 0.017217500135302544,
+        "roundtrip_bit_exact": true
+      },
+      "process_lifetime_peak_rss_bytes": 545308672,
+      "pcm_sha256": null
+    },
+    {
+      "case_id": "first_overlap",
+      "frames": 1489,
+      "hidden_shape": [
+        1489,
+        512
+      ],
+      "mel_sha256": "f992f442e2324af07ef95844347ba1724972e44bcc3ed4fc44abae086b565753",
+      "chunk_count": 2,
+      "owner_frame_counts": [
+        1488,
+        1
+      ],
+      "array_sha256": {
+        "hidden": "6305f4aa125a947b89603a1b6d0439931d670069d69a9dc11cfde40793f4783c",
+        "beat": "1bdbc0298c443b103aba64525534c6c6b053b1fe129277a046e7bf64e4cca5e4",
+        "downbeat": "829bf4dc79bed9114d73d27daabfb708c91ddc13dd33f2086bf3b1303f9b007c",
+        "owner": "e44fc2c286ee0960c0dc0e878d62a43d46859f263afcf51e810109e6e5a9e152"
+      },
+      "chunk_checks": [
+        {
+          "checks": {
+            "beat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "beat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            }
+          },
+          "untapped_s": 14.980803799815476,
+          "tapped_s": 16.200428399723023
+        },
+        {
+          "checks": {
+            "beat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "beat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            }
+          },
+          "untapped_s": 14.015811400022358,
+          "tapped_s": 9.351302899885923
+        }
+      ],
+      "checks": {
+        "beat_aggregate_vs_upstream": {
+          "passed": true,
+          "bit_exact": true,
+          "max_abs": 0.0
+        },
+        "downbeat_aggregate_vs_upstream": {
+          "passed": true,
+          "bit_exact": true,
+          "max_abs": 0.0
+        },
+        "beat_events_vs_untapped": {
+          "passed": true,
+          "count": 0,
+          "max_abs": 0.0
+        },
+        "downbeat_events_vs_untapped": {
+          "passed": true,
+          "count": 1,
+          "max_abs": 0.0
+        }
+      },
+      "private_archive": {
+        "size_bytes": 3068336,
+        "sha256": "cc53f6643ebb5791a78c30cb4cbc5afea93937603aca1d64d7b62e7670c34527",
+        "serialization_s": 0.016509999986737967,
+        "roundtrip_bit_exact": true
+      },
+      "process_lifetime_peak_rss_bytes": 548122624,
+      "pcm_sha256": null
+    },
+    {
+      "case_id": "three_chunks",
+      "frames": 2980,
+      "hidden_shape": [
+        2980,
+        512
+      ],
+      "mel_sha256": "58c8fc085e5e72a7fbeadb7e330e4bf569d76e1ebbc74002000da17b59589b1f",
+      "chunk_count": 3,
+      "owner_frame_counts": [
+        1488,
+        1488,
+        4
+      ],
+      "array_sha256": {
+        "hidden": "92b3a9b5f235b91a4e1aad3ebe289b9bf340603388e7a99b386f63df25b6b0d2",
+        "beat": "56b5ca0dda094b87b336da11f58c1601d58319d356185e138e220ca192b9c5e0",
+        "downbeat": "32b0830a2648b9bd25c1d874f6de8a73350343d6a91259ce1e7bfdaa318ba7ba",
+        "owner": "c0c847a75cafef4f32605dc8ebf4e50e63c0b349ab5aadf11f3cee6daf543291"
+      },
+      "chunk_checks": [
+        {
+          "checks": {
+            "beat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "beat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            }
+          },
+          "untapped_s": 8.20548460027203,
+          "tapped_s": 7.9013542998582125
+        },
+        {
+          "checks": {
+            "beat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "beat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            }
+          },
+          "untapped_s": 8.10160390008241,
+          "tapped_s": 7.848018900025636
+        },
+        {
+          "checks": {
+            "beat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "beat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            }
+          },
+          "untapped_s": 8.67271909955889,
+          "tapped_s": 8.301301799714565
+        }
+      ],
+      "checks": {
+        "beat_aggregate_vs_upstream": {
+          "passed": true,
+          "bit_exact": true,
+          "max_abs": 0.0
+        },
+        "downbeat_aggregate_vs_upstream": {
+          "passed": true,
+          "bit_exact": true,
+          "max_abs": 0.0
+        },
+        "beat_events_vs_untapped": {
+          "passed": true,
+          "count": 0,
+          "max_abs": 0.0
+        },
+        "downbeat_events_vs_untapped": {
+          "passed": true,
+          "count": 1,
+          "max_abs": 0.0
+        }
+      },
+      "private_archive": {
+        "size_bytes": 6139796,
+        "sha256": "9b08472f1658c5454be0fffe22ea2166f7d588d60d5ba50aeeda5490ec3d561e",
+        "serialization_s": 0.017670399975031614,
+        "roundtrip_bit_exact": true
+      },
+      "process_lifetime_peak_rss_bytes": 563953664,
+      "pcm_sha256": null
+    }
+  ],
+  "references": [
+    {
+      "case_id": "artbeat-05-75-to-150",
+      "frames": 680,
+      "hidden_shape": [
+        680,
+        512
+      ],
+      "mel_sha256": "424a06b9f7a6ef0ebec4b7f0dedb019ee287c5d10cb8ecdbf33f92ab21133867",
+      "chunk_count": 1,
+      "owner_frame_counts": [
+        680
+      ],
+      "array_sha256": {
+        "hidden": "21937d7f79c2be0bdd2670511bbd866cb502ccfb5340b1bfdaccffebee2ff3f3",
+        "beat": "991c9cf1b5fd2181375ae11b2527d184556b8f1506d15ac283133e7d247c1fa0",
+        "downbeat": "66c6b93dbb61ad52f70fa0b7d4802f389a3c5c81f4fec10f2118002c167aaeaa",
+        "owner": "1ecbf5e79cd2d355ea8e6eb354db483a88990465d7dfb051ee8be339ffe5a038"
+      },
+      "chunk_checks": [
+        {
+          "checks": {
+            "beat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "beat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            }
+          },
+          "untapped_s": 2.9467594996094704,
+          "tapped_s": 2.7004759996198118
+        }
+      ],
+      "checks": {
+        "beat_aggregate_vs_upstream": {
+          "passed": true,
+          "bit_exact": true,
+          "max_abs": 0.0
+        },
+        "downbeat_aggregate_vs_upstream": {
+          "passed": true,
+          "bit_exact": true,
+          "max_abs": 0.0
+        },
+        "beat_events_vs_untapped": {
+          "passed": true,
+          "count": 17,
+          "max_abs": 0.0
+        },
+        "downbeat_events_vs_untapped": {
+          "passed": true,
+          "count": 5,
+          "max_abs": 0.0
+        },
+        "beat_vs_frozen_rten": {
+          "passed": true,
+          "bit_exact": false,
+          "max_abs": 1.9073486328125e-05
+        },
+        "downbeat_vs_frozen_rten": {
+          "passed": true,
+          "bit_exact": false,
+          "max_abs": 1.430511474609375e-05
+        },
+        "beats_vs_frozen_port": {
+          "passed": true,
+          "count": 17,
+          "max_abs": 4.5776367230132564e-07
+        },
+        "downbeats_vs_frozen_port": {
+          "passed": true,
+          "count": 5,
+          "max_abs": 3.051757815342171e-07
+        },
+        "official_frontend_vs_frozen_mel": {
+          "passed": true,
+          "bit_exact": false,
+          "max_abs": 3.337860107421875e-05
+        },
+        "beats_vs_frozen_adapter": {
+          "passed": true,
+          "count": 17,
+          "max_abs": 4.5776367230132564e-07
+        },
+        "downbeats_vs_frozen_adapter": {
+          "passed": true,
+          "count": 5,
+          "max_abs": 3.051757815342171e-07
+        }
+      },
+      "private_archive": {
+        "size_bytes": 1401796,
+        "sha256": "b7cd9fc1123033478c677e5c8248aa014d13cc331b5657676a9ea47ee6e0c7b9",
+        "serialization_s": 0.007139299996197224,
+        "roundtrip_bit_exact": true
+      },
+      "process_lifetime_peak_rss_bytes": 563953664,
+      "pcm_sha256": "50f7183d6d1adf539a7f3c0d4dcaa53df2614c43fab56ecc4792f250ef0b8543",
+      "source_trace_sha256": "6c3f73fef8ba6fe5eb14c5dac7e22c94b2e8f25fa03761654f293787f462901d"
+    },
+    {
+      "case_id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "frames": 1751,
+      "hidden_shape": [
+        1751,
+        512
+      ],
+      "mel_sha256": "881b591f2841b08c10d199bf297c36b2bf302cad8982c047f1764b8b9d2a30ff",
+      "chunk_count": 2,
+      "owner_frame_counts": [
+        1488,
+        263
+      ],
+      "array_sha256": {
+        "hidden": "c928a4471fd9e0a42817421d0343c88905406b0cbe7b67b6ffc12662612feb91",
+        "beat": "3812ca9b7c1c0bf94df7c099fea79a467abe3ff2671d7a605f296b670c0bb487",
+        "downbeat": "bd579979508f5d45bff75816cf677c1c76110b8640bcbd6c892b401a4a7db872",
+        "owner": "50e84f6e8f68074f55c32f01a5abb47e4793bf34288d5d62cee65e8164503274"
+      },
+      "chunk_checks": [
+        {
+          "checks": {
+            "beat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "beat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            }
+          },
+          "untapped_s": 8.340634200256318,
+          "tapped_s": 8.064137700013816
+        },
+        {
+          "checks": {
+            "beat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "beat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_tap_vs_untapped": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            },
+            "downbeat_reconstructed": {
+              "passed": true,
+              "bit_exact": true,
+              "max_abs": 0.0
+            }
+          },
+          "untapped_s": 7.810653199907392,
+          "tapped_s": 7.615826699882746
+        }
+      ],
+      "checks": {
+        "beat_aggregate_vs_upstream": {
+          "passed": true,
+          "bit_exact": true,
+          "max_abs": 0.0
+        },
+        "downbeat_aggregate_vs_upstream": {
+          "passed": true,
+          "bit_exact": true,
+          "max_abs": 0.0
+        },
+        "beat_events_vs_untapped": {
+          "passed": true,
+          "count": 50,
+          "max_abs": 0.0
+        },
+        "downbeat_events_vs_untapped": {
+          "passed": true,
+          "count": 24,
+          "max_abs": 0.0
+        },
+        "beat_vs_frozen_rten": {
+          "passed": true,
+          "bit_exact": false,
+          "max_abs": 1.3828277587890625e-05
+        },
+        "downbeat_vs_frozen_rten": {
+          "passed": true,
+          "bit_exact": false,
+          "max_abs": 1.6689300537109375e-05
+        },
+        "beats_vs_frozen_port": {
+          "passed": true,
+          "count": 50,
+          "max_abs": 1.8310546892053026e-06
+        },
+        "downbeats_vs_frozen_port": {
+          "passed": true,
+          "count": 24,
+          "max_abs": 1.8310546892053026e-06
+        },
+        "official_frontend_vs_frozen_mel": {
+          "passed": true,
+          "bit_exact": false,
+          "max_abs": 0.00011157989501953125
+        },
+        "beats_vs_frozen_adapter": {
+          "passed": true,
+          "count": 50,
+          "max_abs": 1.8310546892053026e-06
+        },
+        "downbeats_vs_frozen_adapter": {
+          "passed": true,
+          "count": 24,
+          "max_abs": 1.8310546892053026e-06
+        }
+      },
+      "private_archive": {
+        "size_bytes": 3608056,
+        "sha256": "8be6e40ce55133a8fdaddd1999a2962aafd1e0b74a1fc5371a4ee4e1754b3e5b",
+        "serialization_s": 0.00801389990374446,
+        "roundtrip_bit_exact": true
+      },
+      "process_lifetime_peak_rss_bytes": 563953664,
+      "pcm_sha256": "89112ace0bd6d784cfedd5d78e10c0237803b6d1005c9f421f063b5aa4808dc0",
+      "source_trace_sha256": "b92ea7c11f8cdb6bbe83c53d2915e7a063d99bc92aaca3907ed2f5b4c6dce796"
+    }
+  ],
+  "gate_elapsed_s": 167.9722635000944,
+  "process_lifetime_peak_rss_bytes": 563953664,
+  "decision": "capture_fidelity_only_no_discrimination_or_promotion",
+  "production_changed": false,
+  "training": false,
+  "holdout_access": false,
+  "full_cohort_capture": false
+}

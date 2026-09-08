@@ -8,6 +8,12 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `prehead_capture.py` and `prehead_capture_audit.py` capture the existing
+  checkpoint's normalized 512-channel task-head input without changing heads,
+  chunk ownership or events. Four authored spectrograms and two original
+  reference traces pass; `prehead-capture-v1.json` records fidelity only, not
+  musical discrimination. Raw feature archives stay private. See the
+  [contract, measured result and reproduction](../baselines/prehead-capture-v1.md).
 - `oracle-period-paired-v1.json` and `oracle_period_paired_audit.py` close the
   count/sign tuning branch after all seven pairs pass an oracle-period geometry
   guard under four shared prefix phases. Robust shape support remains 2/7 raw,

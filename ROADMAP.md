@@ -24,6 +24,16 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- The normalized pre-head capture gate now passes: four authored spectrograms
+  and the two original reference traces retain bit-exact hooked/unhooked logits
+  and bit-exact head reconstruction across ten chunks. Shared ownership, cached
+  event identities, archive round trips and model-state immutability pass.
+  This is an evaluation-only Python tap, not a native feature export or an
+  accuracy gain. Next freeze one label-free temporal discrimination rule and
+  authored omission/change/density/edge controls before inspecting real feature
+  values for that purpose. No whole-cohort feature capture, training, layer
+  sweep, public option, default change or release. See the
+  [capture contract, measured checks and remaining boundary](evaluation/baselines/prehead-capture-v1.md).
 - Richer-representation reuse review narrows the next gate to one untested
   source: the existing Beat This checkpoint's normalized 512-channel pre-head
   sequence. Continuous two-head trajectories, joint windows, context, onset

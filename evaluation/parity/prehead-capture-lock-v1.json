@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "purpose": "capture_fidelity_not_discrimination",
+  "reference_lock_sha256": "10465e598444a39f76a5ec170cce3b1db0af04dd90d30e5028164c3230bc5555",
+  "reference_report_sha256": "9d405b677fafa957f3cb2f01a5c2de24af06e24427be2e8545b0c6e005ec40a2",
+  "comparator_sha256": "b21a8b4f2d31adb7e79e3e4ccc760205bf85c9d04142fd9cc0610eb967eaa513",
+  "feature": "transformer_blocks_output_after_rms_norm_before_task_heads",
+  "feature_width": 512,
+  "dtype": "float32",
+  "device": "cpu",
+  "threads": 2,
+  "interop_threads": 1,
+  "chunk_frames": 1500,
+  "border_frames": 6,
+  "stride_frames": 1488,
+  "max_frames": 4096,
+  "ownership": "keep_first",
+  "authored_controls": [
+    {"id": "short_flat", "frames": 17, "kind": "zero"},
+    {"id": "single_full", "frames": 1488, "kind": "modular"},
+    {"id": "first_overlap", "frames": 1489, "kind": "modular"},
+    {"id": "three_chunks", "frames": 2980, "kind": "modular"}
+  ],
+  "budgets": {
+    "tap_vs_untapped": "bit_exact",
+    "head_reconstruction_atol": 0.00002,
+    "head_reconstruction_rtol": 0.000001,
+    "mel_atol": 0.001,
+    "reference_logit_atol": 0.002,
+    "reference_rtol": 0.0001,
+    "reference_event_atol_s": 0.00001,
+    "event_identity": "same_ordered_half_frame_indices"
+  },
+  "versions": {
+    "torch": "2.8.0+cpu",
+    "torchaudio": "2.8.0+cpu",
+    "numpy": "2.2.6",
+    "einops": "0.8.1",
+    "rotary-embedding-torch": "0.8.9",
+    "soxr": "1.0.0"
+  }
+}
