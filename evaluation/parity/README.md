@@ -8,6 +8,13 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `musicfm_availability.py` separately composes the unchanged native activity/
+  silence contract before the prior feature comparison. Fifteen authored
+  availability checks pass; five cached feature sets and six paired verdicts
+  stay exact, while known silence is rejected before archive access. This is a
+  retrospective correction of the known counterexample, not independent music
+  acceptance or a revision of the failed original report. See the [coverage
+  boundary, native reuse and untested periodicity controls](../baselines/musicfm-availability-v1.md).
 - `musicfm_temporal_probe.py` freezes complete-input 25 Hz ownership and one
   unchanged recurrence formula before new temporal features. All 54 authored
   forwards retain exact extraction, and all six non-silent pairs pass shape

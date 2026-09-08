@@ -1,0 +1,63 @@
+{
+  "schema": "rhythm-map.musicfm-availability-lock.v1",
+  "scope": "separate retrospective availability composition; original unconditioned failure stays closed",
+  "previous_report_sha256": "b0badf814d197c30e3f4e83df221b43570795e396586351904080a7bdd5683a4",
+  "helpers": {
+    "musicfm_temporal.py": "e924d58f2e69f963a4885fca1d8544acb00840022301238b49a9a79abb01b43f",
+    "musicfm_temporal_probe.py": "eb5d3310a160e544bd62460fd143a58d76eb73c5bc63dc6b81fc11085220e337"
+  },
+  "native_sources": {
+    "engine": {"path": "crates/rhythm-map-core/src/engine.rs", "sha256": "b2aa743e5d2699e1b1bd82582dbcb223a71406d99d470b41a49041586fac6ea2"},
+    "estimator": {"path": "crates/rhythm-map-core/src/estimator.rs", "sha256": "3d2bc3ca875025b5d08e511dcecf38351fc8f62e27daf8d49147f9f8a68bf8f1"},
+    "types": {"path": "crates/rhythm-map-core/src/types.rs", "sha256": "5a256fc062bdaa99ff614fbde4bba7064bee01b34dc9198a343595ac56f66646"},
+    "cargo_lock": {"path": "Cargo.lock", "sha256": "246d94421a15809b0dddd9eb6cbebec6270c981c384e06ece9c8267acf75d4f7"},
+    "exporter": {"path": "crates/rhythm-map-eval/examples/activity_availability.rs", "sha256": "43a35d7be1d8ed7276c1a8aaae260f84a18f3c38d0b94408098d56cb0f239596"}
+  },
+  "native_contract": {
+    "sample_rate": 24000,
+    "window_samples": 2400,
+    "hop_samples": 1200,
+    "silence_threshold_db": -40.0,
+    "minimum_silence_s": 0.8,
+    "method": "unchanged Engine activity and shipping analyze_observations, one diagnostic sentinel per nominal center, no task inference or exported beats",
+    "coverage": "uniform complete envelope only; median-hop half-cells, file clipping, no tail extrapolation; missing/gapped coverage is unknown",
+    "numeric_uniform_grid_tolerance_s": 1e-12
+  },
+  "composition": "all target centers and both interpolation endpoints required by every existing competing clock must be covered and retained; any unknown or low-activity requirement rejects the entire window before opening feature files or scoring; no sample removal, score recomputation on favorable support, clock, phase, layer, context or threshold change",
+  "states": ["unknown_activity", "low_activity", "available_for_periodic_test"],
+  "meaning": "available means not excluded by the existing low-activity rule, NOT known beats, rhythm or a calibrated confidence",
+  "cache": {
+    "feature_file_bytes": 1233024,
+    "owner_file_bytes": 1332,
+    "owner_file_sha256": "2b75c6cb19f2e842c2396a3e6853516b7b844f7cbb6b2b76ffdf534699691881",
+    "features": {
+      "constant-clean": "ecff7f90737a77f75e712c38269185e6272d580232832220b01dbd4efdc897ce",
+      "constant-omitted": "86872645b6fdd2359ddfac6e197748710d538c260b76de4083b5a93009bf0356",
+      "constant-weak": "ec564a0db4146ad6c996da289037241c297ac0e1d88551918a6f02ec27d42053",
+      "step-fast": "0d426f87e6bc88f52fc3bce00f30b40c560453d5717733e3d9a0f20d1bfbda85",
+      "step-slow": "5f3d302d82a7b351943868cc5ae82a79d5fc6c741a03433188c47a52942dcdaf",
+      "silence": "92e3fefb0f0d76f200310644d4aa52f6385ee6fa4547993119efc427ab7ee061"
+    }
+  },
+  "original_cases": ["constant-clean", "constant-omitted", "constant-weak", "step-fast", "step-slow", "silence"],
+  "new_activity_controls": [
+    {"id": "quiet-gain", "recipe": "original constant-clean float32 PCM times 2^-16", "window_start": 100, "expected": "available_for_periodic_test"},
+    {"id": "short-rest", "recipe": "constant-clean, zero samples [138000,150000), 0.5-second complete cue/pulse rest", "window_start": 100, "expected": "available_for_periodic_test"},
+    {"id": "long-rest", "recipe": "constant-clean, zero samples [96000,192000)", "window_start": 100, "expected": "low_activity"},
+    {"id": "prefix-rest", "recipe": "constant-clean, zero samples [0,72000)", "window_start": 0, "expected": "low_activity"},
+    {"id": "suffix-rest", "recipe": "constant-clean, zero samples [216000,288240)", "window_start": 200, "expected": "low_activity"},
+    {"id": "steady-tone", "recipe": "0.125*sin(2*pi*440*n/24000) in float64 then float32, 288240 samples", "window_start": 100, "expected": "available_for_periodic_test"},
+    {"id": "dc", "recipe": "constant float32 0.125, 288240 samples", "window_start": 100, "expected": "available_for_periodic_test"},
+    {"id": "noise", "recipe": "NumPy PCG64 seed 142, uniform(-0.125,0.125), 288240 float64 values then float32", "window_start": 100, "expected": "available_for_periodic_test"},
+    {"id": "below-floor", "recipe": "original constant-clean float32 PCM times 2^-60, below the existing f64 epsilon peak floor", "window_start": 100, "expected": "low_activity"}
+  ],
+  "decision": "all 15 activity cases must match the frozen state in both clock comparisons; original five active cached features/scores must remain exact and all six pairs retained; known silence must suppress both clock ledgers before cache access. This is known-counterexample composition and activity-contract validation, not independent musical acceptance. New tone/DC/noise periodicity remains untested and no music inference is authorized by this pass.",
+  "native_timeout_seconds_per_case": 30,
+  "numpy_version": "2.2.6",
+  "new_pretrained_inference": false,
+  "music_access": false,
+  "holdout_access": false,
+  "training": false,
+  "production_change": false,
+  "new_user_parameters": false
+}

@@ -24,6 +24,19 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- The separately frozen activity-availability composition now passes fifteen
+  authored PCM contract checks and replays five original feature sets with every
+  score and all six paired verdicts unchanged. Existing -40 dB / 0.8s filtering
+  rejects the known silence case before feature access; core files/defaults are
+  unchanged. Missing cells and uncovered file-tail half-cells stay unknown. This
+  is retrospective composition success, not independent music acceptance or a
+  reversal of the previous unconditioned failure. Tone/DC/noise remain energy-
+  available, and new gain/rest controls have no neural periodicity verdict yet.
+  Next freeze their neural negative/robustness expectations before any new feature
+  inspection; do not use energy as rhythm confidence or alter old scores. Keep
+  the forty calibration IDs, untyped RUBATO, sealed holdout, zero-tuning product
+  contract and no-release boundary. See the [native reuse, edge-coverage finding
+  and measured composition](evaluation/baselines/musicfm-availability-v1.md).
 - MusicFM's complete-input authored gate now passes all 54 extraction forwards
   across six inputs and eighteen contexts with unchanged model/PCM bytes and
   exact private archive round trips. All six non-silent constant/change pairs
