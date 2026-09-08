@@ -24,6 +24,18 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- Richer-representation reuse review narrows the next gate to one untested
+  source: the existing Beat This checkpoint's normalized 512-channel pre-head
+  sequence. Continuous two-head trajectories, joint windows, context, onset
+  features, overlap ownership and BeatNet evidence already have recorded
+  limitations; do not reopen them under a new name. Actual checkpoint metadata
+  and the 2-by-512 head were verified without inference. Next implement a
+  research-only tap, prove same-pass head reconstruction and unchanged chunk/
+  event identity on authored controls and the two old reference traces, then
+  freeze one discrimination test before feature inspection. No training, layer
+  search, public strategy or default change. MusicFM is one unverified fallback;
+  MERT/MuQ's reviewed noncommercial weights are outside this product route.
+  See the [elimination matrix, sources and capture gate](evaluation/baselines/pretrained-representation-review-v1.md).
 - Decision gate 2 closes the count/sign tuning branch: with oracle nominal
   periods, all seven original pairs pass the geometry guard at four shared
   prefix phases. Only 2/7 raw and 1/7 candidate pairs support both correct native

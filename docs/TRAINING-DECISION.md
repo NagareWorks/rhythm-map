@@ -81,6 +81,13 @@ of the missing-step penalty on these same labels.
 
 ## Practical decision gate, not an impossibility claim
 
+The [pretrained-representation review](../evaluation/baselines/pretrained-representation-review-v1.md)
+records which evidence routes have already failed and which genuinely richer
+feature remains untested. Reading Beat This's existing pre-head sequence is
+training-free; fitting even a small supervised readout would be training and
+needs a separate proposal. Neither an affine information bottleneck nor a
+successful feature-export parity check establishes musical discriminability.
+
 Before proposing training, maintain a case-level evidence ledger covering:
 
 1. **Pipeline validity:** audio/frontend/model parity, timestamp mapping,
