@@ -24,6 +24,16 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- MusicFM offline loader prerequisites now pass in one separately pinned Windows
+  CPU runtime: the full meta architecture, strict authored state round-trip and
+  seven authored frontend/geometry controls. No FMA payload was acquired or
+  loaded and no pretrained encoder features were tested. Retain the rejected
+  import-time IPv6 probe and the tokenizers wheel's missing standalone notice;
+  source/weight/native-dependency distribution clearance is not complete. Next
+  freeze the exact single-checkpoint acquisition and authored extraction-fidelity
+  protocol, verify resources, then test FMA only. No musical discrimination,
+  holdout, training, new strategy, default change or release yet. See the
+  [loader contract, measured scope and finite next gate](evaluation/baselines/musicfm-loader-prerequisite-v1.md).
 - MusicFM's source/metadata feasibility screen now pins both published artifact
   pointers, normalization files and the otherwise online speech-model config.
   Retain only FMA/non-Flash/float32/layer-7 as a conditional research candidate;

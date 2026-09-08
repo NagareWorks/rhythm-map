@@ -1,0 +1,8 @@
+# Research-only CPython 3.13 Windows x64 CPU environment, not a product dependency.
+# Resolve with uv --torch-backend cpu to use the official CPU package index.
+torch==2.8.0+cpu
+torchaudio==2.8.0+cpu
+numpy==2.2.6
+einops==0.8.1
+transformers==4.46.3
+tokenizers==0.20.3

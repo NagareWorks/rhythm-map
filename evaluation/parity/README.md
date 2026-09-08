@@ -770,6 +770,16 @@ holdout, fitting or training is performed. Run the complete 12-test module with
 Read the [contract and failed promotion gate](../baselines/shared-phase-context-v1.md)
 before treating a positive pair margin as correct tempo or acoustic presence.
 
+## MusicFM offline loader prerequisite
+
+`musicfm_loader.py` and `musicfm_loader_probe.py` are research-only, not product
+adapters. The separate pinned Windows runtime runs authored loader/frontend
+controls without acquiring a MusicFM checkpoint or opening music. Normal CI
+runs `python -m unittest discover -s evaluation/parity -p test_musicfm_loader.py -v`
+without neural dependencies. Read the [reproduction steps, measured scope and
+remaining fidelity gate](../baselines/musicfm-loader-prerequisite-v1.md) before
+using these results; no pretrained feature or accuracy claim is established.
+
 ## Full-span clock/response ledger
 
 ```sh

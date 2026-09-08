@@ -1,0 +1,597 @@
+{
+  "schema": "rhythm-map.musicfm-loader-prerequisite.v1",
+  "complete": true,
+  "decision": "loader_prerequisites_only_not_pretrained_fidelity",
+  "pretrained_checkpoint_acquired": false,
+  "pretrained_checkpoint_loaded": false,
+  "pretrained_musicfm_inference": false,
+  "music_access": false,
+  "training": false,
+  "production_changed": false,
+  "runtime_versions": {
+    "certifi": "2026.7.22",
+    "charset-normalizer": "3.5.1",
+    "colorama": "0.4.6",
+    "einops": "0.8.1",
+    "filelock": "3.32.5",
+    "fsspec": "2026.7.0",
+    "hf-xet": "1.6.0",
+    "huggingface-hub": "0.36.2",
+    "idna": "3.19",
+    "jinja2": "3.1.6",
+    "markupsafe": "3.0.3",
+    "mpmath": "1.3.0",
+    "networkx": "3.6.1",
+    "numpy": "2.2.6",
+    "packaging": "26.3",
+    "pyyaml": "6.0.3",
+    "regex": "2026.9.3",
+    "requests": "2.34.2",
+    "safetensors": "0.8.0",
+    "setuptools": "84.0.0",
+    "sympy": "1.14.0",
+    "tokenizers": "0.20.3",
+    "torch": "2.8.0+cpu",
+    "torchaudio": "2.8.0+cpu",
+    "tqdm": "4.70.0",
+    "transformers": "4.46.3",
+    "typing-extensions": "4.16.0",
+    "urllib3": "2.7.0"
+  },
+  "source_sha256": {
+    "musicfm_loader.py": "91af01491b2a06b00c0838f3c845d34fbf8b7cac4c82e722c50e18f4c5927e75",
+    "musicfm_loader_probe.py": "0e84de5525780f667693add59cc4b7cc8660449af73a765570915e76ff0c29f6",
+    "musicfm-runtime-win64.json": "753b87d3630b52e58e5544df217b23ea80daf76aa8035ecb47a6aa9b35981f62",
+    "musicfm-runtime-win64.txt": "ffafd956af668b5467b8785a73fb7d05df0435a460d108bf3b0f67ef598b69e1",
+    "musicfm-artifact-screen-v1.json": "29fb352b002125b84bbac6e962c8e4126a5d34636399d40a211dd95705b3a283"
+  },
+  "process_memory_limit_bytes": 4294967296,
+  "peak_rss_bytes": 303222784,
+  "torch_threads": 2,
+  "construct_meta_s": 3.058223200030625,
+  "meta_parameter_elements": 328932480,
+  "real_buffer_elements": 133248,
+  "state_key_count": 465,
+  "state_schema_sha256": "173475120b65e82454cd1ef5f3c328e71faa22f40db2881accd242a090433ed3",
+  "effective_config_sha256": "d8fcd47d852964c22fc830a076ece4ccf127125d4d18d41af1f01f33e0e2de60",
+  "authored_checkpoints": {
+    "roundtrip_exact": true,
+    "rejected": [
+      "wrong_shape",
+      "wrong_dtype",
+      "nonfinite",
+      "unsupported_pickle_callable"
+    ],
+    "pretrained_weights": false
+  },
+  "authored_frontend_geometry": [
+    {
+      "samples": 1025,
+      "kind": "silence",
+      "mel_frames": 4,
+      "tokens": 1,
+      "origin_samples": 0,
+      "stride_samples": 960,
+      "last_center_samples": 0,
+      "normalization_exact": true,
+      "tiny_convolution_repeat_exact": true,
+      "input_unchanged": true
+    },
+    {
+      "samples": 1199,
+      "kind": "impulse",
+      "mel_frames": 4,
+      "tokens": 1,
+      "origin_samples": 0,
+      "stride_samples": 960,
+      "last_center_samples": 0,
+      "normalization_exact": true,
+      "tiny_convolution_repeat_exact": true,
+      "input_unchanged": true
+    },
+    {
+      "samples": 1200,
+      "kind": "tone",
+      "mel_frames": 5,
+      "tokens": 2,
+      "origin_samples": 0,
+      "stride_samples": 960,
+      "last_center_samples": 960,
+      "normalization_exact": true,
+      "tiny_convolution_repeat_exact": true,
+      "input_unchanged": true
+    },
+    {
+      "samples": 1919,
+      "kind": "tone",
+      "mel_frames": 7,
+      "tokens": 2,
+      "origin_samples": 0,
+      "stride_samples": 960,
+      "last_center_samples": 960,
+      "normalization_exact": true,
+      "tiny_convolution_repeat_exact": true,
+      "input_unchanged": true
+    },
+    {
+      "samples": 1920,
+      "kind": "impulse",
+      "mel_frames": 8,
+      "tokens": 2,
+      "origin_samples": 0,
+      "stride_samples": 960,
+      "last_center_samples": 960,
+      "normalization_exact": true,
+      "tiny_convolution_repeat_exact": true,
+      "input_unchanged": true
+    },
+    {
+      "samples": 24001,
+      "kind": "tone",
+      "mel_frames": 100,
+      "tokens": 25,
+      "origin_samples": 0,
+      "stride_samples": 960,
+      "last_center_samples": 23040,
+      "normalization_exact": true,
+      "tiny_convolution_repeat_exact": true,
+      "input_unchanged": true
+    },
+    {
+      "samples": 48000,
+      "kind": "silence",
+      "mel_frames": 200,
+      "tokens": 50,
+      "origin_samples": 0,
+      "stride_samples": 960,
+      "last_center_samples": 47040,
+      "normalization_exact": true,
+      "tiny_convolution_repeat_exact": true,
+      "input_unchanged": true
+    }
+  ],
+  "frontend_defaults_verified": true,
+  "tiny_convolution_state_unchanged": true,
+  "dependency_notices": [
+    {
+      "name": "certifi",
+      "version": "2026.7.22",
+      "notices": [
+        {
+          "path": "certifi-2026.7.22.dist-info/licenses/LICENSE",
+          "size_bytes": 989,
+          "sha256": "e93716da6b9c0d5a4a1df60fe695b370f0695603d21f6f83f053e42cfc10caf7"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.1",
+      "notices": [
+        {
+          "path": "charset_normalizer-3.5.1.dist-info/licenses/LICENSE",
+          "size_bytes": 1092,
+          "sha256": "18577485d3704f1a479ded8e573c0976cfed315fd2fd17983fa988da4c2f70d1"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.6",
+      "notices": [
+        {
+          "path": "colorama-0.4.6.dist-info/licenses/LICENSE.txt",
+          "size_bytes": 1491,
+          "sha256": "cac35c02686e5d04a5a7140bfb3b36e73aed496656e891102e428886d7930318"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "einops",
+      "version": "0.8.1",
+      "notices": [
+        {
+          "path": "einops-0.8.1.dist-info/licenses/LICENSE",
+          "size_bytes": 1073,
+          "sha256": "30d984364296f51ffaecad4b01ee127e95250c5068918d4b66fc96206723e434"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "filelock",
+      "version": "3.32.5",
+      "notices": [
+        {
+          "path": "filelock-3.32.5.dist-info/licenses/LICENSE",
+          "size_bytes": 1088,
+          "sha256": "608c89d5060ae9921adccf3236695bc654a9946e12323ef6c021dfa04e294d48"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.7.0",
+      "notices": [
+        {
+          "path": "fsspec-2026.7.0.dist-info/licenses/LICENSE",
+          "size_bytes": 1513,
+          "sha256": "2dc35496ce53a7307915c008a844aad53e772b49b34cdd00445067691407ec94"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "hf-xet",
+      "version": "1.6.0",
+      "notices": [
+        {
+          "path": "hf_xet-1.6.0.dist-info/licenses/LICENSE",
+          "size_bytes": 11558,
+          "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "huggingface-hub",
+      "version": "0.36.2",
+      "notices": [
+        {
+          "path": "huggingface_hub-0.36.2.dist-info/licenses/LICENSE",
+          "size_bytes": 11357,
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "idna",
+      "version": "3.19",
+      "notices": [
+        {
+          "path": "idna-3.19.dist-info/licenses/LICENSE.md",
+          "size_bytes": 1541,
+          "sha256": "1a9a4f0e3d479a27240ddd59a9137a66ab4a0f9dfdc8ca6188cc0bfd85187f04"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "jinja2",
+      "version": "3.1.6",
+      "notices": [
+        {
+          "path": "jinja2-3.1.6.dist-info/licenses/LICENSE.txt",
+          "size_bytes": 1475,
+          "sha256": "3b49dcee4105eb37bac10faf1be260408fe85d252b8e9df2e0979fc1e094437b"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "markupsafe",
+      "version": "3.0.3",
+      "notices": [
+        {
+          "path": "markupsafe-3.0.3.dist-info/licenses/LICENSE.txt",
+          "size_bytes": 1503,
+          "sha256": "4631ec0db5fd90a547e336817264c6798214338146f8ac94b4a57f96ee8c9ec4"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0",
+      "notices": [
+        {
+          "path": "mpmath-1.3.0.dist-info/LICENSE",
+          "size_bytes": 1537,
+          "sha256": "c26cae81da4508e5e249985777a33821f183223ebb74d7f8cfbf90fe7eef2fb7"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "networkx",
+      "version": "3.6.1",
+      "notices": [
+        {
+          "path": "networkx-3.6.1.dist-info/licenses/LICENSE.txt",
+          "size_bytes": 1763,
+          "sha256": "3cf7c3a179d817b23b8b8568211769fefdf93797d207d984b8b2fa24d0220b33"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "numpy",
+      "version": "2.2.6",
+      "notices": [
+        {
+          "path": "numpy-2.2.6.dist-info/LICENSE.txt",
+          "size_bytes": 47709,
+          "sha256": "14256cc3a2c9d32ac284da96b937feb44f72dd90bee2317ac3020166846ad99d"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "packaging",
+      "version": "26.3",
+      "notices": [
+        {
+          "path": "packaging-26.3.dist-info/licenses/LICENSE",
+          "size_bytes": 197,
+          "sha256": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48"
+        },
+        {
+          "path": "packaging-26.3.dist-info/licenses/LICENSE.APACHE",
+          "size_bytes": 10174,
+          "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+        },
+        {
+          "path": "packaging-26.3.dist-info/licenses/LICENSE.BSD",
+          "size_bytes": 1344,
+          "sha256": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "pyyaml",
+      "version": "6.0.3",
+      "notices": [
+        {
+          "path": "pyyaml-6.0.3.dist-info/licenses/LICENSE",
+          "size_bytes": 1101,
+          "sha256": "8d3928f9dc4490fd635707cb88eb26bd764102a7282954307d3e5167a577e8a4"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "regex",
+      "version": "2026.9.3",
+      "notices": [
+        {
+          "path": "regex-2026.9.3.dist-info/licenses/LICENSE.txt",
+          "size_bytes": 11792,
+          "sha256": "3d220c06594b826bbabf110312f60f385f99e57e529fa4b9e536f79091f8b4c7"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2",
+      "notices": [
+        {
+          "path": "requests-2.34.2.dist-info/licenses/LICENSE",
+          "size_bytes": 10142,
+          "sha256": "09e8a9bcec8067104652c168685ab0931e7868f9c8284b66f5ae6edae5f1130b"
+        },
+        {
+          "path": "requests-2.34.2.dist-info/licenses/NOTICE",
+          "size_bytes": 38,
+          "sha256": "f5110972dedad2b4e9d314518daf3b7d72d6e02e499acd802181de6f74571dcc"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "safetensors",
+      "version": "0.8.0",
+      "notices": [
+        {
+          "path": "safetensors-0.8.0.dist-info/licenses/LICENSE",
+          "size_bytes": 11558,
+          "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "setuptools",
+      "version": "84.0.0",
+      "notices": [
+        {
+          "path": "setuptools-84.0.0.dist-info/licenses/LICENSE",
+          "size_bytes": 1023,
+          "sha256": "86da0f01aeae46348a3c3d465195dc1ceccde79f79e87769a64b8da04b2a4741"
+        },
+        {
+          "path": "setuptools/_vendor/autocommand-2.2.2.dist-info/LICENSE",
+          "size_bytes": 7634,
+          "sha256": "ade78d04982d69972d444a8e14a94f87a2334dd3855cc80348ea8e240aa0df2d"
+        },
+        {
+          "path": "setuptools/_vendor/backports.tarfile-1.2.0.dist-info/LICENSE",
+          "size_bytes": 1023,
+          "sha256": "86da0f01aeae46348a3c3d465195dc1ceccde79f79e87769a64b8da04b2a4741"
+        },
+        {
+          "path": "setuptools/_vendor/importlib_metadata-8.7.1.dist-info/licenses/LICENSE",
+          "size_bytes": 10278,
+          "sha256": "458502e12d97bbf64438606a20044aa85eb05fb0a8a807bb35dbec253fd1fc04"
+        },
+        {
+          "path": "setuptools/_vendor/jaraco.text-4.0.0.dist-info/LICENSE",
+          "size_bytes": 1023,
+          "sha256": "86da0f01aeae46348a3c3d465195dc1ceccde79f79e87769a64b8da04b2a4741"
+        },
+        {
+          "path": "setuptools/_vendor/jaraco_context-6.1.0.dist-info/licenses/LICENSE",
+          "size_bytes": 1076,
+          "sha256": "9755a18519666e5f0f4cae3daad3d7012bcae48a600b31237d75e9fe134e6683"
+        },
+        {
+          "path": "setuptools/_vendor/jaraco_functools-4.4.0.dist-info/licenses/LICENSE",
+          "size_bytes": 1076,
+          "sha256": "5a57cb4db85e2a2dd88c290628908add57e3451449e0a9a71fdfb38776fd759d"
+        },
+        {
+          "path": "setuptools/_vendor/more_itertools-10.8.0.dist-info/licenses/LICENSE",
+          "size_bytes": 1053,
+          "sha256": "09f1c8c9e941af3e584d59641ea9b87d83c0cb0fd007eb5ef391a7e2643c1a46"
+        },
+        {
+          "path": "setuptools/_vendor/packaging-26.0.dist-info/licenses/LICENSE",
+          "size_bytes": 197,
+          "sha256": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48"
+        },
+        {
+          "path": "setuptools/_vendor/packaging-26.0.dist-info/licenses/LICENSE.APACHE",
+          "size_bytes": 10174,
+          "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+        },
+        {
+          "path": "setuptools/_vendor/packaging-26.0.dist-info/licenses/LICENSE.BSD",
+          "size_bytes": 1344,
+          "sha256": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5"
+        },
+        {
+          "path": "setuptools/_vendor/platformdirs-4.4.0.dist-info/licenses/LICENSE",
+          "size_bytes": 1089,
+          "sha256": "29e0fd62e929850e86eb28c3fdccf0cefdf4fa94879011cffb3d0d4bed6d4db6"
+        },
+        {
+          "path": "setuptools/_vendor/tomli-2.4.0.dist-info/licenses/LICENSE",
+          "size_bytes": 1072,
+          "sha256": "b80816b0d530b8accb4c2211783790984a6e3b61922c2b5ee92f3372ab2742fe"
+        },
+        {
+          "path": "setuptools/_vendor/wheel-0.46.3.dist-info/licenses/LICENSE.txt",
+          "size_bytes": 1107,
+          "sha256": "30c23618679108f3e8ea1d2a658c7ca417bdfc891c98ef1a89fa4ff0c9828654"
+        },
+        {
+          "path": "setuptools/_vendor/zipp-3.23.0.dist-info/licenses/LICENSE",
+          "size_bytes": 1076,
+          "sha256": "5a57cb4db85e2a2dd88c290628908add57e3451449e0a9a71fdfb38776fd759d"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "sympy",
+      "version": "1.14.0",
+      "notices": [
+        {
+          "path": "sympy-1.14.0.dist-info/licenses/AUTHORS",
+          "size_bytes": 55779,
+          "sha256": "82b1038521b0696c63c90b31ed4a0a2c9c4c16871c648b157b07ca44b6f18f8d"
+        },
+        {
+          "path": "sympy-1.14.0.dist-info/licenses/LICENSE",
+          "size_bytes": 7885,
+          "sha256": "07a5e9819f727b4986ad2829c7a29a6320d42575f720eb24d71b7fef573a0286"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "tokenizers",
+      "version": "0.20.3",
+      "notices": [],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "torch",
+      "version": "2.8.0+cpu",
+      "notices": [
+        {
+          "path": "torch-2.8.0+cpu.dist-info/LICENSE",
+          "size_bytes": 506902,
+          "sha256": "d61701e874c39a858d92c47c2cbf3bd8b9e498032a18ae42832fba591752ce1f"
+        },
+        {
+          "path": "torch-2.8.0+cpu.dist-info/NOTICE",
+          "size_bytes": 24088,
+          "sha256": "1c3dec6c0342c7ed9e12af59b296c7bb1d394af5cf881db74191cc8299efce5c"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "torchaudio",
+      "version": "2.8.0+cpu",
+      "notices": [
+        {
+          "path": "torchaudio-2.8.0+cpu.dist-info/licenses/LICENSE",
+          "size_bytes": 1363,
+          "sha256": "32638e179931bfe551eabf67b0e67a13b483e166b58dd7263634ab7f89f396f5"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.0",
+      "notices": [
+        {
+          "path": "tqdm-4.70.0.dist-info/licenses/LICENCE",
+          "size_bytes": 1985,
+          "sha256": "fcff87c3a47ce8028a8512aa182d4fcf0ad1c90544ee75cf9b343684cac194de"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "transformers",
+      "version": "4.46.3",
+      "notices": [
+        {
+          "path": "transformers-4.46.3.dist-info/LICENSE",
+          "size_bytes": 11418,
+          "sha256": "77fd4710def9ec3c0f6225800e0235f15a425abd4a8b03559127fcd782612049"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.16.0",
+      "notices": [
+        {
+          "path": "typing_extensions-4.16.0.dist-info/licenses/LICENSE",
+          "size_bytes": 13936,
+          "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+        }
+      ],
+      "redistribution_audit_complete": false
+    },
+    {
+      "name": "urllib3",
+      "version": "2.7.0",
+      "notices": [
+        {
+          "path": "urllib3-2.7.0.dist-info/licenses/LICENSE.txt",
+          "size_bytes": 1093,
+          "sha256": "130e3a64d5fdd5d096a752694634a7d9df284469de86e5732100268041e3d686"
+        }
+      ],
+      "redistribution_audit_complete": false
+    }
+  ],
+  "unintended_python_network_attempts": 0,
+  "retained_prerequisite_failures": [
+    {
+      "attempt": "initial-and-diagnostic",
+      "outcome": "rejected",
+      "reason": "urllib3 import-time IPv6 loopback capability bind attempted; Python networking guard rejected result",
+      "resolution": "suppress socket.has_ipv6 capability probe; keep bind and connection refusal"
+    },
+    {
+      "attempt": "notice-inventory",
+      "outcome": "rejected",
+      "reason": "tokenizers wheel contains no separate license/notice file",
+      "resolution": "record the exact known absence, retain Apache classifier metadata, leave redistribution audit incomplete"
+    }
+  ]
+}
