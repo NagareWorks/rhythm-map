@@ -1,0 +1,32 @@
+{
+  "schema": "rhythm-map.musicfm-paired-lock.v1",
+  "purpose": "Conditional representation discrimination on the existing seven exposed pairs, not revival or admission of the rejected MusicFM composed rule.",
+  "conditional_only": true,
+  "training": false,
+  "holdout_access": false,
+  "production_change": false,
+  "selected_ids": [
+    "artbeat-06-150-to-75",
+    "artbeat-08-112-5-to-75",
+    "artbeat-09-90-to-80",
+    "artbeat-10-90-to-120",
+    "artbeat-12-80-to-150",
+    "artbeat-14-240-to-96",
+    "artbeat-15-85-to-127-5"
+  ],
+  "helpers": {
+    "musicfm_paired.py": "a408f9a5bc1c6e9b60505e6c057e923da1f05a2f06b5b3a8d44b16ccaf2a1d03",
+    "musicfm_paired_probe.py": "3ebcc89d4d1af1a32b2ead7742d114ec5e1c66fbde45617cad4f9a96e684ba5e",
+    "musicfm_temporal.py": "e924d58f2e69f963a4885fca1d8544acb00840022301238b49a9a79abb01b43f",
+    "musicfm_temporal_probe.py": "eb5d3310a160e544bd62460fd143a58d76eb73c5bc63dc6b81fc11085220e337",
+    "prehead_recurrence_audit.py": "48cad2cc17be06a45355c96cfd651de2db779533f0088d6f477daa9df18cb66f",
+    "prehead-recurrence-v1.json": "81b3d8a98c66d9362bf073187583c44d9f21b9f695bf178261ac24f6c5ee1c09",
+    "musicfm-negative-v1.json": "b2f67387286130b0b1c98e568134caa3def2b9b2cb4b0287a4f9056e5167d79c"
+  },
+  "input_bridge": "Byte-verified complete legacy 22050 Hz float32 mono traces, then pinned torchaudio 2.8.0+cpu resample to 24000 Hz, sinc_interp_hann, width 6, rolloff 0.99, no offset correction. This is a representation plus frontend/context comparison, not an encoder-only ablation.",
+  "extraction": "Unchanged FMA float32 CPU layer 7, full twelve blocks and projection; complete-input 8s contexts, 4s hops, midpoint ownership and unpadded tail. Reference, hooked and repeat passes per context, all exact. No beat/window-aligned crop inference.",
+  "scoring": "Unchanged full-cycle minus half-cycle cosine at native 25 Hz, four prefix phases, eight supplied shape/density clocks, 1e-6 numerical ties, 1e-12 zero norms, shared in-window support. No fitted threshold, layer, context, phase or source choice.",
+  "coverage": "Retain all 40 prior identities, seven original pairs, 26 expressive/untyped inputs. Odd 50 Hz window starts move the first native target by 20ms within the same half-open physical interval. Preserve old 60ms two-direction clock geometry guard and cross-owner counts.",
+  "decision": "Report both native shapes and all density rivals per pair. Any missing member stays rejected in denominator. A positive conditional contrast cannot solve known no-rhythm rejection, demonstrate automatic detection or independent acceptance, authorize training, or admit a product strategy. A negative contrast closes this fixed real-music recurrence comparison without a layer/distance/threshold sweep.",
+  "timeout_seconds": 1800
+}

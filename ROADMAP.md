@@ -24,6 +24,19 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- The [conditional MusicFM music replay](evaluation/baselines/musicfm-paired-v1.md)
+  fills the remaining seven-pair discrimination gap without reopening the
+  rejected no-rhythm composition. All seven pairs pass geometry and all 27
+  contexts pass exact capture checks; only 3/7 pairs support both native shapes,
+  and 0/7 exclude all density rivals. Keep false changes in 06/08/12/14 and
+  erased true changes in 06/08. Case 15 gains native support versus the old
+  pre-head rule while 14 loses it; no per-track blend. Eleven windows cross
+  context owners, so this is not an isolated encoder ablation. Close the fixed
+  recurrence comparison, not all pretrained representations. Next formulate a
+  small learned timing-readout proposal targeting continuation/transition and
+  beat level, with independent labels/rights, runtime and stopping gates;
+  presence-only training would not solve this target. No training, new holdout,
+  default change, user strategy, model distribution or release is approved.
 - The [bounded metadata admission review](evaluation/baselines/rhythm-support-admission-review-v1.md)
   clarifies standard CC reuse terms without inventing an AI-specific grant
   requirement, finds two FSD50K IDs already exposed through FSLD calibration,

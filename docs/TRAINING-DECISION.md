@@ -81,7 +81,26 @@ of the missing-step penalty on these same labels.
 
 ## Practical decision gate, not an impossibility claim
 
-The latest [bounded metadata admission review](../evaluation/baselines/rhythm-support-admission-review-v1.md)
+The [conditional MusicFM replay](../evaluation/baselines/musicfm-paired-v1.md)
+now measures the original seven exposed music pairs, separately from admission
+of the previously rejected no-rhythm composition. Valid extraction and geometry
+leave 3/7 pairs with both correct native shapes and 0/7 resolving all density
+rivals; false changes and erased real changes remain. Context/frontend differ
+from Beat This, and the rule uses oracle clocks, so this neither ranks encoders
+in isolation nor measures automatic accuracy. It does show that a presence
+rejector alone would not repair this fixed clock readout. Keep the old negative
+failure and close this recurrence comparison without a same-label metric sweep.
+
+The next justified **proposal**, not an approved training run, is a small learned
+timing readout for clock continuation through weak/missed observations versus
+true transition and perceived beat level. Do not substitute a presence-only
+classifier for that target. The prior bounded failures support examining this
+investment; they do not prove every training-free method impossible or that a
+particular hidden representation contains enough information. Independent
+paired labels, provenance/rights, group-disjoint acceptance, resource limits and
+stopping criteria remain prerequisites. No optimizer or new holdout is opened.
+
+The preceding [bounded metadata admission review](../evaluation/baselines/rhythm-support-admission-review-v1.md)
 finds two known project-exposure matches and records eight source-review cases,
 not a training set. Standard CC terms do not require an extra AI-specific grant
 solely for being a new technology; individual provenance/other rights and
