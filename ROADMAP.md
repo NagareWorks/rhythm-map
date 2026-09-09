@@ -24,6 +24,19 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- The separately frozen MusicFM neural negative/robustness gate is complete:
+  45 exact extraction forwards across five authored inputs, all four gain/rest
+  constant-to-change pairs pass shape/density, but none of six tone/DC/noise
+  clock-family ledgers abstains. Close this composed rule before music, preserving
+  both the useful conditional cue and all three negative cases. Existing energy
+  availability is not rhythm presence, and the numerical tie budget is not a
+  calibrated confidence cutoff. Next inventory reusable rhythm-presence/rejection
+  evidence and freeze a separate label-free admissibility gate that retains the
+  gain/rest positives; do not sweep thresholds, seeds, layers or contexts. A
+  learned presence/confidence head is a candidate only if reusable evidence fails
+  that gate, not a conclusion established by this one composition. Keep all forty
+  IDs, untyped RUBATO, sealed holdout, defaults and no-release boundary unchanged.
+  See the [full negative ledger, preserved robustness and consequence](evaluation/baselines/musicfm-negative-v1.md).
 - The separately frozen activity-availability composition now passes fifteen
   authored PCM contract checks and replays five original feature sets with every
   score and all six paired verdicts unchanged. Existing -40 dB / 0.8s filtering

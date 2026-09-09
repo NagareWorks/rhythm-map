@@ -8,6 +8,11 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `musicfm_negative.py` tests five previously activity-only controls with the
+  unchanged model/context/score. All 45 extraction forwards and four gain/rest
+  pairs pass, but all six tone/DC/noise negative ledgers fail abstention. This
+  closes the composed rule before music, without changing old reports, defaults
+  or thresholds. See the [fixed expectations and full failure](../baselines/musicfm-negative-v1.md).
 - `musicfm_availability.py` separately composes the unchanged native activity/
   silence contract before the prior feature comparison. Fifteen authored
   availability checks pass; five cached feature sets and six paired verdicts
