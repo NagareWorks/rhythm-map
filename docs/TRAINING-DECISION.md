@@ -81,6 +81,16 @@ of the missing-step penalty on these same labels.
 
 ## Practical decision gate, not an impossibility claim
 
+The [clock-compatibility proposal](CLOCK-READOUT-PROPOSAL.md) now separates
+observation-only proposal coverage, conditional evidence learning and automatic
+product admission. It specifies multi-supported/unknown annotation semantics,
+a costed 25,249-parameter frozen-encoder readout, a bounded label-feasibility
+pilot and explicit fitting/acceptance prerequisites. Only model-free budget and
+vote-contract checks exist: no annotations are newly collected, no independent
+groups admitted, no generator implemented and no training authorized. Next
+review a blinded annotation packet and annotation-free proposal-coverage audit;
+do not present global BPM summaries or supplied oracle clocks as that generator.
+
 The [conditional MusicFM replay](../evaluation/baselines/musicfm-paired-v1.md)
 now measures the original seven exposed music pairs, separately from admission
 of the previously rejected no-rhythm composition. Valid extraction and geometry

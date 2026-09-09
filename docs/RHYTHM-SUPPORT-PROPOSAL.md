@@ -5,6 +5,12 @@ document**. The source screen is complete, but the eleven-input admission gate
 is still `not_run`, not eleven measured failures. This proposal changes no
 model, decoder, default, API, calibration identity or holdout policy.
 
+The later [clock-compatibility proposal](CLOCK-READOUT-PROPOSAL.md) owns the
+current weak/missed-beat versus genuine-change work. This document remains the
+separate presence-support proposal and historical source/null investigation;
+its metadata-only next step is not the active timing plan. It is not enlarged
+into a clock selector by renaming its output.
+
 ## Decision and product boundary
 
 Do not start training yet. The missing prerequisites are representative,

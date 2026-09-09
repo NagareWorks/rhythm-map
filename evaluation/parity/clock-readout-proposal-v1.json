@@ -1,0 +1,63 @@
+{
+  "schema": "rhythm-map.clock-readout-proposal.v1",
+  "status": "design_only_not_training_authorized",
+  "target": "per_candidate_clock_compatibility_not_rhythm_presence_or_single_bpm",
+  "training_authorized": false,
+  "new_annotations_collected": 0,
+  "new_independent_groups_admitted": 0,
+  "generator_implemented": false,
+  "generator_coverage_measured": false,
+  "training_readiness_established": false,
+  "production_change": false,
+  "holdout_access": false,
+  "architecture": {
+    "encoder_width": 512,
+    "frame_rate_hz": 50,
+    "shared_width": 32,
+    "kernel_size": 5,
+    "dilations": [1, 2, 4, 8, 16, 32],
+    "clock_fields": 6,
+    "coverage_fields": 2,
+    "output_logits": 1,
+    "bytes_per_parameter": 4,
+    "extra_trainable_normalization": false,
+    "encoder_frozen": true,
+    "existing_heads_frozen": true
+  },
+  "query": {
+    "frames": 200,
+    "hop_frames": 100,
+    "candidate_cap": 8,
+    "example_owned_frames": 15000,
+    "feature_chunk_frames": 1500,
+    "partial_tail_retained": true
+  },
+  "proposed_label_pilot": {
+    "max_provenance_groups": 24,
+    "primary_strata": 6,
+    "groups_per_stratum": 4,
+    "queries_per_group": 2,
+    "listeners": 2,
+    "max_listener_hours": 6,
+    "min_exact_three_way_agreement_per_stratum": 0.8,
+    "min_known_target_fraction_per_stratum": 0.75,
+    "role": "development_exposed_feasibility_not_fitting_or_acceptance"
+  },
+  "proposed_fit_caps_not_allocations": {
+    "main_seeds": [142, 143, 144],
+    "primary_seed": 142,
+    "clock_only_control_seed": 142,
+    "max_fits": 4,
+    "max_epochs_per_fit": 20,
+    "max_minutes_per_fit": 30,
+    "max_total_fit_minutes": 120,
+    "max_encoder_capture_cpu_core_minutes": 120,
+    "max_fixed_form_calibration_fits": 1,
+    "max_calibration_minutes": 10
+  },
+  "labels": ["supported", "contradicted", "uncertain"],
+  "unknown_is_negative": false,
+  "multiple_supported_clocks_allowed": true,
+  "all_negative_proposals_imply_no_rhythm": false,
+  "baseline_report_sha256": "e71ebd237e5c37c10496d2a58f51ef607788caf3ed2ed5630ccc6ec2f643b203"
+}

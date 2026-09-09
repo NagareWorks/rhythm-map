@@ -24,6 +24,17 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- The [small clock-compatibility readout proposal](docs/CLOCK-READOUT-PROPOSAL.md)
+  now separates candidate generation, conditional scoring and automatic product
+  acceptance. Multiple supported beat levels stay positive; disagreement and
+  unavailable context are not negatives. The costed frozen-encoder design has
+  25,249 parameters and an explicit 126-frame readout halo, not proven runtime
+  or accuracy. Model-free budget/vote checks do not admit data or authorize
+  fitting. Next review blinded annotation packets and annotation-free proposal
+  coverage; a ranker cannot fix missing candidates, and global BPM alternatives
+  are not local clock paths. Keep the proposed 24-group label pilot, split/rights
+  requirements and bounded fit plan separate from any actual resource approval.
+  No new annotations, features, model export, optimizer, user option or release.
 - The [conditional MusicFM music replay](evaluation/baselines/musicfm-paired-v1.md)
   fills the remaining seven-pair discrimination gap without reopening the
   rejected no-rhythm composition. All seven pairs pass geometry and all 27
