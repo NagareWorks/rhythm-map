@@ -24,6 +24,16 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- The minimal [rhythm-support proposal](docs/RHYTHM-SUPPORT-PROPOSAL.md) is now
+  scoped: region support is not missed-beat/tempo-change discrimination, and
+  any first integration stays diagnostic-only with no public strategy knobs.
+  A frozen Beat This temporal readout is costed, not built or authorized for
+  training; native export/chunk seams still need verification. The analytic
+  surrogate alternative lacks a justified no-support null, and existing data
+  lacks independent region-support labels. Next produce a metadata-only
+  rights/label worksheet and model-free null assumption checks, not another
+  model search or neural replay. No new audio, holdout, fitting, defaults or
+  release; the eleven-input producer gate remains explicitly unrun.
 - The bounded rhythm-support source screen is complete, without new inference:
   existing heads/recurrence retain their prior limits, Essentia agreement is not
   an independent null test, BeatNet+ frame non-beat semantics and unresolved

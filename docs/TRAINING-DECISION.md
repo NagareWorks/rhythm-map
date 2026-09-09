@@ -81,6 +81,13 @@ of the missing-step penalty on these same labels.
 
 ## Practical decision gate, not an impossibility claim
 
+The [minimal rhythm-support proposal](RHYTHM-SUPPORT-PROPOSAL.md) now specifies
+the region target, analytic-null assumptions, a costed frozen-encoder readout,
+rights/label gaps and independent acceptance requirements. It recommends no
+training yet. Presence alone cannot resolve missed beats versus true tempo
+changes in rhythmic music. The next bounded work is metadata-only inventory
+and model-free assumption checks, with no new neural execution or holdout use.
+
 The later [rhythm-support source screen](../evaluation/baselines/rhythm-presence-review-v1.md)
 records the MusicFM rejection failure and separates source-semantic limits from
 unresolved license/artifact prerequisites. It freezes seven positive and four
