@@ -8,6 +8,16 @@ links. A lock may also name a member of a remote ZIP. In that case the fetcher
 reads the ZIP/ZIP64 directory once, downloads only the selected byte ranges,
 decompresses the member, and verifies the installed member's size and SHA-256.
 
+## Rhythm-support data planning
+
+[`rhythm-support-worksheet-v1.json`](rhythm-support-worksheet-v1.json) is an
+initial rights/provenance/label worksheet, **not a fetch manifest**. FSD50K
+development figures are publication-only after metadata download failures;
+verified clip/uploader/group counts stay null, with no audio or labels acquired.
+Existing calibration and sealed holdouts keep their original roles. Read the
+[assumption checks and incomplete-inventory status](../baselines/rhythm-support-readiness-v1.md)
+before interpreting nominal license counts as usable training or acceptance data.
+
 ## ARTBeaT rhythm challenges v1
 
 [`artbeat-v1.json`](artbeat-v1.json) selects 15 short MP3 exercises and their

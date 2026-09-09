@@ -1,0 +1,132 @@
+{
+  "schema": "rhythm-map.rhythm-support-null.v1",
+  "complete": true,
+  "decision": "close_preserved_second_order_and_naive_permutation_shortcuts",
+  "numerical_abs_budget": 1e-10,
+  "reported_decimal_places": 12,
+  "phase": {
+    "length": 64,
+    "max_power_error": 0.0,
+    "max_direct_circular_lag_error": 0.0,
+    "changed_sequence": true,
+    "same_second_order_statistics": true
+  },
+  "shift": {
+    "frames": 16,
+    "channels": 4,
+    "offset": 7,
+    "max_lag_error": 0.0,
+    "same_circular_feature_lags": true
+  },
+  "permutation": {
+    "original": [
+      1,
+      1,
+      1,
+      1,
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "permuted": [
+      1,
+      -1,
+      1,
+      -1,
+      1,
+      -1,
+      1,
+      -1
+    ],
+    "stationary_rotation_orbit_size": 8,
+    "original_orbit_probability": 0.125,
+    "permuted_orbit_probability": 0,
+    "original_lag_one": 0.5,
+    "permuted_lag_one": -1.0,
+    "stationarity_does_not_imply_exchangeability": true
+  },
+  "nonstationary_reference": {
+    "construction": "X_t = a_t * independent_symmetric_random_sign_t",
+    "amplitude": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      4,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "mean": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "variance": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      16,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "distinct_time_covariances": 0,
+    "repeated_pulse_imposed": false,
+    "conclusion": "variance_nonstationarity_is_not_a_rhythm_label",
+    "listener_label": null
+  },
+  "rank_arithmetic": {
+    "draw_count": 99,
+    "minimum_tail": 0.01,
+    "all_tied_tail": 1.0,
+    "full_extraction_forward_sets": 100,
+    "actual_test_performed": false,
+    "rhythm_probability": null
+  },
+  "valid_no_support_reference_established": false,
+  "producer_gate": {
+    "status": "not_run",
+    "passes": null,
+    "case_count": 11,
+    "unknown_count": null
+  },
+  "new_audio": false,
+  "new_inference": false,
+  "feature_access": false,
+  "holdout_access": false,
+  "training": false,
+  "training_necessity_proven": false,
+  "production_change": false
+}

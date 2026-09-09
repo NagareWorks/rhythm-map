@@ -1,0 +1,107 @@
+{
+  "schema": "rhythm-map.rhythm-support-worksheet.v1",
+  "status": "draft_no_clip_inventory",
+  "purpose": "metadata_and_label_planning_not_an_acquisition_or_training_manifest",
+  "sources": [
+    {
+      "id": "fsd50k-dev-4060432",
+      "publication_url": "https://zenodo.org/records/4060432",
+      "version": "1.0",
+      "scope": "development_metadata_only",
+      "evidence_level": "publication_only",
+      "attribution": "FSD50K: Eduardo Fonseca, Xavier Favory, Jordi Pons, Frederic Font and Xavier Serra, Music Technology Group, Universitat Pompeu Fabra",
+      "metadata_url": "https://zenodo.org/records/4060432/files/FSD50K.metadata.zip",
+      "published_metadata_md5": "b9ea0c829a411c1d42adb9da539ed237",
+      "metadata_sha256": null,
+      "dev_metadata_member": "FSD50K.metadata/dev_clips_info_FSD50K.json",
+      "dev_member_sha256": null,
+      "metadata_status": "not_acquired",
+      "acquisition_obstacles": ["official_download_gateway_timeout", "alternate_execution_route_denied"],
+      "published_license_counts": {"CC0": 14959, "CC-BY": 20017, "CC-BY-NC": 4616, "Sampling+": 1374},
+      "published_total_clips": 40966,
+      "initial_license_screen": ["CC0", "CC-BY"],
+      "nominal_candidate_clips_from_publication": 34976,
+      "verified_clip_count": null,
+      "verified_candidate_clip_count": null,
+      "distinct_uploaders": null,
+      "independent_source_group_count": null,
+      "dataset_conditions_review": "unreviewed_commercial_contact_note",
+      "encoder_overlap_review": "unreviewed",
+      "rhythm_support_label_status": "not_collected",
+      "audio_acquired": false,
+      "eval_metadata_inspected": false
+    },
+    {
+      "id": "existing-project-regressions",
+      "evidence_level": "existing_project_contract",
+      "role": "regression_only",
+      "exposed_calibration_id_count": 40,
+      "exposed_authored_gate_input_count": 11,
+      "new_independent_acceptance_eligible": false,
+      "holdout_policy": "unchanged_sealed",
+      "reference": "../../docs/RHYTHM-SUPPORT-PROPOSAL.md"
+    },
+    {
+      "id": "newly-authored-recordings",
+      "evidence_level": "planned_not_created",
+      "recordings_created": 0,
+      "grants_obtained": 0,
+      "independent_source_group_count": null,
+      "requires": ["composition_and_recording_rights", "performer_consent_where_needed", "sample_asset_grants", "creator_and_generator_grouping"]
+    }
+  ],
+  "label_coverage": [
+    {"slice": "percussive_pulse", "labeled_independent_groups": 0},
+    {"slice": "drumless_weak_syncopated_pulse", "labeled_independent_groups": 0},
+    {"slice": "contextual_rests", "labeled_independent_groups": 0},
+    {"slice": "true_tempo_jumps", "labeled_independent_groups": 0},
+    {"slice": "gradual_expressive_timing", "labeled_independent_groups": 0},
+    {"slice": "uncertain_free_time", "labeled_independent_groups": 0},
+    {"slice": "stationary_nonstationary_non_support", "labeled_independent_groups": 0},
+    {"slice": "periodic_non_music_counterexamples", "labeled_independent_groups": 0}
+  ],
+  "candidate_record_template": {
+    "source_id": null,
+    "clip_id": null,
+    "source_url": null,
+    "source_version": null,
+    "metadata_sha256": null,
+    "pcm_sha256": null,
+    "rights": {
+      "audio_license_url": null,
+      "annotation_license_url": null,
+      "attribution": null,
+      "training_permission": "unreviewed",
+      "evaluation_permission": "unreviewed",
+      "redistribution_permission": "unreviewed",
+      "dataset_conditions": "unreviewed",
+      "evidence_urls": []
+    },
+    "provenance": {
+      "work_id": null,
+      "recording_id": null,
+      "creator_ids": [],
+      "derived_asset_ids": [],
+      "synthesis_generator_id": null,
+      "encoder_overlap": "unreviewed",
+      "evidence_urls": []
+    },
+    "split": "unassigned",
+    "windows": []
+  },
+  "window_record_template": {
+    "query_start_seconds": null,
+    "query_end_seconds": null,
+    "context_start_seconds": null,
+    "context_end_seconds": null,
+    "context_policy_version": null,
+    "label_status": "not_collected",
+    "listener_votes": [],
+    "adjudication_history": [],
+    "resolved_label": null
+  },
+  "candidate_records": [],
+  "admitted_independent_groups": [],
+  "training_authorized": false,
+  "audio_selection_made": false
+}

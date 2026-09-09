@@ -8,6 +8,12 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `rhythm_support_null.py` checks authored algebraic invariance, dependent
+  permutation and rank-tail counterexamples without audio or model access.
+  Its report does not run the eleven-input producer gate. The accompanying
+  source worksheet remains publication-only after metadata acquisition failed;
+  per-clip rights/groups and labels are not verified. See the
+  [22 controls, incomplete inventory and remaining boundary](../baselines/rhythm-support-readiness-v1.md).
 - `rhythm_presence_audit.py` inventories five bounded evidence sources without
   acquisition or inference, checks model-free semantic counterexamples, and
   freezes all eleven previous authored inputs for a no-oracle rhythm-support

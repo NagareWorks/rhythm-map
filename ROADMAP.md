@@ -24,6 +24,15 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- The [model-free null checks and initial data worksheet](evaluation/baselines/rhythm-support-readiness-v1.md)
+  now retain second-order/circular-shift invariance, a dependent stationary
+  permutation counterexample and the difference between rank tails and rhythm
+  confidence. All 22 new controls pass; none is a new model/music outcome. The
+  source worksheet is still publication-only: official metadata acquisition
+  failed, per-clip rights/provenance groups remain unverified and no labels were
+  collected. Next complete that development-metadata inventory when accessible,
+  not another neural replay or threshold search. Keep missing facts unknown,
+  all previous identities/holdouts/defaults unchanged and training unauthorized.
 - The minimal [rhythm-support proposal](docs/RHYTHM-SUPPORT-PROPOSAL.md) is now
   scoped: region support is not missed-beat/tempo-change discrimination, and
   any first integration stays diagnostic-only with no public strategy knobs.

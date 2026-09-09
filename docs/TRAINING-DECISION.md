@@ -81,6 +81,13 @@ of the missing-step penalty on these same labels.
 
 ## Practical decision gate, not an impossibility claim
 
+The subsequent [null-assumption checks and initial worksheet](../evaluation/baselines/rhythm-support-readiness-v1.md)
+close limited second-order-preserving and naive-permutation shortcuts, not all
+training-free methods. The per-clip data inventory is still incomplete after
+metadata acquisition failures; publication counts are not verified rights or
+independent groups. No neural admission gate ran, and unavailable data is not
+evidence that model training is necessary.
+
 The [minimal rhythm-support proposal](RHYTHM-SUPPORT-PROPOSAL.md) now specifies
 the region target, analytic-null assumptions, a costed frozen-encoder readout,
 rights/label gaps and independent acceptance requirements. It recommends no
