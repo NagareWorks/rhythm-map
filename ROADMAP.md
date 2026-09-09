@@ -24,6 +24,15 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- The [FSD50K development metadata inventory](evaluation/baselines/rhythm-support-inventory-v1.md)
+  now verifies official archive/member identities and recomputes 40,966 clip
+  records, with 34,976 CC0/CC BY initial-screen rows generated outside the
+  checkout. Keep the previous failed-acquisition worksheet as history. The
+  4,179 exact screened uploader strings are not independent source groups;
+  rights, provenance/encoder overlap and region labels remain unreviewed.
+  Next resolve those admission prerequisites on a bounded candidate pool,
+  not another model/threshold search. No audio selection/download, eval payload
+  inspection, human-label coordination, inference, training or defaults change.
 - The [model-free null checks and initial data worksheet](evaluation/baselines/rhythm-support-readiness-v1.md)
   now retain second-order/circular-shift invariance, a dependent stationary
   permutation counterexample and the difference between rank tails and rhythm

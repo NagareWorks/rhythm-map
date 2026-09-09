@@ -83,9 +83,11 @@ of the missing-step penalty on these same labels.
 
 The subsequent [null-assumption checks and initial worksheet](../evaluation/baselines/rhythm-support-readiness-v1.md)
 close limited second-order-preserving and naive-permutation shortcuts, not all
-training-free methods. The per-clip data inventory is still incomplete after
-metadata acquisition failures; publication counts are not verified rights or
-independent groups. No neural admission gate ran, and unavailable data is not
+training-free methods. The subsequent [verified metadata inventory](../evaluation/baselines/rhythm-support-inventory-v1.md)
+recovers the official development metadata and screens 34,976 CC0/CC BY clip
+records. Per-clip rights clearance, provenance/encoder-overlap review and region
+labels remain incomplete; uploader strings are not independent groups. No
+neural admission gate ran. Neither unavailable data nor recovered metadata is
 evidence that model training is necessary.
 
 The [minimal rhythm-support proposal](RHYTHM-SUPPORT-PROPOSAL.md) now specifies

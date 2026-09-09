@@ -1,0 +1,81 @@
+{
+  "schema": "rhythm-map.rhythm-support-inventory.v1",
+  "status": "verified_metadata_screen_not_rights_or_independence_clearance",
+  "source_url": "https://zenodo.org/records/4060432",
+  "source_version": "1.0",
+  "attribution": "FSD50K: Eduardo Fonseca, Xavier Favory, Jordi Pons, Frederic Font and Xavier Serra, Music Technology Group, Universitat Pompeu Fabra",
+  "archive_locks": [
+    {
+      "file": "FSD50K.metadata.zip",
+      "size_bytes": 6700838,
+      "md5": "b9ea0c829a411c1d42adb9da539ed237",
+      "sha256": "9a738e032546f9a2c6e3d04566928d04a65fb79b422cc9d78bb781723537bd19",
+      "member": "FSD50K.metadata/dev_clips_info_FSD50K.json",
+      "member_size_bytes": 22494560,
+      "member_sha256": "b31a2eb130aea6d545d4b48511b24dfd0120420567a8d1066c52d54968bb3735"
+    },
+    {
+      "file": "FSD50K.doc.zip",
+      "size_bytes": 6984,
+      "md5": "3516162b82dc2945d3e7feba0904e800",
+      "sha256": "a5c314ad2bf93d01b5921aa4270c70c90e28ac9a283ba9f08167490e728deb85",
+      "member": "FSD50K.doc/LICENSE-DATASET",
+      "member_size_bytes": 1599,
+      "member_sha256": "ebee1f320405cc09abfcc3c77e14fbc3adb9734d53f2ef5274d35eddcbb476f1"
+    }
+  ],
+  "member_payloads_inspected": [
+    "FSD50K.metadata/dev_clips_info_FSD50K.json",
+    "FSD50K.doc/LICENSE-DATASET"
+  ],
+  "archive_contains_uninspected_eval_metadata": true,
+  "eval_metadata_inspected": false,
+  "metadata_clip_count": 40966,
+  "license_counts": {
+    "CC-BY-3.0": 20017,
+    "CC-BY-NC-3.0": 4616,
+    "CC0-1.0": 14959,
+    "Sampling+-1.0": 1374
+  },
+  "initial_license_screen": [
+    "CC-BY-3.0",
+    "CC0-1.0"
+  ],
+  "screened_clip_count": 34976,
+  "excluded_clip_count": 5990,
+  "all_uploader_hints": {
+    "exact_strings": 4947,
+    "casefolded_strings": 4946,
+    "max_clips_per_exact_string": 3080,
+    "single_clip_exact_strings": 2361,
+    "identity_resolution": "unreviewed_not_independent_groups"
+  },
+  "screened_uploader_hints": {
+    "exact_strings": 4179,
+    "casefolded_strings": 4178,
+    "max_clips_per_exact_string": 3080,
+    "single_clip_exact_strings": 1986,
+    "identity_resolution": "unreviewed_not_independent_groups"
+  },
+  "candidate_jsonl": {
+    "record_count": 34976,
+    "size_bytes": 39781602,
+    "sha256": "6c2c7c8e72115437e6265c684c7b11bbef598e3c6286139ab2518430c80568be",
+    "serialization": "ASCII sorted-key compact JSON plus LF; numeric clip-id order"
+  },
+  "dataset_license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "dataset_conditions_review": "commercial_contact_note_unresolved",
+  "annotation_license_review": "unreviewed",
+  "encoder_overlap_review": "unreviewed",
+  "independent_source_group_count": null,
+  "rights_cleared_clip_count": 0,
+  "admitted_independent_group_count": 0,
+  "collected_region_labels": 0,
+  "audio_selection_made": false,
+  "audio_acquired": false,
+  "feature_access": false,
+  "new_inference": false,
+  "project_holdout_access": false,
+  "training_authorized": false,
+  "production_change": false
+}

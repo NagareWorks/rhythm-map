@@ -10,9 +10,15 @@ decompresses the member, and verifies the installed member's size and SHA-256.
 
 ## Rhythm-support data planning
 
+The newer [verified development metadata inventory](rhythm-support-inventory-v1.json)
+recomputes 40,966 FSD50K dev records and retains 34,976 in the CC0/CC BY initial
+screen. The offline generator produces per-clip rights/provenance placeholders
+outside the checkout; no audio, independent groups or rhythm labels are admitted.
+Read the [reproduction, uploader-count limits and unresolved rights](../baselines/rhythm-support-inventory-v1.md).
+
 [`rhythm-support-worksheet-v1.json`](rhythm-support-worksheet-v1.json) is an
-initial rights/provenance/label worksheet, **not a fetch manifest**. FSD50K
-development figures are publication-only after metadata download failures;
+initial historical rights/provenance/label worksheet, **not a fetch manifest**.
+Its figures remain publication-only evidence from the earlier download failures;
 verified clip/uploader/group counts stay null, with no audio or labels acquired.
 Existing calibration and sealed holdouts keep their original roles. Read the
 [assumption checks and incomplete-inventory status](../baselines/rhythm-support-readiness-v1.md)
