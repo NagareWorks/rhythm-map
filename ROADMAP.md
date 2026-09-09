@@ -24,6 +24,21 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- The bounded rhythm-support source screen is complete, without new inference:
+  existing heads/recurrence retain their prior limits, Essentia agreement is not
+  an independent null test, BeatNet+ frame non-beat semantics and unresolved
+  grants do not supply a direct presence head, and no BeatFCOS task checkpoint
+  was identified in its reviewed publication surfaces. Keep these source/artifact
+  findings separate from measured model failures. A model-free audit freezes
+  seven positive and four negative PCM identities, complete-input/no-oracle
+  producer boundaries, unknown accounting and retained shape/density obligations;
+  the actual producer gate remains explicitly unrun. Next prepare the smallest
+  presence/abstention-component feasibility proposal, including target, data
+  rights, null reference, temporal dependence, runtime and a specified analytic
+  alternative if viable. No open-ended model/threshold search or automatic
+  training authorization. Product defaults, forty IDs, untyped RUBATO, holdout
+  and no-release boundary remain. See the [sources, semantic witnesses and
+  admission contract](evaluation/baselines/rhythm-presence-review-v1.md).
 - The separately frozen MusicFM neural negative/robustness gate is complete:
   45 exact extraction forwards across five authored inputs, all four gain/rest
   constant-to-change pairs pass shape/density, but none of six tone/DC/noise

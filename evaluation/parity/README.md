@@ -8,6 +8,13 @@ Rust port's pinned `scripts/gen_golden.py`.
 
 ## Boundaries
 
+- `rhythm_presence_audit.py` inventories five bounded evidence sources without
+  acquisition or inference, checks model-free semantic counterexamples, and
+  freezes all eleven previous authored inputs for a no-oracle rhythm-support
+  admission contract. Seven positives and four negatives must both survive;
+  unknown cannot disappear or pass as rejection. No producer is selected and
+  its empirical gate is **not run**, not a measured model failure. See the
+  [source/rights findings, scope and next proposal](../baselines/rhythm-presence-review-v1.md).
 - `musicfm_negative.py` tests five previously activity-only controls with the
   unchanged model/context/score. All 45 extraction forwards and four gain/rest
   pairs pass, but all six tone/DC/noise negative ledgers fail abstention. This

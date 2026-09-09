@@ -81,6 +81,16 @@ of the missing-step penalty on these same labels.
 
 ## Practical decision gate, not an impossibility claim
 
+The later [rhythm-support source screen](../evaluation/baselines/rhythm-presence-review-v1.md)
+records the MusicFM rejection failure and separates source-semantic limits from
+unresolved license/artifact prerequisites. It freezes seven positive and four
+negative authored inputs for a no-oracle admission gate, but that gate remains
+unrun without a justified producer. This is not evidence of eleven new failures
+and does not prove that training is necessary. The next small-component proposal
+must identify the missing target, data rights and null/reference assumptions;
+it must not silently equate frame non-beat, silence, unavailable input and a
+beatless musical region. A frozen-encoder fitted readout still counts as training.
+
 The [pretrained-representation review](../evaluation/baselines/pretrained-representation-review-v1.md)
 records which evidence routes have already failed and which genuinely richer
 feature remains untested. Reading Beat This's existing pre-head sequence is

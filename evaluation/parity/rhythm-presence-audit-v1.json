@@ -1,0 +1,172 @@
+{
+  "schema": "rhythm-map.rhythm-presence-audit.v1",
+  "complete": true,
+  "source_sha256": "d39d7f45dc4123847513abf618eba7c4151107560234621084109835981db14d",
+  "decision": "no_direct_presence_producer_qualified_by_this_bounded_screen",
+  "candidate_dispositions": [
+    {
+      "id": "existing-beat-this",
+      "disposition": "direct_presence_conversion_already_rejected"
+    },
+    {
+      "id": "existing-musicfm",
+      "disposition": "composed_recurrence_measured_negative_failure"
+    },
+    {
+      "id": "essentia-agreement",
+      "disposition": "agreement_not_independent_presence_evidence"
+    },
+    {
+      "id": "beatnet-plus",
+      "disposition": "frame_nonbeat_not_region_beatlessness_and_rights_unresolved"
+    },
+    {
+      "id": "beatfcos",
+      "disposition": "no_acquirable_task_checkpoint_identified_in_reviewed_surfaces"
+    }
+  ],
+  "semantic_witnesses": {
+    "frame_nonbeat": {
+      "regular_ticks": [
+        10,
+        35,
+        60,
+        85
+      ],
+      "irregular_ticks": [
+        10,
+        11,
+        12,
+        85
+      ],
+      "regular_summary": [
+        0.03,
+        0.01,
+        0.96
+      ],
+      "irregular_summary": [
+        0.03,
+        0.01,
+        0.96
+      ],
+      "same_summary": true,
+      "regular_offtick_fraction": 0.96,
+      "weighted_ce_population_posterior": [
+        0.378151260504,
+        0.420168067227,
+        0.201680672269
+      ],
+      "recovered_frame_posterior": [
+        0.03,
+        0.01,
+        0.96
+      ],
+      "actual_backend_inference": false,
+      "region_presence_probability": null
+    },
+    "agreement": {
+      "bins": 40,
+      "concentrated_bits": 5.321928094887,
+      "uniform_bits": 0.0,
+      "multiplied_counts_bits": 5.321928094887,
+      "actual_tracker_inference": false,
+      "acoustic_input_used": false,
+      "conclusion": "agreement_of_identical_ticks_does_not_identify_their_acoustic_cause"
+    },
+    "reported_precision_decimal_places": 12,
+    "prior_only": {
+      "signal_log_likelihood_ratios": [
+        0.0,
+        0.0
+      ],
+      "family_prior": [
+        0.995,
+        0.005
+      ],
+      "family_posterior": [
+        0.995,
+        0.005
+      ],
+      "acoustic_presence_probability": null,
+      "conclusion": "equal_likelihoods_retain_prior_preference_not_signal_confidence"
+    }
+  },
+  "prior_decisions": {
+    "musicfm-temporal-v1.json": "close_fixed_rule_before_music",
+    "musicfm-negative-v1.json": "close_composed_rule_before_music",
+    "beat-this-semantics-v1.json": "backend_score_semantics_not_likelihood_calibration"
+  },
+  "gate_cases": [
+    {
+      "id": "constant-clean",
+      "pcm_sha256": "b896e91e4224f574446cbc26f2d89a387044a93bf3b4ea2acb3bb9ec49f24674",
+      "expected_status": "supported"
+    },
+    {
+      "id": "constant-omitted",
+      "pcm_sha256": "f1010b7e9e0a03fc8cea75bdc29993e7036b9636ba7173f557eb4a2f7ad6f34c",
+      "expected_status": "supported"
+    },
+    {
+      "id": "constant-weak",
+      "pcm_sha256": "94adbb00cc26d150e152b50208f8634c14e264157518d0cb1a5e481c0bec6f05",
+      "expected_status": "supported"
+    },
+    {
+      "id": "step-fast",
+      "pcm_sha256": "5ed0cd13327dc92de56e09021edc82f551b01796335b1f3ef1f571088482b4b8",
+      "expected_status": "supported"
+    },
+    {
+      "id": "step-slow",
+      "pcm_sha256": "32db2e41226dd5c4d1b9fc90e975698e3115685675b0e1edc79b82125e12c4ef",
+      "expected_status": "supported"
+    },
+    {
+      "id": "silence",
+      "pcm_sha256": "9608e9f6bff1ba563b1a99e5b0b433f11d2b167c6cc72e9be57d64bc8bfa3839",
+      "expected_status": "not_supported"
+    },
+    {
+      "id": "quiet-gain",
+      "pcm_sha256": "c834fcde4683956517e2954d18b61a87e91f11e0cfdb790b1feee94549e4ea43",
+      "expected_status": "supported"
+    },
+    {
+      "id": "short-rest",
+      "pcm_sha256": "46e2a4add25232ebafecb2a8ba447e0396a334d11b70899eaf252eba70b9a653",
+      "expected_status": "supported"
+    },
+    {
+      "id": "steady-tone",
+      "pcm_sha256": "e919159684cb86decb8738f1ae8bfa79c3398df4980b764f207a4c9cf879bd1e",
+      "expected_status": "not_supported"
+    },
+    {
+      "id": "dc",
+      "pcm_sha256": "b89a0e2e56f0f70bed88c5f9babaed381f69afd192c276e93573314f8267bc52",
+      "expected_status": "not_supported"
+    },
+    {
+      "id": "noise",
+      "pcm_sha256": "bb213ac47de7b6ea1c75429388d149bbb1837336952ef96b3f14f216ebeadd62",
+      "expected_status": "not_supported"
+    }
+  ],
+  "positive_count": 7,
+  "negative_count": 4,
+  "producer_gate": {
+    "status": "not_run",
+    "passes": null,
+    "case_count": 11,
+    "unknown_count": null
+  },
+  "new_model_acquisition": false,
+  "new_inference": false,
+  "music_access": false,
+  "holdout_access": false,
+  "training": false,
+  "training_necessity_proven": false,
+  "production_change": false,
+  "new_user_parameters": false
+}

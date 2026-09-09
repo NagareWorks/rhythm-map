@@ -1,0 +1,87 @@
+{
+  "schema": "rhythm-map.rhythm-presence-source.v1",
+  "review_date": "2026-09-09",
+  "scope": "bounded source and semantics audit, not an exhaustive model search or measured rejection test",
+  "previous_reports": {
+    "musicfm-temporal-v1.json": "b0badf814d197c30e3f4e83df221b43570795e396586351904080a7bdd5683a4",
+    "musicfm-negative-v1.json": "b2f67387286130b0b1c98e568134caa3def2b9b2cb4b0287a4f9056e5167d79c",
+    "beat-this-semantics-v1.json": "22cf7b9bb542571ebb2498580c6a332d5719ececc49cb0b9c39f37c1ee2270f1"
+  },
+  "candidates": [
+    {
+      "id": "existing-beat-this",
+      "revision": "b95c8ab0c58c2d9fcfd40508ae8dffbc05ac4f5c",
+      "evidence": "weighted shift-tolerant metrical-event heads; previous complete source/checkpoint audit retained",
+      "disposition": "direct_presence_conversion_already_rejected",
+      "source": "https://github.com/CPJKU/beat_this/blob/b95c8ab0c58c2d9fcfd40508ae8dffbc05ac4f5c/beat_this/model/loss.py"
+    },
+    {
+      "id": "existing-musicfm",
+      "revision": "b83ebedb401bcef639b26b05c0c8bee1dc2dfe71",
+      "evidence": "representation recurrence is conditional clock ranking, not a null-aware rhythm-presence head",
+      "disposition": "composed_recurrence_measured_negative_failure",
+      "source": "https://github.com/minzwon/musicfm/blob/b83ebedb401bcef639b26b05c0c8bee1dc2dfe71/model/musicfm_25hz.py"
+    },
+    {
+      "id": "essentia-agreement",
+      "revision": null,
+      "evidence": "mutual agreement between candidate tick sequences; documented range 0 to approximately 5.32, not a probability",
+      "disposition": "agreement_not_independent_presence_evidence",
+      "source": "https://essentia.upf.edu/reference/std_TempoTapMaxAgreement.html",
+      "additional_sources": [
+        "https://essentia.upf.edu/reference/std_BeatTrackerMultiFeature.html",
+        "https://essentia.upf.edu/licensing_information.html"
+      ],
+      "rights_boundary": "library, model and transitive dependency terms differ; no code or model acquired; no blanket claim that AGPL forbids commerce"
+    },
+    {
+      "id": "beatnet-plus",
+      "revision": "bb90eb0a9065b101a4b4c4cb2b2061950266cb4b",
+      "evidence": "three-class per-frame softmax; weighted cross entropy; README class weights 60,200,1 for beat,downbeat,non-beat",
+      "disposition": "frame_nonbeat_not_region_beatlessness_and_rights_unresolved",
+      "source": "https://github.com/mjhydri/BeatNet-Plus/tree/bb90eb0a9065b101a4b4c4cb2b2061950266cb4b",
+      "files_sha256": {
+        "README.md": "09dedda34e5c6b8b272099b7175987c35ffcb4711ab7776e1e1d1444a0e50c27",
+        "setup.py": "b5efe6a56d1fafd24dd8e1b507c8bb294bc87c35362844e76c08d14b2d4ffeab",
+        "src/BeatNetPlus/model.py": "8e675773974c304faeebc355169f99ba0c5dc5ee208586b37dd39c4524851956",
+        "src/BeatNetPlus/train.py": "2f91fdc40a1ed4e01e1c21a5fafe3bceb2b7a001167bdcdd3932742485931c23"
+      },
+      "weights_observed_not_downloaded": [
+        {"path": "src/BeatNetPlus/models/generic_weights.pt", "git_blob": "a0e6627f6b71ce5153982b276fda0f05e51c1f1b", "size": 3072825},
+        {"path": "src/BeatNetPlus/models/generic_main_weights.pt", "git_blob": "7aefd5e56ef65482be6f671c3cca8de457dad102", "size": 3072890},
+        {"path": "src/BeatNetPlus/models/af_non_percussive_weights.pt", "git_blob": "30f31a8d337fcedf834f585374923ad037e466c4", "size": 3073019}
+      ],
+      "rights_boundary": "no license file found in reviewed tree or grant in reviewed README/setup; repository license metadata null; not a finding that use is categorically forbidden"
+    },
+    {
+      "id": "beatfcos",
+      "revision": "82f095c6bc78605abedfe4ec2e473f79bfd97818",
+      "evidence": "beat/downbeat interval classification, regression and leftness; source default score_threshold 0.05, paper Soft-NMS threshold 0.2; not interchangeable release identities",
+      "disposition": "no_acquirable_task_checkpoint_identified_in_reviewed_surfaces",
+      "source": "https://github.com/zaiisao/BeatFCOS/tree/82f095c6bc78605abedfe4ec2e473f79bfd97818",
+      "additional_sources": ["https://arxiv.org/html/2510.14391v1"],
+      "files_sha256": {
+        "README.md": "a43e63c6bd0d997abcbaee5aaf398a2e758323b8c913102c8488311dba1f6964",
+        "beatfcos/model_module.py": "cdc4bdd3bf35ed7aa88f6b2964f921d22a90ffc21fda60d5742cd4cd2fcd526d"
+      },
+      "rights_boundary": "repository metadata Apache-2.0; paper CC-BY-4.0 is not a weight grant; transitive backbone and artifact provenance not cleared",
+      "artifact_boundary": "reviewed tree has no task checkpoint; README pre-trained section empty; releases endpoint returned an empty list on review date; local backbone paths in source are not published task checkpoints"
+    }
+  ],
+  "gate": {
+    "population": "all six temporal inputs plus all five negative/robustness inputs, with previous PCM hashes unchanged",
+    "positive_ids": ["constant-clean", "constant-omitted", "constant-weak", "step-fast", "step-slow", "quiet-gain", "short-rest"],
+    "negative_ids": ["silence", "steady-tone", "dc", "noise"],
+    "sample_rate": 24000,
+    "complete_input_samples": 288240,
+    "window_seconds": [4.0, 8.0],
+    "producer_inputs": ["complete_pcm", "sample_rate", "physical_window_seconds"],
+    "forbidden_producer_inputs": ["case_id", "expected_status", "oracle_bpm", "oracle_phase", "oracle_change_point", "supplied_clock_family", "annotation"],
+    "statuses": ["supported", "not_supported", "unknown"],
+    "acceptance": "all seven positives supported and all four negatives not_supported; unknown is retained but cannot pass; missing, duplicate, extra or changed identities are contract errors",
+    "meaning": "support for rhythmic timing in the fixed physical window, not exact beat detection, confident BPM, musical beatlessness or an acoustic absence likelihood",
+    "scope": "necessary authored admissibility only; keep all previous shape/density ledgers; no independent music acceptance",
+    "producer": null,
+    "not_authorized": ["threshold_sweep", "new_seed", "layer_sweep", "context_sweep", "holdout_access", "training", "production_change", "new_user_parameters", "release"]
+  }
+}
