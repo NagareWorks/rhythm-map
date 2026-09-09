@@ -5,6 +5,12 @@ extraction, new annotation collection, holdout access, model export or productio
 change is approved by this document. The pilot sizes and resource caps below
 are proposed limits, not allocated resources or a claim that usable data exists.
 
+Follow-through: the [blinded packet contract and fixed observation-only proposal
+baseline](CLOCK-ANNOTATION-PACKETS.md) now exist. The original proposal below
+remains a design, not an implemented readout. Measured native-grid coverage of
+the new candidate set is insufficient to clear the generation prerequisite;
+independent labels and fitting remain unstarted.
+
 ## Decision: learn evidence for a clock, not just presence or one BPM
 
 The [latest conditional MusicFM experiment](../evaluation/baselines/musicfm-paired-v1.md)

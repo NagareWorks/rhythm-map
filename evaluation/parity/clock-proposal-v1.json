@@ -1,0 +1,1224 @@
+{
+  "schema": "rhythm-map.clock-proposal-audit.v1",
+  "contract": {
+    "schema": "rhythm-map.clock-proposal-lock.v1",
+    "purpose": "One frozen development coverage baseline, not independent listening or a clock decision.",
+    "source_sha256": {
+      "annotation_exposure_audit.py": "824832bb891637a8eafb40bd05c05e4fb5c5000577c7f08a81a10bdc2892c681",
+      "clock_proposals.py": "10403edc7b74a8df692fe22c74b7c2df90eed98743352aa2b09abcf0ed92d2b9",
+      "clock_proposal_audit.py": "6ec8718e949a2dd9727f5f2a3aa854a0fcb76cc20cb635b60c765adec0fdbed7",
+      "clock_annotation_packet.py": "46fb35c7f6df007a81c7ca1737d5bd8bbe92042959e6d5f2ad32ae334c384efa"
+    },
+    "query_seconds": 4,
+    "hop_seconds": 2,
+    "context_halo_seconds": 2.52,
+    "max_candidates": 8,
+    "max_intervals": 128,
+    "max_ticks_per_candidate": 128,
+    "clock_equivalence_epsilon_cycles": 1e-09,
+    "native_grid_tolerance_seconds": 0.06,
+    "constructions": [
+      "local_median_interval_continuation",
+      "raw_event_piecewise_linear_phase"
+    ],
+    "levels": [
+      [
+        1,
+        0
+      ],
+      [
+        0.5,
+        0
+      ],
+      [
+        0.5,
+        0.5
+      ],
+      [
+        2,
+        0
+      ]
+    ],
+    "input_fields": [
+      "duration_s",
+      "beat_times_s",
+      "valid_spans_s"
+    ],
+    "generation": "All fixed-grid queries of all forty frozen calibration recordings before annotations are loaded. No source identities, scores, truth BPM, phase or changes at the generator boundary. No cross-gap/edge extrapolation.",
+    "comparison": "Post-hoc two-direction equal-count native annotation-grid matching at 60ms; incomplete reference support stays unassessed. Not beat-level uniqueness, BPM-curve accuracy or independently supported clock coverage.",
+    "budget": "One baseline, no parameter/phase/source search after reading results; rejected and partial queries retained.",
+    "neural_inference": false,
+    "training": false,
+    "holdout_access": false,
+    "production_change": false,
+    "new_listener_records": 0
+  },
+  "lock_sha256": "ca5042275308956b89ebc3879e4ba308b79e6184bb1fb97401982352f98d41cf",
+  "source_report_sha256": "35eb07cfc8c96471710ecf0a40d3fae6da836638845090cc21583ba337769a8a",
+  "generation_sha256": "ade6b5bc99cfeba73da7d8ea27e3c57f539579d371a6ed878674229d5542b144",
+  "private_content_sha256": "8cfefcb9fbe70d2ead046a257677901311286e21b7d6dd1aedf42db442ab53c5",
+  "generation_elapsed_s": 5.976626199670136,
+  "capture_count": 40,
+  "input_cases": [
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-05-75-to-150",
+      "frame_count": 681,
+      "truth_sha256": "5d6c395345fb6155893bc3aad4e0def3518bdecedb82f08d3514adfaeea0d456",
+      "capture_sha256": "973337d4aa0bd1bac738888fe415755185d4a2a2eea933d11fd21541ce3764a7",
+      "observation_sha256": "8050709d028f8f86965c0430881615a6ce1771c7226459e23e4e2cf686b0f180",
+      "generated_sha256": "14cd7beeec7f8c19d9f335838edfba9c977d8952f9f5aee3a7ba5dc77e6812d7",
+      "queries": 6,
+      "generator_status": {
+        "ready": 4,
+        "unbracketed_query": 2
+      },
+      "reference_status": {
+        "native_grid_covered": 2,
+        "native_grid_missed": 2,
+        "reference_unavailable": 2
+      },
+      "candidate_counts": {
+        "0": 2,
+        "8": 4
+      },
+      "full_readout_context_queries": 2,
+      "full_clock_context_queries": 2,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-06-150-to-75",
+      "frame_count": 681,
+      "truth_sha256": "fcda5614cb07639a66edb58f7b658214e1f54ec1db1de35e84367d47be77849f",
+      "capture_sha256": "c96fe9dff55dc0334c956f453cb9e0640af4ce9b52abdccd82eaeb4b022b9ff3",
+      "observation_sha256": "741528fa7d23c45ce92b5a152a8c1c2903d6726861c3054cc96099b95c6a290e",
+      "generated_sha256": "2a53f85973d648128f9ddebab6f1f47d08902fb81bcadcacc0a6d4102d40b8a0",
+      "queries": 6,
+      "generator_status": {
+        "ready": 4,
+        "unbracketed_query": 2
+      },
+      "reference_status": {
+        "native_grid_missed": 4,
+        "reference_unavailable": 2
+      },
+      "candidate_counts": {
+        "0": 2,
+        "8": 4
+      },
+      "full_readout_context_queries": 2,
+      "full_clock_context_queries": 2,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-07-75-to-112-5",
+      "frame_count": 667,
+      "truth_sha256": "063beee7c5428adedeecab21d0f8678a69c049f4ca2ea8ebfb7827b1ec79057f",
+      "capture_sha256": "bd4e756badf480190d1b3e216677aa8ead7a1032d8f66ef1bcefdc18e7b00e69",
+      "observation_sha256": "347a70b31f0c86dd82a3213dffbe3aedf9ccfab3bb2c410d3be40c1b502d9feb",
+      "generated_sha256": "48e6713e4a8a810db83d465b01802563b74eef91596e53cf23f2c5fc084e2aac",
+      "queries": 6,
+      "generator_status": {
+        "ready": 4,
+        "unbracketed_query": 2
+      },
+      "reference_status": {
+        "native_grid_covered": 2,
+        "native_grid_missed": 2,
+        "reference_unavailable": 2
+      },
+      "candidate_counts": {
+        "0": 2,
+        "8": 4
+      },
+      "full_readout_context_queries": 2,
+      "full_clock_context_queries": 2,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-08-112-5-to-75",
+      "frame_count": 701,
+      "truth_sha256": "64de869a6b3e15d8e07601d67cb1508842de558761f5d00f4d25ded8077b92e6",
+      "capture_sha256": "f727928b068097ab0ac2d58cf838f95265fb9a74a7c2fb990dba7fc5fee07edf",
+      "observation_sha256": "b65e2f540172b0daf29579798e5016d6e1517cfdea2be63585309afecbe99b53",
+      "generated_sha256": "7a75e219d8fb5dbd1460a55729e4803bc3c2d9300d9e10ef497de41164470d16",
+      "queries": 6,
+      "generator_status": {
+        "ready": 4,
+        "unbracketed_query": 2
+      },
+      "reference_status": {
+        "native_grid_covered": 1,
+        "native_grid_missed": 3,
+        "reference_unavailable": 2
+      },
+      "candidate_counts": {
+        "0": 2,
+        "8": 4
+      },
+      "full_readout_context_queries": 2,
+      "full_clock_context_queries": 2,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-09-90-to-80",
+      "frame_count": 881,
+      "truth_sha256": "a9802ae028c9631323354a5826f50e2c78b14e54c66581a817f8d07b633a5409",
+      "capture_sha256": "cc3464f42f5c32135d39832563f146ef2d80d284c817626c23627ee986fe244e",
+      "observation_sha256": "cb33d8e43003b4ecd2f3e7da5358531225826afaf2bf85d0d0c979e7a6e48dc5",
+      "generated_sha256": "e99b5f4d5482c0e87990c77d4b3e310c1cae320fd0f17b1839c048a6904bb8ba",
+      "queries": 8,
+      "generator_status": {
+        "ready": 6,
+        "unbracketed_query": 2
+      },
+      "reference_status": {
+        "native_grid_covered": 5,
+        "native_grid_missed": 1,
+        "reference_unavailable": 2
+      },
+      "candidate_counts": {
+        "0": 2,
+        "8": 6
+      },
+      "full_readout_context_queries": 4,
+      "full_clock_context_queries": 4,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-10-90-to-120",
+      "frame_count": 831,
+      "truth_sha256": "2165ea70a5f4224461552a28567cb45ad2b2cfe66cf4a99661ff49a02b24f10f",
+      "capture_sha256": "d9f11d3c740c80d0e5d12c650b07bdd1268d007491740e0c5ca3b388cf5de9a4",
+      "observation_sha256": "58e5093fd4f7b6cae3dc48dc3de692ef3b815c09b47dd68172245484e93bcaca",
+      "generated_sha256": "148b8d916b8f5e97dc17a22ad9b8be33570f50709390d7763bac941d2d20dfc3",
+      "queries": 8,
+      "generator_status": {
+        "ready": 6,
+        "unbracketed_query": 2
+      },
+      "reference_status": {
+        "native_grid_covered": 6,
+        "reference_unavailable": 2
+      },
+      "candidate_counts": {
+        "0": 2,
+        "8": 6
+      },
+      "full_readout_context_queries": 4,
+      "full_clock_context_queries": 3,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-11-60-to-80",
+      "frame_count": 871,
+      "truth_sha256": "7332a12f293d6bf843b4833054722c492c551d9e82b978aa11e6a90e145f1901",
+      "capture_sha256": "862b06aafd290e8a039978b135f34ea35da797bbf9074157847c0c07d7ed27f3",
+      "observation_sha256": "64d1ddf2661c1ec46ae9c1fff1033ea395ded5a8396fc2ef6ecfe73e5a2a1655",
+      "generated_sha256": "5946e17ad3c21c6e78881582b8ae6b68406309174d4abb8c96f9e893a67a2c5e",
+      "queries": 8,
+      "generator_status": {
+        "ready": 6,
+        "unbracketed_query": 2
+      },
+      "reference_status": {
+        "native_grid_covered": 5,
+        "native_grid_missed": 1,
+        "reference_unavailable": 2
+      },
+      "candidate_counts": {
+        "0": 2,
+        "8": 6
+      },
+      "full_readout_context_queries": 4,
+      "full_clock_context_queries": 4,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-12-80-to-150",
+      "frame_count": 872,
+      "truth_sha256": "84dc7d0b5ae7f297bdef100b6f67dc64d1475655ef9a36cdd442578368301a87",
+      "capture_sha256": "00f0ed56f9eabcd37c80ea2f463cdbfd7ba5416a1e019979f24093bc5a7f1b30",
+      "observation_sha256": "4e8a4335ae6b650244ecc1d2bb226585aab40f4b0a0eec2a9c68093bf8e22356",
+      "generated_sha256": "de172f69ef401786a38d1ffac5de2348cd900b964daabffb7c622df2a8232a9d",
+      "queries": 8,
+      "generator_status": {
+        "ready": 6,
+        "unbracketed_query": 2
+      },
+      "reference_status": {
+        "native_grid_covered": 4,
+        "native_grid_missed": 2,
+        "reference_unavailable": 2
+      },
+      "candidate_counts": {
+        "0": 2,
+        "8": 6
+      },
+      "full_readout_context_queries": 4,
+      "full_clock_context_queries": 4,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-13-180-to-120",
+      "frame_count": 692,
+      "truth_sha256": "61513c63f05ff332d265d6d785ca50342cdad10b23f664a40f1b55d2487349bf",
+      "capture_sha256": "88a5824f541d2dd782a01644c73fd546e52090769e145807b50767ebfbdb23dc",
+      "observation_sha256": "f58d7d3f4777307de1379f2af237df114310fc481afc9340c9942c96582582b1",
+      "generated_sha256": "c6005fb4fc33ee67056d48db7f96d0858be23f1306b5acec59046a608703f2df",
+      "queries": 6,
+      "generator_status": {
+        "ready": 4,
+        "unbracketed_query": 2
+      },
+      "reference_status": {
+        "native_grid_covered": 2,
+        "native_grid_missed": 2,
+        "reference_unavailable": 2
+      },
+      "candidate_counts": {
+        "0": 2,
+        "8": 4
+      },
+      "full_readout_context_queries": 2,
+      "full_clock_context_queries": 2,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-14-240-to-96",
+      "frame_count": 816,
+      "truth_sha256": "6583d495985b507d2083975501e40f15ad0727f2df8761645280f4fb87c3fe96",
+      "capture_sha256": "53ea2508c3487f5fba57ff2c03246dae6b267c0ff9886a22baa496cff7ce19f0",
+      "observation_sha256": "fd5e95df52cb7a7bcce29c5ec7718de32096dc387b1e7f5ef4cf827ca8ceb3a1",
+      "generated_sha256": "7a1eba01148feb1c09970e2195d97075b1e4bd167ff1b35e45423cf34b478c55",
+      "queries": 8,
+      "generator_status": {
+        "ready": 7,
+        "unbracketed_query": 1
+      },
+      "reference_status": {
+        "native_grid_covered": 3,
+        "native_grid_missed": 3,
+        "reference_unavailable": 2
+      },
+      "candidate_counts": {
+        "0": 1,
+        "8": 7
+      },
+      "full_readout_context_queries": 3,
+      "full_clock_context_queries": 3,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-15-85-to-127-5",
+      "frame_count": 1130,
+      "truth_sha256": "e819ded9652413d5fd923066047b8cc1a27a2c0d24f3fdb3b80b40148fc9c39e",
+      "capture_sha256": "5a66d6c4abfc1416ff34fca4c74dd2c0a937e95f3654ea4145b76045125aa350",
+      "observation_sha256": "67062d9b0fce138aadbc85f9fd23cccd1a50fa21816dd5d08f367a18b2b47c0e",
+      "generated_sha256": "3d95bcd8476715d49a69f8f7c1764c56fabf99985cbae8470f8846b292475c85",
+      "queries": 11,
+      "generator_status": {
+        "ready": 10,
+        "unbracketed_query": 1
+      },
+      "reference_status": {
+        "native_grid_covered": 4,
+        "native_grid_missed": 6,
+        "reference_unavailable": 1
+      },
+      "candidate_counts": {
+        "0": 1,
+        "8": 10
+      },
+      "full_readout_context_queries": 7,
+      "full_clock_context_queries": 7,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-18-piano-rubato",
+      "frame_count": 1163,
+      "truth_sha256": "ddf1a5ff2a4d5649497bb54a60084abed6a21b1a062c874a492820245afd11a2",
+      "capture_sha256": "4e6c241ec2705094b5809e8f8d7a48fc668ad2eef2721d54d31a98dff3e3495e",
+      "observation_sha256": "f9139b868c9e07cfda732dd569489649c7cd82f3038a25db08ffe630ea244dbb",
+      "generated_sha256": "50dc1c1a51454ccb7610fa2ba2a318293b698cbd48105650334483f131e24c65",
+      "queries": 11,
+      "generator_status": {
+        "ready": 10,
+        "unbracketed_query": 1
+      },
+      "reference_status": {
+        "native_grid_covered": 1,
+        "native_grid_missed": 8,
+        "reference_unavailable": 2
+      },
+      "candidate_counts": {
+        "0": 1,
+        "8": 10
+      },
+      "full_readout_context_queries": 7,
+      "full_clock_context_queries": 6,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-19-ramp-80-to-200",
+      "frame_count": 863,
+      "truth_sha256": "407ec564b847ebf779e2f740c8c5d156211e69e18dc62b6a8fd37c17d01c4457",
+      "capture_sha256": "cf9e6d10e25ebfbb93e50ad70be70186e7ed229577e2b1fbd5f90c5459af215b",
+      "observation_sha256": "a2cecf34e0378f52c5084db78504be8ee78266a372a845232e54c4ce7b08dfa1",
+      "generated_sha256": "98b4bc1ab5822532cdf4a26eb7becc2c79b444f31bfd4276c5cc98f1a91994f1",
+      "queries": 8,
+      "generator_status": {
+        "ready": 7,
+        "unbracketed_query": 1
+      },
+      "reference_status": {
+        "native_grid_covered": 4,
+        "native_grid_missed": 3,
+        "reference_unavailable": 1
+      },
+      "candidate_counts": {
+        "0": 1,
+        "8": 7
+      },
+      "full_readout_context_queries": 4,
+      "full_clock_context_queries": 4,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-20-ramp-200-to-80",
+      "frame_count": 864,
+      "truth_sha256": "b2e8e3aa1a131b9335914f974d5cfff7618703dd8d9c87fe38723545f6ec5980",
+      "capture_sha256": "9aae8a403e1b95a3532d8bd2670febb21d3e9aab4034f05b6009cdd8f08c8c1c",
+      "observation_sha256": "9f505fcb5a7fe04d97b53085cf7688726434dac57a568202d9f6a6c5a63f258c",
+      "generated_sha256": "c7dd268b5aaa149f6fd94c1b7cf2a4cdd1832d2803407629132a83db5af0bb72",
+      "queries": 8,
+      "generator_status": {
+        "ready": 7,
+        "unbracketed_query": 1
+      },
+      "reference_status": {
+        "native_grid_covered": 3,
+        "native_grid_missed": 4,
+        "reference_unavailable": 1
+      },
+      "candidate_counts": {
+        "0": 1,
+        "8": 7
+      },
+      "full_readout_context_queries": 4,
+      "full_clock_context_queries": 4,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-21-polyrhythm-70-to-105",
+      "frame_count": 615,
+      "truth_sha256": "7016cc892dcec5a95ea18cf778d9890f1d754158168f29c3ce5e895d32578638",
+      "capture_sha256": "2e3ba7557faad626d3f92bf6d6e0a705536a81119c8cf33603a5b6bd91fabc22",
+      "observation_sha256": "a8f869af434a8b9bfc86a9af336019188bd6e500a151a84e41cdd5421cd8d86f",
+      "generated_sha256": "91f3275ea9a670534337063244240be58bf3dbee479b5865d45fc32d911660e5",
+      "queries": 6,
+      "generator_status": {
+        "ready": 4,
+        "unbracketed_query": 2
+      },
+      "reference_status": {
+        "native_grid_covered": 2,
+        "native_grid_missed": 3,
+        "reference_unavailable": 1
+      },
+      "candidate_counts": {
+        "0": 2,
+        "8": 4
+      },
+      "full_readout_context_queries": 1,
+      "full_clock_context_queries": 1,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "frame_count": 6446,
+      "truth_sha256": "f16e419511caee1c96c786fbe5a745b9e319a5d95a8d832dcd3b337f072706a7",
+      "capture_sha256": "76b295f5021e99204b2fde688f1b85f364d6f999866fc7fad7d60f1a6ab7e0a3",
+      "observation_sha256": "5ee323e9e8fe3c64db6e61256ee8e949217a7ef21adaad99c2d326c0f9a8fa48",
+      "generated_sha256": "ed0b045d4898764c2f5ec898c92e440f05f947a1b58822a9a2774252cf4a25ce",
+      "queries": 64,
+      "generator_status": {
+        "ready": 57,
+        "unbracketed_query": 7
+      },
+      "reference_status": {
+        "native_grid_covered": 5,
+        "native_grid_missed": 54,
+        "reference_unavailable": 5
+      },
+      "candidate_counts": {
+        "0": 7,
+        "8": 57
+      },
+      "full_readout_context_queries": 60,
+      "full_clock_context_queries": 55,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "frame_count": 6949,
+      "truth_sha256": "02617c821f0b7beb6fb0578d50f18b45b1e4b96e788c33835646b716b8a584e7",
+      "capture_sha256": "eaac53c4f18d0fbc9da29c315ce6d58385e9c4bbe74b17ff191d1c092981647b",
+      "observation_sha256": "d576c8a8d576105b79d891184e77a8035fde9fd2c634511b4e1582350dfa6999",
+      "generated_sha256": "b4d3fd64781078c9836bec9c5a7e0bedc1f7f028a0dff0b087c174cf1bd8565e",
+      "queries": 69,
+      "generator_status": {
+        "ready": 64,
+        "unbracketed_query": 5
+      },
+      "reference_status": {
+        "native_grid_covered": 7,
+        "native_grid_missed": 59,
+        "reference_unavailable": 3
+      },
+      "candidate_counts": {
+        "0": 5,
+        "8": 64
+      },
+      "full_readout_context_queries": 65,
+      "full_clock_context_queries": 62,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-beethoven-op072-0-ov-henning2017",
+      "frame_count": 20175,
+      "truth_sha256": "0597675375121d0e7592d5abdae51277c166ff7611f3daf327f0ae4193ddcf8e",
+      "capture_sha256": "fb774b4cfc44a241719fa344c81c4db0ecd6d1365bbf1f8c9490cfd31c07f325",
+      "observation_sha256": "fbd3cf87693035179e0012b127e9ef12d79dfaf2f96db44e303ccacf724b5efa",
+      "generated_sha256": "6457cff2f565e5625ae33256c2ece5e5af7ac7c94c79ee65c2f307409028c149",
+      "queries": 201,
+      "generator_status": {
+        "ready": 188,
+        "unbracketed_query": 13
+      },
+      "reference_status": {
+        "native_grid_covered": 33,
+        "native_grid_missed": 155,
+        "reference_unavailable": 13
+      },
+      "candidate_counts": {
+        "0": 13,
+        "8": 188
+      },
+      "full_readout_context_queries": 197,
+      "full_clock_context_queries": 186,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "frame_count": 13626,
+      "truth_sha256": "4e8b47d76b1ddce15d38da69fe3ca74892c777d2e1eb541524fc88d7a790bf34",
+      "capture_sha256": "fa46e89ee43b9e689b9efa8f66bd76f480abd4eface90a49fe934ffb455968d5",
+      "observation_sha256": "531f4ad8f6522cef1c03298dac87e3237d46a9eb5932f65491c675c85a3f15ce",
+      "generated_sha256": "6d2d265a4e6469495b0bd98345b66065f67b1f1f12eeca9810c2518d6f4c8030",
+      "queries": 136,
+      "generator_status": {
+        "ready": 130,
+        "unbracketed_query": 6
+      },
+      "reference_status": {
+        "native_grid_covered": 58,
+        "native_grid_missed": 73,
+        "reference_unavailable": 5
+      },
+      "candidate_counts": {
+        "0": 6,
+        "4": 2,
+        "8": 128
+      },
+      "full_readout_context_queries": 131,
+      "full_clock_context_queries": 128,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-boccherini-g275-03-ov-krux2022",
+      "frame_count": 8132,
+      "truth_sha256": "9b79c5c3cc3046c889ef9bbb34b0231dc7c393e22a088b3776b6b0862edad18b",
+      "capture_sha256": "4a3c2d66e432d3a8c0fae5f4559f0dde4a47d6b3f42e1f74ff23763c76830a49",
+      "observation_sha256": "de1b6f54d068586624512ac10de0e1aaa6f85f6f6d95119cf413bd0128ba5237",
+      "generated_sha256": "a6da1ab6b3bdbfcfbc0de4df17a1657ade5faacae268d998c820bc8311f0fa33",
+      "queries": 81,
+      "generator_status": {
+        "ready": 76,
+        "unbracketed_query": 5
+      },
+      "reference_status": {
+        "native_grid_covered": 7,
+        "native_grid_missed": 70,
+        "reference_unavailable": 4
+      },
+      "candidate_counts": {
+        "0": 5,
+        "8": 76
+      },
+      "full_readout_context_queries": 77,
+      "full_clock_context_queries": 73,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-brahms-op115-01-ov-schmitta2025",
+      "frame_count": 31011,
+      "truth_sha256": "6775c1cabad7d73b7682fa37d9a6e51c5542bffa054838df22f7a94ad150136a",
+      "capture_sha256": "9415d3b198b48e7ab0e046a9a0b6a06cef1b880132a2a46c280e7e7f246bc77f",
+      "observation_sha256": "4f1aa1c8d4e59002d842e472214c6a647f271ef9a4f15ae1761b755ca36619fb",
+      "generated_sha256": "799827f3dce5c62caba5b5d0e363e1a195f43f8f5f8ffc0111a2f0e3c6aa4f87",
+      "queries": 310,
+      "generator_status": {
+        "ready": 303,
+        "unbracketed_query": 7
+      },
+      "reference_status": {
+        "native_grid_covered": 3,
+        "native_grid_missed": 301,
+        "reference_unavailable": 6
+      },
+      "candidate_counts": {
+        "0": 7,
+        "8": 303
+      },
+      "full_readout_context_queries": 305,
+      "full_clock_context_queries": 301,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-brahms-op115-01-ov-steffens2008",
+      "frame_count": 31115,
+      "truth_sha256": "8934b0c9f51e4a9520584c35998f7d9cf724272de99d577d1b4f95e658ce7964",
+      "capture_sha256": "dd3b6bedb679b6dfea6bc1567a38c52d469f4b277ca64d9436b63b60d51279b9",
+      "observation_sha256": "54712f54fe9332c4393756beccc527f75d719538d97a62927e059d503b849611",
+      "generated_sha256": "2a40659ffe8aba1ac55284c94f0e79bc09c3a2758e007eeed392f521707f42a0",
+      "queries": 311,
+      "generator_status": {
+        "ready": 304,
+        "unbracketed_query": 7
+      },
+      "reference_status": {
+        "native_grid_covered": 5,
+        "native_grid_missed": 300,
+        "reference_unavailable": 6
+      },
+      "candidate_counts": {
+        "0": 7,
+        "8": 304
+      },
+      "full_readout_context_queries": 306,
+      "full_clock_context_queries": 302,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+      "frame_count": 8115,
+      "truth_sha256": "986d47aaab5598db25b2fb44d16bfbf7f9c6b2df4acf9b118fae9f7f8911932c",
+      "capture_sha256": "639f95573ffda23e4eef605c10be3ed564c27a8c1512ed9ffb75d0fd10fe6e17",
+      "observation_sha256": "13d3ee1dd18931a82d9bcc56f6ebd63a5ea86c5484839a5068796f578b295fb4",
+      "generated_sha256": "bb94effe5d292699cf2b7deabc1ed372d637ca3cce8647d701e35cac649965d3",
+      "queries": 81,
+      "generator_status": {
+        "ready": 75,
+        "unbracketed_query": 6
+      },
+      "reference_status": {
+        "native_grid_covered": 63,
+        "native_grid_missed": 13,
+        "reference_unavailable": 5
+      },
+      "candidate_counts": {
+        "0": 6,
+        "8": 75
+      },
+      "full_readout_context_queries": 76,
+      "full_clock_context_queries": 73,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+      "frame_count": 8218,
+      "truth_sha256": "10b34ee45b0b11f66943f98ab75b16886fd65dd7a108127a447bfb919d146f3e",
+      "capture_sha256": "5f04d4fcdd5c4324a92b7add6ab17d5f6f78dd83370cd4c7f62814fa04e0fb94",
+      "observation_sha256": "1a578daad281d8684216ce707a71e02efcfae3d7757ae811c89d85233cfe47a8",
+      "generated_sha256": "66424b187d757530870fba311538c113f4ec14bffb9104cc18ecd957921be2aa",
+      "queries": 82,
+      "generator_status": {
+        "ready": 75,
+        "unbracketed_query": 7
+      },
+      "reference_status": {
+        "native_grid_covered": 9,
+        "native_grid_missed": 69,
+        "reference_unavailable": 4
+      },
+      "candidate_counts": {
+        "0": 7,
+        "8": 75
+      },
+      "full_readout_context_queries": 77,
+      "full_clock_context_queries": 73,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+      "frame_count": 7681,
+      "truth_sha256": "ac2935ad5dcb5fc1a1dd44730eaed584241096c35bfe0508da5393dcd40a8ec7",
+      "capture_sha256": "8a5a3539ec7ed49803592f880d420cd86662a00eaec73d692ec77916cd87e28b",
+      "observation_sha256": "f974bd66cdf1337e64879f9d4077f58942c4705e64aa7426dbb07c1e6c60e3d4",
+      "generated_sha256": "518be8e236703163c814f806f5c372aa3c7d1c3e501aa0b6a3d9ebf9e6e3e0ee",
+      "queries": 76,
+      "generator_status": {
+        "ready": 70,
+        "unbracketed_query": 6
+      },
+      "reference_status": {
+        "native_grid_covered": 13,
+        "native_grid_missed": 60,
+        "reference_unavailable": 3
+      },
+      "candidate_counts": {
+        "0": 6,
+        "8": 70
+      },
+      "full_readout_context_queries": 72,
+      "full_clock_context_queries": 68,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-mozart-kv618-ar-papalin2012",
+      "frame_count": 8051,
+      "truth_sha256": "82a37995c722804ee66b57f6b3bfe39ce88cc602a4cc719b84c65c71300f5a32",
+      "capture_sha256": "83bf46fd1128010eebcea578d7f9df697152b1d388920bd3b42d2d4df4f58620",
+      "observation_sha256": "b393e2d9973ea855e74335948a3a291f4577a00beefca8bdf84110db3bd29bbe",
+      "generated_sha256": "a663840e98526f94d7af18b37d46f28a7fd9849509159dc49289d13f5f65e8cc",
+      "queries": 80,
+      "generator_status": {
+        "ready": 71,
+        "unbracketed_query": 9
+      },
+      "reference_status": {
+        "native_grid_covered": 4,
+        "native_grid_missed": 67,
+        "reference_unavailable": 9
+      },
+      "candidate_counts": {
+        "0": 9,
+        "8": 71
+      },
+      "full_readout_context_queries": 76,
+      "full_clock_context_queries": 69,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+      "frame_count": 10336,
+      "truth_sha256": "5f3832fafaa133b5a3875b8964b47b493568cdd2f4be76615fd5ea6f2f0f7616",
+      "capture_sha256": "c70c8a500375325ccc85c81dc24c70a3f296a58f6c2a4d39f3e92cda673d329c",
+      "observation_sha256": "4bbaaaa72a55293b07e383ba1b43ff564211a9ce62856eb65d72fc74942dd217",
+      "generated_sha256": "804ef71eb6a1365c2e871f9a2784ffc2babe021846220e9f111fc316a0fa3ad1",
+      "queries": 103,
+      "generator_status": {
+        "ready": 97,
+        "unbracketed_query": 6
+      },
+      "reference_status": {
+        "native_grid_covered": 6,
+        "native_grid_missed": 71,
+        "reference_unavailable": 26
+      },
+      "candidate_counts": {
+        "0": 6,
+        "4": 1,
+        "8": 96
+      },
+      "full_readout_context_queries": 99,
+      "full_clock_context_queries": 95,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+      "frame_count": 14062,
+      "truth_sha256": "996d4563a086fbe048d71da38e3d2441c789c28e2289aefa7284b3d3c10bc5c6",
+      "capture_sha256": "39965f14ea58cac4e0a1766bfbf97f752e383bafa8625e49b4d21dbfee006ba9",
+      "observation_sha256": "bd77e2e5609673444cfe11ebd812a13c6c13b56e5bac750a9d2e5d9ff703336d",
+      "generated_sha256": "9bec21e657f11050cd79c85b7411874f6e42857ccf22ffbcd122ed145941adc0",
+      "queries": 140,
+      "generator_status": {
+        "ready": 135,
+        "unbracketed_query": 5
+      },
+      "reference_status": {
+        "native_grid_covered": 18,
+        "native_grid_missed": 120,
+        "reference_unavailable": 2
+      },
+      "candidate_counts": {
+        "0": 5,
+        "8": 135
+      },
+      "full_readout_context_queries": 136,
+      "full_clock_context_queries": 133,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+      "frame_count": 16304,
+      "truth_sha256": "cc91282ff134ac42e5c051942baad56b49d19f8a56acdb09ce57c8e49e461f10",
+      "capture_sha256": "7ccaa90f6f1e904b8ce2038a50b8780ff29c6068d99d7b535a5d4ce1050a82fc",
+      "observation_sha256": "6b5f9e3fdd7a2c62625e49fdc181669ed79015937bf73b40469b9781c798cd20",
+      "generated_sha256": "73c33e3b06f475bb87cd34ccfc258d5efc43be1d60865f18014a957317b0c315",
+      "queries": 163,
+      "generator_status": {
+        "ready": 159,
+        "unbracketed_query": 4
+      },
+      "reference_status": {
+        "native_grid_covered": 64,
+        "native_grid_missed": 93,
+        "reference_unavailable": 6
+      },
+      "candidate_counts": {
+        "0": 4,
+        "8": 159
+      },
+      "full_readout_context_queries": 158,
+      "full_clock_context_queries": 156,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-schubert-d733-01-ar-staab2012",
+      "frame_count": 10168,
+      "truth_sha256": "15a68f3c29bb4eb1f9974093ab0f23189ba183232b341233e70f09523deec922",
+      "capture_sha256": "c83d96b22dd1f77113203f6306ca15799da52a37c9d5ae491821150c889ae85c",
+      "observation_sha256": "10edf50945ab28acf95a2fc65d853c9e6da21fc80db02483887d78e247a8229f",
+      "generated_sha256": "1de2a165dfb718d7cabb8387863e223536d1b6ecbafcf3d68fb8ab9e45bcfeba",
+      "queries": 101,
+      "generator_status": {
+        "ready": 97,
+        "unbracketed_query": 4
+      },
+      "reference_status": {
+        "native_grid_covered": 9,
+        "native_grid_missed": 90,
+        "reference_unavailable": 2
+      },
+      "candidate_counts": {
+        "0": 4,
+        "8": 97
+      },
+      "full_readout_context_queries": 97,
+      "full_clock_context_queries": 94,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+      "frame_count": 10359,
+      "truth_sha256": "71dc170ac875df1922db5cba6dcbfb59db11f254d6c35c45b825bdfe0d33ca8c",
+      "capture_sha256": "61a4b73d8ebd98e5f81d6fbcab7195bb5c81875f183741eca435ae7077f478dd",
+      "observation_sha256": "dcc793dc4e3fea7ebd5d6cca2becc843426919a55a196eda1920fe67d42778b7",
+      "generated_sha256": "5ce972eb9b200151b285cedf4b639dc019a79ff74eda575143a9901b0640fdee",
+      "queries": 103,
+      "generator_status": {
+        "ready": 98,
+        "unbracketed_query": 5
+      },
+      "reference_status": {
+        "native_grid_covered": 47,
+        "native_grid_missed": 52,
+        "reference_unavailable": 4
+      },
+      "candidate_counts": {
+        "0": 5,
+        "8": 98
+      },
+      "full_readout_context_queries": 99,
+      "full_clock_context_queries": 96,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-schumann-op039-05-ov-buttner2025",
+      "frame_count": 12226,
+      "truth_sha256": "aa36e4aec046346505801c6eb7d66db6557792129ba3395955945c7f3f315cd5",
+      "capture_sha256": "3089b5afac496979c1ef49f64e52efae5671543a531aa6ac93ff34a613da8bdf",
+      "observation_sha256": "818bd64003d0b6d0c273fa4e914fefeaec06abf303d524bd061eeba7e26fc64b",
+      "generated_sha256": "49a1ced075d3eb2fb56f3839e765fff50e2dbae83671ef4c7c8ded7649827ba1",
+      "queries": 122,
+      "generator_status": {
+        "ready": 114,
+        "unbracketed_query": 8
+      },
+      "reference_status": {
+        "native_grid_covered": 21,
+        "native_grid_missed": 93,
+        "reference_unavailable": 8
+      },
+      "candidate_counts": {
+        "0": 8,
+        "8": 114
+      },
+      "full_readout_context_queries": 117,
+      "full_clock_context_queries": 111,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "frame_count": 11258,
+      "truth_sha256": "d7140499d39a2769e1d8a248d2122efda0cb519ec2cc203d0bf81563ed0fc312",
+      "capture_sha256": "f00c6df8b74aca7395079db30244d15819ae0d4d2ef62c9578d11b3671d22f9e",
+      "observation_sha256": "db9bbf6f1bf66fd2b30a6ed85e2b9b9ed9c66e284ec831956d84ddc89551f902",
+      "generated_sha256": "24cbb6c945424aa079b468c52bfbb89098147a959ca231d28fa2a72836c5ce25",
+      "queries": 112,
+      "generator_status": {
+        "ready": 104,
+        "unbracketed_query": 8
+      },
+      "reference_status": {
+        "native_grid_covered": 3,
+        "native_grid_missed": 104,
+        "reference_unavailable": 5
+      },
+      "candidate_counts": {
+        "0": 8,
+        "8": 104
+      },
+      "full_readout_context_queries": 108,
+      "full_clock_context_queries": 102,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+      "frame_count": 15410,
+      "truth_sha256": "a45bd07ff0742e30ee0eca8cd53ffc0fc1c29baf8f81ee5b024554af89ef2796",
+      "capture_sha256": "09896ffb8511eb529ad81d60add089a0317aa5f40a4e352c28d45d46ea142ad3",
+      "observation_sha256": "db36b3151c8fdd03a9616872803e31f4f6e39abb5d074deedb5ce0194e44e35e",
+      "generated_sha256": "9c84c7b24665c170859f969b8fac4ab9d9177e9b10dc5f04addfeecf2a941a14",
+      "queries": 154,
+      "generator_status": {
+        "ready": 150,
+        "unbracketed_query": 4
+      },
+      "reference_status": {
+        "native_grid_missed": 144,
+        "reference_unavailable": 10
+      },
+      "candidate_counts": {
+        "0": 4,
+        "8": 150
+      },
+      "full_readout_context_queries": 149,
+      "full_clock_context_queries": 147,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+      "frame_count": 14800,
+      "truth_sha256": "49379fbe7c51dbf3d9cff11586ece6b9316d128e1f05cd2f8fdb0b281c1f4c88",
+      "capture_sha256": "7e08129bf8748f959536d857bc9999a4088186a6be46903f48da8f8d1afb436d",
+      "observation_sha256": "fbf8877e245346d4518b5b4fd2bd7dfa9dafd011db36fcc9d755dfc9741cc5c3",
+      "generated_sha256": "598cf47b38b503877b0a6139581bd82ffb7025d623fa77cb2effa2ab9d17618a",
+      "queries": 147,
+      "generator_status": {
+        "ready": 139,
+        "unbracketed_query": 8
+      },
+      "reference_status": {
+        "native_grid_covered": 7,
+        "native_grid_missed": 137,
+        "reference_unavailable": 3
+      },
+      "candidate_counts": {
+        "0": 8,
+        "8": 139
+      },
+      "full_readout_context_queries": 143,
+      "full_clock_context_queries": 136,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+      "frame_count": 13902,
+      "truth_sha256": "f0aaf80955f919bf3cd84df7f649824812ab08aed548d09e5342fb7d79e00959",
+      "capture_sha256": "8f781ccc08798cf349ba841bb5bb89ed66f104068ebc1fcecced2a1f354c72d7",
+      "observation_sha256": "5da16c9401b66cf5ec3e76738542ba39ce7384a800165b91d2a312bb74f65db4",
+      "generated_sha256": "ceaf93aea540e646e58fd922fe0f5a2b2837b524562973e67ee2d1cd6b5baad8",
+      "queries": 139,
+      "generator_status": {
+        "ready": 131,
+        "unbracketed_query": 8
+      },
+      "reference_status": {
+        "native_grid_covered": 11,
+        "native_grid_missed": 121,
+        "reference_unavailable": 7
+      },
+      "candidate_counts": {
+        "0": 8,
+        "8": 131
+      },
+      "full_readout_context_queries": 134,
+      "full_clock_context_queries": 129,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+      "frame_count": 15429,
+      "truth_sha256": "ec2d36c1e4e7bfe5641dc5085e08bd4ab3cb2aa28e1d408f7faab44b584f14d1",
+      "capture_sha256": "c5522a4af335b3045c3cc5d4baade4809307d994b277152d0b7112a10c5c5dda",
+      "observation_sha256": "0d946c6f070695197e4201958abaed39322023f105c53fff7efea1d690eb41c8",
+      "generated_sha256": "7070b6a7b9978b694390388015b2c25ad885658222fe93f4d6fe410a5a965e72",
+      "queries": 154,
+      "generator_status": {
+        "ready": 148,
+        "unbracketed_query": 6
+      },
+      "reference_status": {
+        "native_grid_covered": 5,
+        "native_grid_missed": 145,
+        "reference_unavailable": 4
+      },
+      "candidate_counts": {
+        "0": 6,
+        "8": 148
+      },
+      "full_readout_context_queries": 150,
+      "full_clock_context_queries": 146,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "frame_count": 9547,
+      "truth_sha256": "e892d59ecb17cc055034f3c043d49f981ad877092fb1298df3eaaeb10f4fd47e",
+      "capture_sha256": "3e0626fec9fe95fc1a07b48eab7983a38ab3d951b65cd8f8c9137e2d7e53338f",
+      "observation_sha256": "ae068e47b57a53d62290759ca9a4b9447aea9cf9c9a22cc9f07ddca86c2defc4",
+      "generated_sha256": "4e310e5b0fa3c203086906fd4d1f225caa86541d1c4bd090c05038a5f8985214",
+      "queries": 95,
+      "generator_status": {
+        "ready": 91,
+        "unbracketed_query": 4
+      },
+      "reference_status": {
+        "native_grid_covered": 25,
+        "native_grid_missed": 67,
+        "reference_unavailable": 3
+      },
+      "candidate_counts": {
+        "0": 4,
+        "8": 91
+      },
+      "full_readout_context_queries": 91,
+      "full_clock_context_queries": 88,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "frame_count": 10695,
+      "truth_sha256": "176a0359278e6ec6fcffec89b0489fbd3ca8ac4e8b93dd974c3b4423b8444cb1",
+      "capture_sha256": "8cc504bfe807c64cc1aa721b842de44b350ffc5d6724d0b30277e71cade824bb",
+      "observation_sha256": "c4a3a680ad10b913f4bb63296342986ebf5a1ecaae340c17386b01ad29c8f9ff",
+      "generated_sha256": "9f807e6a7f774b46d25091678bcef806c237b3ba4addccd60509061aeb74fdac",
+      "queries": 106,
+      "generator_status": {
+        "ready": 103,
+        "unbracketed_query": 3
+      },
+      "reference_status": {
+        "native_grid_covered": 17,
+        "native_grid_missed": 87,
+        "reference_unavailable": 2
+      },
+      "candidate_counts": {
+        "0": 3,
+        "8": 103
+      },
+      "full_readout_context_queries": 102,
+      "full_clock_context_queries": 100,
+      "tick_budget_exceeded_candidates": 0
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+      "frame_count": 10500,
+      "truth_sha256": "ba992b7fd03f9117cf411b06c59778f9eb65698a1e71c6907fa8520da0f46d9b",
+      "capture_sha256": "ccedd36d8c0bef9060f0d32d687a586a44c66ecbf43d20b340405412c8373bea",
+      "observation_sha256": "781ee1218adb731f6da683a7aedbbb7111b16de2e57cce6d3a108187ecef3736",
+      "generated_sha256": "8533a9047d834f45339ab859f2d69dc474cf908fba2b47f744e42f4888a5dcd6",
+      "queries": 104,
+      "generator_status": {
+        "ready": 99,
+        "unbracketed_query": 5
+      },
+      "reference_status": {
+        "native_grid_missed": 101,
+        "reference_unavailable": 3
+      },
+      "candidate_counts": {
+        "0": 5,
+        "4": 18,
+        "8": 81
+      },
+      "full_readout_context_queries": 100,
+      "full_clock_context_queries": 97,
+      "tick_budget_exceeded_candidates": 0
+    }
+  ],
+  "summary": {
+    "queries": 3348,
+    "generator_status": {
+      "ready": 3167,
+      "unbracketed_query": 181
+    },
+    "reference_status": {
+      "native_grid_covered": 484,
+      "native_grid_missed": 2690,
+      "reference_unavailable": 174
+    },
+    "candidate_counts": {
+      "0": 181,
+      "4": 21,
+      "8": 3146
+    },
+    "full_readout_context_queries": 3177,
+    "full_clock_context_queries": 3070,
+    "tick_budget_exceeded_candidates": 0
+  },
+  "slices": {
+    "constant": {
+      "queries": 51,
+      "generator_status": {
+        "ready": 41,
+        "unbracketed_query": 10
+      },
+      "reference_status": {
+        "native_grid_covered": 31,
+        "native_grid_missed": 10,
+        "reference_unavailable": 10
+      },
+      "candidate_counts": {
+        "0": 10,
+        "8": 41
+      },
+      "full_readout_context_queries": 16,
+      "full_clock_context_queries": 15,
+      "tick_budget_exceeded_candidates": 0
+    },
+    "expressive_untyped": {
+      "queries": 3245,
+      "generator_status": {
+        "ready": 3088,
+        "unbracketed_query": 157
+      },
+      "reference_status": {
+        "native_grid_covered": 441,
+        "native_grid_missed": 2654,
+        "reference_unavailable": 150
+      },
+      "candidate_counts": {
+        "0": 157,
+        "4": 21,
+        "8": 3067
+      },
+      "full_readout_context_queries": 3132,
+      "full_clock_context_queries": 3026,
+      "tick_budget_exceeded_candidates": 0
+    },
+    "other_or_boundary": {
+      "queries": 12,
+      "generator_status": {
+        "unbracketed_query": 12
+      },
+      "reference_status": {
+        "reference_unavailable": 12
+      },
+      "candidate_counts": {
+        "0": 12
+      },
+      "full_readout_context_queries": 0,
+      "full_clock_context_queries": 0,
+      "tick_budget_exceeded_candidates": 0
+    },
+    "ramp": {
+      "queries": 16,
+      "generator_status": {
+        "ready": 14,
+        "unbracketed_query": 2
+      },
+      "reference_status": {
+        "native_grid_covered": 7,
+        "native_grid_missed": 7,
+        "reference_unavailable": 2
+      },
+      "candidate_counts": {
+        "0": 2,
+        "8": 14
+      },
+      "full_readout_context_queries": 8,
+      "full_clock_context_queries": 8,
+      "tick_budget_exceeded_candidates": 0
+    },
+    "step": {
+      "queries": 24,
+      "generator_status": {
+        "ready": 24
+      },
+      "reference_status": {
+        "native_grid_covered": 5,
+        "native_grid_missed": 19
+      },
+      "candidate_counts": {
+        "8": 24
+      },
+      "full_readout_context_queries": 21,
+      "full_clock_context_queries": 21,
+      "tick_budget_exceeded_candidates": 0
+    }
+  },
+  "generation_completed_before_annotation_load": true,
+  "original_forty_retained": true,
+  "new_annotations_collected": 0,
+  "independently_labeled_coverage": null,
+  "neural_inference": false,
+  "training": false,
+  "holdout_access": false,
+  "production_change": false,
+  "selected_clock": null,
+  "decision": "development_proxy_only_not_training_ready"
+}

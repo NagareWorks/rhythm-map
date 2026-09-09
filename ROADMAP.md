@@ -24,6 +24,15 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- [Blinded packets and the fixed proposal coverage baseline](docs/CLOCK-ANNOTATION-PACKETS.md)
+  now separate pre-overlay listening records, anonymous clock votes and private
+  provenance; unknown context never becomes a negative target. All forty old
+  inputs produce 3,348 fixed queries before annotation loading. The native-grid
+  proxy covers 484, misses 2,690, and leaves 174 reference-unavailable; step
+  coverage is 5/24. These are not independent listening labels or selected-tempo
+  accuracy. The raw-event proposal set is not training-ready: inspect retained
+  missing-anchor/drift/change geometry next, with no score fit or candidate sweep.
+  No model, production default, user parameter, new audio, listener data or release.
 - The [small clock-compatibility readout proposal](docs/CLOCK-READOUT-PROPOSAL.md)
   now separates candidate generation, conditional scoring and automatic product
   acceptance. Multiple supported beat levels stay positive; disagreement and

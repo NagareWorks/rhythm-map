@@ -81,6 +81,16 @@ of the missing-step penalty on these same labels.
 
 ## Practical decision gate, not an impossibility claim
 
+The [observation-only proposal coverage baseline](../evaluation/baselines/clock-proposal-v1.md)
+now measures 3,348 fixed-grid queries from all forty prior inputs before any
+annotation is loaded. Its native-grid proxy covers 484, misses 2,690 and leaves
+174 reference-unavailable; only 5/24 step queries are covered. This is not
+independent listening or product accuracy, but it exposes a candidate-generation
+prerequisite before training a scorer. The [two-pass packet contract](CLOCK-ANNOTATION-PACKETS.md)
+preserves uncertainty, source/context identity and generator misses; no actual
+listener records or cleared groups are added. Next inspect retained miss geometry,
+not train the readout or broaden the candidate/threshold search on these labels.
+
 The [clock-compatibility proposal](CLOCK-READOUT-PROPOSAL.md) now separates
 observation-only proposal coverage, conditional evidence learning and automatic
 product admission. It specifies multi-supported/unknown annotation semantics,

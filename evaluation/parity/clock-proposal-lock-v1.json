@@ -1,0 +1,53 @@
+{
+  "schema": "rhythm-map.clock-proposal-lock.v1",
+  "purpose": "One frozen development coverage baseline, not independent listening or a clock decision.",
+  "source_sha256": {
+    "annotation_exposure_audit.py": "824832bb891637a8eafb40bd05c05e4fb5c5000577c7f08a81a10bdc2892c681",
+    "clock_proposals.py": "10403edc7b74a8df692fe22c74b7c2df90eed98743352aa2b09abcf0ed92d2b9",
+    "clock_proposal_audit.py": "6ec8718e949a2dd9727f5f2a3aa854a0fcb76cc20cb635b60c765adec0fdbed7",
+    "clock_annotation_packet.py": "46fb35c7f6df007a81c7ca1737d5bd8bbe92042959e6d5f2ad32ae334c384efa"
+  },
+  "query_seconds": 4,
+  "hop_seconds": 2,
+  "context_halo_seconds": 2.52,
+  "max_candidates": 8,
+  "max_intervals": 128,
+  "max_ticks_per_candidate": 128,
+  "clock_equivalence_epsilon_cycles": 1e-9,
+  "native_grid_tolerance_seconds": 0.06,
+  "constructions": [
+    "local_median_interval_continuation",
+    "raw_event_piecewise_linear_phase"
+  ],
+  "levels": [
+    [
+      1,
+      0
+    ],
+    [
+      0.5,
+      0
+    ],
+    [
+      0.5,
+      0.5
+    ],
+    [
+      2,
+      0
+    ]
+  ],
+  "input_fields": [
+    "duration_s",
+    "beat_times_s",
+    "valid_spans_s"
+  ],
+  "generation": "All fixed-grid queries of all forty frozen calibration recordings before annotations are loaded. No source identities, scores, truth BPM, phase or changes at the generator boundary. No cross-gap/edge extrapolation.",
+  "comparison": "Post-hoc two-direction equal-count native annotation-grid matching at 60ms; incomplete reference support stays unassessed. Not beat-level uniqueness, BPM-curve accuracy or independently supported clock coverage.",
+  "budget": "One baseline, no parameter/phase/source search after reading results; rejected and partial queries retained.",
+  "neural_inference": false,
+  "training": false,
+  "holdout_access": false,
+  "production_change": false,
+  "new_listener_records": 0
+}
