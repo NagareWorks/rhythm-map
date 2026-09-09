@@ -24,6 +24,15 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- The [bounded metadata admission review](evaluation/baselines/rhythm-support-admission-review-v1.md)
+  clarifies standard CC reuse terms without inventing an AI-specific grant
+  requirement, finds two FSD50K IDs already exposed through FSLD calibration,
+  and retains eight deterministic source-review records with unresolved
+  provenance. Corpus-name absence is not encoder recording non-overlap; cached
+  pages are not live clearance, and no metadata tag becomes a rhythm label.
+  Close this metadata pass with no audio, new labels, independent admission or
+  training. Return the next technical decision to missed/weak beats versus real
+  tempo changes, not continued expansion of a presence-only sound-source pool.
 - The [FSD50K development metadata inventory](evaluation/baselines/rhythm-support-inventory-v1.md)
   now verifies official archive/member identities and recomputes 40,966 clip
   records, with 34,976 CC0/CC BY initial-screen rows generated outside the

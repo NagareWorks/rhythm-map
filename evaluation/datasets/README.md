@@ -10,6 +10,12 @@ decompresses the member, and verifies the installed member's size and SHA-256.
 
 ## Rhythm-support data planning
 
+The [bounded admission review](../baselines/rhythm-support-admission-review-v1.md)
+adds a [deterministic eight-record sample and exact exposure comparison](rhythm-support-provenance-v1.json)
+and a separate [source/rights ledger](rhythm-support-admission-review-v1.json).
+Two FSD50K source IDs already occur in the exposed FSLD calibration lock. No
+new independent group, rhythm label or training authorization results.
+
 The newer [verified development metadata inventory](rhythm-support-inventory-v1.json)
 recomputes 40,966 FSD50K dev records and retains 34,976 in the CC0/CC BY initial
 screen. The offline generator produces per-clip rights/provenance placeholders

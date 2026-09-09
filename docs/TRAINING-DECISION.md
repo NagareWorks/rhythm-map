@@ -81,6 +81,15 @@ of the missing-step penalty on these same labels.
 
 ## Practical decision gate, not an impossibility claim
 
+The latest [bounded metadata admission review](../evaluation/baselines/rhythm-support-admission-review-v1.md)
+finds two known project-exposure matches and records eight source-review cases,
+not a training set. Standard CC terms do not require an extra AI-specific grant
+solely for being a new technology; individual provenance/other rights and
+independent region labels remain unresolved. This closes the metadata-only
+side pass. No training decision is approved, and no amount of presence-only
+metadata resolves weak/omitted beats versus true tempo changes. Return the next
+technical decision to that competing-clock target and existing evidence.
+
 The subsequent [null-assumption checks and initial worksheet](../evaluation/baselines/rhythm-support-readiness-v1.md)
 close limited second-order-preserving and naive-permutation shortcuts, not all
 training-free methods. The subsequent [verified metadata inventory](../evaluation/baselines/rhythm-support-inventory-v1.md)

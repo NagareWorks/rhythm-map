@@ -1,0 +1,131 @@
+{
+  "schema": "rhythm-map.rhythm-support-admission-review.v1",
+  "status": "bounded_metadata_review_complete_admission_incomplete",
+  "observed_at": "2026-09-09",
+  "sample_manifest": "rhythm-support-provenance-v1.json",
+  "license_review": {
+    "scope": "standard_license_terms_not_individual_legal_clearance",
+    "copyright_reuse_basis": "CC0_or_CC_BY_subject_to_applicable_terms_and_licensor_authority",
+    "separate_ai_specific_grant_required_by_standard_cc_license": false,
+    "commercial_contact_note": "publisher_request_not_reclassified_as_NC_or_ai_permission_requirement",
+    "other_rights_cleared": false,
+    "annotation_license_clearance": "not_completed_no_upstream_label_import",
+    "source_urls": [
+      "https://zenodo.org/records/4060432",
+      "https://creativecommons.org/publicdomain/zero/1.0/legalcode",
+      "https://creativecommons.org/licenses/by/3.0/legalcode",
+      "https://creativecommons.org/licenses/by/4.0/legalcode",
+      "https://creativecommons.org/faq/#artificial-intelligence-and-cc-licenses"
+    ]
+  },
+  "encoder_provenance": {
+    "checkpoint": "CPJKU/beat_this final0",
+    "upstream_revision": "b95c8ab0c58c2d9fcfd40508ae8dffbc05ac4f5c",
+    "upstream_readme_url": "https://raw.githubusercontent.com/CPJKU/beat_this/b95c8ab0c58c2d9fcfd40508ae8dffbc05ac4f5c/README.md",
+    "upstream_readme_sha256": "be7b51a9b6ff2041fdde81061d079c29451583f2c06c9733bece9282cc7afab0",
+    "annotations_release": "v1.0",
+    "annotations_revision": "c3c47fd37d3074d9f8119f18bbf460f909609f22",
+    "annotations_readme_url": "https://raw.githubusercontent.com/CPJKU/beat_this_annotations/c3c47fd37d3074d9f8119f18bbf460f909609f22/README.md",
+    "annotations_readme_sha256": "d61a328872b6ad601efe39b1d6428ce6acd9fab9c41a72dd9a405975e3a1e6d0",
+    "root_listing_url": "https://api.github.com/repos/CPJKU/beat_this_annotations/contents?ref=c3c47fd37d3074d9f8119f18bbf460f909609f22",
+    "published_corpora": ["asap", "ballroom", "beatles", "candombe", "filosax", "groove_midi", "gtzan", "guitarset", "hainsworth", "harmonix", "hjdb", "jaah", "rwc", "simac", "smc", "tapcorrect"],
+    "final0_documented_excluded_corpus": "gtzan",
+    "fsd50k_named_in_corpus_list": false,
+    "fsld_named_in_corpus_list": false,
+    "recording_level_overlap": "unknown",
+    "scope": "readmes_and_root_directory_names_only_no_annotation_or_feature_payloads",
+    "membership_comparison_completed": false
+  },
+  "sample_findings": [
+    {
+      "clip_id": "61856",
+      "metadata_hints": ["edited_fragments_of_a_scratching_session"],
+      "open_questions": ["source_material_rights", "shared_session_and_derived_asset_grouping"],
+      "source_page_retrieval": "tool_unavailable_nonretryable",
+      "current_source_verified": false,
+      "independent_group_verified": false,
+      "rhythm_label": null
+    },
+    {
+      "clip_id": "355100",
+      "metadata_hints": ["Good_sounds_project", "single_instrument_note", "original_project_id_7982"],
+      "open_questions": ["project_recording_and_performer_provenance", "shared_session_or_sample_family"],
+      "source_page_retrieval": "tool_unavailable_nonretryable",
+      "current_source_verified": false,
+      "independent_group_verified": false,
+      "rhythm_label": null
+    },
+    {
+      "clip_id": "111125",
+      "metadata_hints": ["explicit_reference_to_another_similar_recording"],
+      "open_questions": ["resolve_related_recording_before_split_assignment"],
+      "source_page_retrieval": "tool_unavailable_nonretryable",
+      "current_source_verified": false,
+      "independent_group_verified": false,
+      "rhythm_label": null
+    },
+    {
+      "clip_id": "216126",
+      "metadata_hints": ["keyboard_tapping_description"],
+      "open_questions": ["recording_and_creator_provenance", "periodicity_cannot_be_inferred_from_event_tag"],
+      "source_page_retrieval": "tool_unavailable_nonretryable",
+      "current_source_verified": false,
+      "independent_group_verified": false,
+      "rhythm_label": null
+    },
+    {
+      "clip_id": "167533",
+      "metadata_hints": ["ring_alert_collection_description"],
+      "open_questions": ["composition_and_source_asset_provenance", "collection_family_grouping"],
+      "source_page_retrieval": "tool_unavailable_nonretryable",
+      "current_source_verified": false,
+      "independent_group_verified": false,
+      "rhythm_label": null
+    },
+    {
+      "clip_id": "340968",
+      "metadata_hints": ["crowd_at_parade_description"],
+      "open_questions": ["incidental_speech_or_music_rights", "recording_provenance"],
+      "source_page_retrieval": "cached_primary_page_crawler_reports_7_months_old",
+      "source_page_url": "https://freesound.org/people/SoundsAreGr8/sounds/340968/",
+      "cached_page_license": "CC0-1.0",
+      "cached_page_agrees_with_metadata": true,
+      "current_source_verified": false,
+      "independent_group_verified": false,
+      "rhythm_label": null
+    },
+    {
+      "clip_id": "262983",
+      "metadata_hints": ["audience_recording_in_a_theatre", "consumer_camera_recording_claim"],
+      "open_questions": ["incidental_performance_and_personality_rights", "recording_session_grouping"],
+      "source_page_retrieval": "tool_unavailable_nonretryable",
+      "current_source_verified": false,
+      "independent_group_verified": false,
+      "rhythm_label": null
+    },
+    {
+      "clip_id": "107272",
+      "metadata_hints": ["transit_bus_engine_recording_description"],
+      "open_questions": ["creator_and_recording_provenance", "mechanical_pulse_is_not_automatically_negative"],
+      "source_page_retrieval": "tool_unavailable_nonretryable",
+      "current_source_verified": false,
+      "independent_group_verified": false,
+      "rhythm_label": null
+    }
+  ],
+  "conclusion": {
+    "metadata_review_sample_count": 8,
+    "known_project_exposure_matches": 2,
+    "new_independent_groups_admitted": 0,
+    "new_region_labels_collected": 0,
+    "training_necessity_established": false,
+    "decision": "close_bounded_metadata_pass_no_training_or_pool_expansion",
+    "next_target": "return_to_missed_beat_vs_real_tempo_change_evidence_not_presence_only",
+    "audio_selection_made": false,
+    "audio_acquired": false,
+    "feature_access": false,
+    "training_authorized": false,
+    "project_holdout_access": false,
+    "production_change": false
+  }
+}

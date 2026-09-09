@@ -1,0 +1,114 @@
+{
+  "schema": "rhythm-map.rhythm-support-provenance.v1",
+  "status": "metadata_review_only_not_admitted",
+  "input_archive_locks": [
+    {
+      "file": "FSD50K.metadata.zip",
+      "size_bytes": 6700838,
+      "md5": "b9ea0c829a411c1d42adb9da539ed237",
+      "sha256": "9a738e032546f9a2c6e3d04566928d04a65fb79b422cc9d78bb781723537bd19",
+      "member": "FSD50K.metadata/dev_clips_info_FSD50K.json",
+      "member_size_bytes": 22494560,
+      "member_sha256": "b31a2eb130aea6d545d4b48511b24dfd0120420567a8d1066c52d54968bb3735"
+    },
+    {
+      "file": "FSD50K.doc.zip",
+      "size_bytes": 6984,
+      "md5": "3516162b82dc2945d3e7feba0904e800",
+      "sha256": "a5c314ad2bf93d01b5921aa4270c70c90e28ac9a283ba9f08167490e728deb85",
+      "member": "FSD50K.doc/LICENSE-DATASET",
+      "member_size_bytes": 1599,
+      "member_sha256": "ebee1f320405cc09abfcc3c77e14fbc3adb9734d53f2ef5274d35eddcbb476f1"
+    }
+  ],
+  "exposure_manifest": {
+    "path": "evaluation/datasets/fsld-tempo-v1.json",
+    "sha256": "cb97f53dd863d104a11cb41ce6c340cd991440d1a6db8006c6c7b73c96186d44",
+    "exposed_audio_id_count": 15
+  },
+  "exposure_matches": {
+    "all_development_ids": [
+      "210835",
+      "418991"
+    ],
+    "screened_ids": [
+      "210835",
+      "418991"
+    ],
+    "meaning": "known_project_regression_exposure_not_encoder_training_overlap"
+  },
+  "selection_rule": {
+    "domain": "rhythm-support-metadata-review-v1\n",
+    "per_license": 4,
+    "license_order": [
+      "CC-BY-3.0",
+      "CC0-1.0"
+    ],
+    "ordering": "SHA-256 then numeric clip ID",
+    "uploader_exclusion": "casefold hint across both quotas, not identity proof",
+    "exposed_id_exclusion": true,
+    "tags_or_descriptions_used": false,
+    "model_scores_used": false,
+    "sample_role": "source_metadata_review_only"
+  },
+  "review_sample": [
+    {
+      "clip_id": "61856",
+      "license_id": "CC-BY-3.0",
+      "rank_sha256": "0000ef3c21a663e0852e18aaab5891f5ced8f202acd2174cc3a2448819c1cdbe",
+      "source_url": "https://freesound.org/s/61856/"
+    },
+    {
+      "clip_id": "355100",
+      "license_id": "CC-BY-3.0",
+      "rank_sha256": "0001695e10098a66a854f8ff157c6557edae3beb101b6077825c1797cba2ba68",
+      "source_url": "https://freesound.org/s/355100/"
+    },
+    {
+      "clip_id": "111125",
+      "license_id": "CC-BY-3.0",
+      "rank_sha256": "000b45f867a66ceeea7c3533094101ce5566107ddc5b83bdf89c4b7b7611929e",
+      "source_url": "https://freesound.org/s/111125/"
+    },
+    {
+      "clip_id": "216126",
+      "license_id": "CC-BY-3.0",
+      "rank_sha256": "00198d38a4c391ad82468907d497ca308781445ad429ded33b889a546c3d665a",
+      "source_url": "https://freesound.org/s/216126/"
+    },
+    {
+      "clip_id": "167533",
+      "license_id": "CC0-1.0",
+      "rank_sha256": "0001d55c08e7862c0446b336588db4f683a531a2824ab16d5aef4358903fe3af",
+      "source_url": "https://freesound.org/s/167533/"
+    },
+    {
+      "clip_id": "340968",
+      "license_id": "CC0-1.0",
+      "rank_sha256": "00047f6e2ed29592d5f494da0cc3a0b8bcee0a3700d1d324b8ff969ae763fffd",
+      "source_url": "https://freesound.org/s/340968/"
+    },
+    {
+      "clip_id": "262983",
+      "license_id": "CC0-1.0",
+      "rank_sha256": "000782b091248c214d5ade2bf8ae798d85e0cb95d00e9bd8ceaf639d661753da",
+      "source_url": "https://freesound.org/s/262983/"
+    },
+    {
+      "clip_id": "107272",
+      "license_id": "CC0-1.0",
+      "rank_sha256": "00124d92a11b62e26e67d17aa80d4e9875c285ed0310757a0f561e0516bd4989",
+      "source_url": "https://freesound.org/s/107272/"
+    }
+  ],
+  "population_rhythm_coverage": null,
+  "encoder_recording_overlap": "unknown",
+  "independent_groups_admitted": 0,
+  "listener_labels_collected": 0,
+  "audio_selection_made": false,
+  "audio_acquired": false,
+  "feature_access": false,
+  "training_authorized": false,
+  "project_holdout_access": false,
+  "production_change": false
+}
