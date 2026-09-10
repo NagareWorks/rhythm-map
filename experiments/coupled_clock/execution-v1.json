@@ -1,0 +1,30 @@
+{
+  "schema": "rhythm-map.coupled-clock-execution.v1",
+  "inputs_sha256": "b4f05c10ebede84c394b0b8e06f6723b096d1f9a0a48e63024eb81d913fffd9c",
+  "source_sha256": {
+    "experiments/coupled_clock/__init__.py": "2cbf69dc36abcac78926b1e6c387b3cd2fa7d88a6dbf9476da287aaf5ffbe9c4",
+    "experiments/coupled_clock/clock.py": "8159c503dcac6b911d784a5e270413f3808f30bb80178a478b7ff9754de80c81",
+    "experiments/coupled_clock/measurement.py": "6aec618f4a868218f121326bc420be01eb14a9b65f28c6d6a8e73ef0da86c18d",
+    "experiments/coupled_clock/model.py": "a58727f37cf9902d4fa300e13b2d16e27e8c93fc4810627e3a24d4b60d544c58",
+    "experiments/coupled_clock/prepare.py": "0542de33d896c982af91ce9ca0f2fa33d018f29b5b4adbbc1f5d416374d6adc9",
+    "experiments/coupled_clock/run.py": "f2e9393c415029af186ea351a69a9ad18b7cd88d6a1da10e251eb7ad5efa2912",
+    "experiments/coupled_clock/supervision.py": "f07045a911b9e8b7e49dd81fc0c90ec392b614a85f62b93fe9fe59346980c204",
+    "experiments/coupled_clock/test_coupled_clock.py": "029181bd07828dcd4e487ab48af2b031637943f7e5d64ded4f2ca35944fef29e",
+    "experiments/coupled_clock/test_experiment.py": "5625274104ef031accceb00085bc06a4830cac39e41cce3225cc80b9dab82006",
+    "experiments/coupled_clock/PROTOCOL-v1.md": "f7e54721d27fc92f28977a63cbdb19fc173c5f991572b1035be20ed3cfb0cd80",
+    "experiments/clock_readout/model.py": "57871068c5c4958679d014dbc0018d4ccda5c1d315265ad64007082da8a76abc"
+  },
+  "torch_version": "2.10.0+cu129",
+  "numpy_version": "2.2.6",
+  "device": "cuda",
+  "deterministic": true,
+  "tf32": false,
+  "fits": 2,
+  "seed": 142,
+  "max_epochs": 20,
+  "max_seconds_per_fit": 1800,
+  "batch_recordings": 4,
+  "parameters": 23970,
+  "holdout_access": false,
+  "production_change": false
+}

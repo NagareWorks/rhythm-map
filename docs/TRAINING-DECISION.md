@@ -4,7 +4,7 @@ The product contract remains one-call, zero-tuning audio metadata extraction.
 Timing is the first capability pack. Experiments do not become user-selectable
 policies, and a rejected heuristic is not proof that training is necessary.
 
-## Current decision: first small fit completed, not admitted
+## Current decision: two bounded readout designs fitted, neither admitted
 
 On 2026-09-10 the user authorized one bounded learning experiment after the
 repeated diagnostic cycle. The [direct phase/period experiment](../evaluation/baselines/direct-clock-learning-v1.md)
@@ -24,9 +24,17 @@ After the user's training walkthrough, the new
 [coupled-clock components](../experiments/coupled_clock/README.md) implement
 positive cumulative beat advancement, one phase origin and native multi-lag
 count supervision. Authored forward/backward tests establish representation
-and numerical contracts, not musical accuracy; no second fit has run. A new
-fitting protocol must keep whole-crop clock state and declare representative
-continuation/change labels, matched controls and stopping criteria. In
+and numerical contracts, not musical accuracy. The subsequent
+[coupled-clock fit](../evaluation/baselines/coupled-clock-learning-v1.md) has now
+run a main model and fitted zero-feature control with one anchor per complete
+crop. The fixed gate failed: native tempo improves against zero on development,
+but phase does not; ARTBeaT regresses broadly against raw and v1. Positive
+integration removes backwards-clock inconsistency, not accumulated alignment
+error. The fit used the same expressive native-beat references and did not
+claim audited omission/change/no-rhythm training labels. Keep ARTBeaT diagnostic
+and all holdouts sealed. Any next proposal must explain how sustained alignment
+and representative supervision will be tested; do not automatically rerun this
+configuration or attribute its failure to CNN architecture alone. In
 particular, an always-positive clock is not a rhythm-presence detector, and
 native count supervision does not certify the uniquely correct perceived level.
 

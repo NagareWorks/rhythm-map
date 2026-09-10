@@ -1,11 +1,11 @@
 # Coupled clock: executable architecture and supervision contract
 
-Status, 2026-09-10: implementation resumed after the training walkthrough.
-This is a **new, unfitted research architecture**, not a retry of the closed
-[direct readout](../../evaluation/baselines/direct-clock-learning-v1.md).
-There is no optimizer runner, encoder capture, new audio, holdout access,
-fitted weight, production integration or measured music-accuracy improvement.
-The authored tests execute forward/backward calculations without weight updates.
+Status, 2026-09-10: the [fixed complete-crop experiment](PROTOCOL-v1.md) has now
+run both 20-epoch fits. Its [research gate failed](../../evaluation/baselines/coupled-clock-learning-v1.md):
+coherent advancement does not establish reliable musical alignment. This is a
+separate experiment, not a retry of the closed [direct readout](../../evaluation/baselines/direct-clock-learning-v1.md).
+No new encoder capture, audio, holdout access, distributed weight or production
+integration. The synthetic unit tests remain separate from the actual music fit.
 
 ## What is implemented, and what is reused
 
@@ -15,12 +15,19 @@ Replace the three independent outputs with two fields: log-period and an
 anchor field, of which only the first physical frame supplies the clock origin.
 The new head has **23,970 parameters**. It accepts only `[batch,time,512]`
 frozen encoder features; truth, detector events, file identity and candidate
-clocks are not inputs. Neither v1 fitted weights nor its predictions are reused.
+clocks are not inputs. V1 fitted weights/predictions are not inputs or initialization;
+the old selected weights are replayed only as an evaluation comparator.
 
 - `model.py`: CNN fields with canonical raw-feature padding and ownership.
 - `clock.py`: positive advancement, one anchor and differentiable integration.
 - `supervision.py`: native cumulative-count targets, reference masks and loss.
 - `test_coupled_clock.py`: authored representation, numerical and gradient tests.
+- `prepare.py`: pinned feature/trace reuse and v1 comparator replay, no encoder call.
+- `run.py`: full-crop gradient accumulation, two fixed fits and development-only selection.
+- `measurement.py`: cell/phase/count scoring on fixed reference and common support.
+- `test_experiment.py`: synthetic measurement, work-weight and replay contracts.
+- `inputs-v1.json`, `execution-v1.json`, `results-v1.json`: public hashes and metrics,
+  never audio/features/prediction arrays or trainable weight files.
 
 The old experiment's source/report hashes and closed decision remain unchanged.
 This module is not imported by the Rust core, CLI, bindings or model packs.
@@ -122,7 +129,7 @@ sparse observation sequence but have different native count targets. This is a
 supervision/identifiability check, not training data or an audio discrimination
 result. Synthetic arrays cannot substitute for representative musical labels.
 
-## Remaining gates before a second fit
+## Requirements registered for the second fit
 
 1. Freeze a separate input manifest and scientific protocol. Reusing v1's
    exposed calibration and private features is exploratory development, not
@@ -145,6 +152,9 @@ result. Synthetic arrays cannot substitute for representative musical labels.
    emit its crossings as observed beats or use unit phase-vector norm as
    confidence. Rhythm availability/admission remains separate.
 
-The next work is a bounded fitting/data protocol for this executable design,
-not another architecture/seed sweep, encoder fine-tune, source search, new
-public option or package release. No second fit is reported by this commit.
+The [protocol](PROTOCOL-v1.md) fixes these choices for the completed run. Its
+fit population has expressive native beats, not audited continuation/change
+region labels; ARTBeaT remains diagnostic-only. That explicit coverage limit is
+not claimed resolved by fitting. Close this fixed run without an automatic
+seed/epoch sweep; see the result report for the remaining phase-locking and
+supervision questions. No public option or package release follows.

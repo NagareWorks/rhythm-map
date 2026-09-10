@@ -40,10 +40,19 @@ After the training walkthrough, implementation resumed with an executable
 a 23,970-parameter CNN, one origin and positive integrated beat advancement.
 Authored checks cover coherent phase/tempo, chunk carry, unsmoothed steps,
 ramps, subcell reference changes, native octave-count loss, masks and gradients.
-No second optimizer run or music improvement is claimed. Cell-average tempo
-is explicitly different from v1's instantaneous targets; old scores stay frozen.
-Next freeze a bounded fitting/data protocol with representative continuation/
-change supervision and complete-crop training, not independent-window resets.
+The subsequent [complete-crop fit](evaluation/baselines/coupled-clock-learning-v1.md)
+has now executed one main fit and one matched zero-feature control, 20 epochs /
+100 updates each. It failed the pre-registered gate: development tempo improves
+16.03% against zero features but phase worsens; ARTBeaT regresses on 13/15 tempo
+and 15/15 phase cases against raw events. Coherence is verified, musical alignment
+is not. Close this fixed run without an automatic sweep. Cell-average tempo is
+explicitly different from v1's instantaneous targets; old scores stay frozen.
+The reused RUBATO fit data supplies expressive native beats, not audited
+continuation/change region labels; no diagnostic cases were moved into fitting.
+The next proposal must address sustained phase alignment and representative
+supervision together, with a falsifiable comparison. Do not infer that more
+epochs, a larger encoder or a Transformer will solve either gap. No new fit is
+automatically authorized by this failure.
 Rhythm availability, native beat-level ambiguity and independent admission
 remain unresolved; coherence alone cannot admit the model. This is not an
 encoder fine-tune or automatic data expansion. Keep the one-call/no-per-song-
