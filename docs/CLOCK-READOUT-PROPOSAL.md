@@ -1,5 +1,13 @@
 # Small learned clock-compatibility readout: proposal v1
 
+Historical proposal, not the current fitting path. On 2026-09-10 a separately
+authorized [direct phase/period head](../evaluation/baselines/direct-clock-learning-v1.md)
+was fitted without candidate-clock inputs, using explicitly exposed development
+data. Its gate failed and that fixed head is closed. The ranker specified below
+was not fitted; its missing-generator and independent-label prerequisites were
+not declared satisfied. Preserve this proposal rather than relabeling the direct
+experiment as its implementation.
+
 Status: **design and model-free contract checks only**. No training, feature
 extraction, new annotation collection, holdout access, model export or production
 change is approved by this document. The pilot sizes and resource caps below

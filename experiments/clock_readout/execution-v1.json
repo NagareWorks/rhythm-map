@@ -1,0 +1,14 @@
+{
+  "inputs_sha256": "2e931a64145b1e425803bc08b7eb9d868f4c41b2d8ddea5a90b455c1f0a292df",
+  "plan_sha256": "69ad03cc6c810761ab13ad7f1fa7991d475186540cac70cfb86067028535b018",
+  "runner_sha256": "ee52a72e4f03675ffe0169d7a9ad15d4bac0726133fdf41e5e49eaaa541ac223",
+  "torch_version": "2.10.0+cu129",
+  "numpy_version": "2.2.6",
+  "device": "cuda",
+  "deterministic": true,
+  "tf32": false,
+  "fits": 2,
+  "max_epochs": 20,
+  "max_seconds_per_fit": 1800,
+  "parameters": 24003
+}

@@ -1,0 +1,3711 @@
+{
+  "schema": "rhythm-map.direct-clock-learning.v1",
+  "plan": {
+    "schema": "rhythm-map.direct-clock-development.v1",
+    "seed": 142,
+    "prefix_seconds": 60,
+    "fit_works": [
+      "Vivaldi_RV269-01",
+      "Bach_BWV1007-01",
+      "Berlioz_H048-04",
+      "Verdi_Nabucco-VaPensiero",
+      "Brahms_Op115-01",
+      "Beethoven_Op072-0",
+      "Handel_HWV040-1-01",
+      "Schumann_Op039-05",
+      "Schubert_D733-01"
+    ],
+    "development_works": [
+      "Boccherini_G275-03",
+      "Mussorgsky_PicturesAtAnExhibition-10",
+      "Mozart_KV618"
+    ],
+    "cases": [
+      {
+        "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Bach_BWV1007-01",
+        "role": "fit",
+        "audio_hint": "audio/Bach_BWV1007-01_AR-MacLeod2011.wav",
+        "audio_sha256": "3b4e219d54a698d5de7a3622ee46e1652ce44e06782691a53a0163bc10bae736",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-bach-bwv1007-01-ar-macleod2011.json",
+        "truth_sha256": "f16e419511caee1c96c786fbe5a745b9e319a5d95a8d832dcd3b337f072706a7"
+      },
+      {
+        "id": "rubato-bach-bwv1007-01-ov-milman2022",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Bach_BWV1007-01",
+        "role": "fit",
+        "audio_hint": "audio/Bach_BWV1007-01_OV-Milman2022.wav",
+        "audio_sha256": "b57525accae925ff8aaca1ee9f1048d956d1f37e75ec6b3db8f05cc8f17817da",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-bach-bwv1007-01-ov-milman2022.json",
+        "truth_sha256": "02617c821f0b7beb6fb0578d50f18b45b1e4b96e788c33835646b716b8a584e7"
+      },
+      {
+        "id": "rubato-beethoven-op072-0-ov-henning2017",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Beethoven_Op072-0",
+        "role": "fit",
+        "audio_hint": "audio/Beethoven_Op072-0_OV-Henning2017.wav",
+        "audio_sha256": "840011dbbbc7dbeee4755466a72ad2736452b7e0486091b8cb97b918044a67e9",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-beethoven-op072-0-ov-henning2017.json",
+        "truth_sha256": "0597675375121d0e7592d5abdae51277c166ff7611f3daf327f0ae4193ddcf8e"
+      },
+      {
+        "id": "rubato-berlioz-h048-04-ov-dennis2016",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Berlioz_H048-04",
+        "role": "fit",
+        "audio_hint": "audio/Berlioz_H048-04_OV-Dennis2016.wav",
+        "audio_sha256": "e5946d1f1176b1165f9e7fac03e32c729b421bbae376db64f839f4287d245bf6",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-berlioz-h048-04-ov-dennis2016.json",
+        "truth_sha256": "4e8b47d76b1ddce15d38da69fe3ca74892c777d2e1eb541524fc88d7a790bf34"
+      },
+      {
+        "id": "rubato-boccherini-g275-03-ov-krux2022",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Boccherini_G275-03",
+        "role": "development",
+        "audio_hint": "audio/Boccherini_G275-03_OV-Krux2022.wav",
+        "audio_sha256": "0176a58324aa4a93455ce47b205edef5b4a96912bf17bf86acd1cdd9c8acf42d",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-boccherini-g275-03-ov-krux2022.json",
+        "truth_sha256": "9b79c5c3cc3046c889ef9bbb34b0231dc7c393e22a088b3776b6b0862edad18b"
+      },
+      {
+        "id": "rubato-brahms-op115-01-ov-schmitta2025",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Brahms_Op115-01",
+        "role": "fit",
+        "audio_hint": "audio/Brahms_Op115-01_OV-SchmittA2025.wav",
+        "audio_sha256": "14b025da3140d4a57c3102065ba0b956a25b12496f272647c3bafba6f9f4430a",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-brahms-op115-01-ov-schmitta2025.json",
+        "truth_sha256": "6775c1cabad7d73b7682fa37d9a6e51c5542bffa054838df22f7a94ad150136a"
+      },
+      {
+        "id": "rubato-brahms-op115-01-ov-steffens2008",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Brahms_Op115-01",
+        "role": "fit",
+        "audio_hint": "audio/Brahms_Op115-01_OV-Steffens2008.wav",
+        "audio_sha256": "ede6c956f98605f468a1932424d6f33561bdb9724c84811a4019acaa74650f6c",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-brahms-op115-01-ov-steffens2008.json",
+        "truth_sha256": "8934b0c9f51e4a9520584c35998f7d9cf724272de99d577d1b4f95e658ce7964"
+      },
+      {
+        "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Handel_HWV040-1-01",
+        "role": "fit",
+        "audio_hint": "audio/Handel_HWV040-1-01_AR-ButtnerFmaj2025.wav",
+        "audio_sha256": "5fee1c79ff4373b61a66882fcb73dc36cb12629eadb76980e47c7dc196ef9d16",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-handel-hwv040-1-01-ar-buttnerfmaj2025.json",
+        "truth_sha256": "986d47aaab5598db25b2fb44d16bfbf7f9c6b2df4acf9b118fae9f7f8911932c"
+      },
+      {
+        "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Handel_HWV040-1-01",
+        "role": "fit",
+        "audio_hint": "audio/Handel_HWV040-1-01_AR-ButtnerGmaj2025.wav",
+        "audio_sha256": "7194e9fc821302c6318b32b836a074a48c05a303ca7cebc87fb2a14d5981b5d3",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-handel-hwv040-1-01-ar-buttnergmaj2025.json",
+        "truth_sha256": "10b34ee45b0b11f66943f98ab75b16886fd65dd7a108127a447bfb919d146f3e"
+      },
+      {
+        "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Handel_HWV040-1-01",
+        "role": "fit",
+        "audio_hint": "audio/Handel_HWV040-1-01_AR-R-Bra2020.wav",
+        "audio_sha256": "4a45277ac9ffed4328583cbc30df1e642339e993a63bc113d8e6e02a2425112d",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-handel-hwv040-1-01-ar-r-bra2020.json",
+        "truth_sha256": "ac2935ad5dcb5fc1a1dd44730eaed584241096c35bfe0508da5393dcd40a8ec7"
+      },
+      {
+        "id": "rubato-mozart-kv618-ar-papalin2012",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Mozart_KV618",
+        "role": "development",
+        "audio_hint": "audio/Mozart_KV618_AR-Papalin2012.wav",
+        "audio_sha256": "896320885ec7f71145a5672d96c26db1242744633cb95ccf247a2f896f11db82",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-mozart-kv618-ar-papalin2012.json",
+        "truth_sha256": "82a37995c722804ee66b57f6b3bfe39ce88cc602a4cc719b84c65c71300f5a32"
+      },
+      {
+        "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Mozart_KV618",
+        "role": "development",
+        "audio_hint": "audio/Mozart_KV618_OV-GliArmonici2015.wav",
+        "audio_sha256": "d03c21133e025c9d12f94ad9eebf4595651c76801613261b7548e2849b858a42",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-mozart-kv618-ov-gliarmonici2015.json",
+        "truth_sha256": "5f3832fafaa133b5a3875b8964b47b493568cdd2f4be76615fd5ea6f2f0f7616"
+      },
+      {
+        "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Mussorgsky_PicturesAtAnExhibition-10",
+        "role": "development",
+        "audio_hint": "audio/Mussorgsky_PicturesAtAnExhibition-10_OV-Bertoglio2012.wav",
+        "audio_sha256": "ab457b00d5da373a204b3300fa574b46e117c9959470913a6032a374bf3c5bbf",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012.json",
+        "truth_sha256": "996d4563a086fbe048d71da38e3d2441c789c28e2289aefa7284b3d3c10bc5c6"
+      },
+      {
+        "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Mussorgsky_PicturesAtAnExhibition-10",
+        "role": "development",
+        "audio_hint": "audio/Mussorgsky_PicturesAtAnExhibition-10_OV-R-Staab2016.wav",
+        "audio_sha256": "00129b67f8fc519de34ad6d36fcad00388aa6d9da49dde1c0cc4fc990f52e2be",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016.json",
+        "truth_sha256": "cc91282ff134ac42e5c051942baad56b49d19f8a56acdb09ce57c8e49e461f10"
+      },
+      {
+        "id": "rubato-schubert-d733-01-ar-staab2012",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Schubert_D733-01",
+        "role": "fit",
+        "audio_hint": "audio/Schubert_D733-01_AR-Staab2012.wav",
+        "audio_sha256": "4cee48e973fd8ff0797c1219e43b07cd2078d6b6882ebeb34e951270d0b4aa30",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-schubert-d733-01-ar-staab2012.json",
+        "truth_sha256": "15a68f3c29bb4eb1f9974093ab0f23189ba183232b341233e70f09523deec922"
+      },
+      {
+        "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Schubert_D733-01",
+        "role": "fit",
+        "audio_hint": "audio/Schubert_D733-01_OV-ButtnerWeiss2025.wav",
+        "audio_sha256": "d2e57e05adc0ffbf8020f690928a873aeff6cbe6a5570db59f13b88946cfaae8",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-schubert-d733-01-ov-buttnerweiss2025.json",
+        "truth_sha256": "71dc170ac875df1922db5cba6dcbfb59db11f254d6c35c45b825bdfe0d33ca8c"
+      },
+      {
+        "id": "rubato-schumann-op039-05-ov-buttner2025",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Schumann_Op039-05",
+        "role": "fit",
+        "audio_hint": "audio/Schumann_Op039-05_OV-Buttner2025.wav",
+        "audio_sha256": "dad5d6157139a75334ed30ee8d4cc7d35c14fde6c2bea50896aff7fcfaaa1ff5",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-schumann-op039-05-ov-buttner2025.json",
+        "truth_sha256": "aa36e4aec046346505801c6eb7d66db6557792129ba3395955945c7f3f315cd5"
+      },
+      {
+        "id": "rubato-schumann-op039-05-ov-pizarro2012",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Schumann_Op039-05",
+        "role": "fit",
+        "audio_hint": "audio/Schumann_Op039-05_OV-Pizarro2012.wav",
+        "audio_sha256": "26d1cae0297e96a5da7c33f50e2e4db32d6af1e897fe7be1e40f1f7a4faa44b9",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-schumann-op039-05-ov-pizarro2012.json",
+        "truth_sha256": "d7140499d39a2769e1d8a248d2122efda0cb519ec2cc203d0bf81563ed0fc312"
+      },
+      {
+        "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Verdi_Nabucco-VaPensiero",
+        "role": "fit",
+        "audio_hint": "audio/Verdi_Nabucco-VaPensiero_AR-R-Operaphilia2022.wav",
+        "audio_sha256": "a8a65dde5137e28f74955df50ba61c188ae16f095b920d3d7f734a9fa70e2305",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022.json",
+        "truth_sha256": "a45bd07ff0742e30ee0eca8cd53ffc0fc1c29baf8f81ee5b024554af89ef2796"
+      },
+      {
+        "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Verdi_Nabucco-VaPensiero",
+        "role": "fit",
+        "audio_hint": "audio/Verdi_Nabucco-VaPensiero_OV-Garcia2015.wav",
+        "audio_sha256": "58ae7ff618b4ac08179ca85568f6fa9432417fbfda5c7a4868c95eea66417b8a",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-verdi-nabucco-vapensiero-ov-garcia2015.json",
+        "truth_sha256": "49379fbe7c51dbf3d9cff11586ece6b9316d128e1f05cd2f8fdb0b281c1f4c88"
+      },
+      {
+        "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Verdi_Nabucco-VaPensiero",
+        "role": "fit",
+        "audio_hint": "audio/Verdi_Nabucco-VaPensiero_OV-LibrosVivos2007.wav",
+        "audio_sha256": "1b213cfacc643b210b6e8f32213cb0ea7a353eb38b05cca5956f282583d04190",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-verdi-nabucco-vapensiero-ov-librosvivos2007.json",
+        "truth_sha256": "f0aaf80955f919bf3cd84df7f649824812ab08aed548d09e5342fb7d79e00959"
+      },
+      {
+        "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Verdi_Nabucco-VaPensiero",
+        "role": "fit",
+        "audio_hint": "audio/Verdi_Nabucco-VaPensiero_OV-Secci2020.wav",
+        "audio_sha256": "9a11bb411d2ad8c99838355180a795a9401c1369c325df6f01f755e81da34f7b",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-verdi-nabucco-vapensiero-ov-secci2020.json",
+        "truth_sha256": "ec2d36c1e4e7bfe5641dc5085e08bd4ab3cb2aa28e1d408f7faab44b584f14d1"
+      },
+      {
+        "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Vivaldi_RV269-01",
+        "role": "fit",
+        "audio_hint": "audio/Vivaldi_RV269-01_AR-Bra2021.wav",
+        "audio_sha256": "25928e5993da83fb5df89a5d08f08e0033ef9e5787eab4ea6864b20034ade654",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-vivaldi-rv269-01-ar-bra2021.json",
+        "truth_sha256": "e892d59ecb17cc055034f3c043d49f981ad877092fb1298df3eaaeb10f4fd47e"
+      },
+      {
+        "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Vivaldi_RV269-01",
+        "role": "fit",
+        "audio_hint": "audio/Vivaldi_RV269-01_AR-ModenaChamber2022.wav",
+        "audio_sha256": "210aa600e039d44824ff31f31070490ecbfa2f92ef8f555532560fef52f66e2c",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-vivaldi-rv269-01-ar-modenachamber2022.json",
+        "truth_sha256": "176a0359278e6ec6fcffec89b0489fbd3ca8ac4e8b93dd974c3b4423b8444cb1"
+      },
+      {
+        "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+        "cohort": "rubato",
+        "suite": "rubato-calibration-v1",
+        "suite_sha256": "c10c229bbf7b89ebd23dd2b4ff2a2d19aaec9b5f28d2b5eb6d121d950fb62653",
+        "work": "Vivaldi_RV269-01",
+        "role": "fit",
+        "audio_hint": "audio/Vivaldi_RV269-01_AR-R-Intartaglia2011.wav",
+        "audio_sha256": "e2bde23fbc01bea0255f7e582414886b2f3dd56f573a0b654aaa8269d0390ea2",
+        "truth": "evaluation/suites/truth/rubato-calibration-v1/rubato-vivaldi-rv269-01-ar-r-intartaglia2011.json",
+        "truth_sha256": "ba992b7fd03f9117cf411b06c59778f9eb65698a1e71c6907fa8520da0f46d9b"
+      },
+      {
+        "id": "artbeat-05-75-to-150",
+        "cohort": "artbeat",
+        "suite": "artbeat-v1",
+        "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+        "work": "artbeat-shared-source",
+        "role": "diagnostic",
+        "audio_hint": "audio/05_ARTBeaT_TempoA_75to150.mp3",
+        "audio_sha256": "ddff1eadde814bc13896b64ad81b7ba55626be4f7b64dae417d00a2210a0c517",
+        "truth": "evaluation/suites/truth/artbeat-v1/artbeat-05-75-to-150.json",
+        "truth_sha256": "5d6c395345fb6155893bc3aad4e0def3518bdecedb82f08d3514adfaeea0d456"
+      },
+      {
+        "id": "artbeat-06-150-to-75",
+        "cohort": "artbeat",
+        "suite": "artbeat-v1",
+        "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+        "work": "artbeat-shared-source",
+        "role": "diagnostic",
+        "audio_hint": "audio/06_ARTBeaT_TempoA_150to75.mp3",
+        "audio_sha256": "196e3f9d0a12b12b7b0936d4de0beb36412f217d55114feac810aad0d303f2e5",
+        "truth": "evaluation/suites/truth/artbeat-v1/artbeat-06-150-to-75.json",
+        "truth_sha256": "fcda5614cb07639a66edb58f7b658214e1f54ec1db1de35e84367d47be77849f"
+      },
+      {
+        "id": "artbeat-07-75-to-112-5",
+        "cohort": "artbeat",
+        "suite": "artbeat-v1",
+        "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+        "work": "artbeat-shared-source",
+        "role": "diagnostic",
+        "audio_hint": "audio/07_ARTBeaT_TempoA_75to112.5.mp3",
+        "audio_sha256": "458693d0911bc8543b5bb819db01391bbaa2b49fd693faf779f00ff266d7641e",
+        "truth": "evaluation/suites/truth/artbeat-v1/artbeat-07-75-to-112-5.json",
+        "truth_sha256": "063beee7c5428adedeecab21d0f8678a69c049f4ca2ea8ebfb7827b1ec79057f"
+      },
+      {
+        "id": "artbeat-08-112-5-to-75",
+        "cohort": "artbeat",
+        "suite": "artbeat-v1",
+        "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+        "work": "artbeat-shared-source",
+        "role": "diagnostic",
+        "audio_hint": "audio/08_ARTBeaT_TempoA_112.5to75.mp3",
+        "audio_sha256": "04180b492147efd020d63e79dd444a7a3969b677be1e15c6f1b67256d4b3544b",
+        "truth": "evaluation/suites/truth/artbeat-v1/artbeat-08-112-5-to-75.json",
+        "truth_sha256": "64de869a6b3e15d8e07601d67cb1508842de558761f5d00f4d25ded8077b92e6"
+      },
+      {
+        "id": "artbeat-09-90-to-80",
+        "cohort": "artbeat",
+        "suite": "artbeat-v1",
+        "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+        "work": "artbeat-shared-source",
+        "role": "diagnostic",
+        "audio_hint": "audio/09_ARTBeaT_TempoA_90to80.mp3",
+        "audio_sha256": "f3bf9837094765fd2ceca45427b16f721ed1b14c31921f829ba26898535d4bdf",
+        "truth": "evaluation/suites/truth/artbeat-v1/artbeat-09-90-to-80.json",
+        "truth_sha256": "a9802ae028c9631323354a5826f50e2c78b14e54c66581a817f8d07b633a5409"
+      },
+      {
+        "id": "artbeat-10-90-to-120",
+        "cohort": "artbeat",
+        "suite": "artbeat-v1",
+        "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+        "work": "artbeat-shared-source",
+        "role": "diagnostic",
+        "audio_hint": "audio/10_ARTBeaT_TempoA_90to120.mp3",
+        "audio_sha256": "adde95301f560b88e35075ed2a866989b0ff27a34e62c2fb7e81a68a1584fd24",
+        "truth": "evaluation/suites/truth/artbeat-v1/artbeat-10-90-to-120.json",
+        "truth_sha256": "2165ea70a5f4224461552a28567cb45ad2b2cfe66cf4a99661ff49a02b24f10f"
+      },
+      {
+        "id": "artbeat-11-60-to-80",
+        "cohort": "artbeat",
+        "suite": "artbeat-v1",
+        "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+        "work": "artbeat-shared-source",
+        "role": "diagnostic",
+        "audio_hint": "audio/11_ARTBeaT_TempoA_60to80.mp3",
+        "audio_sha256": "e9c28da6be8a12ac772df218bd4fdbb3651ec73e0ec9caa745dccba205566fcf",
+        "truth": "evaluation/suites/truth/artbeat-v1/artbeat-11-60-to-80.json",
+        "truth_sha256": "7332a12f293d6bf843b4833054722c492c551d9e82b978aa11e6a90e145f1901"
+      },
+      {
+        "id": "artbeat-12-80-to-150",
+        "cohort": "artbeat",
+        "suite": "artbeat-v1",
+        "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+        "work": "artbeat-shared-source",
+        "role": "diagnostic",
+        "audio_hint": "audio/12_ARTBeaT_TempoA_80to150.mp3",
+        "audio_sha256": "33caad5980c9e743365721d6aa321b5ba2959653c5858f4038e32c7ebcffd11a",
+        "truth": "evaluation/suites/truth/artbeat-v1/artbeat-12-80-to-150.json",
+        "truth_sha256": "84dc7d0b5ae7f297bdef100b6f67dc64d1475655ef9a36cdd442578368301a87"
+      },
+      {
+        "id": "artbeat-13-180-to-120",
+        "cohort": "artbeat",
+        "suite": "artbeat-v1",
+        "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+        "work": "artbeat-shared-source",
+        "role": "diagnostic",
+        "audio_hint": "audio/13_ARTBeaT_TempoA_180to120.mp3",
+        "audio_sha256": "4e14088d021e4d78fef2bd6febc3235c445cef83eef26e24e8429fce7e061fa3",
+        "truth": "evaluation/suites/truth/artbeat-v1/artbeat-13-180-to-120.json",
+        "truth_sha256": "61513c63f05ff332d265d6d785ca50342cdad10b23f664a40f1b55d2487349bf"
+      },
+      {
+        "id": "artbeat-14-240-to-96",
+        "cohort": "artbeat",
+        "suite": "artbeat-v1",
+        "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+        "work": "artbeat-shared-source",
+        "role": "diagnostic",
+        "audio_hint": "audio/14_ARTBeaT_TempoA_240to96.mp3",
+        "audio_sha256": "a96686045df4adee6a0aa4127b70daeeab14d8b9f08124cc78d9af95a860c02c",
+        "truth": "evaluation/suites/truth/artbeat-v1/artbeat-14-240-to-96.json",
+        "truth_sha256": "6583d495985b507d2083975501e40f15ad0727f2df8761645280f4fb87c3fe96"
+      },
+      {
+        "id": "artbeat-15-85-to-127-5",
+        "cohort": "artbeat",
+        "suite": "artbeat-v1",
+        "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+        "work": "artbeat-shared-source",
+        "role": "diagnostic",
+        "audio_hint": "audio/15_ARTBeaT_TempoA_85to127.5.mp3",
+        "audio_sha256": "6997c1b5760b2bb86be1fb9e70dd8e7b2c98aa7243423fd64a895b7ad36ca701",
+        "truth": "evaluation/suites/truth/artbeat-v1/artbeat-15-85-to-127-5.json",
+        "truth_sha256": "e819ded9652413d5fd923066047b8cc1a27a2c0d24f3fdb3b80b40148fc9c39e"
+      },
+      {
+        "id": "artbeat-18-piano-rubato",
+        "cohort": "artbeat",
+        "suite": "artbeat-v1",
+        "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+        "work": "artbeat-shared-source",
+        "role": "diagnostic",
+        "audio_hint": "audio/18_ARTBeaT_TempoC_piano.mp3",
+        "audio_sha256": "3e01831b02777bdc3707677153589ef92645c410303b480e7ef0d1d882dcb82d",
+        "truth": "evaluation/suites/truth/artbeat-v1/artbeat-18-piano-rubato.json",
+        "truth_sha256": "ddf1a5ff2a4d5649497bb54a60084abed6a21b1a062c874a492820245afd11a2"
+      },
+      {
+        "id": "artbeat-19-ramp-80-to-200",
+        "cohort": "artbeat",
+        "suite": "artbeat-v1",
+        "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+        "work": "artbeat-shared-source",
+        "role": "diagnostic",
+        "audio_hint": "audio/19_ARTBeaT_TempoC_80to200.mp3",
+        "audio_sha256": "2a581d2079fc21cc5f3657bf5915903552097c39d68c8ddd045ca8e492113e2e",
+        "truth": "evaluation/suites/truth/artbeat-v1/artbeat-19-ramp-80-to-200.json",
+        "truth_sha256": "407ec564b847ebf779e2f740c8c5d156211e69e18dc62b6a8fd37c17d01c4457"
+      },
+      {
+        "id": "artbeat-20-ramp-200-to-80",
+        "cohort": "artbeat",
+        "suite": "artbeat-v1",
+        "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+        "work": "artbeat-shared-source",
+        "role": "diagnostic",
+        "audio_hint": "audio/20_ARTBeaT_TempoC_200to80.mp3",
+        "audio_sha256": "891601d372c08edc760162584f0e2d37b3efacba972b3a8ac6178abdf051fcf6",
+        "truth": "evaluation/suites/truth/artbeat-v1/artbeat-20-ramp-200-to-80.json",
+        "truth_sha256": "b2e8e3aa1a131b9335914f974d5cfff7618703dd8d9c87fe38723545f6ec5980"
+      },
+      {
+        "id": "artbeat-21-polyrhythm-70-to-105",
+        "cohort": "artbeat",
+        "suite": "artbeat-v1",
+        "suite_sha256": "21f3d44bacbfe9c50dfbc889990c563d44e406d56558492627402d21e5a7e81b",
+        "work": "artbeat-shared-source",
+        "role": "diagnostic",
+        "audio_hint": "audio/21_ARTBeaT_Polyrhythm_140to105.mp3",
+        "audio_sha256": "c6bf4a4268cdf757b971fcc3f2de6c8a63020b09dc12f33cdea083b4e78622c0",
+        "truth": "evaluation/suites/truth/artbeat-v1/artbeat-21-polyrhythm-70-to-105.json",
+        "truth_sha256": "7016cc892dcec5a95ea18cf778d9890f1d754158168f29c3ce5e895d32578638"
+      }
+    ],
+    "independent_acceptance": false,
+    "prior_calibration_reused_for_exploratory_fitting": true,
+    "native_annotation_convention_not_unique_perceived_level": true,
+    "holdout_access": false,
+    "performer_disjointness": "not_certified",
+    "encoder_recording_overlap": "unknown",
+    "source_sha256": {
+      "data.py": "dc785abed705350139786e86fd0533cd96b673987ab7db710c991369c5daa241",
+      "model.py": "57871068c5c4958679d014dbc0018d4ccda5c1d315265ad64007082da8a76abc",
+      "prepare.py": "4fadbeab34eec5c3b99df57a11d23615439b09ad21f9f6843bbc3c3c58f0eeb1",
+      "README.md": "29670fac955177404d235b91e764ad4a167c8b8c696fac696f86dafdc555ca7e"
+    },
+    "trace_executable_sha256": "9e510b03946d7f915dd31be13bd67a06436ef1d233227754ee50cb1ae79dd5e6"
+  },
+  "inputs_sha256": "2e931a64145b1e425803bc08b7eb9d868f4c41b2d8ddea5a90b455c1f0a292df",
+  "capture": {
+    "cases": [
+      {
+        "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+        "frames": 3001,
+        "input_sha256": "fc107ea17f61fadfb9558ba9fb95895861809677b88c8a97cf3c40e7ededa28e",
+        "feature_sha256": "fa3485693a27bbebcff5d128bc43f1b490ab29e93713aa150c78b30c81d5ccf5",
+        "max_logit_error_vs_rten": 4.863739013671875e-05
+      },
+      {
+        "id": "rubato-bach-bwv1007-01-ov-milman2022",
+        "frames": 3001,
+        "input_sha256": "27d4b967d46658ae1eb7bdc62d83fdad4034f0dce11f533faed2aab2c944de99",
+        "feature_sha256": "206bb090becd1ead365297c27e1dbf2163d4f9315eee1339e416641a938dd314",
+        "max_logit_error_vs_rten": 4.291534423828125e-05
+      },
+      {
+        "id": "rubato-beethoven-op072-0-ov-henning2017",
+        "frames": 3001,
+        "input_sha256": "a5e355c75edfb624e340acc1bc35ff2693ef835a085fefd89019f8690eb5b142",
+        "feature_sha256": "34da953c86646625ec061c9c3f627aa20ee14b65b52fb0223a52133cdfaf1f5e",
+        "max_logit_error_vs_rten": 2.491474151611328e-05
+      },
+      {
+        "id": "rubato-berlioz-h048-04-ov-dennis2016",
+        "frames": 3001,
+        "input_sha256": "0f5514420ec5855c3ccae2d36046bc73d8305f03b19490fa8f6a944acec384a5",
+        "feature_sha256": "46243b524fdbaf21a084722391c837042f3ca99c27786e39e837ea7362d1e23d",
+        "max_logit_error_vs_rten": 4.875659942626953e-05
+      },
+      {
+        "id": "rubato-boccherini-g275-03-ov-krux2022",
+        "frames": 3001,
+        "input_sha256": "f83e9dc1c40e5d35432cb99238592b99da630d757e33580b193be9e010d137a0",
+        "feature_sha256": "09ef85983facb47a602b2b8d77f37a7cd4f60256a215bfcc0a9872989f67363a",
+        "max_logit_error_vs_rten": 0.00015401840209960938
+      },
+      {
+        "id": "rubato-brahms-op115-01-ov-schmitta2025",
+        "frames": 3001,
+        "input_sha256": "55e7e831f34651de8dfa76b37bec367b0d5df79d685380322c35470928f2f7d4",
+        "feature_sha256": "3bd1e1198dfc8215c7facf45f1692d901819768e3efd5709568b4fa1febb5383",
+        "max_logit_error_vs_rten": 4.100799560546875e-05
+      },
+      {
+        "id": "rubato-brahms-op115-01-ov-steffens2008",
+        "frames": 3001,
+        "input_sha256": "838eb343bb84e9d3b6df5b94970c77da5c733681f5c791b944241608e9a6b1d2",
+        "feature_sha256": "616ba4747b90510a0018e21cec5e0d75e7095ceb00e7ab7b8ad4094a4741d2af",
+        "max_logit_error_vs_rten": 3.62396240234375e-05
+      },
+      {
+        "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "frames": 3001,
+        "input_sha256": "cd870273a9ca9c1ea0f36e80593847471f54b56886ad79ea58cc6338913afebe",
+        "feature_sha256": "3fcd97c4ace1da1fc8380acb4ed7ac6dd9a4cd0f4ed737cc1ae87e1daa6f9db9",
+        "max_logit_error_vs_rten": 3.62396240234375e-05
+      },
+      {
+        "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "frames": 3001,
+        "input_sha256": "121d14e781cf686e9af2a193659d6fcc4ba82a4a62c14fe0b82f8da4be28da96",
+        "feature_sha256": "5164438bd35d264f91c9f831b4f108a18223d7bae99fe5d4d675f051fe7028a8",
+        "max_logit_error_vs_rten": 3.1948089599609375e-05
+      },
+      {
+        "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+        "frames": 3001,
+        "input_sha256": "07c1895bef01f08ad2d25a885231e8447ed0ddfb0b20ca7cd625f672859ba232",
+        "feature_sha256": "7a54712c0250a7f75a9581e2a9665e50133118090f69c253dbf72cd8e37f8351",
+        "max_logit_error_vs_rten": 5.7220458984375e-05
+      },
+      {
+        "id": "rubato-mozart-kv618-ar-papalin2012",
+        "frames": 3001,
+        "input_sha256": "9e4e914de87ab98d33996760bd91ad858898cfb8c2d67b1b30686a2764857470",
+        "feature_sha256": "fb3b641a95d4d4b54f984857225a34cbec29048b1ae309e7fa29231191bd0a5f",
+        "max_logit_error_vs_rten": 2.765655517578125e-05
+      },
+      {
+        "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+        "frames": 3001,
+        "input_sha256": "102afe2c74c577fd13464d59161b5bfb0f0f47f00ad815f81ad47ab99f12bcb0",
+        "feature_sha256": "e9ceb5afbeca967ed52541bbb755125ee7b812971fe7e2e20cdca53aecd9aa9a",
+        "max_logit_error_vs_rten": 3.647804260253906e-05
+      },
+      {
+        "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+        "frames": 3001,
+        "input_sha256": "a48d731e89b9dfe31a6f8551bdc65083dd0ef2e0bd341d79ffc5cd287617f8e5",
+        "feature_sha256": "09d35131bebede52bc274323f4931815b3899e173d350cf6a3b03115a92d781a",
+        "max_logit_error_vs_rten": 4.291534423828125e-05
+      },
+      {
+        "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+        "frames": 3001,
+        "input_sha256": "65f0f27d60b5b1d638d1f2b9714c7e5d26ed29bbe23bcb8fc1c2c2b512ce2b8e",
+        "feature_sha256": "aea6ceccde855351e4fe6a28db24aea764f23e3b81e40389d46c2c39a43aaa05",
+        "max_logit_error_vs_rten": 2.6464462280273438e-05
+      },
+      {
+        "id": "rubato-schubert-d733-01-ar-staab2012",
+        "frames": 3001,
+        "input_sha256": "f03d832b7856f778b1244ea7cb2fca758b32b3330f2865ec943901c6ccbd573c",
+        "feature_sha256": "d193481e4ff1c3f90733fbc8b8ccfb000e95f4b5d297a27619cc41725c060af2",
+        "max_logit_error_vs_rten": 6.937980651855469e-05
+      },
+      {
+        "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+        "frames": 3001,
+        "input_sha256": "d84da9814d4cb893f29b3d78ede129f2dfeaa5a97fdea45175c9cc3f861a2014",
+        "feature_sha256": "771eb2c95d9636a3d050f3b684423e13b2c8334ea53536d3791c70a1af0c876d",
+        "max_logit_error_vs_rten": 5.3882598876953125e-05
+      },
+      {
+        "id": "rubato-schumann-op039-05-ov-buttner2025",
+        "frames": 3001,
+        "input_sha256": "b76d6a404e881304a8a3036a8e4b9d6677e39b65ec4e1e628ef23a2c40c16cb4",
+        "feature_sha256": "e0066a00e767824791e2d9ccfa7b8bf4ab0f58d7c8c31ab924b70dbc43f05b73",
+        "max_logit_error_vs_rten": 2.7179718017578125e-05
+      },
+      {
+        "id": "rubato-schumann-op039-05-ov-pizarro2012",
+        "frames": 3001,
+        "input_sha256": "9116b0851c788302f236532dc1a787dbe64801e55fb70469ebeb6ada6a512b41",
+        "feature_sha256": "133e39eacd3b849a6099c0eeddc0817c7deaaa7e31cd06bdc0b748cc52ef79ee",
+        "max_logit_error_vs_rten": 3.0517578125e-05
+      },
+      {
+        "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "frames": 3001,
+        "input_sha256": "aeb205aa20cc52a7f91d4d11e40732421e62f173a14905d6807edce48d301766",
+        "feature_sha256": "eb07bf726afb3bb3db65e9e442746c97796b03988f0549df9e55e9486889b88b",
+        "max_logit_error_vs_rten": 4.291534423828125e-05
+      },
+      {
+        "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+        "frames": 3001,
+        "input_sha256": "65a3b0c72d68f69993911ffce9c483b9e6f87ac60108f968b11a03ec60145a7a",
+        "feature_sha256": "82420663b912c6d099f5afe0be7c284794bd89401559e827c5811e55da898b9d",
+        "max_logit_error_vs_rten": 3.2901763916015625e-05
+      },
+      {
+        "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "frames": 3001,
+        "input_sha256": "9902ae23cd2af9bcbe48fe323de643c587c267812ac46acb773ae7e9c85a9c9b",
+        "feature_sha256": "32c0047dcb6d60369854777e193871cff42c61dd43edcfe3487781abba23cfe8",
+        "max_logit_error_vs_rten": 3.719329833984375e-05
+      },
+      {
+        "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+        "frames": 3001,
+        "input_sha256": "68ed99e827d6c89bf40056c51561693dcbc88d4df740b2925cd01e5d157493af",
+        "feature_sha256": "dd27d1ab86cd324a3ab49688672d2f5f608f9ac52ac9afd27c481f995ca250c1",
+        "max_logit_error_vs_rten": 4.076957702636719e-05
+      },
+      {
+        "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+        "frames": 3001,
+        "input_sha256": "e7a2d822c4c0eaa20dcaf84bbf5f839be3c8cab345d904de39e5b27fa1716c2b",
+        "feature_sha256": "52bda4411651d3652452ff0cc6c2302ba27ab44cd22df89740a48062fa27fa8a",
+        "max_logit_error_vs_rten": 6.866455078125e-05
+      },
+      {
+        "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "frames": 3001,
+        "input_sha256": "c66e2aa395598db70311cc8634207656251c8b6aa46941b2e558143d4ef94ce8",
+        "feature_sha256": "0ee2db828efd61781b0660ab18adf7e61057872118df07ee81bec80152bb7121",
+        "max_logit_error_vs_rten": 0.00010204315185546875
+      },
+      {
+        "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+        "frames": 3001,
+        "input_sha256": "684a67d951bb2e05db3612616aa62857ecccc4e8d62dbce90dc6f9d207e54b43",
+        "feature_sha256": "94ee2b03bdff798d372183e5c0a4793d37da4e877377e5b6b24b2cfc0360a8bc",
+        "max_logit_error_vs_rten": 2.5272369384765625e-05
+      },
+      {
+        "id": "artbeat-05-75-to-150",
+        "frames": 681,
+        "input_sha256": "b811090a32e94e2e0e19095fdd6766b6606560b29f524add2a9f0e312f169816",
+        "feature_sha256": "d63e1ce707879576fc40cf3c701db8241b97229e9dd490f65b64f8ec665584c3",
+        "max_logit_error_vs_rten": 3.910064697265625e-05
+      },
+      {
+        "id": "artbeat-06-150-to-75",
+        "frames": 681,
+        "input_sha256": "d59eb3a26b5f77f445e7010a3ab9baa9c863ba7e6586fb6ec36c21f5161db1b8",
+        "feature_sha256": "37808b475c26cfd74d9295d2d9347335ce9188221e9806addebe4a7b05cfab67",
+        "max_logit_error_vs_rten": 2.3365020751953125e-05
+      },
+      {
+        "id": "artbeat-07-75-to-112-5",
+        "frames": 667,
+        "input_sha256": "5f9181c6f55cb999fb6dbd1714ba4c088e55480c885a6684a7649d75323f35cf",
+        "feature_sha256": "97ceb6ad0818925a4041ca4da85ddf213168691b21853b8d74200ee438dfe45a",
+        "max_logit_error_vs_rten": 0.00012683868408203125
+      },
+      {
+        "id": "artbeat-08-112-5-to-75",
+        "frames": 701,
+        "input_sha256": "cf023fae876db48e12c91778053361b807e9516e5243dfab3ab748068771e13f",
+        "feature_sha256": "ef56d534368b8d79114964bd79422fbdd0a5f661148607295fe0a7d4f155dc07",
+        "max_logit_error_vs_rten": 0.0001647472381591797
+      },
+      {
+        "id": "artbeat-09-90-to-80",
+        "frames": 881,
+        "input_sha256": "dcff20ca0d86e1dc0bdb8b2fbd5ac147609c4bd8178c30a5f6b7b6d4bc78584a",
+        "feature_sha256": "ed4799f2af5e48d5cad7a54851aca26d316c6640a3dd2612a2fd634a34ea51cb",
+        "max_logit_error_vs_rten": 3.910064697265625e-05
+      },
+      {
+        "id": "artbeat-10-90-to-120",
+        "frames": 831,
+        "input_sha256": "288f13dac57e3eaacf202ee72fda596376dae66dd9f1fc629d7496a96a4a89ec",
+        "feature_sha256": "4a3755f1780aca0609250e8d4695219dd476b8722b49d661b9f3a8881ac84088",
+        "max_logit_error_vs_rten": 4.673004150390625e-05
+      },
+      {
+        "id": "artbeat-11-60-to-80",
+        "frames": 871,
+        "input_sha256": "3c7039d170350b50faacaca64d1360c3555c464ae9f6a6491c809610c66842f4",
+        "feature_sha256": "de93dd126d7adf6a27e11b293b22df2f314063c93f29f84182e6364ab6feacc6",
+        "max_logit_error_vs_rten": 0.00011157989501953125
+      },
+      {
+        "id": "artbeat-12-80-to-150",
+        "frames": 872,
+        "input_sha256": "2d17efaa2d15e83385d181c268bea84d54f1ce0869c267054e89ba6decbb60c4",
+        "feature_sha256": "d55fe934ef417e110cef17d59fb610d3dc24559585faf33c2d77e28a4803f030",
+        "max_logit_error_vs_rten": 4.7087669372558594e-05
+      },
+      {
+        "id": "artbeat-13-180-to-120",
+        "frames": 692,
+        "input_sha256": "0e0e1347ed538580286138a8016cf8613e05eff5fa699862c95e79ebcd0f1f04",
+        "feature_sha256": "d1fdaca5d415fdd8da44ffeda84f54fe9081c64012a7bbd5aabc0827a0a660eb",
+        "max_logit_error_vs_rten": 3.4332275390625e-05
+      },
+      {
+        "id": "artbeat-14-240-to-96",
+        "frames": 816,
+        "input_sha256": "a09df940fc461cadcd5f345abb598f472ab9735289ad0cc29a0145610aed5709",
+        "feature_sha256": "2ba0beecc6b3c21752ee3be295e2c7fb614453b104c05b0019375a12df49da31",
+        "max_logit_error_vs_rten": 3.695487976074219e-05
+      },
+      {
+        "id": "artbeat-15-85-to-127-5",
+        "frames": 1130,
+        "input_sha256": "1960c615f9286ffa0f4e60b129cabc3251f7a9f0c6329a9c9ca880b258c0b8f3",
+        "feature_sha256": "45b6f023045d3f64737854fe73570ea9dc9b5ff007a97c4673e4f500c87ccda6",
+        "max_logit_error_vs_rten": 3.337860107421875e-05
+      },
+      {
+        "id": "artbeat-18-piano-rubato",
+        "frames": 1163,
+        "input_sha256": "165840562bb8dd7e47fb771a184e84b1e893d26b9f9254d37bef5faf2b801363",
+        "feature_sha256": "4f1a9a4509bae64f83a6f8abcb02205ca30ea9561f728b19611819686825b64e",
+        "max_logit_error_vs_rten": 3.62396240234375e-05
+      },
+      {
+        "id": "artbeat-19-ramp-80-to-200",
+        "frames": 863,
+        "input_sha256": "51401dad0b30ca15544b3d80234e008b23009a04cb5cad5a96916ffdfe21dd2d",
+        "feature_sha256": "fe195bd93d8e44cda513e9849483ca9b5c982f15cfff8319ef7de41c8afb7ffa",
+        "max_logit_error_vs_rten": 1.8596649169921875e-05
+      },
+      {
+        "id": "artbeat-20-ramp-200-to-80",
+        "frames": 864,
+        "input_sha256": "bc8b544e91cb0bef81eee9d2bb0cac28950d5c1131a411278ec2d8e84bde742a",
+        "feature_sha256": "526db6658986068a816cf2f39080b5b56a9088b7e4a978d457fdf7d82899c035",
+        "max_logit_error_vs_rten": 2.288818359375e-05
+      },
+      {
+        "id": "artbeat-21-polyrhythm-70-to-105",
+        "frames": 615,
+        "input_sha256": "4ca14d54ca573670c917743cf07c357d51bc8e7432aede02e4fc654a282f676c",
+        "feature_sha256": "1884660516dde3555a26aa337c1c93c1420a09634c2052731e7de0e0879e2c56",
+        "max_logit_error_vs_rten": 2.5331974029541016e-05
+      }
+    ],
+    "elapsed_s": 22.106005551293492,
+    "encoder_state_unchanged": true,
+    "state_sha256": "db0c7b0d5e2b42aab3651477a058e72b6a82e236ef538cc1566131670da468ce"
+  },
+  "fits": [
+    {
+      "kind": "audio",
+      "parameters": 24003,
+      "seed": 142,
+      "epochs": 20,
+      "budget_exhausted": false,
+      "selected_epoch": 1,
+      "development_loss": 0.728304625250058,
+      "elapsed_s": 19.730570039711893,
+      "history": [
+        {
+          "epoch": 1,
+          "training_loss_mean": 0.6314984780550003,
+          "development_loss": 0.728304625250058
+        },
+        {
+          "epoch": 2,
+          "training_loss_mean": 0.43154943426450093,
+          "development_loss": 0.8008974027718826
+        },
+        {
+          "epoch": 3,
+          "training_loss_mean": 0.3684123327334722,
+          "development_loss": 0.8739455553431817
+        },
+        {
+          "epoch": 4,
+          "training_loss_mean": 0.3378813380996386,
+          "development_loss": 0.8344903491771913
+        },
+        {
+          "epoch": 5,
+          "training_loss_mean": 0.3229847925901413,
+          "development_loss": 1.0107268094998625
+        },
+        {
+          "epoch": 6,
+          "training_loss_mean": 0.30355989158153535,
+          "development_loss": 0.9901913378862948
+        },
+        {
+          "epoch": 7,
+          "training_loss_mean": 0.2868256001671155,
+          "development_loss": 0.9835777500198636
+        },
+        {
+          "epoch": 8,
+          "training_loss_mean": 0.2736020760734876,
+          "development_loss": 0.9293709042958304
+        },
+        {
+          "epoch": 9,
+          "training_loss_mean": 0.26395116994778317,
+          "development_loss": 0.9403502876496478
+        },
+        {
+          "epoch": 10,
+          "training_loss_mean": 0.2550408576925596,
+          "development_loss": 1.0968667412624995
+        },
+        {
+          "epoch": 11,
+          "training_loss_mean": 0.2469370267788569,
+          "development_loss": 0.966701461211194
+        },
+        {
+          "epoch": 12,
+          "training_loss_mean": 0.23698815137147902,
+          "development_loss": 0.9079256899794652
+        },
+        {
+          "epoch": 13,
+          "training_loss_mean": 0.2292648718257745,
+          "development_loss": 0.8950578341406579
+        },
+        {
+          "epoch": 14,
+          "training_loss_mean": 0.22764096528291702,
+          "development_loss": 0.8963135701657299
+        },
+        {
+          "epoch": 15,
+          "training_loss_mean": 0.21654938245813052,
+          "development_loss": 0.9524715902585309
+        },
+        {
+          "epoch": 16,
+          "training_loss_mean": 0.20872814084092775,
+          "development_loss": 0.8417132265426592
+        },
+        {
+          "epoch": 17,
+          "training_loss_mean": 0.20179637903968492,
+          "development_loss": 0.9334776984122044
+        },
+        {
+          "epoch": 18,
+          "training_loss_mean": 0.19574603254596393,
+          "development_loss": 0.9547140976568874
+        },
+        {
+          "epoch": 19,
+          "training_loss_mean": 0.18959917803605397,
+          "development_loss": 0.9770034951729331
+        },
+        {
+          "epoch": 20,
+          "training_loss_mean": 0.18005457227428753,
+          "development_loss": 0.8513378606114208
+        }
+      ],
+      "weight_sha256": "133535b6114a4043cd1b5c366a97fbabf951c94c3ace9bd90073e4ac0a31d02e"
+    },
+    {
+      "kind": "zero-audio",
+      "parameters": 24003,
+      "seed": 142,
+      "epochs": 20,
+      "budget_exhausted": false,
+      "selected_epoch": 2,
+      "development_loss": 0.9141826575137469,
+      "elapsed_s": 13.968766561709344,
+      "history": [
+        {
+          "epoch": 1,
+          "training_loss_mean": 0.898618175983429,
+          "development_loss": 1.1100425291403822
+        },
+        {
+          "epoch": 2,
+          "training_loss_mean": 0.8614276468753814,
+          "development_loss": 0.9141826575137469
+        },
+        {
+          "epoch": 3,
+          "training_loss_mean": 0.8703132180372873,
+          "development_loss": 1.0012685098275425
+        },
+        {
+          "epoch": 4,
+          "training_loss_mean": 0.8590112010637919,
+          "development_loss": 0.9880860292096365
+        },
+        {
+          "epoch": 5,
+          "training_loss_mean": 0.8661269040902456,
+          "development_loss": 0.9941055787978605
+        },
+        {
+          "epoch": 6,
+          "training_loss_mean": 0.8661333270867666,
+          "development_loss": 0.9411205354750418
+        },
+        {
+          "epoch": 7,
+          "training_loss_mean": 0.8578505591551463,
+          "development_loss": 0.9412454680359899
+        },
+        {
+          "epoch": 8,
+          "training_loss_mean": 0.863026309410731,
+          "development_loss": 1.0541091173054815
+        },
+        {
+          "epoch": 9,
+          "training_loss_mean": 0.8563478628794352,
+          "development_loss": 0.9478601353202537
+        },
+        {
+          "epoch": 10,
+          "training_loss_mean": 0.8599344770113627,
+          "development_loss": 0.953470246832917
+        },
+        {
+          "epoch": 11,
+          "training_loss_mean": 0.8585032216707865,
+          "development_loss": 0.9423612251216996
+        },
+        {
+          "epoch": 12,
+          "training_loss_mean": 0.8637337509791057,
+          "development_loss": 0.98235905786664
+        },
+        {
+          "epoch": 13,
+          "training_loss_mean": 0.8595870260397593,
+          "development_loss": 0.9741710430832128
+        },
+        {
+          "epoch": 14,
+          "training_loss_mean": 0.857967207034429,
+          "development_loss": 0.9694628473014141
+        },
+        {
+          "epoch": 15,
+          "training_loss_mean": 0.8600777530670166,
+          "development_loss": 0.9313807827989035
+        },
+        {
+          "epoch": 16,
+          "training_loss_mean": 0.8647048604488373,
+          "development_loss": 0.9563859503540283
+        },
+        {
+          "epoch": 17,
+          "training_loss_mean": 0.8563503444194793,
+          "development_loss": 0.9885149402189324
+        },
+        {
+          "epoch": 18,
+          "training_loss_mean": 0.8585171262423198,
+          "development_loss": 0.9987033716807442
+        },
+        {
+          "epoch": 19,
+          "training_loss_mean": 0.8591887700557709,
+          "development_loss": 1.0045244803964062
+        },
+        {
+          "epoch": 20,
+          "training_loss_mean": 0.8571046010653178,
+          "development_loss": 0.9577162014669868
+        }
+      ],
+      "weight_sha256": "e4073b57690d1c7b830297e7a25c3fc1701f3b423ce70f9370c5897ef8a05432"
+    }
+  ],
+  "cases": [
+    {
+      "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "role": "fit",
+      "work": "Bach_BWV1007-01",
+      "frames": 3001,
+      "reference_frames": 2998,
+      "raw_supported_reference_frames": 2935,
+      "audio": {
+        "reference_frames": 2998,
+        "period_available_frames": 2998,
+        "phase_available_frames": 2998,
+        "tempo_median_error_percent": 10.245424270629883,
+        "tempo_p95_error_percent": 28.441802978515625,
+        "phase_mean_absolute_cycles": 0.1702687293291092
+      },
+      "audio_common": {
+        "reference_frames": 2935,
+        "period_available_frames": 2935,
+        "phase_available_frames": 2935,
+        "tempo_median_error_percent": 10.036003112792969,
+        "tempo_p95_error_percent": 25.84795570373535,
+        "phase_mean_absolute_cycles": 0.1673753410577774
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2997,
+        "available_adjacent_frames": 2997,
+        "forward_phase_fraction": 0.6986986986986987,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.04840654507279396
+      },
+      "zero": {
+        "reference_frames": 2998,
+        "period_available_frames": 2998,
+        "phase_available_frames": 2998,
+        "tempo_median_error_percent": 26.399951934814453,
+        "tempo_p95_error_percent": 42.57933044433594,
+        "phase_mean_absolute_cycles": 0.2505185604095459
+      },
+      "zero_common": {
+        "reference_frames": 2935,
+        "period_available_frames": 2935,
+        "phase_available_frames": 2935,
+        "tempo_median_error_percent": 26.363265991210938,
+        "tempo_p95_error_percent": 42.016780853271484,
+        "phase_mean_absolute_cycles": 0.25054872035980225
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2997,
+        "available_adjacent_frames": 2997,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 2935,
+        "period_available_frames": 2935,
+        "phase_available_frames": 2935,
+        "tempo_median_error_percent": 6.167387962341309,
+        "tempo_p95_error_percent": 77.83931732177734,
+        "phase_mean_absolute_cycles": 0.16585463285446167
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "role": "fit",
+      "work": "Bach_BWV1007-01",
+      "frames": 3001,
+      "reference_frames": 2961,
+      "raw_supported_reference_frames": 2952,
+      "audio": {
+        "reference_frames": 2961,
+        "period_available_frames": 2961,
+        "phase_available_frames": 2961,
+        "tempo_median_error_percent": 22.764188766479492,
+        "tempo_p95_error_percent": 38.40040588378906,
+        "phase_mean_absolute_cycles": 0.08074916899204254
+      },
+      "audio_common": {
+        "reference_frames": 2952,
+        "period_available_frames": 2952,
+        "phase_available_frames": 2952,
+        "tempo_median_error_percent": 22.735794067382812,
+        "tempo_p95_error_percent": 38.41340255737305,
+        "phase_mean_absolute_cycles": 0.08046552538871765
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2960,
+        "available_adjacent_frames": 2960,
+        "forward_phase_fraction": 0.8381756756756756,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.023287391290068626
+      },
+      "zero": {
+        "reference_frames": 2961,
+        "period_available_frames": 2961,
+        "phase_available_frames": 2961,
+        "tempo_median_error_percent": 29.400211334228516,
+        "tempo_p95_error_percent": 38.14824295043945,
+        "phase_mean_absolute_cycles": 0.25001421570777893
+      },
+      "zero_common": {
+        "reference_frames": 2952,
+        "period_available_frames": 2952,
+        "phase_available_frames": 2952,
+        "tempo_median_error_percent": 29.400211334228516,
+        "tempo_p95_error_percent": 38.14824295043945,
+        "phase_mean_absolute_cycles": 0.2503215968608856
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2960,
+        "available_adjacent_frames": 2960,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 2952,
+        "period_available_frames": 2952,
+        "phase_available_frames": 2952,
+        "tempo_median_error_percent": 7.050925254821777,
+        "tempo_p95_error_percent": 35.61701965332031,
+        "phase_mean_absolute_cycles": 0.08824824541807175
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": true,
+        "phase_mean_absolute_cycles": false
+      }
+    },
+    {
+      "id": "rubato-beethoven-op072-0-ov-henning2017",
+      "role": "fit",
+      "work": "Beethoven_Op072-0",
+      "frames": 3001,
+      "reference_frames": 2840,
+      "raw_supported_reference_frames": 2679,
+      "audio": {
+        "reference_frames": 2840,
+        "period_available_frames": 2840,
+        "phase_available_frames": 2840,
+        "tempo_median_error_percent": 19.96908187866211,
+        "tempo_p95_error_percent": 66.81461334228516,
+        "phase_mean_absolute_cycles": 0.15994688868522644
+      },
+      "audio_common": {
+        "reference_frames": 2679,
+        "period_available_frames": 2679,
+        "phase_available_frames": 2679,
+        "tempo_median_error_percent": 19.912057876586914,
+        "tempo_p95_error_percent": 67.1703872680664,
+        "phase_mean_absolute_cycles": 0.15817688405513763
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2839,
+        "available_adjacent_frames": 2839,
+        "forward_phase_fraction": 0.7985206058471293,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.019803958013653755
+      },
+      "zero": {
+        "reference_frames": 2840,
+        "period_available_frames": 2840,
+        "phase_available_frames": 2840,
+        "tempo_median_error_percent": 34.62021255493164,
+        "tempo_p95_error_percent": 108.14974212646484,
+        "phase_mean_absolute_cycles": 0.2513660192489624
+      },
+      "zero_common": {
+        "reference_frames": 2679,
+        "period_available_frames": 2679,
+        "phase_available_frames": 2679,
+        "tempo_median_error_percent": 34.62021255493164,
+        "tempo_p95_error_percent": 108.14974212646484,
+        "phase_mean_absolute_cycles": 0.2499835044145584
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2839,
+        "available_adjacent_frames": 2839,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 2679,
+        "period_available_frames": 2679,
+        "phase_available_frames": 2679,
+        "tempo_median_error_percent": 45.67048645019531,
+        "tempo_p95_error_percent": 77.9739761352539,
+        "phase_mean_absolute_cycles": 0.2068338543176651
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": false,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": false
+      }
+    },
+    {
+      "id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "role": "fit",
+      "work": "Berlioz_H048-04",
+      "frames": 3001,
+      "reference_frames": 2847,
+      "raw_supported_reference_frames": 2837,
+      "audio": {
+        "reference_frames": 2847,
+        "period_available_frames": 2847,
+        "phase_available_frames": 2847,
+        "tempo_median_error_percent": 12.746149063110352,
+        "tempo_p95_error_percent": 27.118412017822266,
+        "phase_mean_absolute_cycles": 0.09050179272890091
+      },
+      "audio_common": {
+        "reference_frames": 2837,
+        "period_available_frames": 2837,
+        "phase_available_frames": 2837,
+        "tempo_median_error_percent": 12.71328353881836,
+        "tempo_p95_error_percent": 27.016803741455078,
+        "phase_mean_absolute_cycles": 0.09062617272138596
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2846,
+        "available_adjacent_frames": 2846,
+        "forward_phase_fraction": 0.7803935347856641,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.03307734429836273
+      },
+      "zero": {
+        "reference_frames": 2847,
+        "period_available_frames": 2847,
+        "phase_available_frames": 2847,
+        "tempo_median_error_percent": 32.39638900756836,
+        "tempo_p95_error_percent": 39.08174514770508,
+        "phase_mean_absolute_cycles": 0.2502957582473755
+      },
+      "zero_common": {
+        "reference_frames": 2837,
+        "period_available_frames": 2837,
+        "phase_available_frames": 2837,
+        "tempo_median_error_percent": 32.39638900756836,
+        "tempo_p95_error_percent": 39.08174514770508,
+        "phase_mean_absolute_cycles": 0.2500390410423279
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2846,
+        "available_adjacent_frames": 2846,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 2837,
+        "period_available_frames": 2837,
+        "phase_available_frames": 2837,
+        "tempo_median_error_percent": 10.106229782104492,
+        "tempo_p95_error_percent": 122.26988983154297,
+        "phase_mean_absolute_cycles": 0.13137410581111908
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": false
+      }
+    },
+    {
+      "id": "rubato-boccherini-g275-03-ov-krux2022",
+      "role": "development",
+      "work": "Boccherini_G275-03",
+      "frames": 3001,
+      "reference_frames": 2974,
+      "raw_supported_reference_frames": 2899,
+      "audio": {
+        "reference_frames": 2974,
+        "period_available_frames": 2974,
+        "phase_available_frames": 2974,
+        "tempo_median_error_percent": 15.979146957397461,
+        "tempo_p95_error_percent": 37.081607818603516,
+        "phase_mean_absolute_cycles": 0.10541169345378876
+      },
+      "audio_common": {
+        "reference_frames": 2899,
+        "period_available_frames": 2899,
+        "phase_available_frames": 2899,
+        "tempo_median_error_percent": 15.753829956054688,
+        "tempo_p95_error_percent": 37.183013916015625,
+        "phase_mean_absolute_cycles": 0.10601594299077988
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2973,
+        "available_adjacent_frames": 2973,
+        "forward_phase_fraction": 0.8395560040363269,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.02858339250087738
+      },
+      "zero": {
+        "reference_frames": 2974,
+        "period_available_frames": 2974,
+        "phase_available_frames": 2974,
+        "tempo_median_error_percent": 38.42951583862305,
+        "tempo_p95_error_percent": 51.57194137573242,
+        "phase_mean_absolute_cycles": 0.25006937980651855
+      },
+      "zero_common": {
+        "reference_frames": 2899,
+        "period_available_frames": 2899,
+        "phase_available_frames": 2899,
+        "tempo_median_error_percent": 38.555885314941406,
+        "tempo_p95_error_percent": 51.57194137573242,
+        "phase_mean_absolute_cycles": 0.24996578693389893
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2973,
+        "available_adjacent_frames": 2973,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 2899,
+        "period_available_frames": 2899,
+        "phase_available_frames": 2899,
+        "tempo_median_error_percent": 11.644697189331055,
+        "tempo_p95_error_percent": 52.38098907470703,
+        "phase_mean_absolute_cycles": 0.09204604476690292
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "rubato-brahms-op115-01-ov-schmitta2025",
+      "role": "fit",
+      "work": "Brahms_Op115-01",
+      "frames": 3001,
+      "reference_frames": 2998,
+      "raw_supported_reference_frames": 2983,
+      "audio": {
+        "reference_frames": 2998,
+        "period_available_frames": 2998,
+        "phase_available_frames": 2998,
+        "tempo_median_error_percent": 9.90837287902832,
+        "tempo_p95_error_percent": 44.525386810302734,
+        "phase_mean_absolute_cycles": 0.14153726398944855
+      },
+      "audio_common": {
+        "reference_frames": 2983,
+        "period_available_frames": 2983,
+        "phase_available_frames": 2983,
+        "tempo_median_error_percent": 9.93558120727539,
+        "tempo_p95_error_percent": 44.674678802490234,
+        "phase_mean_absolute_cycles": 0.14156480133533478
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2997,
+        "available_adjacent_frames": 2997,
+        "forward_phase_fraction": 0.711378044711378,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.03476935625076294
+      },
+      "zero": {
+        "reference_frames": 2998,
+        "period_available_frames": 2998,
+        "phase_available_frames": 2998,
+        "tempo_median_error_percent": 25.030399322509766,
+        "tempo_p95_error_percent": 56.79602813720703,
+        "phase_mean_absolute_cycles": 0.2513427436351776
+      },
+      "zero_common": {
+        "reference_frames": 2983,
+        "period_available_frames": 2983,
+        "phase_available_frames": 2983,
+        "tempo_median_error_percent": 25.030399322509766,
+        "tempo_p95_error_percent": 56.79602813720703,
+        "phase_mean_absolute_cycles": 0.2508403956890106
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2997,
+        "available_adjacent_frames": 2997,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 2983,
+        "period_available_frames": 2983,
+        "phase_available_frames": 2983,
+        "tempo_median_error_percent": 179.83656311035156,
+        "tempo_p95_error_percent": 232.13050842285156,
+        "phase_mean_absolute_cycles": 0.21983954310417175
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": false,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": false
+      }
+    },
+    {
+      "id": "rubato-brahms-op115-01-ov-steffens2008",
+      "role": "fit",
+      "work": "Brahms_Op115-01",
+      "frames": 3001,
+      "reference_frames": 2982,
+      "raw_supported_reference_frames": 2981,
+      "audio": {
+        "reference_frames": 2982,
+        "period_available_frames": 2982,
+        "phase_available_frames": 2982,
+        "tempo_median_error_percent": 8.693790435791016,
+        "tempo_p95_error_percent": 22.70725440979004,
+        "phase_mean_absolute_cycles": 0.12467709928750992
+      },
+      "audio_common": {
+        "reference_frames": 2981,
+        "period_available_frames": 2981,
+        "phase_available_frames": 2981,
+        "tempo_median_error_percent": 8.690011978149414,
+        "tempo_p95_error_percent": 22.707378387451172,
+        "phase_mean_absolute_cycles": 0.12471543997526169
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2981,
+        "available_adjacent_frames": 2981,
+        "forward_phase_fraction": 0.7893324387789332,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.025989314541220665
+      },
+      "zero": {
+        "reference_frames": 2982,
+        "period_available_frames": 2982,
+        "phase_available_frames": 2982,
+        "tempo_median_error_percent": 28.375112533569336,
+        "tempo_p95_error_percent": 62.07908248901367,
+        "phase_mean_absolute_cycles": 0.25127243995666504
+      },
+      "zero_common": {
+        "reference_frames": 2981,
+        "period_available_frames": 2981,
+        "phase_available_frames": 2981,
+        "tempo_median_error_percent": 28.375112533569336,
+        "tempo_p95_error_percent": 62.07908248901367,
+        "phase_mean_absolute_cycles": 0.2513224482536316
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2981,
+        "available_adjacent_frames": 2981,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 2981,
+        "period_available_frames": 2981,
+        "phase_available_frames": 2981,
+        "tempo_median_error_percent": 21.67654037475586,
+        "tempo_p95_error_percent": 200.37582397460938,
+        "phase_mean_absolute_cycles": 0.13295777142047882
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": false,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": false
+      }
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+      "role": "fit",
+      "work": "Handel_HWV040-1-01",
+      "frames": 3001,
+      "reference_frames": 3000,
+      "raw_supported_reference_frames": 2960,
+      "audio": {
+        "reference_frames": 3000,
+        "period_available_frames": 3000,
+        "phase_available_frames": 3000,
+        "tempo_median_error_percent": 15.534481048583984,
+        "tempo_p95_error_percent": 27.30731964111328,
+        "phase_mean_absolute_cycles": 0.04122313857078552
+      },
+      "audio_common": {
+        "reference_frames": 2960,
+        "period_available_frames": 2960,
+        "phase_available_frames": 2960,
+        "tempo_median_error_percent": 15.550822257995605,
+        "tempo_p95_error_percent": 27.327449798583984,
+        "phase_mean_absolute_cycles": 0.041079189628362656
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2999,
+        "available_adjacent_frames": 2999,
+        "forward_phase_fraction": 0.9716572190730244,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.008838323876261711
+      },
+      "zero": {
+        "reference_frames": 3000,
+        "period_available_frames": 3000,
+        "phase_available_frames": 3000,
+        "tempo_median_error_percent": 11.541849136352539,
+        "tempo_p95_error_percent": 19.890392303466797,
+        "phase_mean_absolute_cycles": 0.2508828639984131
+      },
+      "zero_common": {
+        "reference_frames": 2960,
+        "period_available_frames": 2960,
+        "phase_available_frames": 2960,
+        "tempo_median_error_percent": 12.41804027557373,
+        "tempo_p95_error_percent": 19.890392303466797,
+        "phase_mean_absolute_cycles": 0.24986964464187622
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2999,
+        "available_adjacent_frames": 2999,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708496451378
+      },
+      "raw_common": {
+        "reference_frames": 2960,
+        "period_available_frames": 2960,
+        "phase_available_frames": 2960,
+        "tempo_median_error_percent": 1.921677589416504,
+        "tempo_p95_error_percent": 12.556695938110352,
+        "phase_mean_absolute_cycles": 0.0291923675686121
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": true,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+      "role": "fit",
+      "work": "Handel_HWV040-1-01",
+      "frames": 3001,
+      "reference_frames": 2988,
+      "raw_supported_reference_frames": 2966,
+      "audio": {
+        "reference_frames": 2988,
+        "period_available_frames": 2988,
+        "phase_available_frames": 2988,
+        "tempo_median_error_percent": 18.43267822265625,
+        "tempo_p95_error_percent": 35.19541549682617,
+        "phase_mean_absolute_cycles": 0.08669768273830414
+      },
+      "audio_common": {
+        "reference_frames": 2966,
+        "period_available_frames": 2966,
+        "phase_available_frames": 2966,
+        "tempo_median_error_percent": 18.44488525390625,
+        "tempo_p95_error_percent": 35.25965881347656,
+        "phase_mean_absolute_cycles": 0.08712410181760788
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2987,
+        "available_adjacent_frames": 2987,
+        "forward_phase_fraction": 0.9765651155005022,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.008612597361207008
+      },
+      "zero": {
+        "reference_frames": 2988,
+        "period_available_frames": 2988,
+        "phase_available_frames": 2988,
+        "tempo_median_error_percent": 14.003509521484375,
+        "tempo_p95_error_percent": 32.298553466796875,
+        "phase_mean_absolute_cycles": 0.2510208487510681
+      },
+      "zero_common": {
+        "reference_frames": 2966,
+        "period_available_frames": 2966,
+        "phase_available_frames": 2966,
+        "tempo_median_error_percent": 14.003509521484375,
+        "tempo_p95_error_percent": 32.298553466796875,
+        "phase_mean_absolute_cycles": 0.25000250339508057
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2987,
+        "available_adjacent_frames": 2987,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 2966,
+        "period_available_frames": 2966,
+        "phase_available_frames": 2966,
+        "tempo_median_error_percent": 7.561171054840088,
+        "tempo_p95_error_percent": 31.800783157348633,
+        "phase_mean_absolute_cycles": 0.0781969353556633
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": true,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+      "role": "fit",
+      "work": "Handel_HWV040-1-01",
+      "frames": 3001,
+      "reference_frames": 3000,
+      "raw_supported_reference_frames": 2862,
+      "audio": {
+        "reference_frames": 3000,
+        "period_available_frames": 3000,
+        "phase_available_frames": 3000,
+        "tempo_median_error_percent": 16.159862518310547,
+        "tempo_p95_error_percent": 82.64398193359375,
+        "phase_mean_absolute_cycles": 0.09698553383350372
+      },
+      "audio_common": {
+        "reference_frames": 2862,
+        "period_available_frames": 2862,
+        "phase_available_frames": 2862,
+        "tempo_median_error_percent": 15.560441970825195,
+        "tempo_p95_error_percent": 32.871604919433594,
+        "phase_mean_absolute_cycles": 0.08995514363050461
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2999,
+        "available_adjacent_frames": 2999,
+        "forward_phase_fraction": 0.8579526508836278,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01673419587314129
+      },
+      "zero": {
+        "reference_frames": 3000,
+        "period_available_frames": 3000,
+        "phase_available_frames": 3000,
+        "tempo_median_error_percent": 16.8311767578125,
+        "tempo_p95_error_percent": 175.697509765625,
+        "phase_mean_absolute_cycles": 0.2508903443813324
+      },
+      "zero_common": {
+        "reference_frames": 2862,
+        "period_available_frames": 2862,
+        "phase_available_frames": 2862,
+        "tempo_median_error_percent": 16.645044326782227,
+        "tempo_p95_error_percent": 30.571359634399414,
+        "phase_mean_absolute_cycles": 0.2483574002981186
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2999,
+        "available_adjacent_frames": 2999,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708496451378
+      },
+      "raw_common": {
+        "reference_frames": 2862,
+        "period_available_frames": 2862,
+        "phase_available_frames": 2862,
+        "tempo_median_error_percent": 7.454192638397217,
+        "tempo_p95_error_percent": 32.591583251953125,
+        "phase_mean_absolute_cycles": 0.06985845416784286
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": true,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "rubato-mozart-kv618-ar-papalin2012",
+      "role": "development",
+      "work": "Mozart_KV618",
+      "frames": 3001,
+      "reference_frames": 2946,
+      "raw_supported_reference_frames": 2919,
+      "audio": {
+        "reference_frames": 2946,
+        "period_available_frames": 2946,
+        "phase_available_frames": 2946,
+        "tempo_median_error_percent": 63.786094665527344,
+        "tempo_p95_error_percent": 121.20201110839844,
+        "phase_mean_absolute_cycles": 0.2450276017189026
+      },
+      "audio_common": {
+        "reference_frames": 2919,
+        "period_available_frames": 2919,
+        "phase_available_frames": 2919,
+        "tempo_median_error_percent": 64.00911712646484,
+        "tempo_p95_error_percent": 121.27790069580078,
+        "phase_mean_absolute_cycles": 0.24424049258232117
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2945,
+        "available_adjacent_frames": 2945,
+        "forward_phase_fraction": 0.9935483870967742,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.009675784967839718
+      },
+      "zero": {
+        "reference_frames": 2946,
+        "period_available_frames": 2946,
+        "phase_available_frames": 2946,
+        "tempo_median_error_percent": 49.87017059326172,
+        "tempo_p95_error_percent": 103.10435485839844,
+        "phase_mean_absolute_cycles": 0.25032368302345276
+      },
+      "zero_common": {
+        "reference_frames": 2919,
+        "period_available_frames": 2919,
+        "phase_available_frames": 2919,
+        "tempo_median_error_percent": 49.87017059326172,
+        "tempo_p95_error_percent": 103.10435485839844,
+        "phase_mean_absolute_cycles": 0.2513583302497864
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2945,
+        "available_adjacent_frames": 2945,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708496451378
+      },
+      "raw_common": {
+        "reference_frames": 2919,
+        "period_available_frames": 2919,
+        "phase_available_frames": 2919,
+        "tempo_median_error_percent": 113.547607421875,
+        "tempo_p95_error_percent": 188.0728302001953,
+        "phase_mean_absolute_cycles": 0.250141978263855
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": false,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": false
+      }
+    },
+    {
+      "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+      "role": "development",
+      "work": "Mozart_KV618",
+      "frames": 3001,
+      "reference_frames": 2948,
+      "raw_supported_reference_frames": 2846,
+      "audio": {
+        "reference_frames": 2948,
+        "period_available_frames": 2948,
+        "phase_available_frames": 2948,
+        "tempo_median_error_percent": 102.63575744628906,
+        "tempo_p95_error_percent": 142.23558044433594,
+        "phase_mean_absolute_cycles": 0.24545706808567047
+      },
+      "audio_common": {
+        "reference_frames": 2846,
+        "period_available_frames": 2846,
+        "phase_available_frames": 2846,
+        "tempo_median_error_percent": 103.43791198730469,
+        "tempo_p95_error_percent": 142.56231689453125,
+        "phase_mean_absolute_cycles": 0.24597525596618652
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2947,
+        "available_adjacent_frames": 2947,
+        "forward_phase_fraction": 0.9718357651849339,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.008351458236575127
+      },
+      "zero": {
+        "reference_frames": 2948,
+        "period_available_frames": 2948,
+        "phase_available_frames": 2948,
+        "tempo_median_error_percent": 89.79885864257812,
+        "tempo_p95_error_percent": 129.45034790039062,
+        "phase_mean_absolute_cycles": 0.2505345344543457
+      },
+      "zero_common": {
+        "reference_frames": 2846,
+        "period_available_frames": 2846,
+        "phase_available_frames": 2846,
+        "tempo_median_error_percent": 88.75528717041016,
+        "tempo_p95_error_percent": 129.45034790039062,
+        "phase_mean_absolute_cycles": 0.25006240606307983
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2947,
+        "available_adjacent_frames": 2947,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 2846,
+        "period_available_frames": 2846,
+        "phase_available_frames": 2846,
+        "tempo_median_error_percent": 101.9969482421875,
+        "tempo_p95_error_percent": 132.06341552734375,
+        "phase_mean_absolute_cycles": 0.2569471001625061
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": true,
+        "phase_mean_absolute_cycles": false
+      }
+    },
+    {
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+      "role": "development",
+      "work": "Mussorgsky_PicturesAtAnExhibition-10",
+      "frames": 3001,
+      "reference_frames": 2990,
+      "raw_supported_reference_frames": 2969,
+      "audio": {
+        "reference_frames": 2990,
+        "period_available_frames": 2990,
+        "phase_available_frames": 2990,
+        "tempo_median_error_percent": 11.204898834228516,
+        "tempo_p95_error_percent": 32.60966873168945,
+        "phase_mean_absolute_cycles": 0.08568333834409714
+      },
+      "audio_common": {
+        "reference_frames": 2969,
+        "period_available_frames": 2969,
+        "phase_available_frames": 2969,
+        "tempo_median_error_percent": 11.205750465393066,
+        "tempo_p95_error_percent": 32.634090423583984,
+        "phase_mean_absolute_cycles": 0.08539807796478271
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2989,
+        "available_adjacent_frames": 2989,
+        "forward_phase_fraction": 0.8414185346269656,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.02205028012394905
+      },
+      "zero": {
+        "reference_frames": 2990,
+        "period_available_frames": 2990,
+        "phase_available_frames": 2990,
+        "tempo_median_error_percent": 12.222105026245117,
+        "tempo_p95_error_percent": 32.71839904785156,
+        "phase_mean_absolute_cycles": 0.25098586082458496
+      },
+      "zero_common": {
+        "reference_frames": 2969,
+        "period_available_frames": 2969,
+        "phase_available_frames": 2969,
+        "tempo_median_error_percent": 12.222105026245117,
+        "tempo_p95_error_percent": 33.083404541015625,
+        "phase_mean_absolute_cycles": 0.2500011920928955
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2989,
+        "available_adjacent_frames": 2989,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708496451378
+      },
+      "raw_common": {
+        "reference_frames": 2969,
+        "period_available_frames": 2969,
+        "phase_available_frames": 2969,
+        "tempo_median_error_percent": 8.259296417236328,
+        "tempo_p95_error_percent": 149.2882843017578,
+        "phase_mean_absolute_cycles": 0.10791855305433273
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": false
+      }
+    },
+    {
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+      "role": "development",
+      "work": "Mussorgsky_PicturesAtAnExhibition-10",
+      "frames": 3001,
+      "reference_frames": 2977,
+      "raw_supported_reference_frames": 2971,
+      "audio": {
+        "reference_frames": 2977,
+        "period_available_frames": 2977,
+        "phase_available_frames": 2977,
+        "tempo_median_error_percent": 13.782560348510742,
+        "tempo_p95_error_percent": 33.37247085571289,
+        "phase_mean_absolute_cycles": 0.048352282494306564
+      },
+      "audio_common": {
+        "reference_frames": 2971,
+        "period_available_frames": 2971,
+        "phase_available_frames": 2971,
+        "tempo_median_error_percent": 13.759112358093262,
+        "tempo_p95_error_percent": 33.290889739990234,
+        "phase_mean_absolute_cycles": 0.04811375215649605
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2976,
+        "available_adjacent_frames": 2976,
+        "forward_phase_fraction": 0.9025537634408602,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.013728687539696693
+      },
+      "zero": {
+        "reference_frames": 2977,
+        "period_available_frames": 2977,
+        "phase_available_frames": 2977,
+        "tempo_median_error_percent": 13.90567398071289,
+        "tempo_p95_error_percent": 25.47052001953125,
+        "phase_mean_absolute_cycles": 0.2506783902645111
+      },
+      "zero_common": {
+        "reference_frames": 2971,
+        "period_available_frames": 2971,
+        "phase_available_frames": 2971,
+        "tempo_median_error_percent": 13.90567398071289,
+        "tempo_p95_error_percent": 25.47052001953125,
+        "phase_mean_absolute_cycles": 0.25024640560150146
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2976,
+        "available_adjacent_frames": 2976,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 2971,
+        "period_available_frames": 2971,
+        "phase_available_frames": 2971,
+        "tempo_median_error_percent": 2.442657947540283,
+        "tempo_p95_error_percent": 50.31406784057617,
+        "phase_mean_absolute_cycles": 0.05732047185301781
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": false
+      }
+    },
+    {
+      "id": "rubato-schubert-d733-01-ar-staab2012",
+      "role": "fit",
+      "work": "Schubert_D733-01",
+      "frames": 3001,
+      "reference_frames": 3000,
+      "raw_supported_reference_frames": 2993,
+      "audio": {
+        "reference_frames": 3000,
+        "period_available_frames": 3000,
+        "phase_available_frames": 3000,
+        "tempo_median_error_percent": 17.223596572875977,
+        "tempo_p95_error_percent": 31.346485137939453,
+        "phase_mean_absolute_cycles": 0.055106423795223236
+      },
+      "audio_common": {
+        "reference_frames": 2993,
+        "period_available_frames": 2993,
+        "phase_available_frames": 2993,
+        "tempo_median_error_percent": 17.209381103515625,
+        "tempo_p95_error_percent": 31.35284423828125,
+        "phase_mean_absolute_cycles": 0.055087871849536896
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2999,
+        "available_adjacent_frames": 2999,
+        "forward_phase_fraction": 0.8769589863287762,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.025639217346906662
+      },
+      "zero": {
+        "reference_frames": 3000,
+        "period_available_frames": 3000,
+        "phase_available_frames": 3000,
+        "tempo_median_error_percent": 47.67949676513672,
+        "tempo_p95_error_percent": 53.307498931884766,
+        "phase_mean_absolute_cycles": 0.25055554509162903
+      },
+      "zero_common": {
+        "reference_frames": 2993,
+        "period_available_frames": 2993,
+        "phase_available_frames": 2993,
+        "tempo_median_error_percent": 47.67949676513672,
+        "tempo_p95_error_percent": 53.307498931884766,
+        "phase_mean_absolute_cycles": 0.25031736493110657
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2999,
+        "available_adjacent_frames": 2999,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708496451378
+      },
+      "raw_common": {
+        "reference_frames": 2993,
+        "period_available_frames": 2993,
+        "phase_available_frames": 2993,
+        "tempo_median_error_percent": 5.107527732849121,
+        "tempo_p95_error_percent": 263.8003845214844,
+        "phase_mean_absolute_cycles": 0.17439182102680206
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": false
+      }
+    },
+    {
+      "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+      "role": "fit",
+      "work": "Schubert_D733-01",
+      "frames": 3001,
+      "reference_frames": 2999,
+      "raw_supported_reference_frames": 2989,
+      "audio": {
+        "reference_frames": 2999,
+        "period_available_frames": 2999,
+        "phase_available_frames": 2999,
+        "tempo_median_error_percent": 20.239757537841797,
+        "tempo_p95_error_percent": 34.19055938720703,
+        "phase_mean_absolute_cycles": 0.050494756549596786
+      },
+      "audio_common": {
+        "reference_frames": 2989,
+        "period_available_frames": 2989,
+        "phase_available_frames": 2989,
+        "tempo_median_error_percent": 20.22227668762207,
+        "tempo_p95_error_percent": 34.19767379760742,
+        "phase_mean_absolute_cycles": 0.05040056258440018
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2998,
+        "available_adjacent_frames": 2998,
+        "forward_phase_fraction": 0.9189459639759839,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.02202649787068367
+      },
+      "zero": {
+        "reference_frames": 2999,
+        "period_available_frames": 2999,
+        "phase_available_frames": 2999,
+        "tempo_median_error_percent": 47.62595748901367,
+        "tempo_p95_error_percent": 51.2784423828125,
+        "phase_mean_absolute_cycles": 0.25044912099838257
+      },
+      "zero_common": {
+        "reference_frames": 2989,
+        "period_available_frames": 2989,
+        "phase_available_frames": 2989,
+        "tempo_median_error_percent": 47.62595748901367,
+        "tempo_p95_error_percent": 51.2784423828125,
+        "phase_mean_absolute_cycles": 0.24999608099460602
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2998,
+        "available_adjacent_frames": 2998,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 2989,
+        "period_available_frames": 2989,
+        "phase_available_frames": 2989,
+        "tempo_median_error_percent": 4.943370819091797,
+        "tempo_p95_error_percent": 251.84249877929688,
+        "phase_mean_absolute_cycles": 0.08057592809200287
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": false
+      }
+    },
+    {
+      "id": "rubato-schumann-op039-05-ov-buttner2025",
+      "role": "fit",
+      "work": "Schumann_Op039-05",
+      "frames": 3001,
+      "reference_frames": 2972,
+      "raw_supported_reference_frames": 2971,
+      "audio": {
+        "reference_frames": 2972,
+        "period_available_frames": 2972,
+        "phase_available_frames": 2972,
+        "tempo_median_error_percent": 9.310785293579102,
+        "tempo_p95_error_percent": 29.303937911987305,
+        "phase_mean_absolute_cycles": 0.07516235113143921
+      },
+      "audio_common": {
+        "reference_frames": 2971,
+        "period_available_frames": 2971,
+        "phase_available_frames": 2971,
+        "tempo_median_error_percent": 9.307968139648438,
+        "tempo_p95_error_percent": 29.305904388427734,
+        "phase_mean_absolute_cycles": 0.07517212629318237
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2971,
+        "available_adjacent_frames": 2971,
+        "forward_phase_fraction": 0.837428475260855,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.018468331545591354
+      },
+      "zero": {
+        "reference_frames": 2972,
+        "period_available_frames": 2972,
+        "phase_available_frames": 2972,
+        "tempo_median_error_percent": 5.165797233581543,
+        "tempo_p95_error_percent": 38.79449462890625,
+        "phase_mean_absolute_cycles": 0.2500308156013489
+      },
+      "zero_common": {
+        "reference_frames": 2971,
+        "period_available_frames": 2971,
+        "phase_available_frames": 2971,
+        "tempo_median_error_percent": 5.165797233581543,
+        "tempo_p95_error_percent": 38.79449462890625,
+        "phase_mean_absolute_cycles": 0.25003230571746826
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2971,
+        "available_adjacent_frames": 2971,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 2971,
+        "period_available_frames": 2971,
+        "phase_available_frames": 2971,
+        "tempo_median_error_percent": 4.577147960662842,
+        "tempo_p95_error_percent": 15.03487777709961,
+        "phase_mean_absolute_cycles": 0.053500235080718994
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": true,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "role": "fit",
+      "work": "Schumann_Op039-05",
+      "frames": 3001,
+      "reference_frames": 2940,
+      "raw_supported_reference_frames": 2936,
+      "audio": {
+        "reference_frames": 2940,
+        "period_available_frames": 2940,
+        "phase_available_frames": 2940,
+        "tempo_median_error_percent": 18.790895462036133,
+        "tempo_p95_error_percent": 54.58259201049805,
+        "phase_mean_absolute_cycles": 0.1371748149394989
+      },
+      "audio_common": {
+        "reference_frames": 2936,
+        "period_available_frames": 2936,
+        "phase_available_frames": 2936,
+        "tempo_median_error_percent": 18.790895462036133,
+        "tempo_p95_error_percent": 54.59535217285156,
+        "phase_mean_absolute_cycles": 0.1371752917766571
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2939,
+        "available_adjacent_frames": 2939,
+        "forward_phase_fraction": 0.790404899625723,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.028198156505823135
+      },
+      "zero": {
+        "reference_frames": 2940,
+        "period_available_frames": 2940,
+        "phase_available_frames": 2940,
+        "tempo_median_error_percent": 10.62631607055664,
+        "tempo_p95_error_percent": 56.912376403808594,
+        "phase_mean_absolute_cycles": 0.2500056326389313
+      },
+      "zero_common": {
+        "reference_frames": 2936,
+        "period_available_frames": 2936,
+        "phase_available_frames": 2936,
+        "tempo_median_error_percent": 10.62631607055664,
+        "tempo_p95_error_percent": 56.912376403808594,
+        "phase_mean_absolute_cycles": 0.25002896785736084
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2939,
+        "available_adjacent_frames": 2939,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 2936,
+        "period_available_frames": 2936,
+        "phase_available_frames": 2936,
+        "tempo_median_error_percent": 33.26702117919922,
+        "tempo_p95_error_percent": 151.4981689453125,
+        "phase_mean_absolute_cycles": 0.17643305659294128
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": false,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": false
+      }
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "frames": 3001,
+      "reference_frames": 2894,
+      "raw_supported_reference_frames": 2887,
+      "audio": {
+        "reference_frames": 2894,
+        "period_available_frames": 2894,
+        "phase_available_frames": 2894,
+        "tempo_median_error_percent": 27.42630386352539,
+        "tempo_p95_error_percent": 313.47808837890625,
+        "phase_mean_absolute_cycles": 0.201692134141922
+      },
+      "audio_common": {
+        "reference_frames": 2887,
+        "period_available_frames": 2887,
+        "phase_available_frames": 2887,
+        "tempo_median_error_percent": 27.315866470336914,
+        "tempo_p95_error_percent": 313.5212097167969,
+        "phase_mean_absolute_cycles": 0.20131273567676544
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2893,
+        "available_adjacent_frames": 2893,
+        "forward_phase_fraction": 0.7362599377808503,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.038615014404058456
+      },
+      "zero": {
+        "reference_frames": 2894,
+        "period_available_frames": 2894,
+        "phase_available_frames": 2894,
+        "tempo_median_error_percent": 22.684406280517578,
+        "tempo_p95_error_percent": 323.10137939453125,
+        "phase_mean_absolute_cycles": 0.25216951966285706
+      },
+      "zero_common": {
+        "reference_frames": 2887,
+        "period_available_frames": 2887,
+        "phase_available_frames": 2887,
+        "tempo_median_error_percent": 22.684406280517578,
+        "tempo_p95_error_percent": 323.10137939453125,
+        "phase_mean_absolute_cycles": 0.25202128291130066
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2893,
+        "available_adjacent_frames": 2893,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708496451378
+      },
+      "raw_common": {
+        "reference_frames": 2887,
+        "period_available_frames": 2887,
+        "phase_available_frames": 2887,
+        "tempo_median_error_percent": 64.19203186035156,
+        "tempo_p95_error_percent": 477.2341613769531,
+        "phase_mean_absolute_cycles": 0.2040868103504181
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": false,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": false
+      }
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "frames": 3001,
+      "reference_frames": 2859,
+      "raw_supported_reference_frames": 2592,
+      "audio": {
+        "reference_frames": 2859,
+        "period_available_frames": 2859,
+        "phase_available_frames": 2859,
+        "tempo_median_error_percent": 13.049209594726562,
+        "tempo_p95_error_percent": 71.27930450439453,
+        "phase_mean_absolute_cycles": 0.20268936455249786
+      },
+      "audio_common": {
+        "reference_frames": 2592,
+        "period_available_frames": 2592,
+        "phase_available_frames": 2592,
+        "tempo_median_error_percent": 12.347253799438477,
+        "tempo_p95_error_percent": 56.39336395263672,
+        "phase_mean_absolute_cycles": 0.20011849701404572
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2858,
+        "available_adjacent_frames": 2858,
+        "forward_phase_fraction": 0.8047585724282715,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.024133628234267235
+      },
+      "zero": {
+        "reference_frames": 2859,
+        "period_available_frames": 2859,
+        "phase_available_frames": 2859,
+        "tempo_median_error_percent": 31.80340576171875,
+        "tempo_p95_error_percent": 103.82588195800781,
+        "phase_mean_absolute_cycles": 0.25019437074661255
+      },
+      "zero_common": {
+        "reference_frames": 2592,
+        "period_available_frames": 2592,
+        "phase_available_frames": 2592,
+        "tempo_median_error_percent": 31.80340576171875,
+        "tempo_p95_error_percent": 88.37617492675781,
+        "phase_mean_absolute_cycles": 0.25113824009895325
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2858,
+        "available_adjacent_frames": 2858,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 2592,
+        "period_available_frames": 2592,
+        "phase_available_frames": 2592,
+        "tempo_median_error_percent": 33.63924026489258,
+        "tempo_p95_error_percent": 82.52623748779297,
+        "phase_mean_absolute_cycles": 0.1890096366405487
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": false,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "frames": 3001,
+      "reference_frames": 2899,
+      "raw_supported_reference_frames": 2835,
+      "audio": {
+        "reference_frames": 2899,
+        "period_available_frames": 2899,
+        "phase_available_frames": 2899,
+        "tempo_median_error_percent": 14.724331855773926,
+        "tempo_p95_error_percent": 74.9293212890625,
+        "phase_mean_absolute_cycles": 0.15017086267471313
+      },
+      "audio_common": {
+        "reference_frames": 2835,
+        "period_available_frames": 2835,
+        "phase_available_frames": 2835,
+        "tempo_median_error_percent": 14.87077522277832,
+        "tempo_p95_error_percent": 74.9786376953125,
+        "phase_mean_absolute_cycles": 0.14929217100143433
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2898,
+        "available_adjacent_frames": 2898,
+        "forward_phase_fraction": 0.7349896480331263,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.027651173993945122
+      },
+      "zero": {
+        "reference_frames": 2899,
+        "period_available_frames": 2899,
+        "phase_available_frames": 2899,
+        "tempo_median_error_percent": 20.14070701599121,
+        "tempo_p95_error_percent": 83.59452819824219,
+        "phase_mean_absolute_cycles": 0.25093111395835876
+      },
+      "zero_common": {
+        "reference_frames": 2835,
+        "period_available_frames": 2835,
+        "phase_available_frames": 2835,
+        "tempo_median_error_percent": 20.14070701599121,
+        "tempo_p95_error_percent": 83.59452819824219,
+        "phase_mean_absolute_cycles": 0.2501794695854187
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2898,
+        "available_adjacent_frames": 2898,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 2835,
+        "period_available_frames": 2835,
+        "phase_available_frames": 2835,
+        "tempo_median_error_percent": 60.12822341918945,
+        "tempo_p95_error_percent": 195.08685302734375,
+        "phase_mean_absolute_cycles": 0.20232166349887848
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": false,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": false
+      }
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "frames": 3001,
+      "reference_frames": 2938,
+      "raw_supported_reference_frames": 2852,
+      "audio": {
+        "reference_frames": 2938,
+        "period_available_frames": 2938,
+        "phase_available_frames": 2938,
+        "tempo_median_error_percent": 29.787288665771484,
+        "tempo_p95_error_percent": 100.53492736816406,
+        "phase_mean_absolute_cycles": 0.2082655429840088
+      },
+      "audio_common": {
+        "reference_frames": 2852,
+        "period_available_frames": 2852,
+        "phase_available_frames": 2852,
+        "tempo_median_error_percent": 27.631168365478516,
+        "tempo_p95_error_percent": 100.28682708740234,
+        "phase_mean_absolute_cycles": 0.20821000635623932
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2937,
+        "available_adjacent_frames": 2937,
+        "forward_phase_fraction": 0.7514470548178414,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.032128337770700455
+      },
+      "zero": {
+        "reference_frames": 2938,
+        "period_available_frames": 2938,
+        "phase_available_frames": 2938,
+        "tempo_median_error_percent": 34.652828216552734,
+        "tempo_p95_error_percent": 120.44548797607422,
+        "phase_mean_absolute_cycles": 0.2502567768096924
+      },
+      "zero_common": {
+        "reference_frames": 2852,
+        "period_available_frames": 2852,
+        "phase_available_frames": 2852,
+        "tempo_median_error_percent": 31.89716339111328,
+        "tempo_p95_error_percent": 120.44548797607422,
+        "phase_mean_absolute_cycles": 0.25117412209510803
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2937,
+        "available_adjacent_frames": 2937,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 2852,
+        "period_available_frames": 2852,
+        "phase_available_frames": 2852,
+        "tempo_median_error_percent": 57.312076568603516,
+        "tempo_p95_error_percent": 191.96624755859375,
+        "phase_mean_absolute_cycles": 0.23907093703746796
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": false,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": false
+      }
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "role": "fit",
+      "work": "Vivaldi_RV269-01",
+      "frames": 3001,
+      "reference_frames": 2934,
+      "raw_supported_reference_frames": 2931,
+      "audio": {
+        "reference_frames": 2934,
+        "period_available_frames": 2934,
+        "phase_available_frames": 2934,
+        "tempo_median_error_percent": 25.580549240112305,
+        "tempo_p95_error_percent": 39.73659896850586,
+        "phase_mean_absolute_cycles": 0.08802659064531326
+      },
+      "audio_common": {
+        "reference_frames": 2931,
+        "period_available_frames": 2931,
+        "phase_available_frames": 2931,
+        "tempo_median_error_percent": 25.571643829345703,
+        "tempo_p95_error_percent": 39.739784240722656,
+        "phase_mean_absolute_cycles": 0.0880284458398819
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2933,
+        "available_adjacent_frames": 2933,
+        "forward_phase_fraction": 0.8704398227071258,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.03172340989112854
+      },
+      "zero": {
+        "reference_frames": 2934,
+        "period_available_frames": 2934,
+        "phase_available_frames": 2934,
+        "tempo_median_error_percent": 50.74034881591797,
+        "tempo_p95_error_percent": 56.378055572509766,
+        "phase_mean_absolute_cycles": 0.2499963343143463
+      },
+      "zero_common": {
+        "reference_frames": 2931,
+        "period_available_frames": 2931,
+        "phase_available_frames": 2931,
+        "tempo_median_error_percent": 50.74034881591797,
+        "tempo_p95_error_percent": 56.378055572509766,
+        "phase_mean_absolute_cycles": 0.2500361204147339
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2933,
+        "available_adjacent_frames": 2933,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 2931,
+        "period_available_frames": 2931,
+        "phase_available_frames": 2931,
+        "tempo_median_error_percent": 4.9300312995910645,
+        "tempo_p95_error_percent": 18.351072311401367,
+        "phase_mean_absolute_cycles": 0.052265238016843796
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": true,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "role": "fit",
+      "work": "Vivaldi_RV269-01",
+      "frames": 3001,
+      "reference_frames": 2988,
+      "raw_supported_reference_frames": 2965,
+      "audio": {
+        "reference_frames": 2988,
+        "period_available_frames": 2988,
+        "phase_available_frames": 2988,
+        "tempo_median_error_percent": 24.09360122680664,
+        "tempo_p95_error_percent": 42.25086975097656,
+        "phase_mean_absolute_cycles": 0.12432719022035599
+      },
+      "audio_common": {
+        "reference_frames": 2965,
+        "period_available_frames": 2965,
+        "phase_available_frames": 2965,
+        "tempo_median_error_percent": 24.01177215576172,
+        "tempo_p95_error_percent": 42.07838821411133,
+        "phase_mean_absolute_cycles": 0.12461268156766891
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2987,
+        "available_adjacent_frames": 2987,
+        "forward_phase_fraction": 0.8449949782390358,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.028612671419978142
+      },
+      "zero": {
+        "reference_frames": 2988,
+        "period_available_frames": 2988,
+        "phase_available_frames": 2988,
+        "tempo_median_error_percent": 44.03053665161133,
+        "tempo_p95_error_percent": 55.09805679321289,
+        "phase_mean_absolute_cycles": 0.250103235244751
+      },
+      "zero_common": {
+        "reference_frames": 2965,
+        "period_available_frames": 2965,
+        "phase_available_frames": 2965,
+        "tempo_median_error_percent": 44.03053665161133,
+        "tempo_p95_error_percent": 55.09805679321289,
+        "phase_mean_absolute_cycles": 0.25001561641693115
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2987,
+        "available_adjacent_frames": 2987,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 2965,
+        "period_available_frames": 2965,
+        "phase_available_frames": 2965,
+        "tempo_median_error_percent": 41.16368103027344,
+        "tempo_p95_error_percent": 161.9313201904297,
+        "phase_mean_absolute_cycles": 0.16074980795383453
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": false,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": false
+      }
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+      "role": "fit",
+      "work": "Vivaldi_RV269-01",
+      "frames": 3001,
+      "reference_frames": 2991,
+      "raw_supported_reference_frames": 1183,
+      "audio": {
+        "reference_frames": 2991,
+        "period_available_frames": 2991,
+        "phase_available_frames": 2991,
+        "tempo_median_error_percent": 28.457456588745117,
+        "tempo_p95_error_percent": 48.651695251464844,
+        "phase_mean_absolute_cycles": 0.24698065221309662
+      },
+      "audio_common": {
+        "reference_frames": 1183,
+        "period_available_frames": 1183,
+        "phase_available_frames": 1183,
+        "tempo_median_error_percent": 28.420745849609375,
+        "tempo_p95_error_percent": 48.58134078979492,
+        "phase_mean_absolute_cycles": 0.24650448560714722
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 2990,
+        "available_adjacent_frames": 2990,
+        "forward_phase_fraction": 0.6408026755852843,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.033292051404714584
+      },
+      "zero": {
+        "reference_frames": 2991,
+        "period_available_frames": 2991,
+        "phase_available_frames": 2991,
+        "tempo_median_error_percent": 48.420860290527344,
+        "tempo_p95_error_percent": 63.91946792602539,
+        "phase_mean_absolute_cycles": 0.25021639466285706
+      },
+      "zero_common": {
+        "reference_frames": 1183,
+        "period_available_frames": 1183,
+        "phase_available_frames": 1183,
+        "tempo_median_error_percent": 41.552066802978516,
+        "tempo_p95_error_percent": 56.95283508300781,
+        "phase_mean_absolute_cycles": 0.2505987286567688
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 2990,
+        "available_adjacent_frames": 2990,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 1183,
+        "period_available_frames": 1183,
+        "phase_available_frames": 1183,
+        "tempo_median_error_percent": 44.12001419067383,
+        "tempo_p95_error_percent": 94.64202880859375,
+        "phase_mean_absolute_cycles": 0.2317666858434677
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": false,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "artbeat-05-75-to-150",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 681,
+      "reference_frames": 659,
+      "raw_supported_reference_frames": 639,
+      "audio": {
+        "reference_frames": 659,
+        "period_available_frames": 659,
+        "phase_available_frames": 659,
+        "tempo_median_error_percent": 47.40985107421875,
+        "tempo_p95_error_percent": 61.12941360473633,
+        "phase_mean_absolute_cycles": 0.15825261175632477
+      },
+      "audio_common": {
+        "reference_frames": 639,
+        "period_available_frames": 639,
+        "phase_available_frames": 639,
+        "tempo_median_error_percent": 44.17489242553711,
+        "tempo_p95_error_percent": 61.1684455871582,
+        "phase_mean_absolute_cycles": 0.1586298942565918
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 658,
+        "available_adjacent_frames": 658,
+        "forward_phase_fraction": 0.7689969604863222,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.0567263700067997
+      },
+      "zero": {
+        "reference_frames": 659,
+        "period_available_frames": 659,
+        "phase_available_frames": 659,
+        "tempo_median_error_percent": 62.5477180480957,
+        "tempo_p95_error_percent": 65.24427795410156,
+        "phase_mean_absolute_cycles": 0.249993234872818
+      },
+      "zero_common": {
+        "reference_frames": 639,
+        "period_available_frames": 639,
+        "phase_available_frames": 639,
+        "tempo_median_error_percent": 62.5477180480957,
+        "tempo_p95_error_percent": 64.8697280883789,
+        "phase_mean_absolute_cycles": 0.250045508146286
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 658,
+        "available_adjacent_frames": 658,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 639,
+        "period_available_frames": 639,
+        "phase_available_frames": 639,
+        "tempo_median_error_percent": 47.91658020019531,
+        "tempo_p95_error_percent": 51.145755767822266,
+        "phase_mean_absolute_cycles": 0.12938256561756134
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": false,
+        "tempo_p95_error_percent": true,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "artbeat-06-150-to-75",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 681,
+      "reference_frames": 638,
+      "raw_supported_reference_frames": 638,
+      "audio": {
+        "reference_frames": 638,
+        "period_available_frames": 638,
+        "phase_available_frames": 638,
+        "tempo_median_error_percent": 49.743953704833984,
+        "tempo_p95_error_percent": 60.73685836791992,
+        "phase_mean_absolute_cycles": 0.18152734637260437
+      },
+      "audio_common": {
+        "reference_frames": 638,
+        "period_available_frames": 638,
+        "phase_available_frames": 638,
+        "tempo_median_error_percent": 49.743953704833984,
+        "tempo_p95_error_percent": 60.73685836791992,
+        "phase_mean_absolute_cycles": 0.18152734637260437
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 637,
+        "available_adjacent_frames": 637,
+        "forward_phase_fraction": 0.706436420722135,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.07090901583433151
+      },
+      "zero": {
+        "reference_frames": 638,
+        "period_available_frames": 638,
+        "phase_available_frames": 638,
+        "tempo_median_error_percent": 63.07201385498047,
+        "tempo_p95_error_percent": 65.468994140625,
+        "phase_mean_absolute_cycles": 0.25001755356788635
+      },
+      "zero_common": {
+        "reference_frames": 638,
+        "period_available_frames": 638,
+        "phase_available_frames": 638,
+        "tempo_median_error_percent": 63.07201385498047,
+        "tempo_p95_error_percent": 65.468994140625,
+        "phase_mean_absolute_cycles": 0.25001755356788635
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 637,
+        "available_adjacent_frames": 637,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 638,
+        "period_available_frames": 638,
+        "phase_available_frames": 638,
+        "tempo_median_error_percent": 1.2500226497650146,
+        "tempo_p95_error_percent": 50.937496185302734,
+        "phase_mean_absolute_cycles": 0.12753233313560486
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": true,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "artbeat-07-75-to-112-5",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 667,
+      "reference_frames": 639,
+      "raw_supported_reference_frames": 639,
+      "audio": {
+        "reference_frames": 639,
+        "period_available_frames": 639,
+        "phase_available_frames": 639,
+        "tempo_median_error_percent": 23.890310287475586,
+        "tempo_p95_error_percent": 43.230350494384766,
+        "phase_mean_absolute_cycles": 0.11936246603727341
+      },
+      "audio_common": {
+        "reference_frames": 639,
+        "period_available_frames": 639,
+        "phase_available_frames": 639,
+        "tempo_median_error_percent": 23.890310287475586,
+        "tempo_p95_error_percent": 43.230350494384766,
+        "phase_mean_absolute_cycles": 0.11936246603727341
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 638,
+        "available_adjacent_frames": 638,
+        "forward_phase_fraction": 0.700626959247649,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.05800037458539009
+      },
+      "zero": {
+        "reference_frames": 639,
+        "period_available_frames": 639,
+        "phase_available_frames": 639,
+        "tempo_median_error_percent": 30.076610565185547,
+        "tempo_p95_error_percent": 53.23460006713867,
+        "phase_mean_absolute_cycles": 0.2500259280204773
+      },
+      "zero_common": {
+        "reference_frames": 639,
+        "period_available_frames": 639,
+        "phase_available_frames": 639,
+        "tempo_median_error_percent": 30.076610565185547,
+        "tempo_p95_error_percent": 53.23460006713867,
+        "phase_mean_absolute_cycles": 0.2500259280204773
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 638,
+        "available_adjacent_frames": 638,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 639,
+        "period_available_frames": 639,
+        "phase_available_frames": 639,
+        "tempo_median_error_percent": 2.137017250061035,
+        "tempo_p95_error_percent": 54.674232482910156,
+        "phase_mean_absolute_cycles": 0.05586002767086029
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "artbeat-08-112-5-to-75",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 701,
+      "reference_frames": 668,
+      "raw_supported_reference_frames": 668,
+      "audio": {
+        "reference_frames": 668,
+        "period_available_frames": 668,
+        "phase_available_frames": 668,
+        "tempo_median_error_percent": 18.1072998046875,
+        "tempo_p95_error_percent": 39.26350021362305,
+        "phase_mean_absolute_cycles": 0.1198582649230957
+      },
+      "audio_common": {
+        "reference_frames": 668,
+        "period_available_frames": 668,
+        "phase_available_frames": 668,
+        "tempo_median_error_percent": 18.1072998046875,
+        "tempo_p95_error_percent": 39.26350021362305,
+        "phase_mean_absolute_cycles": 0.1198582649230957
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 667,
+        "available_adjacent_frames": 667,
+        "forward_phase_fraction": 0.6911544227886057,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.0666167140007019
+      },
+      "zero": {
+        "reference_frames": 668,
+        "period_available_frames": 668,
+        "phase_available_frames": 668,
+        "tempo_median_error_percent": 50.637901306152344,
+        "tempo_p95_error_percent": 53.159637451171875,
+        "phase_mean_absolute_cycles": 0.24995380640029907
+      },
+      "zero_common": {
+        "reference_frames": 668,
+        "period_available_frames": 668,
+        "phase_available_frames": 668,
+        "tempo_median_error_percent": 50.637901306152344,
+        "tempo_p95_error_percent": 53.159637451171875,
+        "phase_mean_absolute_cycles": 0.24995380640029907
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 667,
+        "available_adjacent_frames": 667,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 668,
+        "period_available_frames": 668,
+        "phase_available_frames": 668,
+        "tempo_median_error_percent": 1.9344568252563477,
+        "tempo_p95_error_percent": 91.07140350341797,
+        "phase_mean_absolute_cycles": 0.08364865183830261
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "artbeat-09-90-to-80",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 881,
+      "reference_frames": 850,
+      "raw_supported_reference_frames": 849,
+      "audio": {
+        "reference_frames": 850,
+        "period_available_frames": 850,
+        "phase_available_frames": 850,
+        "tempo_median_error_percent": 11.24122428894043,
+        "tempo_p95_error_percent": 22.66816520690918,
+        "phase_mean_absolute_cycles": 0.09249207377433777
+      },
+      "audio_common": {
+        "reference_frames": 849,
+        "period_available_frames": 849,
+        "phase_available_frames": 849,
+        "tempo_median_error_percent": 11.24262809753418,
+        "tempo_p95_error_percent": 22.66881561279297,
+        "phase_mean_absolute_cycles": 0.09232623875141144
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 849,
+        "available_adjacent_frames": 849,
+        "forward_phase_fraction": 0.8610129564193169,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.024024376645684242
+      },
+      "zero": {
+        "reference_frames": 850,
+        "period_available_frames": 850,
+        "phase_available_frames": 850,
+        "tempo_median_error_percent": 34.13079833984375,
+        "tempo_p95_error_percent": 41.1374626159668,
+        "phase_mean_absolute_cycles": 0.250007688999176
+      },
+      "zero_common": {
+        "reference_frames": 849,
+        "period_available_frames": 849,
+        "phase_available_frames": 849,
+        "tempo_median_error_percent": 34.13079833984375,
+        "tempo_p95_error_percent": 41.1374626159668,
+        "phase_mean_absolute_cycles": 0.2500094473361969
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 849,
+        "available_adjacent_frames": 849,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708496451378
+      },
+      "raw_common": {
+        "reference_frames": 849,
+        "period_available_frames": 849,
+        "phase_available_frames": 849,
+        "tempo_median_error_percent": 1.8518447875976562,
+        "tempo_p95_error_percent": 7.589316368103027,
+        "phase_mean_absolute_cycles": 0.028893617913126945
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": true,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "artbeat-10-90-to-120",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 831,
+      "reference_frames": 802,
+      "raw_supported_reference_frames": 801,
+      "audio": {
+        "reference_frames": 802,
+        "period_available_frames": 802,
+        "phase_available_frames": 802,
+        "tempo_median_error_percent": 25.359710693359375,
+        "tempo_p95_error_percent": 42.3952522277832,
+        "phase_mean_absolute_cycles": 0.10009577870368958
+      },
+      "audio_common": {
+        "reference_frames": 801,
+        "period_available_frames": 801,
+        "phase_available_frames": 801,
+        "tempo_median_error_percent": 25.48871612548828,
+        "tempo_p95_error_percent": 42.39533615112305,
+        "phase_mean_absolute_cycles": 0.09995973855257034
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 801,
+        "available_adjacent_frames": 801,
+        "forward_phase_fraction": 0.7053682896379525,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.06322173029184341
+      },
+      "zero": {
+        "reference_frames": 802,
+        "period_available_frames": 802,
+        "phase_available_frames": 802,
+        "tempo_median_error_percent": 47.90232849121094,
+        "tempo_p95_error_percent": 56.18085861206055,
+        "phase_mean_absolute_cycles": 0.25005659461021423
+      },
+      "zero_common": {
+        "reference_frames": 801,
+        "period_available_frames": 801,
+        "phase_available_frames": 801,
+        "tempo_median_error_percent": 53.04422378540039,
+        "tempo_p95_error_percent": 56.18085861206055,
+        "phase_mean_absolute_cycles": 0.25006213784217834
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 801,
+        "available_adjacent_frames": 801,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708496451378
+      },
+      "raw_common": {
+        "reference_frames": 801,
+        "period_available_frames": 801,
+        "phase_available_frames": 801,
+        "tempo_median_error_percent": 1.5521824359893799,
+        "tempo_p95_error_percent": 3.5157322883605957,
+        "phase_mean_absolute_cycles": 0.019885776564478874
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": true,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "artbeat-11-60-to-80",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 871,
+      "reference_frames": 850,
+      "raw_supported_reference_frames": 850,
+      "audio": {
+        "reference_frames": 850,
+        "period_available_frames": 850,
+        "phase_available_frames": 850,
+        "tempo_median_error_percent": 14.003157615661621,
+        "tempo_p95_error_percent": 26.455472946166992,
+        "phase_mean_absolute_cycles": 0.08903266489505768
+      },
+      "audio_common": {
+        "reference_frames": 850,
+        "period_available_frames": 850,
+        "phase_available_frames": 850,
+        "tempo_median_error_percent": 14.003157615661621,
+        "tempo_p95_error_percent": 26.455472946166992,
+        "phase_mean_absolute_cycles": 0.08903266489505768
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 849,
+        "available_adjacent_frames": 849,
+        "forward_phase_fraction": 0.7502944640753828,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.03262133151292801
+      },
+      "zero": {
+        "reference_frames": 850,
+        "period_available_frames": 850,
+        "phase_available_frames": 850,
+        "tempo_median_error_percent": 32.0943603515625,
+        "tempo_p95_error_percent": 33.46376419067383,
+        "phase_mean_absolute_cycles": 0.24999983608722687
+      },
+      "zero_common": {
+        "reference_frames": 850,
+        "period_available_frames": 850,
+        "phase_available_frames": 850,
+        "tempo_median_error_percent": 32.0943603515625,
+        "tempo_p95_error_percent": 33.46376419067383,
+        "phase_mean_absolute_cycles": 0.24999983608722687
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 849,
+        "available_adjacent_frames": 849,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708496451378
+      },
+      "raw_common": {
+        "reference_frames": 850,
+        "period_available_frames": 850,
+        "phase_available_frames": 850,
+        "tempo_median_error_percent": 0.6332337856292725,
+        "tempo_p95_error_percent": 39.26409912109375,
+        "phase_mean_absolute_cycles": 0.04755896329879761
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "artbeat-12-80-to-150",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 872,
+      "reference_frames": 850,
+      "raw_supported_reference_frames": 812,
+      "audio": {
+        "reference_frames": 850,
+        "period_available_frames": 850,
+        "phase_available_frames": 850,
+        "tempo_median_error_percent": 19.360614776611328,
+        "tempo_p95_error_percent": 57.29119110107422,
+        "phase_mean_absolute_cycles": 0.15836597979068756
+      },
+      "audio_common": {
+        "reference_frames": 812,
+        "period_available_frames": 812,
+        "phase_available_frames": 812,
+        "tempo_median_error_percent": 22.691532135009766,
+        "tempo_p95_error_percent": 57.41787338256836,
+        "phase_mean_absolute_cycles": 0.15938913822174072
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 849,
+        "available_adjacent_frames": 849,
+        "forward_phase_fraction": 0.696113074204947,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.05841632932424545
+      },
+      "zero": {
+        "reference_frames": 850,
+        "period_available_frames": 850,
+        "phase_available_frames": 850,
+        "tempo_median_error_percent": 33.639217376708984,
+        "tempo_p95_error_percent": 64.83232879638672,
+        "phase_mean_absolute_cycles": 0.25001394748687744
+      },
+      "zero_common": {
+        "reference_frames": 812,
+        "period_available_frames": 812,
+        "phase_available_frames": 812,
+        "tempo_median_error_percent": 33.639217376708984,
+        "tempo_p95_error_percent": 64.83232879638672,
+        "phase_mean_absolute_cycles": 0.25001639127731323
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 849,
+        "available_adjacent_frames": 849,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708496451378
+      },
+      "raw_common": {
+        "reference_frames": 812,
+        "period_available_frames": 812,
+        "phase_available_frames": 812,
+        "tempo_median_error_percent": 2.3437857627868652,
+        "tempo_p95_error_percent": 50.96546936035156,
+        "phase_mean_absolute_cycles": 0.1361180692911148
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": true,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "artbeat-13-180-to-120",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 692,
+      "reference_frames": 665,
+      "raw_supported_reference_frames": 656,
+      "audio": {
+        "reference_frames": 665,
+        "period_available_frames": 665,
+        "phase_available_frames": 665,
+        "tempo_median_error_percent": 42.10938262939453,
+        "tempo_p95_error_percent": 60.86279296875,
+        "phase_mean_absolute_cycles": 0.17940598726272583
+      },
+      "audio_common": {
+        "reference_frames": 656,
+        "period_available_frames": 656,
+        "phase_available_frames": 656,
+        "tempo_median_error_percent": 41.96687316894531,
+        "tempo_p95_error_percent": 60.4345588684082,
+        "phase_mean_absolute_cycles": 0.1794806271791458
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 664,
+        "available_adjacent_frames": 664,
+        "forward_phase_fraction": 0.6219879518072289,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.0784171000123024
+      },
+      "zero": {
+        "reference_frames": 665,
+        "period_available_frames": 665,
+        "phase_available_frames": 665,
+        "tempo_median_error_percent": 56.22769546508789,
+        "tempo_p95_error_percent": 71.09941101074219,
+        "phase_mean_absolute_cycles": 0.24987466633319855
+      },
+      "zero_common": {
+        "reference_frames": 656,
+        "period_available_frames": 656,
+        "phase_available_frames": 656,
+        "tempo_median_error_percent": 56.22769546508789,
+        "tempo_p95_error_percent": 71.09941101074219,
+        "phase_mean_absolute_cycles": 0.24845802783966064
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 664,
+        "available_adjacent_frames": 664,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 656,
+        "period_available_frames": 656,
+        "phase_available_frames": 656,
+        "tempo_median_error_percent": 2.604198455810547,
+        "tempo_p95_error_percent": 38.167911529541016,
+        "phase_mean_absolute_cycles": 0.09868200868368149
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": true,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "artbeat-14-240-to-96",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 816,
+      "reference_frames": 799,
+      "raw_supported_reference_frames": 799,
+      "audio": {
+        "reference_frames": 799,
+        "period_available_frames": 799,
+        "phase_available_frames": 799,
+        "tempo_median_error_percent": 30.063426971435547,
+        "tempo_p95_error_percent": 71.99738311767578,
+        "phase_mean_absolute_cycles": 0.12006855010986328
+      },
+      "audio_common": {
+        "reference_frames": 799,
+        "period_available_frames": 799,
+        "phase_available_frames": 799,
+        "tempo_median_error_percent": 30.063426971435547,
+        "tempo_p95_error_percent": 71.99738311767578,
+        "phase_mean_absolute_cycles": 0.12006855010986328
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 798,
+        "available_adjacent_frames": 798,
+        "forward_phase_fraction": 0.7869674185463659,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.05654512345790863
+      },
+      "zero": {
+        "reference_frames": 799,
+        "period_available_frames": 799,
+        "phase_available_frames": 799,
+        "tempo_median_error_percent": 45.28459167480469,
+        "tempo_p95_error_percent": 78.20746612548828,
+        "phase_mean_absolute_cycles": 0.2500164210796356
+      },
+      "zero_common": {
+        "reference_frames": 799,
+        "period_available_frames": 799,
+        "phase_available_frames": 799,
+        "tempo_median_error_percent": 45.28459167480469,
+        "tempo_p95_error_percent": 78.20746612548828,
+        "phase_mean_absolute_cycles": 0.2500164210796356
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 798,
+        "available_adjacent_frames": 798,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708496451378
+      },
+      "raw_common": {
+        "reference_frames": 799,
+        "period_available_frames": 799,
+        "phase_available_frames": 799,
+        "tempo_median_error_percent": 2.6475071907043457,
+        "tempo_p95_error_percent": 71.05140686035156,
+        "phase_mean_absolute_cycles": 0.0828615203499794
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": true,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "artbeat-15-85-to-127-5",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 1130,
+      "reference_frames": 1106,
+      "raw_supported_reference_frames": 1106,
+      "audio": {
+        "reference_frames": 1106,
+        "period_available_frames": 1106,
+        "phase_available_frames": 1106,
+        "tempo_median_error_percent": 28.758373260498047,
+        "tempo_p95_error_percent": 50.35929489135742,
+        "phase_mean_absolute_cycles": 0.1594715565443039
+      },
+      "audio_common": {
+        "reference_frames": 1106,
+        "period_available_frames": 1106,
+        "phase_available_frames": 1106,
+        "tempo_median_error_percent": 28.758373260498047,
+        "tempo_p95_error_percent": 50.35929489135742,
+        "phase_mean_absolute_cycles": 0.1594715565443039
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 1105,
+        "available_adjacent_frames": 1105,
+        "forward_phase_fraction": 0.7122171945701358,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.04927131161093712
+      },
+      "zero": {
+        "reference_frames": 1106,
+        "period_available_frames": 1106,
+        "phase_available_frames": 1106,
+        "tempo_median_error_percent": 36.551509857177734,
+        "tempo_p95_error_percent": 57.70100402832031,
+        "phase_mean_absolute_cycles": 0.25000283122062683
+      },
+      "zero_common": {
+        "reference_frames": 1106,
+        "period_available_frames": 1106,
+        "phase_available_frames": 1106,
+        "tempo_median_error_percent": 36.551509857177734,
+        "tempo_p95_error_percent": 57.70100402832031,
+        "phase_mean_absolute_cycles": 0.25000283122062683
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 1105,
+        "available_adjacent_frames": 1105,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708123922348
+      },
+      "raw_common": {
+        "reference_frames": 1106,
+        "period_available_frames": 1106,
+        "phase_available_frames": 1106,
+        "tempo_median_error_percent": 1.9608676433563232,
+        "tempo_p95_error_percent": 38.40816116333008,
+        "phase_mean_absolute_cycles": 0.1264219433069229
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": true,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "artbeat-18-piano-rubato",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 1163,
+      "reference_frames": 1146,
+      "raw_supported_reference_frames": 1124,
+      "audio": {
+        "reference_frames": 1146,
+        "period_available_frames": 1146,
+        "phase_available_frames": 1146,
+        "tempo_median_error_percent": 42.196685791015625,
+        "tempo_p95_error_percent": 66.64093017578125,
+        "phase_mean_absolute_cycles": 0.16702088713645935
+      },
+      "audio_common": {
+        "reference_frames": 1124,
+        "period_available_frames": 1124,
+        "phase_available_frames": 1124,
+        "tempo_median_error_percent": 41.88551330566406,
+        "tempo_p95_error_percent": 66.46675872802734,
+        "phase_mean_absolute_cycles": 0.16634592413902283
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 1145,
+        "available_adjacent_frames": 1145,
+        "forward_phase_fraction": 0.6873362445414847,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.0577605664730072
+      },
+      "zero": {
+        "reference_frames": 1146,
+        "period_available_frames": 1146,
+        "phase_available_frames": 1146,
+        "tempo_median_error_percent": 51.97211456298828,
+        "tempo_p95_error_percent": 66.47714233398438,
+        "phase_mean_absolute_cycles": 0.24999581277370453
+      },
+      "zero_common": {
+        "reference_frames": 1124,
+        "period_available_frames": 1124,
+        "phase_available_frames": 1124,
+        "tempo_median_error_percent": 51.92605209350586,
+        "tempo_p95_error_percent": 65.83258056640625,
+        "phase_mean_absolute_cycles": 0.25029274821281433
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 1145,
+        "available_adjacent_frames": 1145,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 1124,
+        "period_available_frames": 1124,
+        "phase_available_frames": 1124,
+        "tempo_median_error_percent": 48.57041931152344,
+        "tempo_p95_error_percent": 56.73507308959961,
+        "phase_mean_absolute_cycles": 0.18533186614513397
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": false,
+        "tempo_p95_error_percent": true,
+        "phase_mean_absolute_cycles": false
+      }
+    },
+    {
+      "id": "artbeat-19-ramp-80-to-200",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 863,
+      "reference_frames": 848,
+      "raw_supported_reference_frames": 833,
+      "audio": {
+        "reference_frames": 848,
+        "period_available_frames": 848,
+        "phase_available_frames": 848,
+        "tempo_median_error_percent": 50.475406646728516,
+        "tempo_p95_error_percent": 67.49565887451172,
+        "phase_mean_absolute_cycles": 0.1703844964504242
+      },
+      "audio_common": {
+        "reference_frames": 833,
+        "period_available_frames": 833,
+        "phase_available_frames": 833,
+        "tempo_median_error_percent": 49.63246154785156,
+        "tempo_p95_error_percent": 67.44648742675781,
+        "phase_mean_absolute_cycles": 0.1712881177663803
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 847,
+        "available_adjacent_frames": 847,
+        "forward_phase_fraction": 0.7485242030696576,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.04166543111205101
+      },
+      "zero": {
+        "reference_frames": 848,
+        "period_available_frames": 848,
+        "phase_available_frames": 848,
+        "tempo_median_error_percent": 60.79881286621094,
+        "tempo_p95_error_percent": 73.03437805175781,
+        "phase_mean_absolute_cycles": 0.24986666440963745
+      },
+      "zero_common": {
+        "reference_frames": 833,
+        "period_available_frames": 833,
+        "phase_available_frames": 833,
+        "tempo_median_error_percent": 59.91173553466797,
+        "tempo_p95_error_percent": 73.03437805175781,
+        "phase_mean_absolute_cycles": 0.2498781830072403
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 847,
+        "available_adjacent_frames": 847,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708310186863
+      },
+      "raw_common": {
+        "reference_frames": 833,
+        "period_available_frames": 833,
+        "phase_available_frames": 833,
+        "tempo_median_error_percent": 49.589508056640625,
+        "tempo_p95_error_percent": 73.46711730957031,
+        "phase_mean_absolute_cycles": 0.19716626405715942
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": false
+      }
+    },
+    {
+      "id": "artbeat-20-ramp-200-to-80",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 864,
+      "reference_frames": 827,
+      "raw_supported_reference_frames": 827,
+      "audio": {
+        "reference_frames": 827,
+        "period_available_frames": 827,
+        "phase_available_frames": 827,
+        "tempo_median_error_percent": 44.68815231323242,
+        "tempo_p95_error_percent": 63.530723571777344,
+        "phase_mean_absolute_cycles": 0.1884177178144455
+      },
+      "audio_common": {
+        "reference_frames": 827,
+        "period_available_frames": 827,
+        "phase_available_frames": 827,
+        "tempo_median_error_percent": 44.68815231323242,
+        "tempo_p95_error_percent": 63.530723571777344,
+        "phase_mean_absolute_cycles": 0.1884177178144455
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 826,
+        "available_adjacent_frames": 826,
+        "forward_phase_fraction": 0.7457627118644068,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.038156021386384964
+      },
+      "zero": {
+        "reference_frames": 827,
+        "period_available_frames": 827,
+        "phase_available_frames": 827,
+        "tempo_median_error_percent": 62.07590866088867,
+        "tempo_p95_error_percent": 73.03437805175781,
+        "phase_mean_absolute_cycles": 0.25014081597328186
+      },
+      "zero_common": {
+        "reference_frames": 827,
+        "period_available_frames": 827,
+        "phase_available_frames": 827,
+        "tempo_median_error_percent": 62.07590866088867,
+        "tempo_p95_error_percent": 73.03437805175781,
+        "phase_mean_absolute_cycles": 0.25014081597328186
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 826,
+        "available_adjacent_frames": 826,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708496451378
+      },
+      "raw_common": {
+        "reference_frames": 827,
+        "period_available_frames": 827,
+        "phase_available_frames": 827,
+        "tempo_median_error_percent": 49.8455924987793,
+        "tempo_p95_error_percent": 62.418365478515625,
+        "phase_mean_absolute_cycles": 0.18299704790115356
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": false,
+        "tempo_p95_error_percent": true,
+        "phase_mean_absolute_cycles": true
+      }
+    },
+    {
+      "id": "artbeat-21-polyrhythm-70-to-105",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 615,
+      "reference_frames": 601,
+      "raw_supported_reference_frames": 599,
+      "audio": {
+        "reference_frames": 601,
+        "period_available_frames": 601,
+        "phase_available_frames": 601,
+        "tempo_median_error_percent": 20.473384857177734,
+        "tempo_p95_error_percent": 34.47988510131836,
+        "phase_mean_absolute_cycles": 0.14277082681655884
+      },
+      "audio_common": {
+        "reference_frames": 599,
+        "period_available_frames": 599,
+        "phase_available_frames": 599,
+        "tempo_median_error_percent": 20.504629135131836,
+        "tempo_p95_error_percent": 34.521522521972656,
+        "phase_mean_absolute_cycles": 0.14253580570220947
+      },
+      "audio_coherence": {
+        "reference_adjacent_frames": 600,
+        "available_adjacent_frames": 600,
+        "forward_phase_fraction": 0.7683333333333333,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.038742657750844955
+      },
+      "zero": {
+        "reference_frames": 601,
+        "period_available_frames": 601,
+        "phase_available_frames": 601,
+        "tempo_median_error_percent": 48.636871337890625,
+        "tempo_p95_error_percent": 48.636871337890625,
+        "phase_mean_absolute_cycles": 0.24998120963573456
+      },
+      "zero_common": {
+        "reference_frames": 599,
+        "period_available_frames": 599,
+        "phase_available_frames": 599,
+        "tempo_median_error_percent": 48.636871337890625,
+        "tempo_p95_error_percent": 48.636871337890625,
+        "phase_mean_absolute_cycles": 0.25002679228782654
+      },
+      "zero_coherence": {
+        "reference_adjacent_frames": 600,
+        "available_adjacent_frames": 600,
+        "forward_phase_fraction": 0.0,
+        "mean_phase_period_disagreement_cycles_per_frame": 0.01797708123922348
+      },
+      "raw_common": {
+        "reference_frames": 599,
+        "period_available_frames": 599,
+        "phase_available_frames": 599,
+        "tempo_median_error_percent": 2.0408987998962402,
+        "tempo_p95_error_percent": 53.06145095825195,
+        "phase_mean_absolute_cycles": 0.11469504237174988
+      },
+      "regressions_vs_raw_common": {
+        "tempo_median_error_percent": true,
+        "tempo_p95_error_percent": false,
+        "phase_mean_absolute_cycles": true
+      }
+    }
+  ],
+  "summary": {
+    "fit": {
+      "audio": {
+        "tempo_median_error_percent": 17.255921814176773,
+        "tempo_p95_error_percent": 51.96291944715711,
+        "phase_mean_absolute_cycles": 0.12075763602775555
+      },
+      "zero": {
+        "tempo_median_error_percent": 29.593850383052118,
+        "tempo_p95_error_percent": 71.0387111239963,
+        "phase_mean_absolute_cycles": 0.250631214843856
+      },
+      "audio_common": {
+        "tempo_median_error_percent": 17.12785189240067,
+        "tempo_p95_error_percent": 49.5906523598565,
+        "phase_mean_absolute_cycles": 0.12003143393882998
+      },
+      "raw_common": {
+        "tempo_median_error_percent": 30.736086006517763,
+        "tempo_p95_error_percent": 129.81196686073588,
+        "phase_mean_absolute_cycles": 0.14445266686379912
+      }
+    },
+    "development": {
+      "audio": {
+        "tempo_median_error_percent": 37.22793420155843,
+        "tempo_p95_error_percent": 67.26382446289062,
+        "phase_mean_absolute_cycles": 0.1392239462584257
+      },
+      "zero": {
+        "tempo_median_error_percent": 40.44263998667399,
+        "tempo_p95_error_percent": 65.64791742960612,
+        "phase_mean_absolute_cycles": 0.2504435380299886
+      },
+      "audio_common": {
+        "tempo_median_error_percent": 37.31992530822754,
+        "tempo_p95_error_percent": 67.35520426432292,
+        "phase_mean_absolute_cycles": 0.1392932441085577
+      },
+      "raw_common": {
+        "tempo_median_error_percent": 41.589317401250206,
+        "tempo_p95_error_percent": 104.08342933654785,
+        "phase_mean_absolute_cycles": 0.14273669881125292
+      }
+    },
+    "diagnostic": {
+      "audio": {
+        "tempo_median_error_percent": 31.1920623143514,
+        "tempo_p95_error_percent": 51.235791524251304,
+        "phase_mean_absolute_cycles": 0.14310181389252344
+      },
+      "zero": {
+        "tempo_median_error_percent": 47.709896850585935,
+        "tempo_p95_error_percent": 60.060838317871095,
+        "phase_mean_absolute_cycles": 0.24999646743138632
+      },
+      "audio_common": {
+        "tempo_median_error_percent": 31.122794659932456,
+        "tempo_p95_error_percent": 51.20622545878093,
+        "phase_mean_absolute_cycles": 0.14317960341771443
+      },
+      "raw_common": {
+        "tempo_median_error_percent": 14.458541043599446,
+        "tempo_p95_error_percent": 49.49819943110148,
+        "phase_mean_absolute_cycles": 0.1078023798763752
+      }
+    }
+  },
+  "development_gate_passed": false,
+  "training": true,
+  "independent_acceptance": false,
+  "holdout_access": false,
+  "production_change": false,
+  "decision": "close_this_fixed_direct_readout_no_automatic_sweep"
+}

@@ -4,6 +4,28 @@ The product contract remains one-call, zero-tuning audio metadata extraction.
 Timing is the first capability pack. Experiments do not become user-selectable
 policies, and a rejected heuristic is not proof that training is necessary.
 
+## Current decision: first small fit completed, not admitted
+
+On 2026-09-10 the user authorized one bounded learning experiment after the
+repeated diagnostic cycle. The [direct phase/period experiment](../evaluation/baselines/direct-clock-learning-v1.md)
+has now run both fits. It is not the earlier candidate-compatibility scorer:
+the network predicts from frozen audio features without supplied clock paths.
+Existing exposed calibration is explicitly reused for exploratory fitting;
+this does not certify independent data, a perceived beat convention, or product
+accuracy. No existing holdout was opened and no model is distributed.
+
+The pre-fit continuation gate failed. Audio features improve phase relative to
+a fitted zero-audio control, but do not supply reliable tempo/beat-level output;
+ARTBeaT regressions and backwards phase remain. Close this fixed architecture
+without more seeds, parameter sweeps or relaxed gates. A future coherent-clock
+design would be a new experiment, not a silent continuation of this one.
+
+The sections below retain the evidence and approval state at their original
+checkpoints. Their proposals and "no training" statements are historical, not
+a claim that the above optimizer runs have not happened. The independent-label
+and automatic-product gates remain open, not prerequisites retrospectively
+claimed to have passed for this deliberately narrower development experiment.
+
 ## Separate the musical clock from observations
 
 A detected event is evidence about a beat, not the definition of a beat. Two

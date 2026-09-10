@@ -22,7 +22,26 @@ mandatory model. A future pack gets a crate only when it has meaningful behavior
 and artifacts to own, and every product surface includes only the packs selected
 for that distribution.
 
-## Phase 1: training-free timing engine
+## Phase 1: timing accuracy, one shipping estimator
+
+Current status, 2026-09-10: the first user-authorized small learning experiment
+has actually fitted a 24,003-parameter direct phase/period head and a zero-audio
+control on frozen Beat This features. This bypasses the failed candidate-ranker
+prerequisite rather than training a scorer for absent paths. It reuses exposed
+calibration for exploration, not independent acceptance. The fixed development
+gate failed: tempo error improved only 7.95% against the control, below 10%;
+ARTBeaT tempo and phase regressed against raw-event interpolation. Phase also
+sometimes moves backwards. Close this fixed head, do not sweep its settings,
+promote a favorable corpus, or integrate it into the product. See the
+[actual fit, every-case results and limits](evaluation/baselines/direct-clock-learning-v1.md).
+
+The next design decision is whether a jointly constrained learned clock can
+address phase/period inconsistency and beat-level errors with representative
+supervision. That is not an approved second fit, encoder fine-tune or automatic
+data expansion. Keep the one-call/no-per-song-tuning contract. The following
+entries are historical checkpoints: their earlier no-training status and
+"next" proposals do not override this dated outcome. Shipping Rust outputs,
+holdouts and release status remain unchanged.
 
 - The [frozen proposal-miss diagnosis](evaluation/baselines/clock-proposal-diagnosis-v1.md)
   preserves all 3,348 queries and old scores. Only 38/2,690 misses have a pure
