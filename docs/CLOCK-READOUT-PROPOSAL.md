@@ -11,6 +11,13 @@ remains a design, not an implemented readout. Measured native-grid coverage of
 the new candidate set is insufficient to clear the generation prerequisite;
 independent labels and fitting remain unstarted.
 
+The [subsequent miss diagnosis](../evaluation/baselines/clock-proposal-diagnosis-v1.md)
+preserves those scores and separates crop-boundary witnesses, offset-compatible
+residuals, count mismatch and anchor geometry. Step misses primarily lack a
+count-matched candidate, often despite nearby existing peaks. Joint observation
+assignment and locally varying clock advancement need a bounded construction
+contract before a learned scorer; the diagnostic does not supply a repaired path.
+
 ## Decision: learn evidence for a clock, not just presence or one BPM
 
 The [latest conditional MusicFM experiment](../evaluation/baselines/musicfm-paired-v1.md)

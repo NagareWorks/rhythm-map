@@ -24,6 +24,18 @@ for that distribution.
 
 ## Phase 1: training-free timing engine
 
+- The [frozen proposal-miss diagnosis](evaluation/baselines/clock-proposal-diagnosis-v1.md)
+  preserves all 3,348 queries and old scores. Only 38/2,690 misses have a pure
+  crop-boundary witness; 427 have offset-compatible ordered residuals, 1,179
+  have nonuniform equal-count error, 1,000 lack a count-matched candidate and
+  46 have no candidates. None is counted as repaired. Of nineteen step misses,
+  seventeen lack a count-matched candidate; fourteen have existing peaks near
+  every missing raw reference anchor, but twelve also have extra raw events.
+  This motivates one jointly assigned, peak-supported, variable-advance clock
+  construction contract, not phase fitting or another top-K event ranker.
+  Fix its finite state/search cost and existing eight-candidate ceiling before
+  replay. Expressive missing-peak and nonuniform-gap failures remain explicit;
+  no training, new audio, listener labels, default change or accuracy gain.
 - [Blinded packets and the fixed proposal coverage baseline](docs/CLOCK-ANNOTATION-PACKETS.md)
   now separate pre-overlay listening records, anonymous clock votes and private
   provenance; unknown context never becomes a negative target. All forty old

@@ -81,6 +81,17 @@ of the missing-step penalty on these same labels.
 
 ## Practical decision gate, not an impossibility claim
 
+The subsequent [frozen proposal-miss diagnosis](../evaluation/baselines/clock-proposal-diagnosis-v1.md)
+leaves every old candidate and score unchanged. Only 38/2,690 misses have a
+crop-boundary-only witness. Seventeen of nineteen step misses lack any
+count-matched candidate; fourteen have existing local-max peaks near every
+missing raw reference tick, while extra events coexist. This is evidence to
+specify one peak-supported, locally variable-advance clock construction, not
+proof that selecting those peaks works or that a scorer should now be trained.
+Expressive missing-peak and nonuniform-interpolation errors remain; reference-
+assisted offset/anchor geometry is not independent coverage or a product fix.
+Freeze joint assignment, support and finite candidate/search cost before replay.
+
 The [observation-only proposal coverage baseline](../evaluation/baselines/clock-proposal-v1.md)
 now measures 3,348 fixed-grid queries from all forty prior inputs before any
 annotation is loaded. Its native-grid proxy covers 484, misses 2,690 and leaves
@@ -97,9 +108,10 @@ product admission. It specifies multi-supported/unknown annotation semantics,
 a costed 25,249-parameter frozen-encoder readout, a bounded label-feasibility
 pilot and explicit fitting/acceptance prerequisites. Only model-free budget and
 vote-contract checks exist: no annotations are newly collected, no independent
-groups admitted, no generator implemented and no training authorized. Next
-review a blinded annotation packet and annotation-free proposal-coverage audit;
-do not present global BPM summaries or supplied oracle clocks as that generator.
+groups admitted and no training authorized. The later packet/proposal audit
+above implements the generation prerequisite but does not pass its coverage
+gate; do not present global BPM summaries or supplied oracle clocks as that
+automatic generator.
 
 The [conditional MusicFM replay](../evaluation/baselines/musicfm-paired-v1.md)
 now measures the original seven exposed music pairs, separately from admission

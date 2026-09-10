@@ -1,0 +1,33 @@
+{
+  "schema": "rhythm-map.clock-proposal-diagnosis-lock.v1",
+  "purpose": "Post-hoc decomposition of every frozen proposal query, not a repaired generator or causal/perceptual labels.",
+  "source_sha256": {
+    "clock_proposal_diagnosis.py": "b2e5dce193dc6a7fed7be5827690fcd71d5b7de645b3e696efe2cdb8c276791a",
+    "clock_proposal_diagnosis_audit.py": "fe037066182858da95e3ac6ea457015f9d8a882bd433be33e9143b0c2cca317e"
+  },
+  "prior_report_sha256": "d17f36dd8f3ea3d4c9ccc46eb78c41c3ab9ee11d97f22e2869e5d714582411cf",
+  "private_input_sha256": "4daa46fb79bcba78b8d554c83b752f594b23ddf149d0672ab05bdf96473bed3b",
+  "population": "All forty original inputs and all 3348 original queries, including empty candidates and unavailable reference. Previous source, input, candidate, slice and result hashes are checked; no query filtering.",
+  "tolerance_seconds": 0.06,
+  "matching": "Chronological one-to-one 60 ms tolerance matching, not least-error alignment. Fixed half-open query with a 60 ms halo; candidate halo clips to physical clock support. Cross-boundary matches are constructive witnesses, not proof of the absence of another alignment.",
+  "partition_precedence": [
+    "reference_unavailable",
+    "original_covered",
+    "no_candidates",
+    "query_boundary_only_witness",
+    "equal_count_offset_compatible",
+    "equal_count_nonuniform_error",
+    "diagnostic_budget_unavailable",
+    "no_count_matched_candidate"
+  ],
+  "boundary_only": "An original miss with at least one crossing pair and no unmatched central reference or candidate tick under the fixed halo alignment. Does not update the strict original result.",
+  "offset_compatible": "At least one equal-count ordered candidate has residual span at most 120 ms. No offset is selected or applied. Translating can change crop membership, so this is not repaired coverage.",
+  "anchor_inventory": "Raw-event/reference local halo alignment identifies missing and extra query events. Missing reference anchors are separately matched one-to-one to existing model local-max candidates; this is not joint event selection or a recoverable-coverage bound.",
+  "interval_inventory": "Full-trace raw/reference chronological matching supplies endpoint reference indices. Count reference-index advances in intersecting raw intervals; unmatched endpoints remain unknown. Measure interior query reference ticks more than 60 ms from uniform endpoint interpolation. Neither mixed advances nor nonuniform residuals proves a musical tempo change or a specific causal failure.",
+  "aggregation": "Mutually exclusive query partitions use the stated precedence. Failed-query flags are nonexclusive; anchor totals count repeated occurrences in overlapping queries, not independent unique events. Keep per-input and old post-hoc slice counts.",
+  "budget": "One descriptive replay after authored geometry tests and this lock; no new candidate, phase fitting, threshold sweep, optimizer, audio acquisition, listening or heldout data. Reference-assisted findings can motivate a separate proposal only.",
+  "new_candidates_generated": false,
+  "training": false,
+  "holdout_access": false,
+  "production_change": false
+}

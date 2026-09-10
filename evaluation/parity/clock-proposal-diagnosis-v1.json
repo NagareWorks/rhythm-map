@@ -1,0 +1,1768 @@
+{
+  "schema": "rhythm-map.clock-proposal-diagnosis.v1",
+  "contract": {
+    "schema": "rhythm-map.clock-proposal-diagnosis-lock.v1",
+    "purpose": "Post-hoc decomposition of every frozen proposal query, not a repaired generator or causal/perceptual labels.",
+    "source_sha256": {
+      "clock_proposal_diagnosis.py": "b2e5dce193dc6a7fed7be5827690fcd71d5b7de645b3e696efe2cdb8c276791a",
+      "clock_proposal_diagnosis_audit.py": "fe037066182858da95e3ac6ea457015f9d8a882bd433be33e9143b0c2cca317e"
+    },
+    "prior_report_sha256": "d17f36dd8f3ea3d4c9ccc46eb78c41c3ab9ee11d97f22e2869e5d714582411cf",
+    "private_input_sha256": "4daa46fb79bcba78b8d554c83b752f594b23ddf149d0672ab05bdf96473bed3b",
+    "population": "All forty original inputs and all 3348 original queries, including empty candidates and unavailable reference. Previous source, input, candidate, slice and result hashes are checked; no query filtering.",
+    "tolerance_seconds": 0.06,
+    "matching": "Chronological one-to-one 60 ms tolerance matching, not least-error alignment. Fixed half-open query with a 60 ms halo; candidate halo clips to physical clock support. Cross-boundary matches are constructive witnesses, not proof of the absence of another alignment.",
+    "partition_precedence": [
+      "reference_unavailable",
+      "original_covered",
+      "no_candidates",
+      "query_boundary_only_witness",
+      "equal_count_offset_compatible",
+      "equal_count_nonuniform_error",
+      "diagnostic_budget_unavailable",
+      "no_count_matched_candidate"
+    ],
+    "boundary_only": "An original miss with at least one crossing pair and no unmatched central reference or candidate tick under the fixed halo alignment. Does not update the strict original result.",
+    "offset_compatible": "At least one equal-count ordered candidate has residual span at most 120 ms. No offset is selected or applied. Translating can change crop membership, so this is not repaired coverage.",
+    "anchor_inventory": "Raw-event/reference local halo alignment identifies missing and extra query events. Missing reference anchors are separately matched one-to-one to existing model local-max candidates; this is not joint event selection or a recoverable-coverage bound.",
+    "interval_inventory": "Full-trace raw/reference chronological matching supplies endpoint reference indices. Count reference-index advances in intersecting raw intervals; unmatched endpoints remain unknown. Measure interior query reference ticks more than 60 ms from uniform endpoint interpolation. Neither mixed advances nor nonuniform residuals proves a musical tempo change or a specific causal failure.",
+    "aggregation": "Mutually exclusive query partitions use the stated precedence. Failed-query flags are nonexclusive; anchor totals count repeated occurrences in overlapping queries, not independent unique events. Keep per-input and old post-hoc slice counts.",
+    "budget": "One descriptive replay after authored geometry tests and this lock; no new candidate, phase fitting, threshold sweep, optimizer, audio acquisition, listening or heldout data. Reference-assisted findings can motivate a separate proposal only.",
+    "new_candidates_generated": false,
+    "training": false,
+    "holdout_access": false,
+    "production_change": false
+  },
+  "lock_sha256": "638a8f95b39d37a81ccf5bfeae154cf47b62366fd2a95fbbff3814c0d84db589",
+  "prior_generation_sha256": "ade6b5bc99cfeba73da7d8ea27e3c57f539579d371a6ed878674229d5542b144",
+  "private_content_sha256": "de009dc77bd4e62adca6e7383e2df33f371cbfb7297e424c6759915435258a42",
+  "elapsed_s": 16.18196289986372,
+  "input_cases": [
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-05-75-to-150",
+      "frame_count": 681,
+      "truth_sha256": "5d6c395345fb6155893bc3aad4e0def3518bdecedb82f08d3514adfaeea0d456",
+      "capture_sha256": "973337d4aa0bd1bac738888fe415755185d4a2a2eea933d11fd21541ce3764a7",
+      "queries": 6,
+      "partition": {
+        "no_count_matched_candidate": 2,
+        "original_covered": 2,
+        "reference_unavailable": 2
+      },
+      "original_reference_status": {
+        "native_grid_covered": 2,
+        "native_grid_missed": 2,
+        "reference_unavailable": 2
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 2,
+        "extra_raw_event": 0,
+        "all_missing_raw_anchors_have_candidate_peaks": 2,
+        "some_missing_raw_anchor_has_no_candidate_peak": 0,
+        "mixed_reference_advances": 2,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 0
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 6,
+        "unmatched_prediction": 0,
+        "missing_reference_with_candidate_peak": 6,
+        "missing_reference_without_candidate_peak": 0,
+        "intervals_without_two_reference_anchors": 0,
+        "interior_reference_ticks_between_matched_raw_anchors": 6,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-06-150-to-75",
+      "frame_count": 681,
+      "truth_sha256": "fcda5614cb07639a66edb58f7b658214e1f54ec1db1de35e84367d47be77849f",
+      "capture_sha256": "c96fe9dff55dc0334c956f453cb9e0640af4ce9b52abdccd82eaeb4b022b9ff3",
+      "queries": 6,
+      "partition": {
+        "no_count_matched_candidate": 2,
+        "query_boundary_only_witness": 2,
+        "reference_unavailable": 2
+      },
+      "original_reference_status": {
+        "native_grid_missed": 4,
+        "reference_unavailable": 2
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 3,
+        "extra_raw_event": 0,
+        "all_missing_raw_anchors_have_candidate_peaks": 3,
+        "some_missing_raw_anchor_has_no_candidate_peak": 0,
+        "mixed_reference_advances": 3,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 0
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 8,
+        "unmatched_prediction": 0,
+        "missing_reference_with_candidate_peak": 8,
+        "missing_reference_without_candidate_peak": 0,
+        "intervals_without_two_reference_anchors": 0,
+        "interior_reference_ticks_between_matched_raw_anchors": 8,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-07-75-to-112-5",
+      "frame_count": 667,
+      "truth_sha256": "063beee7c5428adedeecab21d0f8678a69c049f4ca2ea8ebfb7827b1ec79057f",
+      "capture_sha256": "bd4e756badf480190d1b3e216677aa8ead7a1032d8f66ef1bcefdc18e7b00e69",
+      "queries": 6,
+      "partition": {
+        "no_count_matched_candidate": 2,
+        "original_covered": 2,
+        "reference_unavailable": 2
+      },
+      "original_reference_status": {
+        "native_grid_covered": 2,
+        "native_grid_missed": 2,
+        "reference_unavailable": 2
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 2,
+        "extra_raw_event": 2,
+        "all_missing_raw_anchors_have_candidate_peaks": 2,
+        "some_missing_raw_anchor_has_no_candidate_peak": 0,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 0
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 2,
+        "unmatched_prediction": 6,
+        "missing_reference_with_candidate_peak": 2,
+        "missing_reference_without_candidate_peak": 0,
+        "intervals_without_two_reference_anchors": 10,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-08-112-5-to-75",
+      "frame_count": 701,
+      "truth_sha256": "64de869a6b3e15d8e07601d67cb1508842de558761f5d00f4d25ded8077b92e6",
+      "capture_sha256": "f727928b068097ab0ac2d58cf838f95265fb9a74a7c2fb990dba7fc5fee07edf",
+      "queries": 6,
+      "partition": {
+        "no_count_matched_candidate": 3,
+        "original_covered": 1,
+        "reference_unavailable": 2
+      },
+      "original_reference_status": {
+        "native_grid_covered": 1,
+        "native_grid_missed": 3,
+        "reference_unavailable": 2
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 2,
+        "extra_raw_event": 3,
+        "all_missing_raw_anchors_have_candidate_peaks": 2,
+        "some_missing_raw_anchor_has_no_candidate_peak": 0,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 0
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 4,
+        "unmatched_prediction": 8,
+        "missing_reference_with_candidate_peak": 4,
+        "missing_reference_without_candidate_peak": 0,
+        "intervals_without_two_reference_anchors": 13,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-09-90-to-80",
+      "frame_count": 881,
+      "truth_sha256": "a9802ae028c9631323354a5826f50e2c78b14e54c66581a817f8d07b633a5409",
+      "capture_sha256": "cc3464f42f5c32135d39832563f146ef2d80d284c817626c23627ee986fe244e",
+      "queries": 8,
+      "partition": {
+        "equal_count_offset_compatible": 1,
+        "original_covered": 5,
+        "reference_unavailable": 2
+      },
+      "original_reference_status": {
+        "native_grid_covered": 5,
+        "native_grid_missed": 1,
+        "reference_unavailable": 2
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 1,
+        "extra_raw_event": 1,
+        "all_missing_raw_anchors_have_candidate_peaks": 0,
+        "some_missing_raw_anchor_has_no_candidate_peak": 1,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 1
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 1,
+        "unmatched_prediction": 1,
+        "missing_reference_with_candidate_peak": 0,
+        "missing_reference_without_candidate_peak": 1,
+        "intervals_without_two_reference_anchors": 2,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-10-90-to-120",
+      "frame_count": 831,
+      "truth_sha256": "2165ea70a5f4224461552a28567cb45ad2b2cfe66cf4a99661ff49a02b24f10f",
+      "capture_sha256": "d9f11d3c740c80d0e5d12c650b07bdd1268d007491740e0c5ca3b388cf5de9a4",
+      "queries": 8,
+      "partition": {
+        "original_covered": 6,
+        "reference_unavailable": 2
+      },
+      "original_reference_status": {
+        "native_grid_covered": 6,
+        "reference_unavailable": 2
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 0,
+        "extra_raw_event": 0,
+        "all_missing_raw_anchors_have_candidate_peaks": 0,
+        "some_missing_raw_anchor_has_no_candidate_peak": 0,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 0
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 0,
+        "unmatched_prediction": 0,
+        "missing_reference_with_candidate_peak": 0,
+        "missing_reference_without_candidate_peak": 0,
+        "intervals_without_two_reference_anchors": 0,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-11-60-to-80",
+      "frame_count": 871,
+      "truth_sha256": "7332a12f293d6bf843b4833054722c492c551d9e82b978aa11e6a90e145f1901",
+      "capture_sha256": "862b06aafd290e8a039978b135f34ea35da797bbf9074157847c0c07d7ed27f3",
+      "queries": 8,
+      "partition": {
+        "no_count_matched_candidate": 1,
+        "original_covered": 5,
+        "reference_unavailable": 2
+      },
+      "original_reference_status": {
+        "native_grid_covered": 5,
+        "native_grid_missed": 1,
+        "reference_unavailable": 2
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 1,
+        "extra_raw_event": 1,
+        "all_missing_raw_anchors_have_candidate_peaks": 1,
+        "some_missing_raw_anchor_has_no_candidate_peak": 0,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 0
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 2,
+        "unmatched_prediction": 1,
+        "missing_reference_with_candidate_peak": 2,
+        "missing_reference_without_candidate_peak": 0,
+        "intervals_without_two_reference_anchors": 2,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-12-80-to-150",
+      "frame_count": 872,
+      "truth_sha256": "84dc7d0b5ae7f297bdef100b6f67dc64d1475655ef9a36cdd442578368301a87",
+      "capture_sha256": "00f0ed56f9eabcd37c80ea2f463cdbfd7ba5416a1e019979f24093bc5a7f1b30",
+      "queries": 8,
+      "partition": {
+        "no_count_matched_candidate": 2,
+        "original_covered": 4,
+        "reference_unavailable": 2
+      },
+      "original_reference_status": {
+        "native_grid_covered": 4,
+        "native_grid_missed": 2,
+        "reference_unavailable": 2
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 2,
+        "extra_raw_event": 0,
+        "all_missing_raw_anchors_have_candidate_peaks": 2,
+        "some_missing_raw_anchor_has_no_candidate_peak": 0,
+        "mixed_reference_advances": 2,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 0
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 5,
+        "unmatched_prediction": 0,
+        "missing_reference_with_candidate_peak": 5,
+        "missing_reference_without_candidate_peak": 0,
+        "intervals_without_two_reference_anchors": 0,
+        "interior_reference_ticks_between_matched_raw_anchors": 5,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-13-180-to-120",
+      "frame_count": 692,
+      "truth_sha256": "61513c63f05ff332d265d6d785ca50342cdad10b23f664a40f1b55d2487349bf",
+      "capture_sha256": "88a5824f541d2dd782a01644c73fd546e52090769e145807b50767ebfbdb23dc",
+      "queries": 6,
+      "partition": {
+        "no_count_matched_candidate": 2,
+        "original_covered": 2,
+        "reference_unavailable": 2
+      },
+      "original_reference_status": {
+        "native_grid_covered": 2,
+        "native_grid_missed": 2,
+        "reference_unavailable": 2
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 2,
+        "extra_raw_event": 2,
+        "all_missing_raw_anchors_have_candidate_peaks": 2,
+        "some_missing_raw_anchor_has_no_candidate_peak": 0,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 0
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 9,
+        "unmatched_prediction": 4,
+        "missing_reference_with_candidate_peak": 9,
+        "missing_reference_without_candidate_peak": 0,
+        "intervals_without_two_reference_anchors": 10,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-14-240-to-96",
+      "frame_count": 816,
+      "truth_sha256": "6583d495985b507d2083975501e40f15ad0727f2df8761645280f4fb87c3fe96",
+      "capture_sha256": "53ea2508c3487f5fba57ff2c03246dae6b267c0ff9886a22baa496cff7ce19f0",
+      "queries": 8,
+      "partition": {
+        "no_count_matched_candidate": 2,
+        "original_covered": 3,
+        "query_boundary_only_witness": 1,
+        "reference_unavailable": 2
+      },
+      "original_reference_status": {
+        "native_grid_covered": 3,
+        "native_grid_missed": 3,
+        "reference_unavailable": 2
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 2,
+        "extra_raw_event": 2,
+        "all_missing_raw_anchors_have_candidate_peaks": 2,
+        "some_missing_raw_anchor_has_no_candidate_peak": 0,
+        "mixed_reference_advances": 2,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 0
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 16,
+        "unmatched_prediction": 6,
+        "missing_reference_with_candidate_peak": 16,
+        "missing_reference_without_candidate_peak": 0,
+        "intervals_without_two_reference_anchors": 10,
+        "interior_reference_ticks_between_matched_raw_anchors": 5,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-15-85-to-127-5",
+      "frame_count": 1130,
+      "truth_sha256": "e819ded9652413d5fd923066047b8cc1a27a2c0d24f3fdb3b80b40148fc9c39e",
+      "capture_sha256": "5a66d6c4abfc1416ff34fca4c74dd2c0a937e95f3654ea4145b76045125aa350",
+      "queries": 11,
+      "partition": {
+        "no_count_matched_candidate": 6,
+        "original_covered": 4,
+        "reference_unavailable": 1
+      },
+      "original_reference_status": {
+        "native_grid_covered": 4,
+        "native_grid_missed": 6,
+        "reference_unavailable": 1
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 6,
+        "extra_raw_event": 5,
+        "all_missing_raw_anchors_have_candidate_peaks": 1,
+        "some_missing_raw_anchor_has_no_candidate_peak": 5,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 0
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 27,
+        "unmatched_prediction": 17,
+        "missing_reference_with_candidate_peak": 16,
+        "missing_reference_without_candidate_peak": 11,
+        "intervals_without_two_reference_anchors": 36,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-18-piano-rubato",
+      "frame_count": 1163,
+      "truth_sha256": "ddf1a5ff2a4d5649497bb54a60084abed6a21b1a062c874a492820245afd11a2",
+      "capture_sha256": "4e6c241ec2705094b5809e8f8d7a48fc668ad2eef2721d54d31a98dff3e3495e",
+      "queries": 11,
+      "partition": {
+        "equal_count_nonuniform_error": 2,
+        "equal_count_offset_compatible": 1,
+        "no_count_matched_candidate": 5,
+        "original_covered": 1,
+        "reference_unavailable": 2
+      },
+      "original_reference_status": {
+        "native_grid_covered": 1,
+        "native_grid_missed": 8,
+        "reference_unavailable": 2
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 8,
+        "extra_raw_event": 2,
+        "all_missing_raw_anchors_have_candidate_peaks": 8,
+        "some_missing_raw_anchor_has_no_candidate_peak": 0,
+        "mixed_reference_advances": 6,
+        "misplaced_linear_interpolation": 5,
+        "equal_count_nonuniform_candidate": 3
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 26,
+        "unmatched_prediction": 3,
+        "missing_reference_with_candidate_peak": 26,
+        "missing_reference_without_candidate_peak": 0,
+        "intervals_without_two_reference_anchors": 6,
+        "interior_reference_ticks_between_matched_raw_anchors": 19,
+        "linear_interpolation_outside_tolerance": 5
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-19-ramp-80-to-200",
+      "frame_count": 863,
+      "truth_sha256": "407ec564b847ebf779e2f740c8c5d156211e69e18dc62b6a8fd37c17d01c4457",
+      "capture_sha256": "cf9e6d10e25ebfbb93e50ad70be70186e7ed229577e2b1fbd5f90c5459af215b",
+      "queries": 8,
+      "partition": {
+        "no_count_matched_candidate": 3,
+        "original_covered": 4,
+        "reference_unavailable": 1
+      },
+      "original_reference_status": {
+        "native_grid_covered": 4,
+        "native_grid_missed": 3,
+        "reference_unavailable": 1
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 3,
+        "extra_raw_event": 2,
+        "all_missing_raw_anchors_have_candidate_peaks": 3,
+        "some_missing_raw_anchor_has_no_candidate_peak": 0,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 0
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 14,
+        "unmatched_prediction": 2,
+        "missing_reference_with_candidate_peak": 14,
+        "missing_reference_without_candidate_peak": 0,
+        "intervals_without_two_reference_anchors": 5,
+        "interior_reference_ticks_between_matched_raw_anchors": 6,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-20-ramp-200-to-80",
+      "frame_count": 864,
+      "truth_sha256": "b2e8e3aa1a131b9335914f974d5cfff7618703dd8d9c87fe38723545f6ec5980",
+      "capture_sha256": "9aae8a403e1b95a3532d8bd2670febb21d3e9aab4034f05b6009cdd8f08c8c1c",
+      "queries": 8,
+      "partition": {
+        "equal_count_nonuniform_error": 1,
+        "no_count_matched_candidate": 1,
+        "original_covered": 3,
+        "query_boundary_only_witness": 2,
+        "reference_unavailable": 1
+      },
+      "original_reference_status": {
+        "native_grid_covered": 3,
+        "native_grid_missed": 4,
+        "reference_unavailable": 1
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 4,
+        "extra_raw_event": 2,
+        "all_missing_raw_anchors_have_candidate_peaks": 2,
+        "some_missing_raw_anchor_has_no_candidate_peak": 2,
+        "mixed_reference_advances": 1,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 1
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 19,
+        "unmatched_prediction": 2,
+        "missing_reference_with_candidate_peak": 17,
+        "missing_reference_without_candidate_peak": 2,
+        "intervals_without_two_reference_anchors": 5,
+        "interior_reference_ticks_between_matched_raw_anchors": 13,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "artbeat",
+      "id": "artbeat-21-polyrhythm-70-to-105",
+      "frame_count": 615,
+      "truth_sha256": "7016cc892dcec5a95ea18cf778d9890f1d754158168f29c3ce5e895d32578638",
+      "capture_sha256": "2e3ba7557faad626d3f92bf6d6e0a705536a81119c8cf33603a5b6bd91fabc22",
+      "queries": 6,
+      "partition": {
+        "equal_count_nonuniform_error": 1,
+        "no_candidates": 1,
+        "no_count_matched_candidate": 1,
+        "original_covered": 2,
+        "reference_unavailable": 1
+      },
+      "original_reference_status": {
+        "native_grid_covered": 2,
+        "native_grid_missed": 3,
+        "reference_unavailable": 1
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 3,
+        "extra_raw_event": 3,
+        "all_missing_raw_anchors_have_candidate_peaks": 1,
+        "some_missing_raw_anchor_has_no_candidate_peak": 2,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 1
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 5,
+        "unmatched_prediction": 10,
+        "missing_reference_with_candidate_peak": 3,
+        "missing_reference_without_candidate_peak": 2,
+        "intervals_without_two_reference_anchors": 15,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "frame_count": 6446,
+      "truth_sha256": "f16e419511caee1c96c786fbe5a745b9e319a5d95a8d832dcd3b337f072706a7",
+      "capture_sha256": "76b295f5021e99204b2fde688f1b85f364d6f999866fc7fad7d60f1a6ab7e0a3",
+      "queries": 64,
+      "partition": {
+        "equal_count_nonuniform_error": 25,
+        "equal_count_offset_compatible": 6,
+        "no_candidates": 2,
+        "no_count_matched_candidate": 21,
+        "original_covered": 5,
+        "reference_unavailable": 5
+      },
+      "original_reference_status": {
+        "native_grid_covered": 5,
+        "native_grid_missed": 54,
+        "reference_unavailable": 5
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 54,
+        "extra_raw_event": 54,
+        "all_missing_raw_anchors_have_candidate_peaks": 23,
+        "some_missing_raw_anchor_has_no_candidate_peak": 31,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 27
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 191,
+        "unmatched_prediction": 329,
+        "missing_reference_with_candidate_peak": 145,
+        "missing_reference_without_candidate_peak": 46,
+        "intervals_without_two_reference_anchors": 444,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "frame_count": 6949,
+      "truth_sha256": "02617c821f0b7beb6fb0578d50f18b45b1e4b96e788c33835646b716b8a584e7",
+      "capture_sha256": "eaac53c4f18d0fbc9da29c315ce6d58385e9c4bbe74b17ff191d1c092981647b",
+      "queries": 69,
+      "partition": {
+        "equal_count_nonuniform_error": 30,
+        "equal_count_offset_compatible": 10,
+        "no_candidates": 2,
+        "no_count_matched_candidate": 17,
+        "original_covered": 7,
+        "reference_unavailable": 3
+      },
+      "original_reference_status": {
+        "native_grid_covered": 7,
+        "native_grid_missed": 59,
+        "reference_unavailable": 3
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 47,
+        "extra_raw_event": 58,
+        "all_missing_raw_anchors_have_candidate_peaks": 26,
+        "some_missing_raw_anchor_has_no_candidate_peak": 21,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 32
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 109,
+        "unmatched_prediction": 199,
+        "missing_reference_with_candidate_peak": 86,
+        "missing_reference_without_candidate_peak": 23,
+        "intervals_without_two_reference_anchors": 324,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-beethoven-op072-0-ov-henning2017",
+      "frame_count": 20175,
+      "truth_sha256": "0597675375121d0e7592d5abdae51277c166ff7611f3daf327f0ae4193ddcf8e",
+      "capture_sha256": "fb774b4cfc44a241719fa344c81c4db0ecd6d1365bbf1f8c9490cfd31c07f325",
+      "queries": 201,
+      "partition": {
+        "equal_count_nonuniform_error": 60,
+        "equal_count_offset_compatible": 47,
+        "no_candidates": 1,
+        "no_count_matched_candidate": 40,
+        "original_covered": 33,
+        "query_boundary_only_witness": 7,
+        "reference_unavailable": 13
+      },
+      "original_reference_status": {
+        "native_grid_covered": 33,
+        "native_grid_missed": 155,
+        "reference_unavailable": 13
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 146,
+        "extra_raw_event": 132,
+        "all_missing_raw_anchors_have_candidate_peaks": 9,
+        "some_missing_raw_anchor_has_no_candidate_peak": 137,
+        "mixed_reference_advances": 7,
+        "misplaced_linear_interpolation": 17,
+        "equal_count_nonuniform_candidate": 77
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 370,
+        "unmatched_prediction": 466,
+        "missing_reference_with_candidate_peak": 108,
+        "missing_reference_without_candidate_peak": 262,
+        "intervals_without_two_reference_anchors": 818,
+        "interior_reference_ticks_between_matched_raw_anchors": 47,
+        "linear_interpolation_outside_tolerance": 20
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "frame_count": 13626,
+      "truth_sha256": "4e8b47d76b1ddce15d38da69fe3ca74892c777d2e1eb541524fc88d7a790bf34",
+      "capture_sha256": "fa46e89ee43b9e689b9efa8f66bd76f480abd4eface90a49fe934ffb455968d5",
+      "queries": 136,
+      "partition": {
+        "equal_count_nonuniform_error": 20,
+        "equal_count_offset_compatible": 33,
+        "no_candidates": 2,
+        "no_count_matched_candidate": 13,
+        "original_covered": 58,
+        "query_boundary_only_witness": 5,
+        "reference_unavailable": 5
+      },
+      "original_reference_status": {
+        "native_grid_covered": 58,
+        "native_grid_missed": 73,
+        "reference_unavailable": 5
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 66,
+        "extra_raw_event": 64,
+        "all_missing_raw_anchors_have_candidate_peaks": 8,
+        "some_missing_raw_anchor_has_no_candidate_peak": 58,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 28
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 145,
+        "unmatched_prediction": 355,
+        "missing_reference_with_candidate_peak": 56,
+        "missing_reference_without_candidate_peak": 89,
+        "intervals_without_two_reference_anchors": 595,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-boccherini-g275-03-ov-krux2022",
+      "frame_count": 8132,
+      "truth_sha256": "9b79c5c3cc3046c889ef9bbb34b0231dc7c393e22a088b3776b6b0862edad18b",
+      "capture_sha256": "4a3c2d66e432d3a8c0fae5f4559f0dde4a47d6b3f42e1f74ff23763c76830a49",
+      "queries": 81,
+      "partition": {
+        "equal_count_nonuniform_error": 40,
+        "equal_count_offset_compatible": 18,
+        "no_candidates": 1,
+        "no_count_matched_candidate": 10,
+        "original_covered": 7,
+        "query_boundary_only_witness": 1,
+        "reference_unavailable": 4
+      },
+      "original_reference_status": {
+        "native_grid_covered": 7,
+        "native_grid_missed": 70,
+        "reference_unavailable": 4
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 67,
+        "extra_raw_event": 68,
+        "all_missing_raw_anchors_have_candidate_peaks": 9,
+        "some_missing_raw_anchor_has_no_candidate_peak": 58,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 45
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 170,
+        "unmatched_prediction": 190,
+        "missing_reference_with_candidate_peak": 45,
+        "missing_reference_without_candidate_peak": 125,
+        "intervals_without_two_reference_anchors": 328,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-brahms-op115-01-ov-schmitta2025",
+      "frame_count": 31011,
+      "truth_sha256": "6775c1cabad7d73b7682fa37d9a6e51c5542bffa054838df22f7a94ad150136a",
+      "capture_sha256": "9415d3b198b48e7ab0e046a9a0b6a06cef1b880132a2a46c280e7e7f246bc77f",
+      "queries": 310,
+      "partition": {
+        "equal_count_nonuniform_error": 87,
+        "equal_count_offset_compatible": 24,
+        "no_candidates": 1,
+        "no_count_matched_candidate": 189,
+        "original_covered": 3,
+        "reference_unavailable": 6
+      },
+      "original_reference_status": {
+        "native_grid_covered": 3,
+        "native_grid_missed": 301,
+        "reference_unavailable": 6
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 230,
+        "extra_raw_event": 297,
+        "all_missing_raw_anchors_have_candidate_peaks": 61,
+        "some_missing_raw_anchor_has_no_candidate_peak": 169,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 2,
+        "equal_count_nonuniform_candidate": 103
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 392,
+        "unmatched_prediction": 1715,
+        "missing_reference_with_candidate_peak": 159,
+        "missing_reference_without_candidate_peak": 233,
+        "intervals_without_two_reference_anchors": 2459,
+        "interior_reference_ticks_between_matched_raw_anchors": 2,
+        "linear_interpolation_outside_tolerance": 2
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-brahms-op115-01-ov-steffens2008",
+      "frame_count": 31115,
+      "truth_sha256": "8934b0c9f51e4a9520584c35998f7d9cf724272de99d577d1b4f95e658ce7964",
+      "capture_sha256": "dd3b6bedb679b6dfea6bc1567a38c52d469f4b277ca64d9436b63b60d51279b9",
+      "queries": 311,
+      "partition": {
+        "equal_count_nonuniform_error": 144,
+        "equal_count_offset_compatible": 37,
+        "no_candidates": 2,
+        "no_count_matched_candidate": 117,
+        "original_covered": 5,
+        "reference_unavailable": 6
+      },
+      "original_reference_status": {
+        "native_grid_covered": 5,
+        "native_grid_missed": 300,
+        "reference_unavailable": 6
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 248,
+        "extra_raw_event": 295,
+        "all_missing_raw_anchors_have_candidate_peaks": 76,
+        "some_missing_raw_anchor_has_no_candidate_peak": 172,
+        "mixed_reference_advances": 2,
+        "misplaced_linear_interpolation": 4,
+        "equal_count_nonuniform_candidate": 164
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 411,
+        "unmatched_prediction": 1238,
+        "missing_reference_with_candidate_peak": 187,
+        "missing_reference_without_candidate_peak": 224,
+        "intervals_without_two_reference_anchors": 1911,
+        "interior_reference_ticks_between_matched_raw_anchors": 6,
+        "linear_interpolation_outside_tolerance": 4
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+      "frame_count": 8115,
+      "truth_sha256": "986d47aaab5598db25b2fb44d16bfbf7f9c6b2df4acf9b118fae9f7f8911932c",
+      "capture_sha256": "639f95573ffda23e4eef605c10be3ed564c27a8c1512ed9ffb75d0fd10fe6e17",
+      "queries": 81,
+      "partition": {
+        "equal_count_nonuniform_error": 2,
+        "equal_count_offset_compatible": 7,
+        "no_candidates": 2,
+        "original_covered": 63,
+        "query_boundary_only_witness": 2,
+        "reference_unavailable": 5
+      },
+      "original_reference_status": {
+        "native_grid_covered": 63,
+        "native_grid_missed": 13,
+        "reference_unavailable": 5
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 11,
+        "extra_raw_event": 10,
+        "all_missing_raw_anchors_have_candidate_peaks": 3,
+        "some_missing_raw_anchor_has_no_candidate_peak": 8,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 5
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 18,
+        "unmatched_prediction": 16,
+        "missing_reference_with_candidate_peak": 8,
+        "missing_reference_without_candidate_peak": 10,
+        "intervals_without_two_reference_anchors": 26,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+      "frame_count": 8218,
+      "truth_sha256": "10b34ee45b0b11f66943f98ab75b16886fd65dd7a108127a447bfb919d146f3e",
+      "capture_sha256": "5f04d4fcdd5c4324a92b7add6ab17d5f6f78dd83370cd4c7f62814fa04e0fb94",
+      "queries": 82,
+      "partition": {
+        "equal_count_nonuniform_error": 38,
+        "equal_count_offset_compatible": 24,
+        "no_candidates": 3,
+        "no_count_matched_candidate": 4,
+        "original_covered": 9,
+        "reference_unavailable": 4
+      },
+      "original_reference_status": {
+        "native_grid_covered": 9,
+        "native_grid_missed": 69,
+        "reference_unavailable": 4
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 69,
+        "extra_raw_event": 68,
+        "all_missing_raw_anchors_have_candidate_peaks": 8,
+        "some_missing_raw_anchor_has_no_candidate_peak": 61,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 49
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 134,
+        "unmatched_prediction": 129,
+        "missing_reference_with_candidate_peak": 33,
+        "missing_reference_without_candidate_peak": 101,
+        "intervals_without_two_reference_anchors": 241,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+      "frame_count": 7681,
+      "truth_sha256": "ac2935ad5dcb5fc1a1dd44730eaed584241096c35bfe0508da5393dcd40a8ec7",
+      "capture_sha256": "8a5a3539ec7ed49803592f880d420cd86662a00eaec73d692ec77916cd87e28b",
+      "queries": 76,
+      "partition": {
+        "equal_count_nonuniform_error": 45,
+        "equal_count_offset_compatible": 6,
+        "no_candidates": 3,
+        "no_count_matched_candidate": 6,
+        "original_covered": 13,
+        "reference_unavailable": 3
+      },
+      "original_reference_status": {
+        "native_grid_covered": 13,
+        "native_grid_missed": 60,
+        "reference_unavailable": 3
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 60,
+        "extra_raw_event": 60,
+        "all_missing_raw_anchors_have_candidate_peaks": 1,
+        "some_missing_raw_anchor_has_no_candidate_peak": 59,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 46
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 101,
+        "unmatched_prediction": 101,
+        "missing_reference_with_candidate_peak": 12,
+        "missing_reference_without_candidate_peak": 89,
+        "intervals_without_two_reference_anchors": 207,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-mozart-kv618-ar-papalin2012",
+      "frame_count": 8051,
+      "truth_sha256": "82a37995c722804ee66b57f6b3bfe39ce88cc602a4cc719b84c65c71300f5a32",
+      "capture_sha256": "83bf46fd1128010eebcea578d7f9df697152b1d388920bd3b42d2d4df4f58620",
+      "queries": 80,
+      "partition": {
+        "equal_count_nonuniform_error": 47,
+        "equal_count_offset_compatible": 20,
+        "original_covered": 4,
+        "reference_unavailable": 9
+      },
+      "original_reference_status": {
+        "native_grid_covered": 4,
+        "native_grid_missed": 67,
+        "reference_unavailable": 9
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 67,
+        "extra_raw_event": 67,
+        "all_missing_raw_anchors_have_candidate_peaks": 10,
+        "some_missing_raw_anchor_has_no_candidate_peak": 57,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 55
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 119,
+        "unmatched_prediction": 284,
+        "missing_reference_with_candidate_peak": 28,
+        "missing_reference_without_candidate_peak": 91,
+        "intervals_without_two_reference_anchors": 398,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+      "frame_count": 10336,
+      "truth_sha256": "5f3832fafaa133b5a3875b8964b47b493568cdd2f4be76615fd5ea6f2f0f7616",
+      "capture_sha256": "c70c8a500375325ccc85c81dc24c70a3f296a58f6c2a4d39f3e92cda673d329c",
+      "queries": 103,
+      "partition": {
+        "equal_count_nonuniform_error": 34,
+        "equal_count_offset_compatible": 34,
+        "no_count_matched_candidate": 3,
+        "original_covered": 6,
+        "reference_unavailable": 26
+      },
+      "original_reference_status": {
+        "native_grid_covered": 6,
+        "native_grid_missed": 71,
+        "reference_unavailable": 26
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 71,
+        "extra_raw_event": 71,
+        "all_missing_raw_anchors_have_candidate_peaks": 7,
+        "some_missing_raw_anchor_has_no_candidate_peak": 64,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 52
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 138,
+        "unmatched_prediction": 245,
+        "missing_reference_with_candidate_peak": 41,
+        "missing_reference_without_candidate_peak": 97,
+        "intervals_without_two_reference_anchors": 323,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+      "frame_count": 14062,
+      "truth_sha256": "996d4563a086fbe048d71da38e3d2441c789c28e2289aefa7284b3d3c10bc5c6",
+      "capture_sha256": "39965f14ea58cac4e0a1766bfbf97f752e383bafa8625e49b4d21dbfee006ba9",
+      "queries": 140,
+      "partition": {
+        "equal_count_nonuniform_error": 65,
+        "equal_count_offset_compatible": 6,
+        "no_candidates": 3,
+        "no_count_matched_candidate": 41,
+        "original_covered": 18,
+        "query_boundary_only_witness": 5,
+        "reference_unavailable": 2
+      },
+      "original_reference_status": {
+        "native_grid_covered": 18,
+        "native_grid_missed": 120,
+        "reference_unavailable": 2
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 104,
+        "extra_raw_event": 85,
+        "all_missing_raw_anchors_have_candidate_peaks": 32,
+        "some_missing_raw_anchor_has_no_candidate_peak": 72,
+        "mixed_reference_advances": 29,
+        "misplaced_linear_interpolation": 38,
+        "equal_count_nonuniform_candidate": 69
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 302,
+        "unmatched_prediction": 177,
+        "missing_reference_with_candidate_peak": 185,
+        "missing_reference_without_candidate_peak": 117,
+        "intervals_without_two_reference_anchors": 372,
+        "interior_reference_ticks_between_matched_raw_anchors": 109,
+        "linear_interpolation_outside_tolerance": 68
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+      "frame_count": 16304,
+      "truth_sha256": "cc91282ff134ac42e5c051942baad56b49d19f8a56acdb09ce57c8e49e461f10",
+      "capture_sha256": "7ccaa90f6f1e904b8ce2038a50b8780ff29c6068d99d7b535a5d4ce1050a82fc",
+      "queries": 163,
+      "partition": {
+        "equal_count_nonuniform_error": 36,
+        "equal_count_offset_compatible": 4,
+        "no_count_matched_candidate": 47,
+        "original_covered": 64,
+        "query_boundary_only_witness": 6,
+        "reference_unavailable": 6
+      },
+      "original_reference_status": {
+        "native_grid_covered": 64,
+        "native_grid_missed": 93,
+        "reference_unavailable": 6
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 81,
+        "extra_raw_event": 59,
+        "all_missing_raw_anchors_have_candidate_peaks": 35,
+        "some_missing_raw_anchor_has_no_candidate_peak": 46,
+        "mixed_reference_advances": 35,
+        "misplaced_linear_interpolation": 14,
+        "equal_count_nonuniform_candidate": 37
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 201,
+        "unmatched_prediction": 143,
+        "missing_reference_with_candidate_peak": 126,
+        "missing_reference_without_candidate_peak": 75,
+        "intervals_without_two_reference_anchors": 265,
+        "interior_reference_ticks_between_matched_raw_anchors": 61,
+        "linear_interpolation_outside_tolerance": 24
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-schubert-d733-01-ar-staab2012",
+      "frame_count": 10168,
+      "truth_sha256": "15a68f3c29bb4eb1f9974093ab0f23189ba183232b341233e70f09523deec922",
+      "capture_sha256": "c83d96b22dd1f77113203f6306ca15799da52a37c9d5ae491821150c889ae85c",
+      "queries": 101,
+      "partition": {
+        "equal_count_nonuniform_error": 20,
+        "equal_count_offset_compatible": 9,
+        "no_candidates": 2,
+        "no_count_matched_candidate": 59,
+        "original_covered": 9,
+        "reference_unavailable": 2
+      },
+      "original_reference_status": {
+        "native_grid_covered": 9,
+        "native_grid_missed": 90,
+        "reference_unavailable": 2
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 65,
+        "extra_raw_event": 89,
+        "all_missing_raw_anchors_have_candidate_peaks": 29,
+        "some_missing_raw_anchor_has_no_candidate_peak": 36,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 21
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 176,
+        "unmatched_prediction": 424,
+        "missing_reference_with_candidate_peak": 126,
+        "missing_reference_without_candidate_peak": 50,
+        "intervals_without_two_reference_anchors": 734,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+      "frame_count": 10359,
+      "truth_sha256": "71dc170ac875df1922db5cba6dcbfb59db11f254d6c35c45b825bdfe0d33ca8c",
+      "capture_sha256": "61a4b73d8ebd98e5f81d6fbcab7195bb5c81875f183741eca435ae7077f478dd",
+      "queries": 103,
+      "partition": {
+        "equal_count_nonuniform_error": 11,
+        "equal_count_offset_compatible": 13,
+        "no_candidates": 1,
+        "no_count_matched_candidate": 22,
+        "original_covered": 47,
+        "query_boundary_only_witness": 5,
+        "reference_unavailable": 4
+      },
+      "original_reference_status": {
+        "native_grid_covered": 47,
+        "native_grid_missed": 52,
+        "reference_unavailable": 4
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 35,
+        "extra_raw_event": 44,
+        "all_missing_raw_anchors_have_candidate_peaks": 19,
+        "some_missing_raw_anchor_has_no_candidate_peak": 16,
+        "mixed_reference_advances": 2,
+        "misplaced_linear_interpolation": 2,
+        "equal_count_nonuniform_candidate": 16
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 66,
+        "unmatched_prediction": 128,
+        "missing_reference_with_candidate_peak": 38,
+        "missing_reference_without_candidate_peak": 28,
+        "intervals_without_two_reference_anchors": 237,
+        "interior_reference_ticks_between_matched_raw_anchors": 2,
+        "linear_interpolation_outside_tolerance": 2
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-schumann-op039-05-ov-buttner2025",
+      "frame_count": 12226,
+      "truth_sha256": "aa36e4aec046346505801c6eb7d66db6557792129ba3395955945c7f3f315cd5",
+      "capture_sha256": "3089b5afac496979c1ef49f64e52efae5671543a531aa6ac93ff34a613da8bdf",
+      "queries": 122,
+      "partition": {
+        "equal_count_nonuniform_error": 52,
+        "equal_count_offset_compatible": 25,
+        "no_candidates": 2,
+        "no_count_matched_candidate": 14,
+        "original_covered": 21,
+        "reference_unavailable": 8
+      },
+      "original_reference_status": {
+        "native_grid_covered": 21,
+        "native_grid_missed": 93,
+        "reference_unavailable": 8
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 89,
+        "extra_raw_event": 88,
+        "all_missing_raw_anchors_have_candidate_peaks": 17,
+        "some_missing_raw_anchor_has_no_candidate_peak": 72,
+        "mixed_reference_advances": 2,
+        "misplaced_linear_interpolation": 2,
+        "equal_count_nonuniform_candidate": 66
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 173,
+        "unmatched_prediction": 212,
+        "missing_reference_with_candidate_peak": 72,
+        "missing_reference_without_candidate_peak": 101,
+        "intervals_without_two_reference_anchors": 361,
+        "interior_reference_ticks_between_matched_raw_anchors": 4,
+        "linear_interpolation_outside_tolerance": 2
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "frame_count": 11258,
+      "truth_sha256": "d7140499d39a2769e1d8a248d2122efda0cb519ec2cc203d0bf81563ed0fc312",
+      "capture_sha256": "f00c6df8b74aca7395079db30244d15819ae0d4d2ef62c9578d11b3671d22f9e",
+      "queries": 112,
+      "partition": {
+        "equal_count_nonuniform_error": 63,
+        "equal_count_offset_compatible": 17,
+        "no_candidates": 3,
+        "no_count_matched_candidate": 21,
+        "original_covered": 3,
+        "reference_unavailable": 5
+      },
+      "original_reference_status": {
+        "native_grid_covered": 3,
+        "native_grid_missed": 104,
+        "reference_unavailable": 5
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 103,
+        "extra_raw_event": 103,
+        "all_missing_raw_anchors_have_candidate_peaks": 37,
+        "some_missing_raw_anchor_has_no_candidate_peak": 66,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 78
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 233,
+        "unmatched_prediction": 380,
+        "missing_reference_with_candidate_peak": 130,
+        "missing_reference_without_candidate_peak": 103,
+        "intervals_without_two_reference_anchors": 590,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+      "frame_count": 15410,
+      "truth_sha256": "a45bd07ff0742e30ee0eca8cd53ffc0fc1c29baf8f81ee5b024554af89ef2796",
+      "capture_sha256": "09896ffb8511eb529ad81d60add089a0317aa5f40a4e352c28d45d46ea142ad3",
+      "queries": 154,
+      "partition": {
+        "equal_count_nonuniform_error": 34,
+        "equal_count_offset_compatible": 1,
+        "no_candidates": 1,
+        "no_count_matched_candidate": 108,
+        "reference_unavailable": 10
+      },
+      "original_reference_status": {
+        "native_grid_missed": 144,
+        "reference_unavailable": 10
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 123,
+        "extra_raw_event": 143,
+        "all_missing_raw_anchors_have_candidate_peaks": 15,
+        "some_missing_raw_anchor_has_no_candidate_peak": 108,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 35
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 235,
+        "unmatched_prediction": 903,
+        "missing_reference_with_candidate_peak": 68,
+        "missing_reference_without_candidate_peak": 167,
+        "intervals_without_two_reference_anchors": 1200,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+      "frame_count": 14800,
+      "truth_sha256": "49379fbe7c51dbf3d9cff11586ece6b9316d128e1f05cd2f8fdb0b281c1f4c88",
+      "capture_sha256": "7e08129bf8748f959536d857bc9999a4088186a6be46903f48da8f8d1afb436d",
+      "queries": 147,
+      "partition": {
+        "equal_count_nonuniform_error": 82,
+        "equal_count_offset_compatible": 10,
+        "no_candidates": 5,
+        "no_count_matched_candidate": 40,
+        "original_covered": 7,
+        "reference_unavailable": 3
+      },
+      "original_reference_status": {
+        "native_grid_covered": 7,
+        "native_grid_missed": 137,
+        "reference_unavailable": 3
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 129,
+        "extra_raw_event": 128,
+        "all_missing_raw_anchors_have_candidate_peaks": 27,
+        "some_missing_raw_anchor_has_no_candidate_peak": 102,
+        "mixed_reference_advances": 2,
+        "misplaced_linear_interpolation": 4,
+        "equal_count_nonuniform_candidate": 88
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 261,
+        "unmatched_prediction": 469,
+        "missing_reference_with_candidate_peak": 103,
+        "missing_reference_without_candidate_peak": 158,
+        "intervals_without_two_reference_anchors": 691,
+        "interior_reference_ticks_between_matched_raw_anchors": 4,
+        "linear_interpolation_outside_tolerance": 4
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+      "frame_count": 13902,
+      "truth_sha256": "f0aaf80955f919bf3cd84df7f649824812ab08aed548d09e5342fb7d79e00959",
+      "capture_sha256": "8f781ccc08798cf349ba841bb5bb89ed66f104068ebc1fcecced2a1f354c72d7",
+      "queries": 139,
+      "partition": {
+        "equal_count_nonuniform_error": 55,
+        "equal_count_offset_compatible": 27,
+        "no_candidates": 1,
+        "no_count_matched_candidate": 38,
+        "original_covered": 11,
+        "reference_unavailable": 7
+      },
+      "original_reference_status": {
+        "native_grid_covered": 11,
+        "native_grid_missed": 121,
+        "reference_unavailable": 7
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 118,
+        "extra_raw_event": 117,
+        "all_missing_raw_anchors_have_candidate_peaks": 14,
+        "some_missing_raw_anchor_has_no_candidate_peak": 104,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 2,
+        "equal_count_nonuniform_candidate": 69
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 248,
+        "unmatched_prediction": 487,
+        "missing_reference_with_candidate_peak": 64,
+        "missing_reference_without_candidate_peak": 184,
+        "intervals_without_two_reference_anchors": 704,
+        "interior_reference_ticks_between_matched_raw_anchors": 6,
+        "linear_interpolation_outside_tolerance": 2
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+      "frame_count": 15429,
+      "truth_sha256": "ec2d36c1e4e7bfe5641dc5085e08bd4ab3cb2aa28e1d408f7faab44b584f14d1",
+      "capture_sha256": "c5522a4af335b3045c3cc5d4baade4809307d994b277152d0b7112a10c5c5dda",
+      "queries": 154,
+      "partition": {
+        "equal_count_nonuniform_error": 64,
+        "equal_count_offset_compatible": 11,
+        "no_candidates": 3,
+        "no_count_matched_candidate": 67,
+        "original_covered": 5,
+        "reference_unavailable": 4
+      },
+      "original_reference_status": {
+        "native_grid_covered": 5,
+        "native_grid_missed": 145,
+        "reference_unavailable": 4
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 121,
+        "extra_raw_event": 140,
+        "all_missing_raw_anchors_have_candidate_peaks": 26,
+        "some_missing_raw_anchor_has_no_candidate_peak": 95,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 2,
+        "equal_count_nonuniform_candidate": 72
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 225,
+        "unmatched_prediction": 662,
+        "missing_reference_with_candidate_peak": 96,
+        "missing_reference_without_candidate_peak": 129,
+        "intervals_without_two_reference_anchors": 942,
+        "interior_reference_ticks_between_matched_raw_anchors": 2,
+        "linear_interpolation_outside_tolerance": 2
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "frame_count": 9547,
+      "truth_sha256": "e892d59ecb17cc055034f3c043d49f981ad877092fb1298df3eaaeb10f4fd47e",
+      "capture_sha256": "3e0626fec9fe95fc1a07b48eab7983a38ab3d951b65cd8f8c9137e2d7e53338f",
+      "queries": 95,
+      "partition": {
+        "equal_count_nonuniform_error": 29,
+        "equal_count_offset_compatible": 22,
+        "no_candidates": 1,
+        "no_count_matched_candidate": 13,
+        "original_covered": 25,
+        "query_boundary_only_witness": 2,
+        "reference_unavailable": 3
+      },
+      "original_reference_status": {
+        "native_grid_covered": 25,
+        "native_grid_missed": 67,
+        "reference_unavailable": 3
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 64,
+        "extra_raw_event": 64,
+        "all_missing_raw_anchors_have_candidate_peaks": 6,
+        "some_missing_raw_anchor_has_no_candidate_peak": 58,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 35
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 149,
+        "unmatched_prediction": 207,
+        "missing_reference_with_candidate_peak": 51,
+        "missing_reference_without_candidate_peak": 98,
+        "intervals_without_two_reference_anchors": 350,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "frame_count": 10695,
+      "truth_sha256": "176a0359278e6ec6fcffec89b0489fbd3ca8ac4e8b93dd974c3b4423b8444cb1",
+      "capture_sha256": "8cc504bfe807c64cc1aa721b842de44b350ffc5d6724d0b30277e71cade824bb",
+      "queries": 106,
+      "partition": {
+        "equal_count_nonuniform_error": 58,
+        "equal_count_offset_compatible": 13,
+        "no_candidates": 2,
+        "no_count_matched_candidate": 14,
+        "original_covered": 17,
+        "reference_unavailable": 2
+      },
+      "original_reference_status": {
+        "native_grid_covered": 17,
+        "native_grid_missed": 87,
+        "reference_unavailable": 2
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 85,
+        "extra_raw_event": 86,
+        "all_missing_raw_anchors_have_candidate_peaks": 11,
+        "some_missing_raw_anchor_has_no_candidate_peak": 74,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 63
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 176,
+        "unmatched_prediction": 360,
+        "missing_reference_with_candidate_peak": 41,
+        "missing_reference_without_candidate_peak": 135,
+        "intervals_without_two_reference_anchors": 619,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    {
+      "cohort": "rubato",
+      "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+      "frame_count": 10500,
+      "truth_sha256": "ba992b7fd03f9117cf411b06c59778f9eb65698a1e71c6907fa8520da0f46d9b",
+      "capture_sha256": "ccedd36d8c0bef9060f0d32d687a586a44c66ecbf43d20b340405412c8373bea",
+      "queries": 104,
+      "partition": {
+        "equal_count_nonuniform_error": 34,
+        "equal_count_offset_compatible": 1,
+        "no_candidates": 2,
+        "no_count_matched_candidate": 64,
+        "reference_unavailable": 3
+      },
+      "original_reference_status": {
+        "native_grid_missed": 101,
+        "reference_unavailable": 3
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 101,
+        "extra_raw_event": 62,
+        "all_missing_raw_anchors_have_candidate_peaks": 9,
+        "some_missing_raw_anchor_has_no_candidate_peak": 92,
+        "mixed_reference_advances": 3,
+        "misplaced_linear_interpolation": 16,
+        "equal_count_nonuniform_candidate": 35
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 522,
+        "unmatched_prediction": 177,
+        "missing_reference_with_candidate_peak": 293,
+        "missing_reference_without_candidate_peak": 229,
+        "intervals_without_two_reference_anchors": 328,
+        "interior_reference_ticks_between_matched_raw_anchors": 60,
+        "linear_interpolation_outside_tolerance": 54
+      }
+    }
+  ],
+  "summary": {
+    "queries": 3348,
+    "partition": {
+      "equal_count_nonuniform_error": 1179,
+      "equal_count_offset_compatible": 427,
+      "no_candidates": 46,
+      "no_count_matched_candidate": 1000,
+      "original_covered": 484,
+      "query_boundary_only_witness": 38,
+      "reference_unavailable": 174
+    },
+    "original_reference_status": {
+      "native_grid_covered": 484,
+      "native_grid_missed": 2690,
+      "reference_unavailable": 174
+    },
+    "failed_query_flags": {
+      "missing_raw_reference_anchor": 2395,
+      "extra_raw_event": 2477,
+      "all_missing_raw_anchors_have_candidate_peaks": 549,
+      "some_missing_raw_anchor_has_no_candidate_peak": 1846,
+      "mixed_reference_advances": 98,
+      "misplaced_linear_interpolation": 108,
+      "equal_count_nonuniform_candidate": 1373
+    },
+    "failed_query_anchor_totals": {
+      "unmatched_reference": 5409,
+      "unmatched_prediction": 10056,
+      "missing_reference_with_candidate_peak": 2429,
+      "missing_reference_without_candidate_peak": 2980,
+      "intervals_without_two_reference_anchors": 15581,
+      "interior_reference_ticks_between_matched_raw_anchors": 365,
+      "linear_interpolation_outside_tolerance": 189
+    }
+  },
+  "slices": {
+    "constant": {
+      "queries": 51,
+      "partition": {
+        "no_candidates": 1,
+        "no_count_matched_candidate": 6,
+        "original_covered": 31,
+        "query_boundary_only_witness": 3,
+        "reference_unavailable": 10
+      },
+      "original_reference_status": {
+        "native_grid_covered": 31,
+        "native_grid_missed": 10,
+        "reference_unavailable": 10
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 8,
+        "extra_raw_event": 7,
+        "all_missing_raw_anchors_have_candidate_peaks": 4,
+        "some_missing_raw_anchor_has_no_candidate_peak": 4,
+        "mixed_reference_advances": 2,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 0
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 31,
+        "unmatched_prediction": 25,
+        "missing_reference_with_candidate_peak": 21,
+        "missing_reference_without_candidate_peak": 10,
+        "intervals_without_two_reference_anchors": 48,
+        "interior_reference_ticks_between_matched_raw_anchors": 4,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    "expressive_untyped": {
+      "queries": 3245,
+      "partition": {
+        "equal_count_nonuniform_error": 1177,
+        "equal_count_offset_compatible": 426,
+        "no_candidates": 45,
+        "no_count_matched_candidate": 973,
+        "original_covered": 441,
+        "query_boundary_only_witness": 33,
+        "reference_unavailable": 150
+      },
+      "original_reference_status": {
+        "native_grid_covered": 441,
+        "native_grid_missed": 2654,
+        "reference_unavailable": 150
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 2362,
+        "extra_raw_event": 2454,
+        "all_missing_raw_anchors_have_candidate_peaks": 526,
+        "some_missing_raw_anchor_has_no_candidate_peak": 1836,
+        "mixed_reference_advances": 88,
+        "misplaced_linear_interpolation": 108,
+        "equal_count_nonuniform_candidate": 1370
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 5291,
+        "unmatched_prediction": 9999,
+        "missing_reference_with_candidate_peak": 2327,
+        "missing_reference_without_candidate_peak": 2964,
+        "intervals_without_two_reference_anchors": 15473,
+        "interior_reference_ticks_between_matched_raw_anchors": 322,
+        "linear_interpolation_outside_tolerance": 189
+      }
+    },
+    "other_or_boundary": {
+      "queries": 12,
+      "partition": {
+        "reference_unavailable": 12
+      },
+      "original_reference_status": {
+        "reference_unavailable": 12
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 0,
+        "extra_raw_event": 0,
+        "all_missing_raw_anchors_have_candidate_peaks": 0,
+        "some_missing_raw_anchor_has_no_candidate_peak": 0,
+        "mixed_reference_advances": 0,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 0
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 0,
+        "unmatched_prediction": 0,
+        "missing_reference_with_candidate_peak": 0,
+        "missing_reference_without_candidate_peak": 0,
+        "intervals_without_two_reference_anchors": 0,
+        "interior_reference_ticks_between_matched_raw_anchors": 0,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    "ramp": {
+      "queries": 16,
+      "partition": {
+        "equal_count_nonuniform_error": 1,
+        "no_count_matched_candidate": 4,
+        "original_covered": 7,
+        "query_boundary_only_witness": 2,
+        "reference_unavailable": 2
+      },
+      "original_reference_status": {
+        "native_grid_covered": 7,
+        "native_grid_missed": 7,
+        "reference_unavailable": 2
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 7,
+        "extra_raw_event": 4,
+        "all_missing_raw_anchors_have_candidate_peaks": 5,
+        "some_missing_raw_anchor_has_no_candidate_peak": 2,
+        "mixed_reference_advances": 1,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 1
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 33,
+        "unmatched_prediction": 4,
+        "missing_reference_with_candidate_peak": 31,
+        "missing_reference_without_candidate_peak": 2,
+        "intervals_without_two_reference_anchors": 10,
+        "interior_reference_ticks_between_matched_raw_anchors": 19,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    },
+    "step": {
+      "queries": 24,
+      "partition": {
+        "equal_count_nonuniform_error": 1,
+        "equal_count_offset_compatible": 1,
+        "no_count_matched_candidate": 17,
+        "original_covered": 5
+      },
+      "original_reference_status": {
+        "native_grid_covered": 5,
+        "native_grid_missed": 19
+      },
+      "failed_query_flags": {
+        "missing_raw_reference_anchor": 18,
+        "extra_raw_event": 12,
+        "all_missing_raw_anchors_have_candidate_peaks": 14,
+        "some_missing_raw_anchor_has_no_candidate_peak": 4,
+        "mixed_reference_advances": 7,
+        "misplaced_linear_interpolation": 0,
+        "equal_count_nonuniform_candidate": 2
+      },
+      "failed_query_anchor_totals": {
+        "unmatched_reference": 54,
+        "unmatched_prediction": 28,
+        "missing_reference_with_candidate_peak": 50,
+        "missing_reference_without_candidate_peak": 4,
+        "intervals_without_two_reference_anchors": 50,
+        "interior_reference_ticks_between_matched_raw_anchors": 20,
+        "linear_interpolation_outside_tolerance": 0
+      }
+    }
+  },
+  "all_original_candidates_and_scores_unchanged": true,
+  "posthoc_reference_assisted_diagnosis": true,
+  "new_candidates_generated": false,
+  "phase_shift_applied": false,
+  "selected_clock": null,
+  "new_annotations_collected": 0,
+  "neural_inference": false,
+  "training": false,
+  "holdout_access": false,
+  "production_change": false,
+  "accuracy_improvement_claimed": false,
+  "decision": "descriptive_decomposition_only_not_a_repaired_generator_or_training_gate"
+}
