@@ -35,10 +35,19 @@ sometimes moves backwards. Close this fixed head, do not sweep its settings,
 promote a favorable corpus, or integrate it into the product. See the
 [actual fit, every-case results and limits](evaluation/baselines/direct-clock-learning-v1.md).
 
-The next design decision is whether a jointly constrained learned clock can
-address phase/period inconsistency and beat-level errors with representative
-supervision. That is not an approved second fit, encoder fine-tune or automatic
-data expansion. Keep the one-call/no-per-song-tuning contract. The following
+After the training walkthrough, implementation resumed with an executable
+[coupled-clock architecture and supervision contract](experiments/coupled_clock/README.md):
+a 23,970-parameter CNN, one origin and positive integrated beat advancement.
+Authored checks cover coherent phase/tempo, chunk carry, unsmoothed steps,
+ramps, subcell reference changes, native octave-count loss, masks and gradients.
+No second optimizer run or music improvement is claimed. Cell-average tempo
+is explicitly different from v1's instantaneous targets; old scores stay frozen.
+Next freeze a bounded fitting/data protocol with representative continuation/
+change supervision and complete-crop training, not independent-window resets.
+Rhythm availability, native beat-level ambiguity and independent admission
+remain unresolved; coherence alone cannot admit the model. This is not an
+encoder fine-tune or automatic data expansion. Keep the one-call/no-per-song-
+tuning contract. The following
 entries are historical checkpoints: their earlier no-training status and
 "next" proposals do not override this dated outcome. Shipping Rust outputs,
 holdouts and release status remain unchanged.

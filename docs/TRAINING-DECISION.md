@@ -20,6 +20,16 @@ ARTBeaT regressions and backwards phase remain. Close this fixed architecture
 without more seeds, parameter sweeps or relaxed gates. A future coherent-clock
 design would be a new experiment, not a silent continuation of this one.
 
+After the user's training walkthrough, the new
+[coupled-clock components](../experiments/coupled_clock/README.md) implement
+positive cumulative beat advancement, one phase origin and native multi-lag
+count supervision. Authored forward/backward tests establish representation
+and numerical contracts, not musical accuracy; no second fit has run. A new
+fitting protocol must keep whole-crop clock state and declare representative
+continuation/change labels, matched controls and stopping criteria. In
+particular, an always-positive clock is not a rhythm-presence detector, and
+native count supervision does not certify the uniquely correct perceived level.
+
 The sections below retain the evidence and approval state at their original
 checkpoints. Their proposals and "no training" statements are historical, not
 a claim that the above optimizer runs have not happened. The independent-label
