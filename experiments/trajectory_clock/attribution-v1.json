@@ -1,0 +1,2189 @@
+{
+  "schema": "rhythm-map.clock-error-attribution.v1",
+  "old_inputs_sha256": "b4f05c10ebede84c394b0b8e06f6723b096d1f9a0a48e63024eb81d913fffd9c",
+  "old_report_sha256": "e33a44db4ce20a35f0676aa3f4fc47806da83f4a2ab80c1cfb555ce5343cda9a",
+  "source_sha256": "584d5831e2bfbc0681e9bf07c04b1f98021cdeacc2a03ef41cfd72bbda1c322e",
+  "post_fit_truth_assisted": true,
+  "training": false,
+  "holdout_access": false,
+  "product_change": false,
+  "independent_acceptance": false,
+  "cases": [
+    {
+      "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "role": "fit",
+      "work": "Bach_BWV1007-01",
+      "audio": {
+        "points": 2935,
+        "reference_spans": [
+          {
+            "start_frame": 2,
+            "end_frame_exclusive": 2937,
+            "points": 2935,
+            "native_rate_bias_bpm": -19.214396381854137,
+            "terminal_drift_cycles": -20.559987927208073,
+            "max_first_aligned_drift_cycles": 20.559987927208073
+          }
+        ],
+        "observed_phase_error_cycles": 0.2476955300598334,
+        "first_supported_phase_error_cycles": 0.4180450799707278,
+        "first_supported_aligned_phase_error_cycles": 0.24558225599426964,
+        "best_constant_phase_error_cycles": 0.23719799468249925,
+        "oracle_shift_cycles": 0.2059002207970213,
+        "minimum_circular_training_loss": 0.9376930873237652,
+        "centered_clock_rmse_cycles": 5.4817907508904415,
+        "constant_rate_component_rmse_cycles": 5.4265392467110445,
+        "nonlinear_residual_rmse_cycles": 0.7763386119810844
+      },
+      "zero": {
+        "points": 2935,
+        "reference_spans": [
+          {
+            "start_frame": 2,
+            "end_frame_exclusive": 2937,
+            "points": 2935,
+            "native_rate_bias_bpm": -21.703172398962675,
+            "terminal_drift_cycles": -22.12282748952148,
+            "max_first_aligned_drift_cycles": 22.12282748952148
+          }
+        ],
+        "observed_phase_error_cycles": 0.25401466913051945,
+        "first_supported_phase_error_cycles": 0.3599192667781238,
+        "first_supported_aligned_phase_error_cycles": 0.24759002229127816,
+        "best_constant_phase_error_cycles": 0.24598366341885394,
+        "oracle_shift_cycles": 0.5019494478736704,
+        "minimum_circular_training_loss": 0.9802785518686318,
+        "centered_clock_rmse_cycles": 6.152533670866916,
+        "constant_rate_component_rmse_cycles": 6.129420589674652,
+        "nonlinear_residual_rmse_cycles": 0.5327980912349245
+      },
+      "raw_common_phase_error_cycles": 0.16585463460137448,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.16737535031646536,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "role": "fit",
+      "work": "Bach_BWV1007-01",
+      "audio": {
+        "points": 2952,
+        "reference_spans": [
+          {
+            "start_frame": 41,
+            "end_frame_exclusive": 2993,
+            "points": 2952,
+            "native_rate_bias_bpm": -27.084675193921644,
+            "terminal_drift_cycles": -25.378457277367396,
+            "max_first_aligned_drift_cycles": 25.378457277367396
+          }
+        ],
+        "observed_phase_error_cycles": 0.2463590019290162,
+        "first_supported_phase_error_cycles": 0.4317142601653843,
+        "first_supported_aligned_phase_error_cycles": 0.25196126836443095,
+        "best_constant_phase_error_cycles": 0.24617684805945117,
+        "oracle_shift_cycles": 0.028554787246243052,
+        "minimum_circular_training_loss": 0.9800023769721145,
+        "centered_clock_rmse_cycles": 7.708944552037241,
+        "constant_rate_component_rmse_cycles": 7.693573059515495,
+        "nonlinear_residual_rmse_cycles": 0.4865795765155641
+      },
+      "zero": {
+        "points": 2952,
+        "reference_spans": [
+          {
+            "start_frame": 41,
+            "end_frame_exclusive": 2993,
+            "points": 2952,
+            "native_rate_bias_bpm": -23.573466682411556,
+            "terminal_drift_cycles": -22.929302231699992,
+            "max_first_aligned_drift_cycles": 22.929302231699992
+          }
+        ],
+        "observed_phase_error_cycles": 0.2527131511795736,
+        "first_supported_phase_error_cycles": 0.2896476562355368,
+        "first_supported_aligned_phase_error_cycles": 0.24065709671514268,
+        "best_constant_phase_error_cycles": 0.2405282474454346,
+        "oracle_shift_cycles": 0.2628292270166135,
+        "minimum_circular_training_loss": 0.9524326212338785,
+        "centered_clock_rmse_cycles": 6.697476657618706,
+        "constant_rate_component_rmse_cycles": 6.696192104525939,
+        "nonlinear_residual_rmse_cycles": 0.13116736877722815
+      },
+      "raw_common_phase_error_cycles": 0.08824824321809788,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.08046553322045066,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-beethoven-op072-0-ov-henning2017",
+      "role": "fit",
+      "work": "Beethoven_Op072-0",
+      "audio": {
+        "points": 2679,
+        "reference_spans": [
+          {
+            "start_frame": 162,
+            "end_frame_exclusive": 2841,
+            "points": 2679,
+            "native_rate_bias_bpm": -4.464742648111876,
+            "terminal_drift_cycles": -5.02829527404729,
+            "max_first_aligned_drift_cycles": 6.291610512031925
+          }
+        ],
+        "observed_phase_error_cycles": 0.24905137153651632,
+        "first_supported_phase_error_cycles": 0.28994944710466974,
+        "first_supported_aligned_phase_error_cycles": 0.24226411021152103,
+        "best_constant_phase_error_cycles": 0.23962594265800455,
+        "oracle_shift_cycles": 0.2022736499817981,
+        "minimum_circular_training_loss": 0.9484685080911679,
+        "centered_clock_rmse_cycles": 1.5953004726639173,
+        "constant_rate_component_rmse_cycles": 1.150952064910365,
+        "nonlinear_residual_rmse_cycles": 1.1046687025349664
+      },
+      "zero": {
+        "points": 2679,
+        "reference_spans": [
+          {
+            "start_frame": 162,
+            "end_frame_exclusive": 2841,
+            "points": 2679,
+            "native_rate_bias_bpm": 0.45613193610430935,
+            "terminal_drift_cycles": -0.9373098119254126,
+            "max_first_aligned_drift_cycles": 4.918273309994007
+          }
+        ],
+        "observed_phase_error_cycles": 0.2565451205445249,
+        "first_supported_phase_error_cycles": 0.35836863792591656,
+        "first_supported_aligned_phase_error_cycles": 0.2596528498019227,
+        "best_constant_phase_error_cycles": 0.22539871285850108,
+        "oracle_shift_cycles": 0.6435239418811172,
+        "minimum_circular_training_loss": 0.8920571434885278,
+        "centered_clock_rmse_cycles": 1.0576773455174115,
+        "constant_rate_component_rmse_cycles": 0.11758482741504309,
+        "nonlinear_residual_rmse_cycles": 1.051120913873629
+      },
+      "raw_common_phase_error_cycles": 0.2068338677900781,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.15817688681119266,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "role": "fit",
+      "work": "Berlioz_H048-04",
+      "audio": {
+        "points": 2837,
+        "reference_spans": [
+          {
+            "start_frame": 154,
+            "end_frame_exclusive": 2991,
+            "points": 2837,
+            "native_rate_bias_bpm": -22.961625600117156,
+            "terminal_drift_cycles": -21.21524251059849,
+            "max_first_aligned_drift_cycles": 21.21524251059849
+          }
+        ],
+        "observed_phase_error_cycles": 0.2565010413852154,
+        "first_supported_phase_error_cycles": 0.12292345450659337,
+        "first_supported_aligned_phase_error_cycles": 0.253525386329017,
+        "best_constant_phase_error_cycles": 0.24349506969329834,
+        "oracle_shift_cycles": 0.49570942728858114,
+        "minimum_circular_training_loss": 0.9674743262309482,
+        "centered_clock_rmse_cycles": 6.2933692548009095,
+        "constant_rate_component_rmse_cycles": 6.268304168297062,
+        "nonlinear_residual_rmse_cycles": 0.561123365208574
+      },
+      "zero": {
+        "points": 2837,
+        "reference_spans": [
+          {
+            "start_frame": 154,
+            "end_frame_exclusive": 2991,
+            "points": 2837,
+            "native_rate_bias_bpm": -27.165576442801058,
+            "terminal_drift_cycles": -25.135907405785613,
+            "max_first_aligned_drift_cycles": 25.135907405785613
+          }
+        ],
+        "observed_phase_error_cycles": 0.2456653491123867,
+        "first_supported_phase_error_cycles": 0.29021974934099504,
+        "first_supported_aligned_phase_error_cycles": 0.24717565892220955,
+        "best_constant_phase_error_cycles": 0.2436464283387826,
+        "oracle_shift_cycles": 0.12068546170667815,
+        "minimum_circular_training_loss": 0.9697194464990759,
+        "centered_clock_rmse_cycles": 7.42096456659892,
+        "constant_rate_component_rmse_cycles": 7.415942538917347,
+        "nonlinear_residual_rmse_cycles": 0.27296768708554786
+      },
+      "raw_common_phase_error_cycles": 0.1313741010302453,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.09062617079927113,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-boccherini-g275-03-ov-krux2022",
+      "role": "development",
+      "work": "Boccherini_G275-03",
+      "audio": {
+        "points": 2899,
+        "reference_spans": [
+          {
+            "start_frame": 67,
+            "end_frame_exclusive": 2966,
+            "points": 2899,
+            "native_rate_bias_bpm": -25.310864246008286,
+            "terminal_drift_cycles": -23.994377226149886,
+            "max_first_aligned_drift_cycles": 23.994377226149886
+          }
+        ],
+        "observed_phase_error_cycles": 0.2570639103950833,
+        "first_supported_phase_error_cycles": 0.14725787558707926,
+        "first_supported_aligned_phase_error_cycles": 0.24649077214146373,
+        "best_constant_phase_error_cycles": 0.2399356509342669,
+        "oracle_shift_cycles": 0.42435531940285376,
+        "minimum_circular_training_loss": 0.9524242794795761,
+        "centered_clock_rmse_cycles": 7.085913161564989,
+        "constant_rate_component_rmse_cycles": 7.0606272790502,
+        "nonlinear_residual_rmse_cycles": 0.5980867492029388
+      },
+      "zero": {
+        "points": 2899,
+        "reference_spans": [
+          {
+            "start_frame": 67,
+            "end_frame_exclusive": 2966,
+            "points": 2899,
+            "native_rate_bias_bpm": -35.69390057564263,
+            "terminal_drift_cycles": -34.1486856795729,
+            "max_first_aligned_drift_cycles": 34.1486856795729
+          }
+        ],
+        "observed_phase_error_cycles": 0.2442116510369765,
+        "first_supported_phase_error_cycles": 0.15700910728337747,
+        "first_supported_aligned_phase_error_cycles": 0.25277892365843957,
+        "best_constant_phase_error_cycles": 0.24134372319396202,
+        "oracle_shift_cycles": 0.140354804106817,
+        "minimum_circular_training_loss": 0.9567637008249152,
+        "centered_clock_rmse_cycles": 9.959477827103344,
+        "constant_rate_component_rmse_cycles": 9.95704159488879,
+        "nonlinear_residual_rmse_cycles": 0.22027543262406285
+      },
+      "raw_common_phase_error_cycles": 0.09204604996268305,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.10601593178231815,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-brahms-op115-01-ov-schmitta2025",
+      "role": "fit",
+      "work": "Brahms_Op115-01",
+      "audio": {
+        "points": 2983,
+        "reference_spans": [
+          {
+            "start_frame": 2,
+            "end_frame_exclusive": 2985,
+            "points": 2983,
+            "native_rate_bias_bpm": -0.5164736460954791,
+            "terminal_drift_cycles": 0.5706481007154082,
+            "max_first_aligned_drift_cycles": 1.7108760670491976
+          }
+        ],
+        "observed_phase_error_cycles": 0.3122417968058646,
+        "first_supported_phase_error_cycles": 0.041499590540661324,
+        "first_supported_aligned_phase_error_cycles": 0.3056798085363009,
+        "best_constant_phase_error_cycles": 0.18356053343240472,
+        "oracle_shift_cycles": 0.461175344698054,
+        "minimum_circular_training_loss": 0.6783883082368347,
+        "centered_clock_rmse_cycles": 0.4369567088709216,
+        "constant_rate_component_rmse_cycles": 0.14824823007509116,
+        "nonlinear_residual_rmse_cycles": 0.41103969115756955
+      },
+      "zero": {
+        "points": 2983,
+        "reference_spans": [
+          {
+            "start_frame": 2,
+            "end_frame_exclusive": 2985,
+            "points": 2983,
+            "native_rate_bias_bpm": 10.165397865441467,
+            "terminal_drift_cycles": 10.05565675007401,
+            "max_first_aligned_drift_cycles": 10.05565675007401
+          }
+        ],
+        "observed_phase_error_cycles": 0.25470776076949725,
+        "first_supported_phase_error_cycles": 0.34711964846647064,
+        "first_supported_aligned_phase_error_cycles": 0.2486437408643841,
+        "best_constant_phase_error_cycles": 0.24156448528274632,
+        "oracle_shift_cycles": 0.3794782225641047,
+        "minimum_circular_training_loss": 0.9651972676066626,
+        "centered_clock_rmse_cycles": 2.932062828580311,
+        "constant_rate_component_rmse_cycles": 2.9178686133429776,
+        "nonlinear_residual_rmse_cycles": 0.2881582655595718
+      },
+      "raw_common_phase_error_cycles": 0.21983955655985782,
+      "oracle_anchor_still_worse_than_raw_common": false,
+      "v1_common_phase_error_cycles": 0.1415647893978283,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-brahms-op115-01-ov-steffens2008",
+      "role": "fit",
+      "work": "Brahms_Op115-01",
+      "audio": {
+        "points": 2981,
+        "reference_spans": [
+          {
+            "start_frame": 18,
+            "end_frame_exclusive": 2999,
+            "points": 2981,
+            "native_rate_bias_bpm": 3.2719162310873755,
+            "terminal_drift_cycles": 3.3861598127403294,
+            "max_first_aligned_drift_cycles": 3.386383291036834
+          }
+        ],
+        "observed_phase_error_cycles": 0.20432321065980913,
+        "first_supported_phase_error_cycles": 0.06976302941700913,
+        "first_supported_aligned_phase_error_cycles": 0.2275958203746027,
+        "best_constant_phase_error_cycles": 0.18309551985935713,
+        "oracle_shift_cycles": 0.11517458599288055,
+        "minimum_circular_training_loss": 0.6879861405470682,
+        "centered_clock_rmse_cycles": 0.9475002079407491,
+        "constant_rate_component_rmse_cycles": 0.9385388401477855,
+        "nonlinear_residual_rmse_cycles": 0.13000572903458102
+      },
+      "zero": {
+        "points": 2981,
+        "reference_spans": [
+          {
+            "start_frame": 18,
+            "end_frame_exclusive": 2999,
+            "points": 2981,
+            "native_rate_bias_bpm": 10.817006106443515,
+            "terminal_drift_cycles": 10.657628126419194,
+            "max_first_aligned_drift_cycles": 10.657628126419194
+          }
+        ],
+        "observed_phase_error_cycles": 0.25477257115641644,
+        "first_supported_phase_error_cycles": 0.06300929330405203,
+        "first_supported_aligned_phase_error_cycles": 0.2611938304034999,
+        "best_constant_phase_error_cycles": 0.23250524403990758,
+        "oracle_shift_cycles": 0.32138722915373563,
+        "minimum_circular_training_loss": 0.9166719995468537,
+        "centered_clock_rmse_cycles": 3.1059719858838104,
+        "constant_rate_component_rmse_cycles": 3.1028240480469376,
+        "nonlinear_residual_rmse_cycles": 0.13980308993952628
+      },
+      "raw_common_phase_error_cycles": 0.13295776618595354,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.124715450033312,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+      "role": "fit",
+      "work": "Handel_HWV040-1-01",
+      "audio": {
+        "points": 2960,
+        "reference_spans": [
+          {
+            "start_frame": 8,
+            "end_frame_exclusive": 2968,
+            "points": 2960,
+            "native_rate_bias_bpm": -1.2318358773602616,
+            "terminal_drift_cycles": -1.0712226910014346,
+            "max_first_aligned_drift_cycles": 1.108104644364982
+          }
+        ],
+        "observed_phase_error_cycles": 0.3673987067758931,
+        "first_supported_phase_error_cycles": 0.4617678315562126,
+        "first_supported_aligned_phase_error_cycles": 0.1314932778877092,
+        "best_constant_phase_error_cycles": 0.13093729855768074,
+        "oracle_shift_cycles": 0.47362597269565754,
+        "minimum_circular_training_loss": 0.4218624442500859,
+        "centered_clock_rmse_cycles": 0.396971929224714,
+        "constant_rate_component_rmse_cycles": 0.35085902917053874,
+        "nonlinear_residual_rmse_cycles": 0.1857004422232172
+      },
+      "zero": {
+        "points": 2960,
+        "reference_spans": [
+          {
+            "start_frame": 8,
+            "end_frame_exclusive": 2968,
+            "points": 2960,
+            "native_rate_bias_bpm": -9.537097870733112,
+            "terminal_drift_cycles": -8.92801935624629,
+            "max_first_aligned_drift_cycles": 8.92801935624629
+          }
+        ],
+        "observed_phase_error_cycles": 0.24399458303216592,
+        "first_supported_phase_error_cycles": 0.3705961620597952,
+        "first_supported_aligned_phase_error_cycles": 0.2501354097424479,
+        "best_constant_phase_error_cycles": 0.24376998883588882,
+        "oracle_shift_cycles": 0.9286983505190918,
+        "minimum_circular_training_loss": 0.967485086184999,
+        "centered_clock_rmse_cycles": 2.7252007188729097,
+        "constant_rate_component_rmse_cycles": 2.7164145496398886,
+        "nonlinear_residual_rmse_cycles": 0.2186571577839196
+      },
+      "raw_common_phase_error_cycles": 0.029192368327013087,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.041079191945539884,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+      "role": "fit",
+      "work": "Handel_HWV040-1-01",
+      "audio": {
+        "points": 2966,
+        "reference_spans": [
+          {
+            "start_frame": 12,
+            "end_frame_exclusive": 2978,
+            "points": 2966,
+            "native_rate_bias_bpm": -4.014982006838716,
+            "terminal_drift_cycles": -3.834813148798755,
+            "max_first_aligned_drift_cycles": 3.920472243889453
+          }
+        ],
+        "observed_phase_error_cycles": 0.23325225484897888,
+        "first_supported_phase_error_cycles": 0.41908706943886304,
+        "first_supported_aligned_phase_error_cycles": 0.2650031372207252,
+        "best_constant_phase_error_cycles": 0.23303016325425763,
+        "oracle_shift_cycles": 0.014825532201079739,
+        "minimum_circular_training_loss": 0.9254761320496805,
+        "centered_clock_rmse_cycles": 1.1753358381760788,
+        "constant_rate_component_rmse_cycles": 1.1458897840843312,
+        "nonlinear_residual_rmse_cycles": 0.26144011787067123
+      },
+      "zero": {
+        "points": 2966,
+        "reference_spans": [
+          {
+            "start_frame": 12,
+            "end_frame_exclusive": 2978,
+            "points": 2966,
+            "native_rate_bias_bpm": -9.309988476180427,
+            "terminal_drift_cycles": -8.974803322732232,
+            "max_first_aligned_drift_cycles": 8.974803322732232
+          }
+        ],
+        "observed_phase_error_cycles": 0.261636053819794,
+        "first_supported_phase_error_cycles": 0.184226186878231,
+        "first_supported_aligned_phase_error_cycles": 0.28083493217353767,
+        "best_constant_phase_error_cycles": 0.21839584320234434,
+        "oracle_shift_cycles": 0.3382540072118303,
+        "minimum_circular_training_loss": 0.8495765964704693,
+        "centered_clock_rmse_cycles": 2.6662618836303023,
+        "constant_rate_component_rmse_cycles": 2.6571029874173355,
+        "nonlinear_residual_rmse_cycles": 0.22080793997880152
+      },
+      "raw_common_phase_error_cycles": 0.07819693773611912,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.08712411385709268,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+      "role": "fit",
+      "work": "Handel_HWV040-1-01",
+      "audio": {
+        "points": 2862,
+        "reference_spans": [
+          {
+            "start_frame": 118,
+            "end_frame_exclusive": 2980,
+            "points": 2862,
+            "native_rate_bias_bpm": -5.075890636425106,
+            "terminal_drift_cycles": -4.258949054357096,
+            "max_first_aligned_drift_cycles": 4.258949054357096
+          }
+        ],
+        "observed_phase_error_cycles": 0.27406772965629916,
+        "first_supported_phase_error_cycles": 0.22240849145611463,
+        "first_supported_aligned_phase_error_cycles": 0.24097832843047087,
+        "best_constant_phase_error_cycles": 0.22052466499347723,
+        "oracle_shift_cycles": 0.4068266429366574,
+        "minimum_circular_training_loss": 0.8603973038561283,
+        "centered_clock_rmse_cycles": 1.4179879299057403,
+        "constant_rate_component_rmse_cycles": 1.3978802903464662,
+        "nonlinear_residual_rmse_cycles": 0.23795054784397124
+      },
+      "zero": {
+        "points": 2862,
+        "reference_spans": [
+          {
+            "start_frame": 118,
+            "end_frame_exclusive": 2980,
+            "points": 2862,
+            "native_rate_bias_bpm": -12.262158667569441,
+            "terminal_drift_cycles": -10.99159097155412,
+            "max_first_aligned_drift_cycles": 10.99159097155412
+          }
+        ],
+        "observed_phase_error_cycles": 0.24501283816836383,
+        "first_supported_phase_error_cycles": 0.0752383101050631,
+        "first_supported_aligned_phase_error_cycles": 0.25331963639206306,
+        "best_constant_phase_error_cycles": 0.23471973005065613,
+        "oracle_shift_cycles": 0.2384793119562545,
+        "minimum_circular_training_loss": 0.9251409785453063,
+        "centered_clock_rmse_cycles": 3.378994106198945,
+        "constant_rate_component_rmse_cycles": 3.3769502036727577,
+        "nonlinear_residual_rmse_cycles": 0.11750953851382859
+      },
+      "raw_common_phase_error_cycles": 0.06985845190408993,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.08995514573813436,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-mozart-kv618-ar-papalin2012",
+      "role": "development",
+      "work": "Mozart_KV618",
+      "audio": {
+        "points": 2919,
+        "reference_spans": [
+          {
+            "start_frame": 55,
+            "end_frame_exclusive": 2974,
+            "points": 2919,
+            "native_rate_bias_bpm": 16.422219311942296,
+            "terminal_drift_cycles": 15.710416569410373,
+            "max_first_aligned_drift_cycles": 15.717670011535706
+          }
+        ],
+        "observed_phase_error_cycles": 0.24977012794678247,
+        "first_supported_phase_error_cycles": 0.34032503913585277,
+        "first_supported_aligned_phase_error_cycles": 0.24777848991880208,
+        "best_constant_phase_error_cycles": 0.2457601637279888,
+        "oracle_shift_cycles": 0.815615388853324,
+        "minimum_circular_training_loss": 0.9825436771253604,
+        "centered_clock_rmse_cycles": 4.6647242417534605,
+        "constant_rate_component_rmse_cycles": 4.612687567544697,
+        "nonlinear_residual_rmse_cycles": 0.6948133964029477
+      },
+      "zero": {
+        "points": 2919,
+        "reference_spans": [
+          {
+            "start_frame": 55,
+            "end_frame_exclusive": 2974,
+            "points": 2919,
+            "native_rate_bias_bpm": 15.27031229324233,
+            "terminal_drift_cycles": 14.790636031347171,
+            "max_first_aligned_drift_cycles": 14.790636031347171
+          }
+        ],
+        "observed_phase_error_cycles": 0.25445415013000616,
+        "first_supported_phase_error_cycles": 0.42587854524250535,
+        "first_supported_aligned_phase_error_cycles": 0.24219462116087712,
+        "best_constant_phase_error_cycles": 0.2421602419283922,
+        "oracle_shift_cycles": 0.5687428467570568,
+        "minimum_circular_training_loss": 0.9626221429310388,
+        "centered_clock_rmse_cycles": 4.291465998878007,
+        "constant_rate_component_rmse_cycles": 4.2891388995360495,
+        "nonlinear_residual_rmse_cycles": 0.14130789083662806
+      },
+      "raw_common_phase_error_cycles": 0.2501419714996643,
+      "oracle_anchor_still_worse_than_raw_common": false,
+      "v1_common_phase_error_cycles": 0.2442404824433689,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+      "role": "development",
+      "work": "Mozart_KV618",
+      "audio": {
+        "points": 2846,
+        "reference_spans": [
+          {
+            "start_frame": 52,
+            "end_frame_exclusive": 2898,
+            "points": 2846,
+            "native_rate_bias_bpm": 20.916047494801305,
+            "terminal_drift_cycles": 19.391030748489356,
+            "max_first_aligned_drift_cycles": 19.391030748489356
+          }
+        ],
+        "observed_phase_error_cycles": 0.24788703615555968,
+        "first_supported_phase_error_cycles": 0.4152957536555191,
+        "first_supported_aligned_phase_error_cycles": 0.24879467547829293,
+        "best_constant_phase_error_cycles": 0.2450879489928706,
+        "oracle_shift_cycles": 0.8726702387460814,
+        "minimum_circular_training_loss": 0.9795873381661926,
+        "centered_clock_rmse_cycles": 5.7405318880145835,
+        "constant_rate_component_rmse_cycles": 5.727994740438912,
+        "nonlinear_residual_rmse_cycles": 0.37918677563496805
+      },
+      "zero": {
+        "points": 2846,
+        "reference_spans": [
+          {
+            "start_frame": 52,
+            "end_frame_exclusive": 2898,
+            "points": 2846,
+            "native_rate_bias_bpm": 24.506945918571194,
+            "terminal_drift_cycles": 22.992091949597313,
+            "max_first_aligned_drift_cycles": 22.992091949597313
+          }
+        ],
+        "observed_phase_error_cycles": 0.2517731546297426,
+        "first_supported_phase_error_cycles": 0.46946440116829,
+        "first_supported_aligned_phase_error_cycles": 0.2483971680564482,
+        "best_constant_phase_error_cycles": 0.24797720974049195,
+        "oracle_shift_cycles": 0.40505355516246055,
+        "minimum_circular_training_loss": 0.9898312863186759,
+        "centered_clock_rmse_cycles": 6.712038383756052,
+        "constant_rate_component_rmse_cycles": 6.711385473794086,
+        "nonlinear_residual_rmse_cycles": 0.09361777160498835
+      },
+      "raw_common_phase_error_cycles": 0.25694709527758836,
+      "oracle_anchor_still_worse_than_raw_common": false,
+      "v1_common_phase_error_cycles": 0.24597526636965775,
+      "oracle_anchor_still_worse_than_v1_common": false
+    },
+    {
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+      "role": "development",
+      "work": "Mussorgsky_PicturesAtAnExhibition-10",
+      "audio": {
+        "points": 2969,
+        "reference_spans": [
+          {
+            "start_frame": 10,
+            "end_frame_exclusive": 2979,
+            "points": 2969,
+            "native_rate_bias_bpm": -0.05987255904069125,
+            "terminal_drift_cycles": 0.23999302603726985,
+            "max_first_aligned_drift_cycles": 1.5265217888551326
+          }
+        ],
+        "observed_phase_error_cycles": 0.3230615531581171,
+        "first_supported_phase_error_cycles": 0.10401623248023961,
+        "first_supported_aligned_phase_error_cycles": 0.29423761775963597,
+        "best_constant_phase_error_cycles": 0.17397057997332735,
+        "oracle_shift_cycles": 0.464054849718778,
+        "minimum_circular_training_loss": 0.6483135426072006,
+        "centered_clock_rmse_cycles": 0.3963918442810587,
+        "constant_rate_component_rmse_cycles": 0.017105119639299105,
+        "nonlinear_residual_rmse_cycles": 0.3960226118476878
+      },
+      "zero": {
+        "points": 2969,
+        "reference_spans": [
+          {
+            "start_frame": 10,
+            "end_frame_exclusive": 2979,
+            "points": 2969,
+            "native_rate_bias_bpm": -4.499783695334382,
+            "terminal_drift_cycles": -3.9216950515057967,
+            "max_first_aligned_drift_cycles": 4.107371200799943
+          }
+        ],
+        "observed_phase_error_cycles": 0.21713403803110704,
+        "first_supported_phase_error_cycles": 0.21147219382233495,
+        "first_supported_aligned_phase_error_cycles": 0.23429977422215872,
+        "best_constant_phase_error_cycles": 0.21701385637668996,
+        "oracle_shift_cycles": 0.011704531362852322,
+        "minimum_circular_training_loss": 0.8366623643108395,
+        "centered_clock_rmse_cycles": 1.3648240890813932,
+        "constant_rate_component_rmse_cycles": 1.2855528424524383,
+        "nonlinear_residual_rmse_cycles": 0.45836522926516926
+      },
+      "raw_common_phase_error_cycles": 0.10791855973076038,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.08539807736204336,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+      "role": "development",
+      "work": "Mussorgsky_PicturesAtAnExhibition-10",
+      "audio": {
+        "points": 2971,
+        "reference_spans": [
+          {
+            "start_frame": 23,
+            "end_frame_exclusive": 2994,
+            "points": 2971,
+            "native_rate_bias_bpm": -7.000589178104104,
+            "terminal_drift_cycles": -7.607768134111323,
+            "max_first_aligned_drift_cycles": 7.607768134111323
+          }
+        ],
+        "observed_phase_error_cycles": 0.19185568821026433,
+        "first_supported_phase_error_cycles": 0.11474860985495472,
+        "first_supported_aligned_phase_error_cycles": 0.20483186299256706,
+        "best_constant_phase_error_cycles": 0.1917297090935322,
+        "oracle_shift_cycles": 0.9876619706540168,
+        "minimum_circular_training_loss": 0.7048993994495478,
+        "centered_clock_rmse_cycles": 2.0393360873957023,
+        "constant_rate_component_rmse_cycles": 2.001360581639721,
+        "nonlinear_residual_rmse_cycles": 0.3917237542109576
+      },
+      "zero": {
+        "points": 2971,
+        "reference_spans": [
+          {
+            "start_frame": 23,
+            "end_frame_exclusive": 2994,
+            "points": 2971,
+            "native_rate_bias_bpm": -9.934089294435825,
+            "terminal_drift_cycles": -10.042379737309194,
+            "max_first_aligned_drift_cycles": 10.042379737309194
+          }
+        ],
+        "observed_phase_error_cycles": 0.2395405839401969,
+        "first_supported_phase_error_cycles": 0.006899302404900776,
+        "first_supported_aligned_phase_error_cycles": 0.2403254959755442,
+        "best_constant_phase_error_cycles": 0.22960372360834302,
+        "oracle_shift_cycles": 0.8677537973240987,
+        "minimum_circular_training_loss": 0.905155203804654,
+        "centered_clock_rmse_cycles": 2.847433200234111,
+        "constant_rate_component_rmse_cycles": 2.840003065821577,
+        "nonlinear_residual_rmse_cycles": 0.2055685187948696
+      },
+      "raw_common_phase_error_cycles": 0.05732046884667188,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.048113753731086534,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-schubert-d733-01-ar-staab2012",
+      "role": "fit",
+      "work": "Schubert_D733-01",
+      "audio": {
+        "points": 2993,
+        "reference_spans": [
+          {
+            "start_frame": 3,
+            "end_frame_exclusive": 2996,
+            "points": 2993,
+            "native_rate_bias_bpm": -38.65739615500546,
+            "terminal_drift_cycles": -39.12984198856137,
+            "max_first_aligned_drift_cycles": 39.12984198856137
+          }
+        ],
+        "observed_phase_error_cycles": 0.25030625102120074,
+        "first_supported_phase_error_cycles": 0.22665358641639077,
+        "first_supported_aligned_phase_error_cycles": 0.2502282714942905,
+        "best_constant_phase_error_cycles": 0.24870146866303022,
+        "oracle_shift_cycles": 0.609883805925179,
+        "minimum_circular_training_loss": 0.9960601404280419,
+        "centered_clock_rmse_cycles": 11.136123904011919,
+        "constant_rate_component_rmse_cycles": 11.13338974895729,
+        "nonlinear_residual_rmse_cycles": 0.2467555537741812
+      },
+      "zero": {
+        "points": 2993,
+        "reference_spans": [
+          {
+            "start_frame": 3,
+            "end_frame_exclusive": 2996,
+            "points": 2993,
+            "native_rate_bias_bpm": -51.793537895797996,
+            "terminal_drift_cycles": -51.649426831832976,
+            "max_first_aligned_drift_cycles": 51.649426831832976
+          }
+        ],
+        "observed_phase_error_cycles": 0.24912088611915315,
+        "first_supported_phase_error_cycles": 0.423374508837571,
+        "first_supported_aligned_phase_error_cycles": 0.25066209048392357,
+        "best_constant_phase_error_cycles": 0.24904083207953484,
+        "oracle_shift_cycles": 0.9434675995039079,
+        "minimum_circular_training_loss": 0.9953463699704528,
+        "centered_clock_rmse_cycles": 14.918058917415959,
+        "constant_rate_component_rmse_cycles": 14.916618842074904,
+        "nonlinear_residual_rmse_cycles": 0.20727803489469404
+      },
+      "raw_common_phase_error_cycles": 0.17439181045978416,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.055087876118671504,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+      "role": "fit",
+      "work": "Schubert_D733-01",
+      "audio": {
+        "points": 2989,
+        "reference_spans": [
+          {
+            "start_frame": 2,
+            "end_frame_exclusive": 2991,
+            "points": 2989,
+            "native_rate_bias_bpm": -39.56293910991662,
+            "terminal_drift_cycles": -39.82451788710482,
+            "max_first_aligned_drift_cycles": 39.82451788710482
+          }
+        ],
+        "observed_phase_error_cycles": 0.2490716157435554,
+        "first_supported_phase_error_cycles": 0.28571011826738,
+        "first_supported_aligned_phase_error_cycles": 0.25329863732804764,
+        "best_constant_phase_error_cycles": 0.2466488029575634,
+        "oracle_shift_cycles": 0.8035775555215636,
+        "minimum_circular_training_loss": 0.9842229578993446,
+        "centered_clock_rmse_cycles": 11.381701174553553,
+        "constant_rate_component_rmse_cycles": 11.378959734196343,
+        "nonlinear_residual_rmse_cycles": 0.2497939037927043
+      },
+      "zero": {
+        "points": 2989,
+        "reference_spans": [
+          {
+            "start_frame": 2,
+            "end_frame_exclusive": 2991,
+            "points": 2989,
+            "native_rate_bias_bpm": -49.75993213574569,
+            "terminal_drift_cycles": -49.53637967540867,
+            "max_first_aligned_drift_cycles": 49.53637967540867
+          }
+        ],
+        "observed_phase_error_cycles": 0.25077412771334734,
+        "first_supported_phase_error_cycles": 0.37548440531686206,
+        "first_supported_aligned_phase_error_cycles": 0.2481223966095961,
+        "best_constant_phase_error_cycles": 0.2479590466728486,
+        "oracle_shift_cycles": 0.6905129028657804,
+        "minimum_circular_training_loss": 0.9900748766721745,
+        "centered_clock_rmse_cycles": 14.312522217690038,
+        "constant_rate_component_rmse_cycles": 14.311784637028353,
+        "nonlinear_residual_rmse_cycles": 0.1453022201831407
+      },
+      "raw_common_phase_error_cycles": 0.08057592715551702,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.05040055985493399,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-schumann-op039-05-ov-buttner2025",
+      "role": "fit",
+      "work": "Schumann_Op039-05",
+      "audio": {
+        "points": 2971,
+        "reference_spans": [
+          {
+            "start_frame": 29,
+            "end_frame_exclusive": 3000,
+            "points": 2971,
+            "native_rate_bias_bpm": 2.8137877620284137,
+            "terminal_drift_cycles": 2.986591274198211,
+            "max_first_aligned_drift_cycles": 3.052615264170505
+          }
+        ],
+        "observed_phase_error_cycles": 0.290117486169973,
+        "first_supported_phase_error_cycles": 0.17765307894411875,
+        "first_supported_aligned_phase_error_cycles": 0.25013410826782045,
+        "best_constant_phase_error_cycles": 0.20554856219934017,
+        "oracle_shift_cycles": 0.41489712979493376,
+        "minimum_circular_training_loss": 0.7890207400245904,
+        "centered_clock_rmse_cycles": 0.8422859709222442,
+        "constant_rate_component_rmse_cycles": 0.8044185666025624,
+        "nonlinear_residual_rmse_cycles": 0.24971268793857132
+      },
+      "zero": {
+        "points": 2971,
+        "reference_spans": [
+          {
+            "start_frame": 29,
+            "end_frame_exclusive": 3000,
+            "points": 2971,
+            "native_rate_bias_bpm": -0.04938842772052011,
+            "terminal_drift_cycles": 0.20859239753541442,
+            "max_first_aligned_drift_cycles": 0.972531694988812
+          }
+        ],
+        "observed_phase_error_cycles": 0.3209749084093426,
+        "first_supported_phase_error_cycles": 0.10985963203952787,
+        "first_supported_aligned_phase_error_cycles": 0.3241975349194927,
+        "best_constant_phase_error_cycles": 0.171650539537886,
+        "oracle_shift_cycles": 0.563312951013053,
+        "minimum_circular_training_loss": 0.6279687027479675,
+        "centered_clock_rmse_cycles": 0.21081990774743586,
+        "constant_rate_component_rmse_cycles": 0.014119390513325385,
+        "nonlinear_residual_rmse_cycles": 0.21034656240159855
+      },
+      "raw_common_phase_error_cycles": 0.053500238353232844,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.07517213321477872,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "role": "fit",
+      "work": "Schumann_Op039-05",
+      "audio": {
+        "points": 2936,
+        "reference_spans": [
+          {
+            "start_frame": 61,
+            "end_frame_exclusive": 2997,
+            "points": 2936,
+            "native_rate_bias_bpm": -12.359118809790505,
+            "terminal_drift_cycles": -11.159747653618972,
+            "max_first_aligned_drift_cycles": 11.159747653618972
+          }
+        ],
+        "observed_phase_error_cycles": 0.29957212171739545,
+        "first_supported_phase_error_cycles": 0.23026872106423468,
+        "first_supported_aligned_phase_error_cycles": 0.25457778641646656,
+        "best_constant_phase_error_cycles": 0.20011489071838265,
+        "oracle_shift_cycles": 0.5164271951542858,
+        "minimum_circular_training_loss": 0.7565417076035577,
+        "centered_clock_rmse_cycles": 3.581638039910796,
+        "constant_rate_component_rmse_cycles": 3.491657650593806,
+        "nonlinear_residual_rmse_cycles": 0.7977831158816273
+      },
+      "zero": {
+        "points": 2936,
+        "reference_spans": [
+          {
+            "start_frame": 61,
+            "end_frame_exclusive": 2997,
+            "points": 2936,
+            "native_rate_bias_bpm": -7.306393440595771,
+            "terminal_drift_cycles": -6.4243565074396525,
+            "max_first_aligned_drift_cycles": 6.4243565074396525
+          }
+        ],
+        "observed_phase_error_cycles": 0.23185908759908777,
+        "first_supported_phase_error_cycles": 0.32335492057170434,
+        "first_supported_aligned_phase_error_cycles": 0.24292314303540963,
+        "best_constant_phase_error_cycles": 0.21626534752172571,
+        "oracle_shift_cycles": 0.846771530088052,
+        "minimum_circular_training_loss": 0.8513916677494828,
+        "centered_clock_rmse_cycles": 2.1833722782504954,
+        "constant_rate_component_rmse_cycles": 2.0641782757922247,
+        "nonlinear_residual_rmse_cycles": 0.7115353478079603
+      },
+      "raw_common_phase_error_cycles": 0.17643306278522183,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.13717529770900544,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "audio": {
+        "points": 2887,
+        "reference_spans": [
+          {
+            "start_frame": 106,
+            "end_frame_exclusive": 2993,
+            "points": 2887,
+            "native_rate_bias_bpm": 11.848184276116148,
+            "terminal_drift_cycles": 7.349906977891255,
+            "max_first_aligned_drift_cycles": 8.44733173856292
+          }
+        ],
+        "observed_phase_error_cycles": 0.26364982417848476,
+        "first_supported_phase_error_cycles": 0.46599262736794267,
+        "first_supported_aligned_phase_error_cycles": 0.23821921849621847,
+        "best_constant_phase_error_cycles": 0.23362466459068643,
+        "oracle_shift_cycles": 0.5706664220189133,
+        "minimum_circular_training_loss": 0.9255102095083501,
+        "centered_clock_rmse_cycles": 3.4976039188713193,
+        "constant_rate_component_rmse_cycles": 3.2914455899795216,
+        "nonlinear_residual_rmse_cycles": 1.1830549866799869
+      },
+      "zero": {
+        "points": 2887,
+        "reference_spans": [
+          {
+            "start_frame": 106,
+            "end_frame_exclusive": 2993,
+            "points": 2887,
+            "native_rate_bias_bpm": 15.176428609688399,
+            "terminal_drift_cycles": 11.246995130237543,
+            "max_first_aligned_drift_cycles": 11.31167799728749
+          }
+        ],
+        "observed_phase_error_cycles": 0.26738668296373563,
+        "first_supported_phase_error_cycles": 0.47971130373005644,
+        "first_supported_aligned_phase_error_cycles": 0.2279042501072002,
+        "best_constant_phase_error_cycles": 0.2121239407608817,
+        "oracle_shift_cycles": 0.33559111815892706,
+        "minimum_circular_training_loss": 0.8153507658562262,
+        "centered_clock_rmse_cycles": 4.415701481510001,
+        "constant_rate_component_rmse_cycles": 4.216037483455851,
+        "nonlinear_residual_rmse_cycles": 1.3128013985005034
+      },
+      "raw_common_phase_error_cycles": 0.2040868019588191,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.2013127497377153,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "audio": {
+        "points": 2592,
+        "reference_spans": [
+          {
+            "start_frame": 148,
+            "end_frame_exclusive": 2740,
+            "points": 2592,
+            "native_rate_bias_bpm": 2.8768624860399714,
+            "terminal_drift_cycles": 0.9953710379120675,
+            "max_first_aligned_drift_cycles": 2.021421300409716
+          }
+        ],
+        "observed_phase_error_cycles": 0.2169882792125342,
+        "first_supported_phase_error_cycles": 0.35344173134530177,
+        "first_supported_aligned_phase_error_cycles": 0.26590209759623973,
+        "best_constant_phase_error_cycles": 0.21597268278950707,
+        "oracle_shift_cycles": 0.9608269433097596,
+        "minimum_circular_training_loss": 0.8431393076462765,
+        "centered_clock_rmse_cycles": 0.8216464618490946,
+        "constant_rate_component_rmse_cycles": 0.7175335134781384,
+        "nonlinear_residual_rmse_cycles": 0.40031058605144804
+      },
+      "zero": {
+        "points": 2592,
+        "reference_spans": [
+          {
+            "start_frame": 148,
+            "end_frame_exclusive": 2740,
+            "points": 2592,
+            "native_rate_bias_bpm": 11.20462069450848,
+            "terminal_drift_cycles": 8.249724641765514,
+            "max_first_aligned_drift_cycles": 8.249724641765514
+          }
+        ],
+        "observed_phase_error_cycles": 0.23815805885775812,
+        "first_supported_phase_error_cycles": 0.07319906877728855,
+        "first_supported_aligned_phase_error_cycles": 0.2321486495181106,
+        "best_constant_phase_error_cycles": 0.2281775213536173,
+        "oracle_shift_cycles": 0.15071682517950613,
+        "minimum_circular_training_loss": 0.8998180937134879,
+        "centered_clock_rmse_cycles": 2.8231149072109805,
+        "constant_rate_component_rmse_cycles": 2.7946038064500045,
+        "nonlinear_residual_rmse_cycles": 0.4002091256980633
+      },
+      "raw_common_phase_error_cycles": 0.18900964714823087,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.20011851371398665,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "audio": {
+        "points": 2835,
+        "reference_spans": [
+          {
+            "start_frame": 106,
+            "end_frame_exclusive": 2941,
+            "points": 2835,
+            "native_rate_bias_bpm": -4.174965657215032,
+            "terminal_drift_cycles": -3.5745185697835247,
+            "max_first_aligned_drift_cycles": 4.198530287817665
+          }
+        ],
+        "observed_phase_error_cycles": 0.27097150118088675,
+        "first_supported_phase_error_cycles": 0.40777829132831656,
+        "first_supported_aligned_phase_error_cycles": 0.21985616647946288,
+        "best_constant_phase_error_cycles": 0.21953295005925327,
+        "oracle_shift_cycles": 0.39105293544465525,
+        "minimum_circular_training_loss": 0.8579067874386056,
+        "centered_clock_rmse_cycles": 1.6689527300915512,
+        "constant_rate_component_rmse_cycles": 1.1389222196559232,
+        "nonlinear_residual_rmse_cycles": 1.2199423727594954
+      },
+      "zero": {
+        "points": 2835,
+        "reference_spans": [
+          {
+            "start_frame": 106,
+            "end_frame_exclusive": 2941,
+            "points": 2835,
+            "native_rate_bias_bpm": 2.5410092363515675,
+            "terminal_drift_cycles": 2.9569172013442433,
+            "max_first_aligned_drift_cycles": 4.906955736461384
+          }
+        ],
+        "observed_phase_error_cycles": 0.25371388341312534,
+        "first_supported_phase_error_cycles": 0.39710333436889633,
+        "first_supported_aligned_phase_error_cycles": 0.2429320221700303,
+        "best_constant_phase_error_cycles": 0.2366964018246473,
+        "oracle_shift_cycles": 0.261819185074998,
+        "minimum_circular_training_loss": 0.9404359534745669,
+        "centered_clock_rmse_cycles": 1.2193791389116884,
+        "constant_rate_component_rmse_cycles": 0.6931822001051429,
+        "nonlinear_residual_rmse_cycles": 1.0031868828241344
+      },
+      "raw_common_phase_error_cycles": 0.20232166868831458,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.14929218482265694,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "audio": {
+        "points": 2852,
+        "reference_spans": [
+          {
+            "start_frame": 69,
+            "end_frame_exclusive": 2921,
+            "points": 2852,
+            "native_rate_bias_bpm": 6.522061423531489,
+            "terminal_drift_cycles": 4.871584203074976,
+            "max_first_aligned_drift_cycles": 5.322128979475872
+          }
+        ],
+        "observed_phase_error_cycles": 0.2574576449954037,
+        "first_supported_phase_error_cycles": 0.2515001505114207,
+        "first_supported_aligned_phase_error_cycles": 0.2433473278987072,
+        "best_constant_phase_error_cycles": 0.23846317517557064,
+        "oracle_shift_cycles": 0.6094288658866995,
+        "minimum_circular_training_loss": 0.9448332477203504,
+        "centered_clock_rmse_cycles": 1.8646588467806346,
+        "constant_rate_component_rmse_cycles": 1.7898741725905538,
+        "nonlinear_residual_rmse_cycles": 0.5227839526712402
+      },
+      "zero": {
+        "points": 2852,
+        "reference_spans": [
+          {
+            "start_frame": 69,
+            "end_frame_exclusive": 2921,
+            "points": 2852,
+            "native_rate_bias_bpm": 12.60808125369502,
+            "terminal_drift_cycles": 10.90894865174864,
+            "max_first_aligned_drift_cycles": 10.90894865174864
+          }
+        ],
+        "observed_phase_error_cycles": 0.23516847543309466,
+        "first_supported_phase_error_cycles": 0.28961248153728403,
+        "first_supported_aligned_phase_error_cycles": 0.24100867667527295,
+        "best_constant_phase_error_cycles": 0.23401241459141825,
+        "oracle_shift_cycles": 0.8987531486283,
+        "minimum_circular_training_loss": 0.9136947781712079,
+        "centered_clock_rmse_cycles": 3.5046607584191545,
+        "constant_rate_component_rmse_cycles": 3.4600837889215397,
+        "nonlinear_residual_rmse_cycles": 0.5571958410159582
+      },
+      "raw_common_phase_error_cycles": 0.23907094595724604,
+      "oracle_anchor_still_worse_than_raw_common": false,
+      "v1_common_phase_error_cycles": 0.20821002832284033,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "role": "fit",
+      "work": "Vivaldi_RV269-01",
+      "audio": {
+        "points": 2931,
+        "reference_spans": [
+          {
+            "start_frame": 66,
+            "end_frame_exclusive": 2997,
+            "points": 2931,
+            "native_rate_bias_bpm": -43.560414294445835,
+            "terminal_drift_cycles": -43.59571647178663,
+            "max_first_aligned_drift_cycles": 43.59571647178663
+          }
+        ],
+        "observed_phase_error_cycles": 0.2520120918218391,
+        "first_supported_phase_error_cycles": 0.06384918563716413,
+        "first_supported_aligned_phase_error_cycles": 0.250857855777002,
+        "best_constant_phase_error_cycles": 0.24592623624146676,
+        "oracle_shift_cycles": 0.32649900198134674,
+        "minimum_circular_training_loss": 0.982900087907901,
+        "centered_clock_rmse_cycles": 12.287119165099206,
+        "constant_rate_component_rmse_cycles": 12.285587149840936,
+        "nonlinear_residual_rmse_cycles": 0.19402515561480177
+      },
+      "zero": {
+        "points": 2931,
+        "reference_spans": [
+          {
+            "start_frame": 66,
+            "end_frame_exclusive": 2997,
+            "points": 2931,
+            "native_rate_bias_bpm": -55.79381784358948,
+            "terminal_drift_cycles": -55.399693436395886,
+            "max_first_aligned_drift_cycles": 55.399693436395886
+          }
+        ],
+        "observed_phase_error_cycles": 0.24637621155101885,
+        "first_supported_phase_error_cycles": 0.2941978406353938,
+        "first_supported_aligned_phase_error_cycles": 0.24703820890531916,
+        "best_constant_phase_error_cycles": 0.24345452133465523,
+        "oracle_shift_cycles": 0.8676199765409649,
+        "minimum_circular_training_loss": 0.9709125742274899,
+        "centered_clock_rmse_cycles": 15.737693545979011,
+        "constant_rate_component_rmse_cycles": 15.735842338560321,
+        "nonlinear_residual_rmse_cycles": 0.2413794587819082
+      },
+      "raw_common_phase_error_cycles": 0.05226523643688436,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.08802844395751046,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "role": "fit",
+      "work": "Vivaldi_RV269-01",
+      "audio": {
+        "points": 2965,
+        "reference_spans": [
+          {
+            "start_frame": 12,
+            "end_frame_exclusive": 2977,
+            "points": 2965,
+            "native_rate_bias_bpm": -36.928389378677664,
+            "terminal_drift_cycles": -37.70726665630523,
+            "max_first_aligned_drift_cycles": 37.70726665630523
+          }
+        ],
+        "observed_phase_error_cycles": 0.2519195076943947,
+        "first_supported_phase_error_cycles": 0.4692915953620218,
+        "first_supported_aligned_phase_error_cycles": 0.2469521898572339,
+        "best_constant_phase_error_cycles": 0.24523349314263265,
+        "oracle_shift_cycles": 0.598644736853295,
+        "minimum_circular_training_loss": 0.9805742340516879,
+        "centered_clock_rmse_cycles": 10.547154256236514,
+        "constant_rate_component_rmse_cycles": 10.535936917662713,
+        "nonlinear_residual_rmse_cycles": 0.4863087207524826
+      },
+      "zero": {
+        "points": 2965,
+        "reference_spans": [
+          {
+            "start_frame": 12,
+            "end_frame_exclusive": 2977,
+            "points": 2965,
+            "native_rate_bias_bpm": -43.11567835673389,
+            "terminal_drift_cycles": -42.91466477642951,
+            "max_first_aligned_drift_cycles": 42.91466477642951
+          }
+        ],
+        "observed_phase_error_cycles": 0.24693783578996736,
+        "first_supported_phase_error_cycles": 0.18994733359108767,
+        "first_supported_aligned_phase_error_cycles": 0.25128653959755565,
+        "best_constant_phase_error_cycles": 0.24469937239871023,
+        "oracle_shift_cycles": 0.12026690026733888,
+        "minimum_circular_training_loss": 0.9768048983211794,
+        "centered_clock_rmse_cycles": 12.301677550010725,
+        "constant_rate_component_rmse_cycles": 12.301215270197366,
+        "nonlinear_residual_rmse_cycles": 0.10664624091367242
+      },
+      "raw_common_phase_error_cycles": 0.1607498091037362,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.12461267806345112,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+      "role": "fit",
+      "work": "Vivaldi_RV269-01",
+      "audio": {
+        "points": 1183,
+        "reference_spans": [
+          {
+            "start_frame": 10,
+            "end_frame_exclusive": 1193,
+            "points": 1183,
+            "native_rate_bias_bpm": -47.84932305527032,
+            "terminal_drift_cycles": -18.937861318263714,
+            "max_first_aligned_drift_cycles": 18.937861318263714
+          }
+        ],
+        "observed_phase_error_cycles": 0.25490043668943224,
+        "first_supported_phase_error_cycles": 0.19592028208431517,
+        "first_supported_aligned_phase_error_cycles": 0.241712992225862,
+        "best_constant_phase_error_cycles": 0.23842382234513776,
+        "oracle_shift_cycles": 0.6859164458579681,
+        "minimum_circular_training_loss": 0.9431732116903284,
+        "centered_clock_rmse_cycles": 5.449813413212813,
+        "constant_rate_component_rmse_cycles": 5.446888807889808,
+        "nonlinear_residual_rmse_cycles": 0.17851765548268872
+      },
+      "zero": {
+        "points": 1183,
+        "reference_spans": [
+          {
+            "start_frame": 10,
+            "end_frame_exclusive": 1193,
+            "points": 1183,
+            "native_rate_bias_bpm": -42.21156467560934,
+            "terminal_drift_cycles": -16.9186443145581,
+            "max_first_aligned_drift_cycles": 16.9186443145581
+          }
+        ],
+        "observed_phase_error_cycles": 0.2518732635720224,
+        "first_supported_phase_error_cycles": 0.32578610996775426,
+        "first_supported_aligned_phase_error_cycles": 0.24811428772316685,
+        "best_constant_phase_error_cycles": 0.24744315619915527,
+        "oracle_shift_cycles": 0.5922440770610216,
+        "minimum_circular_training_loss": 0.9886507246284731,
+        "centered_clock_rmse_cycles": 4.807050435602725,
+        "constant_rate_component_rmse_cycles": 4.805119163953747,
+        "nonlinear_residual_rmse_cycles": 0.136248708738008
+      },
+      "raw_common_phase_error_cycles": 0.23176670812532074,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.24650449316560413,
+      "oracle_anchor_still_worse_than_v1_common": false
+    },
+    {
+      "id": "artbeat-05-75-to-150",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "audio": {
+        "points": 639,
+        "reference_spans": [
+          {
+            "start_frame": 2,
+            "end_frame_exclusive": 641,
+            "points": 639,
+            "native_rate_bias_bpm": -42.70370762641778,
+            "terminal_drift_cycles": -9.06551217716979,
+            "max_first_aligned_drift_cycles": 9.06551217716979
+          }
+        ],
+        "observed_phase_error_cycles": 0.2856480458720767,
+        "first_supported_phase_error_cycles": 0.12311269943006009,
+        "first_supported_aligned_phase_error_cycles": 0.26085692717666875,
+        "best_constant_phase_error_cycles": 0.2086615305636302,
+        "oracle_shift_cycles": 0.5765534211281373,
+        "minimum_circular_training_loss": 0.7955670073142187,
+        "centered_clock_rmse_cycles": 2.8588453374641736,
+        "constant_rate_component_rmse_cycles": 2.6257539751465653,
+        "nonlinear_residual_rmse_cycles": 1.130669149460907
+      },
+      "zero": {
+        "points": 639,
+        "reference_spans": [
+          {
+            "start_frame": 2,
+            "end_frame_exclusive": 641,
+            "points": 639,
+            "native_rate_bias_bpm": -59.74783431134861,
+            "terminal_drift_cycles": -12.721679325668122,
+            "max_first_aligned_drift_cycles": 12.721679325668122
+          }
+        ],
+        "observed_phase_error_cycles": 0.2592152314185556,
+        "first_supported_phase_error_cycles": 0.3621657581450651,
+        "first_supported_aligned_phase_error_cycles": 0.2478204012591571,
+        "best_constant_phase_error_cycles": 0.2394024848693648,
+        "oracle_shift_cycles": 0.4087928075663738,
+        "minimum_circular_training_loss": 0.9465089554198832,
+        "centered_clock_rmse_cycles": 3.8489699306517924,
+        "constant_rate_component_rmse_cycles": 3.6737586071418638,
+        "nonlinear_residual_rmse_cycles": 1.1480710881790936
+      },
+      "raw_common_phase_error_cycles": 0.12938256662996742,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.15862989675127287,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "artbeat-06-150-to-75",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "audio": {
+        "points": 638,
+        "reference_spans": [
+          {
+            "start_frame": 2,
+            "end_frame_exclusive": 640,
+            "points": 638,
+            "native_rate_bias_bpm": -50.345787239108276,
+            "terminal_drift_cycles": -10.228735147813225,
+            "max_first_aligned_drift_cycles": 10.228735147813225
+          }
+        ],
+        "observed_phase_error_cycles": 0.22986953829743068,
+        "first_supported_phase_error_cycles": 0.2500850857045637,
+        "first_supported_aligned_phase_error_cycles": 0.21569553332280644,
+        "best_constant_phase_error_cycles": 0.21012858824594716,
+        "oracle_shift_cycles": 0.8233392140552596,
+        "minimum_circular_training_loss": 0.8019306015209497,
+        "centered_clock_rmse_cycles": 3.280665115873846,
+        "constant_rate_component_rmse_cycles": 3.0908035590158267,
+        "nonlinear_residual_rmse_cycles": 1.0998622468685175
+      },
+      "zero": {
+        "points": 638,
+        "reference_spans": [
+          {
+            "start_frame": 2,
+            "end_frame_exclusive": 640,
+            "points": 638,
+            "native_rate_bias_bpm": -66.8045907334632,
+            "terminal_drift_cycles": -13.758439638078613,
+            "max_first_aligned_drift_cycles": 13.758439638078613
+          }
+        ],
+        "observed_phase_error_cycles": 0.2469587982467761,
+        "first_supported_phase_error_cycles": 0.3842654652743174,
+        "first_supported_aligned_phase_error_cycles": 0.2516327284873314,
+        "best_constant_phase_error_cycles": 0.24632240045803036,
+        "oracle_shift_cycles": 0.9107548309603324,
+        "minimum_circular_training_loss": 0.9834779490043266,
+        "centered_clock_rmse_cycles": 4.252641849636379,
+        "constant_rate_component_rmse_cycles": 4.101234246610241,
+        "nonlinear_residual_rmse_cycles": 1.1246512151374075
+      },
+      "raw_common_phase_error_cycles": 0.12753234652201406,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.1815273428811744,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "artbeat-07-75-to-112-5",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "audio": {
+        "points": 639,
+        "reference_spans": [
+          {
+            "start_frame": 1,
+            "end_frame_exclusive": 640,
+            "points": 639,
+            "native_rate_bias_bpm": -23.782187392137093,
+            "terminal_drift_cycles": -5.142738400296796,
+            "max_first_aligned_drift_cycles": 5.142738400296796
+          }
+        ],
+        "observed_phase_error_cycles": 0.2348158441597835,
+        "first_supported_phase_error_cycles": 0.25599447898476396,
+        "first_supported_aligned_phase_error_cycles": 0.24262186610108288,
+        "best_constant_phase_error_cycles": 0.23214002660943434,
+        "oracle_shift_cycles": 0.9325616444100486,
+        "minimum_circular_training_loss": 0.9126269073597393,
+        "centered_clock_rmse_cycles": 1.53385678709822,
+        "constant_rate_component_rmse_cycles": 1.4623126785355156,
+        "nonlinear_residual_rmse_cycles": 0.46298841618507064
+      },
+      "zero": {
+        "points": 639,
+        "reference_spans": [
+          {
+            "start_frame": 1,
+            "end_frame_exclusive": 640,
+            "points": 639,
+            "native_rate_bias_bpm": -41.1444076208086,
+            "terminal_drift_cycles": -8.77493849840937,
+            "max_first_aligned_drift_cycles": 8.77493849840937
+          }
+        ],
+        "observed_phase_error_cycles": 0.25678752521508763,
+        "first_supported_phase_error_cycles": 0.3691831180383578,
+        "first_supported_aligned_phase_error_cycles": 0.2474831892045216,
+        "best_constant_phase_error_cycles": 0.24270537268334988,
+        "oracle_shift_cycles": 0.43729181436177633,
+        "minimum_circular_training_loss": 0.9625747626821182,
+        "centered_clock_rmse_cycles": 2.594598561467032,
+        "constant_rate_component_rmse_cycles": 2.529876159946241,
+        "nonlinear_residual_rmse_cycles": 0.5759065119465603
+      },
+      "raw_common_phase_error_cycles": 0.05586002604337135,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.11936247902015037,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "artbeat-08-112-5-to-75",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "audio": {
+        "points": 668,
+        "reference_spans": [
+          {
+            "start_frame": 13,
+            "end_frame_exclusive": 681,
+            "points": 668,
+            "native_rate_bias_bpm": -28.632588329735842,
+            "terminal_drift_cycles": -6.069920951001802,
+            "max_first_aligned_drift_cycles": 6.069920951001802
+          }
+        ],
+        "observed_phase_error_cycles": 0.22504603694973155,
+        "first_supported_phase_error_cycles": 0.18040368795053097,
+        "first_supported_aligned_phase_error_cycles": 0.24156618743946845,
+        "best_constant_phase_error_cycles": 0.22503488487062207,
+        "oracle_shift_cycles": 0.004587417156213469,
+        "minimum_circular_training_loss": 0.8798548788882443,
+        "centered_clock_rmse_cycles": 1.8832920204349772,
+        "constant_rate_component_rmse_cycles": 1.840452898291866,
+        "nonlinear_residual_rmse_cycles": 0.399402007259764
+      },
+      "zero": {
+        "points": 668,
+        "reference_spans": [
+          {
+            "start_frame": 13,
+            "end_frame_exclusive": 681,
+            "points": 668,
+            "native_rate_bias_bpm": -42.370356538273114,
+            "terminal_drift_cycles": -9.284660697387638,
+            "max_first_aligned_drift_cycles": 9.284660697387638
+          }
+        ],
+        "observed_phase_error_cycles": 0.25090780239895183,
+        "first_supported_phase_error_cycles": 0.14975034408574417,
+        "first_supported_aligned_phase_error_cycles": 0.24111658872975314,
+        "best_constant_phase_error_cycles": 0.23819502160870784,
+        "oracle_shift_cycles": 0.7326956787195429,
+        "minimum_circular_training_loss": 0.9411526979611962,
+        "centered_clock_rmse_cycles": 2.7878352852534145,
+        "constant_rate_component_rmse_cycles": 2.723492706788898,
+        "nonlinear_residual_rmse_cycles": 0.5954939577961068
+      },
+      "raw_common_phase_error_cycles": 0.08364865345705076,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.11985827022435613,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "artbeat-09-90-to-80",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "audio": {
+        "points": 849,
+        "reference_spans": [
+          {
+            "start_frame": 6,
+            "end_frame_exclusive": 855,
+            "points": 849,
+            "native_rate_bias_bpm": -18.346514481085933,
+            "terminal_drift_cycles": -5.289004192072898,
+            "max_first_aligned_drift_cycles": 5.289004192072898
+          }
+        ],
+        "observed_phase_error_cycles": 0.2513053342392174,
+        "first_supported_phase_error_cycles": 0.18236759408310332,
+        "first_supported_aligned_phase_error_cycles": 0.23993151066111804,
+        "best_constant_phase_error_cycles": 0.23810099157909928,
+        "oracle_shift_cycles": 0.7270816249883314,
+        "minimum_circular_training_loss": 0.9424789492035469,
+        "centered_clock_rmse_cycles": 1.501643058844348,
+        "constant_rate_component_rmse_cycles": 1.4988186183293157,
+        "nonlinear_residual_rmse_cycles": 0.09205772930509584
+      },
+      "zero": {
+        "points": 849,
+        "reference_spans": [
+          {
+            "start_frame": 6,
+            "end_frame_exclusive": 855,
+            "points": 849,
+            "native_rate_bias_bpm": -31.889563630680698,
+            "terminal_drift_cycles": -9.048445969326638,
+            "max_first_aligned_drift_cycles": 9.048445969326638
+          }
+        ],
+        "observed_phase_error_cycles": 0.2518944163238761,
+        "first_supported_phase_error_cycles": 0.313463523747927,
+        "first_supported_aligned_phase_error_cycles": 0.2470699743706548,
+        "best_constant_phase_error_cycles": 0.24689605756959188,
+        "oracle_shift_cycles": 0.6553484735524826,
+        "minimum_circular_training_loss": 0.985668228086007,
+        "centered_clock_rmse_cycles": 2.6130989801735267,
+        "constant_rate_component_rmse_cycles": 2.6052181055609727,
+        "nonlinear_residual_rmse_cycles": 0.20279275786186665
+      },
+      "raw_common_phase_error_cycles": 0.028893618427357597,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.09232624179738355,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "artbeat-10-90-to-120",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "audio": {
+        "points": 801,
+        "reference_spans": [
+          {
+            "start_frame": 6,
+            "end_frame_exclusive": 807,
+            "points": 801,
+            "native_rate_bias_bpm": -36.5851196032889,
+            "terminal_drift_cycles": -9.554188588905646,
+            "max_first_aligned_drift_cycles": 9.554188588905646
+          }
+        ],
+        "observed_phase_error_cycles": 0.25286526981998253,
+        "first_supported_phase_error_cycles": 0.18566405894177884,
+        "first_supported_aligned_phase_error_cycles": 0.24965813299946793,
+        "best_constant_phase_error_cycles": 0.24665461133717054,
+        "oracle_shift_cycles": 0.5745764384501761,
+        "minimum_circular_training_loss": 0.9833551733178457,
+        "centered_clock_rmse_cycles": 2.869728004124321,
+        "constant_rate_component_rmse_cycles": 2.8198420274407243,
+        "nonlinear_residual_rmse_cycles": 0.5327567530631021
+      },
+      "zero": {
+        "points": 801,
+        "reference_spans": [
+          {
+            "start_frame": 6,
+            "end_frame_exclusive": 807,
+            "points": 801,
+            "native_rate_bias_bpm": -52.10246489474093,
+            "terminal_drift_cycles": -13.912214514570238,
+            "max_first_aligned_drift_cycles": 13.912214514570238
+          }
+        ],
+        "observed_phase_error_cycles": 0.24933865307936795,
+        "first_supported_phase_error_cycles": 0.3105893478269871,
+        "first_supported_aligned_phase_error_cycles": 0.2518463272009146,
+        "best_constant_phase_error_cycles": 0.24810872174211368,
+        "oracle_shift_cycles": 0.21010173727247938,
+        "minimum_circular_training_loss": 0.9915364124272219,
+        "centered_clock_rmse_cycles": 4.056958548165143,
+        "constant_rate_component_rmse_cycles": 4.015860050112769,
+        "nonlinear_residual_rmse_cycles": 0.5760040967202238
+      },
+      "raw_common_phase_error_cycles": 0.019885777300344718,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.09995973498251681,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "artbeat-11-60-to-80",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "audio": {
+        "points": 850,
+        "reference_spans": [
+          {
+            "start_frame": 1,
+            "end_frame_exclusive": 851,
+            "points": 850,
+            "native_rate_bias_bpm": -2.058708289862096,
+            "terminal_drift_cycles": -0.4320300088213125,
+            "max_first_aligned_drift_cycles": 1.508791625253686
+          }
+        ],
+        "observed_phase_error_cycles": 0.24144776941935533,
+        "first_supported_phase_error_cycles": 0.08847041522740384,
+        "first_supported_aligned_phase_error_cycles": 0.25191504516579766,
+        "best_constant_phase_error_cycles": 0.2349583096826924,
+        "oracle_shift_cycles": 0.16474904778386357,
+        "minimum_circular_training_loss": 0.9190006779226798,
+        "centered_clock_rmse_cycles": 0.5382309366473444,
+        "constant_rate_component_rmse_cycles": 0.16838428639339043,
+        "nonlinear_residual_rmse_cycles": 0.5112135300048957
+      },
+      "zero": {
+        "points": 850,
+        "reference_spans": [
+          {
+            "start_frame": 1,
+            "end_frame_exclusive": 851,
+            "points": 850,
+            "native_rate_bias_bpm": -18.22528089295055,
+            "terminal_drift_cycles": -5.073586785086829,
+            "max_first_aligned_drift_cycles": 5.073586785086829
+          }
+        ],
+        "observed_phase_error_cycles": 0.2517524207242949,
+        "first_supported_phase_error_cycles": 0.3652111084712437,
+        "first_supported_aligned_phase_error_cycles": 0.24980244690339695,
+        "best_constant_phase_error_cycles": 0.24823618930462632,
+        "oracle_shift_cycles": 0.4935274390877771,
+        "minimum_circular_training_loss": 0.9929548637112877,
+        "centered_clock_rmse_cycles": 1.5459292968106588,
+        "constant_rate_component_rmse_cycles": 1.4906681692548784,
+        "nonlinear_residual_rmse_cycles": 0.4096410622823436
+      },
+      "raw_common_phase_error_cycles": 0.04755896470070721,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.08903265537704053,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "artbeat-12-80-to-150",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "audio": {
+        "points": 812,
+        "reference_spans": [
+          {
+            "start_frame": 39,
+            "end_frame_exclusive": 851,
+            "points": 812,
+            "native_rate_bias_bpm": -47.37354347725221,
+            "terminal_drift_cycles": -13.121313989035311,
+            "max_first_aligned_drift_cycles": 13.121313989035311
+          }
+        ],
+        "observed_phase_error_cycles": 0.2637670934960168,
+        "first_supported_phase_error_cycles": 0.3269461185118532,
+        "first_supported_aligned_phase_error_cycles": 0.23640382433050217,
+        "best_constant_phase_error_cycles": 0.23367133746494761,
+        "oracle_shift_cycles": 0.5852875436924556,
+        "minimum_circular_training_loss": 0.919872427909593,
+        "centered_clock_rmse_cycles": 3.904822939297085,
+        "constant_rate_component_rmse_cycles": 3.7015165263935135,
+        "nonlinear_residual_rmse_cycles": 1.2435503978916258
+      },
+      "zero": {
+        "points": 812,
+        "reference_spans": [
+          {
+            "start_frame": 39,
+            "end_frame_exclusive": 851,
+            "points": 812,
+            "native_rate_bias_bpm": -61.33988200433368,
+            "terminal_drift_cycles": -16.705127706594258,
+            "max_first_aligned_drift_cycles": 16.705127706594258
+          }
+        ],
+        "observed_phase_error_cycles": 0.24455432774989963,
+        "first_supported_phase_error_cycles": 0.29580859421762773,
+        "first_supported_aligned_phase_error_cycles": 0.25340496810667884,
+        "best_constant_phase_error_cycles": 0.2440383617951684,
+        "oracle_shift_cycles": 0.9398561696500831,
+        "minimum_circular_training_loss": 0.971510773728049,
+        "centered_clock_rmse_cycles": 4.98233793305296,
+        "constant_rate_component_rmse_cycles": 4.79277187857172,
+        "nonlinear_residual_rmse_cycles": 1.3612600776892538
+      },
+      "raw_common_phase_error_cycles": 0.13611806799958584,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.15938913781098732,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "artbeat-13-180-to-120",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "audio": {
+        "points": 656,
+        "reference_spans": [
+          {
+            "start_frame": 11,
+            "end_frame_exclusive": 667,
+            "points": 656,
+            "native_rate_bias_bpm": -69.40757925000403,
+            "terminal_drift_cycles": -16.380349415401756,
+            "max_first_aligned_drift_cycles": 16.380349415401756
+          }
+        ],
+        "observed_phase_error_cycles": 0.24620648936089828,
+        "first_supported_phase_error_cycles": 0.19446652413946164,
+        "first_supported_aligned_phase_error_cycles": 0.24594597016875203,
+        "best_constant_phase_error_cycles": 0.2451405560842594,
+        "oracle_shift_cycles": 0.08439413182404998,
+        "minimum_circular_training_loss": 0.9764653061830109,
+        "centered_clock_rmse_cycles": 4.529599085218426,
+        "constant_rate_component_rmse_cycles": 4.381253221796052,
+        "nonlinear_residual_rmse_cycles": 1.1497339167447893
+      },
+      "zero": {
+        "points": 656,
+        "reference_spans": [
+          {
+            "start_frame": 11,
+            "end_frame_exclusive": 667,
+            "points": 656,
+            "native_rate_bias_bpm": -87.64826442376113,
+            "terminal_drift_cycles": -19.839649676771188,
+            "max_first_aligned_drift_cycles": 19.839649676771188
+          }
+        ],
+        "observed_phase_error_cycles": 0.2506318176195807,
+        "first_supported_phase_error_cycles": 0.18224121963285034,
+        "first_supported_aligned_phase_error_cycles": 0.2513661236276271,
+        "best_constant_phase_error_cycles": 0.2485264802953219,
+        "oracle_shift_cycles": 0.7347306829848264,
+        "minimum_circular_training_loss": 0.9929251210194794,
+        "centered_clock_rmse_cycles": 5.603086393914983,
+        "constant_rate_component_rmse_cycles": 5.5326701354652625,
+        "nonlinear_residual_rmse_cycles": 0.8855158439045445
+      },
+      "raw_common_phase_error_cycles": 0.09868201459675269,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.17948063261292518,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "artbeat-14-240-to-96",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "audio": {
+        "points": 799,
+        "reference_spans": [
+          {
+            "start_frame": 1,
+            "end_frame_exclusive": 800,
+            "points": 799,
+            "native_rate_bias_bpm": -79.8592841985198,
+            "terminal_drift_cycles": -23.609611157536843,
+            "max_first_aligned_drift_cycles": 23.609611157536843
+          }
+        ],
+        "observed_phase_error_cycles": 0.2509161344789107,
+        "first_supported_phase_error_cycles": 0.2653901111189496,
+        "first_supported_aligned_phase_error_cycles": 0.25348610663604665,
+        "best_constant_phase_error_cycles": 0.24638010300402077,
+        "oracle_shift_cycles": 0.2717657473818349,
+        "minimum_circular_training_loss": 0.9826266057142194,
+        "centered_clock_rmse_cycles": 6.718861786915522,
+        "constant_rate_component_rmse_cycles": 6.139881291900227,
+        "nonlinear_residual_rmse_cycles": 2.7285456626282136
+      },
+      "zero": {
+        "points": 799,
+        "reference_spans": [
+          {
+            "start_frame": 1,
+            "end_frame_exclusive": 800,
+            "points": 799,
+            "native_rate_bias_bpm": -88.90024957581359,
+            "terminal_drift_cycles": -25.95264032293709,
+            "max_first_aligned_drift_cycles": 25.95264032293709
+          }
+        ],
+        "observed_phase_error_cycles": 0.24965991708662208,
+        "first_supported_phase_error_cycles": 0.36895133689680276,
+        "first_supported_aligned_phase_error_cycles": 0.24865928915378807,
+        "best_constant_phase_error_cycles": 0.24739809175032604,
+        "oracle_shift_cycles": 0.7813409442752999,
+        "minimum_circular_training_loss": 0.9879513379028221,
+        "centered_clock_rmse_cycles": 7.282863848031468,
+        "constant_rate_component_rmse_cycles": 6.8349846194328405,
+        "nonlinear_residual_rmse_cycles": 2.5145757258591828
+      },
+      "raw_common_phase_error_cycles": 0.082861523636541,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.12006854811601839,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "artbeat-15-85-to-127-5",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "audio": {
+        "points": 1106,
+        "reference_spans": [
+          {
+            "start_frame": 0,
+            "end_frame_exclusive": 1106,
+            "points": 1106,
+            "native_rate_bias_bpm": -38.59567050936168,
+            "terminal_drift_cycles": -14.451621777472539,
+            "max_first_aligned_drift_cycles": 14.451621777472539
+          }
+        ],
+        "observed_phase_error_cycles": 0.256086974026935,
+        "first_supported_phase_error_cycles": 0.25516241788864136,
+        "first_supported_aligned_phase_error_cycles": 0.24674434364971912,
+        "best_constant_phase_error_cycles": 0.2426313868570867,
+        "oracle_shift_cycles": 0.648902356926385,
+        "minimum_circular_training_loss": 0.9650037952324226,
+        "centered_clock_rmse_cycles": 4.279676513271407,
+        "constant_rate_component_rmse_cycles": 4.107538680784241,
+        "nonlinear_residual_rmse_cycles": 1.2015644152970577
+      },
+      "zero": {
+        "points": 1106,
+        "reference_spans": [
+          {
+            "start_frame": 0,
+            "end_frame_exclusive": 1106,
+            "points": 1106,
+            "native_rate_bias_bpm": -52.89166519844292,
+            "terminal_drift_cycles": -19.567943242407676,
+            "max_first_aligned_drift_cycles": 19.567943242407676
+          }
+        ],
+        "observed_phase_error_cycles": 0.251974990543336,
+        "first_supported_phase_error_cycles": 0.37690508365631104,
+        "first_supported_aligned_phase_error_cycles": 0.249631719172824,
+        "best_constant_phase_error_cycles": 0.24763980988052706,
+        "oracle_shift_cycles": 0.4047563875215907,
+        "minimum_circular_training_loss": 0.9879277820333283,
+        "centered_clock_rmse_cycles": 5.7412771394362165,
+        "constant_rate_component_rmse_cycles": 5.628987858651069,
+        "nonlinear_residual_rmse_cycles": 1.129937555341776
+      },
+      "raw_common_phase_error_cycles": 0.1264219312310666,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.1594715563347699,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "artbeat-18-piano-rubato",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "audio": {
+        "points": 1124,
+        "reference_spans": [
+          {
+            "start_frame": 1,
+            "end_frame_exclusive": 1125,
+            "points": 1124,
+            "native_rate_bias_bpm": -48.437646175082556,
+            "terminal_drift_cycles": -20.75353677746967,
+            "max_first_aligned_drift_cycles": 20.75353677746967
+          }
+        ],
+        "observed_phase_error_cycles": 0.24491372522036184,
+        "first_supported_phase_error_cycles": 0.44983965799485914,
+        "first_supported_aligned_phase_error_cycles": 0.2551270214352651,
+        "best_constant_phase_error_cycles": 0.24482334083813317,
+        "oracle_shift_cycles": 0.9755475111469245,
+        "minimum_circular_training_loss": 0.9746516390611383,
+        "centered_clock_rmse_cycles": 5.274265082443869,
+        "constant_rate_component_rmse_cycles": 5.238866022855574,
+        "nonlinear_residual_rmse_cycles": 0.6100450429731062
+      },
+      "zero": {
+        "points": 1124,
+        "reference_spans": [
+          {
+            "start_frame": 1,
+            "end_frame_exclusive": 1125,
+            "points": 1124,
+            "native_rate_bias_bpm": -54.062299851265806,
+            "terminal_drift_cycles": -22.08492147160899,
+            "max_first_aligned_drift_cycles": 22.08492147160899
+          }
+        ],
+        "observed_phase_error_cycles": 0.24795156573659047,
+        "first_supported_phase_error_cycles": 0.3737202360368976,
+        "first_supported_aligned_phase_error_cycles": 0.2501396737545723,
+        "best_constant_phase_error_cycles": 0.2470984965311088,
+        "oracle_shift_cycles": 0.849200523615087,
+        "minimum_circular_training_loss": 0.9856321104506708,
+        "centered_clock_rmse_cycles": 5.865396478744715,
+        "constant_rate_component_rmse_cycles": 5.847211170924403,
+        "nonlinear_residual_rmse_cycles": 0.46151638701974707
+      },
+      "raw_common_phase_error_cycles": 0.18533187796391673,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.16634592779873944,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "artbeat-19-ramp-80-to-200",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "audio": {
+        "points": 833,
+        "reference_spans": [
+          {
+            "start_frame": 0,
+            "end_frame_exclusive": 833,
+            "points": 833,
+            "native_rate_bias_bpm": -81.12823692724814,
+            "terminal_drift_cycles": -22.558088789791015,
+            "max_first_aligned_drift_cycles": 22.558088789791015
+          }
+        ],
+        "observed_phase_error_cycles": 0.24384270377448752,
+        "first_supported_phase_error_cycles": 0.21401658654212952,
+        "first_supported_aligned_phase_error_cycles": 0.24924946097356665,
+        "best_constant_phase_error_cycles": 0.24379828096305334,
+        "oracle_shift_cycles": 0.017258288229617946,
+        "minimum_circular_training_loss": 0.969252898528047,
+        "centered_clock_rmse_cycles": 6.723383919638716,
+        "constant_rate_component_rmse_cycles": 6.502866656551782,
+        "nonlinear_residual_rmse_cycles": 1.7078104631262483
+      },
+      "zero": {
+        "points": 833,
+        "reference_spans": [
+          {
+            "start_frame": 0,
+            "end_frame_exclusive": 833,
+            "points": 833,
+            "native_rate_bias_bpm": -83.55944752574537,
+            "terminal_drift_cycles": -23.365771937803995,
+            "max_first_aligned_drift_cycles": 23.365771937803995
+          }
+        ],
+        "observed_phase_error_cycles": 0.25422926103498866,
+        "first_supported_phase_error_cycles": 0.37690508365631104,
+        "first_supported_aligned_phase_error_cycles": 0.24928659654842986,
+        "best_constant_phase_error_cycles": 0.2446864582743479,
+        "oracle_shift_cycles": 0.38610464745398065,
+        "minimum_circular_training_loss": 0.9732799716717937,
+        "centered_clock_rmse_cycles": 6.890489619121937,
+        "constant_rate_component_rmse_cycles": 6.697741325777003,
+        "nonlinear_residual_rmse_cycles": 1.618365942611893
+      },
+      "raw_common_phase_error_cycles": 0.19716628121192428,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.17128810141083334,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "artbeat-20-ramp-200-to-80",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "audio": {
+        "points": 827,
+        "reference_spans": [
+          {
+            "start_frame": 0,
+            "end_frame_exclusive": 827,
+            "points": 827,
+            "native_rate_bias_bpm": -82.32857686687737,
+            "terminal_drift_cycles": -22.310137311974863,
+            "max_first_aligned_drift_cycles": 22.310137311974863
+          }
+        ],
+        "observed_phase_error_cycles": 0.25242143529170813,
+        "first_supported_phase_error_cycles": 0.41473597288131714,
+        "first_supported_aligned_phase_error_cycles": 0.24651391449044957,
+        "best_constant_phase_error_cycles": 0.2460742004741613,
+        "oracle_shift_cycles": 0.348789765573432,
+        "minimum_circular_training_loss": 0.9798364271699787,
+        "centered_clock_rmse_cycles": 6.69797495576295,
+        "constant_rate_component_rmse_cycles": 6.551547929572153,
+        "nonlinear_residual_rmse_cycles": 1.3928705017145462
+      },
+      "zero": {
+        "points": 827,
+        "reference_spans": [
+          {
+            "start_frame": 0,
+            "end_frame_exclusive": 827,
+            "points": 827,
+            "native_rate_bias_bpm": -89.38406312448201,
+            "terminal_drift_cycles": -24.500427875752518,
+            "max_first_aligned_drift_cycles": 24.500427875752518
+          }
+        ],
+        "observed_phase_error_cycles": 0.2534273546059493,
+        "first_supported_phase_error_cycles": 0.37690508365631104,
+        "first_supported_aligned_phase_error_cycles": 0.24995110371986468,
+        "best_constant_phase_error_cycles": 0.24551558164538925,
+        "oracle_shift_cycles": 0.38307264086383697,
+        "minimum_circular_training_loss": 0.9772233321853383,
+        "centered_clock_rmse_cycles": 7.304266787809976,
+        "constant_rate_component_rmse_cycles": 7.113009795454736,
+        "nonlinear_residual_rmse_cycles": 1.6605435728305458
+      },
+      "raw_common_phase_error_cycles": 0.18299706429603924,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.18841772605686197,
+      "oracle_anchor_still_worse_than_v1_common": true
+    },
+    {
+      "id": "artbeat-21-polyrhythm-70-to-105",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "audio": {
+        "points": 599,
+        "reference_spans": [
+          {
+            "start_frame": 1,
+            "end_frame_exclusive": 600,
+            "points": 599,
+            "native_rate_bias_bpm": -21.8298154782262,
+            "terminal_drift_cycles": -4.3920023253196945,
+            "max_first_aligned_drift_cycles": 4.3920023253196945
+          }
+        ],
+        "observed_phase_error_cycles": 0.23317769817194037,
+        "first_supported_phase_error_cycles": 0.1446942884772343,
+        "first_supported_aligned_phase_error_cycles": 0.23726472130708323,
+        "best_constant_phase_error_cycles": 0.23150213266459196,
+        "oracle_shift_cycles": 0.966546280719645,
+        "minimum_circular_training_loss": 0.9190766837938865,
+        "centered_clock_rmse_cycles": 1.2891657326514872,
+        "constant_rate_component_rmse_cycles": 1.2582426558948878,
+        "nonlinear_residual_rmse_cycles": 0.280666537245582
+      },
+      "zero": {
+        "points": 599,
+        "reference_spans": [
+          {
+            "start_frame": 1,
+            "end_frame_exclusive": 600,
+            "points": 599,
+            "native_rate_bias_bpm": -38.57557708055168,
+            "terminal_drift_cycles": -7.445760491836147,
+            "max_first_aligned_drift_cycles": 7.445760491836147
+          }
+        ],
+        "observed_phase_error_cycles": 0.2640061653345437,
+        "first_supported_phase_error_cycles": 0.38268672955381994,
+        "first_supported_aligned_phase_error_cycles": 0.24790947083767012,
+        "best_constant_phase_error_cycles": 0.23201617291963653,
+        "oracle_shift_cycles": 0.38026578864831595,
+        "minimum_circular_training_loss": 0.9084974072127815,
+        "centered_clock_rmse_cycles": 2.276568996975454,
+        "constant_rate_component_rmse_cycles": 2.223446946078137,
+        "nonlinear_residual_rmse_cycles": 0.4889274751592837
+      },
+      "raw_common_phase_error_cycles": 0.11469504515622767,
+      "oracle_anchor_still_worse_than_raw_common": true,
+      "v1_common_phase_error_cycles": 0.1425358231044439,
+      "oracle_anchor_still_worse_than_v1_common": true
+    }
+  ],
+  "summary": {
+    "fit": {
+      "audio": {
+        "observed_phase_error_cycles": 0.2613532935032402,
+        "best_constant_phase_error_cycles": 0.22484076855214324,
+        "minimum_circular_training_loss": 0.8798380470207527,
+        "centered_clock_rmse_cycles": 4.559461116524103,
+        "constant_rate_component_rmse_cycles": 4.449893700577566,
+        "nonlinear_residual_rmse_cycles": 0.520663002657552
+      },
+      "zero": {
+        "observed_phase_error_cycles": 0.25376623198223186,
+        "best_constant_phase_error_cycles": 0.23300451309294778,
+        "minimum_circular_training_loss": 0.9207377188091298,
+        "centered_clock_rmse_cycles": 5.622006440269,
+        "constant_rate_component_rmse_cycles": 5.473913586042109,
+        "nonlinear_residual_rmse_cycles": 0.4080793798079493
+      }
+    },
+    "development": {
+      "audio": {
+        "observed_phase_error_cycles": 0.2544503710434817,
+        "best_constant_phase_error_cycles": 0.2227366172760421,
+        "minimum_circular_training_loss": 0.8700320860512423,
+        "centered_clock_rmse_cycles": 4.502135064095797,
+        "constant_rate_component_rmse_cycles": 4.413400427893838,
+        "nonlinear_residual_rmse_cycles": 0.5096533394170731
+      },
+      "zero": {
+        "observed_phase_error_cycles": 0.24188753813416763,
+        "best_constant_phase_error_cycles": 0.23657374634030684,
+        "minimum_circular_training_loss": 0.9346330665025064,
+        "centered_clock_rmse_cycles": 5.855786221026041,
+        "constant_rate_component_rmse_cycles": 5.840027245230289,
+        "nonlinear_residual_rmse_cycles": 0.22323504595829682
+      }
+    },
+    "diagnostic": {
+      "audio": {
+        "observed_phase_error_cycles": 0.24748867283858908,
+        "best_constant_phase_error_cycles": 0.23531335208259,
+        "minimum_circular_training_loss": 0.9281066652746348,
+        "centered_clock_rmse_cycles": 3.592267418379113,
+        "constant_rate_component_rmse_cycles": 3.425872068593442,
+        "nonlinear_residual_rmse_cycles": 0.9695824513179014
+      },
+      "zero": {
+        "observed_phase_error_cycles": 0.2522193498078947,
+        "best_constant_phase_error_cycles": 0.2444523800885074,
+        "minimum_circular_training_loss": 0.9725881136997536,
+        "centered_clock_rmse_cycles": 4.509754643283044,
+        "constant_rate_component_rmse_cycles": 4.387395451718069,
+        "nonlinear_residual_rmse_cycles": 0.9835468846893219
+      }
+    }
+  }
+}

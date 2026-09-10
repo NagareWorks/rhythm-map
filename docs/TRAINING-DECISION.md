@@ -4,7 +4,7 @@ The product contract remains one-call, zero-tuning audio metadata extraction.
 Timing is the first capability pack. Experiments do not become user-selectable
 policies, and a rejected heuristic is not proof that training is necessary.
 
-## Current decision: two bounded readout designs fitted, neither admitted
+## Current decision: three bounded readout experiments, none admitted
 
 On 2026-09-10 the user authorized one bounded learning experiment after the
 repeated diagnostic cycle. The [direct phase/period experiment](../evaluation/baselines/direct-clock-learning-v1.md)
@@ -37,6 +37,17 @@ and representative supervision will be tested; do not automatically rerun this
 configuration or attribute its failure to CNN architecture alone. In
 particular, an always-positive clock is not a rhythm-presence detector, and
 native count supervision does not certify the uniquely correct perceived level.
+
+The next user-authorized [loss-only experiment](../evaluation/baselines/trajectory-clock-learning-v1.md)
+kept the same CNN, features, initial state, optimizer loop and budget, replacing
+the objective with whole-span native count MSE modulo one integer origin. Its
+preceding oracle attribution ruled out a sufficient one-origin correction, not
+all possible alignment methods. Both fits completed but the musical gate failed:
+ARTBeaT tempo/count aggregates improve while development tempo and phase regress.
+Do not promote either corpus or keep both failed objectives as public strategies.
+The next proposal must jointly use local acoustic phase evidence and count/tempo
+consistency rather than merely rotate scalar losses; no additional fit, new
+data/holdout or encoder change follows automatically from this result.
 
 The sections below retain the evidence and approval state at their original
 checkpoints. Their proposals and "no training" statements are historical, not

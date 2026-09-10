@@ -49,10 +49,18 @@ is not. Close this fixed run without an automatic sweep. Cell-average tempo is
 explicitly different from v1's instantaneous targets; old scores stay frozen.
 The reused RUBATO fit data supplies expressive native beats, not audited
 continuation/change region labels; no diagnostic cases were moved into fitting.
-The next proposal must address sustained phase alignment and representative
-supervision together, with a falsifiable comparison. Do not infer that more
-epochs, a larger encoder or a Transformer will solve either gap. No new fit is
-automatically authorized by this failure.
+The subsequent [native-trajectory loss-only experiment](evaluation/baselines/trajectory-clock-learning-v1.md)
+first established that even an oracle best origin leaves substantial phase error,
+then changed only the loss with identical CNN/inputs/optimizer/budget. Both fits
+completed, but the gate failed: ARTBeaT common-support tempo improves from 38.06%
+to 28.20% while development worsens from 33.91% to 45.34%; phase remains unreliable.
+Close this fixed run without promoting the favorable corpus or retaining a public
+strategy. One-origin repair and whole-span count MSE alone are insufficient here.
+The next proposal must combine local acoustic phase evidence with native count/
+tempo consistency and address representative supervision, with a falsifiable
+comparison. Do not infer that more epochs, a larger encoder or a Transformer
+will solve either gap; do not alternate scalar losses without a new mechanism.
+No new fit is automatically authorized by this failure.
 Rhythm availability, native beat-level ambiguity and independent admission
 remain unresolved; coherence alone cannot admit the model. This is not an
 encoder fine-tune or automatic data expansion. Keep the one-call/no-per-song-
