@@ -49,6 +49,17 @@ The next proposal must jointly use local acoustic phase evidence and count/tempo
 consistency rather than merely rotate scalar losses; no additional fit, new
 data/holdout or encoder change follows automatically from this result.
 
+The [fixed-checkpoint input diagnostic](../evaluation/baselines/clock-temporal-evidence-v1.md)
+now distinguishes fitted-zero comparisons from input dependence at unchanged
+weights. The direct head's phase benefits from correctly timed features on all
+5 development and 15 ARTBeaT recordings against zero/mean/half-roll controls.
+The integrated models react to features but do not retain that reliable phase
+benefit. This is evidence for a distributed-phase coherent-clock implementation,
+not proof of one failure cause or absence of tempo ambiguity. The report locks
+the next forward/backward, gap/change, no-truth-leak and complete-crop cost checks
+before a new musical fit. No new fit occurred in this diagnostic; the same three
+trained heads remain rejected for production and all old reports stay intact.
+
 The sections below retain the evidence and approval state at their original
 checkpoints. Their proposals and "no training" statements are historical, not
 a claim that the above optimizer runs have not happened. The independent-label

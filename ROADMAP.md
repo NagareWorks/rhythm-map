@@ -61,6 +61,18 @@ tempo consistency and address representative supervision, with a falsifiable
 comparison. Do not infer that more epochs, a larger encoder or a Transformer
 will solve either gap; do not alternate scalar losses without a new mechanism.
 No new fit is automatically authorized by this failure.
+The subsequent [fixed-checkpoint temporal-evidence diagnostic](evaluation/baselines/clock-temporal-evidence-v1.md)
+completed 600 sequence evaluations without training. Keeping weights fixed, the
+direct head's natural input beats zero, temporal-mean and half-roll phase controls
+on all 5 development and 15 ARTBeaT recordings; integrated phase does not preserve
+the same reliable advantage. This rejects a blanket no-timing-information claim,
+not the old product rejection. All prior regressions and ambiguity remain.
+Next implement and test a distributed-phase/positive-rate clock synchronizer:
+late phase evidence must participate in inference and gradients, with one positive
+clock, no truth/chunk re-anchoring, and explicit rate/count constraints. First
+validate synthetic drift/gap/change cases and full-crop cost; then propose one
+bounded musical fit. Do not reopen this perturbation diagnostic or merely add an
+unused auxiliary phase head. See the report's six-part implementation contract.
 Rhythm availability, native beat-level ambiguity and independent admission
 remain unresolved; coherence alone cannot admit the model. This is not an
 encoder fine-tune or automatic data expansion. Keep the one-call/no-per-song-
