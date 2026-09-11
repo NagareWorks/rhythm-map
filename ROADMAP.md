@@ -24,7 +24,7 @@ for that distribution.
 
 ## Phase 1: timing accuracy, one shipping estimator
 
-Current status, 2026-09-10: the first user-authorized small learning experiment
+Current status, 2026-09-11: the first user-authorized small learning experiment
 has actually fitted a 24,003-parameter direct phase/period head and a zero-audio
 control on frozen Beat This features. This bypasses the failed candidate-ranker
 prerequisite rather than training a scorer for absent paths. It reuses exposed
@@ -67,12 +67,22 @@ direct head's natural input beats zero, temporal-mean and half-roll phase contro
 on all 5 development and 15 ARTBeaT recordings; integrated phase does not preserve
 the same reliable advantage. This rejects a blanket no-timing-information claim,
 not the old product rejection. All prior regressions and ambiguity remain.
-Next implement and test a distributed-phase/positive-rate clock synchronizer:
-late phase evidence must participate in inference and gradients, with one positive
-clock, no truth/chunk re-anchoring, and explicit rate/count constraints. First
-validate synthetic drift/gap/change cases and full-crop cost; then propose one
-bounded musical fit. Do not reopen this perturbation diagnostic or merely add an
-unused auxiliary phase head. See the report's six-part implementation contract.
+The follow-up [distributed-phase synchronizer](experiments/phase_sync/README.md)
+is now implemented as a 24,037-parameter CNN plus bounded positive phase feedback.
+Late phase evidence affects forward output and gradients; phase and cell BPM come
+from the same clock. Numerical adjoint, state-carry, native-count supervision and
+authored drift/gap/abrupt-change checks pass, including the T4 device path. Wrong
+rates across missing observations still lose integer beats: phase is not a count
+or octave oracle. CPU full-crop forward/backward is 64.34 ms for 60 s of synthetic
+features, with 397 MiB process peak RSS, passing the fixed 1 s / 2 GiB component
+gate. This does not include decode/frozen feature extraction or establish music
+accuracy. No fit, old checkpoint loading, production change or holdout access.
+Next pre-register one bounded musical comparison, including initialization,
+objective, budget, matched fitted-zero and same-checkpoint temporal controls,
+native rate/count coverage and the unchanged nonregression gate. Do not reopen
+the perturbation diagnostic, sweep failed runs, or mistake synthetic coherence
+for musical admission. The CPU/NumPy training scan also needs a separately
+verified portable implementation before any Rust/library model promotion.
 Rhythm availability, native beat-level ambiguity and independent admission
 remain unresolved; coherence alone cannot admit the model. This is not an
 encoder fine-tune or automatic data expansion. Keep the one-call/no-per-song-

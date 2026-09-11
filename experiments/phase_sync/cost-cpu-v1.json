@@ -1,0 +1,82 @@
+{
+  "schema": "phase-sync-component-readiness-v1",
+  "contract": {
+    "schema": "phase-sync-component-readiness-v1",
+    "data": "authored synthetic Gaussian features only; no optimizer or music",
+    "seed": 777,
+    "batch": 1,
+    "cells": 3000,
+    "fps": 50,
+    "feature_width": 512,
+    "feature_dtype": "float32",
+    "clock_dtype": "float64",
+    "cpu_threads": 4,
+    "warmups": 1,
+    "iterations": 5,
+    "cpu_median_forward_backward_limit_seconds": 1,
+    "cpu_process_peak_rss_limit_bytes": 2147483648,
+    "admission": "component readiness only; not musical accuracy or production promotion"
+  },
+  "source_sha256": {
+    "experiments/phase_sync/scan.py": "db9393b924975a6943d26417ff397c57ffacebc6e2071456ed928553eabd1e5b",
+    "experiments/phase_sync/model.py": "38bee4d0991fbc14c51dd465dbb2e419826ebf672f6030c1dd5d57ad07741213",
+    "experiments/phase_sync/benchmark.py": "4a3aee86be4161cfcbf5037ab6b63bd16f0ef0b1c7be7b5ccb556bf30459b5fe",
+    "experiments/phase_sync/contract-v1.json": "67b7e722b6807a41db023d2ef8e0ae374fe51c173e01d09b634c1b6ccac7c57d",
+    "experiments/clock_readout/model.py": "57871068c5c4958679d014dbc0018d4ccda5c1d315265ad64007082da8a76abc",
+    "experiments/coupled_clock/model.py": "a58727f37cf9902d4fa300e13b2d16e27e8c93fc4810627e3a24d4b60d544c58",
+    "experiments/coupled_clock/clock.py": "8159c503dcac6b911d784a5e270413f3808f30bb80178a478b7ff9754de80c81"
+  },
+  "feature_sha256": "659a4fb4262c30ce9de38588dea1c2417be2c571665b9b407dd8d9f06b3bd2fb",
+  "device": "cpu",
+  "environment": {
+    "os": "Linux",
+    "machine": "x86_64",
+    "python": "3.12.13",
+    "torch": "2.10.0+cpu",
+    "cuda_runtime": null,
+    "gpu": null
+  },
+  "models": {
+    "direct": {
+      "seconds": [
+        0.027046156115829945,
+        0.026642216369509697,
+        0.027279937639832497,
+        0.027440927922725677,
+        0.028864867985248566
+      ],
+      "median_seconds": 0.027279937639832497,
+      "parameters": 24003
+    },
+    "integrated": {
+      "seconds": [
+        0.030368122272193432,
+        0.029903470538556576,
+        0.030138377100229263,
+        0.03201459627598524,
+        0.03068919386714697
+      ],
+      "median_seconds": 0.030368122272193432,
+      "parameters": 23970
+    },
+    "synchronized": {
+      "seconds": [
+        0.06407365296036005,
+        0.0643399115651846,
+        0.06524567306041718,
+        0.06782630737870932,
+        0.0642689187079668
+      ],
+      "median_seconds": 0.0643399115651846,
+      "parameters": 24037
+    }
+  },
+  "process_peak_rss_bytes": 416284672,
+  "cuda_peak_allocated_bytes": null,
+  "synchronized_over_direct_ratio": 2.3585065484621706,
+  "synchronized_over_integrated_ratio": 2.118666112724968,
+  "cpu_gate_applies": true,
+  "cpu_gate_pass": true,
+  "musical_accuracy_measured": false,
+  "optimizer_steps": 0
+}
