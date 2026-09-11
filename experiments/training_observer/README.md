@@ -88,6 +88,11 @@ phase failure. This does not reconstruct the old musical failure from epoch 17.
 CUDA coverage checks device identity, RNG capture and same-device backward replay.
 Run `python -m unittest discover -s experiments/training_observer -p 'test_*.py' -v`.
 
+The later [observed scaled-adjoint integration](../observed_adjoint/README.md)
+reuses this lifecycle through internal accumulation/clip/post-return hooks.
+The default recorder's native math and event sequence remain covered by the
+original parity/fault tests; no frozen fit runner is switched by this extension.
+
 ## Why merely reducing phase feedback is not a stability proof
 
 For fixed period/evidence, the old scan has a differentiable state map

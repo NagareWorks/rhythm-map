@@ -157,6 +157,28 @@ class FitRecorder:
                 original.add_note('Diagnostic persistence incomplete: ' + ', '.join(problems))
             raise
 
+    def _begin_accumulation(self):
+        """Extension boundary for an explicitly registered gradient representation."""
+
+    def _begin_record(self):
+        """Clear record-local diagnostics before capturing a new input."""
+
+    def _backward_record(self, row, loss_fn):
+        loss = loss_fn(self.model, row['payload'])
+        if not isinstance(loss, torch.Tensor) or loss.numel() != 1 or not torch.isfinite(loss).item():
+            raise ValueError('finite scalar loss required')
+        self.cursor['stage'] = 'backward'
+        self._event('backward_started')
+        (loss * row['scale']).backward()
+        return float(loss.detach())
+
+    def _clip_accumulated(self, clip_norm):
+        norm = torch.nn.utils.clip_grad_norm_(self.model.parameters(), clip_norm, error_if_nonfinite=True)
+        return dict(gradient_norm=float(norm))
+
+    def _after_optimizer_return(self):
+        """Optional state checks after a counted, returned optimizer call."""
+
     def update(self, epoch, batch_index, records, loss_fn, *, clip_norm=1.):
         """Accumulate full records, apply one ordinary clip and optimizer step.
 
@@ -180,6 +202,7 @@ class FitRecorder:
             self.cursor.update(stage='update_start', epoch=epoch, batch=batch_index,
                                recording=None, record_index=None, batch_recordings=[r['id'] for r in records],
                                optimizer_step_status='not_started')
+            self._begin_accumulation()
             # Captures model, optimizer and RNG before zero_grad / any record.
             # This durable state survives process termination during a later step.
             before_sha = self._save('before-update.pt')
@@ -189,20 +212,16 @@ class FitRecorder:
             losses = []
             for index, row in enumerate(records):
                 self.cursor.update(stage='forward', recording=row['id'], record_index=index)
+                self.current_record, self.before_record_rng = None, None
+                self._begin_record()
                 self.current_record = cpu_copy(row)
                 self.before_record_rng = rng_state(self.model)
                 self._event('recording_started')
-                loss = loss_fn(self.model, row['payload'])
-                if not isinstance(loss, torch.Tensor) or loss.numel() != 1 or not torch.isfinite(loss).item():
-                    raise ValueError('finite scalar loss required')
-                self.cursor['stage'] = 'backward'
-                self._event('backward_started')
-                (loss * row['scale']).backward()
-                losses.append(float(loss.detach()))
+                losses.append(self._backward_record(row, loss_fn))
                 self._event('recording_backward_completed')
             self.cursor.update(stage='clip', recording=None, record_index=None)
             self._event('clip_started')
-            norm = torch.nn.utils.clip_grad_norm_(self.model.parameters(), clip_norm, error_if_nonfinite=True)
+            clip_report = self._clip_accumulated(clip_norm)
             self.cursor['stage'] = 'optimizer_step_prepare'
             self._event('optimizer_step_prepared')
             # The durable record is intent, not proof of entry. If its write
@@ -213,8 +232,9 @@ class FitRecorder:
             # have partially mutated parameters and MUST remain explicitly unknown.
             self.completed_updates += 1
             self.cursor.update(stage='update_complete', optimizer_step_status='returned')
+            self._after_optimizer_return()
             after_sha = self._save('after-update.pt')
-            self._event('update_completed', checkpoint_sha256=after_sha, gradient_norm=float(norm))
+            self._event('update_completed', checkpoint_sha256=after_sha, **clip_report)
             return losses
 
     def development_record(self, epoch, record, score_fn):

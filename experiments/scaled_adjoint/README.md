@@ -116,3 +116,7 @@ protocol and explicit conditioning/failure gates before touching musical data.
 The old failure remains a failure; holdouts, shipping Rust behavior, model packs
 and release status are unchanged. Successful numerical transport alone does not
 authorize restarting or promoting the closed experiment.
+
+Follow-up: [observable complete updates](../observed_adjoint/README.md) now
+integrate these primitives with the recorder and a full-CNN multi-band pressure
+fixture. This component and its original one-band cost reports remain unchanged.

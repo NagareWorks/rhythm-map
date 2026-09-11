@@ -1,0 +1,185 @@
+{
+  "schema": "observed-adjoint-update-cost-v1",
+  "contract": {
+    "schema": "observed-adjoint-update-cost-v1",
+    "data": "authored Gaussian features and constant-rate references only",
+    "seed": 777,
+    "cells_per_record": 3000,
+    "fps": 50,
+    "feature_width": 512,
+    "records_per_update": 2,
+    "record_weights": [
+      0.3,
+      0.7
+    ],
+    "reference_origin_cycles": [
+      0.125,
+      0.25
+    ],
+    "cases": [
+      "natural",
+      "opposed"
+    ],
+    "opposed_minimum_vjp_bands_per_record": 4,
+    "native_dtype": "float32",
+    "cpu_threads": 4,
+    "warmups": 1,
+    "iterations": 3,
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "max_norm": 1,
+    "cpu_median_observed_update_limit_seconds": 2,
+    "cpu_process_peak_rss_limit_bytes": 2147483648,
+    "includes": "recorder construction, initial/before/after snapshots, fsynced journal, both full-record forwards/losses/scaled adjoints/native CNN VJP bands, weighting, batch accumulation, one clip, one optimizer step and finite-state checks",
+    "excludes": "feature/fixture construction, source hashing, initial-state restoration and fresh optimizer construction before each independent probe, decode and frozen feature extraction",
+    "storage": "private host disk bind mount, not tmpfs; acknowledged fsync is not a host power-loss proof",
+    "admission": "observed synthetic update readiness only; neither musical accuracy nor all-length/all-band conditioning or cost guarantee"
+  },
+  "source_sha256": {
+    "experiments/observed_adjoint/benchmark.py": "d79c769bccb2f5c1a626df45e8553d38f91481175354850288f20eeb7a80c4f6",
+    "experiments/observed_adjoint/contract-v1.json": "affe5dee999cacae0f5e229a8bee687a91d999aef3eac9920d65dc4db62c0231",
+    "experiments/observed_adjoint/fixtures.py": "687cc777ea1714a08a1bbfa8816f36688c772cf45b559216a53acfed8448e41b",
+    "experiments/observed_adjoint/transport.py": "73dd089e3148f421498db213dbd89bd26a7c0d22eb8d8ef800a4770eab88315f",
+    "experiments/observed_adjoint/recorder.py": "d3b08ad802f38b1dab04f6fe498eb25b518ddb8e9d203d39a0bceea8c0332963",
+    "experiments/training_observer/recorder.py": "ee500f6808a96efad722c17d77da5ad73e09f7c78bf68a4d739a5332b53cd198",
+    "experiments/training_observer/phase_trace.py": "8d579a442afbfcfbdfd84d94b07d27c2d1f7d26289678eaa2d930e429a086907",
+    "experiments/scaled_adjoint/transport.py": "a2662a5aa524c59b9ae90390b65067c5910760fd1090f492e3f77e60107a4988",
+    "experiments/scaled_adjoint/scaled.py": "9d0b69488e46ae5b1f6deb84edf9631d5dec526baf8c2a164e69c4a56be0b37b",
+    "experiments/scaled_adjoint/scan.py": "d2f9adbd358229dfbb72840c42497161d769b4a983e5f8edd0b2df2b951da5e8",
+    "experiments/phase_sync/model.py": "38bee4d0991fbc14c51dd465dbb2e419826ebf672f6030c1dd5d57ad07741213",
+    "experiments/phase_sync/scan.py": "db9393b924975a6943d26417ff397c57ffacebc6e2071456ed928553eabd1e5b",
+    "experiments/coupled_clock/model.py": "a58727f37cf9902d4fa300e13b2d16e27e8c93fc4810627e3a24d4b60d544c58",
+    "experiments/coupled_clock/clock.py": "8159c503dcac6b911d784a5e270413f3808f30bb80178a478b7ff9754de80c81",
+    "experiments/coupled_clock/supervision.py": "f07045a911b9e8b7e49dd81fc0c90ec392b614a85f62b93fe9fe59346980c204",
+    "experiments/clock_readout/model.py": "57871068c5c4958679d014dbc0018d4ccda5c1d315265ad64007082da8a76abc"
+  },
+  "device": "cuda",
+  "cases": {
+    "natural": {
+      "seconds": [
+        0.7960621677339077,
+        0.7639142014086246,
+        0.8069592854008079
+      ],
+      "median_seconds": 0.7960621677339077,
+      "updates": [
+        {
+          "bands": [
+            1,
+            1
+          ],
+          "completed_updates": 1,
+          "clip_report": {
+            "gradient_norm_log2": 2.178838435304228,
+            "binary_exponent": 1,
+            "alignment_underflows": 0,
+            "max_norm": 1
+          },
+          "snapshot_bytes": 8388696
+        },
+        {
+          "bands": [
+            1,
+            1
+          ],
+          "completed_updates": 1,
+          "clip_report": {
+            "gradient_norm_log2": 2.178838435304228,
+            "binary_exponent": 1,
+            "alignment_underflows": 0,
+            "max_norm": 1
+          },
+          "snapshot_bytes": 8388696
+        },
+        {
+          "bands": [
+            1,
+            1
+          ],
+          "completed_updates": 1,
+          "clip_report": {
+            "gradient_norm_log2": 2.178838435304228,
+            "binary_exponent": 1,
+            "alignment_underflows": 0,
+            "max_norm": 1
+          },
+          "snapshot_bytes": 8388696
+        }
+      ],
+      "feature_sha256": "659a4fb4262c30ce9de38588dea1c2417be2c571665b9b407dd8d9f06b3bd2fb",
+      "fixed_offsets_sha256": null,
+      "initial_state_sha256": "a067fbb943fb0f3b7fd66ee10610ff991da4fdfb7edf4596f07da119c0684f6f"
+    },
+    "opposed": {
+      "seconds": [
+        0.9509002817794681,
+        0.9236841602250934,
+        0.9186535216867924
+      ],
+      "median_seconds": 0.9236841602250934,
+      "updates": [
+        {
+          "bands": [
+            5,
+            5
+          ],
+          "completed_updates": 1,
+          "clip_report": {
+            "gradient_norm_log2": 255.2357133777928,
+            "binary_exponent": 254,
+            "alignment_underflows": 0,
+            "max_norm": 1
+          },
+          "snapshot_bytes": 9346088
+        },
+        {
+          "bands": [
+            5,
+            5
+          ],
+          "completed_updates": 1,
+          "clip_report": {
+            "gradient_norm_log2": 255.2357133777928,
+            "binary_exponent": 254,
+            "alignment_underflows": 0,
+            "max_norm": 1
+          },
+          "snapshot_bytes": 9346088
+        },
+        {
+          "bands": [
+            5,
+            5
+          ],
+          "completed_updates": 1,
+          "clip_report": {
+            "gradient_norm_log2": 255.2357133777928,
+            "binary_exponent": 254,
+            "alignment_underflows": 0,
+            "max_norm": 1
+          },
+          "snapshot_bytes": 9346088
+        }
+      ],
+      "feature_sha256": "659a4fb4262c30ce9de38588dea1c2417be2c571665b9b407dd8d9f06b3bd2fb",
+      "fixed_offsets_sha256": "c7987f52c2f27249a5dce275c82e914b0a2c43f361a562a765d4cb1d23863de3",
+      "initial_state_sha256": "23213078dccfe895e7688739f08d321a482950fd323f89db5d5918f68c21ac93"
+    }
+  },
+  "process_peak_rss_bytes": 1578172416,
+  "filesystem": "ext2/ext3",
+  "cuda_peak_allocated_bytes": 25307136,
+  "cpu_gate_applies": false,
+  "cpu_gate_pass": null,
+  "optimizer_steps": 8,
+  "musical_accuracy_measured": false,
+  "automatic_retry": false,
+  "environment": {
+    "os": "Linux",
+    "machine": "x86_64",
+    "python": "3.12.13",
+    "torch": "2.10.0+cu129",
+    "gpu": "Tesla T4"
+  }
+}

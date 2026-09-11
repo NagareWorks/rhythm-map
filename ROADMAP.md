@@ -102,9 +102,20 @@ CNN gradients retain numerical parity, and tiny optimizer updates are checked
 against their explicit formula (near-zero-gradient sensitivity remains). This extends
 representation range, NOT precision or conditioning: large derivatives still
 exist, and no new musical fit or old-run replay has occurred. Keep the old source
-pins and failure outcome unchanged. Next integrate this transport with durable
-failure observation and measure complete observed-update/multi-band cost before proposing
-a separately registered musical fit with explicit conditioning gates. Do not silently detach
+pins and failure outcome unchanged. The following
+[observable full-update integration](experiments/observed_adjoint/README.md)
+now retains partial exponent-band packets, prior weighted records and the whole
+batch in failure snapshots while reusing one recorder-owned update lifecycle.
+Synthetic full-CNN multi-band parity, actual VJP faults, earlier-record retention,
+field-adjoint replay and optimizer-entry/return distinctions are tested. This
+does not reconstruct the old failed learned state. Complete two-record updates,
+including snapshot disk I/O, pass the predeclared 2 s / 2 GiB CPU gate: ordinary
+updates take 0.761 s and five-band pressure updates 0.981 s, with 441 MiB peak
+RSS. T4 equivalents are 0.796/0.924 s. These are independently reset synthetic
+steps, not musical epochs or an all-length/band bound. Next use this evidence
+to register one bounded musical validation
+with the explicit recorder/transport identity and conditioning/failure summaries.
+Do not silently restart the old run, alter its accuracy gates, or detach
 recurrence, shorten crops or sweep settings to rescue this closed run. A future
 portable scan also needs separate verification before Rust/library promotion.
 Rhythm availability, native beat-level ambiguity and independent admission
