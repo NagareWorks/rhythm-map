@@ -1,0 +1,17 @@
+{"event": "fit_started", "kind": "audio", "initial_state_sha256": "527a4911b3f40a92af8ef7233531ba6989cf43d19c3c70361c4467c9ea4d605f"}
+{"event": "epoch", "kind": "audio", "epoch": 1, "training_work_macro_loss": 1.7763941735638857, "development_loss": 3.6143667031886295, "updates": 5}
+{"event": "epoch", "kind": "audio", "epoch": 2, "training_work_macro_loss": 2.981334551618559, "development_loss": 4.042278239865669, "updates": 10}
+{"event": "epoch", "kind": "audio", "epoch": 3, "training_work_macro_loss": 2.9453444276741703, "development_loss": 2.9504265217372048, "updates": 15}
+{"event": "epoch", "kind": "audio", "epoch": 4, "training_work_macro_loss": 2.1956896925407157, "development_loss": 2.5562373140142465, "updates": 20}
+{"event": "epoch", "kind": "audio", "epoch": 5, "training_work_macro_loss": 1.8481208592999034, "development_loss": 2.2251213678777546, "updates": 25}
+{"event": "epoch", "kind": "audio", "epoch": 6, "training_work_macro_loss": 1.5192943123217895, "development_loss": 1.5338346847757922, "updates": 30}
+{"event": "epoch", "kind": "audio", "epoch": 7, "training_work_macro_loss": 1.1641367025664546, "development_loss": 1.2443825499608632, "updates": 35}
+{"event": "epoch", "kind": "audio", "epoch": 8, "training_work_macro_loss": 1.2866005789584127, "development_loss": 1.360349860137287, "updates": 40}
+{"event": "epoch", "kind": "audio", "epoch": 9, "training_work_macro_loss": 1.526423104959234, "development_loss": 1.4353130068668494, "updates": 45}
+{"event": "epoch", "kind": "audio", "epoch": 10, "training_work_macro_loss": 1.8058847804692801, "development_loss": 1.6851731556050427, "updates": 50}
+{"event": "epoch", "kind": "audio", "epoch": 11, "training_work_macro_loss": 1.829414802515932, "development_loss": 1.2032475554089335, "updates": 55}
+{"event": "epoch", "kind": "audio", "epoch": 12, "training_work_macro_loss": 1.3294064295041086, "development_loss": 1.479171748548869, "updates": 60}
+{"event": "epoch", "kind": "audio", "epoch": 13, "training_work_macro_loss": 1.6792777967332877, "development_loss": 2.862911609164707, "updates": 65}
+{"event": "epoch", "kind": "audio", "epoch": 14, "training_work_macro_loss": 2.4677566744170467, "development_loss": 4.657264154404931, "updates": 70}
+{"event": "epoch", "kind": "audio", "epoch": 15, "training_work_macro_loss": 4.463942958864861, "development_loss": 7.187869238775979, "updates": 75}
+{"event": "epoch", "kind": "audio", "epoch": 16, "training_work_macro_loss": 7.223299920398874, "development_loss": 12.323617310964218, "updates": 80}

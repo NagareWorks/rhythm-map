@@ -77,12 +77,20 @@ or octave oracle. CPU full-crop forward/backward is 64.34 ms for 60 s of synthet
 features, with 397 MiB process peak RSS, passing the fixed 1 s / 2 GiB component
 gate. This does not include decode/frozen feature extraction or establish music
 accuracy. No fit, old checkpoint loading, production change or holdout access.
-Next pre-register one bounded musical comparison, including initialization,
-objective, budget, matched fitted-zero and same-checkpoint temporal controls,
-native rate/count coverage and the unchanged nonregression gate. Do not reopen
-the perturbation diagnostic, sweep failed runs, or mistake synthetic coherence
-for musical admission. The CPU/NumPy training scan also needs a separately
-verified portable implementation before any Rust/library model promotion.
+The following [bounded musical validation](experiments/phase_sync_fit/README.md)
+did execute, but stopped in epoch 17 on a nonfinite clock adjoint after 16 complete
+epochs / 80 confirmed updates. No fitted-zero control, saved checkpoint or final
+musical metric comparison exists; the complete research gate failed. Do not
+reinterpret the lowest logged loss as an admitted model or restart the fit.
+An authored 60 s near-120-BPM finite-input witness proves the missing stability
+condition: a positive clock can multiply state derivatives of about 1.0616 into
+a gradient beyond float32 range. It is NOT a replay/attribution of the unsaved
+failed learned state. The old loop's lack of failure snapshots prevents exact
+case/update attribution; the actual update count is only bounded at 80--84.
+Next make failures observable and establish long-sequence gradient stability
+before proposing a separately registered musical fit. Do not silently detach
+recurrence, shorten crops or sweep settings to rescue this closed run. A future
+portable scan also needs separate verification before Rust/library promotion.
 Rhythm availability, native beat-level ambiguity and independent admission
 remain unresolved; coherence alone cannot admit the model. This is not an
 encoder fine-tune or automatic data expansion. Keep the one-call/no-per-song-

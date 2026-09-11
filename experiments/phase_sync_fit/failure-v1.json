@@ -1,0 +1,6 @@
+{
+  "event": "experiment_failed",
+  "exception_type": "ValueError",
+  "automatic_retry": false,
+  "production_change": false
+}

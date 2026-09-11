@@ -1,0 +1,47 @@
+{
+  "schema": "rhythm-map.phase-sync-stability-witness.v1",
+  "cells": 3000,
+  "fps": 50,
+  "prior_bpm": 120,
+  "gain": 0.34657359027997264,
+  "float32_max_log10": 38.531839419103626,
+  "inputs_finite": true,
+  "observations_dtype": "float32",
+  "observation_sha256": "dd7670ac15bde15f8b54ce599fdd81787648a530683336f74c12655d617c7d6b",
+  "torch_version": "2.8.0+cpu",
+  "numpy_version": "2.2.6",
+  "device": "cpu",
+  "evidence": {
+    "float64": {
+      "forward_finite": true,
+      "clock_strictly_increasing": true,
+      "min_bpm": 119.99999887497204,
+      "max_bpm": 120.00000108135112,
+      "local_state_jacobian_min": 1.061591434544618,
+      "local_state_jacobian_max": 1.0615914369559938,
+      "analytical_origin_gradient_log10": 77.87221875177154,
+      "observed_origin_gradient_log10": 77.87221875177154,
+      "backward_error": null
+    },
+    "float32": {
+      "forward_finite": true,
+      "clock_strictly_increasing": true,
+      "min_bpm": 119.99999887497204,
+      "max_bpm": 120.00000108135112,
+      "local_state_jacobian_min": 1.061591434544618,
+      "local_state_jacobian_max": 1.0615914369559938,
+      "analytical_origin_gradient_log10": 77.87221875177154,
+      "observed_origin_gradient_log10": null,
+      "backward_error": "nonfinite clock gradient"
+    }
+  },
+  "musical_data": false,
+  "optimizer_steps": 0,
+  "failed_music_state_reproduced": false,
+  "interpretation": "positive finite clocks can have unrepresentable first-order float32 gradients; this authored witness does not identify the actual failed recording or weights",
+  "source_sha256": {
+    "experiments/phase_sync_fit/diagnostics/stability.py": "f82797038caec84fb9ef7df71c23ce5c965da3032ff296715fbfd8645d68b274",
+    "experiments/phase_sync/scan.py": "db9393b924975a6943d26417ff397c57ffacebc6e2071456ed928553eabd1e5b",
+    "experiments/coupled_clock/clock.py": "8159c503dcac6b911d784a5e270413f3808f30bb80178a478b7ff9754de80c81"
+  }
+}

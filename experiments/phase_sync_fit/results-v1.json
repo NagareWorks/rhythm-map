@@ -1,0 +1,69 @@
+{
+  "schema": "rhythm-map.phase-sync-learning-failure.v1",
+  "plan_sha256": "4427fbbcbfee04da501b00d2aa0c41e59dbb47c3f396a26c4162ee9a95c772a7",
+  "execution_sha256": "290a0065ab86e4c9cb79161904eae21e89fd058acf6e4664c035b48970a9fff1",
+  "failure_sha256": "e4fae94444703430d500a65762ae6f069283104d2a3f3407520fcb2d603c18c1",
+  "journal_sha256": "c6ec2a37739da3086c68fb1ed95c1e2712011afe64753d79703d6200deb6ddf0",
+  "stability_witness_sha256": "09710bbf23d4a4aeb80c5e7e99d51eac571936d669de9f2792c98064fca92596",
+  "inputs_sha256": "b4f05c10ebede84c394b0b8e06f6723b096d1f9a0a48e63024eb81d913fffd9c",
+  "parent_report_sha256": {
+    "coupled": "e33a44db4ce20a35f0676aa3f4fc47806da83f4a2ab80c1cfb555ce5343cda9a",
+    "trajectory": "a20e960c8fa7d3ffffdfab24e9e2d73fb2a0ab78069cc8a33d7e1cfd42d5a8e1"
+  },
+  "planned_fits": 2,
+  "started_fits": 1,
+  "completed_fits": 0,
+  "completed_audio_epochs": 16,
+  "first_incomplete_epoch": 17,
+  "confirmed_optimizer_updates": 80,
+  "possible_unjournaled_updates_max": 4,
+  "exact_optimizer_updates": null,
+  "fitted_zero_started": false,
+  "checkpoint_sequence_evaluations": 0,
+  "best_logged_development_epoch": 11,
+  "best_logged_development_loss": 1.2032475554089335,
+  "last_logged_development_loss": 12.323617310964218,
+  "checkpoint_saved": false,
+  "failed_model_state_saved": false,
+  "failed_recording_known": false,
+  "failure_site": {
+    "file": "experiments/phase_sync/scan.py",
+    "function": "_PhaseScan.backward",
+    "message": "nonfinite clock gradient"
+  },
+  "container_exit_code": 1,
+  "container_oom_killed": false,
+  "container_wall_seconds": 28.113,
+  "container_wall_scope": "includes GPU environment/tests/import/data-loading and failed main fit; not pure training or audio inference latency",
+  "research_gate_passed": false,
+  "musical_accuracy_measured": false,
+  "unrun_gates": [
+    "fitted_zero_audio_signal",
+    "common_nonregression",
+    "recording_breadth",
+    "previous_coupled_nonregression",
+    "previous_trajectory_nonregression",
+    "temporal_controls_complete",
+    "temporal_phase_dependence"
+  ],
+  "training": true,
+  "independent_acceptance": false,
+  "encoder_inference": false,
+  "holdout_access": false,
+  "production_change": false,
+  "automatic_retry": false,
+  "decision": "close_fixed_phase_sync_fit_on_nonfinite_adjoint_no_automatic_retry",
+  "initialization_preflight": {
+    "optimizer_steps": 0,
+    "only_changed_plan_key": "initial_state_sha256",
+    "vdi_plan_sha256": "8338f6357a965e3c1a0bbb22f6d16e159b89cdaddd029bae3c73039732528d3d",
+    "target_plan_sha256": "4427fbbcbfee04da501b00d2aa0c41e59dbb47c3f396a26c4162ee9a95c772a7",
+    "sources_population_protocol_and_budget_unchanged": true
+  },
+  "post_failure_diagnostic": {
+    "musical_data": false,
+    "optimizer_steps": 0,
+    "failed_music_state_reproduced": false,
+    "finding": "A finite positive near-120-BPM clock admits an authored fixed phase sequence whose adjoint exceeds float32 range; this is not attribution of the unsaved failed musical state."
+  }
+}

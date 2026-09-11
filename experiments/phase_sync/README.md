@@ -11,6 +11,13 @@ check); four report-audit tests pin the sources, budget and arithmetic. Existing
 native-count supervision reaches the new phase heads and rejects a phase-compatible
 octave error; this proves compatibility, not selection of the next fit's objective.
 
+The subsequent [bounded musical fit](../phase_sync_fit/README.md) failed in epoch
+17 with a nonfinite clock gradient. Its zero control/final musical comparison
+never ran. An optimizer-free finite-input witness now shows that a positive
+120 BPM forward clock can still amplify backward gradients beyond float32 range.
+The cost/component results below are historical readiness evidence, NOT stable
+training or musical accuracy. Close that fit; do not automatically rerun it.
+
 ## One advancing clock, corrected throughout the sequence
 
 At 50 frame points/second, a cell has prior advance `a = 2^(-ell)/50`, where
@@ -127,9 +134,9 @@ NEW_PRIVATE_JSON` (or `--device cuda`). The output is exclusive and the seven
 source/contract hashes are checked before and after execution. Timing is not
 rerun as a flaky CI assertion; CI audits the retained report and numerical tests.
 
-Next: pre-register ONE musical comparison on the same exposed roles, with matched
+The subsequent fit pre-registered ONE musical comparison on the same exposed roles, with matched
 fitted-zero and same-checkpoint temporal controls, the failed baselines, native
 tempo/count coverage and the unchanged nonregression gate. Do not silently load
 whichever old checkpoint wins a corpus. Initialization, objective and fixed budget
-need an explicit decision before training. Holdouts stay sealed; representative
+were fixed before training; see its failed outcome above. Holdouts stay sealed; representative
 weak-attack/change/no-rhythm supervision and independent admission remain open.
