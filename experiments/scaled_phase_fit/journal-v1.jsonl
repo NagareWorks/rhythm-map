@@ -1,0 +1,83 @@
+{"event": "fit_started", "kind": "audio", "initial_state_sha256": "527a4911b3f40a92af8ef7233531ba6989cf43d19c3c70361c4467c9ea4d605f"}
+{"event": "epoch", "kind": "audio", "epoch": 1, "training_work_macro_loss": 1.7763935891756246, "development_loss": 3.614415022980225, "updates": 5}
+{"event": "epoch", "kind": "audio", "epoch": 2, "training_work_macro_loss": 3.2128267994071265, "development_loss": 4.204912574827584, "updates": 10}
+{"event": "epoch", "kind": "audio", "epoch": 3, "training_work_macro_loss": 3.9266898615549266, "development_loss": 5.58500904150947, "updates": 15}
+{"event": "epoch", "kind": "audio", "epoch": 4, "training_work_macro_loss": 4.661290720458931, "development_loss": 5.847356283468404, "updates": 20}
+{"event": "epoch", "kind": "audio", "epoch": 5, "training_work_macro_loss": 4.012033023980093, "development_loss": 4.001211238535941, "updates": 25}
+{"event": "epoch", "kind": "audio", "epoch": 6, "training_work_macro_loss": 2.714470128551983, "development_loss": 2.9988604520081736, "updates": 30}
+{"event": "epoch", "kind": "audio", "epoch": 7, "training_work_macro_loss": 2.34467827924354, "development_loss": 2.9867835394856077, "updates": 35}
+{"event": "epoch", "kind": "audio", "epoch": 8, "training_work_macro_loss": 2.694702801226291, "development_loss": 3.495135984137112, "updates": 40}
+{"event": "epoch", "kind": "audio", "epoch": 9, "training_work_macro_loss": 2.8324917859733216, "development_loss": 3.287072119192107, "updates": 45}
+{"event": "epoch", "kind": "audio", "epoch": 10, "training_work_macro_loss": 2.4110406422175874, "development_loss": 2.6741628497122787, "updates": 50}
+{"event": "epoch", "kind": "audio", "epoch": 11, "training_work_macro_loss": 1.7549756273446375, "development_loss": 1.6132083722891501, "updates": 55}
+{"event": "epoch", "kind": "audio", "epoch": 12, "training_work_macro_loss": 1.386560604311898, "development_loss": 1.5605446439257828, "updates": 60}
+{"event": "epoch", "kind": "audio", "epoch": 13, "training_work_macro_loss": 1.3367316888048535, "development_loss": 1.6322779916124182, "updates": 65}
+{"event": "epoch", "kind": "audio", "epoch": 14, "training_work_macro_loss": 1.5493014321480891, "development_loss": 2.0306210138543404, "updates": 70}
+{"event": "epoch", "kind": "audio", "epoch": 15, "training_work_macro_loss": 1.5302047017129523, "development_loss": 1.682385916471113, "updates": 75}
+{"event": "epoch", "kind": "audio", "epoch": 16, "training_work_macro_loss": 1.4253693579343478, "development_loss": 1.8661118039026199, "updates": 80}
+{"event": "epoch", "kind": "audio", "epoch": 17, "training_work_macro_loss": 1.3842159784585741, "development_loss": 1.4401248183210729, "updates": 85}
+{"event": "epoch", "kind": "audio", "epoch": 18, "training_work_macro_loss": 1.2250495511344195, "development_loss": 1.4451169267882993, "updates": 90}
+{"event": "epoch", "kind": "audio", "epoch": 19, "training_work_macro_loss": 1.3633306765750033, "development_loss": 1.7216164688476827, "updates": 95}
+{"event": "epoch", "kind": "audio", "epoch": 20, "training_work_macro_loss": 1.2211498715512026, "development_loss": 1.3276853185598654, "updates": 100}
+{"event": "fit_started", "kind": "zero-audio", "initial_state_sha256": "527a4911b3f40a92af8ef7233531ba6989cf43d19c3c70361c4467c9ea4d605f"}
+{"event": "epoch", "kind": "zero-audio", "epoch": 1, "training_work_macro_loss": 1.4936654679321304, "development_loss": 1.4194975390198987, "updates": 5}
+{"event": "epoch", "kind": "zero-audio", "epoch": 2, "training_work_macro_loss": 1.3904582881740923, "development_loss": 1.4828716329035843, "updates": 10}
+{"event": "epoch", "kind": "zero-audio", "epoch": 3, "training_work_macro_loss": 1.3233812898705142, "development_loss": 1.6704096269679478, "updates": 15}
+{"event": "epoch", "kind": "zero-audio", "epoch": 4, "training_work_macro_loss": 1.5048365410554339, "development_loss": 2.106254263892325, "updates": 20}
+{"event": "epoch", "kind": "zero-audio", "epoch": 5, "training_work_macro_loss": 1.7151465442202738, "development_loss": 2.140647682381119, "updates": 25}
+{"event": "epoch", "kind": "zero-audio", "epoch": 6, "training_work_macro_loss": 1.6839339065103542, "development_loss": 2.0220388105274774, "updates": 30}
+{"event": "epoch", "kind": "zero-audio", "epoch": 7, "training_work_macro_loss": 1.6406227619226132, "development_loss": 2.140939682532298, "updates": 35}
+{"event": "epoch", "kind": "zero-audio", "epoch": 8, "training_work_macro_loss": 1.7787281934748786, "development_loss": 2.2031847993565203, "updates": 40}
+{"event": "epoch", "kind": "zero-audio", "epoch": 9, "training_work_macro_loss": 1.7220153075377833, "development_loss": 2.010358555954795, "updates": 45}
+{"event": "epoch", "kind": "zero-audio", "epoch": 10, "training_work_macro_loss": 1.5777570763790583, "development_loss": 1.9670351771319554, "updates": 50}
+{"event": "epoch", "kind": "zero-audio", "epoch": 11, "training_work_macro_loss": 1.578947811336595, "development_loss": 1.8280681516332233, "updates": 55}
+{"event": "epoch", "kind": "zero-audio", "epoch": 12, "training_work_macro_loss": 1.5037801457700883, "development_loss": 1.7661446107751413, "updates": 60}
+{"event": "epoch", "kind": "zero-audio", "epoch": 13, "training_work_macro_loss": 1.4448108104512234, "development_loss": 1.7291289362682278, "updates": 65}
+{"event": "epoch", "kind": "zero-audio", "epoch": 14, "training_work_macro_loss": 1.3394045186416128, "development_loss": 1.6208291436279387, "updates": 70}
+{"event": "epoch", "kind": "zero-audio", "epoch": 15, "training_work_macro_loss": 1.3476377457378979, "development_loss": 1.491273541672631, "updates": 75}
+{"event": "epoch", "kind": "zero-audio", "epoch": 16, "training_work_macro_loss": 1.348130852851139, "development_loss": 1.4361549505427362, "updates": 80}
+{"event": "epoch", "kind": "zero-audio", "epoch": 17, "training_work_macro_loss": 1.3492514893086727, "development_loss": 1.5023275416448367, "updates": 85}
+{"event": "epoch", "kind": "zero-audio", "epoch": 18, "training_work_macro_loss": 1.336294615828219, "development_loss": 1.3529406178198762, "updates": 90}
+{"event": "epoch", "kind": "zero-audio", "epoch": 19, "training_work_macro_loss": 1.2958223459770482, "development_loss": 1.4247755428545232, "updates": 95}
+{"event": "epoch", "kind": "zero-audio", "epoch": 20, "training_work_macro_loss": 1.3073965186570575, "development_loss": 1.3439710275681709, "updates": 100}
+{"event": "recording_evaluated", "recording": 1, "total": 40}
+{"event": "recording_evaluated", "recording": 2, "total": 40}
+{"event": "recording_evaluated", "recording": 3, "total": 40}
+{"event": "recording_evaluated", "recording": 4, "total": 40}
+{"event": "recording_evaluated", "recording": 5, "total": 40}
+{"event": "recording_evaluated", "recording": 6, "total": 40}
+{"event": "recording_evaluated", "recording": 7, "total": 40}
+{"event": "recording_evaluated", "recording": 8, "total": 40}
+{"event": "recording_evaluated", "recording": 9, "total": 40}
+{"event": "recording_evaluated", "recording": 10, "total": 40}
+{"event": "recording_evaluated", "recording": 11, "total": 40}
+{"event": "recording_evaluated", "recording": 12, "total": 40}
+{"event": "recording_evaluated", "recording": 13, "total": 40}
+{"event": "recording_evaluated", "recording": 14, "total": 40}
+{"event": "recording_evaluated", "recording": 15, "total": 40}
+{"event": "recording_evaluated", "recording": 16, "total": 40}
+{"event": "recording_evaluated", "recording": 17, "total": 40}
+{"event": "recording_evaluated", "recording": 18, "total": 40}
+{"event": "recording_evaluated", "recording": 19, "total": 40}
+{"event": "recording_evaluated", "recording": 20, "total": 40}
+{"event": "recording_evaluated", "recording": 21, "total": 40}
+{"event": "recording_evaluated", "recording": 22, "total": 40}
+{"event": "recording_evaluated", "recording": 23, "total": 40}
+{"event": "recording_evaluated", "recording": 24, "total": 40}
+{"event": "recording_evaluated", "recording": 25, "total": 40}
+{"event": "recording_evaluated", "recording": 26, "total": 40}
+{"event": "recording_evaluated", "recording": 27, "total": 40}
+{"event": "recording_evaluated", "recording": 28, "total": 40}
+{"event": "recording_evaluated", "recording": 29, "total": 40}
+{"event": "recording_evaluated", "recording": 30, "total": 40}
+{"event": "recording_evaluated", "recording": 31, "total": 40}
+{"event": "recording_evaluated", "recording": 32, "total": 40}
+{"event": "recording_evaluated", "recording": 33, "total": 40}
+{"event": "recording_evaluated", "recording": 34, "total": 40}
+{"event": "recording_evaluated", "recording": 35, "total": 40}
+{"event": "recording_evaluated", "recording": 36, "total": 40}
+{"event": "recording_evaluated", "recording": 37, "total": 40}
+{"event": "recording_evaluated", "recording": 38, "total": 40}
+{"event": "recording_evaluated", "recording": 39, "total": 40}
+{"event": "recording_evaluated", "recording": 40, "total": 40}
+{"event": "experiment_complete", "gate": {"complete": true, "finished": true, "audio_signal": false, "common_nonregression": false, "recording_breadth": false, "passed": false, "previous_coupled_nonregression": false, "previous_trajectory_nonregression": false, "temporal_controls_complete": true, "temporal_phase_dependence": true, "observed_execution_complete": true}}

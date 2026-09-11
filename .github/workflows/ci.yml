@@ -65,3 +65,4 @@ jobs:
       - run: python -m unittest discover -s experiments/training_observer -p 'test_*.py' -v
       - run: python -m unittest discover -s experiments/scaled_adjoint -p 'test_*.py' -v
       - run: python -m unittest discover -s experiments/observed_adjoint -p 'test_*.py' -v
+      - run: python -m unittest discover -s experiments/scaled_phase_fit -p 'test_*.py' -v

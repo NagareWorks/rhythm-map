@@ -115,6 +115,20 @@ RSS. T4 equivalents are 0.796/0.924 s. These are independently reset synthetic
 steps, not musical epochs or an all-length/band bound. Next use this evidence
 to register one bounded musical validation
 with the explicit recorder/transport identity and conditioning/failure summaries.
+The [separately registered observed fit](experiments/scaled_phase_fit/README.md)
+has completed both 20-epoch/100-update fits and 200 sequence evaluations, with
+the original population, matched fitted-zero control and unchanged accuracy
+gates. Both timing-dependence and numerical execution pass, but the musical gate
+fails: reference-only development phase improves 22.60% against fitted zero
+while median BPM error worsens from 42.46% to 62.60%. ARTBeaT common-support
+tempo improves over earlier learned clocks but remains worse than raw, with
+11/15 tempo and 15/15 phase regressions against raw. Keep all 800 record-gradient
+and 200 update receipts. Every musical record used one VJP band, with zero
+alignment loss: this was not a reproduction of the old unsaved overflow or an
+actual multi-band musical witness. Close this fixed fit without a sweep or
+promotion. Next inspect the fixed predictions/fields read-only to distinguish
+circular phase alignment from tempo/count errors and octave ambiguity before
+proposing a new mechanism; do not infer a cause from aggregate metrics alone.
 Do not silently restart the old run, alter its accuracy gates, or detach
 recurrence, shorten crops or sweep settings to rescue this closed run. A future
 portable scan also needs separate verification before Rust/library promotion.
