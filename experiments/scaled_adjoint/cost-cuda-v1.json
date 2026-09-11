@@ -1,0 +1,110 @@
+{
+  "schema": "scaled-adjoint-component-cost-v1",
+  "contract": {
+    "schema": "scaled-adjoint-component-cost-v1",
+    "data": "authored Gaussian features and a constant 120 BPM reference; no music",
+    "seed": 777,
+    "batch": 1,
+    "cells": 3000,
+    "fps": 50,
+    "feature_width": 512,
+    "feature_dtype": "float32",
+    "cpu_threads": 4,
+    "warmups": 1,
+    "iterations": 5,
+    "max_norm": 1,
+    "cpu_median_forward_backward_limit_seconds": 1,
+    "cpu_process_peak_rss_limit_bytes": 2147483648,
+    "includes": "native CNN, traced clock forward, native clock loss, scaled adjoint, all native CNN VJP bands, record weighting, accumulation, global clipping and gradient installation",
+    "excludes": "decode, frozen feature extraction, optimizer, recorder snapshots and disk I/O",
+    "admission": "numerical component cost only; not conditioning, musical accuracy or training permission"
+  },
+  "source_sha256": {
+    "experiments/scaled_adjoint/benchmark.py": "99798a4472088308aea588dc786c024ce6978fa389c04ed905730a3768549c24",
+    "experiments/scaled_adjoint/contract-v1.json": "6cd803489caf27d01a2ac1b0b5f86b89602432049f40989d5bd7707589da28d8",
+    "experiments/scaled_adjoint/scaled.py": "9d0b69488e46ae5b1f6deb84edf9631d5dec526baf8c2a164e69c4a56be0b37b",
+    "experiments/scaled_adjoint/scan.py": "d2f9adbd358229dfbb72840c42497161d769b4a983e5f8edd0b2df2b951da5e8",
+    "experiments/scaled_adjoint/transport.py": "a2662a5aa524c59b9ae90390b65067c5910760fd1090f492e3f77e60107a4988",
+    "experiments/training_observer/phase_trace.py": "8d579a442afbfcfbdfd84d94b07d27c2d1f7d26289678eaa2d930e429a086907",
+    "experiments/phase_sync/scan.py": "db9393b924975a6943d26417ff397c57ffacebc6e2071456ed928553eabd1e5b",
+    "experiments/phase_sync/model.py": "38bee4d0991fbc14c51dd465dbb2e419826ebf672f6030c1dd5d57ad07741213",
+    "experiments/phase_sync/benchmark.py": "4a3aee86be4161cfcbf5037ab6b63bd16f0ef0b1c7be7b5ccb556bf30459b5fe",
+    "experiments/clock_readout/model.py": "57871068c5c4958679d014dbc0018d4ccda5c1d315265ad64007082da8a76abc",
+    "experiments/coupled_clock/model.py": "a58727f37cf9902d4fa300e13b2d16e27e8c93fc4810627e3a24d4b60d544c58",
+    "experiments/coupled_clock/clock.py": "8159c503dcac6b911d784a5e270413f3808f30bb80178a478b7ff9754de80c81",
+    "experiments/coupled_clock/supervision.py": "f07045a911b9e8b7e49dd81fc0c90ec392b614a85f62b93fe9fe59346980c204"
+  },
+  "device": "cuda",
+  "feature_sha256": "659a4fb4262c30ce9de38588dea1c2417be2c571665b9b407dd8d9f06b3bd2fb",
+  "seconds": [
+    0.26493889186531305,
+    0.26732982508838177,
+    0.2654576348140836,
+    0.26709316298365593,
+    0.2643924932926893
+  ],
+  "median_seconds": 0.2654576348140836,
+  "iterations": [
+    {
+      "loss": 1.5170190052247885,
+      "neural_vjp_passes": 1,
+      "field_exponent": -5,
+      "gradient_norm_log2": 0.8671494145503708,
+      "binary_exponent": 0,
+      "alignment_underflows": 0,
+      "max_norm": 1
+    },
+    {
+      "loss": 1.5170190052247885,
+      "neural_vjp_passes": 1,
+      "field_exponent": -5,
+      "gradient_norm_log2": 0.8671494145503708,
+      "binary_exponent": 0,
+      "alignment_underflows": 0,
+      "max_norm": 1
+    },
+    {
+      "loss": 1.5170190052247885,
+      "neural_vjp_passes": 1,
+      "field_exponent": -5,
+      "gradient_norm_log2": 0.8671494145503708,
+      "binary_exponent": 0,
+      "alignment_underflows": 0,
+      "max_norm": 1
+    },
+    {
+      "loss": 1.5170190052247885,
+      "neural_vjp_passes": 1,
+      "field_exponent": -5,
+      "gradient_norm_log2": 0.8671494145503708,
+      "binary_exponent": 0,
+      "alignment_underflows": 0,
+      "max_norm": 1
+    },
+    {
+      "loss": 1.5170190052247885,
+      "neural_vjp_passes": 1,
+      "field_exponent": -5,
+      "gradient_norm_log2": 0.8671494145503708,
+      "binary_exponent": 0,
+      "alignment_underflows": 0,
+      "max_norm": 1
+    }
+  ],
+  "parameters": 24037,
+  "process_peak_rss_bytes": 1448554496,
+  "cuda_peak_allocated_bytes": 19599872,
+  "environment": {
+    "os": "Linux",
+    "machine": "x86_64",
+    "python": "3.12.13",
+    "torch": "2.10.0+cu129",
+    "cuda_runtime": "12.9",
+    "gpu": "Tesla T4"
+  },
+  "cpu_gate_applies": false,
+  "cpu_gate_pass": null,
+  "optimizer_steps": 0,
+  "musical_accuracy_measured": false,
+  "recorder_io_measured": false
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "scaled-adjoint-component-cost-v1",
+  "data": "authored Gaussian features and a constant 120 BPM reference; no music",
+  "seed": 777,
+  "batch": 1,
+  "cells": 3000,
+  "fps": 50,
+  "feature_width": 512,
+  "feature_dtype": "float32",
+  "cpu_threads": 4,
+  "warmups": 1,
+  "iterations": 5,
+  "max_norm": 1.0,
+  "cpu_median_forward_backward_limit_seconds": 1.0,
+  "cpu_process_peak_rss_limit_bytes": 2147483648,
+  "includes": "native CNN, traced clock forward, native clock loss, scaled adjoint, all native CNN VJP bands, record weighting, accumulation, global clipping and gradient installation",
+  "excludes": "decode, frozen feature extraction, optimizer, recorder snapshots and disk I/O",
+  "admission": "numerical component cost only; not conditioning, musical accuracy or training permission"
+}

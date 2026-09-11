@@ -93,8 +93,18 @@ update boundaries, plus the actual local scan Jacobians/upstream gradient. New
 authored failures can be saved and replayed without an optimizer update; this
 cannot recover the old unsaved music state. Observation-only parity and injected
 failure checks do not fix the unstable model or authorize another musical fit.
-Next establish long-sequence gradient stability and instrumentation cost before
-proposing a separately registered musical fit. Do not silently detach
+The following [range-safe adjoint transport](experiments/scaled_adjoint/README.md)
+now preserves explicit binary exponents through the same clock derivative,
+partitions native CNN VJPs by exponent range, and recombines the complete weighted
+batch before its original global gradient clip. Authored overflowing clocks now
+reach finite parameter gradients consistent with a float64 reference; ordinary
+CNN gradients retain numerical parity, and tiny optimizer updates are checked
+against their explicit formula (near-zero-gradient sensitivity remains). This extends
+representation range, NOT precision or conditioning: large derivatives still
+exist, and no new musical fit or old-run replay has occurred. Keep the old source
+pins and failure outcome unchanged. Next integrate this transport with durable
+failure observation and measure complete observed-update/multi-band cost before proposing
+a separately registered musical fit with explicit conditioning gates. Do not silently detach
 recurrence, shorten crops or sweep settings to rescue this closed run. A future
 portable scan also needs separate verification before Rust/library promotion.
 Rhythm availability, native beat-level ambiguity and independent admission
