@@ -129,6 +129,18 @@ actual multi-band musical witness. Close this fixed fit without a sweep or
 promotion. Next inspect the fixed predictions/fields read-only to distinguish
 circular phase alignment from tempo/count errors and octave ambiguity before
 proposing a new mechanism; do not infer a cause from aggregate metrics alone.
+The [fixed-prediction attribution](experiments/phase_attribution/README.md) now
+audits all 40 packets / 200 predictions and 320 original metric blocks without
+loading weights or running a model. This is not just whole-track octave error:
+the reference-informed recording-octave diagnostic still leaves 24.09% development
+and 24.93% ARTBeaT BPM error. Development prior error is already 68.95% before
+phase feedback (62.73% after); the required native rate lies outside the fixed
+local feedback bound in 69.32% of development cells, by work-macro fraction.
+Circular phase improvement coexists with worse native count loss and large
+recording-specific count drift. This locates an inadequate speed prior and a
+bounded correction mechanism, not its training cause. Next propose a separate
+fixed-checkpoint gradient-path audit before any direct period supervision or
+new architecture/fit; do not treat scalar loss sizes as gradient evidence.
 Do not silently restart the old run, alter its accuracy gates, or detach
 recurrence, shorten crops or sweep settings to rescue this closed run. A future
 portable scan also needs separate verification before Rust/library promotion.
