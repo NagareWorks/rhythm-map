@@ -141,6 +141,20 @@ recording-specific count drift. This locates an inadequate speed prior and a
 bounded correction mechanism, not its training cause. Next propose a separate
 fixed-checkpoint gradient-path audit before any direct period supervision or
 new architecture/fit; do not treat scalar loss sizes as gradient evidence.
+The [fixed-checkpoint gradient audit](experiments/gradient_audit/README.md) now
+completes all 80 recording/checkpoint pairs with exact saved-forward reproduction,
+unchanged model/RNG states and zero parameter updates. At the natural-input
+checkpoint, the work-balanced full-fit period-head count gradient aligns +0.9973
+with direct native-prior calibration, but the phase gradient is nearly opposite
+and 4.52 times stronger; total/prior alignment becomes -0.9239. The shared CNN
+and full parameter vector show the same aggregate reversal. This is measured
+objective interference at the selected state, not missing count supervision,
+an AdamW-history replay or proof that a new scalar weighting will solve BPM.
+Every per-record case, the nonuniform development results and the fitted-zero
+counterexample remain in the report. Next design a controlled gradient-routing
+test covering both the period head and shared CNN, with authored learnability
+checks before a separately specified musical comparison. No new fit, default
+change or release is automatically authorized by this diagnosis.
 Do not silently restart the old run, alter its accuracy gates, or detach
 recurrence, shorten crops or sweep settings to rescue this closed run. A future
 portable scan also needs separate verification before Rust/library promotion.

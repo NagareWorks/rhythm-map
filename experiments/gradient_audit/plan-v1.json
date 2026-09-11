@@ -1,0 +1,427 @@
+{
+  "schema": "rhythm-map.gradient-audit-plan.v1",
+  "runtime": {
+    "device": "cuda",
+    "torch": "2.10.0+cu129",
+    "numpy": "2.2.6",
+    "python": "3.12.13",
+    "os": "Linux",
+    "machine": "x86_64",
+    "cuda": "12.9",
+    "gpu": "Tesla T4",
+    "cpu_threads": 2,
+    "interop_threads": 1,
+    "deterministic": true,
+    "deterministic_warn_only": false,
+    "matmul_tf32": false,
+    "cudnn_tf32": false,
+    "cudnn_benchmark": false
+  },
+  "source_sha256": {
+    "experiments/clock_evidence/diagnostic.py": "be89a21c4f8fe207993c70068402bfae58a701e537bc676ff23fc2c940d9cb71",
+    "experiments/clock_readout/data.py": "dc785abed705350139786e86fd0533cd96b673987ab7db710c991369c5daa241",
+    "experiments/clock_readout/model.py": "57871068c5c4958679d014dbc0018d4ccda5c1d315265ad64007082da8a76abc",
+    "experiments/clock_readout/prepare.py": "4fadbeab34eec5c3b99df57a11d23615439b09ad21f9f6843bbc3c3c58f0eeb1",
+    "experiments/clock_readout/run.py": "ee52a72e4f03675ffe0169d7a9ad15d4bac0726133fdf41e5e49eaaa541ac223",
+    "experiments/clock_readout/test_readout.py": "61207b101157c8403ded5d58d1dbdfdf317d6b7aab45c096f33debda9613f0e3",
+    "experiments/coupled_clock/__init__.py": "2cbf69dc36abcac78926b1e6c387b3cd2fa7d88a6dbf9476da287aaf5ffbe9c4",
+    "experiments/coupled_clock/clock.py": "8159c503dcac6b911d784a5e270413f3808f30bb80178a478b7ff9754de80c81",
+    "experiments/coupled_clock/measurement.py": "6aec618f4a868218f121326bc420be01eb14a9b65f28c6d6a8e73ef0da86c18d",
+    "experiments/coupled_clock/model.py": "a58727f37cf9902d4fa300e13b2d16e27e8c93fc4810627e3a24d4b60d544c58",
+    "experiments/coupled_clock/prepare.py": "0542de33d896c982af91ce9ca0f2fa33d018f29b5b4adbbc1f5d416374d6adc9",
+    "experiments/coupled_clock/run.py": "f2e9393c415029af186ea351a69a9ad18b7cd88d6a1da10e251eb7ad5efa2912",
+    "experiments/coupled_clock/supervision.py": "f07045a911b9e8b7e49dd81fc0c90ec392b614a85f62b93fe9fe59346980c204",
+    "experiments/coupled_clock/test_coupled_clock.py": "029181bd07828dcd4e487ab48af2b031637943f7e5d64ded4f2ca35944fef29e",
+    "experiments/coupled_clock/test_experiment.py": "5625274104ef031accceb00085bc06a4830cac39e41cce3225cc80b9dab82006",
+    "experiments/gradient_audit/PROTOCOL-v1.md": "4213203c827452fb48d8d86f3684f1c26275f78c9dd2cf0dfe33881fc53a7fa5",
+    "experiments/gradient_audit/__init__.py": "75fac5f1de587b63cb7ce0534569245fb3ca4eb5a0cfc65b4d94b87fa927bd6f",
+    "experiments/gradient_audit/audit.py": "12107c255031e0420cb12ed9003274a7906605e8ba7d293560c795a15e5acf6f",
+    "experiments/gradient_audit/register.py": "96220003019a5ce47913599ec28fdfc4ee865190e08bb2d97594d640cc0c4a88",
+    "experiments/gradient_audit/run.py": "f007924040c08fb13f51e7b65093dacefe21b8d79d24b72994d8665cbe81bedb",
+    "experiments/gradient_audit/test_audit.py": "ffb0e8c8ce1570b35c809684a0b79c64d78715ea9afbb54f279d212484aa1082",
+    "experiments/observed_adjoint/__init__.py": "91821b1e3280ae2063769f49431e620291daeb788ca0bba486b093dc209dbc5d",
+    "experiments/observed_adjoint/benchmark.py": "d79c769bccb2f5c1a626df45e8553d38f91481175354850288f20eeb7a80c4f6",
+    "experiments/observed_adjoint/contract-v1.json": "affe5dee999cacae0f5e229a8bee687a91d999aef3eac9920d65dc4db62c0231",
+    "experiments/observed_adjoint/fixtures.py": "687cc777ea1714a08a1bbfa8816f36688c772cf45b559216a53acfed8448e41b",
+    "experiments/observed_adjoint/recorder.py": "d3b08ad802f38b1dab04f6fe498eb25b518ddb8e9d203d39a0bceea8c0332963",
+    "experiments/observed_adjoint/test_cost.py": "46a610e0d356f1d24702796e7b3bb778352a6373b79ce7efa9bb81832d800b02",
+    "experiments/observed_adjoint/test_observed.py": "efe48195cfac73ed608e99acb9671a653d2d2561d809ea4c0426b606141094b6",
+    "experiments/observed_adjoint/transport.py": "73dd089e3148f421498db213dbd89bd26a7c0d22eb8d8ef800a4770eab88315f",
+    "experiments/phase_attribution/PROTOCOL-v1.md": "40f6709885ae6e3ae3fab1d0198f7f1169dceeca16a2bd0c49a4a12fa9a68302",
+    "experiments/phase_attribution/__init__.py": "d983cf17e25a49d8054126d1afa9c1ff3c30787f88525fc81eed64e07e4bbc1c",
+    "experiments/phase_attribution/diagnostic.py": "f3fb0b9fb74484c32849c9ae9be2f58470a10d3ecc1d10da96cc79f65b19b3ee",
+    "experiments/phase_attribution/run.py": "55074f5064f49b1f8683cf005c7282e175548c2ae7897e31e7924a3272cae290",
+    "experiments/phase_sync/benchmark.py": "4a3aee86be4161cfcbf5037ab6b63bd16f0ef0b1c7be7b5ccb556bf30459b5fe",
+    "experiments/phase_sync/model.py": "38bee4d0991fbc14c51dd465dbb2e419826ebf672f6030c1dd5d57ad07741213",
+    "experiments/phase_sync/scan.py": "db9393b924975a6943d26417ff397c57ffacebc6e2071456ed928553eabd1e5b",
+    "experiments/phase_sync/test_cost.py": "01cbfb80dbe17a8e32c10c5ea35aa58529d9ec3e14511fd6756264227c6f614b",
+    "experiments/phase_sync/test_phase_sync.py": "7bf5402c9ce55a6bee85c807dbdd04c42eb73c5db514bf33eacc5d33deab5e59",
+    "experiments/phase_sync_fit/PROTOCOL-v1.md": "6e8f7bd6f31f49b74f459934d83e98737905524cc7ea471b6b5155a918f47fae",
+    "experiments/phase_sync_fit/register.py": "8437fe89de58c443694e46693ed4030530e7985b2a90d3b33b0994a24d8ad7d2",
+    "experiments/phase_sync_fit/run.py": "2389cfd0cd1a48970a12b484996c1730131b41fb538e7fe24c13fb9825c4f32b",
+    "experiments/phase_sync_fit/test_fit.py": "eda23bd39a87b08f3949e31df62b5617c13554eef35523af131e3541d769f5f1",
+    "experiments/scaled_adjoint/__init__.py": "92865a3c1bfcea77dd941b98e6e7d5ac7f533c94b6903692b9b61da7073897fb",
+    "experiments/scaled_adjoint/benchmark.py": "99798a4472088308aea588dc786c024ce6978fa389c04ed905730a3768549c24",
+    "experiments/scaled_adjoint/scaled.py": "9d0b69488e46ae5b1f6deb84edf9631d5dec526baf8c2a164e69c4a56be0b37b",
+    "experiments/scaled_adjoint/scan.py": "d2f9adbd358229dfbb72840c42497161d769b4a983e5f8edd0b2df2b951da5e8",
+    "experiments/scaled_adjoint/test_cost.py": "e8f5c15009ad788a4304c827445443f045a0fffa11a45231946e737c9d9a6f5e",
+    "experiments/scaled_adjoint/test_scaled.py": "1d22d85129c430a5d2454b641623410b1965f3674d84db01fedfafcae9126238",
+    "experiments/scaled_adjoint/transport.py": "a2662a5aa524c59b9ae90390b65067c5910760fd1090f492e3f77e60107a4988",
+    "experiments/scaled_phase_fit/PROTOCOL-v1.md": "f3c531a19f0fbaf11cd11f9466a86eae4a1e861b0cad4fb844b79b0e35d07d5c",
+    "experiments/scaled_phase_fit/__init__.py": "ff566b9c3e0d76f9b85d9801d5588c747f5b85f8df4b86a6c63738353db6074a",
+    "experiments/scaled_phase_fit/recorder.py": "5ee7fc543793ac24de806a24ad50a73908e72b833640e99e4aee31847308b1b9",
+    "experiments/scaled_phase_fit/register.py": "41b84327e4606762a217138a93aa456fcb67e6f3e6acb69f81794c5f048b731f",
+    "experiments/scaled_phase_fit/run.py": "97b22ebee07d6f453f10ad6b4861602cab110059f0acd6b5c3641ae8f8cae25e",
+    "experiments/scaled_phase_fit/test_fit.py": "6478169330f41c026a15992aaee2febb82cbba213a4654c01113aaa1e9c2e0e2",
+    "experiments/training_observer/__init__.py": "4c3e4daf0722d303b8b3be8d4c932482897bf7d01abc15b1648e496958926944",
+    "experiments/training_observer/phase_trace.py": "8d579a442afbfcfbdfd84d94b07d27c2d1f7d26289678eaa2d930e429a086907",
+    "experiments/training_observer/recorder.py": "ee500f6808a96efad722c17d77da5ad73e09f7c78bf68a4d739a5332b53cd198",
+    "experiments/training_observer/test_recorder.py": "9bae1ad4b36407b3de5d43e1d9c05745e2957c51f2a569960f77e5181a119ac6"
+  },
+  "prerequisite_sha256": {
+    "experiments/scaled_phase_fit/results-v1.json": "73454ce089cd3821c51d622ccbd491c56ecc53765e9552f6910d4a56e6c840a5",
+    "experiments/scaled_phase_fit/plan-v1.json": "c159b0f90369793d67cae5d8fc8c94264252d152dfb2e3de6eec257967f55193",
+    "experiments/coupled_clock/inputs-v1.json": "b4f05c10ebede84c394b0b8e06f6723b096d1f9a0a48e63024eb81d913fffd9c",
+    "experiments/phase_attribution/results-v1.json": "3e001e734e09e322e914f9830fbd053dd26644afe32426e72ed8b3b2b99c1d38"
+  },
+  "population": [
+    {
+      "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "role": "fit",
+      "work": "Bach_BWV1007-01",
+      "frames": 3001,
+      "packet_sha256": "c67881642dff0257ad79c4c519663a5717b3ef1a5b4f7508cce1e50db0fc4bcb",
+      "prediction_sha256": "4834bd99f4dbdb27e2906041fd0ea1d41010c42bc69b6d121159ec036265f5a2"
+    },
+    {
+      "id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "role": "fit",
+      "work": "Bach_BWV1007-01",
+      "frames": 3001,
+      "packet_sha256": "b1a1066a9ce45320d6ac1f7c14535e47e1b01de66d06096134b71d310df53221",
+      "prediction_sha256": "ffbbe04d925412b0bfeb8ced011b652068dcc2d05d6c57f25712a14b60f1801d"
+    },
+    {
+      "id": "rubato-beethoven-op072-0-ov-henning2017",
+      "role": "fit",
+      "work": "Beethoven_Op072-0",
+      "frames": 3001,
+      "packet_sha256": "8f11f5fd121259309b41c03f8d7bb53c35835144b9411446c9ca10644f6420dc",
+      "prediction_sha256": "e25f4000c647d7795b3a3e843a62d0fe62bfa9e77dfb3873b0a2aeedb9258317"
+    },
+    {
+      "id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "role": "fit",
+      "work": "Berlioz_H048-04",
+      "frames": 3001,
+      "packet_sha256": "6c5d39efefa3ee8e288950172a5d59797ef9bcf72b71e867c4af23fed0e70ccf",
+      "prediction_sha256": "2b20a53ebd482b34bf126eeb937cc83416a81d558fb794a01d56e0c8a38f3f3d"
+    },
+    {
+      "id": "rubato-boccherini-g275-03-ov-krux2022",
+      "role": "development",
+      "work": "Boccherini_G275-03",
+      "frames": 3001,
+      "packet_sha256": "f02f667ece8f69b877ddbfc8b3a235fa322662b84a6ebffd57a60658472a3f3f",
+      "prediction_sha256": "6048eb51907acc00284fd7d1a9a75c9a0a3b5d28d026aa9649406e133a715fd6"
+    },
+    {
+      "id": "rubato-brahms-op115-01-ov-schmitta2025",
+      "role": "fit",
+      "work": "Brahms_Op115-01",
+      "frames": 3001,
+      "packet_sha256": "9da9ffb57d7955435fb088fb3c8f23cb38031a72c1d48616312566f4f3944524",
+      "prediction_sha256": "9ddfcf50e048bc0174be8b6b25aa59ed268a8a6cafcbab56923fa9c76b7a6fa6"
+    },
+    {
+      "id": "rubato-brahms-op115-01-ov-steffens2008",
+      "role": "fit",
+      "work": "Brahms_Op115-01",
+      "frames": 3001,
+      "packet_sha256": "73c694db2df0d88e7443b38a0b79a9217a8d109008d0be827eb20dc331976c8d",
+      "prediction_sha256": "ca475bf0da5f4febe8a6899320e070d130dad8c9928182f325fa61866ed41c5b"
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+      "role": "fit",
+      "work": "Handel_HWV040-1-01",
+      "frames": 3001,
+      "packet_sha256": "525d66de7f33ea46e22fd58c612dfff8e1432c4b4bdab592fc67c371536f970b",
+      "prediction_sha256": "de4d89a0022c03a9063052f9879a2b43630abd30d7b569eb125d8c1d05d0c065"
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+      "role": "fit",
+      "work": "Handel_HWV040-1-01",
+      "frames": 3001,
+      "packet_sha256": "8ebc00ade67aa09ab38b7329f7c8b8628bba5ab3437bf8cd3b691d2ab4d6522d",
+      "prediction_sha256": "e141fdb2ad4f823da5ce5a8a424d34b2a8ee1d3ceb5360febad9b364474f54c3"
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+      "role": "fit",
+      "work": "Handel_HWV040-1-01",
+      "frames": 3001,
+      "packet_sha256": "2203fb49a376b7f4e6bf2f10d4fff7fd524a109517f3399667578b71558a6d5e",
+      "prediction_sha256": "1b1d33b2af5a69e7738af5d2eeb45bf15bd9918673b6c31f32fdfbd238c9dc72"
+    },
+    {
+      "id": "rubato-mozart-kv618-ar-papalin2012",
+      "role": "development",
+      "work": "Mozart_KV618",
+      "frames": 3001,
+      "packet_sha256": "cdc372a771d52532090ef2893b9a84c19631d025aef2af088e08e00ac3ae9da7",
+      "prediction_sha256": "504000171c8b7c180ecd81d6c690a5048680c993d1f9c375ea2b77bb4f42935e"
+    },
+    {
+      "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+      "role": "development",
+      "work": "Mozart_KV618",
+      "frames": 3001,
+      "packet_sha256": "2aead03e3aa0f79d0ac6ab27e1b3df3a7f0baf8020dde41c1387993a86a612e4",
+      "prediction_sha256": "bdb1f6cea956ad7865bdcd31da7061ad71908bafceef65634601583389447c7a"
+    },
+    {
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+      "role": "development",
+      "work": "Mussorgsky_PicturesAtAnExhibition-10",
+      "frames": 3001,
+      "packet_sha256": "c6ac7dba0bf3322378b5dd8b8a7b59c55566ce51b0d69cfd313fbfad9157c19d",
+      "prediction_sha256": "98ea5cdbd24bb7fa223806a9a2ac75f6a42c804db4afda66336a17fbbbb27774"
+    },
+    {
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+      "role": "development",
+      "work": "Mussorgsky_PicturesAtAnExhibition-10",
+      "frames": 3001,
+      "packet_sha256": "8e0c94c8900f36fb901b049f8e7d0c83893009eacaf638c4356fbe81bc11c8f7",
+      "prediction_sha256": "a70bcec670728526b1b9f3638aab1dabba51888d52aa153286aeef8ad0cc1d31"
+    },
+    {
+      "id": "rubato-schubert-d733-01-ar-staab2012",
+      "role": "fit",
+      "work": "Schubert_D733-01",
+      "frames": 3001,
+      "packet_sha256": "61a1d48da0b4e5aff32db7247e209c25044fde2aabd4dcbbd99ed27865389819",
+      "prediction_sha256": "c21b64c7db4a12d9b0b52667462c67d3ce6dc08f735f91ae43cf49552f656440"
+    },
+    {
+      "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+      "role": "fit",
+      "work": "Schubert_D733-01",
+      "frames": 3001,
+      "packet_sha256": "3b9b29c638ce0ab186812c1a9977fee761fe3ead23cc6a8a290c088b581f9726",
+      "prediction_sha256": "b481f55864fbe9f25b8b866dcc55dc27bec63a900c49c67ce06eac1a3f4ae47e"
+    },
+    {
+      "id": "rubato-schumann-op039-05-ov-buttner2025",
+      "role": "fit",
+      "work": "Schumann_Op039-05",
+      "frames": 3001,
+      "packet_sha256": "c82771a54cf0675d461b634e49d72bb9fe232aaa3d4e6bfad3f8305e315518ec",
+      "prediction_sha256": "308ab7dd91344d2925b7c86bbc2c1515cbe44d09a1cfdf6faa5f843f17f479b2"
+    },
+    {
+      "id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "role": "fit",
+      "work": "Schumann_Op039-05",
+      "frames": 3001,
+      "packet_sha256": "63c50524494bb238cfd8ce201c97896a29fc1844a95e18f066cbef011af5ea70",
+      "prediction_sha256": "ec2345e0da5e9e6aa51b0fe9fe1df450746c5804ec7ab2e512b20dfddf597134"
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "frames": 3001,
+      "packet_sha256": "de7a380e1c2c41465c310a0c20226d35c490f4c65683e384b47227629d8bf812",
+      "prediction_sha256": "169f3ba079e603e2d269b85396e94d38bcb6b89bef43553a4839fe4b79dccca2"
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "frames": 3001,
+      "packet_sha256": "00da5e4af7fcfbe94dec5d21486f693d13942e5f365e2353c9760a5fbc7d7f4e",
+      "prediction_sha256": "9335d549c521e06e8905315f518bd256b4c9addef140583b54640510d5172ddc"
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "frames": 3001,
+      "packet_sha256": "214cf1b6083734b895a0ea2d9c73b11f1d889c9d50ed7f17bad1edf974459ef6",
+      "prediction_sha256": "bc793a9538804251254c0d6ad39baa7de275f687d5deb92135a369bcd67c6190"
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "frames": 3001,
+      "packet_sha256": "9e012afa83234be0dc772ff552f033bd8e1f31e6cc2f0862261b20588ac90544",
+      "prediction_sha256": "59bd710e8589d797c465023dd743962673960347de20a4aee502a0f172071daa"
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "role": "fit",
+      "work": "Vivaldi_RV269-01",
+      "frames": 3001,
+      "packet_sha256": "2361c8f0e76520cc8f4a6552416c3cad94ecaca50404a5ec1638b50e1ec9557e",
+      "prediction_sha256": "f67542040c5b0482f6b2a419650ab2a55147be8e92f361088a1f9be35b8a580f"
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "role": "fit",
+      "work": "Vivaldi_RV269-01",
+      "frames": 3001,
+      "packet_sha256": "8ca195a2c3ac98c3cabf69352bb71d12f7ba08badc4c6653d9186ea175eebf1a",
+      "prediction_sha256": "233b2bb74549496f6274e1b4374719ad5ba62a1de6ba277e50d51336cb402b51"
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+      "role": "fit",
+      "work": "Vivaldi_RV269-01",
+      "frames": 3001,
+      "packet_sha256": "1e6eb82e626a57d51522ece79dd6f2af05e6c110a6278f82797ce63d752fc755",
+      "prediction_sha256": "83df729e42a7f2a9db63d066a6541f868a5f745ed01a8d73f3d74af30169acdb"
+    },
+    {
+      "id": "artbeat-05-75-to-150",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 681,
+      "packet_sha256": "7c00263152405f8142428cf6dfb04e62261007a834a43a480fddb3bd031185e4",
+      "prediction_sha256": "f3d9d664496063a22b6193292ffe4994a153621ab85fd45e886dce1a18fce798"
+    },
+    {
+      "id": "artbeat-06-150-to-75",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 681,
+      "packet_sha256": "56dbca61fc6294d7f517f85b6012693cf8ae9f95ed48e73aea312791788136a0",
+      "prediction_sha256": "b5d785285eeb9cddca1eed1df6533fb0f6b9602de05a7979abe5c4f4979d3fb6"
+    },
+    {
+      "id": "artbeat-07-75-to-112-5",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 667,
+      "packet_sha256": "e5ade2b52195d338840bf4b3bd408fbd8869a345379a06ad9fa746d6e5db32e8",
+      "prediction_sha256": "7517eca43a30b5cd6cd950ec438e62327b924f0ec88799f13535e4160cba1b2b"
+    },
+    {
+      "id": "artbeat-08-112-5-to-75",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 701,
+      "packet_sha256": "be5c1ad2ec3cd45c7494903e8514bf214b658d4e5c97dd206a841a46b2127c87",
+      "prediction_sha256": "9695c0fd709e3b1300e18e989060ba74ac28bf98386cb1fc813846419734b393"
+    },
+    {
+      "id": "artbeat-09-90-to-80",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 881,
+      "packet_sha256": "bc8b818779611c57881b6a9e43f17c385f0a420c8a93882258c6d0c0253f60ba",
+      "prediction_sha256": "f5d84603890e7a6bc1cf3c0fc0f3b07b4a9bbc89e8576953ef4d3d7f71047a53"
+    },
+    {
+      "id": "artbeat-10-90-to-120",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 831,
+      "packet_sha256": "c3962bd027eea81beef8737931037e6e3ed3a5ab08482a3d845c691feb6c2281",
+      "prediction_sha256": "3994091ac667e329ea63c92d917cdbe6e021defa0696a214c00e534132ba0f16"
+    },
+    {
+      "id": "artbeat-11-60-to-80",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 871,
+      "packet_sha256": "048b54dbfb909ecd3e119f70a4f70b9a63e7bb8a65636aebd33edea09ea867d6",
+      "prediction_sha256": "4b0a5b38e9fc35e647531464b8756866b08e8e6e37f295cf06e9951effca2e84"
+    },
+    {
+      "id": "artbeat-12-80-to-150",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 872,
+      "packet_sha256": "e1968c9e8da9cd86275ce00e5c0db8926718445873be9e132248d59213ce2a0d",
+      "prediction_sha256": "71868ee794875f84c00234272b7f8906e6d985b5ca97c8cbc1730d7fdc19a9d5"
+    },
+    {
+      "id": "artbeat-13-180-to-120",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 692,
+      "packet_sha256": "689f3ea2b534ad65901b89615057b2d16017a8cc531dfadec1e35a35432d0528",
+      "prediction_sha256": "ffeb5d2ab2a95a526c6d633e2e6cab36112e6f133bcceafd2d8542081b395550"
+    },
+    {
+      "id": "artbeat-14-240-to-96",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 816,
+      "packet_sha256": "5d520b62df5bef045775f8e9e756307ef43261dc8d5aaa7d4ed4449b78350a59",
+      "prediction_sha256": "649f0ca9c7adf50501a654f04d50c84fa6f594e7ffbc5bfc184428184c8a8eaf"
+    },
+    {
+      "id": "artbeat-15-85-to-127-5",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 1130,
+      "packet_sha256": "15bf894721677ab1d4f970d3d08d9ca88b30a2c86b5e861179a20c11831f23ac",
+      "prediction_sha256": "389b16e5d60fa016ae09c369d21b7c2b5513631fb1631425fdf8b0b223ab5321"
+    },
+    {
+      "id": "artbeat-18-piano-rubato",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 1163,
+      "packet_sha256": "7937db6234fe0ad5404b294d4e1262b8da7f214a796cc55e34b1171e9f7b7320",
+      "prediction_sha256": "d08a5a44e0b0f7a999b01ede9d9b2430971ecea8cfde073137ffdfb68256739c"
+    },
+    {
+      "id": "artbeat-19-ramp-80-to-200",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 863,
+      "packet_sha256": "01d57e4fb60c214f30c5e3c3ce59f55f61932cb0d61c517b0dd81c13393ba306",
+      "prediction_sha256": "572aa0f3c06f2c33f413245b4b5da2bbd821e7ec74d12ce5aa010fb4fcb5b373"
+    },
+    {
+      "id": "artbeat-20-ramp-200-to-80",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 864,
+      "packet_sha256": "8788b6cd0185772d1d90bcda5c6a1cb4856147e02074efcd4f31838cc27a4774",
+      "prediction_sha256": "f632e74a8246c773b07703435cfb80077f4b48a08ed5bb06c6a0481fcb9190b0"
+    },
+    {
+      "id": "artbeat-21-polyrhythm-70-to-105",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "frames": 615,
+      "packet_sha256": "42999c9cc346262b6a868fd393e3adacb7f8cb6fe9a5b57f16de904b6250bb84",
+      "prediction_sha256": "df383e228bb32b20641bcdcd83f0407f5990987fa031058ea82c8141a8ca85bf"
+    }
+  ],
+  "weights": {
+    "audio": "f769416dac97ffc835dc0afb1469584f5005c4452f2944a6c8dd95d68e8c0db8",
+    "zero": "13853c9730d49bb96b11c5566d1ff257f0a39e0034d74e136df4d55811073641"
+  },
+  "selected_epoch": {
+    "audio": 20,
+    "zero": 20
+  },
+  "audit_seconds": 1200,
+  "watchdog_seconds": 1500,
+  "record_checkpoint_pairs": 80,
+  "cnn_field_forwards": 320,
+  "clock_forwards": 240,
+  "training": false,
+  "automatic_retry": false,
+  "encoder_inference": false,
+  "holdout_access": false,
+  "production_change": false
+}
