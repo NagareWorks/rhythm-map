@@ -87,8 +87,14 @@ condition: a positive clock can multiply state derivatives of about 1.0616 into
 a gradient beyond float32 range. It is NOT a replay/attribution of the unsaved
 failed learned state. The old loop's lack of failure snapshots prevents exact
 case/update attribution; the actual update count is only bounded at 80--84.
-Next make failures observable and establish long-sequence gradient stability
-before proposing a separately registered musical fit. Do not silently detach
+The following [training recorder](experiments/training_observer/README.md) now
+persists current/best weights, optimizer/partial gradients, RNG, exact record and
+update boundaries, plus the actual local scan Jacobians/upstream gradient. New
+authored failures can be saved and replayed without an optimizer update; this
+cannot recover the old unsaved music state. Observation-only parity and injected
+failure checks do not fix the unstable model or authorize another musical fit.
+Next establish long-sequence gradient stability and instrumentation cost before
+proposing a separately registered musical fit. Do not silently detach
 recurrence, shorten crops or sweep settings to rescue this closed run. A future
 portable scan also needs separate verification before Rust/library promotion.
 Rhythm availability, native beat-level ambiguity and independent admission
