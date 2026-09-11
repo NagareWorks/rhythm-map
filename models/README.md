@@ -107,6 +107,26 @@ cargo xtask eval-backend \
 metrics or thresholds; it only allows the report to be written when the
 end-to-end path misses an acceptance gate.
 
+## Beat This small model pack
+
+[`beat-this-small-v1.json`](beat-this-small-v1.json) pins the `small1`
+checkpoint converted by the same upstream `scripts/ckpt2onnx.py` command and
+committed to the `danigb/beat-this-rs` repository at the same pinned revision
+`089b509247e6fdcec666511c0dcf0d5f39c21e73`. It reuses the identical mel
+frontend artifact and feature contract; only the beat model differs
+(10,555,592 bytes versus 83,162,650).
+
+The pack exists for measured fast/accurate comparison and size-constrained
+evaluation. It is not the shipping default: the paired measurement and its
+limits are recorded in
+[`evaluation/baselines/beat-this-small-v1.md`](../evaluation/baselines/beat-this-small-v1.md).
+
+```bash
+cargo xtask model-verify \
+  --model-pack models/beat-this-small-v1.json \
+  --model-dir /path/to/beat-this-small-v1
+```
+
 ## Provenance notes
 
 The original Beat This! project and the Rust port license their code and model
