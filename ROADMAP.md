@@ -24,6 +24,19 @@ for that distribution.
 
 ## Phase 1: timing accuracy, one shipping estimator
 
+Latest local-supervision test, 2026-09-14: the
+[local-tempo/retention experiment](experiments/local_tempo/README.md) completed
+two matched 100-update fits, adding all 559 exposed sparse pair points and a
+fit-only frozen-teacher penalty in the primary arm. Six newly rendered schedules
+passed preparation and were encoded only after selection froze. Both arms select
+epoch 0: every learned epoch fails the fixed work-level development constraints.
+The retained terminal reduces development BPM error versus local-only (44.86%
+-> 42.37%) but remains worse than the initial 35.22%; training-pair MSE improves
+without reliable fresh transfer. All epochs and failures are retained. Close the
+run without a coefficient sweep or weaker gate. Next attribute earliest native/
+pair update conflicts using fixed saved states before choosing a new training
+mechanism or broader source coverage. No default change, holdout access or release.
+
 Latest continuation, 2026-09-14: the [sparse paired-speed fit](experiments/relative_tempo/README.md)
 actually completed two matched 100-update tempo-only continuations and fresh
 frozen-encoder capture from 18 retained PCM files. All six trained global-speed
