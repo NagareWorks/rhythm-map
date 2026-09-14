@@ -219,6 +219,18 @@ learnability and real musical accuracy remain different gates. The next musical
 protocol must specify shared/separated natural and fitted-zero arms, unchanged
 data roles, task-specific selection, complete metrics and budgets before any
 music fitting. No optimizer patch, prior closed fit, holdout or default changes.
+The [four-arm runner](experiments/separated_evidence_fit/README.md) now fixes
+shared/separated natural and fitted-zero arms, unchanged population and complete
+record weighting, 20 epochs / 100 paired updates per arm, and equal task-specific
+selection privileges for both architectures. Shared training owns 24,003
+parameters versus separated's 47,907, but both task-selected exports have 47,907
+parameters and two trunk evaluations. Atomic execution boundaries retain partial
+task commits without allowing partial experiment evaluation. Original numerical
+metrics/gates remain unchanged; extra shared/separated nonregression and breadth
+checks cannot admit independent fields as a coherent clock. Authored runner
+validation is not a musical result. The next execution is one byte-registered
+four-arm run on the existing cached packets, without a sweep, default or holdout
+change; its outcome must precede a coherent-fusion proposal.
 Do not silently restart the old run, alter its accuracy gates, or detach
 recurrence, shorten crops or sweep settings to rescue this closed run. A future
 portable scan also needs separate verification before Rust/library promotion.
