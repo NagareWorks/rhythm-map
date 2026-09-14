@@ -267,6 +267,17 @@ unchanged natural baselines and change-insensitive controls. Do not substitute
 hidden-frame stretching for audio transformation or infer that an objective,
 larger model or more data is already validated. No new augmentation, encoder
 forward, training, fusion/default strategy, holdout or release change occurred.
+The subsequent [real-audio tempo-pair renderer audit](experiments/tempo_pairs/README.md)
+has now executed 180 CPU piece renders: 30 authored checks and 30 music previews
+from three fixed, already exposed fit recordings. Under the predeclared gates,
+FFmpeg atempo passes 9/15 authored checks, with up to 91.366 ms click timing error;
+Rubber Band passes 15/15, with at most 10.040 ms error. Both remain external
+private tooling, not product dependencies. Reject requested-factor labels for
+the failed atempo pipeline; first measure real-music alignment for Rubber Band,
+then obtain actual transformed-audio frozen-encoder features for the proposed
+relative-rate test. All previews explicitly remain ineligible for fitting until
+alignment is checked. Exact duration and authored success do not certify music
+labels, demonstrate a better BPM model, or justify loosening old accuracy gates.
 Do not silently restart the old run, alter its accuracy gates, or detach
 recurrence, shorten crops or sweep settings to rescue this closed run. A future
 portable scan also needs separate verification before Rust/library promotion.
