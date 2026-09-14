@@ -1,0 +1,685 @@
+{
+  "schema": "rhythm-map.tempo-conflict-plan.v1",
+  "source_sha256": {
+    "evaluation/parity/prehead_capture.py": "b11224ca2cc99934e30e67144a83ad890e38b3c0bedbba38d4b09d082db2c233",
+    "evaluation/suites/truth/artbeat-v1/artbeat-05-75-to-150.json": "5d6c395345fb6155893bc3aad4e0def3518bdecedb82f08d3514adfaeea0d456",
+    "evaluation/suites/truth/artbeat-v1/artbeat-06-150-to-75.json": "fcda5614cb07639a66edb58f7b658214e1f54ec1db1de35e84367d47be77849f",
+    "evaluation/suites/truth/artbeat-v1/artbeat-07-75-to-112-5.json": "063beee7c5428adedeecab21d0f8678a69c049f4ca2ea8ebfb7827b1ec79057f",
+    "evaluation/suites/truth/artbeat-v1/artbeat-08-112-5-to-75.json": "64de869a6b3e15d8e07601d67cb1508842de558761f5d00f4d25ded8077b92e6",
+    "evaluation/suites/truth/artbeat-v1/artbeat-09-90-to-80.json": "a9802ae028c9631323354a5826f50e2c78b14e54c66581a817f8d07b633a5409",
+    "evaluation/suites/truth/artbeat-v1/artbeat-10-90-to-120.json": "2165ea70a5f4224461552a28567cb45ad2b2cfe66cf4a99661ff49a02b24f10f",
+    "evaluation/suites/truth/artbeat-v1/artbeat-11-60-to-80.json": "7332a12f293d6bf843b4833054722c492c551d9e82b978aa11e6a90e145f1901",
+    "evaluation/suites/truth/artbeat-v1/artbeat-12-80-to-150.json": "84dc7d0b5ae7f297bdef100b6f67dc64d1475655ef9a36cdd442578368301a87",
+    "evaluation/suites/truth/artbeat-v1/artbeat-13-180-to-120.json": "61513c63f05ff332d265d6d785ca50342cdad10b23f664a40f1b55d2487349bf",
+    "evaluation/suites/truth/artbeat-v1/artbeat-14-240-to-96.json": "6583d495985b507d2083975501e40f15ad0727f2df8761645280f4fb87c3fe96",
+    "evaluation/suites/truth/artbeat-v1/artbeat-15-85-to-127-5.json": "e819ded9652413d5fd923066047b8cc1a27a2c0d24f3fdb3b80b40148fc9c39e",
+    "evaluation/suites/truth/artbeat-v1/artbeat-18-piano-rubato.json": "ddf1a5ff2a4d5649497bb54a60084abed6a21b1a062c874a492820245afd11a2",
+    "evaluation/suites/truth/artbeat-v1/artbeat-19-ramp-80-to-200.json": "407ec564b847ebf779e2f740c8c5d156211e69e18dc62b6a8fd37c17d01c4457",
+    "evaluation/suites/truth/artbeat-v1/artbeat-20-ramp-200-to-80.json": "b2e8e3aa1a131b9335914f974d5cfff7618703dd8d9c87fe38723545f6ec5980",
+    "evaluation/suites/truth/artbeat-v1/artbeat-21-polyrhythm-70-to-105.json": "7016cc892dcec5a95ea18cf778d9890f1d754158168f29c3ce5e895d32578638",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-bach-bwv1007-01-ar-macleod2011.json": "f16e419511caee1c96c786fbe5a745b9e319a5d95a8d832dcd3b337f072706a7",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-bach-bwv1007-01-ov-milman2022.json": "02617c821f0b7beb6fb0578d50f18b45b1e4b96e788c33835646b716b8a584e7",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-beethoven-op072-0-ov-henning2017.json": "0597675375121d0e7592d5abdae51277c166ff7611f3daf327f0ae4193ddcf8e",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-berlioz-h048-04-ov-dennis2016.json": "4e8b47d76b1ddce15d38da69fe3ca74892c777d2e1eb541524fc88d7a790bf34",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-boccherini-g275-03-ov-krux2022.json": "9b79c5c3cc3046c889ef9bbb34b0231dc7c393e22a088b3776b6b0862edad18b",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-brahms-op115-01-ov-schmitta2025.json": "6775c1cabad7d73b7682fa37d9a6e51c5542bffa054838df22f7a94ad150136a",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-brahms-op115-01-ov-steffens2008.json": "8934b0c9f51e4a9520584c35998f7d9cf724272de99d577d1b4f95e658ce7964",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-handel-hwv040-1-01-ar-buttnerfmaj2025.json": "986d47aaab5598db25b2fb44d16bfbf7f9c6b2df4acf9b118fae9f7f8911932c",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-handel-hwv040-1-01-ar-buttnergmaj2025.json": "10b34ee45b0b11f66943f98ab75b16886fd65dd7a108127a447bfb919d146f3e",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-handel-hwv040-1-01-ar-r-bra2020.json": "ac2935ad5dcb5fc1a1dd44730eaed584241096c35bfe0508da5393dcd40a8ec7",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-mozart-kv618-ar-papalin2012.json": "82a37995c722804ee66b57f6b3bfe39ce88cc602a4cc719b84c65c71300f5a32",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-mozart-kv618-ov-gliarmonici2015.json": "5f3832fafaa133b5a3875b8964b47b493568cdd2f4be76615fd5ea6f2f0f7616",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012.json": "996d4563a086fbe048d71da38e3d2441c789c28e2289aefa7284b3d3c10bc5c6",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016.json": "cc91282ff134ac42e5c051942baad56b49d19f8a56acdb09ce57c8e49e461f10",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-schubert-d733-01-ar-staab2012.json": "15a68f3c29bb4eb1f9974093ab0f23189ba183232b341233e70f09523deec922",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-schubert-d733-01-ov-buttnerweiss2025.json": "71dc170ac875df1922db5cba6dcbfb59db11f254d6c35c45b825bdfe0d33ca8c",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-schumann-op039-05-ov-buttner2025.json": "aa36e4aec046346505801c6eb7d66db6557792129ba3395955945c7f3f315cd5",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-schumann-op039-05-ov-pizarro2012.json": "d7140499d39a2769e1d8a248d2122efda0cb519ec2cc203d0bf81563ed0fc312",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022.json": "a45bd07ff0742e30ee0eca8cd53ffc0fc1c29baf8f81ee5b024554af89ef2796",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-verdi-nabucco-vapensiero-ov-garcia2015.json": "49379fbe7c51dbf3d9cff11586ece6b9316d128e1f05cd2f8fdb0b281c1f4c88",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-verdi-nabucco-vapensiero-ov-librosvivos2007.json": "f0aaf80955f919bf3cd84df7f649824812ab08aed548d09e5342fb7d79e00959",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-verdi-nabucco-vapensiero-ov-secci2020.json": "ec2d36c1e4e7bfe5641dc5085e08bd4ab3cb2aa28e1d408f7faab44b584f14d1",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-vivaldi-rv269-01-ar-bra2021.json": "e892d59ecb17cc055034f3c043d49f981ad877092fb1298df3eaaeb10f4fd47e",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-vivaldi-rv269-01-ar-modenachamber2022.json": "176a0359278e6ec6fcffec89b0489fbd3ca8ac4e8b93dd974c3b4423b8444cb1",
+    "evaluation/suites/truth/rubato-calibration-v1/rubato-vivaldi-rv269-01-ar-r-intartaglia2011.json": "ba992b7fd03f9117cf411b06c59778f9eb65698a1e71c6907fa8520da0f46d9b",
+    "experiments/clock_readout/inputs-v1.json": "2e931a64145b1e425803bc08b7eb9d868f4c41b2d8ddea5a90b455c1f0a292df",
+    "experiments/clock_readout/model.py": "57871068c5c4958679d014dbc0018d4ccda5c1d315265ad64007082da8a76abc",
+    "experiments/coupled_clock/__init__.py": "2cbf69dc36abcac78926b1e6c387b3cd2fa7d88a6dbf9476da287aaf5ffbe9c4",
+    "experiments/coupled_clock/clock.py": "8159c503dcac6b911d784a5e270413f3808f30bb80178a478b7ff9754de80c81",
+    "experiments/coupled_clock/inputs-v1.json": "b4f05c10ebede84c394b0b8e06f6723b096d1f9a0a48e63024eb81d913fffd9c",
+    "experiments/coupled_clock/measurement.py": "6aec618f4a868218f121326bc420be01eb14a9b65f28c6d6a8e73ef0da86c18d",
+    "experiments/coupled_clock/model.py": "a58727f37cf9902d4fa300e13b2d16e27e8c93fc4810627e3a24d4b60d544c58",
+    "experiments/coupled_clock/prepare.py": "0542de33d896c982af91ce9ca0f2fa33d018f29b5b4adbbc1f5d416374d6adc9",
+    "experiments/coupled_clock/run.py": "f2e9393c415029af186ea351a69a9ad18b7cd88d6a1da10e251eb7ad5efa2912",
+    "experiments/coupled_clock/supervision.py": "f07045a911b9e8b7e49dd81fc0c90ec392b614a85f62b93fe9fe59346980c204",
+    "experiments/coupled_clock/test_coupled_clock.py": "029181bd07828dcd4e487ab48af2b031637943f7e5d64ded4f2ca35944fef29e",
+    "experiments/coupled_clock/test_experiment.py": "5625274104ef031accceb00085bc06a4830cac39e41cce3225cc80b9dab82006",
+    "experiments/relative_tempo/PROTOCOL-v1.md": "6fc194fbf8217cf833221c6350796322dfb2fbec7eef2fe487415ddc9b6ac3c8",
+    "experiments/relative_tempo/__init__.py": "ef9f060125ed408c96e3a78004356d93ad14d6a6e04bd38fccaf117b0851e752",
+    "experiments/relative_tempo/capture.py": "6f749776e2fb896c9d6fe8859e23fe67db6d90d7f815a7f34a90dc05aac51e0a",
+    "experiments/relative_tempo/data.py": "406ebcc7531876bd24bff7ff3b0a33119217cb4ee6aed9e73ec184e3b47bc378",
+    "experiments/relative_tempo/model.py": "feb12e0672c6ddb242d565044faaafbb6c682076481f615f2718daae04d0d744",
+    "experiments/relative_tempo/run.py": "ee3cc8f40df89870649ba9db438c29835eb949fce09fb5fb4c919cc1b6ad175e",
+    "experiments/relative_tempo/test_relative.py": "a9f5e10610b7c0787dfe1d51186e51e0ec115674da37901f45e1ee0c013f58a5",
+    "experiments/separated_evidence/__init__.py": "d00f35d58295516f94c01984f5e6388abb1283faef5e300869a44b5d9505e838",
+    "experiments/separated_evidence/authored.py": "1846bd855d2c66ec6d7ebe1616d44c5e7867f00009f0e878d3b7ff4feff8aa08",
+    "experiments/separated_evidence/model.py": "e78c59c0c565f58cffa78c5ef494975cb56373f6bb6c17c188ad75eedeca4f75",
+    "experiments/separated_evidence/supervision.py": "df88f2a9f3fb8cd895e5ba7bfb82c6d63ee2da78185d24a3561e452eaf8cabd5",
+    "experiments/separated_evidence/test_evidence.py": "2a2606bfd04ee9d557c994cd782ecf70948d3adeb79e9c01f0fd56cc6b8c0e9c",
+    "experiments/separated_evidence/training.py": "1c12e20b34ff1254ca9d16c29a908c9a6b217b9bd944944fc7d765ef113a7f47",
+    "experiments/separated_evidence_fit/results-v1.json": "251dcb1f421d1588bf8b6d11709e05696a15af57624d659600e51a15059984a8",
+    "experiments/tempo_alignment/__init__.py": "9c43915bb8e08dc41818aadbf836c73b3063f8d1b94bb8e63cab6e4faffcf6dd",
+    "experiments/tempo_alignment/alignment.py": "e5298c9d012a527c15c7335d511d5e0e7ac4d2a116b8b6751c37303a7d0ac4d0",
+    "experiments/tempo_alignment/results-v1.json": "326e2b853b88f6bad9907c7ba63623c22c25ebb56e541518c16d7c53b8ce4b50",
+    "experiments/tempo_alignment/run.py": "2883c37501c5c7e83bd51660d9321f8c293b4afdd4d54eebbaaad92afcf0a25d",
+    "experiments/tempo_alignment/test_alignment.py": "4b718ec1038bb1891ce9907baab8dc9293a4bb85168d1241e6ca80fb1cd427d8",
+    "experiments/tempo_alignment/test_outcome.py": "2b500639c748499b068c8c59febf980af86cdf26f41270efca6d95a894fbd982",
+    "experiments/tempo_attribution/__init__.py": "39532f58f5f71f10131bcc5b6b7e538c2ab77ddc2ae458108ee4824f0131a36d",
+    "experiments/tempo_attribution/diagnostic.py": "2b9bb43941bd84d12313ee047e29cf13c1b82ea727b0c8b963168d8fe0aedd59",
+    "experiments/tempo_attribution/run.py": "8683cace7fb7a1f1ee2206c8fdf12c4342e663776d001a96e4810f1c3b3dc353",
+    "experiments/tempo_attribution/test_diagnostic.py": "c794920e36443cabee269ab06d644e77f1632250a5a595bf0aa33cbe851ca762",
+    "experiments/tempo_attribution/test_outcome.py": "49348b4f5e10198e94e2751b977d857cbbc2470cb9290a06d535cc96d8a86e2d",
+    "experiments/tempo_pairs/protocol.py": "12ad91dd7966780c18c583a68c54993a572184992842b3c1a844288b461a82bb",
+    "experiments/tempo_pairs/results-v1.json": "b894c92a7c586b6f6d043b716b7e16a60a4cde0a82ae2eeb8fd42cc5b4f4a0cc",
+    "experiments/tempo_pairs/timeline.py": "2f1b7e78b2a1dc5b4b43fa738802709dba8f13fd9e8d0fd816161eb04916e7b9",
+    "experiments/local_tempo/data.py": "a5c220908a42b46ba7b28fc550cb4e7189f894351cfac67829bfa097a0f9cc5a",
+    "experiments/local_tempo/evaluate.py": "e31112e5f958faf1066d5b31eea0f333234b14fc9ae468ae93384e300b5e7a40",
+    "experiments/local_tempo/selection.py": "3407793b9880bee9ff7a29018e671a90c7157154cc8a77b75771c1caf2a886c2",
+    "experiments/local_tempo/prepare.py": "31076088248e6fca0fcae9caeeee58eb4c693b99f432203a56957e5ceb61a766",
+    "experiments/local_tempo/fit.py": "6da77eabfa43e1a52c8f07453d8218822894f5c5391a070a78d477be59468684",
+    "experiments/local_tempo/run.py": "b65c5735677d19b2b44501133531d9b4a1e9c0d217c1c8ecb88b1ca4445e679c",
+    "experiments/local_tempo/__init__.py": "a701cafff0f55d90ea37e4359a4cbe1e4c0c3abeba57c2ac30b69c265cabf939",
+    "experiments/local_tempo/capture.py": "2bb31a6d4207a9ae7b65edfa10918661b36297fc73d3149b0a728d7ec3ae9251",
+    "experiments/local_tempo/PROTOCOL-v1.md": "b3f97fc93755f8c9544e103c89d138dd96b8dc78ee9ea6a74b40630fffa0fc9b",
+    "experiments/relative_tempo/results-v1.json": "599086fdbdb0134b9fe758814add0b785884f6d2eb2e038a54340ef763950ddc",
+    "experiments/relative_tempo/plan-v1.json": "95f1aea338a585a691453cfeaadc7d809e24e7cd1b9cf9888d2cd0077b531677",
+    "experiments/tempo_pairs/render.py": "a4d238af72d3a6f0d463a95301b84cf26034211a4dcde2eaa4b9a189f731bc6c",
+    "experiments/tempo_pairs/run.py": "46c82723574f2fda0ea600938902bcfbe2c68124ab5606201bb6a0430a4e3c6e",
+    "experiments/tempo_pairs/PROTOCOL-v1.md": "2609d49e702038602870dee053726a359549214a30e113e089dccf8b14b231d5",
+    "experiments/tempo_conflict/data.py": "a13a4829297d04ea7d244747ad77d91c7287969ba47be2727a84afd7ee372284",
+    "experiments/tempo_conflict/run.py": "f0b81fba3045ce3d431b20f7c0cc57f3a3df176af3b234fe3b688cae4c44cafa",
+    "experiments/tempo_conflict/gradients.py": "84fdf1f990be5626c41ae07c88aac81cf19ea05341e0b4d7332ed0965047d3c0",
+    "experiments/tempo_conflict/__init__.py": "f40c4af06f32189a18d4199fbaa7882a1c39819edc874fda380554909ad10363",
+    "experiments/tempo_conflict/statistics.py": "e225699de17abf7103836526452a2ea8aef279e83f9a0825521589ee75f3b6d9",
+    "experiments/local_tempo/results-v1.json": "e4c61280383e8c56fd0378eb9d178fc9e4a6eeb3e649ce64fe0683e85f1580ee",
+    "experiments/local_tempo/plan-v1.json": "fe02b4a9bb4b7dafcb3eed52be780c83058793d880c4a6525d73fda013a723fa",
+    "experiments/tempo_conflict/PROTOCOL-v1.md": "be032c5e3cde7739e3243cd22917ff643438eaf2d4ff99bb3f5ec35427a9be11"
+  },
+  "previous_report_sha256": "e4c61280383e8c56fd0378eb9d178fc9e4a6eeb3e649ce64fe0683e85f1580ee",
+  "slots": [
+    {
+      "arm": "local-only",
+      "epoch": 0,
+      "key": "initial",
+      "file": "local-only.epoch-00.weights.npz",
+      "weight_sha256": "d0b8363ad439d76db2795a6c2fafae0d8e59abb360061582a7575425284302c4",
+      "state_sha256": "14507c0cb8ed17139fa59673afeb82a63cb46d8d6276418fa67ae935de20acc1"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 1,
+      "key": "local-only.epoch-01",
+      "file": "local-only.epoch-01.weights.npz",
+      "weight_sha256": "039927e19f053541c611ed1259f5990c8b69489289a2c7c86b81b4c2e8b631b4",
+      "state_sha256": "a4625f4ab990abd83ab0fdd3f9a2d0767c826ea100d20a9a98f6f4c429949030"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 2,
+      "key": "local-only.epoch-02",
+      "file": "local-only.epoch-02.weights.npz",
+      "weight_sha256": "b5902d3c871a3c03488a47585e28696cd55ee527f73912dfc33f89982475e79c",
+      "state_sha256": "174ac0550f0d9e6f1e9eec20da31d60fc0194147be713a84efaad6bfee767d88"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 3,
+      "key": "local-only.epoch-03",
+      "file": "local-only.epoch-03.weights.npz",
+      "weight_sha256": "bc55d5a01905aa3d96d678b77a96caffeaeea4ab6d14bc17c9965cc471a4753b",
+      "state_sha256": "4d74f85487dc85fbbc27352c425760a3df6f974ff4b03d95be3be48bcce90570"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 4,
+      "key": "local-only.epoch-04",
+      "file": "local-only.epoch-04.weights.npz",
+      "weight_sha256": "b8dfe9e4bb1d09e73b1ce328b886520480204220a4ce8dc42f58ce84d0c31b6c",
+      "state_sha256": "94224c76717f9763e620d104b0611543571b2639132a9d7d996826993c138d1f"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 5,
+      "key": "local-only.epoch-05",
+      "file": "local-only.epoch-05.weights.npz",
+      "weight_sha256": "4c1fdf9c539da62c92b823c1db6349d72c52d4b06ebdf9b76c2afaa7c00a66ed",
+      "state_sha256": "b7bbedae7380c9c6fbb54eabd08beb8ce2455789a93992251e8a252a566aee86"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 6,
+      "key": "local-only.epoch-06",
+      "file": "local-only.epoch-06.weights.npz",
+      "weight_sha256": "06bd3c2e81beb82a82f11e6f3d2d09741863c161768088f8994144e0a0bf5491",
+      "state_sha256": "74541cbf9b1b4304d308cb6061f3c3d221abbe89406b0ce879eea5a575348096"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 7,
+      "key": "local-only.epoch-07",
+      "file": "local-only.epoch-07.weights.npz",
+      "weight_sha256": "c1cbdb5c6a8867055cf7596ceeb4fa4478d47f69786b2c31cd899ad3f102b9ff",
+      "state_sha256": "219a5f5186f0445cf5d8485878cdf6dd5190fdee77aae8948c39b898af003053"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 8,
+      "key": "local-only.epoch-08",
+      "file": "local-only.epoch-08.weights.npz",
+      "weight_sha256": "1d4fb479ca65f61bd26e1b7463dbbbb00ce809c95ab2f62365c85f65bd6697c4",
+      "state_sha256": "b4ac38673ceab232b1b4fff48d3fa1f5d21d58f0a0083cb4bc420d26f13655a0"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 9,
+      "key": "local-only.epoch-09",
+      "file": "local-only.epoch-09.weights.npz",
+      "weight_sha256": "8a75b16f9d01da7053f6ef79cabd0a82a4daf3ad7d1ccee73563da05e205880e",
+      "state_sha256": "07f519bb48d6ad55b7eceba5a8a9eafc0dd31283928ff0064a14e2c79e2d545d"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 10,
+      "key": "local-only.epoch-10",
+      "file": "local-only.epoch-10.weights.npz",
+      "weight_sha256": "b1f2c92240da1fc3d825f8afa6893a8df2ebe9dbad28dc7e880d4681f6f6458b",
+      "state_sha256": "c7d7666735014065ec81226c908af9712a92d518bb4cf56bc04a0a37e0e658c2"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 11,
+      "key": "local-only.epoch-11",
+      "file": "local-only.epoch-11.weights.npz",
+      "weight_sha256": "80bd781129fd5ada38090510bc6ce3a476b275e067b28c97c0837c658372730d",
+      "state_sha256": "417792be01477b9197092f8f34096da4311ca3317eb4946c96f0ecc3e640c790"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 12,
+      "key": "local-only.epoch-12",
+      "file": "local-only.epoch-12.weights.npz",
+      "weight_sha256": "1f11a8a5f538ed611afc292a6c9c18e17c6eb616c17f0b0dccbcf08699688a4c",
+      "state_sha256": "3a0e32e173df7422145ff70887f655af6355a7e6d7d63018fb02927b1e59173e"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 13,
+      "key": "local-only.epoch-13",
+      "file": "local-only.epoch-13.weights.npz",
+      "weight_sha256": "c7b9470dfb13695559b09e4111499520fdefce9d5f4c71610ad86495c05ec222",
+      "state_sha256": "95a03623700c93fab06bc7503226f61b804938d32601a0084265ac47207eab95"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 14,
+      "key": "local-only.epoch-14",
+      "file": "local-only.epoch-14.weights.npz",
+      "weight_sha256": "080f625c84e7308c09b0147bdb36d1493198d93a786c5643b9816287d79fa6da",
+      "state_sha256": "5896829ba67947393a4b56ebedd70f45dedfb4799cb0da166a322ace6aaa4ec2"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 15,
+      "key": "local-only.epoch-15",
+      "file": "local-only.epoch-15.weights.npz",
+      "weight_sha256": "40c6ded26c056fce8fab1244e4611f6d5f96e2aac9550eedf1d522154b15f37f",
+      "state_sha256": "d911be86825cdd8f22bfa2d912e4100a46c226891a4f9d31246150d4954393a5"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 16,
+      "key": "local-only.epoch-16",
+      "file": "local-only.epoch-16.weights.npz",
+      "weight_sha256": "bca8e641b143c929e5c900284ff50f205e205236684a0d25484305ef0c28b026",
+      "state_sha256": "0ccd0bab2843decab7d19e9508e18e17b562133e32c62cf8efb740a6c9c02054"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 17,
+      "key": "local-only.epoch-17",
+      "file": "local-only.epoch-17.weights.npz",
+      "weight_sha256": "8cb1434a78e773fb90c84f91ae16530e9f0d093824e9274bdd3e015a0091bd0b",
+      "state_sha256": "8a7b8cdec94a82255ca8d70c7f7d66a7a71cf75ca39a744ea1f2b1de7e8ceb1f"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 18,
+      "key": "local-only.epoch-18",
+      "file": "local-only.epoch-18.weights.npz",
+      "weight_sha256": "670a1cd376f59e7fa763de0d5d74b1f1a4b7ddfb6b22271190c6db7bb64e5a27",
+      "state_sha256": "708a3f8a0bffa0e80d542878af6c14b85a81e4eeafcf4dadbd2e9c31d613003e"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 19,
+      "key": "local-only.epoch-19",
+      "file": "local-only.epoch-19.weights.npz",
+      "weight_sha256": "1b3628c22af7e5c52d3cc67f8c747bef6b10f2c691f9f29ff65477fd6bd24c1c",
+      "state_sha256": "7fdde608736709ea382339a9277ccb3be82e2da3e2ff5feda8beeb04e6002b73"
+    },
+    {
+      "arm": "local-only",
+      "epoch": 20,
+      "key": "local-only.epoch-20",
+      "file": "local-only.epoch-20.weights.npz",
+      "weight_sha256": "cd823ee0eb2f0ea4d6ee8e131ba0006ee9c730c41cd8e0f6745dd2f076ab5788",
+      "state_sha256": "018dffb02f6f063a0d11f3d438ea5176253544ffb078a442dd84938495ff3986"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 0,
+      "key": "initial",
+      "file": "local-retained.epoch-00.weights.npz",
+      "weight_sha256": "d0b8363ad439d76db2795a6c2fafae0d8e59abb360061582a7575425284302c4",
+      "state_sha256": "14507c0cb8ed17139fa59673afeb82a63cb46d8d6276418fa67ae935de20acc1"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 1,
+      "key": "local-retained.epoch-01",
+      "file": "local-retained.epoch-01.weights.npz",
+      "weight_sha256": "2092d786929276cb2742f939684fcc23646e531ddbea49ddf50ceb54663c9a48",
+      "state_sha256": "97814a85a5cb1ed23ce53e3689a3d81fbfedb29a4b71b8e7c9e794551a2beb5c"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 2,
+      "key": "local-retained.epoch-02",
+      "file": "local-retained.epoch-02.weights.npz",
+      "weight_sha256": "754b320346ad56b8fa5f21a9b40d666bff2e9104c61ffde2f148d7be838f4c36",
+      "state_sha256": "f5d8604c83f94e8358d55b340b1930461bfa0663da042c7b8fde0e8a4b3206ce"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 3,
+      "key": "local-retained.epoch-03",
+      "file": "local-retained.epoch-03.weights.npz",
+      "weight_sha256": "d6e363b0898ba05a037e0b17d9dbcaf4f18b172413545479fc3856627860c60c",
+      "state_sha256": "419aad3e6c89b1205702dd980b2896b39fd87f11afa17857f040ad08f5768266"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 4,
+      "key": "local-retained.epoch-04",
+      "file": "local-retained.epoch-04.weights.npz",
+      "weight_sha256": "969d440ab8d7d751aec33fb223dc17d27316564e82c4978fcc664ffe094490c2",
+      "state_sha256": "23afd4171ba2a52203df62087f7393c27d9456fa179ecbe30d03762e58d4449a"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 5,
+      "key": "local-retained.epoch-05",
+      "file": "local-retained.epoch-05.weights.npz",
+      "weight_sha256": "540b200a9b4eebf100b7abe4aa901ed036f374114f49339ea722c0d6be5bf782",
+      "state_sha256": "45f5bac564fb71bb44659772e162d2a1fd6c5f67a46d0d855ee650d40d3168af"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 6,
+      "key": "local-retained.epoch-06",
+      "file": "local-retained.epoch-06.weights.npz",
+      "weight_sha256": "eeca03e4fe0be5b8da5374797c0cd181df6b58ee086a8cd8ebf9eb0cbf9f06a1",
+      "state_sha256": "dc1c4aa2d44817cdcdfcd3e5fd64433f44dd9e5cbf21a3eb1b0f12649ee3529e"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 7,
+      "key": "local-retained.epoch-07",
+      "file": "local-retained.epoch-07.weights.npz",
+      "weight_sha256": "c908e12a1fa774df264cad08edd2690311b72c469f7652a8bdfe2ad571a33e0a",
+      "state_sha256": "0c907d1b97ffdd99b7cb44d11f85fad72d40824a49f9c298b21221f22eff7d4f"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 8,
+      "key": "local-retained.epoch-08",
+      "file": "local-retained.epoch-08.weights.npz",
+      "weight_sha256": "73e475f41b007acf8eb02e2a076884f4d051ca5f5912890a25bd48643e5e1782",
+      "state_sha256": "971eb45e93ba8558892f9576b9a01e88053bc3f9b8d7649deeca2178c968f3e2"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 9,
+      "key": "local-retained.epoch-09",
+      "file": "local-retained.epoch-09.weights.npz",
+      "weight_sha256": "3913765439dee326b5120e65e63ce1c06425372549f6b74faa9ce8d394456b68",
+      "state_sha256": "17308fd21ea2772be5bb84f742ba0b52a12cb8a6c393b33c1e8936e6abc45641"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 10,
+      "key": "local-retained.epoch-10",
+      "file": "local-retained.epoch-10.weights.npz",
+      "weight_sha256": "665ffc0ef0f961e6f7bdddffc6dc1cef2bf98d15fe10cded2781e8a368817457",
+      "state_sha256": "a4f95b3c32e417e04a110c5bcd03d8fa076fbcb69e21bb61b259c14ab7533e52"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 11,
+      "key": "local-retained.epoch-11",
+      "file": "local-retained.epoch-11.weights.npz",
+      "weight_sha256": "678505e2a6f6ec9ba11ffb530550c0928ca9e53860a74dfe32b149d9710c89e0",
+      "state_sha256": "13668903dc2f24a4f64a95734e26eb2941aa5e23bda5df4fd279df8d0bd7db89"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 12,
+      "key": "local-retained.epoch-12",
+      "file": "local-retained.epoch-12.weights.npz",
+      "weight_sha256": "7b4ed4b096ed8a1b960b4f1530498255a686938b365b64df0cba0226d0e33d4c",
+      "state_sha256": "f4c3394b229e755274c7264a0da492e466246cd52d779ec10d489ab37db1a852"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 13,
+      "key": "local-retained.epoch-13",
+      "file": "local-retained.epoch-13.weights.npz",
+      "weight_sha256": "a609be5b632209d19d1e35ea3b7d31789e55c57dd8fd77a3d0b6df80a7430661",
+      "state_sha256": "b6b6522b8236514018576d86ed7306b1ad6eec7b97bc327ecab59f2cca815335"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 14,
+      "key": "local-retained.epoch-14",
+      "file": "local-retained.epoch-14.weights.npz",
+      "weight_sha256": "82d47b4a83921346eec6b218b8d2fd5569a88dabf24d39db0f0b72ee5955336c",
+      "state_sha256": "7b679ef6a1c8bf30d88abc54c571be70468a2b7d22b64e987839b4ff784fcb30"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 15,
+      "key": "local-retained.epoch-15",
+      "file": "local-retained.epoch-15.weights.npz",
+      "weight_sha256": "a73a958a8d9ccc9bd998258bdd3d35e57e81169e7279a972e42f4137af6feaf0",
+      "state_sha256": "deb0e9831a871a79785a7b431980001dbf8aa5b6dabaf7328194e418bef6a83a"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 16,
+      "key": "local-retained.epoch-16",
+      "file": "local-retained.epoch-16.weights.npz",
+      "weight_sha256": "447f536267e7ac8a9b0768f326cc7a8176e00a23e6bbe8494154740fc79fbf1d",
+      "state_sha256": "fa144681a31cf1ef05309fd6e887963844b10fc55346b866b0d8df47a26b7e55"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 17,
+      "key": "local-retained.epoch-17",
+      "file": "local-retained.epoch-17.weights.npz",
+      "weight_sha256": "302b49165cc77ed340c56a6945c09b2c71dc089bb661820e0db3eb0df993a26c",
+      "state_sha256": "4f703886b11048335d280bdb351c44b87f3db8cf5adbae816078204004c35ce7"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 18,
+      "key": "local-retained.epoch-18",
+      "file": "local-retained.epoch-18.weights.npz",
+      "weight_sha256": "678bb705328681c8c9c02244d0645297663812ac4915b0ef524c7fc7f7bef43c",
+      "state_sha256": "dd5c2b4d2914b26f7842b9b091df61fe1d0fc68302d7b985e9f31615ffeaa687"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 19,
+      "key": "local-retained.epoch-19",
+      "file": "local-retained.epoch-19.weights.npz",
+      "weight_sha256": "16ab6acd1e306ac2f4335458589d1e3cd4ff045d6629543bc59c883983ba45c8",
+      "state_sha256": "12ef1a536c81c244443760db5b7f684509cb6ff5f86483f1dfde21807e7ed4ca"
+    },
+    {
+      "arm": "local-retained",
+      "epoch": 20,
+      "key": "local-retained.epoch-20",
+      "file": "local-retained.epoch-20.weights.npz",
+      "weight_sha256": "b5c7c36f734496095883a2ebebee29d0aeac20fa6494fa623772a726e8fbc3b2",
+      "state_sha256": "4d980e82a25f7797e0bfc11648a77ea76cbbe28cb3f2998cbeb05f12f51b8bf8"
+    }
+  ],
+  "parameter_geometry": [
+    {
+      "name": "trunk.projection.weight",
+      "shape": [
+        32,
+        512,
+        1
+      ],
+      "elements": 16384
+    },
+    {
+      "name": "trunk.projection.bias",
+      "shape": [
+        32
+      ],
+      "elements": 32
+    },
+    {
+      "name": "trunk.blocks.0.depthwise.weight",
+      "shape": [
+        32,
+        1,
+        5
+      ],
+      "elements": 160
+    },
+    {
+      "name": "trunk.blocks.0.depthwise.bias",
+      "shape": [
+        32
+      ],
+      "elements": 32
+    },
+    {
+      "name": "trunk.blocks.0.pointwise.weight",
+      "shape": [
+        32,
+        32,
+        1
+      ],
+      "elements": 1024
+    },
+    {
+      "name": "trunk.blocks.0.pointwise.bias",
+      "shape": [
+        32
+      ],
+      "elements": 32
+    },
+    {
+      "name": "trunk.blocks.1.depthwise.weight",
+      "shape": [
+        32,
+        1,
+        5
+      ],
+      "elements": 160
+    },
+    {
+      "name": "trunk.blocks.1.depthwise.bias",
+      "shape": [
+        32
+      ],
+      "elements": 32
+    },
+    {
+      "name": "trunk.blocks.1.pointwise.weight",
+      "shape": [
+        32,
+        32,
+        1
+      ],
+      "elements": 1024
+    },
+    {
+      "name": "trunk.blocks.1.pointwise.bias",
+      "shape": [
+        32
+      ],
+      "elements": 32
+    },
+    {
+      "name": "trunk.blocks.2.depthwise.weight",
+      "shape": [
+        32,
+        1,
+        5
+      ],
+      "elements": 160
+    },
+    {
+      "name": "trunk.blocks.2.depthwise.bias",
+      "shape": [
+        32
+      ],
+      "elements": 32
+    },
+    {
+      "name": "trunk.blocks.2.pointwise.weight",
+      "shape": [
+        32,
+        32,
+        1
+      ],
+      "elements": 1024
+    },
+    {
+      "name": "trunk.blocks.2.pointwise.bias",
+      "shape": [
+        32
+      ],
+      "elements": 32
+    },
+    {
+      "name": "trunk.blocks.3.depthwise.weight",
+      "shape": [
+        32,
+        1,
+        5
+      ],
+      "elements": 160
+    },
+    {
+      "name": "trunk.blocks.3.depthwise.bias",
+      "shape": [
+        32
+      ],
+      "elements": 32
+    },
+    {
+      "name": "trunk.blocks.3.pointwise.weight",
+      "shape": [
+        32,
+        32,
+        1
+      ],
+      "elements": 1024
+    },
+    {
+      "name": "trunk.blocks.3.pointwise.bias",
+      "shape": [
+        32
+      ],
+      "elements": 32
+    },
+    {
+      "name": "trunk.blocks.4.depthwise.weight",
+      "shape": [
+        32,
+        1,
+        5
+      ],
+      "elements": 160
+    },
+    {
+      "name": "trunk.blocks.4.depthwise.bias",
+      "shape": [
+        32
+      ],
+      "elements": 32
+    },
+    {
+      "name": "trunk.blocks.4.pointwise.weight",
+      "shape": [
+        32,
+        32,
+        1
+      ],
+      "elements": 1024
+    },
+    {
+      "name": "trunk.blocks.4.pointwise.bias",
+      "shape": [
+        32
+      ],
+      "elements": 32
+    },
+    {
+      "name": "trunk.blocks.5.depthwise.weight",
+      "shape": [
+        32,
+        1,
+        5
+      ],
+      "elements": 160
+    },
+    {
+      "name": "trunk.blocks.5.depthwise.bias",
+      "shape": [
+        32
+      ],
+      "elements": 32
+    },
+    {
+      "name": "trunk.blocks.5.pointwise.weight",
+      "shape": [
+        32,
+        32,
+        1
+      ],
+      "elements": 1024
+    },
+    {
+      "name": "trunk.blocks.5.pointwise.bias",
+      "shape": [
+        32
+      ],
+      "elements": 32
+    },
+    {
+      "name": "head.weight",
+      "shape": [
+        1,
+        32,
+        1
+      ],
+      "elements": 32
+    },
+    {
+      "name": "head.bias",
+      "shape": [
+        1
+      ],
+      "elements": 1
+    }
+  ],
+  "natural_manifest_sha256": "b4f05c10ebede84c394b0b8e06f6723b096d1f9a0a48e63024eb81d913fffd9c",
+  "python": "3.12.13",
+  "torch": "2.10.0+cu129",
+  "numpy": "2.2.6",
+  "device": "cuda",
+  "pair_batch": 16,
+  "optimizer_steps": 0,
+  "encoder_forwards": 0,
+  "holdout_access": false,
+  "development_role": "selection_exposed_gradient_diagnostic_only",
+  "independent_acceptance": false,
+  "production_change": false
+}

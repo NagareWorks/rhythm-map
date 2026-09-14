@@ -78,3 +78,4 @@ jobs:
       - run: python -m unittest discover -s experiments/tempo_alignment -p 'test_*.py' -v
       - run: python -m unittest discover -s experiments/relative_tempo -p 'test_*.py' -v
       - run: python -m unittest discover -s experiments/local_tempo -p 'test_*.py' -v
+      - run: python -m unittest discover -s experiments/tempo_conflict -p 'test_*.py' -v

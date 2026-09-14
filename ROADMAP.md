@@ -24,6 +24,21 @@ for that distribution.
 
 ## Phase 1: timing accuracy, one shipping estimator
 
+Latest frozen-state attribution, 2026-09-14: the
+[tempo-conflict audit](experiments/tempo_conflict/README.md) inspected all 41
+distinct saved epoch slots and 40 actual epoch displacements without updates.
+At the initial head, native-fit/development-macro gradient cosine is -.938;
+paired -.135; the exact first minibatch confirms native -.921 / paired -.132.
+Across slots native opposes the macro gradient in 34/41, local pairs in 37/41;
+the fit-only teacher is zero initially, helpful in 39 slots and opposing in one.
+Different development works disagree, so this is not proof of bad annotations or
+sole blame on either objective. Endpoint derivatives match all 40 macro movement
+signs but cannot reconstruct unsaved AdamW steps or assign causal percentages.
+Next register one controlled native offset-versus-variation loss comparison,
+keeping paired-speed targets, architecture, retention and full absolute metrics
+fixed. Reference centering may occur in FIT losses only, never as an evaluation
+or inference correction. This is a hypothesis, not another fit or default change.
+
 Latest local-supervision test, 2026-09-14: the
 [local-tempo/retention experiment](experiments/local_tempo/README.md) completed
 two matched 100-update fits, adding all 559 exposed sparse pair points and a
