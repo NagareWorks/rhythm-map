@@ -40,7 +40,25 @@ runner rejects modified source/runtime/initialization/population/budget before
 input loading, and never resumes a failed run. All earlier experiments and their
 source hashes remain untouched.
 
-## Implementation and verification
+## Closed musical outcome, 2026-09-14
+
+The once-only registered experiment has now completed all four fits and 400
+evidence-pair evaluations. Both architectures pass the fitted-zero audio-signal
+and temporal-phase-dependence gates, but neither passes the full musical gate.
+Separation improves development phase and all four ARTBeaT aggregate errors
+relative to the shared network; development median BPM error nevertheless rises
+from 35.4250% to 35.4772%, with 3/5 recordings regressing. It therefore fails the
+registered separation nonregression and breadth requirements. Do not promote
+either pair or start fusion/another fit automatically.
+
+See the [complete outcome and limitations](../../evaluation/baselines/separated-evidence-learning-v1.md),
+[registered plan](plan-v1.json), [execution receipt](execution-v1.json),
+[every-case results](results-v1.json), and [epoch/evaluation journal](journal-v1.jsonl).
+The nested `checks/` tests recompute every aggregate, decision, native-update
+schedule and checkpoint selection without music access or model inference.
+Private prediction packets additionally reproduced all 400 measurements exactly.
+
+## Runner implementation and authored verification
 
 - `register.py`: byte-pinned prerequisites, input population, source closure,
   exact target runtime and matched fresh initialization, without musical access.
@@ -56,13 +74,13 @@ AdamW/TaskTrainer loops, on CPU and CUDA. They cover nonuniform work weights,
 independent selections, complete development, returned versus unknown calls,
 failure evidence, late export, diagnostic exclusion, temporal controls, invalid
 phase/rate support, and refusal to treat independent fields as a unified clock.
-These tests are not a musical result. No music fit has been run by adding this
-protocol and runner, and no favorable result is implied.
+These authored tests are not a musical result. The runner-only commit did not
+perform fitting; the subsequent outcome above is separate, retained evidence.
 
 ```sh
 python -m unittest discover -s experiments/separated_evidence_fit -p 'test_*.py' -v
 python -m experiments.separated_evidence_fit.register --device cuda --output NEW_PRIVATE_PLAN
-timeout --signal=TERM --kill-after=10s 7500s python -m experiments.separated_evidence_fit.run \
+timeout --signal=TERM --kill-after=10s 7500s python3 -m experiments.separated_evidence_fit.run \
   --device cuda --inputs PINNED_PRIVATE_INPUTS --plan NEW_PRIVATE_PLAN \
   --expected-plan-sha256 REGISTERED_PLAN_HASH --output NEW_PRIVATE_RUN
 ```

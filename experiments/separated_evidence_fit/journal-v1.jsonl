@@ -1,0 +1,121 @@
+{"event": "epoch", "arm": "shared-natural", "epoch": 1, "training": {"tempo": 0.5558231181880957, "phase": 0.492781410037851}, "development": {"tempo": 0.6109167552157931, "phase": 0.4747805824476415}, "paired_updates": 5}
+{"event": "epoch", "arm": "shared-natural", "epoch": 2, "training": {"tempo": 0.3427639319750823, "phase": 0.4547249768921614}, "development": {"tempo": 0.40823710236810645, "phase": 0.45777162859139464}, "paired_updates": 10}
+{"event": "epoch", "arm": "shared-natural", "epoch": 3, "training": {"tempo": 0.28958137440338866, "phase": 0.4277162094168452}, "development": {"tempo": 0.3859368043316469, "phase": 0.4677168706368728}, "paired_updates": 15}
+{"event": "epoch", "arm": "shared-natural", "epoch": 4, "training": {"tempo": 0.2354029967746184, "phase": 0.3931941729752306}, "development": {"tempo": 0.41125513579781653, "phase": 0.42928453199719946}, "paired_updates": 20}
+{"event": "epoch", "arm": "shared-natural", "epoch": 5, "training": {"tempo": 0.20160756899319987, "phase": 0.3701346398292307}, "development": {"tempo": 0.32111969790074046, "phase": 0.4325598337436342}, "paired_updates": 25}
+{"event": "epoch", "arm": "shared-natural", "epoch": 6, "training": {"tempo": 0.181075883321695, "phase": 0.35528238649008237}, "development": {"tempo": 0.5283118157618311, "phase": 0.43060135320950527}, "paired_updates": 30}
+{"event": "epoch", "arm": "shared-natural", "epoch": 7, "training": {"tempo": 0.17962630205410843, "phase": 0.3376509001036465}, "development": {"tempo": 0.3314984250068668, "phase": 0.3988026406914878}, "paired_updates": 35}
+{"event": "epoch", "arm": "shared-natural", "epoch": 8, "training": {"tempo": 0.15955183848222548, "phase": 0.3181838200163457}, "development": {"tempo": 0.4425118114155111, "phase": 0.41394224806941776}, "paired_updates": 40}
+{"event": "epoch", "arm": "shared-natural", "epoch": 9, "training": {"tempo": 0.14791621269331373, "phase": 0.3104094673781501}, "development": {"tempo": 0.35567005504811505, "phase": 0.3986893717839992}, "paired_updates": 45}
+{"event": "epoch", "arm": "shared-natural", "epoch": 10, "training": {"tempo": 0.16319753354134325, "phase": 0.29786465554411934}, "development": {"tempo": 0.40087897557190394, "phase": 0.40917163775304305}, "paired_updates": 50}
+{"event": "epoch", "arm": "shared-natural", "epoch": 11, "training": {"tempo": 0.13238094730807293, "phase": 0.28818971712671587}, "development": {"tempo": 0.5084397167655278, "phase": 0.39992203144052046}, "paired_updates": 55}
+{"event": "epoch", "arm": "shared-natural", "epoch": 12, "training": {"tempo": 0.12857419688979502, "phase": 0.28271420525667185}, "development": {"tempo": 0.3575153847021524, "phase": 0.40274995269775804}, "paired_updates": 60}
+{"event": "epoch", "arm": "shared-natural", "epoch": 13, "training": {"tempo": 0.1507098550873937, "phase": 0.2795065300618329}, "development": {"tempo": 0.47646338734689037, "phase": 0.4121843024324054}, "paired_updates": 65}
+{"event": "epoch", "arm": "shared-natural", "epoch": 14, "training": {"tempo": 0.12510690565044172, "phase": 0.2730810045613723}, "development": {"tempo": 0.38993939192804467, "phase": 0.39519994570121325}, "paired_updates": 70}
+{"event": "epoch", "arm": "shared-natural", "epoch": 15, "training": {"tempo": 0.12909349216270594, "phase": 0.26948189651179305}, "development": {"tempo": 0.43580324081051636, "phase": 0.4207446616619112}, "paired_updates": 75}
+{"event": "epoch", "arm": "shared-natural", "epoch": 16, "training": {"tempo": 0.12748220229992613, "phase": 0.2687051533525338}, "development": {"tempo": 0.46500120639502884, "phase": 0.3945619541630874}, "paired_updates": 80}
+{"event": "epoch", "arm": "shared-natural", "epoch": 17, "training": {"tempo": 0.13940671230695276, "phase": 0.26929945255710197}, "development": {"tempo": 0.42141520372636676, "phase": 0.3913435408464107}, "paired_updates": 85}
+{"event": "epoch", "arm": "shared-natural", "epoch": 18, "training": {"tempo": 0.11734320343253285, "phase": 0.2603007314642034}, "development": {"tempo": 0.505323523038287, "phase": 0.4046571021752414}, "paired_updates": 90}
+{"event": "epoch", "arm": "shared-natural", "epoch": 19, "training": {"tempo": 0.10495359144952224, "phase": 0.25456597347110527}, "development": {"tempo": 0.42253630808380543, "phase": 0.3961560088350864}, "paired_updates": 95}
+{"event": "epoch", "arm": "shared-natural", "epoch": 20, "training": {"tempo": 0.10906778891988246, "phase": 0.25204539126641756}, "development": {"tempo": 0.5022929683753883, "phase": 0.40617408744882416}, "paired_updates": 100}
+{"event": "epoch", "arm": "shared-zero", "epoch": 1, "training": {"tempo": 0.4335416954517295, "phase": 0.5039147236887639}, "development": {"tempo": 0.47936818888526683, "phase": 0.5021367646922724}, "paired_updates": 5}
+{"event": "epoch", "arm": "shared-zero", "epoch": 2, "training": {"tempo": 0.3801267083412444, "phase": 0.502908159707387}, "development": {"tempo": 0.5317399699514226, "phase": 0.5007040153115588}, "paired_updates": 10}
+{"event": "epoch", "arm": "shared-zero", "epoch": 3, "training": {"tempo": 0.35829684128013173, "phase": 0.500611971682045}, "development": {"tempo": 0.4655806426864954, "phase": 0.5020537691818324}, "paired_updates": 15}
+{"event": "epoch", "arm": "shared-zero", "epoch": 4, "training": {"tempo": 0.35808647956786, "phase": 0.5017063142734988}, "development": {"tempo": 0.4276511753467551, "phase": 0.500350562752499}, "paired_updates": 20}
+{"event": "epoch", "arm": "shared-zero", "epoch": 5, "training": {"tempo": 0.3591766353834414, "phase": 0.5003726898466131}, "development": {"tempo": 0.44169843462916764, "phase": 0.5011461061867245}, "paired_updates": 25}
+{"event": "epoch", "arm": "shared-zero", "epoch": 6, "training": {"tempo": 0.3553129962998092, "phase": 0.5008163465129895}, "development": {"tempo": 0.44182762461301167, "phase": 0.5001123708508237}, "paired_updates": 30}
+{"event": "epoch", "arm": "shared-zero", "epoch": 7, "training": {"tempo": 0.3590504293245233, "phase": 0.5001025001415288}, "development": {"tempo": 0.4287431723010609, "phase": 0.5004728611235338}, "paired_updates": 35}
+{"event": "epoch", "arm": "shared-zero", "epoch": 8, "training": {"tempo": 0.3592828203639209, "phase": 0.5003346653129694}, "development": {"tempo": 0.43820343933961986, "phase": 0.5000123024217401}, "paired_updates": 40}
+{"event": "epoch", "arm": "shared-zero", "epoch": 9, "training": {"tempo": 0.372554570524444, "phase": 0.5001680625171426}, "development": {"tempo": 0.47061442046564395, "phase": 0.5003805644645078}, "paired_updates": 45}
+{"event": "epoch", "arm": "shared-zero", "epoch": 10, "training": {"tempo": 0.3531771211514293, "phase": 0.5002320007146878}, "development": {"tempo": 0.47005463060696, "phase": 0.49999690622573806}, "paired_updates": 50}
+{"event": "epoch", "arm": "shared-zero", "epoch": 11, "training": {"tempo": 0.3542633988603, "phase": 0.5000545304188722}, "development": {"tempo": 0.47561507784004337, "phase": 0.5001193070675872}, "paired_updates": 55}
+{"event": "epoch", "arm": "shared-zero", "epoch": 12, "training": {"tempo": 0.3543864339316711, "phase": 0.5000812649932841}, "development": {"tempo": 0.46251557781197566, "phase": 0.5000079700200247}, "paired_updates": 60}
+{"event": "epoch", "arm": "shared-zero", "epoch": 13, "training": {"tempo": 0.35482568488239696, "phase": 0.5000099532530862}, "development": {"tempo": 0.4473258297401741, "phase": 0.5000168959144448}, "paired_updates": 65}
+{"event": "epoch", "arm": "shared-zero", "epoch": 14, "training": {"tempo": 0.36390189012994306, "phase": 0.5000673207616183}, "development": {"tempo": 0.46620090795115504, "phase": 0.5000396633867893}, "paired_updates": 70}
+{"event": "epoch", "arm": "shared-zero", "epoch": 15, "training": {"tempo": 0.35636026291897643, "phase": 0.5000543194150916}, "development": {"tempo": 0.4461942621109367, "phase": 0.500097260791982}, "paired_updates": 75}
+{"event": "epoch", "arm": "shared-zero", "epoch": 16, "training": {"tempo": 0.35452527897717473, "phase": 0.500039744863261}, "development": {"tempo": 0.4641649691475947, "phase": 0.5000198926740685}, "paired_updates": 80}
+{"event": "epoch", "arm": "shared-zero", "epoch": 17, "training": {"tempo": 0.3545393442057428, "phase": 0.500016967174172}, "development": {"tempo": 0.4635047171323712, "phase": 0.5000121119263647}, "paired_updates": 85}
+{"event": "epoch", "arm": "shared-zero", "epoch": 18, "training": {"tempo": 0.36808017477462446, "phase": 0.5000504174841676}, "development": {"tempo": 0.5084002700598945, "phase": 0.5000323787148412}, "paired_updates": 90}
+{"event": "epoch", "arm": "shared-zero", "epoch": 19, "training": {"tempo": 0.36052593915346065, "phase": 0.5000433200622546}, "development": {"tempo": 0.47695770212178074, "phase": 0.5001858107507507}, "paired_updates": 95}
+{"event": "epoch", "arm": "shared-zero", "epoch": 20, "training": {"tempo": 0.3573706930590346, "phase": 0.5001319763221803}, "development": {"tempo": 0.44295532945865634, "phase": 0.5000553553780954}, "paired_updates": 100}
+{"event": "epoch", "arm": "separated-natural", "epoch": 1, "training": {"tempo": 0.5803901899885304, "phase": 0.4688633520777232}, "development": {"tempo": 0.7065475705469174, "phase": 0.454506543966787}, "paired_updates": 5}
+{"event": "epoch", "arm": "separated-natural", "epoch": 2, "training": {"tempo": 0.3605083123238948, "phase": 0.397489013855976}, "development": {"tempo": 0.3949199504207849, "phase": 0.41221169119594525}, "paired_updates": 10}
+{"event": "epoch", "arm": "separated-natural", "epoch": 3, "training": {"tempo": 0.27399231128971663, "phase": 0.36234953320623764}, "development": {"tempo": 0.3528445766987345, "phase": 0.4087538718523433}, "paired_updates": 15}
+{"event": "epoch", "arm": "separated-natural", "epoch": 4, "training": {"tempo": 0.21137105978731555, "phase": 0.3289529123967195}, "development": {"tempo": 0.36822468139184067, "phase": 0.40603056435933405}, "paired_updates": 20}
+{"event": "epoch", "arm": "separated-natural", "epoch": 5, "training": {"tempo": 0.18716803840853527, "phase": 0.3110887081960087}, "development": {"tempo": 0.32328665978307053, "phase": 0.3970828271401657}, "paired_updates": 25}
+{"event": "epoch", "arm": "separated-natural", "epoch": 6, "training": {"tempo": 0.1794566634342967, "phase": 0.293296311030771}, "development": {"tempo": 0.637449790547376, "phase": 0.3979220773973293}, "paired_updates": 30}
+{"event": "epoch", "arm": "separated-natural", "epoch": 7, "training": {"tempo": 0.2012555495399708, "phase": 0.2813327027841745}, "development": {"tempo": 0.3207716359188397, "phase": 0.41163154344185954}, "paired_updates": 35}
+{"event": "epoch", "arm": "separated-natural", "epoch": 8, "training": {"tempo": 0.1898362655524426, "phase": 0.27256817845599063}, "development": {"tempo": 0.3623653424317326, "phase": 0.39763038572439363}, "paired_updates": 40}
+{"event": "epoch", "arm": "separated-natural", "epoch": 9, "training": {"tempo": 0.204577671894733, "phase": 0.26702140873575414}, "development": {"tempo": 0.6573730163591263, "phase": 0.409956168320239}, "paired_updates": 45}
+{"event": "epoch", "arm": "separated-natural", "epoch": 10, "training": {"tempo": 0.1553241666882613, "phase": 0.2585909539704697}, "development": {"tempo": 0.35786735755645194, "phase": 0.3945164203566979}, "paired_updates": 50}
+{"event": "epoch", "arm": "separated-natural", "epoch": 11, "training": {"tempo": 0.2212460326739909, "phase": 0.255444591057896}, "development": {"tempo": 0.3417623765979949, "phase": 0.3916705413529817}, "paired_updates": 55}
+{"event": "epoch", "arm": "separated-natural", "epoch": 12, "training": {"tempo": 0.16867697206973528, "phase": 0.2481300541538971}, "development": {"tempo": 0.7010974108465716, "phase": 0.39087313216883635}, "paired_updates": 60}
+{"event": "epoch", "arm": "separated-natural", "epoch": 13, "training": {"tempo": 0.158196439636194, "phase": 0.2421224677753972}, "development": {"tempo": 0.3670241458409968, "phase": 0.3840437896207783}, "paired_updates": 65}
+{"event": "epoch", "arm": "separated-natural", "epoch": 14, "training": {"tempo": 0.14749813381298893, "phase": 0.23816584879865926}, "development": {"tempo": 0.44799243661201493, "phase": 0.3857823474604823}, "paired_updates": 70}
+{"event": "epoch", "arm": "separated-natural", "epoch": 15, "training": {"tempo": 0.11948628311509231, "phase": 0.2337692404324486}, "development": {"tempo": 0.5108411885976144, "phase": 0.3897366313599462}, "paired_updates": 75}
+{"event": "epoch", "arm": "separated-natural", "epoch": 16, "training": {"tempo": 0.1187903047248213, "phase": 0.2294644175948892}, "development": {"tempo": 0.46116530054663557, "phase": 0.39368659623935703}, "paired_updates": 80}
+{"event": "epoch", "arm": "separated-natural", "epoch": 17, "training": {"tempo": 0.11263747455757983, "phase": 0.22794965938025247}, "development": {"tempo": 0.5410392758599835, "phase": 0.38869607829567693}, "paired_updates": 85}
+{"event": "epoch", "arm": "separated-natural", "epoch": 18, "training": {"tempo": 0.10573323542510218, "phase": 0.22301792707649706}, "development": {"tempo": 0.47070352613701205, "phase": 0.3825430514110573}, "paired_updates": 90}
+{"event": "epoch", "arm": "separated-natural", "epoch": 19, "training": {"tempo": 0.100083521720826, "phase": 0.2193248774837974}, "development": {"tempo": 0.4663735144240397, "phase": 0.3886860497329074}, "paired_updates": 95}
+{"event": "epoch", "arm": "separated-natural", "epoch": 20, "training": {"tempo": 0.10053636229950441, "phase": 0.21528116805838554}, "development": {"tempo": 0.5399092912567408, "phase": 0.3816444363321844}, "paired_updates": 100}
+{"event": "epoch", "arm": "separated-zero", "epoch": 1, "training": {"tempo": 0.432941514972623, "phase": 0.5055459893773436}, "development": {"tempo": 0.4867706228997708, "phase": 0.5018479985866356}, "paired_updates": 5}
+{"event": "epoch", "arm": "separated-zero", "epoch": 2, "training": {"tempo": 0.3838979668969227, "phase": 0.5011612647886894}, "development": {"tempo": 0.5385697676421588, "phase": 0.5028420411448431}, "paired_updates": 10}
+{"event": "epoch", "arm": "separated-zero", "epoch": 3, "training": {"tempo": 0.35883998769636183, "phase": 0.5011088002383111}, "development": {"tempo": 0.46394006108649405, "phase": 0.5007945973671175}, "paired_updates": 15}
+{"event": "epoch", "arm": "separated-zero", "epoch": 4, "training": {"tempo": 0.3589543096247024, "phase": 0.5008815530229612}, "development": {"tempo": 0.42512362175414514, "phase": 0.5000013087860441}, "paired_updates": 20}
+{"event": "epoch", "arm": "separated-zero", "epoch": 5, "training": {"tempo": 0.360892923505885, "phase": 0.5002622327651193}, "development": {"tempo": 0.43929241876580344, "phase": 0.500445273983383}, "paired_updates": 25}
+{"event": "epoch", "arm": "separated-zero", "epoch": 6, "training": {"tempo": 0.3557110062596571, "phase": 0.5001738420259454}, "development": {"tempo": 0.44405161538642074, "phase": 0.5002139309851309}, "paired_updates": 30}
+{"event": "epoch", "arm": "separated-zero", "epoch": 7, "training": {"tempo": 0.3578849147962431, "phase": 0.5001720952739915}, "development": {"tempo": 0.431842738322362, "phase": 0.5000334021039823}, "paired_updates": 35}
+{"event": "epoch", "arm": "separated-zero", "epoch": 8, "training": {"tempo": 0.3577731485755694, "phase": 0.5001093217539735}, "development": {"tempo": 0.43975547526138925, "phase": 0.5000359325735843}, "paired_updates": 40}
+{"event": "epoch", "arm": "separated-zero", "epoch": 9, "training": {"tempo": 0.37115204698398957, "phase": 0.5000473156218641}, "development": {"tempo": 0.4696207339800358, "phase": 0.5000925060442751}, "paired_updates": 45}
+{"event": "epoch", "arm": "separated-zero", "epoch": 10, "training": {"tempo": 0.3531009282194531, "phase": 0.5000599688245254}, "development": {"tempo": 0.46851534994965355, "phase": 0.5000666600755863}, "paired_updates": 50}
+{"event": "epoch", "arm": "separated-zero", "epoch": 11, "training": {"tempo": 0.3540995594699142, "phase": 0.5000385945001841}, "development": {"tempo": 0.47487437224927564, "phase": 0.5000065449237024}, "paired_updates": 55}
+{"event": "epoch", "arm": "separated-zero", "epoch": 12, "training": {"tempo": 0.3543371579762358, "phase": 0.5000276637780043}, "development": {"tempo": 0.462637076459923, "phase": 0.5000090948057047}, "paired_updates": 60}
+{"event": "epoch", "arm": "separated-zero", "epoch": 13, "training": {"tempo": 0.35478508352203497, "phase": 0.5000069959855653}, "development": {"tempo": 0.4476408841530437, "phase": 0.5000085762764438}, "paired_updates": 65}
+{"event": "epoch", "arm": "separated-zero", "epoch": 14, "training": {"tempo": 0.36402584547071026, "phase": 0.5000131385306152}, "development": {"tempo": 0.46693206023902567, "phase": 0.5000004762895688}, "paired_updates": 70}
+{"event": "epoch", "arm": "separated-zero", "epoch": 15, "training": {"tempo": 0.35634629932270667, "phase": 0.5000080155514268}, "development": {"tempo": 0.44665563326843655, "phase": 0.5000091572987501}, "paired_updates": 75}
+{"event": "epoch", "arm": "separated-zero", "epoch": 16, "training": {"tempo": 0.35442948338139446, "phase": 0.5000121143187206}, "development": {"tempo": 0.46381339419860174, "phase": 0.5000242935666868}, "paired_updates": 80}
+{"event": "epoch", "arm": "separated-zero", "epoch": 17, "training": {"tempo": 0.35459973813222656, "phase": 0.5000040710564013}, "development": {"tempo": 0.4629629748629523, "phase": 0.5000027367896477}, "paired_updates": 85}
+{"event": "epoch", "arm": "separated-zero", "epoch": 18, "training": {"tempo": 0.36801387805193275, "phase": 0.5000019707051921}, "development": {"tempo": 0.5079517269601653, "phase": 0.4999965914002816}, "paired_updates": 90}
+{"event": "epoch", "arm": "separated-zero", "epoch": 19, "training": {"tempo": 0.3604662455636342, "phase": 0.5000007756554296}, "development": {"tempo": 0.47632295491509247, "phase": 0.4999975510339428}, "paired_updates": 95}
+{"event": "epoch", "arm": "separated-zero", "epoch": 20, "training": {"tempo": 0.3575292420931653, "phase": 0.5000080212082539}, "development": {"tempo": 0.4418605507507096, "phase": 0.5000184151126853}, "paired_updates": 100}
+{"event": "recording_evaluated", "recording": 1, "total": 40}
+{"event": "recording_evaluated", "recording": 2, "total": 40}
+{"event": "recording_evaluated", "recording": 3, "total": 40}
+{"event": "recording_evaluated", "recording": 4, "total": 40}
+{"event": "recording_evaluated", "recording": 5, "total": 40}
+{"event": "recording_evaluated", "recording": 6, "total": 40}
+{"event": "recording_evaluated", "recording": 7, "total": 40}
+{"event": "recording_evaluated", "recording": 8, "total": 40}
+{"event": "recording_evaluated", "recording": 9, "total": 40}
+{"event": "recording_evaluated", "recording": 10, "total": 40}
+{"event": "recording_evaluated", "recording": 11, "total": 40}
+{"event": "recording_evaluated", "recording": 12, "total": 40}
+{"event": "recording_evaluated", "recording": 13, "total": 40}
+{"event": "recording_evaluated", "recording": 14, "total": 40}
+{"event": "recording_evaluated", "recording": 15, "total": 40}
+{"event": "recording_evaluated", "recording": 16, "total": 40}
+{"event": "recording_evaluated", "recording": 17, "total": 40}
+{"event": "recording_evaluated", "recording": 18, "total": 40}
+{"event": "recording_evaluated", "recording": 19, "total": 40}
+{"event": "recording_evaluated", "recording": 20, "total": 40}
+{"event": "recording_evaluated", "recording": 21, "total": 40}
+{"event": "recording_evaluated", "recording": 22, "total": 40}
+{"event": "recording_evaluated", "recording": 23, "total": 40}
+{"event": "recording_evaluated", "recording": 24, "total": 40}
+{"event": "recording_evaluated", "recording": 25, "total": 40}
+{"event": "recording_evaluated", "recording": 26, "total": 40}
+{"event": "recording_evaluated", "recording": 27, "total": 40}
+{"event": "recording_evaluated", "recording": 28, "total": 40}
+{"event": "recording_evaluated", "recording": 29, "total": 40}
+{"event": "recording_evaluated", "recording": 30, "total": 40}
+{"event": "recording_evaluated", "recording": 31, "total": 40}
+{"event": "recording_evaluated", "recording": 32, "total": 40}
+{"event": "recording_evaluated", "recording": 33, "total": 40}
+{"event": "recording_evaluated", "recording": 34, "total": 40}
+{"event": "recording_evaluated", "recording": 35, "total": 40}
+{"event": "recording_evaluated", "recording": 36, "total": 40}
+{"event": "recording_evaluated", "recording": 37, "total": 40}
+{"event": "recording_evaluated", "recording": 38, "total": 40}
+{"event": "recording_evaluated", "recording": 39, "total": 40}
+{"event": "recording_evaluated", "recording": 40, "total": 40}
+{"event": "experiment_complete", "gate": {"numerical_gates": {"shared": {"complete": true, "finished": true, "audio_signal": true, "common_nonregression": false, "recording_breadth": false, "passed": false, "previous_coupled_nonregression": false, "previous_trajectory_nonregression": false, "temporal_controls_complete": true, "temporal_phase_dependence": true}, "separated": {"complete": true, "finished": true, "audio_signal": true, "common_nonregression": false, "recording_breadth": false, "passed": false, "previous_coupled_nonregression": false, "previous_trajectory_nonregression": false, "temporal_controls_complete": true, "temporal_phase_dependence": true}}, "per_task_audio_signal": {"shared": {"tempo": true, "phase": true}, "separated": {"tempo": true, "phase": true}}, "separation_nonregression": false, "separation_strict_development_gain": true, "separation_recording_breadth": false, "supports_fusion_proposal": false, "coherent_clock": false, "independent_acceptance": false, "production_change": false, "execution_complete": true}}

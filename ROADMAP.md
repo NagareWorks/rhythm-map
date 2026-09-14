@@ -231,6 +231,26 @@ checks cannot admit independent fields as a coherent clock. Authored runner
 validation is not a musical result. The next execution is one byte-registered
 four-arm run on the existing cached packets, without a sweep, default or holdout
 change; its outcome must precede a coherent-fusion proposal.
+The subsequent [four-arm musical outcome](evaluation/baselines/separated-evidence-learning-v1.md)
+has now completed all 80 epochs, 400 paired updates / 600 native optimizer calls,
+and 400 evidence-pair evaluations in 201.84 s on T4. Both architectures pass the
+joint fitted-zero audio-signal and temporal-phase-dependence gates, unlike the
+preceding protected-clock fit's joint signal failure. This is useful evidence,
+not production acceptance. Separation lowers phase error and ARTBeaT aggregate
+errors versus shared training, but development median BPM worsens slightly and
+3/5 development recordings regress on BPM. ARTBeaT separated BPM error remains
+28.21% versus raw's 14.45%; 11/15 recordings regress on both BPM and phase versus
+raw. Neither architecture passes the unchanged full gate, and the additional
+separation nonregression/breadth gates fail. Close this fixed experiment; no
+fusion proposal, new fit, public strategy or default change follows automatically.
+Next inspect the retained per-task errors and temporal controls without training:
+development time-mean features have slightly lower median BPM error than natural
+features for both networks, despite natural phase's clear advantage. Distinguish
+absolute tempo/beat-level prior error from local timing sensitivity and examine
+the existing supervision's coverage before proposing another mechanism. Do not
+infer that task separation, extra capacity, more epochs or a Transformer alone
+will fix speed. Preserve every adverse case and the original gates; independent
+evidence still does not establish a coherent beat list or release readiness.
 Do not silently restart the old run, alter its accuracy gates, or detach
 recurrence, shorten crops or sweep settings to rescue this closed run. A future
 portable scan also needs separate verification before Rust/library promotion.
