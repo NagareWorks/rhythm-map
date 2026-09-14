@@ -188,6 +188,25 @@ Next separately register a bounded musical comparison with this explicit
 optimizer identity, matched zero-feature control and unchanged acceptance gates,
 including veto/stall and finite-count-regression receipts. Shipping outputs,
 holdouts, old source identities and release state remain unchanged.
+The [protected-optimizer musical comparison](experiments/protected_phase_fit/README.md)
+has now completed both 20-epoch / 100-update fits and 200 sequence evaluations.
+Every defined native displacement certificate passes, yet the musical gate
+fails. Compared with the preceding unprotected fit, common-support development
+BPM error improves from 62.73% to 42.19%, but ARTBeaT worsens from 24.58% to
+29.12%; phase worsens on both cohorts. Reference-only development phase beats
+fitted zero by 15.84%, while BPM error is 42.00% versus zero's 41.17%, failing
+the unchanged joint 10% improvement gate. Raw per-record regressions remain
+4/5 development and 11/15 ARTBeaT for BPM, 3/5 and 15/15 for phase. The audio
+fit has 6 fully stalled steps and 32 finite-count increases; the zero control
+has 2 and 11, despite first-order protection. All complete records, term-gradient
+receipts, selected checkpoints, predictions and adverse metrics are retained
+and independently checked. This disproves sufficiency of the protected update,
+not the existence of the previously measured objective interference.
+Close the fixed run, stop extending this optimizer through tolerance/step-size
+sweeps, and do not add a public strategy. The next proposal must address speed
+prior, phase alignment and representative supervision with a distinct falsifiable
+comparison grounded in these fixed paired outputs; this result does not establish
+which new architecture or data change will succeed. No further fit is automatic.
 Do not silently restart the old run, alter its accuracy gates, or detach
 recurrence, shorten crops or sweep settings to rescue this closed run. A future
 portable scan also needs separate verification before Rust/library promotion.
