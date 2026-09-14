@@ -75,3 +75,4 @@ jobs:
       - run: python -m unittest discover -s experiments/separated_evidence_fit -p 'test_*.py' -v
       - run: python -m unittest discover -s experiments/tempo_attribution -p 'test_*.py' -v
       - run: python -m unittest discover -s experiments/tempo_pairs -p 'test_*.py' -v
+      - run: python -m unittest discover -s experiments/tempo_alignment -p 'test_*.py' -v

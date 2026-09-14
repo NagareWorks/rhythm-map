@@ -278,6 +278,19 @@ then obtain actual transformed-audio frozen-encoder features for the proposed
 relative-rate test. All previews explicitly remain ineligible for fitting until
 alignment is checked. Exact duration and authored success do not certify music
 labels, demonstrate a better BPM model, or justify loosening old accuracy gates.
+The subsequent [real-music correspondence audit](experiments/tempo_alignment/README.md)
+has now checked all 15 Rubber Band pairs, 2,215 grid/beat positions, real +120 ms
+delayed-PCM controls and changed-rate wrong-map controls. Eleven pairs pass the
+fixed 80% interior grid/beat support gate; four orchestral variants do not, so
+the full-population gate fails. Wrong-map false alignment is 0/504 physically
+supported changed-context points. Supported grid coverage is 694/795 interior,
+54/60 seam and 25/60 edge. The rejected orchestral points mostly lose short-window
+spectral similarity, not demonstrably nonzero timing: do not call this a proven
+renderer drift or model failure. Retain the strict failure and all original
+sources. A new relative-speed learning contract may investigate explicitly
+control-checked units with exclusion accounting and natural controls, but may
+not promote entire nominal labels, interpolate sparse checks into dense masks,
+or claim a three-source pilot generalizes. No new model fit or product change.
 Do not silently restart the old run, alter its accuracy gates, or detach
 recurrence, shorten crops or sweep settings to rescue this closed run. A future
 portable scan also needs separate verification before Rust/library promotion.
