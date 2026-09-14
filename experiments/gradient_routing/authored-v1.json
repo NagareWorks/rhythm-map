@@ -1,0 +1,142 @@
+{
+  "schema": "rhythm-map.gradient-routing-authored.v1",
+  "source_sha256": {
+    "experiments/clock_evidence/diagnostic.py": "be89a21c4f8fe207993c70068402bfae58a701e537bc676ff23fc2c940d9cb71",
+    "experiments/clock_readout/data.py": "dc785abed705350139786e86fd0533cd96b673987ab7db710c991369c5daa241",
+    "experiments/clock_readout/model.py": "57871068c5c4958679d014dbc0018d4ccda5c1d315265ad64007082da8a76abc",
+    "experiments/clock_readout/prepare.py": "4fadbeab34eec5c3b99df57a11d23615439b09ad21f9f6843bbc3c3c58f0eeb1",
+    "experiments/clock_readout/run.py": "ee52a72e4f03675ffe0169d7a9ad15d4bac0726133fdf41e5e49eaaa541ac223",
+    "experiments/clock_readout/test_readout.py": "61207b101157c8403ded5d58d1dbdfdf317d6b7aab45c096f33debda9613f0e3",
+    "experiments/coupled_clock/__init__.py": "2cbf69dc36abcac78926b1e6c387b3cd2fa7d88a6dbf9476da287aaf5ffbe9c4",
+    "experiments/coupled_clock/clock.py": "8159c503dcac6b911d784a5e270413f3808f30bb80178a478b7ff9754de80c81",
+    "experiments/coupled_clock/measurement.py": "6aec618f4a868218f121326bc420be01eb14a9b65f28c6d6a8e73ef0da86c18d",
+    "experiments/coupled_clock/model.py": "a58727f37cf9902d4fa300e13b2d16e27e8c93fc4810627e3a24d4b60d544c58",
+    "experiments/coupled_clock/prepare.py": "0542de33d896c982af91ce9ca0f2fa33d018f29b5b4adbbc1f5d416374d6adc9",
+    "experiments/coupled_clock/run.py": "f2e9393c415029af186ea351a69a9ad18b7cd88d6a1da10e251eb7ad5efa2912",
+    "experiments/coupled_clock/supervision.py": "f07045a911b9e8b7e49dd81fc0c90ec392b614a85f62b93fe9fe59346980c204",
+    "experiments/coupled_clock/test_coupled_clock.py": "029181bd07828dcd4e487ab48af2b031637943f7e5d64ded4f2ca35944fef29e",
+    "experiments/coupled_clock/test_experiment.py": "5625274104ef031accceb00085bc06a4830cac39e41cce3225cc80b9dab82006",
+    "experiments/gradient_audit/PROTOCOL-v1.md": "4213203c827452fb48d8d86f3684f1c26275f78c9dd2cf0dfe33881fc53a7fa5",
+    "experiments/gradient_audit/__init__.py": "75fac5f1de587b63cb7ce0534569245fb3ca4eb5a0cfc65b4d94b87fa927bd6f",
+    "experiments/gradient_audit/audit.py": "12107c255031e0420cb12ed9003274a7906605e8ba7d293560c795a15e5acf6f",
+    "experiments/gradient_audit/register.py": "96220003019a5ce47913599ec28fdfc4ee865190e08bb2d97594d640cc0c4a88",
+    "experiments/gradient_audit/results-v1.json": "e0b6e2f4c13098196a54c08e2f31b07ba9885c30c8ffdb8c5815fd2d212e5954",
+    "experiments/gradient_audit/run.py": "f007924040c08fb13f51e7b65093dacefe21b8d79d24b72994d8665cbe81bedb",
+    "experiments/gradient_audit/test_audit.py": "ffb0e8c8ce1570b35c809684a0b79c64d78715ea9afbb54f279d212484aa1082",
+    "experiments/gradient_routing/PROTOCOL-v1.md": "53e58b268fdea42a5460dc7352257317de6bea6c76fd5c3b7ec97a7ac204e6af",
+    "experiments/gradient_routing/__init__.py": "c382f979e8ccfdb32b18ad08f3e9e7ecf2c3530040e4d67b78eba6911646e79a",
+    "experiments/gradient_routing/authored.py": "f9d3cefc254a61a1271a3fab8a842408eb2a08ec15a03204e8a97d5ebbde96d6",
+    "experiments/gradient_routing/packet_audit.py": "6b2b90bc4d012f5caf7e1dd914a9d7f3954c7bb18e5b39163da49d85e31448b4",
+    "experiments/gradient_routing/route.py": "84464ef5c1a5cd1e1dff0649fef7155af36af440163a114f07a209d8547c2d09",
+    "experiments/gradient_routing/test_packets.py": "83af1c9d06f10031a0a761ddb0ef8a49a28eff5426918cd15f7f93ea042ae6cc",
+    "experiments/gradient_routing/test_route.py": "a27fee90ba9eaca13c4349b45141a9ce12d488eb2c5304b0a35176b75afe15b8",
+    "experiments/observed_adjoint/__init__.py": "91821b1e3280ae2063769f49431e620291daeb788ca0bba486b093dc209dbc5d",
+    "experiments/observed_adjoint/benchmark.py": "d79c769bccb2f5c1a626df45e8553d38f91481175354850288f20eeb7a80c4f6",
+    "experiments/observed_adjoint/contract-v1.json": "affe5dee999cacae0f5e229a8bee687a91d999aef3eac9920d65dc4db62c0231",
+    "experiments/observed_adjoint/fixtures.py": "687cc777ea1714a08a1bbfa8816f36688c772cf45b559216a53acfed8448e41b",
+    "experiments/observed_adjoint/recorder.py": "d3b08ad802f38b1dab04f6fe498eb25b518ddb8e9d203d39a0bceea8c0332963",
+    "experiments/observed_adjoint/test_cost.py": "46a610e0d356f1d24702796e7b3bb778352a6373b79ce7efa9bb81832d800b02",
+    "experiments/observed_adjoint/test_observed.py": "efe48195cfac73ed608e99acb9671a653d2d2561d809ea4c0426b606141094b6",
+    "experiments/observed_adjoint/transport.py": "73dd089e3148f421498db213dbd89bd26a7c0d22eb8d8ef800a4770eab88315f",
+    "experiments/phase_attribution/PROTOCOL-v1.md": "40f6709885ae6e3ae3fab1d0198f7f1169dceeca16a2bd0c49a4a12fa9a68302",
+    "experiments/phase_attribution/__init__.py": "d983cf17e25a49d8054126d1afa9c1ff3c30787f88525fc81eed64e07e4bbc1c",
+    "experiments/phase_attribution/diagnostic.py": "f3fb0b9fb74484c32849c9ae9be2f58470a10d3ecc1d10da96cc79f65b19b3ee",
+    "experiments/phase_attribution/run.py": "55074f5064f49b1f8683cf005c7282e175548c2ae7897e31e7924a3272cae290",
+    "experiments/phase_sync/benchmark.py": "4a3aee86be4161cfcbf5037ab6b63bd16f0ef0b1c7be7b5ccb556bf30459b5fe",
+    "experiments/phase_sync/model.py": "38bee4d0991fbc14c51dd465dbb2e419826ebf672f6030c1dd5d57ad07741213",
+    "experiments/phase_sync/scan.py": "db9393b924975a6943d26417ff397c57ffacebc6e2071456ed928553eabd1e5b",
+    "experiments/phase_sync/test_cost.py": "01cbfb80dbe17a8e32c10c5ea35aa58529d9ec3e14511fd6756264227c6f614b",
+    "experiments/phase_sync/test_phase_sync.py": "7bf5402c9ce55a6bee85c807dbdd04c42eb73c5db514bf33eacc5d33deab5e59",
+    "experiments/phase_sync_fit/PROTOCOL-v1.md": "6e8f7bd6f31f49b74f459934d83e98737905524cc7ea471b6b5155a918f47fae",
+    "experiments/phase_sync_fit/register.py": "8437fe89de58c443694e46693ed4030530e7985b2a90d3b33b0994a24d8ad7d2",
+    "experiments/phase_sync_fit/run.py": "2389cfd0cd1a48970a12b484996c1730131b41fb538e7fe24c13fb9825c4f32b",
+    "experiments/phase_sync_fit/test_fit.py": "eda23bd39a87b08f3949e31df62b5617c13554eef35523af131e3541d769f5f1",
+    "experiments/scaled_adjoint/__init__.py": "92865a3c1bfcea77dd941b98e6e7d5ac7f533c94b6903692b9b61da7073897fb",
+    "experiments/scaled_adjoint/benchmark.py": "99798a4472088308aea588dc786c024ce6978fa389c04ed905730a3768549c24",
+    "experiments/scaled_adjoint/scaled.py": "9d0b69488e46ae5b1f6deb84edf9631d5dec526baf8c2a164e69c4a56be0b37b",
+    "experiments/scaled_adjoint/scan.py": "d2f9adbd358229dfbb72840c42497161d769b4a983e5f8edd0b2df2b951da5e8",
+    "experiments/scaled_adjoint/test_cost.py": "e8f5c15009ad788a4304c827445443f045a0fffa11a45231946e737c9d9a6f5e",
+    "experiments/scaled_adjoint/test_scaled.py": "1d22d85129c430a5d2454b641623410b1965f3674d84db01fedfafcae9126238",
+    "experiments/scaled_adjoint/transport.py": "a2662a5aa524c59b9ae90390b65067c5910760fd1090f492e3f77e60107a4988",
+    "experiments/scaled_phase_fit/PROTOCOL-v1.md": "f3c531a19f0fbaf11cd11f9466a86eae4a1e861b0cad4fb844b79b0e35d07d5c",
+    "experiments/scaled_phase_fit/__init__.py": "ff566b9c3e0d76f9b85d9801d5588c747f5b85f8df4b86a6c63738353db6074a",
+    "experiments/scaled_phase_fit/recorder.py": "5ee7fc543793ac24de806a24ad50a73908e72b833640e99e4aee31847308b1b9",
+    "experiments/scaled_phase_fit/register.py": "41b84327e4606762a217138a93aa456fcb67e6f3e6acb69f81794c5f048b731f",
+    "experiments/scaled_phase_fit/run.py": "97b22ebee07d6f453f10ad6b4861602cab110059f0acd6b5c3641ae8f8cae25e",
+    "experiments/scaled_phase_fit/test_fit.py": "6478169330f41c026a15992aaee2febb82cbba213a4654c01113aaa1e9c2e0e2",
+    "experiments/training_observer/__init__.py": "4c3e4daf0722d303b8b3be8d4c932482897bf7d01abc15b1648e496958926944",
+    "experiments/training_observer/phase_trace.py": "8d579a442afbfcfbdfd84d94b07d27c2d1f7d26289678eaa2d930e429a086907",
+    "experiments/training_observer/recorder.py": "ee500f6808a96efad722c17d77da5ad73e09f7c78bf68a4d739a5332b53cd198",
+    "experiments/training_observer/test_recorder.py": "9bae1ad4b36407b3de5d43e1d9c05745e2957c51f2a569960f77e5181a119ac6"
+  },
+  "runtime": {
+    "python": "3.13.5",
+    "torch": "2.8.0+cpu",
+    "numpy": "2.2.6"
+  },
+  "learning": {
+    "seed": 1729,
+    "frames": 61,
+    "optimizer": "SGD",
+    "learning_rate": 0.03,
+    "updates": 40,
+    "before": {
+      "phase": 0.10857581731640681,
+      "advance": 0.007530799740855725,
+      "total": 0.11610661705726254
+    },
+    "after": {
+      "phase": 0.031399107080882636,
+      "advance": 0.001449292063394093,
+      "total": 0.03284839914427673
+    },
+    "both_losses_reduced": true
+  },
+  "preconditioning": {
+    "momentum_warmup_updates": 0,
+    "raw_gradient": {
+      "conflict": false,
+      "count_direction_defined": true,
+      "phase_count_cosine": 0.0,
+      "routed_count_cosine": 0.3162277660168379,
+      "retained_phase_norm_log2": 2.7459265481648374,
+      "original_phase_norm_log2": 2.7459265481648374,
+      "count_projection_ratio_log2": 0.0
+    },
+    "actual_displacement": [
+      0.009999999900000002,
+      -0.009999999985714284
+    ],
+    "check": {
+      "count_direction_defined": true,
+      "moved": true,
+      "displacement_count_cosine": 0.31622776195105257,
+      "first_order_nonincrease": false
+    },
+    "quadratic_count_loss_change": 0.010099999813142864
+  },
+  "momentum": {
+    "momentum_warmup_updates": 10,
+    "raw_gradient": {
+      "conflict": false,
+      "count_direction_defined": true,
+      "phase_count_cosine": null,
+      "routed_count_cosine": 1.0,
+      "retained_phase_norm_log2": null,
+      "original_phase_norm_log2": null,
+      "count_projection_ratio_log2": 0.0
+    },
+    "actual_displacement": [
+      0.0070853527652530585
+    ],
+    "check": {
+      "count_direction_defined": true,
+      "moved": true,
+      "displacement_count_cosine": 1.0,
+      "first_order_nonincrease": false
+    },
+    "quadratic_count_loss_change": 0.007110453877157098
+  },
+  "musical_updates": 0,
+  "admission": false
+}

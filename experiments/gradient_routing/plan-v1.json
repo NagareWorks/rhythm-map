@@ -1,0 +1,647 @@
+{
+  "schema": "rhythm-map.gradient-routing-plan.v1",
+  "source_sha256": {
+    "experiments/clock_evidence/diagnostic.py": "be89a21c4f8fe207993c70068402bfae58a701e537bc676ff23fc2c940d9cb71",
+    "experiments/clock_readout/data.py": "dc785abed705350139786e86fd0533cd96b673987ab7db710c991369c5daa241",
+    "experiments/clock_readout/model.py": "57871068c5c4958679d014dbc0018d4ccda5c1d315265ad64007082da8a76abc",
+    "experiments/clock_readout/prepare.py": "4fadbeab34eec5c3b99df57a11d23615439b09ad21f9f6843bbc3c3c58f0eeb1",
+    "experiments/clock_readout/run.py": "ee52a72e4f03675ffe0169d7a9ad15d4bac0726133fdf41e5e49eaaa541ac223",
+    "experiments/clock_readout/test_readout.py": "61207b101157c8403ded5d58d1dbdfdf317d6b7aab45c096f33debda9613f0e3",
+    "experiments/coupled_clock/__init__.py": "2cbf69dc36abcac78926b1e6c387b3cd2fa7d88a6dbf9476da287aaf5ffbe9c4",
+    "experiments/coupled_clock/clock.py": "8159c503dcac6b911d784a5e270413f3808f30bb80178a478b7ff9754de80c81",
+    "experiments/coupled_clock/measurement.py": "6aec618f4a868218f121326bc420be01eb14a9b65f28c6d6a8e73ef0da86c18d",
+    "experiments/coupled_clock/model.py": "a58727f37cf9902d4fa300e13b2d16e27e8c93fc4810627e3a24d4b60d544c58",
+    "experiments/coupled_clock/prepare.py": "0542de33d896c982af91ce9ca0f2fa33d018f29b5b4adbbc1f5d416374d6adc9",
+    "experiments/coupled_clock/run.py": "f2e9393c415029af186ea351a69a9ad18b7cd88d6a1da10e251eb7ad5efa2912",
+    "experiments/coupled_clock/supervision.py": "f07045a911b9e8b7e49dd81fc0c90ec392b614a85f62b93fe9fe59346980c204",
+    "experiments/coupled_clock/test_coupled_clock.py": "029181bd07828dcd4e487ab48af2b031637943f7e5d64ded4f2ca35944fef29e",
+    "experiments/coupled_clock/test_experiment.py": "5625274104ef031accceb00085bc06a4830cac39e41cce3225cc80b9dab82006",
+    "experiments/gradient_audit/PROTOCOL-v1.md": "4213203c827452fb48d8d86f3684f1c26275f78c9dd2cf0dfe33881fc53a7fa5",
+    "experiments/gradient_audit/__init__.py": "75fac5f1de587b63cb7ce0534569245fb3ca4eb5a0cfc65b4d94b87fa927bd6f",
+    "experiments/gradient_audit/audit.py": "12107c255031e0420cb12ed9003274a7906605e8ba7d293560c795a15e5acf6f",
+    "experiments/gradient_audit/register.py": "96220003019a5ce47913599ec28fdfc4ee865190e08bb2d97594d640cc0c4a88",
+    "experiments/gradient_audit/results-v1.json": "e0b6e2f4c13098196a54c08e2f31b07ba9885c30c8ffdb8c5815fd2d212e5954",
+    "experiments/gradient_audit/run.py": "f007924040c08fb13f51e7b65093dacefe21b8d79d24b72994d8665cbe81bedb",
+    "experiments/gradient_audit/test_audit.py": "ffb0e8c8ce1570b35c809684a0b79c64d78715ea9afbb54f279d212484aa1082",
+    "experiments/gradient_routing/PROTOCOL-v1.md": "53e58b268fdea42a5460dc7352257317de6bea6c76fd5c3b7ec97a7ac204e6af",
+    "experiments/gradient_routing/__init__.py": "c382f979e8ccfdb32b18ad08f3e9e7ecf2c3530040e4d67b78eba6911646e79a",
+    "experiments/gradient_routing/authored.py": "f9d3cefc254a61a1271a3fab8a842408eb2a08ec15a03204e8a97d5ebbde96d6",
+    "experiments/gradient_routing/packet_audit.py": "6b2b90bc4d012f5caf7e1dd914a9d7f3954c7bb18e5b39163da49d85e31448b4",
+    "experiments/gradient_routing/route.py": "84464ef5c1a5cd1e1dff0649fef7155af36af440163a114f07a209d8547c2d09",
+    "experiments/gradient_routing/test_packets.py": "83af1c9d06f10031a0a761ddb0ef8a49a28eff5426918cd15f7f93ea042ae6cc",
+    "experiments/gradient_routing/test_route.py": "a27fee90ba9eaca13c4349b45141a9ce12d488eb2c5304b0a35176b75afe15b8",
+    "experiments/observed_adjoint/__init__.py": "91821b1e3280ae2063769f49431e620291daeb788ca0bba486b093dc209dbc5d",
+    "experiments/observed_adjoint/benchmark.py": "d79c769bccb2f5c1a626df45e8553d38f91481175354850288f20eeb7a80c4f6",
+    "experiments/observed_adjoint/contract-v1.json": "affe5dee999cacae0f5e229a8bee687a91d999aef3eac9920d65dc4db62c0231",
+    "experiments/observed_adjoint/fixtures.py": "687cc777ea1714a08a1bbfa8816f36688c772cf45b559216a53acfed8448e41b",
+    "experiments/observed_adjoint/recorder.py": "d3b08ad802f38b1dab04f6fe498eb25b518ddb8e9d203d39a0bceea8c0332963",
+    "experiments/observed_adjoint/test_cost.py": "46a610e0d356f1d24702796e7b3bb778352a6373b79ce7efa9bb81832d800b02",
+    "experiments/observed_adjoint/test_observed.py": "efe48195cfac73ed608e99acb9671a653d2d2561d809ea4c0426b606141094b6",
+    "experiments/observed_adjoint/transport.py": "73dd089e3148f421498db213dbd89bd26a7c0d22eb8d8ef800a4770eab88315f",
+    "experiments/phase_attribution/PROTOCOL-v1.md": "40f6709885ae6e3ae3fab1d0198f7f1169dceeca16a2bd0c49a4a12fa9a68302",
+    "experiments/phase_attribution/__init__.py": "d983cf17e25a49d8054126d1afa9c1ff3c30787f88525fc81eed64e07e4bbc1c",
+    "experiments/phase_attribution/diagnostic.py": "f3fb0b9fb74484c32849c9ae9be2f58470a10d3ecc1d10da96cc79f65b19b3ee",
+    "experiments/phase_attribution/run.py": "55074f5064f49b1f8683cf005c7282e175548c2ae7897e31e7924a3272cae290",
+    "experiments/phase_sync/benchmark.py": "4a3aee86be4161cfcbf5037ab6b63bd16f0ef0b1c7be7b5ccb556bf30459b5fe",
+    "experiments/phase_sync/model.py": "38bee4d0991fbc14c51dd465dbb2e419826ebf672f6030c1dd5d57ad07741213",
+    "experiments/phase_sync/scan.py": "db9393b924975a6943d26417ff397c57ffacebc6e2071456ed928553eabd1e5b",
+    "experiments/phase_sync/test_cost.py": "01cbfb80dbe17a8e32c10c5ea35aa58529d9ec3e14511fd6756264227c6f614b",
+    "experiments/phase_sync/test_phase_sync.py": "7bf5402c9ce55a6bee85c807dbdd04c42eb73c5db514bf33eacc5d33deab5e59",
+    "experiments/phase_sync_fit/PROTOCOL-v1.md": "6e8f7bd6f31f49b74f459934d83e98737905524cc7ea471b6b5155a918f47fae",
+    "experiments/phase_sync_fit/register.py": "8437fe89de58c443694e46693ed4030530e7985b2a90d3b33b0994a24d8ad7d2",
+    "experiments/phase_sync_fit/run.py": "2389cfd0cd1a48970a12b484996c1730131b41fb538e7fe24c13fb9825c4f32b",
+    "experiments/phase_sync_fit/test_fit.py": "eda23bd39a87b08f3949e31df62b5617c13554eef35523af131e3541d769f5f1",
+    "experiments/scaled_adjoint/__init__.py": "92865a3c1bfcea77dd941b98e6e7d5ac7f533c94b6903692b9b61da7073897fb",
+    "experiments/scaled_adjoint/benchmark.py": "99798a4472088308aea588dc786c024ce6978fa389c04ed905730a3768549c24",
+    "experiments/scaled_adjoint/scaled.py": "9d0b69488e46ae5b1f6deb84edf9631d5dec526baf8c2a164e69c4a56be0b37b",
+    "experiments/scaled_adjoint/scan.py": "d2f9adbd358229dfbb72840c42497161d769b4a983e5f8edd0b2df2b951da5e8",
+    "experiments/scaled_adjoint/test_cost.py": "e8f5c15009ad788a4304c827445443f045a0fffa11a45231946e737c9d9a6f5e",
+    "experiments/scaled_adjoint/test_scaled.py": "1d22d85129c430a5d2454b641623410b1965f3674d84db01fedfafcae9126238",
+    "experiments/scaled_adjoint/transport.py": "a2662a5aa524c59b9ae90390b65067c5910760fd1090f492e3f77e60107a4988",
+    "experiments/scaled_phase_fit/PROTOCOL-v1.md": "f3c531a19f0fbaf11cd11f9466a86eae4a1e861b0cad4fb844b79b0e35d07d5c",
+    "experiments/scaled_phase_fit/__init__.py": "ff566b9c3e0d76f9b85d9801d5588c747f5b85f8df4b86a6c63738353db6074a",
+    "experiments/scaled_phase_fit/recorder.py": "5ee7fc543793ac24de806a24ad50a73908e72b833640e99e4aee31847308b1b9",
+    "experiments/scaled_phase_fit/register.py": "41b84327e4606762a217138a93aa456fcb67e6f3e6acb69f81794c5f048b731f",
+    "experiments/scaled_phase_fit/run.py": "97b22ebee07d6f453f10ad6b4861602cab110059f0acd6b5c3641ae8f8cae25e",
+    "experiments/scaled_phase_fit/test_fit.py": "6478169330f41c026a15992aaee2febb82cbba213a4654c01113aaa1e9c2e0e2",
+    "experiments/training_observer/__init__.py": "4c3e4daf0722d303b8b3be8d4c932482897bf7d01abc15b1648e496958926944",
+    "experiments/training_observer/phase_trace.py": "8d579a442afbfcfbdfd84d94b07d27c2d1f7d26289678eaa2d930e429a086907",
+    "experiments/training_observer/recorder.py": "ee500f6808a96efad722c17d77da5ad73e09f7c78bf68a4d739a5332b53cd198",
+    "experiments/training_observer/test_recorder.py": "9bae1ad4b36407b3de5d43e1d9c05745e2957c51f2a569960f77e5181a119ac6"
+  },
+  "archive_sha256": "befd8d11cadc88e9b2ce8699f0a1efb731d3f5bb6a7dc3ed603456e7a766f884",
+  "private_report_sha256": "19a3b3d540fa968aa8ec37a63712d5953b9f53cbf1b14430d4050b9ac54d4a91",
+  "population": [
+    {
+      "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Bach_BWV1007-01",
+      "gradient_packet_sha256": "e8871e85dd39795cf02a21c2c1d34a293d1b062a238d0c28234959fdfba64ae1"
+    },
+    {
+      "id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Bach_BWV1007-01",
+      "gradient_packet_sha256": "854be1b3db20321b8818fd32137c537211d8e8395364132741d6176b0451bb57"
+    },
+    {
+      "id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Bach_BWV1007-01",
+      "gradient_packet_sha256": "42727a1fb135ddb15e8d3cb1bfbc4a60088098d104fed48c1e4d7cf968aa3700"
+    },
+    {
+      "id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Bach_BWV1007-01",
+      "gradient_packet_sha256": "de3e50ac2aa2e9d746279a52dd066268a3d1776e222995c9e3c92553850d31da"
+    },
+    {
+      "id": "rubato-beethoven-op072-0-ov-henning2017",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Beethoven_Op072-0",
+      "gradient_packet_sha256": "2eca5ec4dd619fdb9d5c7ec2f26dadfc7fa19c2c12881680f47bcc768f8eec3a"
+    },
+    {
+      "id": "rubato-beethoven-op072-0-ov-henning2017",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Beethoven_Op072-0",
+      "gradient_packet_sha256": "b6d758f41db17f63f0d1cc9ad8f892b27058c3509378aabe3190e28ce5777317"
+    },
+    {
+      "id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Berlioz_H048-04",
+      "gradient_packet_sha256": "6fadd1a06d192e228f7df8956afdd0cf8e08162589894ad75a4a33f872817eb3"
+    },
+    {
+      "id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Berlioz_H048-04",
+      "gradient_packet_sha256": "1c45f2d33c7a26508c5b1d86dea6eb7eb1f96243e09fd12811abf73eb9b21488"
+    },
+    {
+      "id": "rubato-boccherini-g275-03-ov-krux2022",
+      "checkpoint": "audio",
+      "role": "development",
+      "work": "Boccherini_G275-03",
+      "gradient_packet_sha256": "f67e25af9a622fb3b1dbcc14155993806ee74f0ed20470c4975b9ff837d84111"
+    },
+    {
+      "id": "rubato-boccherini-g275-03-ov-krux2022",
+      "checkpoint": "zero",
+      "role": "development",
+      "work": "Boccherini_G275-03",
+      "gradient_packet_sha256": "628ced87d8d603bcfc9e4d7a969277b9565bb404d97e03de63fbba05c0735d41"
+    },
+    {
+      "id": "rubato-brahms-op115-01-ov-schmitta2025",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Brahms_Op115-01",
+      "gradient_packet_sha256": "82a5d7a995005ed796d44270241b50821bd772fe0ac51f9b845bfb9fb9f7018b"
+    },
+    {
+      "id": "rubato-brahms-op115-01-ov-schmitta2025",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Brahms_Op115-01",
+      "gradient_packet_sha256": "5a422442281ca7a8c9392bfd1fc6a6e9215d870d44bccf14db2a466039bef052"
+    },
+    {
+      "id": "rubato-brahms-op115-01-ov-steffens2008",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Brahms_Op115-01",
+      "gradient_packet_sha256": "25ea0f60de0a41aec3b3a7f77670adb9b15aab54eff9392f7039bd3a7b1c65ab"
+    },
+    {
+      "id": "rubato-brahms-op115-01-ov-steffens2008",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Brahms_Op115-01",
+      "gradient_packet_sha256": "b618bb320df622912891a1a1f87f32eac61ffd5c94b343b6ed8293f5df146364"
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Handel_HWV040-1-01",
+      "gradient_packet_sha256": "118a0994ac07397bbe4f73bd86f01711ac57b42bc74ce591af350b2cd812cf48"
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Handel_HWV040-1-01",
+      "gradient_packet_sha256": "9b408b378376816fa51af28722eb2bb63d347b88c810bad958d74113ae4811ed"
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Handel_HWV040-1-01",
+      "gradient_packet_sha256": "876f3d464b6334486b2a0bdc3e266b16710eb13eb4a35e111c4cc7495d2d4c01"
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Handel_HWV040-1-01",
+      "gradient_packet_sha256": "984f57e6b018f527158394b5712deb2c64abf911e76864238f3da5d0ea2e760f"
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Handel_HWV040-1-01",
+      "gradient_packet_sha256": "1029f7ddb7144d6ce2f5e5f1ff73752298ff28c371b93c1192da798ff096fc8f"
+    },
+    {
+      "id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Handel_HWV040-1-01",
+      "gradient_packet_sha256": "474a3b5d18d9a22a0e7d38d131793b9c8f692b3f92d96c77c9b5c9c643e5a984"
+    },
+    {
+      "id": "rubato-mozart-kv618-ar-papalin2012",
+      "checkpoint": "audio",
+      "role": "development",
+      "work": "Mozart_KV618",
+      "gradient_packet_sha256": "701e40f513e5171874751bd6d5b7b20519968abd159512461f90adab10d0940a"
+    },
+    {
+      "id": "rubato-mozart-kv618-ar-papalin2012",
+      "checkpoint": "zero",
+      "role": "development",
+      "work": "Mozart_KV618",
+      "gradient_packet_sha256": "92f5bd2354162a12d08f091b056391b5238827811952967b8dd1329450655205"
+    },
+    {
+      "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+      "checkpoint": "audio",
+      "role": "development",
+      "work": "Mozart_KV618",
+      "gradient_packet_sha256": "605b5e2e8555f0453daff52d3129848a70a9f111daeb2cf134376495ae763847"
+    },
+    {
+      "id": "rubato-mozart-kv618-ov-gliarmonici2015",
+      "checkpoint": "zero",
+      "role": "development",
+      "work": "Mozart_KV618",
+      "gradient_packet_sha256": "9daa9730d4e3c0b66e345b7b16760d724b3852cae310889b941f333b1285c863"
+    },
+    {
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+      "checkpoint": "audio",
+      "role": "development",
+      "work": "Mussorgsky_PicturesAtAnExhibition-10",
+      "gradient_packet_sha256": "b8403bed649d10c823dc4fa21298a28fd3adb776d911c0f1dbb5c5ac48277a65"
+    },
+    {
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012",
+      "checkpoint": "zero",
+      "role": "development",
+      "work": "Mussorgsky_PicturesAtAnExhibition-10",
+      "gradient_packet_sha256": "488b8f2e79a8c55d7e5b4958e07ad48d86390348e6716ec8b582b79b3976b1d6"
+    },
+    {
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+      "checkpoint": "audio",
+      "role": "development",
+      "work": "Mussorgsky_PicturesAtAnExhibition-10",
+      "gradient_packet_sha256": "b0a756e5d4aef7ae30f0085f169a836080ee9956f4e5c8dc75c3f10197953cfd"
+    },
+    {
+      "id": "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016",
+      "checkpoint": "zero",
+      "role": "development",
+      "work": "Mussorgsky_PicturesAtAnExhibition-10",
+      "gradient_packet_sha256": "d82cef9548a6a5066f50645a6e27440e62f05b34d55a5f64f21b1366e00162a9"
+    },
+    {
+      "id": "rubato-schubert-d733-01-ar-staab2012",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Schubert_D733-01",
+      "gradient_packet_sha256": "b8a1cbf3daaf4f96609c760b6c7f368f86cf9d3b1e28d8ba6fb1e563bc97adb9"
+    },
+    {
+      "id": "rubato-schubert-d733-01-ar-staab2012",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Schubert_D733-01",
+      "gradient_packet_sha256": "56095b7e311a02a49ac0ec59b4b07270368b59072882f048a3d825c8021239de"
+    },
+    {
+      "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Schubert_D733-01",
+      "gradient_packet_sha256": "5b4b76a53419bb220bf253a6c0458296132f3eae96a4050355e7989e5b928546"
+    },
+    {
+      "id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Schubert_D733-01",
+      "gradient_packet_sha256": "8a76c06ab083babd26d3e05821eef388e13f495311efea270b5076219a4d82f9"
+    },
+    {
+      "id": "rubato-schumann-op039-05-ov-buttner2025",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Schumann_Op039-05",
+      "gradient_packet_sha256": "5d19db6b1253024642ce8f364571e0f1a9017ce70d7836b038e11bd9b1c89015"
+    },
+    {
+      "id": "rubato-schumann-op039-05-ov-buttner2025",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Schumann_Op039-05",
+      "gradient_packet_sha256": "8e2fb2774f9758866b53a35cc12109bfc65dbd62d460417017624829dff27927"
+    },
+    {
+      "id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Schumann_Op039-05",
+      "gradient_packet_sha256": "dfbd7e3aa7c579f1c05a3ffe090f86b16784257409d594d551b423a8cd39fdd1"
+    },
+    {
+      "id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Schumann_Op039-05",
+      "gradient_packet_sha256": "fc990ffd1777b1ba57ed716829604674e5faca01b6743aa9176bb854a938cef6"
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "gradient_packet_sha256": "efb8934647b45a050595cb1e4a83f8f3323fd70b36428c2260a577a5cfb7ec81"
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "gradient_packet_sha256": "34a3f0d07880be48cf4a29ddb78458aab253536141f0682e954a12dded191097"
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "gradient_packet_sha256": "5d7aa26b9ec562374c91aacb2afbaae667c3a5b53ef73d1fe9ed438ef7e8965d"
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "gradient_packet_sha256": "e03ef7e930ec70cdbe61eb5faa0f42a4e2acffe1cef5b50709ae7d5708c2f8c4"
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "gradient_packet_sha256": "a798fc83ee75635f72a547949aafdee75a9d744f4b028465550791462b91b08b"
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "gradient_packet_sha256": "533777bbcee0d058b5edaccba595db7fd7b3acdffc0ae751ea7cb3b36c7b9a46"
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "gradient_packet_sha256": "bef4ee6cae036b6d13c23f99a158f665b2a5d2b00a1ce71057d0fba78bbabcc7"
+    },
+    {
+      "id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero",
+      "gradient_packet_sha256": "8940a89fe9d3ba707058e66ee8ca5fc562a1f8d7b2ff7cae93ba8eff812b62d8"
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Vivaldi_RV269-01",
+      "gradient_packet_sha256": "aa22db65b31824e1c2b0308f703803c329de462711259916276965535ebcd525"
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Vivaldi_RV269-01",
+      "gradient_packet_sha256": "771b8bd24b3310be6c1ed3bb98fd20e5f8d9e99b40e92e42af2de4d3b92847f2"
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Vivaldi_RV269-01",
+      "gradient_packet_sha256": "2935cb9a5bfc41e82c3f222af22600ca8dc05e8fe6376d3b5ea136014ee71d2d"
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Vivaldi_RV269-01",
+      "gradient_packet_sha256": "e1e82bcad95cda9dc5f33875310ac58f6d8ddd90d800bb8e4b6646519fa76362"
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+      "checkpoint": "audio",
+      "role": "fit",
+      "work": "Vivaldi_RV269-01",
+      "gradient_packet_sha256": "bd167c75fb940904602444db137eca5aff3a96419c0c7228d1fd678da4759614"
+    },
+    {
+      "id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+      "checkpoint": "zero",
+      "role": "fit",
+      "work": "Vivaldi_RV269-01",
+      "gradient_packet_sha256": "9eb09f6bc1a9b48c2568a6131b479b34a9a0b6bcc7e7320868361839f11b2c3b"
+    },
+    {
+      "id": "artbeat-05-75-to-150",
+      "checkpoint": "audio",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "e72eb447dfe1eaf0558a2e46da141a92b028f32cf4ad37646c438dd85a66f604"
+    },
+    {
+      "id": "artbeat-05-75-to-150",
+      "checkpoint": "zero",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "8a17e55daa5db4589f06b1366bdd2e0a8eb13becf22f0937be4515e344f7cbc6"
+    },
+    {
+      "id": "artbeat-06-150-to-75",
+      "checkpoint": "audio",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "4ccc5ddec18aaaa7d48ef0d56c59e067f5f2ea0956046455d1d4177c6ef403b7"
+    },
+    {
+      "id": "artbeat-06-150-to-75",
+      "checkpoint": "zero",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "e821f65291447907040c241b919f7405ad67a16dc919bd853372dd42f28f93b5"
+    },
+    {
+      "id": "artbeat-07-75-to-112-5",
+      "checkpoint": "audio",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "0bbdec15ee2d3aca876b3397f8f9d3ed3f3a3fe5293c6f13c50f8306253a72c7"
+    },
+    {
+      "id": "artbeat-07-75-to-112-5",
+      "checkpoint": "zero",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "d5d376e8f1afe042b7e7cc523d84a1954e4657079f8924a5eba600db5e71cd61"
+    },
+    {
+      "id": "artbeat-08-112-5-to-75",
+      "checkpoint": "audio",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "02f56d425a4cf7d9d05d362f57a1f8849a210f1be9a229c44b0947f2c09a7cbc"
+    },
+    {
+      "id": "artbeat-08-112-5-to-75",
+      "checkpoint": "zero",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "07c4d9405615c2668d4eb3e90861a281b8b19d5a4416354cc549704686975fc7"
+    },
+    {
+      "id": "artbeat-09-90-to-80",
+      "checkpoint": "audio",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "5ce46c1c598c7765bacb6d8aeb4c1538d475b4766ca46be04cd427e5709ecde8"
+    },
+    {
+      "id": "artbeat-09-90-to-80",
+      "checkpoint": "zero",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "575a6332baa4fd51f24eb1df067faae9f629cae03f2377604f1c6194869e04cd"
+    },
+    {
+      "id": "artbeat-10-90-to-120",
+      "checkpoint": "audio",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "d8210abbc21029b9781b2d79008abda86b124ce55acf1696ba6c09bb196487e4"
+    },
+    {
+      "id": "artbeat-10-90-to-120",
+      "checkpoint": "zero",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "ebfb8a8592eb9ee96564745eacd9e4c21d3b2717890e5d1c138b1a81091042c9"
+    },
+    {
+      "id": "artbeat-11-60-to-80",
+      "checkpoint": "audio",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "b8577f08f78778a74a92867576af032e89dba857b74c4552a81b84ce7a916d15"
+    },
+    {
+      "id": "artbeat-11-60-to-80",
+      "checkpoint": "zero",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "e6ed6f7bef2ec9f67c7b0fb2d7fbb3a9ef0328516b5a56873e775f268bebf239"
+    },
+    {
+      "id": "artbeat-12-80-to-150",
+      "checkpoint": "audio",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "a646d1802177b93d5c8f031003c1245d353ee9734a258026c6947cbcb5d3cd28"
+    },
+    {
+      "id": "artbeat-12-80-to-150",
+      "checkpoint": "zero",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "8930e9fa4794e30a2ce49d70c8fd6c1858788dde41253a1e207195c78c8d3696"
+    },
+    {
+      "id": "artbeat-13-180-to-120",
+      "checkpoint": "audio",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "b610c64257fddfd653f6d8e9d8a0e96039ae78f003f1a9df00d0dddffcf7ba94"
+    },
+    {
+      "id": "artbeat-13-180-to-120",
+      "checkpoint": "zero",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "66f1706a715994d3200b365d212202243670a6791d735004163e72c99d3cc2ee"
+    },
+    {
+      "id": "artbeat-14-240-to-96",
+      "checkpoint": "audio",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "9e3440be380cba7d0cd6b2db7fd007d5d98f1241eadd841f554e8835dda3d128"
+    },
+    {
+      "id": "artbeat-14-240-to-96",
+      "checkpoint": "zero",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "8ef7dfa253e9b2e43a86dcc4a6d41fa9a83432a1d2e15a33c7af73746fc7e35a"
+    },
+    {
+      "id": "artbeat-15-85-to-127-5",
+      "checkpoint": "audio",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "1aa9afae2b13dcde8527c73082c0c449a3a1a68f588de9e2d4a7d798cb9ab254"
+    },
+    {
+      "id": "artbeat-15-85-to-127-5",
+      "checkpoint": "zero",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "939678e3794fde338fba824cdfca5235ecc1bd99625a98a3acf92fae851c3c51"
+    },
+    {
+      "id": "artbeat-18-piano-rubato",
+      "checkpoint": "audio",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "3a0e407f5752ed496142a26524476db7b603096b1c2cabd803cb5c4cda3163c7"
+    },
+    {
+      "id": "artbeat-18-piano-rubato",
+      "checkpoint": "zero",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "97ecd78116bf721bb06dccf5f2d17ad2389fe1f430247f933be2d073211356fb"
+    },
+    {
+      "id": "artbeat-19-ramp-80-to-200",
+      "checkpoint": "audio",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "fa2b202d97374a74ea152ea1d66592c799ead5175a438ee90aae8b9b94f2abe7"
+    },
+    {
+      "id": "artbeat-19-ramp-80-to-200",
+      "checkpoint": "zero",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "f4268bb72792093fdde629993444986a6ed17b205307b61a71aeeb559a5e3e7a"
+    },
+    {
+      "id": "artbeat-20-ramp-200-to-80",
+      "checkpoint": "audio",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "ed36cada27986f24c61878a4e0290701220ad8db3d42f74bda970b076500ac1a"
+    },
+    {
+      "id": "artbeat-20-ramp-200-to-80",
+      "checkpoint": "zero",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "d1a930df9839e9d73daf31d72913464db7340bb9dbca5bc1fcd07e462ac6eee8"
+    },
+    {
+      "id": "artbeat-21-polyrhythm-70-to-105",
+      "checkpoint": "audio",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "cca1cbe02258dbe61e78372508fad07b77ef150b7acfb4cfb99d7571a6274795"
+    },
+    {
+      "id": "artbeat-21-polyrhythm-70-to-105",
+      "checkpoint": "zero",
+      "role": "diagnostic",
+      "work": "artbeat-shared-source",
+      "gradient_packet_sha256": "b923de1d2a6d576af083da6a0f879b20a9ec64a239d41aaf2dff51c823b8fb55"
+    }
+  ],
+  "groups": [
+    "period_head",
+    "shared_cnn",
+    "phase_parameters"
+  ],
+  "seconds": 120,
+  "model_forwards": 0,
+  "clock_forwards": 0,
+  "optimizer_updates": 0,
+  "holdout_access": false,
+  "prior_used_for_routing": false
+}

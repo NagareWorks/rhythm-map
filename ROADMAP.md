@@ -24,7 +24,7 @@ for that distribution.
 
 ## Phase 1: timing accuracy, one shipping estimator
 
-Current status, 2026-09-11: the first user-authorized small learning experiment
+Current status, 2026-09-14: the first user-authorized small learning experiment
 has actually fitted a 24,003-parameter direct phase/period head and a zero-audio
 control on frozen Beat This features. This bypasses the failed candidate-ranker
 prerequisite rather than training a scorer for absent paths. It reuses exposed
@@ -155,6 +155,21 @@ counterexample remain in the report. Next design a controlled gradient-routing
 test covering both the period head and shared CNN, with authored learnability
 checks before a separately specified musical comparison. No new fit, default
 change or release is automatically authorized by this diagnosis.
+The [count-priority routing mechanism](experiments/gradient_routing/README.md)
+now preserves the original CNN/forward/losses while projecting opposing phase
+gradient components in three exhaustive groups, AFTER complete-batch weighting.
+CPU/T4 authored checks and a fixed 40-step synthetic SGD task pass; both authored
+losses decrease. Reusing all 80 retained gradient packets requires no new model
+forward or musical update. Natural full-FIT prior alignment changes from -0.9239
+to +0.6038 in the period head and -0.9437 to +0.6703 in the shared CNN, but adverse
+per-record prior directions remain. These are direction diagnostics, not BPM
+accuracy gains. Real AdamW counterexamples establish that diagonal preconditioning
+and retained momentum can undo raw-gradient count protection. Do not put the
+projection alone into the old fitter. Next verify an optimizer boundary around
+the actual native-rounded parameter displacement and recorder/batch ownership,
+including first-order versus finite-step limitations, before registering another
+musical comparison. No new music fit, model branch, prior auxiliary target,
+public policy, holdout, default change or release is admitted by this mechanism.
 Do not silently restart the old run, alter its accuracy gates, or detach
 recurrence, shorten crops or sweep settings to rescue this closed run. A future
 portable scan also needs separate verification before Rust/library promotion.
