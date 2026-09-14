@@ -71,3 +71,4 @@ jobs:
       - run: python -m unittest discover -s experiments/gradient_routing -p 'test_*.py' -v
       - run: python -m unittest discover -s experiments/protected_update -p 'test_*.py' -v
       - run: python -m unittest discover -s experiments/protected_phase_fit -p 'test_*.py' -v
+      - run: python -m unittest discover -s experiments/separated_evidence -p 'test_*.py' -v

@@ -207,6 +207,18 @@ sweeps, and do not add a public strategy. The next proposal must address speed
 prior, phase alignment and representative supervision with a distinct falsifiable
 comparison grounded in these fixed paired outputs; this result does not establish
 which new architecture or data change will succeed. No further fit is automatic.
+The next [separated-evidence component](experiments/separated_evidence/README.md)
+now implements independent tempo and phase projections/CNNs/heads and native
+AdamW/clipping ownership, with a shared-trunk control having identical initial
+per-task functions. Per-task capacity is retained, but total parameters rise
+from 24,003 to 47,907; do not claim an equal-capacity isolation experiment.
+Native tempo and frame-phase targets are explicit, with full-context chunking,
+support masks, task-isolation and failure-boundary checks. These outputs are
+evidence fields, not a coherent clock or shipping beat list. Fixed authored
+learnability and real musical accuracy remain different gates. The next musical
+protocol must specify shared/separated natural and fitted-zero arms, unchanged
+data roles, task-specific selection, complete metrics and budgets before any
+music fitting. No optimizer patch, prior closed fit, holdout or default changes.
 Do not silently restart the old run, alter its accuracy gates, or detach
 recurrence, shorten crops or sweep settings to rescue this closed run. A future
 portable scan also needs separate verification before Rust/library promotion.
