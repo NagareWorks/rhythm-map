@@ -24,6 +24,19 @@ for that distribution.
 
 ## Phase 1: timing accuracy, one shipping estimator
 
+Latest controlled fit, 2026-09-14: the
+[native-offset ablation](experiments/tempo_variation/README.md) completed two
+matched 100-update fits; all 21 control epochs exactly replay the old retained
+arm. Removing native recording-offset supervision improves terminal development
+BPM error versus control (42.37% -> 37.80%), but remains worse than initial
+35.22%; exposed ART worsens to 29.73%. Pair MSE improves and five of six exposed
+schedule RMSEs improve against control, yet every learned epoch is rejected.
+Both selected models remain epoch zero. Close the fixed ablation, keep all
+200 optimizer-state/gradient packets, and do not sweep loss weights or weaken
+gates. Next inventory legally usable work-disjoint training-source coverage
+before a broader-source comparison. The [closed-direction index](experiments/RESEARCH-DECISIONS.md)
+links failed hypotheses and reopening conditions. No default/holdout/release change.
+
 Latest frozen-state attribution, 2026-09-14: the
 [tempo-conflict audit](experiments/tempo_conflict/README.md) inspected all 41
 distinct saved epoch slots and 40 actual epoch displacements without updates.
