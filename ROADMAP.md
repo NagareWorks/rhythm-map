@@ -251,6 +251,22 @@ the existing supervision's coverage before proposing another mechanism. Do not
 infer that task separation, extra capacity, more epochs or a Transformer alone
 will fix speed. Preserve every adverse case and the original gates; independent
 evidence still does not establish a coherent beat list or release readiness.
+The [retained tempo diagnostic](experiments/tempo_attribution/README.md) has now
+recomputed all 720 original metric blocks without model inference or training.
+For separated natural features, constant bias accounts for 78.22% / 65.18% of
+development/ARTBeaT aggregate log-rate MSE, yet reference-informed recording
+octave diagnostics still leave 14.01% / 20.71% BPM error. At fixed 4 s large-
+change pairs, response slopes are only 0.12578 / 0.03848 / 0.04310 on fit /
+development / ARTBeaT, and change RMSE is no better than predicting no change.
+This separates useful phase/absolute-speed evidence from demonstrated local
+native-speed tracking and shows the gap also exists on fitting recordings.
+Reference speed coverage differs strongly, but that is not a proven sole cause.
+Next propose one bounded same-source known-audio-tempo-transform learning test,
+with explicit mapped native labels, real transformed-audio encoder evidence,
+unchanged natural baselines and change-insensitive controls. Do not substitute
+hidden-frame stretching for audio transformation or infer that an objective,
+larger model or more data is already validated. No new augmentation, encoder
+forward, training, fusion/default strategy, holdout or release change occurred.
 Do not silently restart the old run, alter its accuracy gates, or detach
 recurrence, shorten crops or sweep settings to rescue this closed run. A future
 portable scan also needs separate verification before Rust/library promotion.
