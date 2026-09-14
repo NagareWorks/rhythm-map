@@ -170,6 +170,24 @@ the actual native-rounded parameter displacement and recorder/batch ownership,
 including first-order versus finite-step limitations, before registering another
 musical comparison. No new music fit, model branch, prior auxiliary target,
 public policy, holdout, default change or release is admitted by this mechanism.
+The [actual-displacement optimizer boundary](experiments/protected_update/README.md)
+now proposes native AdamW updates on a shadow state, projects adverse count
+displacements in the same three groups, and checks native-rounded endpoints.
+An adverse rounded projection vetoes its group; all committed AdamW moments
+advance with explicit returned/committed/moved counters. Existing recorder
+boundaries retain the proposed weights/moments and count packets before live
+commit, with tested rollback/unknown and postcommit failure distinctions.
+On the fixed 40-step synthetic teacher task, phase loss falls from 0.108576 to
+0.00005496 and count loss from 0.007531 to 0.00003417; all 40 proposals move
+weights. Across 120 group decisions, 25 are projected and 18 are vetoed after
+rounding; 15 steps still increase finite count loss. This establishes bounded
+synthetic learnability, not musical accuracy
+or a per-step finite-loss guarantee; exact stored-gradient signs cannot eliminate
+loss curvature or repair wrong native-beat semantics. No old fit was restarted.
+Next separately register a bounded musical comparison with this explicit
+optimizer identity, matched zero-feature control and unchanged acceptance gates,
+including veto/stall and finite-count-regression receipts. Shipping outputs,
+holdouts, old source identities and release state remain unchanged.
 Do not silently restart the old run, alter its accuracy gates, or detach
 recurrence, shorten crops or sweep settings to rescue this closed run. A future
 portable scan also needs separate verification before Rust/library promotion.
