@@ -24,6 +24,18 @@ for that distribution.
 
 ## Phase 1: timing accuracy, one shipping estimator
 
+Latest continuation, 2026-09-14: the [sparse paired-speed fit](experiments/relative_tempo/README.md)
+actually completed two matched 100-update tempo-only continuations and fresh
+frozen-encoder capture from 18 retained PCM files. All six trained global-speed
+groups improve versus native-only; five of six reserved local-change groups
+improve, but only one passes every transfer gate. Identity preservation passes;
+natural development retention fails (BPM median error 35.22% initial -> 47.18%
+native-only / 45.57% paired). This supports learning the explicit relation, not
+general local-tempo accuracy. Both arms show a fit/development gap, so do not
+blame only the new objective or simply add more updates. Close the fixed outcome,
+retain defaults/holdout, and separately scope local-schedule supervision with
+unexposed schedule controls and a retention/checkpoint policy. No release.
+
 Current status, 2026-09-14: the first user-authorized small learning experiment
 has actually fitted a 24,003-parameter direct phase/period head and a zero-audio
 control on frozen Beat This features. This bypasses the failed candidate-ranker
