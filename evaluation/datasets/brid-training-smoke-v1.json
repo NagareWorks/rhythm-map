@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "id": "brid-training-smoke-v1",
+  "version": "14051323-four-style-smoke",
+  "homepage_url": "https://zenodo.org/records/14051323",
+  "license": "CC-BY-4.0",
+  "attribution": "Brazilian Rhythmic Instruments Dataset (BRID), Lucas S. Maia, Pedro D. de Tomaz Junior, Magdalena Fuentes, Martin Rocamora, Luiz W. P. Biscainho, Mauricio V. M. da Costa and Sara Cohen, 2018. Unmodified source audio and annotations; training candidates, not independent evaluation.",
+  "assets": [
+    {
+      "path": "audio/0001.wav",
+      "url": "https://zenodo.org/api/records/14051323/files/audio.zip/content",
+      "sha256": "4a8e39b7aba2033583c0d81472ba971c6c36da5dc5f229c17f297a8137778a18",
+      "size_bytes": 6351092,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 944409073,
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0001] M4-01-SA.wav"
+      }
+    },
+    {
+      "path": "annotations/0001.beats",
+      "url": "https://zenodo.org/api/records/14051323/files/annotations.zip/content",
+      "sha256": "92bb69b298719f1339bc35d1e7ad18f236ce0f4e2b6642d18416535cf4d1ede2",
+      "size_bytes": 466,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 84989,
+        "member_path": "Annotations/beats/[0001] M4-01-SA.beats"
+      }
+    },
+    {
+      "path": "annotations/0001.bpm",
+      "url": "https://zenodo.org/api/records/14051323/files/annotations.zip/content",
+      "sha256": "223aa591997438f7134b6d2afcf7b4a75c832ca7b9183916c138e639aac1d2f4",
+      "size_bytes": 10,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 84989,
+        "member_path": "Annotations/tempo/[0001] M4-01-SA.bpm"
+      }
+    },
+    {
+      "path": "audio/0003.wav",
+      "url": "https://zenodo.org/api/records/14051323/files/audio.zip/content",
+      "sha256": "341c60a1291af0e5f205de3ec91b0cd932077dcb2f2cd5c061cd75bb3be91e81",
+      "size_bytes": 7162532,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 944409073,
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0003] M4-03-PA.wav"
+      }
+    },
+    {
+      "path": "annotations/0003.beats",
+      "url": "https://zenodo.org/api/records/14051323/files/annotations.zip/content",
+      "sha256": "6f85f7911e81d7ee1d4a7c6b90fc01fa051bfa933a4ca6aacb6589c30e6895c4",
+      "size_bytes": 595,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 84989,
+        "member_path": "Annotations/beats/[0003] M4-03-PA.beats"
+      }
+    },
+    {
+      "path": "annotations/0003.bpm",
+      "url": "https://zenodo.org/api/records/14051323/files/annotations.zip/content",
+      "sha256": "68d5f1b7d0b5bf847c305e78ee6faccc1a9c7b25ccec3590a647db68cffb3073",
+      "size_bytes": 10,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 84989,
+        "member_path": "Annotations/tempo/[0003] M4-03-PA.bpm"
+      }
+    },
+    {
+      "path": "audio/0010.wav",
+      "url": "https://zenodo.org/api/records/14051323/files/audio.zip/content",
+      "sha256": "8e2c5844e80aae8c42c8cc6b47f075f3a2b4ebb2c0abf31b0acda7c55bcf2706",
+      "size_bytes": 4977824,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 944409073,
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0010] M4-10-SE.wav"
+      }
+    },
+    {
+      "path": "annotations/0010.beats",
+      "url": "https://zenodo.org/api/records/14051323/files/annotations.zip/content",
+      "sha256": "f358fd6d080d68ff1f954c6ff7892b16f2f9dc0415671e92fa3b02ff67018d08",
+      "size_bytes": 568,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 84989,
+        "member_path": "Annotations/beats/[0010] M4-10-SE.beats"
+      }
+    },
+    {
+      "path": "annotations/0010.bpm",
+      "url": "https://zenodo.org/api/records/14051323/files/annotations.zip/content",
+      "sha256": "4894cad1a6cfd168360ce13c0ced360f89e0cf583f6ffd1c29f1dd75c195c65d",
+      "size_bytes": 11,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 84989,
+        "member_path": "Annotations/tempo/[0010] M4-10-SE.bpm"
+      }
+    },
+    {
+      "path": "audio/0028.wav",
+      "url": "https://zenodo.org/api/records/14051323/files/audio.zip/content",
+      "sha256": "19207be1b48083b1d0d7b617751145dc0755123867fea08d252f686605ecdf22",
+      "size_bytes": 3251580,
+      "role": "audio",
+      "zip_member": {
+        "archive_size_bytes": 944409073,
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0028] M3-09-MA.wav"
+      }
+    },
+    {
+      "path": "annotations/0028.beats",
+      "url": "https://zenodo.org/api/records/14051323/files/annotations.zip/content",
+      "sha256": "41a5ddda7c0fbcad7c33346d8eeac5ae921b69a7c9ec16bfe2a604e39285b1e5",
+      "size_bytes": 387,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 84989,
+        "member_path": "Annotations/beats/[0028] M3-09-MA.beats"
+      }
+    },
+    {
+      "path": "annotations/0028.bpm",
+      "url": "https://zenodo.org/api/records/14051323/files/annotations.zip/content",
+      "sha256": "db4ffc8dca68cb6c204236c397313de63b8d9340a951ad3ee1ed5a8cf23182a1",
+      "size_bytes": 11,
+      "role": "annotation_source",
+      "zip_member": {
+        "archive_size_bytes": 84989,
+        "member_path": "Annotations/tempo/[0028] M3-09-MA.bpm"
+      }
+    }
+  ]
+}

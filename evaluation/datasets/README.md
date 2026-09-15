@@ -19,6 +19,15 @@ See the [source review, reproduction and next acquisition slice](../baselines/tr
 for annotation limits, conservative grouping, and why encoder-exposed GuitarSet
 and Groove MIDI can be training options without becoming independent evaluation.
 
+The follow-up [four-style audio smoke](../baselines/brid-audio-intake-v1.md) now
+has a [completed fetch lock](brid-training-smoke-v1.json) and
+[replayable structural audit](brid-audio-smoke-v1.json): 123.24 seconds, 209 beats,
+no out-of-bounds references and consistent native/Rust decoded duration.
+The earlier inventory remains historical; its null audio hashes are not a claim
+that the new smoke was never downloaded. Full-pool acquisition encountered
+HTTP 429 on recording 0005 and remains incomplete. Musical annotation review
+and training admission are still pending; onset proximity is not beat accuracy.
+
 ## Rhythm-support data planning
 
 The [bounded admission review](../baselines/rhythm-support-admission-review-v1.md)

@@ -35,3 +35,11 @@ finds 93 CC BY 4.0 acoustic-mixture candidates, not 367 independently labeled
 works. No audio, fit admission or new evaluation claim yet. The next bounded
 step is the preregistered four-style audio/annotation smoke check, followed by
 full-pool admission and a matched source-expansion comparison if it passes.
+
+Follow-up: the [preregistered four-style audio smoke](../evaluation/baselines/brid-audio-intake-v1.md)
+is acquired and structurally verified (123.24 seconds, 209 beats). Full 93-mixture
+acquisition was attempted but stopped at source HTTP 429 on 0005; completed
+partial files and the failure are retained. This is a transport interruption,
+not evidence against source coverage or permission to fit on the smoke alone.
+Musical annotation review, full-pool lock and matched expansion training remain
+pending. Old rejected model directions and all product defaults stay frozen.
