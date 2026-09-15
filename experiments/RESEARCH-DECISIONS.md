@@ -59,3 +59,10 @@ The [source-expansion design](tempo_source_expansion/PROTOCOL-v1.md) freezes a
 matched old-source/BRID extra slot and one conservative BRID group weight.
 Source disposition, frozen feature packets and executable-runner registration
 remain before fitting. Prepared references are not an accuracy breakthrough.
+
+The [full-record frozen feature capture](../evaluation/baselines/brid-features-v1.md)
+now completes source disposition and all 93 input/feature packets. Keep 0092
+with explicit label uncertainty, not an onset-aligned repair. The T4 capture
+repeats hidden tensors exactly and leaves encoder weights unchanged; no tempo
+optimizer ran. Stop source-offset probing here. Next is old-input replay and
+the executable matched training/replay runner, not another loss or policy sweep.

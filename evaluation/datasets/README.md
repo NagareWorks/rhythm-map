@@ -43,6 +43,12 @@ tempo cells. No timestamps are shifted, including the retained 0092 alignment
 question. The matched source-expansion design and draw schedule are frozen;
 source disposition, feature replay and runner registration still precede fitting.
 
+The subsequent [full-record frozen feature capture](../baselines/brid-features-v1.md)
+completes source disposition and all 93 neural packets: 133,247 frame points,
+exact input/reference joins, repeated hidden-feature equality and unchanged
+encoder weights. The 0092 uncertainty remains explicit; no labels are shifted.
+Old input replay and the executable training runner still precede fitting.
+
 ## Rhythm-support data planning
 
 The [bounded admission review](../baselines/rhythm-support-admission-review-v1.md)
