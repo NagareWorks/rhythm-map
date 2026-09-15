@@ -1,0 +1,3588 @@
+{
+  "schema": "rhythm-map.brid-training-inventory.v1",
+  "status": "verified_annotation_and_directory_inventory_not_training_admission",
+  "inspected_on": "2026-09-15",
+  "source_url": "https://zenodo.org/records/14051323",
+  "license": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "Brazilian Rhythmic Instruments Dataset (BRID), Maia et al., 2018",
+  "annotation_archive": {
+    "size_bytes": 84989,
+    "md5": "678b2fa99c8d220cddd9f5e20d55d0c1",
+    "sha256": "605ad57dd9ad86fb3dbb40368a961c7d0db91595a3574aa15b8eb0bbe35ac6dd"
+  },
+  "audio_archive": {
+    "size_bytes": 944409073,
+    "md5": "3514b53d66515181f95619adb71a59b4"
+  },
+  "audio_tail": {
+    "offset": 943360497,
+    "size_bytes": 1048576,
+    "sha256": "5edb4eab075d8dc08ad1ce03030984a8b66f4c40295f5afb56b5f568e7c0aa00"
+  },
+  "source_audio_count": 367,
+  "beat_annotated_recording_count": 93,
+  "audio_without_released_beat_files": 274,
+  "style_counts": {
+    "MA": 3,
+    "PA": 28,
+    "SA": 41,
+    "SE": 21
+  },
+  "instrument_count_counts": {
+    "2": 45,
+    "3": 29,
+    "4": 19
+  },
+  "beat_count": 4342,
+  "downbeat_count": 2205,
+  "annotated_span_seconds": 2527.192,
+  "candidate_audio_uncompressed_bytes": 469990540,
+  "candidate_audio_compressed_bytes": 389308232,
+  "position_repeat_recordings": [],
+  "encoder_exposure": "not_named_in_beat_this_annotations_v1.0_not_a_no_overlap_guarantee",
+  "independent_work_count": null,
+  "conservative_leakage_group_count": 1,
+  "audio_payloads_acquired": 0,
+  "admitted_training_recordings": 0,
+  "feature_access": false,
+  "optimizer_steps": 0,
+  "project_holdout_access": false,
+  "public_default_changed": false,
+  "records": [
+    {
+      "recording_id": "0001",
+      "name": "[0001] M4-01-SA",
+      "instrument_count": 4,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 48,
+      "downbeat_count": 24,
+      "first_beat_seconds": 0.025,
+      "last_beat_seconds": 35.28,
+      "annotated_span_seconds": 35.255,
+      "position_repeat_count": 0,
+      "published_global_bpm": 79.988654,
+      "descriptive_median_interval_bpm": 80.0,
+      "minimum_interval_seconds": 0.728,
+      "maximum_interval_seconds": 0.777,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0001] M4-01-SA.beats",
+          "size_bytes": 466,
+          "sha256": "92bb69b298719f1339bc35d1e7ad18f236ce0f4e2b6642d18416535cf4d1ede2"
+        },
+        {
+          "member_path": "Annotations/tempo/[0001] M4-01-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "223aa591997438f7134b6d2afcf7b4a75c832ca7b9183916c138e639aac1d2f4"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0001] M4-01-SA.wav",
+        "size_bytes": 6351092,
+        "compressed_size_bytes": 5466391,
+        "zip_crc32": "3c67adf6",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0002",
+      "name": "[0002] M4-02-SA",
+      "instrument_count": 4,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 45,
+      "downbeat_count": 23,
+      "first_beat_seconds": 0.56,
+      "last_beat_seconds": 33.557,
+      "annotated_span_seconds": 32.997,
+      "position_repeat_count": 0,
+      "published_global_bpm": 80.007273,
+      "descriptive_median_interval_bpm": 80.213904,
+      "minimum_interval_seconds": 0.733,
+      "maximum_interval_seconds": 0.772,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0002] M4-02-SA.beats",
+          "size_bytes": 437,
+          "sha256": "ea7435e85c8c94c77620ea463695f0eb7eb1e007ca6ca517917226d23f74bca6"
+        },
+        {
+          "member_path": "Annotations/tempo/[0002] M4-02-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "1af554f2f54652efc2cc5ce039700de71a7b1430a3fdf6ab22074174f586343b"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0002] M4-02-SA.wav",
+        "size_bytes": 6051212,
+        "compressed_size_bytes": 5168301,
+        "zip_crc32": "ee2fcb13",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0003",
+      "name": "[0003] M4-03-PA",
+      "instrument_count": 4,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 61,
+      "downbeat_count": 31,
+      "first_beat_seconds": 0.522,
+      "last_beat_seconds": 39.957,
+      "annotated_span_seconds": 39.435,
+      "position_repeat_count": 0,
+      "published_global_bpm": 91.289464,
+      "descriptive_median_interval_bpm": 91.116173,
+      "minimum_interval_seconds": 0.621,
+      "maximum_interval_seconds": 0.689,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0003] M4-03-PA.beats",
+          "size_bytes": 595,
+          "sha256": "6f85f7911e81d7ee1d4a7c6b90fc01fa051bfa933a4ca6aacb6589c30e6895c4"
+        },
+        {
+          "member_path": "Annotations/tempo/[0003] M4-03-PA.bpm",
+          "size_bytes": 10,
+          "sha256": "68d5f1b7d0b5bf847c305e78ee6faccc1a9c7b25ccec3590a647db68cffb3073"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0003] M4-03-PA.wav",
+        "size_bytes": 7162532,
+        "compressed_size_bytes": 6080689,
+        "zip_crc32": "87009372",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0004",
+      "name": "[0004] M4-04-PA",
+      "instrument_count": 4,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 57,
+      "downbeat_count": 29,
+      "first_beat_seconds": 0.392,
+      "last_beat_seconds": 35.563,
+      "annotated_span_seconds": 35.171,
+      "position_repeat_count": 0,
+      "published_global_bpm": 95.533252,
+      "descriptive_median_interval_bpm": 95.313741,
+      "minimum_interval_seconds": 0.586,
+      "maximum_interval_seconds": 0.647,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0004] M4-04-PA.beats",
+          "size_bytes": 554,
+          "sha256": "6fa15536e4a5bd3f021df84f6b4f9519c50da2669a7a1efc6c6892e9a41d4e67"
+        },
+        {
+          "member_path": "Annotations/tempo/[0004] M4-04-PA.bpm",
+          "size_bytes": 10,
+          "sha256": "f78ffc40c217fb9f599c8983990881e39de429ca83620a9d8fae964d4a3d72da"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0004] M4-04-PA.wav",
+        "size_bytes": 6529260,
+        "compressed_size_bytes": 5580130,
+        "zip_crc32": "15e5e9a4",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0005",
+      "name": "[0005] M4-05-PA",
+      "instrument_count": 4,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 65,
+      "downbeat_count": 33,
+      "first_beat_seconds": 0.338,
+      "last_beat_seconds": 40.493,
+      "annotated_span_seconds": 40.155,
+      "position_repeat_count": 0,
+      "published_global_bpm": 95.629436,
+      "descriptive_median_interval_bpm": 95.465394,
+      "minimum_interval_seconds": 0.602,
+      "maximum_interval_seconds": 0.653,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0005] M4-05-PA.beats",
+          "size_bytes": 634,
+          "sha256": "7bc90c1071dd15feea3e2ef42c5e6670c3c11f1489c1bad114fb2bd8d1b49beb"
+        },
+        {
+          "member_path": "Annotations/tempo/[0005] M4-05-PA.bpm",
+          "size_bytes": 10,
+          "sha256": "257d42dd6ff4aeb6f9689c3d4a4ef61b611206205e275b876aed786be6a22606"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0005] M4-05-PA.wav",
+        "size_bytes": 7457136,
+        "compressed_size_bytes": 6382877,
+        "zip_crc32": "ee860740",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0006",
+      "name": "[0006] M4-06-SA",
+      "instrument_count": 4,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 57,
+      "downbeat_count": 29,
+      "first_beat_seconds": 0.403,
+      "last_beat_seconds": 43.944,
+      "annotated_span_seconds": 43.541,
+      "position_repeat_count": 0,
+      "published_global_bpm": 77.168646,
+      "descriptive_median_interval_bpm": 77.220077,
+      "minimum_interval_seconds": 0.746,
+      "maximum_interval_seconds": 0.802,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0006] M4-06-SA.beats",
+          "size_bytes": 557,
+          "sha256": "486e1ac548db5075750b80d7226d9ebe29b3a1e129a27beb8a06e5a56ea9d61c"
+        },
+        {
+          "member_path": "Annotations/tempo/[0006] M4-06-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "a029f9e2ed1fd5e29c4ca7b673bd5c63bd56ced353640e6aa15a7afefd008bb5"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0006] M4-06-SA.wav",
+        "size_bytes": 7983760,
+        "compressed_size_bytes": 6846863,
+        "zip_crc32": "e0a1ec15",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0007",
+      "name": "[0007] M4-07-SA",
+      "instrument_count": 4,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 41,
+      "downbeat_count": 21,
+      "first_beat_seconds": 0.409,
+      "last_beat_seconds": 30.028,
+      "annotated_span_seconds": 29.619,
+      "position_repeat_count": 0,
+      "published_global_bpm": 81.029069,
+      "descriptive_median_interval_bpm": 80.91706,
+      "minimum_interval_seconds": 0.713,
+      "maximum_interval_seconds": 0.776,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0007] M4-07-SA.beats",
+          "size_bytes": 397,
+          "sha256": "90c6dc63ef585ff956f5831912e6517636dff6b6af259e22487f1a941c398848"
+        },
+        {
+          "member_path": "Annotations/tempo/[0007] M4-07-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "c6303091903264b1d77ccaced0c76ab950d1777956f820c1f3a70ac6727469f6"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0007] M4-07-SA.wav",
+        "size_bytes": 5415620,
+        "compressed_size_bytes": 4715001,
+        "zip_crc32": "30f5eb5e",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0008",
+      "name": "[0008] M4-08-SA",
+      "instrument_count": 4,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 40,
+      "downbeat_count": 20,
+      "first_beat_seconds": 0.128,
+      "last_beat_seconds": 28.315,
+      "annotated_span_seconds": 28.187,
+      "position_repeat_count": 0,
+      "published_global_bpm": 83.016994,
+      "descriptive_median_interval_bpm": 82.872928,
+      "minimum_interval_seconds": 0.698,
+      "maximum_interval_seconds": 0.742,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0008] M4-08-SA.beats",
+          "size_bytes": 386,
+          "sha256": "1a91ccd9de8516f174b409ac7df1567c38a4731039fe10cd06de1baecbffb285"
+        },
+        {
+          "member_path": "Annotations/tempo/[0008] M4-08-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "b3144638d8f834708d621e54625f382ded9f571c6b1c0900645a8eeb14dffc7f"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0008] M4-08-SA.wav",
+        "size_bytes": 5159144,
+        "compressed_size_bytes": 4568500,
+        "zip_crc32": "7ec27750",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0009",
+      "name": "[0009] M4-09-SA",
+      "instrument_count": 4,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 37,
+      "downbeat_count": 19,
+      "first_beat_seconds": 0.599,
+      "last_beat_seconds": 27.388,
+      "annotated_span_seconds": 26.789,
+      "position_repeat_count": 0,
+      "published_global_bpm": 80.630109,
+      "descriptive_median_interval_bpm": 80.536913,
+      "minimum_interval_seconds": 0.71,
+      "maximum_interval_seconds": 0.786,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0009] M4-09-SA.beats",
+          "size_bytes": 357,
+          "sha256": "c7d60990a667a7e8acb060929ec820271045945c7af12f1d85740b70896e4acd"
+        },
+        {
+          "member_path": "Annotations/tempo/[0009] M4-09-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "342d26ae7e27c5155a9ba4973e16388d6914182276c109aa9c61832b89e70d3e"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0009] M4-09-SA.wav",
+        "size_bytes": 4992096,
+        "compressed_size_bytes": 4298520,
+        "zip_crc32": "2175efe8",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0010",
+      "name": "[0010] M4-10-SE",
+      "instrument_count": 4,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 59,
+      "downbeat_count": 30,
+      "first_beat_seconds": 0.247,
+      "last_beat_seconds": 27.031,
+      "annotated_span_seconds": 26.784,
+      "position_repeat_count": 0,
+      "published_global_bpm": 129.928315,
+      "descriptive_median_interval_bpm": 129.589633,
+      "minimum_interval_seconds": 0.43,
+      "maximum_interval_seconds": 0.492,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0010] M4-10-SE.beats",
+          "size_bytes": 568,
+          "sha256": "f358fd6d080d68ff1f954c6ff7892b16f2f9dc0415671e92fa3b02ff67018d08"
+        },
+        {
+          "member_path": "Annotations/tempo/[0010] M4-10-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "4894cad1a6cfd168360ce13c0ced360f89e0cf583f6ffd1c29f1dd75c195c65d"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0010] M4-10-SE.wav",
+        "size_bytes": 4977824,
+        "compressed_size_bytes": 4317229,
+        "zip_crc32": "8a9eb157",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0011",
+      "name": "[0011] M4-11-SE",
+      "instrument_count": 4,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 55,
+      "downbeat_count": 28,
+      "first_beat_seconds": 0.266,
+      "last_beat_seconds": 26.874,
+      "annotated_span_seconds": 26.608,
+      "position_repeat_count": 0,
+      "published_global_bpm": 121.767889,
+      "descriptive_median_interval_bpm": 121.334681,
+      "minimum_interval_seconds": 0.454,
+      "maximum_interval_seconds": 0.519,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0011] M4-11-SE.beats",
+          "size_bytes": 530,
+          "sha256": "c8b0663688c11be50d5be021133bfb9d5650729f7d71372445c2c0e88f387957"
+        },
+        {
+          "member_path": "Annotations/tempo/[0011] M4-11-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "0719f7bdaa620c833d25eb2ac09beeb8c51ddbceddff744fe2782cbc0a77b16a"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0011] M4-11-SE.wav",
+        "size_bytes": 4883132,
+        "compressed_size_bytes": 4182010,
+        "zip_crc32": "59fee072",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0012",
+      "name": "[0012] M4-12-SE",
+      "instrument_count": 4,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 55,
+      "downbeat_count": 28,
+      "first_beat_seconds": 0.248,
+      "last_beat_seconds": 26.228,
+      "annotated_span_seconds": 25.98,
+      "position_repeat_count": 0,
+      "published_global_bpm": 124.711316,
+      "descriptive_median_interval_bpm": 124.740125,
+      "minimum_interval_seconds": 0.428,
+      "maximum_interval_seconds": 0.518,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0012] M4-12-SE.beats",
+          "size_bytes": 529,
+          "sha256": "d97fb7ff86c5d882bd6f5b6c218e88894b1d891b0d33b5102ecd06589127cd25"
+        },
+        {
+          "member_path": "Annotations/tempo/[0012] M4-12-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "02ccee23bc945f8499de88b9521c6ec47a31024efaada136c0d69393b3175db2"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0012] M4-12-SE.wav",
+        "size_bytes": 5004656,
+        "compressed_size_bytes": 4543955,
+        "zip_crc32": "d681c9a1",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0013",
+      "name": "[0013] M4-13-SE",
+      "instrument_count": 4,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 55,
+      "downbeat_count": 28,
+      "first_beat_seconds": 0.338,
+      "last_beat_seconds": 26.069,
+      "annotated_span_seconds": 25.731,
+      "position_repeat_count": 0,
+      "published_global_bpm": 125.918153,
+      "descriptive_median_interval_bpm": 126.05042,
+      "minimum_interval_seconds": 0.428,
+      "maximum_interval_seconds": 0.507,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0013] M4-13-SE.beats",
+          "size_bytes": 529,
+          "sha256": "813bfe97097baae69e55ee6d04f3e8d541dd825be8f601299044f7b4020b8588"
+        },
+        {
+          "member_path": "Annotations/tempo/[0013] M4-13-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "3a82a2de6346df512fa5b94117a48c8a8842528b9a468a108cfe51f0dde58e1a"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0013] M4-13-SE.wav",
+        "size_bytes": 4709704,
+        "compressed_size_bytes": 4204545,
+        "zip_crc32": "01bfa092",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0014",
+      "name": "[0014] M4-14-SE",
+      "instrument_count": 4,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 39,
+      "downbeat_count": 20,
+      "first_beat_seconds": 0.231,
+      "last_beat_seconds": 17.785,
+      "annotated_span_seconds": 17.554,
+      "position_repeat_count": 0,
+      "published_global_bpm": 129.884927,
+      "descriptive_median_interval_bpm": 129.589633,
+      "minimum_interval_seconds": 0.425,
+      "maximum_interval_seconds": 0.496,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0014] M4-14-SE.beats",
+          "size_bytes": 368,
+          "sha256": "8318bda6a702662918544799af406433132a9a1cbd17b8a2ce2adeb0c73dba9e"
+        },
+        {
+          "member_path": "Annotations/tempo/[0014] M4-14-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "108c739a133ffc9680368e5151478bd14c083fce9018a193e6d0878c277505cc"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0014] M4-14-SE.wav",
+        "size_bytes": 3418492,
+        "compressed_size_bytes": 2923642,
+        "zip_crc32": "f171a211",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0015",
+      "name": "[0015] M4-15-SA",
+      "instrument_count": 4,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 43,
+      "downbeat_count": 22,
+      "first_beat_seconds": 0.55,
+      "last_beat_seconds": 32.222,
+      "annotated_span_seconds": 31.672,
+      "position_repeat_count": 0,
+      "published_global_bpm": 79.565547,
+      "descriptive_median_interval_bpm": 79.522863,
+      "minimum_interval_seconds": 0.723,
+      "maximum_interval_seconds": 0.778,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0015] M4-15-SA.beats",
+          "size_bytes": 417,
+          "sha256": "35e15b3f8446e4f5933906ae85690f0f336af019aa0e14c3102eeab45996d910"
+        },
+        {
+          "member_path": "Annotations/tempo/[0015] M4-15-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "d5c0f062812b647af8c45565c045933544a84b0ef61d2588291a66537e27d521"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0015] M4-15-SA.wav",
+        "size_bytes": 5919036,
+        "compressed_size_bytes": 5045274,
+        "zip_crc32": "9b3084d8",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0016",
+      "name": "[0016] M4-16-PA",
+      "instrument_count": 4,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 49,
+      "downbeat_count": 25,
+      "first_beat_seconds": 0.335,
+      "last_beat_seconds": 30.926,
+      "annotated_span_seconds": 30.591,
+      "position_repeat_count": 0,
+      "published_global_bpm": 94.145337,
+      "descriptive_median_interval_bpm": 94.043887,
+      "minimum_interval_seconds": 0.603,
+      "maximum_interval_seconds": 0.679,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0016] M4-16-PA.beats",
+          "size_bytes": 474,
+          "sha256": "86e43627d23fefdb0fbe6db091afcb873865a083d6b4302361245f6770007f23"
+        },
+        {
+          "member_path": "Annotations/tempo/[0016] M4-16-PA.bpm",
+          "size_bytes": 10,
+          "sha256": "c4b2cb544f099b59f2eafbe31084ff52028bf8ec779f19989689452a2ce4d70c"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0016] M4-16-PA.wav",
+        "size_bytes": 5671388,
+        "compressed_size_bytes": 5037989,
+        "zip_crc32": "db18b7e1",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0017",
+      "name": "[0017] M4-17-PA",
+      "instrument_count": 4,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 38,
+      "downbeat_count": 19,
+      "first_beat_seconds": 0.502,
+      "last_beat_seconds": 22.803,
+      "annotated_span_seconds": 22.301,
+      "position_repeat_count": 0,
+      "published_global_bpm": 99.547106,
+      "descriptive_median_interval_bpm": 99.667774,
+      "minimum_interval_seconds": 0.559,
+      "maximum_interval_seconds": 0.623,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0017] M4-17-PA.beats",
+          "size_bytes": 364,
+          "sha256": "e144fb04c031a76cf1d740abf2857264e2ba78ebc2cae236a272e736abf09f9b"
+        },
+        {
+          "member_path": "Annotations/tempo/[0017] M4-17-PA.bpm",
+          "size_bytes": 10,
+          "sha256": "8114efaa4338982cff7319f9bc4c48331abac46a7dae812e20ff147d8dd99bd3"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0017] M4-17-PA.wav",
+        "size_bytes": 4110540,
+        "compressed_size_bytes": 3488327,
+        "zip_crc32": "ce8adbfa",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0018",
+      "name": "[0018] M4-18-SA",
+      "instrument_count": 4,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 46,
+      "downbeat_count": 23,
+      "first_beat_seconds": 0.56,
+      "last_beat_seconds": 32.395,
+      "annotated_span_seconds": 31.835,
+      "position_repeat_count": 0,
+      "published_global_bpm": 84.812313,
+      "descriptive_median_interval_bpm": 84.507042,
+      "minimum_interval_seconds": 0.668,
+      "maximum_interval_seconds": 0.732,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0018] M4-18-SA.beats",
+          "size_bytes": 446,
+          "sha256": "512a95ec5e82361dfd82276742b0b32be6c196c6fe5ffd07ac9f18716b79a39a"
+        },
+        {
+          "member_path": "Annotations/tempo/[0018] M4-18-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "4e863f07253e3cc2412a3d94a29252be7d5b30ffde87a69e2abba8ff8fabb839"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0018] M4-18-SA.wav",
+        "size_bytes": 5882012,
+        "compressed_size_bytes": 4901421,
+        "zip_crc32": "a6a6d444",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0019",
+      "name": "[0019] M4-19-SA",
+      "instrument_count": 4,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 41,
+      "downbeat_count": 21,
+      "first_beat_seconds": 0.209,
+      "last_beat_seconds": 29.218,
+      "annotated_span_seconds": 29.009,
+      "position_repeat_count": 0,
+      "published_global_bpm": 82.732945,
+      "descriptive_median_interval_bpm": 82.530949,
+      "minimum_interval_seconds": 0.633,
+      "maximum_interval_seconds": 0.766,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0019] M4-19-SA.beats",
+          "size_bytes": 396,
+          "sha256": "d4483f0219e69d9eb561d0cbb2da247c2e137e0c7063ebcf4caf9c61fa780416"
+        },
+        {
+          "member_path": "Annotations/tempo/[0019] M4-19-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "362e12eeba2219ea89e60ce29b986a0476c7c607ef3ef00ca7b8b614aec587b2"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/4 Instruments/[0019] M4-19-SA.wav",
+        "size_bytes": 5291536,
+        "compressed_size_bytes": 4641195,
+        "zip_crc32": "ae217c18",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0020",
+      "name": "[0020] M3-01-PA",
+      "instrument_count": 3,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 29,
+      "downbeat_count": 15,
+      "first_beat_seconds": 0.421,
+      "last_beat_seconds": 17.968,
+      "annotated_span_seconds": 17.547,
+      "position_repeat_count": 0,
+      "published_global_bpm": 95.742862,
+      "descriptive_median_interval_bpm": 95.541401,
+      "minimum_interval_seconds": 0.603,
+      "maximum_interval_seconds": 0.65,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0020] M3-01-PA.beats",
+          "size_bytes": 274,
+          "sha256": "783be908def8427f431f16d5f3ed186d2528f35a24f41be06e068303c701143a"
+        },
+        {
+          "member_path": "Annotations/tempo/[0020] M3-01-PA.bpm",
+          "size_bytes": 10,
+          "sha256": "94815c0f83f395c0a69fabbb16e749283e0be018b914deef870d28b422516ce2"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0020] M3-01-PA.wav",
+        "size_bytes": 3299760,
+        "compressed_size_bytes": 2810196,
+        "zip_crc32": "87710d64",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0021",
+      "name": "[0021] M3-02-SA",
+      "instrument_count": 3,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 48,
+      "downbeat_count": 24,
+      "first_beat_seconds": 0.049,
+      "last_beat_seconds": 27.948,
+      "annotated_span_seconds": 27.899,
+      "position_repeat_count": 0,
+      "published_global_bpm": 101.078892,
+      "descriptive_median_interval_bpm": 100.840336,
+      "minimum_interval_seconds": 0.562,
+      "maximum_interval_seconds": 0.619,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0021] M3-02-SA.beats",
+          "size_bytes": 463,
+          "sha256": "7c2e4b695d66117e3a9e196ec340715ab4f84860bc1d71e848cd3130fdf5866b"
+        },
+        {
+          "member_path": "Annotations/tempo/[0021] M3-02-SA.bpm",
+          "size_bytes": 11,
+          "sha256": "12883c726dee0449fa71b1b8a24656dd59aad9db070e60155c6679f2dd60ee11"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0021] M3-02-SA.wav",
+        "size_bytes": 5176624,
+        "compressed_size_bytes": 4372023,
+        "zip_crc32": "5ce5995e",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0022",
+      "name": "[0022] M3-03-SA",
+      "instrument_count": 3,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 46,
+      "downbeat_count": 23,
+      "first_beat_seconds": 0.67,
+      "last_beat_seconds": 31.495,
+      "annotated_span_seconds": 30.825,
+      "position_repeat_count": 0,
+      "published_global_bpm": 87.591241,
+      "descriptive_median_interval_bpm": 87.209302,
+      "minimum_interval_seconds": 0.622,
+      "maximum_interval_seconds": 0.708,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0022] M3-03-SA.beats",
+          "size_bytes": 446,
+          "sha256": "4afd26e07451984e9faeb79d4ae2c8480bb2ae7b28ff6595af1e96120301af96"
+        },
+        {
+          "member_path": "Annotations/tempo/[0022] M3-03-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "565886bb1ab419d15288e8f76a9be22ef3c2f2f23d7f9ba35fe6e3f173e76a01"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0022] M3-03-SA.wav",
+        "size_bytes": 5745088,
+        "compressed_size_bytes": 4914598,
+        "zip_crc32": "c14d432d",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0023",
+      "name": "[0023] M3-04-SA",
+      "instrument_count": 3,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 27,
+      "downbeat_count": 14,
+      "first_beat_seconds": 0.54,
+      "last_beat_seconds": 25.517,
+      "annotated_span_seconds": 24.977,
+      "position_repeat_count": 0,
+      "published_global_bpm": 62.457461,
+      "descriptive_median_interval_bpm": 62.467465,
+      "minimum_interval_seconds": 0.931,
+      "maximum_interval_seconds": 0.988,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0023] M3-04-SA.beats",
+          "size_bytes": 260,
+          "sha256": "cb5eed93bdbf3cc85256f7f1a8600be67c3ea3e69e5fd6c38cb33acf5513770f"
+        },
+        {
+          "member_path": "Annotations/tempo/[0023] M3-04-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "f6a718072d170af02e7e209ceb102aeb72d9ab2f9082692de63d473fb34583e3"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0023] M3-04-SA.wav",
+        "size_bytes": 4613928,
+        "compressed_size_bytes": 3809092,
+        "zip_crc32": "1d4964f6",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0024",
+      "name": "[0024] M3-05-PA",
+      "instrument_count": 3,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 54,
+      "downbeat_count": 27,
+      "first_beat_seconds": 0.538,
+      "last_beat_seconds": 28.527,
+      "annotated_span_seconds": 27.989,
+      "position_repeat_count": 0,
+      "published_global_bpm": 113.616063,
+      "descriptive_median_interval_bpm": 112.99435,
+      "minimum_interval_seconds": 0.486,
+      "maximum_interval_seconds": 0.548,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0024] M3-05-PA.beats",
+          "size_bytes": 521,
+          "sha256": "1ce4d618e7f845c54817672d79efcddc5884e59a16b00bed3d64549cd9f6b085"
+        },
+        {
+          "member_path": "Annotations/tempo/[0024] M3-05-PA.bpm",
+          "size_bytes": 11,
+          "sha256": "c78a3eb702726112a392e4e06f4325a6d51ddd4f4a7e7bee6c778b5a7260ce7c"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0024] M3-05-PA.wav",
+        "size_bytes": 5173464,
+        "compressed_size_bytes": 4519894,
+        "zip_crc32": "5ff2e316",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0025",
+      "name": "[0025] M3-06-PA",
+      "instrument_count": 3,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 41,
+      "downbeat_count": 21,
+      "first_beat_seconds": 0.151,
+      "last_beat_seconds": 22.856,
+      "annotated_span_seconds": 22.705,
+      "position_repeat_count": 0,
+      "published_global_bpm": 105.70359,
+      "descriptive_median_interval_bpm": 105.726872,
+      "minimum_interval_seconds": 0.53,
+      "maximum_interval_seconds": 0.588,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0025] M3-06-PA.beats",
+          "size_bytes": 392,
+          "sha256": "bc6c8334b19946b23ff07b15ca5ceb7c1a1580a8cb3a8e38bd23695e3fe5da20"
+        },
+        {
+          "member_path": "Annotations/tempo/[0025] M3-06-PA.bpm",
+          "size_bytes": 11,
+          "sha256": "dc089515eb42933e9918878e6285e89c6c2284c5d0e93145243ea4798022b80f"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0025] M3-06-PA.wav",
+        "size_bytes": 4309796,
+        "compressed_size_bytes": 3575573,
+        "zip_crc32": "64a74a1d",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0026",
+      "name": "[0026] M3-07-PA",
+      "instrument_count": 3,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 40,
+      "downbeat_count": 20,
+      "first_beat_seconds": 1.807,
+      "last_beat_seconds": 25.266,
+      "annotated_span_seconds": 23.459,
+      "position_repeat_count": 0,
+      "published_global_bpm": 99.748497,
+      "descriptive_median_interval_bpm": 99.667774,
+      "minimum_interval_seconds": 0.582,
+      "maximum_interval_seconds": 0.624,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0026] M3-07-PA.beats",
+          "size_bytes": 386,
+          "sha256": "3e1253263c51caa1f684770141bc857dd532247c71166ef98661109a03790d4d"
+        },
+        {
+          "member_path": "Annotations/tempo/[0026] M3-07-PA.bpm",
+          "size_bytes": 10,
+          "sha256": "45bd0afbb1f11cef693639a700f30527a6d5eb134152baaaeb966ce502111fbc"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0026] M3-07-PA.wav",
+        "size_bytes": 4690884,
+        "compressed_size_bytes": 3926216,
+        "zip_crc32": "fd97c868",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0027",
+      "name": "[0027] M3-08-SE",
+      "instrument_count": 3,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 35,
+      "downbeat_count": 18,
+      "first_beat_seconds": 0.113,
+      "last_beat_seconds": 16.994,
+      "annotated_span_seconds": 16.881,
+      "position_repeat_count": 0,
+      "published_global_bpm": 120.845921,
+      "descriptive_median_interval_bpm": 120.845921,
+      "minimum_interval_seconds": 0.473,
+      "maximum_interval_seconds": 0.527,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0027] M3-08-SE.beats",
+          "size_bytes": 329,
+          "sha256": "75c7b06f5297b30b5a85987f98e83abe70e6f845c90ac2f792008994a8c35b81"
+        },
+        {
+          "member_path": "Annotations/tempo/[0027] M3-08-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "3f37c4ddc350c2d9972436f3145e339553aa68fa8bd93c216d3b05a9ed24c5ce"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0027] M3-08-SE.wav",
+        "size_bytes": 3147304,
+        "compressed_size_bytes": 2610796,
+        "zip_crc32": "6e98c69b",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0028",
+      "name": "[0028] M3-09-MA",
+      "instrument_count": 3,
+      "style": "MA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 41,
+      "downbeat_count": 21,
+      "first_beat_seconds": 0.248,
+      "last_beat_seconds": 17.775,
+      "annotated_span_seconds": 17.527,
+      "position_repeat_count": 0,
+      "published_global_bpm": 136.931591,
+      "descriptive_median_interval_bpm": 136.986301,
+      "minimum_interval_seconds": 0.419,
+      "maximum_interval_seconds": 0.467,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0028] M3-09-MA.beats",
+          "size_bytes": 387,
+          "sha256": "41a5ddda7c0fbcad7c33346d8eeac5ae921b69a7c9ec16bfe2a604e39285b1e5"
+        },
+        {
+          "member_path": "Annotations/tempo/[0028] M3-09-MA.bpm",
+          "size_bytes": 11,
+          "sha256": "db4ffc8dca68cb6c204236c397313de63b8d9340a951ad3ee1ed5a8cf23182a1"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0028] M3-09-MA.wav",
+        "size_bytes": 3251580,
+        "compressed_size_bytes": 2791512,
+        "zip_crc32": "0af78b03",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0029",
+      "name": "[0029] M3-10-PA",
+      "instrument_count": 3,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 45,
+      "downbeat_count": 23,
+      "first_beat_seconds": 0.055,
+      "last_beat_seconds": 27.603,
+      "annotated_span_seconds": 27.548,
+      "position_repeat_count": 0,
+      "published_global_bpm": 95.832728,
+      "descriptive_median_interval_bpm": 95.69378,
+      "minimum_interval_seconds": 0.592,
+      "maximum_interval_seconds": 0.656,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0029] M3-10-PA.beats",
+          "size_bytes": 434,
+          "sha256": "19142fe34824b119d3031a781474c341bf04f9edeee0bfadb6cbc68dcb014c4e"
+        },
+        {
+          "member_path": "Annotations/tempo/[0029] M3-10-PA.bpm",
+          "size_bytes": 10,
+          "sha256": "8e953653b991c0616df6e5490dc0b191f4ea6cd1f3851b27a5759b445c2c6b2d"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0029] M3-10-PA.wav",
+        "size_bytes": 5073524,
+        "compressed_size_bytes": 4297103,
+        "zip_crc32": "2a5672d6",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0030",
+      "name": "[0030] M3-11-PA",
+      "instrument_count": 3,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 52,
+      "downbeat_count": 26,
+      "first_beat_seconds": 0.061,
+      "last_beat_seconds": 30.405,
+      "annotated_span_seconds": 30.344,
+      "position_repeat_count": 0,
+      "published_global_bpm": 100.843659,
+      "descriptive_median_interval_bpm": 100.671141,
+      "minimum_interval_seconds": 0.541,
+      "maximum_interval_seconds": 0.626,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0030] M3-11-PA.beats",
+          "size_bytes": 503,
+          "sha256": "52cec84d853452ae62681589e7e0cbae5945f5bb11d16064fbf6b460fd23d6c5"
+        },
+        {
+          "member_path": "Annotations/tempo/[0030] M3-11-PA.bpm",
+          "size_bytes": 11,
+          "sha256": "c7bc3ebaeceb37146f801d6c6cc8e9d569c482d5d5add6a6bfa71810c74cfbf0"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0030] M3-11-PA.wav",
+        "size_bytes": 5724920,
+        "compressed_size_bytes": 4824605,
+        "zip_crc32": "b779011b",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0031",
+      "name": "[0031] M3-12-SA",
+      "instrument_count": 3,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 37,
+      "downbeat_count": 19,
+      "first_beat_seconds": 0.012,
+      "last_beat_seconds": 25.69,
+      "annotated_span_seconds": 25.678,
+      "position_repeat_count": 0,
+      "published_global_bpm": 84.118701,
+      "descriptive_median_interval_bpm": 84.685956,
+      "minimum_interval_seconds": 0.669,
+      "maximum_interval_seconds": 0.799,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0031] M3-12-SA.beats",
+          "size_bytes": 356,
+          "sha256": "0dfdc34344d0fa473eec21073fd08ba91234caf625ff01e63770d3dbf1cd1232"
+        },
+        {
+          "member_path": "Annotations/tempo/[0031] M3-12-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "6f125b5226d4767e5ddba622c5e303684efe5bfeec87bcfb070e7fe05a6f2282"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0031] M3-12-SA.wav",
+        "size_bytes": 4666472,
+        "compressed_size_bytes": 3802749,
+        "zip_crc32": "50b5ec98",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0032",
+      "name": "[0032] M3-13-SA",
+      "instrument_count": 3,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 42,
+      "downbeat_count": 21,
+      "first_beat_seconds": 0.599,
+      "last_beat_seconds": 26.493,
+      "annotated_span_seconds": 25.894,
+      "position_repeat_count": 0,
+      "published_global_bpm": 95.002703,
+      "descriptive_median_interval_bpm": 94.78673,
+      "minimum_interval_seconds": 0.599,
+      "maximum_interval_seconds": 0.659,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0032] M3-13-SA.beats",
+          "size_bytes": 405,
+          "sha256": "6b00e6dad2d4fd88b3b1b08fd760915f60a91dbaa9bbe1431a5075950ea8b48b"
+        },
+        {
+          "member_path": "Annotations/tempo/[0032] M3-13-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "6790fba4111f7348289a9ad7683531b14d0e18992217d8350f5b660b21637c25"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0032] M3-13-SA.wav",
+        "size_bytes": 4841836,
+        "compressed_size_bytes": 3997681,
+        "zip_crc32": "20df45a6",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0033",
+      "name": "[0033] M3-14-SA",
+      "instrument_count": 3,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 46,
+      "downbeat_count": 23,
+      "first_beat_seconds": 0.459,
+      "last_beat_seconds": 28.546,
+      "annotated_span_seconds": 28.087,
+      "position_repeat_count": 0,
+      "published_global_bpm": 96.129882,
+      "descriptive_median_interval_bpm": 96.153846,
+      "minimum_interval_seconds": 0.608,
+      "maximum_interval_seconds": 0.654,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0033] M3-14-SA.beats",
+          "size_bytes": 444,
+          "sha256": "1eee2c4a000192833c8099d7c58d0eb52314cd742cadbab7b37b4fe9b17d895f"
+        },
+        {
+          "member_path": "Annotations/tempo/[0033] M3-14-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "808b445ca53eeb9e6202ea2eb7ffa2652fbcfd135be681a2a4c9fce90cea3df3"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0033] M3-14-SA.wav",
+        "size_bytes": 5141448,
+        "compressed_size_bytes": 4420116,
+        "zip_crc32": "cd63f63f",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0034",
+      "name": "[0034] M3-15-SA",
+      "instrument_count": 3,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 35,
+      "downbeat_count": 18,
+      "first_beat_seconds": 0.225,
+      "last_beat_seconds": 23.317,
+      "annotated_span_seconds": 23.092,
+      "position_repeat_count": 0,
+      "published_global_bpm": 88.342283,
+      "descriptive_median_interval_bpm": 88.365243,
+      "minimum_interval_seconds": 0.627,
+      "maximum_interval_seconds": 0.743,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0034] M3-15-SA.beats",
+          "size_bytes": 335,
+          "sha256": "70c415bf57d10c9ffbb3448149665923cc4cea04bb1103388e450a89b73130db"
+        },
+        {
+          "member_path": "Annotations/tempo/[0034] M3-15-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "958294339b16b3722616e2aedb55283b3028309e5306f071de9e4c4d29fd51d9"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0034] M3-15-SA.wav",
+        "size_bytes": 4306872,
+        "compressed_size_bytes": 3610687,
+        "zip_crc32": "672eec50",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0035",
+      "name": "[0035] M3-16-PA",
+      "instrument_count": 3,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 39,
+      "downbeat_count": 20,
+      "first_beat_seconds": 0.11,
+      "last_beat_seconds": 22.34,
+      "annotated_span_seconds": 22.23,
+      "position_repeat_count": 0,
+      "published_global_bpm": 102.564103,
+      "descriptive_median_interval_bpm": 102.30179,
+      "minimum_interval_seconds": 0.546,
+      "maximum_interval_seconds": 0.605,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0035] M3-16-PA.beats",
+          "size_bytes": 372,
+          "sha256": "29eaca2fbaa4454f13332555a56d42b95300ff76526de29ced2e7084349998b4"
+        },
+        {
+          "member_path": "Annotations/tempo/[0035] M3-16-PA.bpm",
+          "size_bytes": 11,
+          "sha256": "bb8366d60994115ef6f324c396c77c5e9a21ccd7d01b0b77c78a32e8862f9407"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0035] M3-16-PA.wav",
+        "size_bytes": 4092360,
+        "compressed_size_bytes": 3421774,
+        "zip_crc32": "e05912f9",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0036",
+      "name": "[0036] M3-17-PA",
+      "instrument_count": 3,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 32,
+      "downbeat_count": 16,
+      "first_beat_seconds": 0.193,
+      "last_beat_seconds": 17.326,
+      "annotated_span_seconds": 17.133,
+      "position_repeat_count": 0,
+      "published_global_bpm": 108.562423,
+      "descriptive_median_interval_bpm": 107.719928,
+      "minimum_interval_seconds": 0.475,
+      "maximum_interval_seconds": 0.598,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0036] M3-17-PA.beats",
+          "size_bytes": 302,
+          "sha256": "ab20529c9b82318e54109b886e7b91b31ccea0a659dd9bf41c843a89c5d41add"
+        },
+        {
+          "member_path": "Annotations/tempo/[0036] M3-17-PA.bpm",
+          "size_bytes": 11,
+          "sha256": "8463b6d785a0af7748fb0be2fb1ba75f1a0a86e79795667bc616c55e536ac808"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0036] M3-17-PA.wav",
+        "size_bytes": 3238124,
+        "compressed_size_bytes": 2619062,
+        "zip_crc32": "9f33052c",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0037",
+      "name": "[0037] M3-18-SA",
+      "instrument_count": 3,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 43,
+      "downbeat_count": 22,
+      "first_beat_seconds": 0.173,
+      "last_beat_seconds": 29.217,
+      "annotated_span_seconds": 29.044,
+      "position_repeat_count": 0,
+      "published_global_bpm": 86.764908,
+      "descriptive_median_interval_bpm": 86.393089,
+      "minimum_interval_seconds": 0.669,
+      "maximum_interval_seconds": 0.718,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0037] M3-18-SA.beats",
+          "size_bytes": 415,
+          "sha256": "87b7bfe2729240db1227d5258746926572bee4947bba1417963fcb51b6f70950"
+        },
+        {
+          "member_path": "Annotations/tempo/[0037] M3-18-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "d2fdc61bd43c31d917a75a1da0945d3663c80ffbbb6be43f5836ea4693698e4f"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0037] M3-18-SA.wav",
+        "size_bytes": 5344240,
+        "compressed_size_bytes": 4540165,
+        "zip_crc32": "175af989",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0038",
+      "name": "[0038] M3-19-SA",
+      "instrument_count": 3,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 37,
+      "downbeat_count": 19,
+      "first_beat_seconds": 0.145,
+      "last_beat_seconds": 23.782,
+      "annotated_span_seconds": 23.637,
+      "position_repeat_count": 0,
+      "published_global_bpm": 91.382155,
+      "descriptive_median_interval_bpm": 91.393755,
+      "minimum_interval_seconds": 0.627,
+      "maximum_interval_seconds": 0.706,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0038] M3-19-SA.beats",
+          "size_bytes": 355,
+          "sha256": "2165bda53415100bf5111e3d490c91c6ed974695e9447bd36a6505aa5e21fef0"
+        },
+        {
+          "member_path": "Annotations/tempo/[0038] M3-19-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "86fb69bb460e53468f3f54a36fc999f8ead8eedccdddc08887076eef2ac41327"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0038] M3-19-SA.wav",
+        "size_bytes": 4426204,
+        "compressed_size_bytes": 3734481,
+        "zip_crc32": "c38ff0c1",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0039",
+      "name": "[0039] M3-20-SE",
+      "instrument_count": 3,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 51,
+      "downbeat_count": 26,
+      "first_beat_seconds": 0.179,
+      "last_beat_seconds": 23.236,
+      "annotated_span_seconds": 23.057,
+      "position_repeat_count": 0,
+      "published_global_bpm": 130.11233,
+      "descriptive_median_interval_bpm": 128.893663,
+      "minimum_interval_seconds": 0.415,
+      "maximum_interval_seconds": 0.485,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0039] M3-20-SE.beats",
+          "size_bytes": 488,
+          "sha256": "a6076fce649b2a14e94938f98f5c7871648f32198b3df708105d13efa739ecb2"
+        },
+        {
+          "member_path": "Annotations/tempo/[0039] M3-20-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "75ad4a8d2a6c12e12bce14b216dc42690ce09d3db36051e48adda7283ee56ba2"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0039] M3-20-SE.wav",
+        "size_bytes": 4286244,
+        "compressed_size_bytes": 3460281,
+        "zip_crc32": "1af7b5ee",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0040",
+      "name": "[0040] M3-21-PA",
+      "instrument_count": 3,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 45,
+      "downbeat_count": 23,
+      "first_beat_seconds": 0.049,
+      "last_beat_seconds": 30.541,
+      "annotated_span_seconds": 30.492,
+      "position_repeat_count": 0,
+      "published_global_bpm": 86.580087,
+      "descriptive_median_interval_bpm": 86.642599,
+      "minimum_interval_seconds": 0.636,
+      "maximum_interval_seconds": 0.731,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0040] M3-21-PA.beats",
+          "size_bytes": 435,
+          "sha256": "e9f368179e910199cf61eaf8129bd87232fca52f0a2c71fc76b933aa7c17e2f7"
+        },
+        {
+          "member_path": "Annotations/tempo/[0040] M3-21-PA.bpm",
+          "size_bytes": 10,
+          "sha256": "ef26329c273c7e0b940be6bd62ff2b29d6a35f37731005fc1dd1ad442da201f1"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0040] M3-21-PA.wav",
+        "size_bytes": 5514592,
+        "compressed_size_bytes": 4520487,
+        "zip_crc32": "a6347911",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0041",
+      "name": "[0041] M3-22-SE",
+      "instrument_count": 3,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 47,
+      "downbeat_count": 24,
+      "first_beat_seconds": 0.319,
+      "last_beat_seconds": 21.605,
+      "annotated_span_seconds": 21.286,
+      "position_repeat_count": 0,
+      "published_global_bpm": 129.662689,
+      "descriptive_median_interval_bpm": 129.310345,
+      "minimum_interval_seconds": 0.43,
+      "maximum_interval_seconds": 0.494,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0041] M3-22-SE.beats",
+          "size_bytes": 449,
+          "sha256": "5332dbdf33f55d983992ac6571f046c3912306b5f37aee69345a988450617b89"
+        },
+        {
+          "member_path": "Annotations/tempo/[0041] M3-22-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "31c904315a34937e08a4ac323ebd15a42ac8db3a9f978a5c252e21d54de5b021"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0041] M3-22-SE.wav",
+        "size_bytes": 4023368,
+        "compressed_size_bytes": 3515140,
+        "zip_crc32": "84def341",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0042",
+      "name": "[0042] M3-23-SE",
+      "instrument_count": 3,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 57,
+      "downbeat_count": 29,
+      "first_beat_seconds": 0.315,
+      "last_beat_seconds": 26.185,
+      "annotated_span_seconds": 25.87,
+      "position_repeat_count": 0,
+      "published_global_bpm": 129.88017,
+      "descriptive_median_interval_bpm": 130.151844,
+      "minimum_interval_seconds": 0.411,
+      "maximum_interval_seconds": 0.491,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0042] M3-23-SE.beats",
+          "size_bytes": 549,
+          "sha256": "6d9423e0c6a509553fca69cb1471d79b661d90083ef78f639259289f3ab33edb"
+        },
+        {
+          "member_path": "Annotations/tempo/[0042] M3-23-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "929bdad034bf52093937318e867d77839ac14a0b46b8b41ce6262a1d9c58f846"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0042] M3-23-SE.wav",
+        "size_bytes": 4771384,
+        "compressed_size_bytes": 4264391,
+        "zip_crc32": "b29559e3",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0043",
+      "name": "[0043] M3-24-SE",
+      "instrument_count": 3,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 51,
+      "downbeat_count": 26,
+      "first_beat_seconds": 0.38,
+      "last_beat_seconds": 23.441,
+      "annotated_span_seconds": 23.061,
+      "position_repeat_count": 0,
+      "published_global_bpm": 130.089762,
+      "descriptive_median_interval_bpm": 129.171152,
+      "minimum_interval_seconds": 0.396,
+      "maximum_interval_seconds": 0.518,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0043] M3-24-SE.beats",
+          "size_bytes": 489,
+          "sha256": "5bde1f0e52d66eccdc6b6561f28eb047d4314c5a9737b38ea89dae1e088e6594"
+        },
+        {
+          "member_path": "Annotations/tempo/[0043] M3-24-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "d04a10df5f885585c695ae007207946a0b63fa4b7d457e079f256f51b5105ed5"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0043] M3-24-SE.wav",
+        "size_bytes": 4301920,
+        "compressed_size_bytes": 3829765,
+        "zip_crc32": "d5010c2f",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0044",
+      "name": "[0044] M3-25-SE",
+      "instrument_count": 3,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 47,
+      "downbeat_count": 24,
+      "first_beat_seconds": 0.327,
+      "last_beat_seconds": 21.544,
+      "annotated_span_seconds": 21.217,
+      "position_repeat_count": 0,
+      "published_global_bpm": 130.084366,
+      "descriptive_median_interval_bpm": 129.589633,
+      "minimum_interval_seconds": 0.409,
+      "maximum_interval_seconds": 0.511,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0044] M3-25-SE.beats",
+          "size_bytes": 448,
+          "sha256": "b91677bf7ad38ad5ef6fc8984761b0e2055193fcbcc28e3e5272eed203fc480b"
+        },
+        {
+          "member_path": "Annotations/tempo/[0044] M3-25-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "d1cdd9da80d53d86154aaed754ecb0e458bc58aa4cdcaa9cff53a8042ecb5bbf"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0044] M3-25-SE.wav",
+        "size_bytes": 3958804,
+        "compressed_size_bytes": 3492980,
+        "zip_crc32": "5ca4f4a5",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0045",
+      "name": "[0045] M3-26-SE",
+      "instrument_count": 3,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 43,
+      "downbeat_count": 22,
+      "first_beat_seconds": 0.461,
+      "last_beat_seconds": 19.879,
+      "annotated_span_seconds": 19.418,
+      "position_repeat_count": 0,
+      "published_global_bpm": 129.776496,
+      "descriptive_median_interval_bpm": 129.589633,
+      "minimum_interval_seconds": 0.412,
+      "maximum_interval_seconds": 0.501,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0045] M3-26-SE.beats",
+          "size_bytes": 409,
+          "sha256": "162bfb0f189ab51192c10989bf2122c56b42c9be44857f9c3f03bf7d8ef79936"
+        },
+        {
+          "member_path": "Annotations/tempo/[0045] M3-26-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "0d50d915a43378874e734145bbe0327b5158c25460b9d958952d8d859160b56f"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0045] M3-26-SE.wav",
+        "size_bytes": 3807684,
+        "compressed_size_bytes": 3311311,
+        "zip_crc32": "564c8b6f",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0046",
+      "name": "[0046] M3-27-SE",
+      "instrument_count": 3,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 31,
+      "downbeat_count": 16,
+      "first_beat_seconds": 0.316,
+      "last_beat_seconds": 14.138,
+      "annotated_span_seconds": 13.822,
+      "position_repeat_count": 0,
+      "published_global_bpm": 130.227174,
+      "descriptive_median_interval_bpm": 129.171152,
+      "minimum_interval_seconds": 0.427,
+      "maximum_interval_seconds": 0.488,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0046] M3-27-SE.beats",
+          "size_bytes": 288,
+          "sha256": "e69bbe12cf7dcce3b9f7894b4956ca245501c042c40de43cb22159d3ee538253"
+        },
+        {
+          "member_path": "Annotations/tempo/[0046] M3-27-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "9ce2f7751c935c4493793ac3601bdcddf5f4fb7f282bfc0627b54136247ea6f8"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0046] M3-27-SE.wav",
+        "size_bytes": 2691908,
+        "compressed_size_bytes": 2310663,
+        "zip_crc32": "4ce64478",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0047",
+      "name": "[0047] M3-28-SE",
+      "instrument_count": 3,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 47,
+      "downbeat_count": 24,
+      "first_beat_seconds": 0.308,
+      "last_beat_seconds": 20.516,
+      "annotated_span_seconds": 20.208,
+      "position_repeat_count": 0,
+      "published_global_bpm": 136.579572,
+      "descriptive_median_interval_bpm": 137.299771,
+      "minimum_interval_seconds": 0.417,
+      "maximum_interval_seconds": 0.469,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0047] M3-28-SE.beats",
+          "size_bytes": 448,
+          "sha256": "c71a07174b239a1b72eeaf7a2e6e198012f9481a6568aa02e6ae4bd8bebd74bf"
+        },
+        {
+          "member_path": "Annotations/tempo/[0047] M3-28-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "8fa0d28b553279399c9be6c84295fe51f213c64ff98deb63eeb8ba740c641afd"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0047] M3-28-SE.wav",
+        "size_bytes": 3792372,
+        "compressed_size_bytes": 3324802,
+        "zip_crc32": "552694d4",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0048",
+      "name": "[0048] M3-29-SE",
+      "instrument_count": 3,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 57,
+      "downbeat_count": 29,
+      "first_beat_seconds": 0.115,
+      "last_beat_seconds": 25.371,
+      "annotated_span_seconds": 25.256,
+      "position_repeat_count": 0,
+      "published_global_bpm": 133.037694,
+      "descriptive_median_interval_bpm": 132.743363,
+      "minimum_interval_seconds": 0.422,
+      "maximum_interval_seconds": 0.495,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0048] M3-29-SE.beats",
+          "size_bytes": 548,
+          "sha256": "29e0a18ffc325dd6bd2fc54f0c034c467034770bbae62b3b3c05d3e123b98594"
+        },
+        {
+          "member_path": "Annotations/tempo/[0048] M3-29-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "86a8563efff4ea26e8bb633e5f5c275f117d1e01ea23ba9e42ae9f4354fc83e1"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/3 Instruments/[0048] M3-29-SE.wav",
+        "size_bytes": 4731600,
+        "compressed_size_bytes": 4096674,
+        "zip_crc32": "710248e4",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0049",
+      "name": "[0049] M2-01-PA",
+      "instrument_count": 2,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 34,
+      "downbeat_count": 17,
+      "first_beat_seconds": 0.634,
+      "last_beat_seconds": 23.5,
+      "annotated_span_seconds": 22.866,
+      "position_repeat_count": 0,
+      "published_global_bpm": 86.591446,
+      "descriptive_median_interval_bpm": 86.455331,
+      "minimum_interval_seconds": 0.674,
+      "maximum_interval_seconds": 0.708,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0049] M2-01-PA.beats",
+          "size_bytes": 326,
+          "sha256": "64d3d2298a958667a814f94c84d71c0687c693824ae3e9ea5ca6225d612d4b3b"
+        },
+        {
+          "member_path": "Annotations/tempo/[0049] M2-01-PA.bpm",
+          "size_bytes": 10,
+          "sha256": "9826900d38140f8b9cc29a32c8f337994099a0dfc85fde85514583d89cea8535"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0049] M2-01-PA.wav",
+        "size_bytes": 4472868,
+        "compressed_size_bytes": 3635795,
+        "zip_crc32": "f6048758",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0050",
+      "name": "[0050] M2-02-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 50,
+      "downbeat_count": 25,
+      "first_beat_seconds": 0.457,
+      "last_beat_seconds": 28.344,
+      "annotated_span_seconds": 27.887,
+      "position_repeat_count": 0,
+      "published_global_bpm": 105.425467,
+      "descriptive_median_interval_bpm": 105.263158,
+      "minimum_interval_seconds": 0.521,
+      "maximum_interval_seconds": 0.587,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0050] M2-02-SA.beats",
+          "size_bytes": 482,
+          "sha256": "b28d1af33f989f01c27045a76299e7ebd4a38b259d82a8738248f2be258b60ce"
+        },
+        {
+          "member_path": "Annotations/tempo/[0050] M2-02-SA.bpm",
+          "size_bytes": 11,
+          "sha256": "94cfe3a9c5ef927750f449646eeed3e254ec258242457e655078a50ba286e7c0"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0050] M2-02-SA.wav",
+        "size_bytes": 5346884,
+        "compressed_size_bytes": 4269658,
+        "zip_crc32": "ab9840ca",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0051",
+      "name": "[0051] M2-03-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 43,
+      "downbeat_count": 22,
+      "first_beat_seconds": 0.628,
+      "last_beat_seconds": 25.398,
+      "annotated_span_seconds": 24.77,
+      "position_repeat_count": 0,
+      "published_global_bpm": 101.735971,
+      "descriptive_median_interval_bpm": 101.351351,
+      "minimum_interval_seconds": 0.544,
+      "maximum_interval_seconds": 0.614,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0051] M2-03-SA.beats",
+          "size_bytes": 414,
+          "sha256": "58847e97b249a4bb3600ee57c847e01a65970ec97afbfebbfbcbf39839ff0ce1"
+        },
+        {
+          "member_path": "Annotations/tempo/[0051] M2-03-SA.bpm",
+          "size_bytes": 11,
+          "sha256": "1fa7e8d4db45a958c33c7c2719bdddecd5ae2eb4bff9148024b9265c48e9a2a8"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0051] M2-03-SA.wav",
+        "size_bytes": 4710576,
+        "compressed_size_bytes": 3829502,
+        "zip_crc32": "94070795",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0052",
+      "name": "[0052] M2-04-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 31,
+      "downbeat_count": 16,
+      "first_beat_seconds": 0.501,
+      "last_beat_seconds": 24.202,
+      "annotated_span_seconds": 23.701,
+      "position_repeat_count": 0,
+      "published_global_bpm": 75.946163,
+      "descriptive_median_interval_bpm": 75.949367,
+      "minimum_interval_seconds": 0.762,
+      "maximum_interval_seconds": 0.813,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0052] M2-04-SA.beats",
+          "size_bytes": 298,
+          "sha256": "5d5ed4dba0a8f769daf88348e681fbb01039bc1ad639d6208530637297004bd7"
+        },
+        {
+          "member_path": "Annotations/tempo/[0052] M2-04-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "e2a7b60687ffa47f0dae9cd0fc34131b014eeefe9d86eedc35fb86d443fce207"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0052] M2-04-SA.wav",
+        "size_bytes": 4558880,
+        "compressed_size_bytes": 3701835,
+        "zip_crc32": "d0aee04b",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0053",
+      "name": "[0053] M2-05-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 49,
+      "downbeat_count": 25,
+      "first_beat_seconds": 0.434,
+      "last_beat_seconds": 32.123,
+      "annotated_span_seconds": 31.689,
+      "position_repeat_count": 0,
+      "published_global_bpm": 90.883272,
+      "descriptive_median_interval_bpm": 90.840273,
+      "minimum_interval_seconds": 0.639,
+      "maximum_interval_seconds": 0.684,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0053] M2-05-SA.beats",
+          "size_bytes": 475,
+          "sha256": "665b7db8f9fb9f36d2547d1f5855f8f1d04984c2ace40e983317a9495825186e"
+        },
+        {
+          "member_path": "Annotations/tempo/[0053] M2-05-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "09fb5c6e67357e42c0f684e8baff33b1011f374fd393b5ab11b19865a5c349b4"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0053] M2-05-SA.wav",
+        "size_bytes": 5926396,
+        "compressed_size_bytes": 4875638,
+        "zip_crc32": "a6c523cb",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0054",
+      "name": "[0054] M2-06-PA",
+      "instrument_count": 2,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 45,
+      "downbeat_count": 23,
+      "first_beat_seconds": 0.091,
+      "last_beat_seconds": 28.25,
+      "annotated_span_seconds": 28.159,
+      "position_repeat_count": 0,
+      "published_global_bpm": 93.753329,
+      "descriptive_median_interval_bpm": 93.75,
+      "minimum_interval_seconds": 0.594,
+      "maximum_interval_seconds": 0.781,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0054] M2-06-PA.beats",
+          "size_bytes": 434,
+          "sha256": "9353e879a90f7db7798778b8f4ad3b9b4a2be38eb467b836130c5d6086ec4b32"
+        },
+        {
+          "member_path": "Annotations/tempo/[0054] M2-06-PA.bpm",
+          "size_bytes": 10,
+          "sha256": "7712e78ccb3625204dec50798f7ec03981be313f239fa109d6ee46a8465a0bdd"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0054] M2-06-PA.wav",
+        "size_bytes": 5161940,
+        "compressed_size_bytes": 4143047,
+        "zip_crc32": "aae55ff7",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0055",
+      "name": "[0055] M2-07-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 41,
+      "downbeat_count": 21,
+      "first_beat_seconds": 0.447,
+      "last_beat_seconds": 26.957,
+      "annotated_span_seconds": 26.51,
+      "position_repeat_count": 0,
+      "published_global_bpm": 90.531875,
+      "descriptive_median_interval_bpm": 90.225564,
+      "minimum_interval_seconds": 0.633,
+      "maximum_interval_seconds": 0.698,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0055] M2-07-SA.beats",
+          "size_bytes": 395,
+          "sha256": "f0c4db19be67960787e54378d5d6705fffc9a1418f1d255ab96b04b92adccf4b"
+        },
+        {
+          "member_path": "Annotations/tempo/[0055] M2-07-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "8eed1908531370ba5d42db943a23fb58492aadf52c974fe170b2f83e4ce52211"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0055] M2-07-SA.wav",
+        "size_bytes": 5031832,
+        "compressed_size_bytes": 3978477,
+        "zip_crc32": "f3aeba56",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0056",
+      "name": "[0056] M2-08-MA",
+      "instrument_count": 2,
+      "style": "MA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 52,
+      "downbeat_count": 26,
+      "first_beat_seconds": 0.254,
+      "last_beat_seconds": 20.056,
+      "annotated_span_seconds": 19.802,
+      "position_repeat_count": 0,
+      "published_global_bpm": 154.529845,
+      "descriptive_median_interval_bpm": 154.241645,
+      "minimum_interval_seconds": 0.354,
+      "maximum_interval_seconds": 0.437,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0056] M2-08-MA.beats",
+          "size_bytes": 494,
+          "sha256": "512ce87836beac54f22ffcc15820c74bf74c8ce8ae9452a594371a03042c3f78"
+        },
+        {
+          "member_path": "Annotations/tempo/[0056] M2-08-MA.bpm",
+          "size_bytes": 11,
+          "sha256": "1444467d967894c8a97f32713e1d68ed36fab299d227b94e170f7faf80972ebe"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0056] M2-08-MA.wav",
+        "size_bytes": 3835496,
+        "compressed_size_bytes": 3089768,
+        "zip_crc32": "c4cc3a40",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0057",
+      "name": "[0057] M2-09-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 45,
+      "downbeat_count": 23,
+      "first_beat_seconds": 0.132,
+      "last_beat_seconds": 29.608,
+      "annotated_span_seconds": 29.476,
+      "position_repeat_count": 0,
+      "published_global_bpm": 89.564391,
+      "descriptive_median_interval_bpm": 89.485459,
+      "minimum_interval_seconds": 0.653,
+      "maximum_interval_seconds": 0.689,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0057] M2-09-SA.beats",
+          "size_bytes": 435,
+          "sha256": "677e88ab0099949fdfa524473502194c3750de804c80172c4e177f4621ad99db"
+        },
+        {
+          "member_path": "Annotations/tempo/[0057] M2-09-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "12faa88ae5884aa76f0f9b91c901de97cb0496ff30161aa71ef92a9ea54e6b79"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0057] M2-09-SA.wav",
+        "size_bytes": 5416112,
+        "compressed_size_bytes": 4219396,
+        "zip_crc32": "4c78c753",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0058",
+      "name": "[0058] M2-10-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 50,
+      "downbeat_count": 25,
+      "first_beat_seconds": 0.089,
+      "last_beat_seconds": 33.422,
+      "annotated_span_seconds": 33.333,
+      "position_repeat_count": 0,
+      "published_global_bpm": 88.200882,
+      "descriptive_median_interval_bpm": 88.365243,
+      "minimum_interval_seconds": 0.65,
+      "maximum_interval_seconds": 0.75,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0058] M2-10-SA.beats",
+          "size_bytes": 485,
+          "sha256": "07019b2f4d525256d2a1787324fbae959e295c2a5ded75edb47be8a2740c543b"
+        },
+        {
+          "member_path": "Annotations/tempo/[0058] M2-10-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "2db7436205b29ced77f21ec166c7ae0903fb6970d4b547a2251d2dd58050b771"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0058] M2-10-SA.wav",
+        "size_bytes": 6368848,
+        "compressed_size_bytes": 4858848,
+        "zip_crc32": "d6829b19",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0059",
+      "name": "[0059] M2-11-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 29,
+      "downbeat_count": 15,
+      "first_beat_seconds": 0.446,
+      "last_beat_seconds": 20.297,
+      "annotated_span_seconds": 19.851,
+      "position_repeat_count": 0,
+      "published_global_bpm": 84.630497,
+      "descriptive_median_interval_bpm": 84.745763,
+      "minimum_interval_seconds": 0.693,
+      "maximum_interval_seconds": 0.723,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0059] M2-11-SA.beats",
+          "size_bytes": 276,
+          "sha256": "8c793d7c7d8bac14a12b533018c63d3f78a1c8002c045a3990e0a3e721149d04"
+        },
+        {
+          "member_path": "Annotations/tempo/[0059] M2-11-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "777f7f4c4ad798c8bce5753e78fbcae11b559aebed85e3ed47a0d62a72c15bc4"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0059] M2-11-SA.wav",
+        "size_bytes": 3716380,
+        "compressed_size_bytes": 2932922,
+        "zip_crc32": "29f717bd",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0060",
+      "name": "[0060] M2-12-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 39,
+      "downbeat_count": 20,
+      "first_beat_seconds": 0.313,
+      "last_beat_seconds": 27.455,
+      "annotated_span_seconds": 27.142,
+      "position_repeat_count": 0,
+      "published_global_bpm": 84.002653,
+      "descriptive_median_interval_bpm": 83.974808,
+      "minimum_interval_seconds": 0.68,
+      "maximum_interval_seconds": 0.748,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0060] M2-12-SA.beats",
+          "size_bytes": 376,
+          "sha256": "35e5a5a7e5a48dec9767fa1a8e27d988dabe0a16226ea3196c6a830b1505e046"
+        },
+        {
+          "member_path": "Annotations/tempo/[0060] M2-12-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "b7b4f2a45ad0835ececddbac0b5dee0bfb28a9210d71dd939845822974c00936"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0060] M2-12-SA.wav",
+        "size_bytes": 5127116,
+        "compressed_size_bytes": 4132885,
+        "zip_crc32": "12ec9797",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0061",
+      "name": "[0061] M2-13-SE",
+      "instrument_count": 2,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 47,
+      "downbeat_count": 24,
+      "first_beat_seconds": 0.042,
+      "last_beat_seconds": 24.853,
+      "annotated_span_seconds": 24.811,
+      "position_repeat_count": 0,
+      "published_global_bpm": 111.240982,
+      "descriptive_median_interval_bpm": 111.317254,
+      "minimum_interval_seconds": 0.521,
+      "maximum_interval_seconds": 0.556,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0061] M2-13-SE.beats",
+          "size_bytes": 451,
+          "sha256": "560e490223fb948e20628409fb1d55c2b7d76ed931d210233a6042d79ba729ea"
+        },
+        {
+          "member_path": "Annotations/tempo/[0061] M2-13-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "e2150af2abb7cf76b0ac934ef6888d359d0f94fdc44809f5c97ac8fbd6df71bf"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0061] M2-13-SE.wav",
+        "size_bytes": 4574724,
+        "compressed_size_bytes": 3613827,
+        "zip_crc32": "ea0998e2",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0062",
+      "name": "[0062] M2-14-MA",
+      "instrument_count": 2,
+      "style": "MA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 47,
+      "downbeat_count": 24,
+      "first_beat_seconds": 0.268,
+      "last_beat_seconds": 19.213,
+      "annotated_span_seconds": 18.945,
+      "position_repeat_count": 0,
+      "published_global_bpm": 145.684877,
+      "descriptive_median_interval_bpm": 146.163216,
+      "minimum_interval_seconds": 0.396,
+      "maximum_interval_seconds": 0.445,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0062] M2-14-MA.beats",
+          "size_bytes": 446,
+          "sha256": "9519da0e9ce1d681477d1f0d5a20cba56a51c333568c2a1e3399316f6033e7cd"
+        },
+        {
+          "member_path": "Annotations/tempo/[0062] M2-14-MA.bpm",
+          "size_bytes": 11,
+          "sha256": "d64f7c06719468b72423b81b154c5293a85a9ff3442832d56c67b882ac86ef62"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0062] M2-14-MA.wav",
+        "size_bytes": 3802364,
+        "compressed_size_bytes": 3062811,
+        "zip_crc32": "0c220896",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0063",
+      "name": "[0063] M2-15-PA",
+      "instrument_count": 2,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 43,
+      "downbeat_count": 22,
+      "first_beat_seconds": 0.028,
+      "last_beat_seconds": 24.011,
+      "annotated_span_seconds": 23.983,
+      "position_repeat_count": 0,
+      "published_global_bpm": 105.074428,
+      "descriptive_median_interval_bpm": 105.820106,
+      "minimum_interval_seconds": 0.546,
+      "maximum_interval_seconds": 0.595,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0063] M2-15-PA.beats",
+          "size_bytes": 412,
+          "sha256": "5bd939961ffe83c0e7bb1467f9b15c6521b25445bb47d4c06cdc58ed479ddf75"
+        },
+        {
+          "member_path": "Annotations/tempo/[0063] M2-15-PA.bpm",
+          "size_bytes": 11,
+          "sha256": "9bfddc96ab72a047ede9b49bbeb62e30e4df9759b93485921a22e33186c932a0"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0063] M2-15-PA.wav",
+        "size_bytes": 4382680,
+        "compressed_size_bytes": 3613045,
+        "zip_crc32": "2a9685ed",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0064",
+      "name": "[0064] M2-16-PA",
+      "instrument_count": 2,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 44,
+      "downbeat_count": 22,
+      "first_beat_seconds": 0.61,
+      "last_beat_seconds": 26.984,
+      "annotated_span_seconds": 26.374,
+      "position_repeat_count": 0,
+      "published_global_bpm": 97.823614,
+      "descriptive_median_interval_bpm": 97.560976,
+      "minimum_interval_seconds": 0.579,
+      "maximum_interval_seconds": 0.666,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0064] M2-16-PA.beats",
+          "size_bytes": 424,
+          "sha256": "477fcb0aa4eb48999e5b1f3a5dc3134b36333f34fe98f79d85c6d6d750bb7ebd"
+        },
+        {
+          "member_path": "Annotations/tempo/[0064] M2-16-PA.bpm",
+          "size_bytes": 10,
+          "sha256": "192517af242045449fc89a5515f16246e3cdeb42a5e6f88b6c9aa0bfd7e141e4"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0064] M2-16-PA.wav",
+        "size_bytes": 5452872,
+        "compressed_size_bytes": 4130578,
+        "zip_crc32": "d7b672a8",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0065",
+      "name": "[0065] M2-17-PA",
+      "instrument_count": 2,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 47,
+      "downbeat_count": 24,
+      "first_beat_seconds": 0.264,
+      "last_beat_seconds": 28.413,
+      "annotated_span_seconds": 28.149,
+      "position_repeat_count": 0,
+      "published_global_bpm": 98.049664,
+      "descriptive_median_interval_bpm": 97.323601,
+      "minimum_interval_seconds": 0.534,
+      "maximum_interval_seconds": 0.652,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0065] M2-17-PA.beats",
+          "size_bytes": 453,
+          "sha256": "21aec62ca69b2f5a888901dcaf91563c2d0d12048cddc8ff62b880673abb3360"
+        },
+        {
+          "member_path": "Annotations/tempo/[0065] M2-17-PA.bpm",
+          "size_bytes": 10,
+          "sha256": "5818c1c369c34b4649bdc56a7f7b9feab4aea4932264860dc89edad391ae57fa"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0065] M2-17-PA.wav",
+        "size_bytes": 5232336,
+        "compressed_size_bytes": 3582002,
+        "zip_crc32": "7a232914",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0066",
+      "name": "[0066] M2-18-PA",
+      "instrument_count": 2,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 39,
+      "downbeat_count": 20,
+      "first_beat_seconds": 0.068,
+      "last_beat_seconds": 21.468,
+      "annotated_span_seconds": 21.4,
+      "position_repeat_count": 0,
+      "published_global_bpm": 106.542056,
+      "descriptive_median_interval_bpm": 106.382979,
+      "minimum_interval_seconds": 0.507,
+      "maximum_interval_seconds": 0.596,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0066] M2-18-PA.beats",
+          "size_bytes": 372,
+          "sha256": "73b35ea2a3485bdebbda53dba36a55c739e97b57f15ee742217fe487a248edad"
+        },
+        {
+          "member_path": "Annotations/tempo/[0066] M2-18-PA.bpm",
+          "size_bytes": 11,
+          "sha256": "a9842c8b779b28920672903074db44f4f1386ce3e6c7b3cd7cb959f7ef383d1a"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0066] M2-18-PA.wav",
+        "size_bytes": 4051516,
+        "compressed_size_bytes": 3081787,
+        "zip_crc32": "6d5f4203",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0067",
+      "name": "[0067] M2-19-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 38,
+      "downbeat_count": 19,
+      "first_beat_seconds": 0.652,
+      "last_beat_seconds": 23.979,
+      "annotated_span_seconds": 23.327,
+      "position_repeat_count": 0,
+      "published_global_bpm": 95.168689,
+      "descriptive_median_interval_bpm": 94.78673,
+      "minimum_interval_seconds": 0.589,
+      "maximum_interval_seconds": 0.696,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0067] M2-19-SA.beats",
+          "size_bytes": 365,
+          "sha256": "925fac9f0994d5c3b2304403be7a43da8b9113cf5823ee4e9457745f506c8dcb"
+        },
+        {
+          "member_path": "Annotations/tempo/[0067] M2-19-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "cf42256acd7533f4297f297b7975323c7e71aa7e5b08cfd648585129f3a711f3"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0067] M2-19-SA.wav",
+        "size_bytes": 4395744,
+        "compressed_size_bytes": 3519408,
+        "zip_crc32": "dda6d455",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0068",
+      "name": "[0068] M2-20-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 38,
+      "downbeat_count": 19,
+      "first_beat_seconds": 0.598,
+      "last_beat_seconds": 23.545,
+      "annotated_span_seconds": 22.947,
+      "position_repeat_count": 0,
+      "published_global_bpm": 96.744673,
+      "descriptive_median_interval_bpm": 96.463023,
+      "minimum_interval_seconds": 0.587,
+      "maximum_interval_seconds": 0.655,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0068] M2-20-SA.beats",
+          "size_bytes": 364,
+          "sha256": "62ee3f842b8e2e6beac27079f3e371d3cac8ba7d16ac47fe6be92e07808955d5"
+        },
+        {
+          "member_path": "Annotations/tempo/[0068] M2-20-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "a74297fc69a1045ad6ba2785f127ebeae9fc90e048cb7a761c138101fe3733ea"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0068] M2-20-SA.wav",
+        "size_bytes": 4331872,
+        "compressed_size_bytes": 3168704,
+        "zip_crc32": "01b3d6c0",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0069",
+      "name": "[0069] M2-21-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 39,
+      "downbeat_count": 20,
+      "first_beat_seconds": 0.054,
+      "last_beat_seconds": 24.768,
+      "annotated_span_seconds": 24.714,
+      "position_repeat_count": 0,
+      "published_global_bpm": 92.255402,
+      "descriptive_median_interval_bpm": 92.236741,
+      "minimum_interval_seconds": 0.618,
+      "maximum_interval_seconds": 0.681,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0069] M2-21-SA.beats",
+          "size_bytes": 374,
+          "sha256": "b41e9b7d880d88e0723f30dd337fe0b95788f94e44e7c7a2870a6bd845cabf06"
+        },
+        {
+          "member_path": "Annotations/tempo/[0069] M2-21-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "bc9b8a90be2da10800aa693f1115201ac7bbb303a6682fea210efb9ecb16a1c3"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0069] M2-21-SA.wav",
+        "size_bytes": 4588496,
+        "compressed_size_bytes": 3553542,
+        "zip_crc32": "8083bbb5",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0070",
+      "name": "[0070] M2-22-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 43,
+      "downbeat_count": 22,
+      "first_beat_seconds": 0.44,
+      "last_beat_seconds": 27.505,
+      "annotated_span_seconds": 27.065,
+      "position_repeat_count": 0,
+      "published_global_bpm": 93.109182,
+      "descriptive_median_interval_bpm": 92.807425,
+      "minimum_interval_seconds": 0.619,
+      "maximum_interval_seconds": 0.659,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0070] M2-22-SA.beats",
+          "size_bytes": 415,
+          "sha256": "1527a22e39d2e8b08cec7707c121439d8d14624d584b9dd81d5b3d6ab66308d9"
+        },
+        {
+          "member_path": "Annotations/tempo/[0070] M2-22-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "cbf21fd5277f5de369f28c90193eb65188f38f9474edb1f4144b40449f885c26"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0070] M2-22-SA.wav",
+        "size_bytes": 5009856,
+        "compressed_size_bytes": 3771663,
+        "zip_crc32": "3ffc9d69",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0071",
+      "name": "[0071] M2-23-PA",
+      "instrument_count": 2,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 50,
+      "downbeat_count": 25,
+      "first_beat_seconds": 0.578,
+      "last_beat_seconds": 32.788,
+      "annotated_span_seconds": 32.21,
+      "position_repeat_count": 0,
+      "published_global_bpm": 91.276001,
+      "descriptive_median_interval_bpm": 91.047041,
+      "minimum_interval_seconds": 0.631,
+      "maximum_interval_seconds": 0.676,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0071] M2-23-PA.beats",
+          "size_bytes": 485,
+          "sha256": "400246a1d9f1a36ad55188558d7c209132d4fceb32ebd784d1d02cbee28c30da"
+        },
+        {
+          "member_path": "Annotations/tempo/[0071] M2-23-PA.bpm",
+          "size_bytes": 10,
+          "sha256": "769405d3f46ad8188515dae4c7e9bd28e2747325735fe79ac34ea6eb8808ee32"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0071] M2-23-PA.wav",
+        "size_bytes": 5882420,
+        "compressed_size_bytes": 4600283,
+        "zip_crc32": "6119c053",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0072",
+      "name": "[0072] M2-24-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 55,
+      "downbeat_count": 28,
+      "first_beat_seconds": 0.418,
+      "last_beat_seconds": 33.826,
+      "annotated_span_seconds": 33.408,
+      "position_repeat_count": 0,
+      "published_global_bpm": 96.982759,
+      "descriptive_median_interval_bpm": 96.696213,
+      "minimum_interval_seconds": 0.57,
+      "maximum_interval_seconds": 0.646,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0072] M2-24-SA.beats",
+          "size_bytes": 534,
+          "sha256": "fc81e013f813a8ecf72ce66dc89b836f41b840fabd3f90285bb2e99c38c17d18"
+        },
+        {
+          "member_path": "Annotations/tempo/[0072] M2-24-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "81ec4c645a81a9c4de5b8434849ae970615acfa5e10c5f73836a6c8eb58fecee"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0072] M2-24-SA.wav",
+        "size_bytes": 6100520,
+        "compressed_size_bytes": 4949341,
+        "zip_crc32": "a15cc17e",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0073",
+      "name": "[0073] M2-25-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 54,
+      "downbeat_count": 27,
+      "first_beat_seconds": 0.525,
+      "last_beat_seconds": 34.386,
+      "annotated_span_seconds": 33.861,
+      "position_repeat_count": 0,
+      "published_global_bpm": 93.913352,
+      "descriptive_median_interval_bpm": 93.896714,
+      "minimum_interval_seconds": 0.576,
+      "maximum_interval_seconds": 0.73,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0073] M2-25-SA.beats",
+          "size_bytes": 525,
+          "sha256": "f28aea7851e6039ea7d4185b5cac63506ceb02215e30dd946515fb4dc23a0e43"
+        },
+        {
+          "member_path": "Annotations/tempo/[0073] M2-25-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "6134967074d68cfe588899a0c78e674a98d5e78f174720244d8da7fc88d8bda4"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0073] M2-25-SA.wav",
+        "size_bytes": 6232632,
+        "compressed_size_bytes": 5326423,
+        "zip_crc32": "eb51e1f7",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0074",
+      "name": "[0074] M2-26-PA",
+      "instrument_count": 2,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 43,
+      "downbeat_count": 22,
+      "first_beat_seconds": 0.345,
+      "last_beat_seconds": 27.717,
+      "annotated_span_seconds": 27.372,
+      "position_repeat_count": 0,
+      "published_global_bpm": 92.064884,
+      "descriptive_median_interval_bpm": 91.954023,
+      "minimum_interval_seconds": 0.611,
+      "maximum_interval_seconds": 0.685,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0074] M2-26-PA.beats",
+          "size_bytes": 415,
+          "sha256": "2a38c0a3b6ff38f1a922d065e21e6a870e5e126afd39c3366e38aeed6501c36b"
+        },
+        {
+          "member_path": "Annotations/tempo/[0074] M2-26-PA.bpm",
+          "size_bytes": 10,
+          "sha256": "d9832860fcfb529f3977c2f6144aeaed51f253514770c614d4234f02ced1dfa7"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0074] M2-26-PA.wav",
+        "size_bytes": 5123412,
+        "compressed_size_bytes": 4192159,
+        "zip_crc32": "31eb4f64",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0075",
+      "name": "[0075] M2-27-PA",
+      "instrument_count": 2,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 44,
+      "downbeat_count": 22,
+      "first_beat_seconds": 0.688,
+      "last_beat_seconds": 29.62,
+      "annotated_span_seconds": 28.932,
+      "position_repeat_count": 0,
+      "published_global_bpm": 89.174616,
+      "descriptive_median_interval_bpm": 88.888889,
+      "minimum_interval_seconds": 0.628,
+      "maximum_interval_seconds": 0.704,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0075] M2-27-PA.beats",
+          "size_bytes": 426,
+          "sha256": "3458c2a41c64eba3a0b9d4be8efc44e9e670dc3ea0070bb371f3c9c4585e349a"
+        },
+        {
+          "member_path": "Annotations/tempo/[0075] M2-27-PA.bpm",
+          "size_bytes": 10,
+          "sha256": "05c7cfdbdc4c601ed036c8276eef24bf048b70385f86b54a83e5fdf3814703be"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0075] M2-27-PA.wav",
+        "size_bytes": 5410928,
+        "compressed_size_bytes": 4314222,
+        "zip_crc32": "3020153d",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0076",
+      "name": "[0076] M2-28-SE",
+      "instrument_count": 2,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 47,
+      "downbeat_count": 24,
+      "first_beat_seconds": 0.453,
+      "last_beat_seconds": 27.164,
+      "annotated_span_seconds": 26.711,
+      "position_repeat_count": 0,
+      "published_global_bpm": 103.328217,
+      "descriptive_median_interval_bpm": 103.626943,
+      "minimum_interval_seconds": 0.55,
+      "maximum_interval_seconds": 0.607,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0076] M2-28-SE.beats",
+          "size_bytes": 453,
+          "sha256": "27811cef9ec81aaa81dc3f90eaf66d8d4695b37622a95dd7aa95615b940f6476"
+        },
+        {
+          "member_path": "Annotations/tempo/[0076] M2-28-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "1e5ca3b18e2a5ef1f0f7924f4b4b324a5ac5b82d2784af5be4cf468f6089d56d"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0076] M2-28-SE.wav",
+        "size_bytes": 5037100,
+        "compressed_size_bytes": 4130044,
+        "zip_crc32": "838a5b7d",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0077",
+      "name": "[0077] M2-29-SE",
+      "instrument_count": 2,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 71,
+      "downbeat_count": 36,
+      "first_beat_seconds": 0.061,
+      "last_beat_seconds": 30.929,
+      "annotated_span_seconds": 30.868,
+      "position_repeat_count": 0,
+      "published_global_bpm": 136.063237,
+      "descriptive_median_interval_bpm": 135.90034,
+      "minimum_interval_seconds": 0.388,
+      "maximum_interval_seconds": 0.498,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0077] M2-29-SE.beats",
+          "size_bytes": 686,
+          "sha256": "70a4eb826dbda35ad71257c58d4a602ef52bdaabbc17c48006bb924a5a42f4a8"
+        },
+        {
+          "member_path": "Annotations/tempo/[0077] M2-29-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "07ad92a44e4b815afbc118a9b287bc0c20c1f14b2addac09b21c78c8353c38cb"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0077] M2-29-SE.wav",
+        "size_bytes": 5695580,
+        "compressed_size_bytes": 4918758,
+        "zip_crc32": "de872544",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0078",
+      "name": "[0078] M2-30-PA",
+      "instrument_count": 2,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 47,
+      "downbeat_count": 24,
+      "first_beat_seconds": 0.077,
+      "last_beat_seconds": 27.957,
+      "annotated_span_seconds": 27.88,
+      "position_repeat_count": 0,
+      "published_global_bpm": 98.995696,
+      "descriptive_median_interval_bpm": 99.09166,
+      "minimum_interval_seconds": 0.57,
+      "maximum_interval_seconds": 0.643,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0078] M2-30-PA.beats",
+          "size_bytes": 453,
+          "sha256": "a5e7d7aa1e5e0d81b66041c7b2c6f58b879cd3fc3857ed5586aff872a4012ada"
+        },
+        {
+          "member_path": "Annotations/tempo/[0078] M2-30-PA.bpm",
+          "size_bytes": 10,
+          "sha256": "abfea4dd4a8dda4bba6f55f5fc8834abd22c24c76dcb53a6417c583d0e8de95b"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0078] M2-30-PA.wav",
+        "size_bytes": 5235212,
+        "compressed_size_bytes": 4096814,
+        "zip_crc32": "5ea35911",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0079",
+      "name": "[0079] M2-31-PA",
+      "instrument_count": 2,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 51,
+      "downbeat_count": 26,
+      "first_beat_seconds": 0.106,
+      "last_beat_seconds": 28.732,
+      "annotated_span_seconds": 28.626,
+      "position_repeat_count": 0,
+      "published_global_bpm": 104.799832,
+      "descriptive_median_interval_bpm": 104.895105,
+      "minimum_interval_seconds": 0.551,
+      "maximum_interval_seconds": 0.598,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0079] M2-31-PA.beats",
+          "size_bytes": 492,
+          "sha256": "8130ce17d3ab73a142a2aae4e6dea4d0de4ec57c0dd60277ddd96e46a83b416c"
+        },
+        {
+          "member_path": "Annotations/tempo/[0079] M2-31-PA.bpm",
+          "size_bytes": 11,
+          "sha256": "c872f9c9e23606eef5effc4a7000e639654efe8beeef2d0a5ded369e17c49405"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0079] M2-31-PA.wav",
+        "size_bytes": 5271572,
+        "compressed_size_bytes": 4150810,
+        "zip_crc32": "b72c9a83",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0080",
+      "name": "[0080] M2-32-PA",
+      "instrument_count": 2,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 44,
+      "downbeat_count": 22,
+      "first_beat_seconds": 0.742,
+      "last_beat_seconds": 25.326,
+      "annotated_span_seconds": 24.584,
+      "position_repeat_count": 0,
+      "published_global_bpm": 104.946307,
+      "descriptive_median_interval_bpm": 104.347826,
+      "minimum_interval_seconds": 0.535,
+      "maximum_interval_seconds": 0.602,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0080] M2-32-PA.beats",
+          "size_bytes": 423,
+          "sha256": "57c03878a42029de5ba4c98bf4c373ea000c54420f0d881680bb807e3a27c84e"
+        },
+        {
+          "member_path": "Annotations/tempo/[0080] M2-32-PA.bpm",
+          "size_bytes": 11,
+          "sha256": "5e53d8859b673aa178dd312ba336e9d0f211304b3ac0d754e98f66ed88f8fb38"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0080] M2-32-PA.wav",
+        "size_bytes": 4691924,
+        "compressed_size_bytes": 3652389,
+        "zip_crc32": "633a6ef3",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0081",
+      "name": "[0081] M2-33-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 46,
+      "downbeat_count": 23,
+      "first_beat_seconds": 0.225,
+      "last_beat_seconds": 29.987,
+      "annotated_span_seconds": 29.762,
+      "position_repeat_count": 0,
+      "published_global_bpm": 90.71971,
+      "descriptive_median_interval_bpm": 91.18541,
+      "minimum_interval_seconds": 0.618,
+      "maximum_interval_seconds": 0.772,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0081] M2-33-SA.beats",
+          "size_bytes": 445,
+          "sha256": "db208330a75f65d1bc69ce1c14d0a9971057c3dfbc3c216e2d85c14483a4dd36"
+        },
+        {
+          "member_path": "Annotations/tempo/[0081] M2-33-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "8bcded610d5f4f7094cc13a253aef52a59eb4baf0b27a476b69d9426b89de8e2"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0081] M2-33-SA.wav",
+        "size_bytes": 5427068,
+        "compressed_size_bytes": 4385418,
+        "zip_crc32": "9049c5f6",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0082",
+      "name": "[0082] M2-34-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 51,
+      "downbeat_count": 26,
+      "first_beat_seconds": 0.126,
+      "last_beat_seconds": 26.632,
+      "annotated_span_seconds": 26.506,
+      "position_repeat_count": 0,
+      "published_global_bpm": 113.181921,
+      "descriptive_median_interval_bpm": 112.99435,
+      "minimum_interval_seconds": 0.402,
+      "maximum_interval_seconds": 0.559,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0082] M2-34-SA.beats",
+          "size_bytes": 491,
+          "sha256": "8f2c3f42ebc3674a7fcf514ec57d954be4d7d29975c95a90316cdfbfed4cbe72"
+        },
+        {
+          "member_path": "Annotations/tempo/[0082] M2-34-SA.bpm",
+          "size_bytes": 11,
+          "sha256": "54d728bd1f30ede057c42c4fa60860ed1d42493230e400e5ea309795aa8601d9"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0082] M2-34-SA.wav",
+        "size_bytes": 4817712,
+        "compressed_size_bytes": 3855633,
+        "zip_crc32": "99025855",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0083",
+      "name": "[0083] M2-35-SE",
+      "instrument_count": 2,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 63,
+      "downbeat_count": 32,
+      "first_beat_seconds": 0.21,
+      "last_beat_seconds": 36.27,
+      "annotated_span_seconds": 36.06,
+      "position_repeat_count": 0,
+      "published_global_bpm": 103.161398,
+      "descriptive_median_interval_bpm": 103.092784,
+      "minimum_interval_seconds": 0.55,
+      "maximum_interval_seconds": 0.608,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0083] M2-35-SE.beats",
+          "size_bytes": 612,
+          "sha256": "0cc0c3f4e7b933013cb5705544359bbce3c72c182edd7bbd7abd2cae5960aeee"
+        },
+        {
+          "member_path": "Annotations/tempo/[0083] M2-35-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "a80acabb1449ecbdc5c842ef8d34b87a18f56b8e56e71ba83049600f5fe8266a"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0083] M2-35-SE.wav",
+        "size_bytes": 6550812,
+        "compressed_size_bytes": 5515424,
+        "zip_crc32": "1f68562c",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0084",
+      "name": "[0084] M2-36-PA",
+      "instrument_count": 2,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 59,
+      "downbeat_count": 30,
+      "first_beat_seconds": 0.16,
+      "last_beat_seconds": 32.882,
+      "annotated_span_seconds": 32.722,
+      "position_repeat_count": 0,
+      "published_global_bpm": 106.350468,
+      "descriptive_median_interval_bpm": 105.913504,
+      "minimum_interval_seconds": 0.521,
+      "maximum_interval_seconds": 0.589,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0084] M2-36-PA.beats",
+          "size_bytes": 572,
+          "sha256": "fa270e0f73c42e6c741956023683873841d2f05ba327e9e75aa1816e402fe938"
+        },
+        {
+          "member_path": "Annotations/tempo/[0084] M2-36-PA.bpm",
+          "size_bytes": 11,
+          "sha256": "b0b22c868959e66232a3670ac80eeabfc489605029c812323fbad7b2ab9480af"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0084] M2-36-PA.wav",
+        "size_bytes": 5965724,
+        "compressed_size_bytes": 4489182,
+        "zip_crc32": "b99c3fce",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0085",
+      "name": "[0085] M2-37-SE",
+      "instrument_count": 2,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 59,
+      "downbeat_count": 30,
+      "first_beat_seconds": 0.144,
+      "last_beat_seconds": 30.816,
+      "annotated_span_seconds": 30.672,
+      "position_repeat_count": 0,
+      "published_global_bpm": 113.458529,
+      "descriptive_median_interval_bpm": 113.100848,
+      "minimum_interval_seconds": 0.484,
+      "maximum_interval_seconds": 0.556,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0085] M2-37-SE.beats",
+          "size_bytes": 571,
+          "sha256": "e724cf8ccfd4b96ce41e58f969a7a7a0c6c4772238620a4fd683e79c9e653c5e"
+        },
+        {
+          "member_path": "Annotations/tempo/[0085] M2-37-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "55394b7a43b955915c5fe24f8b4468e7f7844fe6720f85d036a46f182024f6c5"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0085] M2-37-SE.wav",
+        "size_bytes": 5584548,
+        "compressed_size_bytes": 4573484,
+        "zip_crc32": "43a7129a",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0086",
+      "name": "[0086] M2-38-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 52,
+      "downbeat_count": 26,
+      "first_beat_seconds": 0.475,
+      "last_beat_seconds": 33.263,
+      "annotated_span_seconds": 32.788,
+      "position_repeat_count": 0,
+      "published_global_bpm": 93.326827,
+      "descriptive_median_interval_bpm": 93.312597,
+      "minimum_interval_seconds": 0.596,
+      "maximum_interval_seconds": 0.696,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0086] M2-38-SA.beats",
+          "size_bytes": 505,
+          "sha256": "2c44c2de6e1df57d88ed9d2b60091384b47839e82fd4554f2ccead6ee03a6fe4"
+        },
+        {
+          "member_path": "Annotations/tempo/[0086] M2-38-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "3f733e1ea8d38312905ef52aaaf39e1a94547ce1ad2c3267369bd2bce3910c5b"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0086] M2-38-SA.wav",
+        "size_bytes": 6117912,
+        "compressed_size_bytes": 4926471,
+        "zip_crc32": "fca76d49",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0087",
+      "name": "[0087] M2-39-SE",
+      "instrument_count": 2,
+      "style": "SE",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 63,
+      "downbeat_count": 32,
+      "first_beat_seconds": 0.16,
+      "last_beat_seconds": 26.699,
+      "annotated_span_seconds": 26.539,
+      "position_repeat_count": 0,
+      "published_global_bpm": 140.171069,
+      "descriptive_median_interval_bpm": 140.186916,
+      "minimum_interval_seconds": 0.401,
+      "maximum_interval_seconds": 0.448,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0087] M2-39-SE.beats",
+          "size_bytes": 606,
+          "sha256": "17c0592cbbe493a63ce9550330b2fd684c1b50fe72343764c253c81a930d70cd"
+        },
+        {
+          "member_path": "Annotations/tempo/[0087] M2-39-SE.bpm",
+          "size_bytes": 11,
+          "sha256": "2978f849ce1dedefdd56589528009567baad31c22838f18ab96725cf2d647748"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0087] M2-39-SE.wav",
+        "size_bytes": 4842668,
+        "compressed_size_bytes": 3976290,
+        "zip_crc32": "2f585fc8",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0088",
+      "name": "[0088] M2-40-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 55,
+      "downbeat_count": 28,
+      "first_beat_seconds": 0.016,
+      "last_beat_seconds": 33.345,
+      "annotated_span_seconds": 33.329,
+      "position_repeat_count": 0,
+      "published_global_bpm": 97.212638,
+      "descriptive_median_interval_bpm": 96.930533,
+      "minimum_interval_seconds": 0.569,
+      "maximum_interval_seconds": 0.646,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0088] M2-40-SA.beats",
+          "size_bytes": 533,
+          "sha256": "0d077d25213210c43f7f2819134a0e84e9428d5dd60e8640dd4c9de7a6fe58b6"
+        },
+        {
+          "member_path": "Annotations/tempo/[0088] M2-40-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "de93669579b48e6d0dcc9729c5149e4ce2ddfc2461aa30f7a6dcfd9096ce3e8b"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0088] M2-40-SA.wav",
+        "size_bytes": 6011164,
+        "compressed_size_bytes": 4928059,
+        "zip_crc32": "6ba0dcf4",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0089",
+      "name": "[0089] M2-41-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 39,
+      "downbeat_count": 20,
+      "first_beat_seconds": 0.035,
+      "last_beat_seconds": 26.471,
+      "annotated_span_seconds": 26.436,
+      "position_repeat_count": 0,
+      "published_global_bpm": 86.246028,
+      "descriptive_median_interval_bpm": 86.455331,
+      "minimum_interval_seconds": 0.662,
+      "maximum_interval_seconds": 0.739,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0089] M2-41-SA.beats",
+          "size_bytes": 375,
+          "sha256": "d8ecfa64b43cc1629a865472cc131985fc5bace3f3d2bf302d865f93cf2d473e"
+        },
+        {
+          "member_path": "Annotations/tempo/[0089] M2-41-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "6c20bd5358308e8ab5fa19075e9c5af479b0b76cff4aa135f5989a3f2365d0c9"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0089] M2-41-SA.wav",
+        "size_bytes": 4813448,
+        "compressed_size_bytes": 3780005,
+        "zip_crc32": "0c6e6c87",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0090",
+      "name": "[0090] M2-42-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 51,
+      "downbeat_count": 26,
+      "first_beat_seconds": 0.315,
+      "last_beat_seconds": 30.218,
+      "annotated_span_seconds": 29.903,
+      "position_repeat_count": 0,
+      "published_global_bpm": 100.324382,
+      "descriptive_median_interval_bpm": 100.334448,
+      "minimum_interval_seconds": 0.583,
+      "maximum_interval_seconds": 0.617,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0090] M2-42-SA.beats",
+          "size_bytes": 493,
+          "sha256": "fc2fe07d84090138b6a3bb8987778be4685d133f7a5f94b7a5ba0763d3dd8caf"
+        },
+        {
+          "member_path": "Annotations/tempo/[0090] M2-42-SA.bpm",
+          "size_bytes": 11,
+          "sha256": "dc268c88de44d9f0f38a751613491d219af40382559e683b87e55030446b8b43"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0090] M2-42-SA.wav",
+        "size_bytes": 5418096,
+        "compressed_size_bytes": 4405531,
+        "zip_crc32": "878bd2c7",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0091",
+      "name": "[0091] M2-43-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 65,
+      "downbeat_count": 33,
+      "first_beat_seconds": 0.332,
+      "last_beat_seconds": 38.809,
+      "annotated_span_seconds": 38.477,
+      "position_repeat_count": 0,
+      "published_global_bpm": 99.79988,
+      "descriptive_median_interval_bpm": 99.667774,
+      "minimum_interval_seconds": 0.546,
+      "maximum_interval_seconds": 0.623,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0091] M2-43-SA.beats",
+          "size_bytes": 634,
+          "sha256": "b4f1ed6f21aa69bdcfbc274dd128be84f936b862055b34e89d843f8ace1b1208"
+        },
+        {
+          "member_path": "Annotations/tempo/[0091] M2-43-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "23a333cad75145cd1f786d9475314e5a506aee3f3a38e4654f40609d64fef028"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0091] M2-43-SA.wav",
+        "size_bytes": 7001200,
+        "compressed_size_bytes": 5805874,
+        "zip_crc32": "5f4ae9c5",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0092",
+      "name": "[0092] M2-44-SA",
+      "instrument_count": 2,
+      "style": "SA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 53,
+      "downbeat_count": 27,
+      "first_beat_seconds": 0.235,
+      "last_beat_seconds": 33.074,
+      "annotated_span_seconds": 32.839,
+      "position_repeat_count": 0,
+      "published_global_bpm": 95.008983,
+      "descriptive_median_interval_bpm": 94.711918,
+      "minimum_interval_seconds": 0.594,
+      "maximum_interval_seconds": 0.659,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0092] M2-44-SA.beats",
+          "size_bytes": 514,
+          "sha256": "5aba5602d8dcca13447ae8d23aa0f50737f80a1b4001e73d63c0deeadd3801ee"
+        },
+        {
+          "member_path": "Annotations/tempo/[0092] M2-44-SA.bpm",
+          "size_bytes": 10,
+          "sha256": "0a31fd60a157901835590490bc14a2c96f2cfe821644f8efe8bb82ae8164ae64"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0092] M2-44-SA.wav",
+        "size_bytes": 6006856,
+        "compressed_size_bytes": 5041984,
+        "zip_crc32": "1157ac52",
+        "sha256": null,
+        "payload_verified": false
+      }
+    },
+    {
+      "recording_id": "0093",
+      "name": "[0093] M2-45-PA",
+      "instrument_count": 2,
+      "style": "PA",
+      "intended_role": "training_candidate_only",
+      "leakage_group": "brid-corpus-v1",
+      "beat_count": 71,
+      "downbeat_count": 36,
+      "first_beat_seconds": 0.039,
+      "last_beat_seconds": 34.448,
+      "annotated_span_seconds": 34.409,
+      "position_repeat_count": 0,
+      "published_global_bpm": 122.061089,
+      "descriptive_median_interval_bpm": 121.45749,
+      "minimum_interval_seconds": 0.425,
+      "maximum_interval_seconds": 0.524,
+      "annotation_assets": [
+        {
+          "member_path": "Annotations/beats/[0093] M2-45-PA.beats",
+          "size_bytes": 689,
+          "sha256": "98890380a2d0418c42435a68e8718f928c8c7751c7d8d6af20ae07b6326fddf4"
+        },
+        {
+          "member_path": "Annotations/tempo/[0093] M2-45-PA.bpm",
+          "size_bytes": 11,
+          "sha256": "6d9eedb10b3feaf6d63adc233e12d4f80905bd35e6ccd705f41cf09a14a8f616"
+        }
+      ],
+      "audio_candidate": {
+        "member_path": "Data/Acoustic Mixtures/2 Instruments/[0093] M2-45-PA.wav",
+        "size_bytes": 6141768,
+        "compressed_size_bytes": 5410820,
+        "zip_crc32": "d0a5935a",
+        "sha256": null,
+        "payload_verified": false
+      }
+    }
+  ]
+}

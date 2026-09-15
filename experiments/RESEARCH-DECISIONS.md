@@ -29,3 +29,9 @@ Common boundaries:
 - The next proposed direction is broader **work-disjoint training-source
   coverage**, with provenance/license/split checks first. Do not move development
   or holdout examples into fit, or assume a larger encoder is required.
+
+Source intake has now begun: the [BRID annotation/directory inventory](../evaluation/baselines/training-source-intake-v1.md)
+finds 93 CC BY 4.0 acoustic-mixture candidates, not 367 independently labeled
+works. No audio, fit admission or new evaluation claim yet. The next bounded
+step is the preregistered four-style audio/annotation smoke check, followed by
+full-pool admission and a matched source-expansion comparison if it passes.

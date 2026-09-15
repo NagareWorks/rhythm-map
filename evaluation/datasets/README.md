@@ -8,6 +8,17 @@ links. A lock may also name a member of a remote ZIP. In that case the fetcher
 reads the ZIP/ZIP64 directory once, downloads only the selected byte ranges,
 decompresses the member, and verifies the installed member's size and SHA-256.
 
+## Broader training-source intake
+
+The [BRID candidate inventory](brid-training-candidate-v1.json) verifies 93
+beat-annotated acoustic mixtures against the official audio ZIP directory,
+including 4,342 beats over 42.12 minutes of annotated spans. This is a new
+commercially licensed training-source candidate, not an independent test set,
+an audio fetch lock or an admitted fit pool. Audio payload hashes remain null.
+See the [source review, reproduction and next acquisition slice](../baselines/training-source-intake-v1.md)
+for annotation limits, conservative grouping, and why encoder-exposed GuitarSet
+and Groove MIDI can be training options without becoming independent evaluation.
+
 ## Rhythm-support data planning
 
 The [bounded admission review](../baselines/rhythm-support-admission-review-v1.md)
