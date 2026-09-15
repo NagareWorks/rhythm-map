@@ -50,3 +50,12 @@ resume path. No new rate-limit failure or structural rejection occurred; the
 earlier interrupted run is not rewritten. The next boundary is source-reference
 alignment/adaptation and a fixed source-expansion comparison, not another loss
 sweep. No encoder, fit, holdout access or default change accompanied acquisition.
+
+The [reference adapter and alignment review](../evaluation/baselines/brid-reference-v1.md)
+now retain all 93 recordings with 126,270 supported native tempo cells, without
+timestamp shifts or extrapolation. The 0092 acoustic-offset anomaly survives
+equal-beat and temporal-split review; it is recorded, not silently corrected.
+The [source-expansion design](tempo_source_expansion/PROTOCOL-v1.md) freezes a
+matched old-source/BRID extra slot and one conservative BRID group weight.
+Source disposition, frozen feature packets and executable-runner registration
+remain before fitting. Prepared references are not an accuracy breakthrough.

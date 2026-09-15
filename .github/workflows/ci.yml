@@ -80,3 +80,4 @@ jobs:
       - run: python -m unittest discover -s experiments/local_tempo -p 'test_*.py' -v
       - run: python -m unittest discover -s experiments/tempo_conflict -p 'test_*.py' -v
       - run: python -m unittest discover -s experiments/tempo_variation -p 'test_*.py' -v
+      - run: python -m unittest discover -s experiments/tempo_source_expansion -p 'test_*.py' -v

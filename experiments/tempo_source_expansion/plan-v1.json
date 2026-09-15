@@ -1,0 +1,1723 @@
+{
+  "schema": "rhythm-map.tempo-source-expansion-design.v1",
+  "source_sha256": {
+    "experiments/coupled_clock/inputs-v1.json": "b4f05c10ebede84c394b0b8e06f6723b096d1f9a0a48e63024eb81d913fffd9c",
+    "experiments/tempo_variation/results-v1.json": "774b86f5f1ddf7a24758af8f742a14e544e7778eeb0c571af285562c02330dc9",
+    "evaluation/datasets/brid-reference-v1.json": "ad70e2ed3a005c1d349368e25be405abb5f6a779f1efcf22d2f495291aa34a6a",
+    "experiments/tempo_source_expansion/PROTOCOL-v1.md": "71f54bb9d4a99098148f54e9f01d3d35105aaa2c8f4d48795f603a413d9d2301",
+    "experiments/tempo_source_expansion/design.py": "353a4790d50720d9c1c5c709ee4608f703251b12c7d2158160103bcedffbf272",
+    "experiments/local_tempo/selection.py": "3407793b9880bee9ff7a29018e671a90c7157154cc8a77b75771c1caf2a886c2",
+    "experiments/coupled_clock/supervision.py": "f07045a911b9e8b7e49dd81fc0c90ec392b614a85f62b93fe9fe59346980c204",
+    "experiments/separated_evidence/supervision.py": "df88f2a9f3fb8cd895e5ba7bfb82c6d63ee2da78185d24a3561e452eaf8cabd5"
+  },
+  "status": "design_frozen_execution_not_admitted",
+  "arms": [
+    "old-source-control",
+    "brid-source-primary"
+  ],
+  "initial_weights_sha256": "1b25f43474ba780d845dccd032a8e4c150ebabc77c50f31cc975e9419c4e214a",
+  "updates_per_arm": 100,
+  "epochs": 20,
+  "shared_native_records_per_update": 4,
+  "extra_native_records_per_update": 1,
+  "natural_seeds": [
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    151,
+    152,
+    153,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161
+  ],
+  "pair_seed": 8142,
+  "control_extra_seed": 24142,
+  "primary_extra_seed": 34142,
+  "loss_coefficients": {
+    "shared_native": 0.9,
+    "extra_native": 0.1,
+    "pair": 1.0,
+    "old_fit_retention": 1.0
+  },
+  "primary_record_draw_counts": {
+    "0001": 1,
+    "0002": 2,
+    "0003": 1,
+    "0004": 1,
+    "0005": 1,
+    "0006": 1,
+    "0007": 1,
+    "0008": 1,
+    "0009": 1,
+    "0010": 1,
+    "0011": 2,
+    "0012": 1,
+    "0013": 1,
+    "0014": 2,
+    "0015": 1,
+    "0016": 1,
+    "0017": 1,
+    "0018": 1,
+    "0019": 1,
+    "0020": 1,
+    "0021": 1,
+    "0022": 1,
+    "0023": 1,
+    "0024": 1,
+    "0025": 1,
+    "0026": 1,
+    "0027": 1,
+    "0028": 1,
+    "0029": 1,
+    "0030": 1,
+    "0031": 1,
+    "0032": 1,
+    "0033": 1,
+    "0034": 1,
+    "0035": 1,
+    "0036": 1,
+    "0037": 1,
+    "0038": 1,
+    "0039": 1,
+    "0040": 1,
+    "0041": 1,
+    "0042": 1,
+    "0043": 1,
+    "0044": 1,
+    "0045": 1,
+    "0046": 1,
+    "0047": 1,
+    "0048": 1,
+    "0049": 1,
+    "0050": 1,
+    "0051": 1,
+    "0052": 1,
+    "0053": 1,
+    "0054": 1,
+    "0055": 1,
+    "0056": 1,
+    "0057": 1,
+    "0058": 1,
+    "0059": 1,
+    "0060": 1,
+    "0061": 1,
+    "0062": 1,
+    "0063": 1,
+    "0064": 1,
+    "0065": 1,
+    "0066": 1,
+    "0067": 1,
+    "0068": 1,
+    "0069": 2,
+    "0070": 1,
+    "0071": 1,
+    "0072": 1,
+    "0073": 1,
+    "0074": 1,
+    "0075": 1,
+    "0076": 1,
+    "0077": 1,
+    "0078": 1,
+    "0079": 1,
+    "0080": 1,
+    "0081": 1,
+    "0082": 1,
+    "0083": 2,
+    "0084": 1,
+    "0085": 1,
+    "0086": 2,
+    "0087": 1,
+    "0088": 1,
+    "0089": 1,
+    "0090": 1,
+    "0091": 1,
+    "0092": 2,
+    "0093": 1
+  },
+  "schedule": [
+    {
+      "update": 1,
+      "epoch": 1,
+      "shared_fit_ids": [
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "rubato-bach-bwv1007-01-ov-milman2022",
+        "rubato-brahms-op115-01-ov-steffens2008"
+      ],
+      "control_extra_id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "control_extra_work": "Schumann_Op039-05",
+      "primary_extra_id": "0043",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 2,
+      "epoch": 1,
+      "shared_fit_ids": [
+        "rubato-schubert-d733-01-ar-staab2012",
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "rubato-vivaldi-rv269-01-ar-bra2021",
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015"
+      ],
+      "control_extra_id": "rubato-schubert-d733-01-ar-staab2012",
+      "control_extra_work": "Schubert_D733-01",
+      "primary_extra_id": "0093",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 3,
+      "epoch": 1,
+      "shared_fit_ids": [
+        "rubato-schubert-d733-01-ov-buttnerweiss2025",
+        "rubato-brahms-op115-01-ov-schmitta2025",
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011"
+      ],
+      "control_extra_id": "rubato-schubert-d733-01-ar-staab2012",
+      "control_extra_work": "Schubert_D733-01",
+      "primary_extra_id": "0052",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 4,
+      "epoch": 1,
+      "shared_fit_ids": [
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "rubato-handel-hwv040-1-01-ar-r-bra2020",
+        "rubato-berlioz-h048-04-ov-dennis2016",
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022"
+      ],
+      "control_extra_id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+      "control_extra_work": "Handel_HWV040-1-01",
+      "primary_extra_id": "0020",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 5,
+      "epoch": 1,
+      "shared_fit_ids": [
+        "rubato-beethoven-op072-0-ov-henning2017",
+        "rubato-bach-bwv1007-01-ar-macleod2011",
+        "rubato-schumann-op039-05-ov-buttner2025",
+        "rubato-schumann-op039-05-ov-pizarro2012"
+      ],
+      "control_extra_id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+      "control_extra_work": "Handel_HWV040-1-01",
+      "primary_extra_id": "0030",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 6,
+      "epoch": 2,
+      "shared_fit_ids": [
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "rubato-vivaldi-rv269-01-ar-bra2021",
+        "rubato-bach-bwv1007-01-ar-macleod2011"
+      ],
+      "control_extra_id": "rubato-beethoven-op072-0-ov-henning2017",
+      "control_extra_work": "Beethoven_Op072-0",
+      "primary_extra_id": "0028",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 7,
+      "epoch": 2,
+      "shared_fit_ids": [
+        "rubato-brahms-op115-01-ov-steffens2008",
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "rubato-brahms-op115-01-ov-schmitta2025",
+        "rubato-berlioz-h048-04-ov-dennis2016"
+      ],
+      "control_extra_id": "rubato-beethoven-op072-0-ov-henning2017",
+      "control_extra_work": "Beethoven_Op072-0",
+      "primary_extra_id": "0088",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 8,
+      "epoch": 2,
+      "shared_fit_ids": [
+        "rubato-handel-hwv040-1-01-ar-r-bra2020",
+        "rubato-schumann-op039-05-ov-pizarro2012",
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+        "rubato-beethoven-op072-0-ov-henning2017"
+      ],
+      "control_extra_id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "control_extra_work": "Vivaldi_RV269-01",
+      "primary_extra_id": "0063",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 9,
+      "epoch": 2,
+      "shared_fit_ids": [
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "rubato-schubert-d733-01-ov-buttnerweiss2025",
+        "rubato-bach-bwv1007-01-ov-milman2022"
+      ],
+      "control_extra_id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "control_extra_work": "Bach_BWV1007-01",
+      "primary_extra_id": "0038",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 10,
+      "epoch": 2,
+      "shared_fit_ids": [
+        "rubato-schumann-op039-05-ov-buttner2025",
+        "rubato-schubert-d733-01-ar-staab2012",
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015"
+      ],
+      "control_extra_id": "rubato-brahms-op115-01-ov-schmitta2025",
+      "control_extra_work": "Brahms_Op115-01",
+      "primary_extra_id": "0085",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 11,
+      "epoch": 3,
+      "shared_fit_ids": [
+        "rubato-brahms-op115-01-ov-schmitta2025",
+        "rubato-berlioz-h048-04-ov-dennis2016",
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "rubato-schubert-d733-01-ov-buttnerweiss2025"
+      ],
+      "control_extra_id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "control_extra_work": "Bach_BWV1007-01",
+      "primary_extra_id": "0091",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 12,
+      "epoch": 3,
+      "shared_fit_ids": [
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+        "rubato-brahms-op115-01-ov-steffens2008",
+        "rubato-schubert-d733-01-ar-staab2012",
+        "rubato-schumann-op039-05-ov-pizarro2012"
+      ],
+      "control_extra_id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "control_extra_work": "Vivaldi_RV269-01",
+      "primary_extra_id": "0009",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 13,
+      "epoch": 3,
+      "shared_fit_ids": [
+        "rubato-vivaldi-rv269-01-ar-bra2021",
+        "rubato-bach-bwv1007-01-ov-milman2022",
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "rubato-handel-hwv040-1-01-ar-r-bra2020"
+      ],
+      "control_extra_id": "rubato-beethoven-op072-0-ov-henning2017",
+      "control_extra_work": "Beethoven_Op072-0",
+      "primary_extra_id": "0002",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 14,
+      "epoch": 3,
+      "shared_fit_ids": [
+        "rubato-beethoven-op072-0-ov-henning2017",
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007"
+      ],
+      "control_extra_id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+      "control_extra_work": "Handel_HWV040-1-01",
+      "primary_extra_id": "0076",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 15,
+      "epoch": 3,
+      "shared_fit_ids": [
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "rubato-schumann-op039-05-ov-buttner2025",
+        "rubato-bach-bwv1007-01-ar-macleod2011",
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020"
+      ],
+      "control_extra_id": "rubato-beethoven-op072-0-ov-henning2017",
+      "control_extra_work": "Beethoven_Op072-0",
+      "primary_extra_id": "0083",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 16,
+      "epoch": 4,
+      "shared_fit_ids": [
+        "rubato-bach-bwv1007-01-ar-macleod2011",
+        "rubato-schumann-op039-05-ov-buttner2025",
+        "rubato-schubert-d733-01-ov-buttnerweiss2025",
+        "rubato-brahms-op115-01-ov-steffens2008"
+      ],
+      "control_extra_id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+      "control_extra_work": "Verdi_Nabucco-VaPensiero",
+      "primary_extra_id": "0025",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 17,
+      "epoch": 4,
+      "shared_fit_ids": [
+        "rubato-beethoven-op072-0-ov-henning2017",
+        "rubato-schumann-op039-05-ov-pizarro2012",
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022"
+      ],
+      "control_extra_id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "control_extra_work": "Vivaldi_RV269-01",
+      "primary_extra_id": "0010",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 18,
+      "epoch": 4,
+      "shared_fit_ids": [
+        "rubato-schubert-d733-01-ar-staab2012",
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+        "rubato-berlioz-h048-04-ov-dennis2016",
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025"
+      ],
+      "control_extra_id": "rubato-brahms-op115-01-ov-steffens2008",
+      "control_extra_work": "Brahms_Op115-01",
+      "primary_extra_id": "0056",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 19,
+      "epoch": 4,
+      "shared_fit_ids": [
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "rubato-vivaldi-rv269-01-ar-bra2021",
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "rubato-handel-hwv040-1-01-ar-r-bra2020"
+      ],
+      "control_extra_id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "control_extra_work": "Berlioz_H048-04",
+      "primary_extra_id": "0079",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 20,
+      "epoch": 4,
+      "shared_fit_ids": [
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+        "rubato-brahms-op115-01-ov-schmitta2025",
+        "rubato-bach-bwv1007-01-ov-milman2022"
+      ],
+      "control_extra_id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "control_extra_work": "Vivaldi_RV269-01",
+      "primary_extra_id": "0016",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 21,
+      "epoch": 5,
+      "shared_fit_ids": [
+        "rubato-schumann-op039-05-ov-buttner2025",
+        "rubato-vivaldi-rv269-01-ar-bra2021",
+        "rubato-berlioz-h048-04-ov-dennis2016",
+        "rubato-brahms-op115-01-ov-steffens2008"
+      ],
+      "control_extra_id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "control_extra_work": "Vivaldi_RV269-01",
+      "primary_extra_id": "0007",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 22,
+      "epoch": 5,
+      "shared_fit_ids": [
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "rubato-brahms-op115-01-ov-schmitta2025",
+        "rubato-bach-bwv1007-01-ar-macleod2011",
+        "rubato-bach-bwv1007-01-ov-milman2022"
+      ],
+      "control_extra_id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+      "control_extra_work": "Verdi_Nabucco-VaPensiero",
+      "primary_extra_id": "0008",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 23,
+      "epoch": 5,
+      "shared_fit_ids": [
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "rubato-handel-hwv040-1-01-ar-r-bra2020",
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "rubato-schubert-d733-01-ar-staab2012"
+      ],
+      "control_extra_id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+      "control_extra_work": "Handel_HWV040-1-01",
+      "primary_extra_id": "0026",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 24,
+      "epoch": 5,
+      "shared_fit_ids": [
+        "rubato-schubert-d733-01-ov-buttnerweiss2025",
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "rubato-beethoven-op072-0-ov-henning2017",
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020"
+      ],
+      "control_extra_id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "control_extra_work": "Schumann_Op039-05",
+      "primary_extra_id": "0042",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 25,
+      "epoch": 5,
+      "shared_fit_ids": [
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "rubato-schumann-op039-05-ov-pizarro2012",
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015"
+      ],
+      "control_extra_id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "control_extra_work": "Vivaldi_RV269-01",
+      "primary_extra_id": "0075",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 26,
+      "epoch": 6,
+      "shared_fit_ids": [
+        "rubato-schumann-op039-05-ov-buttner2025",
+        "rubato-berlioz-h048-04-ov-dennis2016",
+        "rubato-brahms-op115-01-ov-schmitta2025",
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007"
+      ],
+      "control_extra_id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+      "control_extra_work": "Handel_HWV040-1-01",
+      "primary_extra_id": "0041",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 27,
+      "epoch": 6,
+      "shared_fit_ids": [
+        "rubato-vivaldi-rv269-01-ar-bra2021",
+        "rubato-brahms-op115-01-ov-steffens2008",
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020"
+      ],
+      "control_extra_id": "rubato-schubert-d733-01-ar-staab2012",
+      "control_extra_work": "Schubert_D733-01",
+      "primary_extra_id": "0073",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 28,
+      "epoch": 6,
+      "shared_fit_ids": [
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+        "rubato-schubert-d733-01-ov-buttnerweiss2025",
+        "rubato-schubert-d733-01-ar-staab2012",
+        "rubato-bach-bwv1007-01-ov-milman2022"
+      ],
+      "control_extra_id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "control_extra_work": "Berlioz_H048-04",
+      "primary_extra_id": "0001",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 29,
+      "epoch": 6,
+      "shared_fit_ids": [
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "rubato-schumann-op039-05-ov-pizarro2012",
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015"
+      ],
+      "control_extra_id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "control_extra_work": "Berlioz_H048-04",
+      "primary_extra_id": "0067",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 30,
+      "epoch": 6,
+      "shared_fit_ids": [
+        "rubato-beethoven-op072-0-ov-henning2017",
+        "rubato-bach-bwv1007-01-ar-macleod2011",
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "rubato-handel-hwv040-1-01-ar-r-bra2020"
+      ],
+      "control_extra_id": "rubato-brahms-op115-01-ov-steffens2008",
+      "control_extra_work": "Brahms_Op115-01",
+      "primary_extra_id": "0004",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 31,
+      "epoch": 7,
+      "shared_fit_ids": [
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "rubato-bach-bwv1007-01-ov-milman2022"
+      ],
+      "control_extra_id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "control_extra_work": "Schumann_Op039-05",
+      "primary_extra_id": "0033",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 32,
+      "epoch": 7,
+      "shared_fit_ids": [
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+        "rubato-berlioz-h048-04-ov-dennis2016",
+        "rubato-schubert-d733-01-ar-staab2012"
+      ],
+      "control_extra_id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "control_extra_work": "Berlioz_H048-04",
+      "primary_extra_id": "0034",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 33,
+      "epoch": 7,
+      "shared_fit_ids": [
+        "rubato-handel-hwv040-1-01-ar-r-bra2020",
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+        "rubato-beethoven-op072-0-ov-henning2017",
+        "rubato-schumann-op039-05-ov-buttner2025"
+      ],
+      "control_extra_id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "control_extra_work": "Vivaldi_RV269-01",
+      "primary_extra_id": "0021",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 34,
+      "epoch": 7,
+      "shared_fit_ids": [
+        "rubato-brahms-op115-01-ov-schmitta2025",
+        "rubato-schumann-op039-05-ov-pizarro2012",
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "rubato-brahms-op115-01-ov-steffens2008"
+      ],
+      "control_extra_id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "control_extra_work": "Bach_BWV1007-01",
+      "primary_extra_id": "0046",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 35,
+      "epoch": 7,
+      "shared_fit_ids": [
+        "rubato-schubert-d733-01-ov-buttnerweiss2025",
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "rubato-bach-bwv1007-01-ar-macleod2011",
+        "rubato-vivaldi-rv269-01-ar-bra2021"
+      ],
+      "control_extra_id": "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+      "control_extra_work": "Verdi_Nabucco-VaPensiero",
+      "primary_extra_id": "0092",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 36,
+      "epoch": 8,
+      "shared_fit_ids": [
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011"
+      ],
+      "control_extra_id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "control_extra_work": "Berlioz_H048-04",
+      "primary_extra_id": "0044",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 37,
+      "epoch": 8,
+      "shared_fit_ids": [
+        "rubato-brahms-op115-01-ov-schmitta2025",
+        "rubato-bach-bwv1007-01-ov-milman2022",
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "rubato-schubert-d733-01-ov-buttnerweiss2025"
+      ],
+      "control_extra_id": "rubato-beethoven-op072-0-ov-henning2017",
+      "control_extra_work": "Beethoven_Op072-0",
+      "primary_extra_id": "0082",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 38,
+      "epoch": 8,
+      "shared_fit_ids": [
+        "rubato-bach-bwv1007-01-ar-macleod2011",
+        "rubato-brahms-op115-01-ov-steffens2008",
+        "rubato-vivaldi-rv269-01-ar-bra2021",
+        "rubato-schumann-op039-05-ov-buttner2025"
+      ],
+      "control_extra_id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "control_extra_work": "Bach_BWV1007-01",
+      "primary_extra_id": "0029",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 39,
+      "epoch": 8,
+      "shared_fit_ids": [
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "rubato-berlioz-h048-04-ov-dennis2016",
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "rubato-schumann-op039-05-ov-pizarro2012"
+      ],
+      "control_extra_id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "control_extra_work": "Bach_BWV1007-01",
+      "primary_extra_id": "0054",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 40,
+      "epoch": 8,
+      "shared_fit_ids": [
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "rubato-handel-hwv040-1-01-ar-r-bra2020",
+        "rubato-beethoven-op072-0-ov-henning2017",
+        "rubato-schubert-d733-01-ar-staab2012"
+      ],
+      "control_extra_id": "rubato-beethoven-op072-0-ov-henning2017",
+      "control_extra_work": "Beethoven_Op072-0",
+      "primary_extra_id": "0036",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 41,
+      "epoch": 9,
+      "shared_fit_ids": [
+        "rubato-berlioz-h048-04-ov-dennis2016",
+        "rubato-schubert-d733-01-ov-buttnerweiss2025",
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011"
+      ],
+      "control_extra_id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "control_extra_work": "Schumann_Op039-05",
+      "primary_extra_id": "0012",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 42,
+      "epoch": 9,
+      "shared_fit_ids": [
+        "rubato-schumann-op039-05-ov-pizarro2012",
+        "rubato-bach-bwv1007-01-ov-milman2022",
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "rubato-schubert-d733-01-ar-staab2012"
+      ],
+      "control_extra_id": "rubato-brahms-op115-01-ov-steffens2008",
+      "control_extra_work": "Brahms_Op115-01",
+      "primary_extra_id": "0051",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 43,
+      "epoch": 9,
+      "shared_fit_ids": [
+        "rubato-vivaldi-rv269-01-ar-bra2021",
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "rubato-schumann-op039-05-ov-buttner2025"
+      ],
+      "control_extra_id": "rubato-beethoven-op072-0-ov-henning2017",
+      "control_extra_work": "Beethoven_Op072-0",
+      "primary_extra_id": "0055",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 44,
+      "epoch": 9,
+      "shared_fit_ids": [
+        "rubato-brahms-op115-01-ov-steffens2008",
+        "rubato-beethoven-op072-0-ov-henning2017",
+        "rubato-brahms-op115-01-ov-schmitta2025",
+        "rubato-handel-hwv040-1-01-ar-r-bra2020"
+      ],
+      "control_extra_id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+      "control_extra_work": "Handel_HWV040-1-01",
+      "primary_extra_id": "0074",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 45,
+      "epoch": 9,
+      "shared_fit_ids": [
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+        "rubato-bach-bwv1007-01-ar-macleod2011"
+      ],
+      "control_extra_id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+      "control_extra_work": "Vivaldi_RV269-01",
+      "primary_extra_id": "0090",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 46,
+      "epoch": 10,
+      "shared_fit_ids": [
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+        "rubato-vivaldi-rv269-01-ar-bra2021",
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022"
+      ],
+      "control_extra_id": "rubato-brahms-op115-01-ov-steffens2008",
+      "control_extra_work": "Brahms_Op115-01",
+      "primary_extra_id": "0086",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 47,
+      "epoch": 10,
+      "shared_fit_ids": [
+        "rubato-handel-hwv040-1-01-ar-r-bra2020",
+        "rubato-schumann-op039-05-ov-buttner2025",
+        "rubato-beethoven-op072-0-ov-henning2017",
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025"
+      ],
+      "control_extra_id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "control_extra_work": "Berlioz_H048-04",
+      "primary_extra_id": "0022",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 48,
+      "epoch": 10,
+      "shared_fit_ids": [
+        "rubato-berlioz-h048-04-ov-dennis2016",
+        "rubato-bach-bwv1007-01-ov-milman2022",
+        "rubato-schumann-op039-05-ov-pizarro2012",
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025"
+      ],
+      "control_extra_id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+      "control_extra_work": "Handel_HWV040-1-01",
+      "primary_extra_id": "0011",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 49,
+      "epoch": 10,
+      "shared_fit_ids": [
+        "rubato-bach-bwv1007-01-ar-macleod2011",
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011"
+      ],
+      "control_extra_id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "control_extra_work": "Berlioz_H048-04",
+      "primary_extra_id": "0068",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 50,
+      "epoch": 10,
+      "shared_fit_ids": [
+        "rubato-brahms-op115-01-ov-schmitta2025",
+        "rubato-schubert-d733-01-ar-staab2012",
+        "rubato-brahms-op115-01-ov-steffens2008",
+        "rubato-schubert-d733-01-ov-buttnerweiss2025"
+      ],
+      "control_extra_id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "control_extra_work": "Bach_BWV1007-01",
+      "primary_extra_id": "0032",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 51,
+      "epoch": 11,
+      "shared_fit_ids": [
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "rubato-schumann-op039-05-ov-buttner2025",
+        "rubato-brahms-op115-01-ov-steffens2008"
+      ],
+      "control_extra_id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "control_extra_work": "Bach_BWV1007-01",
+      "primary_extra_id": "0053",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 52,
+      "epoch": 11,
+      "shared_fit_ids": [
+        "rubato-schubert-d733-01-ov-buttnerweiss2025",
+        "rubato-vivaldi-rv269-01-ar-bra2021",
+        "rubato-handel-hwv040-1-01-ar-r-bra2020",
+        "rubato-bach-bwv1007-01-ar-macleod2011"
+      ],
+      "control_extra_id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "control_extra_work": "Bach_BWV1007-01",
+      "primary_extra_id": "0072",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 53,
+      "epoch": 11,
+      "shared_fit_ids": [
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+        "rubato-berlioz-h048-04-ov-dennis2016",
+        "rubato-brahms-op115-01-ov-schmitta2025"
+      ],
+      "control_extra_id": "rubato-schubert-d733-01-ar-staab2012",
+      "control_extra_work": "Schubert_D733-01",
+      "primary_extra_id": "0057",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 54,
+      "epoch": 11,
+      "shared_fit_ids": [
+        "rubato-beethoven-op072-0-ov-henning2017",
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "rubato-schubert-d733-01-ar-staab2012",
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020"
+      ],
+      "control_extra_id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+      "control_extra_work": "Verdi_Nabucco-VaPensiero",
+      "primary_extra_id": "0018",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 55,
+      "epoch": 11,
+      "shared_fit_ids": [
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "rubato-bach-bwv1007-01-ov-milman2022",
+        "rubato-schumann-op039-05-ov-pizarro2012"
+      ],
+      "control_extra_id": "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+      "control_extra_work": "Verdi_Nabucco-VaPensiero",
+      "primary_extra_id": "0039",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 56,
+      "epoch": 12,
+      "shared_fit_ids": [
+        "rubato-brahms-op115-01-ov-steffens2008",
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "rubato-schubert-d733-01-ov-buttnerweiss2025"
+      ],
+      "control_extra_id": "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+      "control_extra_work": "Verdi_Nabucco-VaPensiero",
+      "primary_extra_id": "0066",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 57,
+      "epoch": 12,
+      "shared_fit_ids": [
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+        "rubato-berlioz-h048-04-ov-dennis2016",
+        "rubato-beethoven-op072-0-ov-henning2017"
+      ],
+      "control_extra_id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "control_extra_work": "Berlioz_H048-04",
+      "primary_extra_id": "0071",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 58,
+      "epoch": 12,
+      "shared_fit_ids": [
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+        "rubato-vivaldi-rv269-01-ar-bra2021",
+        "rubato-bach-bwv1007-01-ov-milman2022",
+        "rubato-schumann-op039-05-ov-buttner2025"
+      ],
+      "control_extra_id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "control_extra_work": "Vivaldi_RV269-01",
+      "primary_extra_id": "0084",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 59,
+      "epoch": 12,
+      "shared_fit_ids": [
+        "rubato-schubert-d733-01-ar-staab2012",
+        "rubato-handel-hwv040-1-01-ar-r-bra2020",
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020"
+      ],
+      "control_extra_id": "rubato-beethoven-op072-0-ov-henning2017",
+      "control_extra_work": "Beethoven_Op072-0",
+      "primary_extra_id": "0017",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 60,
+      "epoch": 12,
+      "shared_fit_ids": [
+        "rubato-bach-bwv1007-01-ar-macleod2011",
+        "rubato-schumann-op039-05-ov-pizarro2012",
+        "rubato-brahms-op115-01-ov-schmitta2025",
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022"
+      ],
+      "control_extra_id": "rubato-brahms-op115-01-ov-steffens2008",
+      "control_extra_work": "Brahms_Op115-01",
+      "primary_extra_id": "0013",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 61,
+      "epoch": 13,
+      "shared_fit_ids": [
+        "rubato-schumann-op039-05-ov-pizarro2012",
+        "rubato-brahms-op115-01-ov-steffens2008",
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022"
+      ],
+      "control_extra_id": "rubato-brahms-op115-01-ov-steffens2008",
+      "control_extra_work": "Brahms_Op115-01",
+      "primary_extra_id": "0087",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 62,
+      "epoch": 13,
+      "shared_fit_ids": [
+        "rubato-brahms-op115-01-ov-schmitta2025",
+        "rubato-vivaldi-rv269-01-ar-bra2021",
+        "rubato-handel-hwv040-1-01-ar-r-bra2020",
+        "rubato-bach-bwv1007-01-ov-milman2022"
+      ],
+      "control_extra_id": "rubato-berlioz-h048-04-ov-dennis2016",
+      "control_extra_work": "Berlioz_H048-04",
+      "primary_extra_id": "0058",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 63,
+      "epoch": 13,
+      "shared_fit_ids": [
+        "rubato-schubert-d733-01-ov-buttnerweiss2025",
+        "rubato-schumann-op039-05-ov-buttner2025",
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015"
+      ],
+      "control_extra_id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "control_extra_work": "Vivaldi_RV269-01",
+      "primary_extra_id": "0045",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 64,
+      "epoch": 13,
+      "shared_fit_ids": [
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+        "rubato-bach-bwv1007-01-ar-macleod2011",
+        "rubato-schubert-d733-01-ar-staab2012"
+      ],
+      "control_extra_id": "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+      "control_extra_work": "Verdi_Nabucco-VaPensiero",
+      "primary_extra_id": "0023",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 65,
+      "epoch": 13,
+      "shared_fit_ids": [
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "rubato-beethoven-op072-0-ov-henning2017",
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+        "rubato-berlioz-h048-04-ov-dennis2016"
+      ],
+      "control_extra_id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "control_extra_work": "Vivaldi_RV269-01",
+      "primary_extra_id": "0089",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 66,
+      "epoch": 14,
+      "shared_fit_ids": [
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+        "rubato-schubert-d733-01-ov-buttnerweiss2025",
+        "rubato-brahms-op115-01-ov-schmitta2025"
+      ],
+      "control_extra_id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "control_extra_work": "Bach_BWV1007-01",
+      "primary_extra_id": "0019",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 67,
+      "epoch": 14,
+      "shared_fit_ids": [
+        "rubato-bach-bwv1007-01-ar-macleod2011",
+        "rubato-handel-hwv040-1-01-ar-r-bra2020",
+        "rubato-berlioz-h048-04-ov-dennis2016",
+        "rubato-vivaldi-rv269-01-ar-bra2021"
+      ],
+      "control_extra_id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+      "control_extra_work": "Handel_HWV040-1-01",
+      "primary_extra_id": "0069",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 68,
+      "epoch": 14,
+      "shared_fit_ids": [
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "rubato-schubert-d733-01-ar-staab2012",
+        "rubato-schumann-op039-05-ov-pizarro2012"
+      ],
+      "control_extra_id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "control_extra_work": "Schumann_Op039-05",
+      "primary_extra_id": "0047",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 69,
+      "epoch": 14,
+      "shared_fit_ids": [
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+        "rubato-brahms-op115-01-ov-steffens2008",
+        "rubato-bach-bwv1007-01-ov-milman2022"
+      ],
+      "control_extra_id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+      "control_extra_work": "Schubert_D733-01",
+      "primary_extra_id": "0027",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 70,
+      "epoch": 14,
+      "shared_fit_ids": [
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "rubato-schumann-op039-05-ov-buttner2025",
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "rubato-beethoven-op072-0-ov-henning2017"
+      ],
+      "control_extra_id": "rubato-brahms-op115-01-ov-schmitta2025",
+      "control_extra_work": "Brahms_Op115-01",
+      "primary_extra_id": "0014",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 71,
+      "epoch": 15,
+      "shared_fit_ids": [
+        "rubato-beethoven-op072-0-ov-henning2017",
+        "rubato-berlioz-h048-04-ov-dennis2016",
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020"
+      ],
+      "control_extra_id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "control_extra_work": "Vivaldi_RV269-01",
+      "primary_extra_id": "0081",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 72,
+      "epoch": 15,
+      "shared_fit_ids": [
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "rubato-schumann-op039-05-ov-buttner2025",
+        "rubato-schumann-op039-05-ov-pizarro2012"
+      ],
+      "control_extra_id": "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+      "control_extra_work": "Vivaldi_RV269-01",
+      "primary_extra_id": "0065",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 73,
+      "epoch": 15,
+      "shared_fit_ids": [
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "rubato-schubert-d733-01-ar-staab2012",
+        "rubato-brahms-op115-01-ov-schmitta2025",
+        "rubato-bach-bwv1007-01-ar-macleod2011"
+      ],
+      "control_extra_id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "control_extra_work": "Bach_BWV1007-01",
+      "primary_extra_id": "0061",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 74,
+      "epoch": 15,
+      "shared_fit_ids": [
+        "rubato-vivaldi-rv269-01-ar-bra2021",
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+        "rubato-handel-hwv040-1-01-ar-r-bra2020",
+        "rubato-bach-bwv1007-01-ov-milman2022"
+      ],
+      "control_extra_id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "control_extra_work": "Bach_BWV1007-01",
+      "primary_extra_id": "0080",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 75,
+      "epoch": 15,
+      "shared_fit_ids": [
+        "rubato-brahms-op115-01-ov-steffens2008",
+        "rubato-schubert-d733-01-ov-buttnerweiss2025",
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025"
+      ],
+      "control_extra_id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "control_extra_work": "Schumann_Op039-05",
+      "primary_extra_id": "0003",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 76,
+      "epoch": 16,
+      "shared_fit_ids": [
+        "rubato-brahms-op115-01-ov-steffens2008",
+        "rubato-bach-bwv1007-01-ov-milman2022",
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022"
+      ],
+      "control_extra_id": "rubato-brahms-op115-01-ov-steffens2008",
+      "control_extra_work": "Brahms_Op115-01",
+      "primary_extra_id": "0005",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 77,
+      "epoch": 16,
+      "shared_fit_ids": [
+        "rubato-berlioz-h048-04-ov-dennis2016",
+        "rubato-beethoven-op072-0-ov-henning2017",
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+        "rubato-schumann-op039-05-ov-pizarro2012"
+      ],
+      "control_extra_id": "rubato-beethoven-op072-0-ov-henning2017",
+      "control_extra_work": "Beethoven_Op072-0",
+      "primary_extra_id": "0024",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 78,
+      "epoch": 16,
+      "shared_fit_ids": [
+        "rubato-bach-bwv1007-01-ar-macleod2011",
+        "rubato-brahms-op115-01-ov-schmitta2025",
+        "rubato-schubert-d733-01-ar-staab2012",
+        "rubato-vivaldi-rv269-01-ar-bra2021"
+      ],
+      "control_extra_id": "rubato-schumann-op039-05-ov-buttner2025",
+      "control_extra_work": "Schumann_Op039-05",
+      "primary_extra_id": "0048",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 79,
+      "epoch": 16,
+      "shared_fit_ids": [
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "rubato-schubert-d733-01-ov-buttnerweiss2025",
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "rubato-handel-hwv040-1-01-ar-r-bra2020"
+      ],
+      "control_extra_id": "rubato-schumann-op039-05-ov-buttner2025",
+      "control_extra_work": "Schumann_Op039-05",
+      "primary_extra_id": "0015",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 80,
+      "epoch": 16,
+      "shared_fit_ids": [
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+        "rubato-schumann-op039-05-ov-buttner2025"
+      ],
+      "control_extra_id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "control_extra_work": "Vivaldi_RV269-01",
+      "primary_extra_id": "0059",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 81,
+      "epoch": 17,
+      "shared_fit_ids": [
+        "rubato-schumann-op039-05-ov-buttner2025",
+        "rubato-handel-hwv040-1-01-ar-r-bra2020",
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "rubato-brahms-op115-01-ov-steffens2008"
+      ],
+      "control_extra_id": "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+      "control_extra_work": "Handel_HWV040-1-01",
+      "primary_extra_id": "0040",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 82,
+      "epoch": 17,
+      "shared_fit_ids": [
+        "rubato-beethoven-op072-0-ov-henning2017",
+        "rubato-schubert-d733-01-ar-staab2012",
+        "rubato-bach-bwv1007-01-ov-milman2022",
+        "rubato-schumann-op039-05-ov-pizarro2012"
+      ],
+      "control_extra_id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+      "control_extra_work": "Handel_HWV040-1-01",
+      "primary_extra_id": "0031",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 83,
+      "epoch": 17,
+      "shared_fit_ids": [
+        "rubato-bach-bwv1007-01-ar-macleod2011",
+        "rubato-berlioz-h048-04-ov-dennis2016",
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025"
+      ],
+      "control_extra_id": "rubato-brahms-op115-01-ov-steffens2008",
+      "control_extra_work": "Brahms_Op115-01",
+      "primary_extra_id": "0006",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 84,
+      "epoch": 17,
+      "shared_fit_ids": [
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011"
+      ],
+      "control_extra_id": "rubato-beethoven-op072-0-ov-henning2017",
+      "control_extra_work": "Beethoven_Op072-0",
+      "primary_extra_id": "0049",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 85,
+      "epoch": 17,
+      "shared_fit_ids": [
+        "rubato-brahms-op115-01-ov-schmitta2025",
+        "rubato-vivaldi-rv269-01-ar-bra2021",
+        "rubato-schubert-d733-01-ov-buttnerweiss2025",
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025"
+      ],
+      "control_extra_id": "rubato-brahms-op115-01-ov-steffens2008",
+      "control_extra_work": "Brahms_Op115-01",
+      "primary_extra_id": "0050",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 86,
+      "epoch": 18,
+      "shared_fit_ids": [
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025"
+      ],
+      "control_extra_id": "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+      "control_extra_work": "Handel_HWV040-1-01",
+      "primary_extra_id": "0070",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 87,
+      "epoch": 18,
+      "shared_fit_ids": [
+        "rubato-schubert-d733-01-ar-staab2012",
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+        "rubato-handel-hwv040-1-01-ar-r-bra2020",
+        "rubato-berlioz-h048-04-ov-dennis2016"
+      ],
+      "control_extra_id": "rubato-brahms-op115-01-ov-steffens2008",
+      "control_extra_work": "Brahms_Op115-01",
+      "primary_extra_id": "0077",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 88,
+      "epoch": 18,
+      "shared_fit_ids": [
+        "rubato-schubert-d733-01-ov-buttnerweiss2025",
+        "rubato-vivaldi-rv269-01-ar-bra2021",
+        "rubato-schumann-op039-05-ov-pizarro2012",
+        "rubato-bach-bwv1007-01-ar-macleod2011"
+      ],
+      "control_extra_id": "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+      "control_extra_work": "Vivaldi_RV269-01",
+      "primary_extra_id": "0078",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 89,
+      "epoch": 18,
+      "shared_fit_ids": [
+        "rubato-beethoven-op072-0-ov-henning2017",
+        "rubato-bach-bwv1007-01-ov-milman2022",
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011"
+      ],
+      "control_extra_id": "rubato-brahms-op115-01-ov-schmitta2025",
+      "control_extra_work": "Brahms_Op115-01",
+      "primary_extra_id": "0037",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 90,
+      "epoch": 18,
+      "shared_fit_ids": [
+        "rubato-schumann-op039-05-ov-buttner2025",
+        "rubato-brahms-op115-01-ov-schmitta2025",
+        "rubato-brahms-op115-01-ov-steffens2008",
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007"
+      ],
+      "control_extra_id": "rubato-beethoven-op072-0-ov-henning2017",
+      "control_extra_work": "Beethoven_Op072-0",
+      "primary_extra_id": "0035",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 91,
+      "epoch": 19,
+      "shared_fit_ids": [
+        "rubato-vivaldi-rv269-01-ar-bra2021",
+        "rubato-schumann-op039-05-ov-pizarro2012",
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007",
+        "rubato-bach-bwv1007-01-ov-milman2022"
+      ],
+      "control_extra_id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+      "control_extra_work": "Schubert_D733-01",
+      "primary_extra_id": "0062",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 92,
+      "epoch": 19,
+      "shared_fit_ids": [
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "rubato-brahms-op115-01-ov-schmitta2025",
+        "rubato-bach-bwv1007-01-ar-macleod2011",
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025"
+      ],
+      "control_extra_id": "rubato-bach-bwv1007-01-ar-macleod2011",
+      "control_extra_work": "Bach_BWV1007-01",
+      "primary_extra_id": "0060",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 93,
+      "epoch": 19,
+      "shared_fit_ids": [
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022",
+        "rubato-beethoven-op072-0-ov-henning2017",
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011"
+      ],
+      "control_extra_id": "rubato-schumann-op039-05-ov-pizarro2012",
+      "control_extra_work": "Schumann_Op039-05",
+      "primary_extra_id": "0064",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 94,
+      "epoch": 19,
+      "shared_fit_ids": [
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "rubato-handel-hwv040-1-01-ar-r-bra2020",
+        "rubato-schubert-d733-01-ar-staab2012"
+      ],
+      "control_extra_id": "rubato-beethoven-op072-0-ov-henning2017",
+      "control_extra_work": "Beethoven_Op072-0",
+      "primary_extra_id": "0011",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 95,
+      "epoch": 19,
+      "shared_fit_ids": [
+        "rubato-berlioz-h048-04-ov-dennis2016",
+        "rubato-brahms-op115-01-ov-steffens2008",
+        "rubato-schumann-op039-05-ov-buttner2025",
+        "rubato-schubert-d733-01-ov-buttnerweiss2025"
+      ],
+      "control_extra_id": "rubato-brahms-op115-01-ov-schmitta2025",
+      "control_extra_work": "Brahms_Op115-01",
+      "primary_extra_id": "0092",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 96,
+      "epoch": 20,
+      "shared_fit_ids": [
+        "rubato-bach-bwv1007-01-ov-milman2022",
+        "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022",
+        "rubato-verdi-nabucco-vapensiero-ov-garcia2015",
+        "rubato-vivaldi-rv269-01-ar-modenachamber2022"
+      ],
+      "control_extra_id": "rubato-schubert-d733-01-ar-staab2012",
+      "control_extra_work": "Schubert_D733-01",
+      "primary_extra_id": "0083",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 97,
+      "epoch": 20,
+      "shared_fit_ids": [
+        "rubato-vivaldi-rv269-01-ar-r-intartaglia2011",
+        "rubato-bach-bwv1007-01-ar-macleod2011",
+        "rubato-schumann-op039-05-ov-pizarro2012",
+        "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007"
+      ],
+      "control_extra_id": "rubato-bach-bwv1007-01-ov-milman2022",
+      "control_extra_work": "Bach_BWV1007-01",
+      "primary_extra_id": "0002",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 98,
+      "epoch": 20,
+      "shared_fit_ids": [
+        "rubato-beethoven-op072-0-ov-henning2017",
+        "rubato-verdi-nabucco-vapensiero-ov-secci2020",
+        "rubato-brahms-op115-01-ov-steffens2008",
+        "rubato-vivaldi-rv269-01-ar-bra2021"
+      ],
+      "control_extra_id": "rubato-schubert-d733-01-ov-buttnerweiss2025",
+      "control_extra_work": "Schubert_D733-01",
+      "primary_extra_id": "0069",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 99,
+      "epoch": 20,
+      "shared_fit_ids": [
+        "rubato-handel-hwv040-1-01-ar-r-bra2020",
+        "rubato-brahms-op115-01-ov-schmitta2025",
+        "rubato-schumann-op039-05-ov-buttner2025",
+        "rubato-schubert-d733-01-ar-staab2012"
+      ],
+      "control_extra_id": "rubato-handel-hwv040-1-01-ar-r-bra2020",
+      "control_extra_work": "Handel_HWV040-1-01",
+      "primary_extra_id": "0086",
+      "primary_extra_group": "brid-corpus-v1"
+    },
+    {
+      "update": 100,
+      "epoch": 20,
+      "shared_fit_ids": [
+        "rubato-berlioz-h048-04-ov-dennis2016",
+        "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025",
+        "rubato-handel-hwv040-1-01-ar-buttnergmaj2025",
+        "rubato-schubert-d733-01-ov-buttnerweiss2025"
+      ],
+      "control_extra_id": "rubato-vivaldi-rv269-01-ar-bra2021",
+      "control_extra_work": "Vivaldi_RV269-01",
+      "primary_extra_id": "0014",
+      "primary_extra_group": "brid-corpus-v1"
+    }
+  ],
+  "old_roles": {
+    "rubato-bach-bwv1007-01-ar-macleod2011": {
+      "role": "fit",
+      "work": "Bach_BWV1007-01"
+    },
+    "rubato-bach-bwv1007-01-ov-milman2022": {
+      "role": "fit",
+      "work": "Bach_BWV1007-01"
+    },
+    "rubato-beethoven-op072-0-ov-henning2017": {
+      "role": "fit",
+      "work": "Beethoven_Op072-0"
+    },
+    "rubato-berlioz-h048-04-ov-dennis2016": {
+      "role": "fit",
+      "work": "Berlioz_H048-04"
+    },
+    "rubato-boccherini-g275-03-ov-krux2022": {
+      "role": "development",
+      "work": "Boccherini_G275-03"
+    },
+    "rubato-brahms-op115-01-ov-schmitta2025": {
+      "role": "fit",
+      "work": "Brahms_Op115-01"
+    },
+    "rubato-brahms-op115-01-ov-steffens2008": {
+      "role": "fit",
+      "work": "Brahms_Op115-01"
+    },
+    "rubato-handel-hwv040-1-01-ar-buttnerfmaj2025": {
+      "role": "fit",
+      "work": "Handel_HWV040-1-01"
+    },
+    "rubato-handel-hwv040-1-01-ar-buttnergmaj2025": {
+      "role": "fit",
+      "work": "Handel_HWV040-1-01"
+    },
+    "rubato-handel-hwv040-1-01-ar-r-bra2020": {
+      "role": "fit",
+      "work": "Handel_HWV040-1-01"
+    },
+    "rubato-mozart-kv618-ar-papalin2012": {
+      "role": "development",
+      "work": "Mozart_KV618"
+    },
+    "rubato-mozart-kv618-ov-gliarmonici2015": {
+      "role": "development",
+      "work": "Mozart_KV618"
+    },
+    "rubato-mussorgsky-picturesatanexhibition-10-ov-bertoglio2012": {
+      "role": "development",
+      "work": "Mussorgsky_PicturesAtAnExhibition-10"
+    },
+    "rubato-mussorgsky-picturesatanexhibition-10-ov-r-staab2016": {
+      "role": "development",
+      "work": "Mussorgsky_PicturesAtAnExhibition-10"
+    },
+    "rubato-schubert-d733-01-ar-staab2012": {
+      "role": "fit",
+      "work": "Schubert_D733-01"
+    },
+    "rubato-schubert-d733-01-ov-buttnerweiss2025": {
+      "role": "fit",
+      "work": "Schubert_D733-01"
+    },
+    "rubato-schumann-op039-05-ov-buttner2025": {
+      "role": "fit",
+      "work": "Schumann_Op039-05"
+    },
+    "rubato-schumann-op039-05-ov-pizarro2012": {
+      "role": "fit",
+      "work": "Schumann_Op039-05"
+    },
+    "rubato-verdi-nabucco-vapensiero-ar-r-operaphilia2022": {
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero"
+    },
+    "rubato-verdi-nabucco-vapensiero-ov-garcia2015": {
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero"
+    },
+    "rubato-verdi-nabucco-vapensiero-ov-librosvivos2007": {
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero"
+    },
+    "rubato-verdi-nabucco-vapensiero-ov-secci2020": {
+      "role": "fit",
+      "work": "Verdi_Nabucco-VaPensiero"
+    },
+    "rubato-vivaldi-rv269-01-ar-bra2021": {
+      "role": "fit",
+      "work": "Vivaldi_RV269-01"
+    },
+    "rubato-vivaldi-rv269-01-ar-modenachamber2022": {
+      "role": "fit",
+      "work": "Vivaldi_RV269-01"
+    },
+    "rubato-vivaldi-rv269-01-ar-r-intartaglia2011": {
+      "role": "fit",
+      "work": "Vivaldi_RV269-01"
+    },
+    "artbeat-05-75-to-150": {
+      "role": "diagnostic",
+      "work": "artbeat-shared-source"
+    },
+    "artbeat-06-150-to-75": {
+      "role": "diagnostic",
+      "work": "artbeat-shared-source"
+    },
+    "artbeat-07-75-to-112-5": {
+      "role": "diagnostic",
+      "work": "artbeat-shared-source"
+    },
+    "artbeat-08-112-5-to-75": {
+      "role": "diagnostic",
+      "work": "artbeat-shared-source"
+    },
+    "artbeat-09-90-to-80": {
+      "role": "diagnostic",
+      "work": "artbeat-shared-source"
+    },
+    "artbeat-10-90-to-120": {
+      "role": "diagnostic",
+      "work": "artbeat-shared-source"
+    },
+    "artbeat-11-60-to-80": {
+      "role": "diagnostic",
+      "work": "artbeat-shared-source"
+    },
+    "artbeat-12-80-to-150": {
+      "role": "diagnostic",
+      "work": "artbeat-shared-source"
+    },
+    "artbeat-13-180-to-120": {
+      "role": "diagnostic",
+      "work": "artbeat-shared-source"
+    },
+    "artbeat-14-240-to-96": {
+      "role": "diagnostic",
+      "work": "artbeat-shared-source"
+    },
+    "artbeat-15-85-to-127-5": {
+      "role": "diagnostic",
+      "work": "artbeat-shared-source"
+    },
+    "artbeat-18-piano-rubato": {
+      "role": "diagnostic",
+      "work": "artbeat-shared-source"
+    },
+    "artbeat-19-ramp-80-to-200": {
+      "role": "diagnostic",
+      "work": "artbeat-shared-source"
+    },
+    "artbeat-20-ramp-200-to-80": {
+      "role": "diagnostic",
+      "work": "artbeat-shared-source"
+    },
+    "artbeat-21-polyrhythm-70-to-105": {
+      "role": "diagnostic",
+      "work": "artbeat-shared-source"
+    }
+  },
+  "admission_pending": [
+    "source_alignment_disposition",
+    "all_93_feature_packet_capture_and_replay",
+    "old_input_identity_replay",
+    "executable_runner_closure_and_execution_freeze"
+  ],
+  "optimizer_steps": 0,
+  "encoder_calls": 0,
+  "holdout_access": false,
+  "production_change": false
+}

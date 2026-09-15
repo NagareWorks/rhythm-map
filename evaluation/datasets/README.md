@@ -37,6 +37,12 @@ Use the polite, resumable source helper for network acquisition and offline
 verification. These are still training candidates, not an admitted fit pool or
 93 independent test works; original smoke and failure reports remain historical.
 
+The [reference adaptation report](../baselines/brid-reference-v1.md) now provides
+all 93 reference packets with explicit unsupported intervals and 126,270 native
+tempo cells. No timestamps are shifted, including the retained 0092 alignment
+question. The matched source-expansion design and draw schedule are frozen;
+source disposition, feature replay and runner registration still precede fitting.
+
 ## Rhythm-support data planning
 
 The [bounded admission review](../baselines/rhythm-support-admission-review-v1.md)
