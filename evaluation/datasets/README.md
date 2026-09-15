@@ -28,6 +28,15 @@ that the new smoke was never downloaded. Full-pool acquisition encountered
 HTTP 429 on recording 0005 and remains incomplete. Musical annotation review
 and training admission are still pending; onset proximity is not beat accuracy.
 
+The subsequent [complete-pool intake](../baselines/brid-audio-pool-v1.md) resolves
+that transport interruption: [93 WAVs and 186 annotation assets](brid-training-mixtures-v1.json)
+are now byte-addressed, totaling 44:23.981 of native audio. The
+[full structural report](brid-audio-pool-v1.json) retains all 4,342 beats and 2,205
+downbeats, with no out-of-bounds references, zero channels or full-scale samples.
+Use the polite, resumable source helper for network acquisition and offline
+verification. These are still training candidates, not an admitted fit pool or
+93 independent test works; original smoke and failure reports remain historical.
+
 ## Rhythm-support data planning
 
 The [bounded admission review](../baselines/rhythm-support-admission-review-v1.md)

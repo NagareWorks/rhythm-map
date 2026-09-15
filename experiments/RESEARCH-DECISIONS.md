@@ -43,3 +43,10 @@ partial files and the failure are retained. This is a transport interruption,
 not evidence against source coverage or permission to fit on the smoke alone.
 Musical annotation review, full-pool lock and matched expansion training remain
 pending. Old rejected model directions and all product defaults stay frozen.
+
+The [full BRID acquisition and structural audit](../evaluation/baselines/brid-audio-pool-v1.md)
+now completes all 93 mixtures (44:23.981, 4,342 beats) with a polite single-range
+resume path. No new rate-limit failure or structural rejection occurred; the
+earlier interrupted run is not rewritten. The next boundary is source-reference
+alignment/adaptation and a fixed source-expansion comparison, not another loss
+sweep. No encoder, fit, holdout access or default change accompanied acquisition.
